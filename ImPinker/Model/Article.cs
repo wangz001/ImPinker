@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 
 namespace Model{
 	/// <summary>
@@ -22,7 +24,7 @@ namespace Model{
 		/// <summary>
 		/// 
 		/// </summary>
-		public long Id
+        public long Id
 		{
 			set{ _id=value;}
 			get{return _id;}
@@ -30,6 +32,7 @@ namespace Model{
 		/// <summary>
 		/// 
 		/// </summary>
+        [Display(Name = "标题")]
 		public string ArticleName
 		{
 			set{ _articlename=value;}
@@ -38,7 +41,8 @@ namespace Model{
 		/// <summary>
 		/// 
 		/// </summary>
-		public string Url
+        [Display(Name = "链接")]
+        public string Url
 		{
 			set{ _url=value;}
 			get{return _url;}

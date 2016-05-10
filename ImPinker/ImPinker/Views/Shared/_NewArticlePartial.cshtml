@@ -10,7 +10,6 @@
             @Html.ActionLink("你好 " + User.Identity.GetUserName() + "~", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "管理" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
-        <li>@Html.ActionLink("发布链接", "Create", "Article", routeValues: null, htmlAttributes: new { title = "发布链接" })</li>
     </ul>
     }
 }

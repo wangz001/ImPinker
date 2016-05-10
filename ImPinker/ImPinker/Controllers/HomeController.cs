@@ -27,5 +27,10 @@ namespace ImPinker.Controllers
 
 			return View();
 		}
+
+	    public ActionResult Default()
+	    {
+	        return View();
+	    }
 	}
 }
