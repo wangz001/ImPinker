@@ -40,3 +40,31 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+/* add by wangzheng */
+.search-form {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+
+.search-input {
+    font-size: 15px;
+    font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    width: 330px;
+    height: 35px;
+    padding: 5px 13px;
+    background-color: #4f4c4d;
+    border: 0;
+    color: #cac9c9;
+    margin: 5px 0;
+}
+
+.search-submit {
+    width: 18px;
+    height: 18px;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 11px;
+    right: 5px;
+}
