@@ -46,35 +46,25 @@ namespace DAL
 		public int Add(Model.Users model)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into User(");
-			strSql.Append("UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime)");
+			strSql.Append("insert into Users(");
+			strSql.Append("UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId)");
 			strSql.Append(" values (");
-			strSql.Append("@UserName,@ShowName,@PassWord,@Sex,@PhoneNum,@Email,@Age,@ImgUrl,@IsEnable,@CreateTime,@UpdateTime)");
+			strSql.Append("@UserName,@ShowName,@PassWord,@Sex,@PhoneNum,@Email,@Age,@ImgUrl,@IsEnable,@CreateTime,@UpdateTime,@AspNetId)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", SqlDbType.VarChar,100),
-					new SqlParameter("@ShowName", SqlDbType.VarChar,100),
-					new SqlParameter("@PassWord", SqlDbType.VarChar,20),
-					new SqlParameter("@Sex", SqlDbType.Bit,1),
-					new SqlParameter("@PhoneNum", SqlDbType.VarChar,20),
-					new SqlParameter("@Email", SqlDbType.VarChar,50),
-					new SqlParameter("@Age", SqlDbType.Int,4),
-					new SqlParameter("@ImgUrl", SqlDbType.VarChar,-1),
-					new SqlParameter("@IsEnable", SqlDbType.Bit,1),
-					new SqlParameter("@CreateTime", SqlDbType.DateTime),
-					new SqlParameter("@UpdateTime", SqlDbType.DateTime)};
-			parameters[0].Value = model.UserName;
-			parameters[1].Value = model.ShowName;
-			parameters[2].Value = model.PassWord;
-			parameters[3].Value = model.Sex;
-			parameters[4].Value = model.PhoneNum;
-			parameters[5].Value = model.Email;
-			parameters[6].Value = model.Age;
-			parameters[7].Value = model.ImgUrl;
-			parameters[8].Value = model.IsEnable;
-			parameters[9].Value = model.CreateTime;
-			parameters[10].Value = model.UpdateTime;
-
+					new SqlParameter("@UserName", SqlDbType.VarChar,100){Value = model.UserName},
+					new SqlParameter("@ShowName", SqlDbType.VarChar,100){Value = model.ShowName},
+					new SqlParameter("@PassWord", SqlDbType.VarChar,20){Value = model.PassWord},
+					new SqlParameter("@Sex", SqlDbType.Bit,1){Value = model.Sex},
+					new SqlParameter("@PhoneNum", SqlDbType.VarChar,20){Value = model.PhoneNum},
+					new SqlParameter("@Email", SqlDbType.VarChar,50){Value = model.Email},
+					new SqlParameter("@Age", SqlDbType.Int,4){Value = model.Age},
+					new SqlParameter("@ImgUrl", SqlDbType.VarChar,-1){Value = model.ImgUrl},
+					new SqlParameter("@IsEnable", SqlDbType.Bit,1){Value = model.IsEnable},
+					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
+					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
+					new SqlParameter("@AspNetId", SqlDbType.NVarChar,128){Value = model.AspNetId}};
+			
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
 			{

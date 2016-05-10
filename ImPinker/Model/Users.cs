@@ -22,6 +22,13 @@ namespace Model
 		private bool _isenable;
 		private DateTime _createtime;
 		private DateTime _updatetime;
+		private string _aspnetid;
+
+		public string AspNetId
+		{
+			set { _aspnetid = value; }
+			get { return _aspnetid; }
+		}
 		/// <summary>
 		/// 
 		/// </summary>
