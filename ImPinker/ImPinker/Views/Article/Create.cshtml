@@ -1,4 +1,4 @@
-﻿@model Model.Article
+﻿@model ImPinker.Models.CreateArticleViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -12,9 +12,9 @@
     <hr />
     @Html.ValidationSummary()
     <div class="form-group">
-        @Html.LabelFor(m => m.Url, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ArticleUrl, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.ArticleUrl, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -24,9 +24,15 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.KeyWords, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.KeyWords, new { @class = "form-control",placeholder="关键字用逗号隔开" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", })
         </div>
     </div>
     <div class="form-group">

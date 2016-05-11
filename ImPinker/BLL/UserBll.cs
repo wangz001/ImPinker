@@ -96,6 +96,28 @@ namespace BLL
 			return (Model.Users)objModel;
 		}
 
+
+		public Model.Users GetModelByAspNetId(string aspnetId)
+		{
+
+			string CacheKey = "UserModel-" + aspnetId;
+			object objModel = DataCache.GetCache(CacheKey);
+			if (objModel == null)
+			{
+				try
+				{
+					objModel = dal.GetModelByAspNetId(aspnetId);
+					if (objModel != null)
+					{
+						int ModelCache = ConfigHelper.GetConfigInt("ModelCache");
+						DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
+					}
+				}
+				catch { }
+			}
+			return (Model.Users)objModel;
+		}
+
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

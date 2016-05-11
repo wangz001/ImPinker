@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using ImPinker.Common;
+using ImPinker.Models;
 
 namespace ImPinker.Controllers
 {
@@ -11,7 +13,24 @@ namespace ImPinker.Controllers
 	{
 		public ActionResult Index()
 		{
+			ViewBag.ArticleVms = null;
 			return View();
+		}
+
+		/// <summary>
+		/// 搜索
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public ActionResult Search(string key)
+		{
+			var list = new List<ArticleViewModel>();
+			if (!string.IsNullOrEmpty(key))
+			{
+				list = EasyNetSolrUtil.Query(key, 1, 10);
+			}
+			ViewBag.ArticleVms = list;
+			return View("Index");
 		}
 
 		public ActionResult About()

@@ -3,6 +3,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace Model{
+
+	public enum ArticleStateEnum
+	{
+		[Display(Name = "已删除")]
+		Deleted=0,
+		[Display(Name = "正常")]
+		Normal=1,
+		[Display(Name = "待审核")]
+		BeCheck=2,
+		[Display(Name = "审核未通过")]
+		CheckFalse=3
+
+	}
 	/// <summary>
 	/// Article:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
@@ -17,6 +30,7 @@ namespace Model{
 		private string _url;
 		private string _coverimage;
 		private int _userid;
+		private string _keywords;
 		private string _description;
 		private int _state;
 		private DateTime _createtime;
@@ -63,6 +77,12 @@ namespace Model{
 			set{ _userid=value;}
 			get{return _userid;}
 		}
+
+		public string KeyWords
+		{
+			set { _keywords = value; }
+			get { return _keywords; }
+		}
 		/// <summary>
 		/// 
 		/// </summary>
@@ -72,7 +92,7 @@ namespace Model{
 			get{return _description;}
 		}
 		/// <summary>
-		///  状态:    -1:删除   0:默认    1:正常可显示   2: 待审核   3:审核不通过
+		///  状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过
 		/// </summary>
 		public int State
 		{

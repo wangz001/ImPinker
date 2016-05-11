@@ -3,6 +3,7 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using DBUtility;
+using Model;
 
 namespace DAL
 {
@@ -388,6 +389,26 @@ namespace DAL
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
+
+		public Users GetModelByAspNetId(string aspnetid)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
+			strSql.Append(" where AspNetId=@AspNetId");
+			SqlParameter[] parameters = {
+					new SqlParameter("@AspNetId", SqlDbType.NVarChar){Value = aspnetid}
+			};
+			Model.Users model = new Model.Users();
+			DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
+			{
+				return DataRowToModel(ds.Tables[0].Rows[0]);
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 }
 

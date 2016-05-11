@@ -457,9 +457,9 @@ namespace DBUtility
                         cmd.Parameters.Clear();
                         return rows;
                     }
-                    catch (System.Data.SqlClient.SqlException e)
+                    catch (SqlException e)
                     {
-                        throw e;
+                        throw e ;
                     }
                 }
             }
