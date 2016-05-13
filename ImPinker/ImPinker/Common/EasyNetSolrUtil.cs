@@ -24,6 +24,7 @@ namespace ImPinker.Common
 		static ISolrQueryOperations<NamedList> operations = new SolrQueryOperations<NamedList>(connection) { ResponseWriter = "javabin" };
 
 		static IObjectDeserializer<Example> exampleDeserializer = new ExampleDeserializer();
+
 		static ISolrResponseParser<NamedList, QueryResults<Example>> binaryQueryResultsParser = new BinaryQueryResultsParser<Example>(exampleDeserializer);
 
 		static EasyNetSolrUtil()
