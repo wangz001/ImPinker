@@ -39,10 +39,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNet.Solr">
-      <HintPath>..\Lib\EasyNet.Solr.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -187,6 +185,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery-1.12.3.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -241,6 +240,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
+      <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
+      <Name>EasyNet.Solr</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>

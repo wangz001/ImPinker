@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBUtility", "DBUtility\DBUtility.csproj", "{DFF30BF7-FF38-49FC-8314-81E338F08AB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNet.Solr", "EasyNet.Solr\EasyNet.Solr.csproj", "{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

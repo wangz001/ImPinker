@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68D7B310-D02C-4503-9CAA-9F3AF0D24FB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EasyNet.Solr</RootNamespace>
+    <AssemblyName>EasyNet.Solr</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EasyNet.Solr.XML</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddOptions.cs" />
+    <Compile Include="CommitOptions.cs" />
+    <Compile Include="Commons\DoubleConverter.cs" />
+    <Compile Include="Commons\Extension.cs" />
+    <Compile Include="Commons\FastInputStream.cs" />
+    <Compile Include="Commons\FastOutputStream.cs" />
+    <Compile Include="Commons\FloatConverter.cs" />
+    <Compile Include="Commons\JavaBinCodec.cs" />
+    <Compile Include="Commons\LinkedHashMap.cs" />
+    <Compile Include="Commons\NamedList.cs" />
+    <Compile Include="Commons\SimpleOrderedMap.cs" />
+    <Compile Include="Commons\SolrDocument.cs" />
+    <Compile Include="Commons\SolrDocumentList.cs" />
+    <Compile Include="Commons\SolrInputDocument.cs" />
+    <Compile Include="Commons\SolrInputField.cs" />
+    <Compile Include="FacetField.cs" />
+    <Compile Include="FacetRange.cs" />
+    <Compile Include="GroupQueryResult.cs" />
+    <Compile Include="GroupQueryResults.cs" />
+    <Compile Include="ICodec.cs" />
+    <Compile Include="ICodecFactory.cs" />
+    <Compile Include="Impl\BinaryCodecFactory.cs" />
+    <Compile Include="Impl\BinaryFacetFieldsParser.cs" />
+    <Compile Include="Impl\BinaryFacetQueriesParser.cs" />
+    <Compile Include="Impl\BinaryFacetRangesParser.cs" />
+    <Compile Include="Impl\BinaryGroupQueryResultsParser.cs" />
+    <Compile Include="Impl\BinaryHighlightingParser.cs" />
+    <Compile Include="Impl\BinaryQueryResultsParser.cs.cs" />
+    <Compile Include="Impl\BinaryResponseHeaderParser.cs" />
+    <Compile Include="Impl\BinaryUpdateParametersConvert.cs" />
+    <Compile Include="Impl\RuntimeCache.cs" />
+    <Compile Include="Impl\SolrQuery.cs" />
+    <Compile Include="Impl\SolrQueryOperations.cs" />
+    <Compile Include="Impl\SolrQueryConnection.cs" />
+    <Compile Include="Impl\SolrUpdateConnection.cs" />
+    <Compile Include="Impl\SolrUpdateOperations.cs" />
+    <Compile Include="IObjectDeserializer.cs" />
+    <Compile Include="IObjectSerializer.cs" />
+    <Compile Include="ISolrCache.cs" />
+    <Compile Include="ISolrQuery.cs" />
+    <Compile Include="ISolrQueryOperations.cs" />
+    <Compile Include="ISolrQueryConnection.cs" />
+    <Compile Include="ISolrResponseParser.cs" />
+    <Compile Include="ISolrUpdateConnection.cs" />
+    <Compile Include="ISolrUpdateOperations.cs" />
+    <Compile Include="IUpdateParametersConvert.cs" />
+    <Compile Include="OptimizeOptions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryResults.cs" />
+    <Compile Include="ResponseHeader.cs" />
+    <Compile Include="SolrCacheEntity.cs" />
+    <Compile Include="UpdateOptions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
