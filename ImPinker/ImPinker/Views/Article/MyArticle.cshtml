@@ -1,0 +1,26 @@
+﻿@using Model
+
+@{
+    ViewBag.Title = "MyArticle";
+}
+
+<h2>MyArticle</h2>
+@{
+    var articles = (List<Article>)ViewBag.articles;
+    if (articles != null && articles.Count > 0)
+    {
+        foreach (Article vm in articles)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="@vm.Url" target="_blank">
+                        <h2>@vm.ArticleName</h2>
+                    </a>
+                    <p>
+                        @vm.Description
+                    </p>
+                </div>
+            </div>
+        }
+    }
+}

@@ -23,6 +23,16 @@ namespace ImPinker.Controllers
             return View();
         }
 
+        public ActionResult MyArticle()
+        {
+            var userId = _userBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+
+            var ds = _articleBll.GetListByPage(" userid=" + userId, " createtime", 0, 100);
+            var articles = _articleBll.DataTableToList(ds.Tables[0]);
+            ViewBag.articles = articles;
+            return View();
+        }
+
         //
         // GET: /Article/Details/5
         public ActionResult Details(int id)
