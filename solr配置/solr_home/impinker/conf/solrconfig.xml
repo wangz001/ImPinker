@@ -927,7 +927,7 @@
   </requestHandler>
   <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">  
     <lst name="defaults">  
-       <str name="config">E:\solr_home\impinker\conf\data-config.xml</str>  
+       <str name="config">D:\solr_home\impinker\conf\data-config.xml</str>  
     </lst>  
   </requestHandler>
 
