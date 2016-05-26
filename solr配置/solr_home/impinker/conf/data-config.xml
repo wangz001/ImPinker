@@ -2,7 +2,7 @@
 <dataConfig>
     <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=ImPinker" user="sa" password="funnycar2015"/>
     <document name="article">  
-        <entity name="article"  transformer="ClobTransformer" pk="id"
+        <entity name="article"  transformer="ClobTransformer" pk="table_id"
                  query="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
 						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage from Article"        
                  deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId

@@ -68,9 +68,9 @@
    -->   
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
    <field name="UserId" type="string" indexed="false" stored="true" omitNorms="true"/>
-   <field name="ArticleName" type="text_ik" indexed="true" stored="true" omitNorms="true"/>
-   <field name="KeyWords" type="text_ik" indexed="true" stored="true" omitNorms="true"/>
-   <field name="Description" type="text_ik" indexed="true" stored="true" omitNorms="true"/>
+   <field name="ArticleName" type="text_ik" indexed="true" stored="true" omitNorms="true" termVectors="true" termPositions="true"  termOffsets="true"/>
+   <field name="KeyWords" type="text_ik" indexed="true" stored="true" omitNorms="true" termVectors="true" termPositions="true"  termOffsets="true"/>
+   <field name="Description" type="text_ik" indexed="true" stored="true" omitNorms="true" termVectors="true" termPositions="true"  termOffsets="true"/>
    <field name="Url" type="string" indexed="true" stored="true" omitNorms="true"/>
    <field name="CreateTime" type="date" indexed="true" stored="true" omitNorms="true"/>
    <field name="UpdateTime" type="date" indexed="true" stored="true" omitNorms="true"/>
