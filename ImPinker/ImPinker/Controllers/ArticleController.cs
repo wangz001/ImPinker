@@ -27,7 +27,7 @@ namespace ImPinker.Controllers
         {
             var userId = _userBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
 
-            var ds = _articleBll.GetListByPage(" userid=" + userId, " createtime", 0, 100);
+            var ds = _articleBll.GetListByPage(" userid=" + userId, " createtime desc ", 0, 100);
             var articles = _articleBll.DataTableToList(ds.Tables[0]);
             ViewBag.articles = articles;
             return View();

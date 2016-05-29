@@ -69,10 +69,10 @@ namespace ImPinker.Common
 					var idStr = solrDocument["id"].ToString();
 					var travelId = Int32.Parse(idStr.Substring(idStr.IndexOf("_") + 1));
 					var userId = Int32.Parse(solrDocument["UserId"].ToString());
-					var articleName = solrDocument["ArticleName"].ToString();
-					var keyWords = solrDocument["KeyWords"].ToString();
-					var description = solrDocument["Description"].ToString();
-					var url = solrDocument["Url"].ToString();
+					var articleName = !solrDocument.ContainsKey("ArticleName")? "":solrDocument["ArticleName"].ToString();
+                    var keyWords = !solrDocument.ContainsKey("KeyWords") ? "" : solrDocument["KeyWords"].ToString();
+                    var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
+                    var url = solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
 					//var coverImage = solrDocument["CoverImage"].ToString();
 					if (existArticles.Contains(travelId)) continue;
 					var searchvm = new ArticleViewModel
