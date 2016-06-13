@@ -22,6 +22,10 @@ namespace ImPinker.Controllers
             {
                 foreach (var article in articles)
                 {
+                    if (article.ArticleName.Length > 25)
+                    {
+                        article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
+                    }
                     list.Add(new ArticleViewModel()
                     {
                         ArticleName = article.ArticleName,

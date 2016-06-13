@@ -72,10 +72,15 @@ namespace ImPinker.Common
 					var articleName = !solrDocument.ContainsKey("ArticleName")? "":solrDocument["ArticleName"].ToString();
                     var keyWords = !solrDocument.ContainsKey("KeyWords") ? "" : solrDocument["KeyWords"].ToString();
                     var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
-                    var url = solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
+                    var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
 					//var coverImage = solrDocument["CoverImage"].ToString();
 					if (existArticles.Contains(travelId)) continue;
-					var searchvm = new ArticleViewModel
+				    if (articleName.Length > 25)
+				    {
+				        articleName = articleName.Substring(0, 25) + "……";
+				    }
+
+                    var searchvm = new ArticleViewModel
 					{
 						ArticleName = articleName,
 						ArticleUrl = url,
