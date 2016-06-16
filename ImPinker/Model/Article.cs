@@ -30,7 +30,8 @@ namespace Model{
 		private string _url;
 		private string _coverimage;
 		private int _userid;
-		private string _keywords;
+        private string _keywords;
+        private string _company;
 		private string _description;
 		private int _state;
 		private DateTime _createtime;
@@ -83,6 +84,15 @@ namespace Model{
 			set { _keywords = value; }
 			get { return _keywords; }
 		}
+
+    /// <summary>
+    /// 所属网站。易车、之家、e族等
+    /// </summary>
+        public string Company
+        {
+            set { _company = value; }
+            get { return _company; }
+        }
 		/// <summary>
 		/// 
 		/// </summary>

@@ -63,7 +63,8 @@ namespace ImPinker.Controllers
 					UserId =_userBll.GetModelByAspNetId( User.Identity.GetUserId()).Id,
 					State = (int)ArticleStateEnum.BeCheck,   //待审核状态
    					CreateTime = DateTime.Now,
-					UpdateTime = DateTime.Now
+					UpdateTime = DateTime.Now,
+                    Company = ""
 	            };
 				//审核通过后添加索引
 	            var flag=_articleBll.Add(article);

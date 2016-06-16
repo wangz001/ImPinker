@@ -40,9 +40,9 @@ namespace DAL
 		{
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into Article(");
-			strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime)");
+			strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company)");
 			strSql.Append(" values (");
-			strSql.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime)");
+            strSql.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime,@Company)");
 			SqlParameter[] parameters =
 			{
 				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =model.ArticleName },
@@ -53,7 +53,8 @@ namespace DAL
 				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
 				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
 				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.CreateTime },
-				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
+                new SqlParameter("@Company",SqlDbType.Char){Value = model.Company}, 
 			};
 			
 			int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
