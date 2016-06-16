@@ -1,4 +1,4 @@
-package us.codecraft.webmagic.samples;
+package com.lang.fblife;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -7,14 +7,13 @@ import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import java.util.List;
 
-import com.lang.fblife.FblifePipeline;
 import com.lang.util.DBHelper;
 
 /**
  * @author 410775541@qq.com <br>
  * @since 0.5.1
  */
-public class FbLifePageProcessor implements PageProcessor {
+public class FbLifeTourPageProcessor implements PageProcessor {
 
     private Site site = Site.me().setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(500).setTimeOut(3 * 60 * 1000)
             .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0")
@@ -57,7 +56,7 @@ public class FbLifePageProcessor implements PageProcessor {
     public static void main(String[] args) {
         
     	
-    	Spider.create(new FbLifePageProcessor()).
+    	Spider.create(new FbLifeTourPageProcessor()).
                 addUrl("http://tour.fblife.com/").
                 addPipeline(new FblifePipeline()).
                 thread(1).

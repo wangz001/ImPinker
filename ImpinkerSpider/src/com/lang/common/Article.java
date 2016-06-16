@@ -10,7 +10,16 @@ public class Article {
 	
 	public String description;
 
+	public String company;
 	
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
 	public String getTitle() {
 		return Title;
 	}

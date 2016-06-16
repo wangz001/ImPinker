@@ -2,6 +2,8 @@ package com.lang.fblife;
 
 import com.lang.common.Article;
 import com.lang.common.ArticleDao;
+import com.lang.common.ArticleTypeEnum;
+import com.lang.common.CompanyEnum;
 import com.lang.util.DBConnection;
 import com.lang.util.DBHelper;
 
@@ -17,9 +19,10 @@ public class FblifePipeline implements Pipeline {
 		// TODO Auto-generated method stub
 		Article article=new Article();
 		article.setTitle(resultItems.get("title").toString());
-		article.setKeyWord(resultItems.get("keyword").toString());
+		article.setKeyWord(ArticleTypeEnum.LvXing.getName()+","+CompanyEnum.Fblife.getName());
 		article.setDescription(resultItems.get("description").toString());
 		article.setUrlString(resultItems.get("url").toString());
+		article.setCompany(CompanyEnum.Fblife.getName());
 		boolean flag=articleDao.NewArticle(article);
 		
 		System.out.println(resultItems.get("title"));
