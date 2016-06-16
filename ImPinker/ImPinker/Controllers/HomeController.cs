@@ -53,7 +53,7 @@ namespace ImPinker.Controllers
                 list = EasyNetSolrUtil.Query(key, 1, 10);
             }
             ViewBag.ArticleVms = list;
-            return View("Index");
+            return View();
         }
 
         public ActionResult About()

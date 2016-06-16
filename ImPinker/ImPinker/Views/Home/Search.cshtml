@@ -1,0 +1,25 @@
+﻿@using ImPinker.Models
+@{
+    ViewBag.Title = "Search";
+    var articles = (List<ArticleViewModel>)ViewBag.ArticleVms;
+}
+
+@{
+    if (articles != null && articles.Count > 0)
+    {
+        foreach (var vm in articles)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="@vm.ArticleUrl" target="_blank">
+                        <h2>@vm.ArticleName</h2>
+                    </a>
+                    <p>
+                        @vm.Description
+                    </p>
+                </div>
+            </div>
+        }
+    }
+}
+
