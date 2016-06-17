@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using BLL;
 using ImPinker.Models;
 using Microsoft.AspNet.Identity;
 using Model;
+using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
 {
     public class ArticleController : Controller
     {
-		private static ArticleBll _articleBll=new ArticleBll();
-		private static UserBll _userBll=new UserBll();
+		private static readonly ArticleBll ArticleBll=new ArticleBll();
+		private static readonly UserBll UserBll=new UserBll();
+        private const int MyPageCount = 10;
+
         //
         // GET: /Article/
         public ActionResult Index()
@@ -23,14 +21,37 @@ namespace ImPinker.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 我的文章
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MyArticle()
         {
-            var userId = _userBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-
-            var ds = _articleBll.GetListByPage(" userid=" + userId, " createtime desc ", 0, 100);
-            var articles = _articleBll.DataTableToList(ds.Tables[0]);
-            ViewBag.articles = articles;
+            var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            var ds = ArticleBll.GetMyListByPage( userId, 1, MyPageCount);
+            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
+            ViewBag.jsonData = JsonConvert.SerializeObject(articles);
+            ViewBag.pageNum = MyPageCount;
             return View();
+        }
+
+        /// <summary>
+        /// 分页获取数据接口
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageNum"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public string GetMyNextPage(int pageIndex,int pageNum)
+        {
+            var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            var ds = ArticleBll.GetMyListByPage(userId, pageIndex, pageNum);
+            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
+            if (articles!=null&&articles.Count>0)
+            {
+                return JsonConvert.SerializeObject(articles);
+            }
+            return string.Empty;
         }
 
         //
@@ -47,8 +68,11 @@ namespace ImPinker.Controllers
             return View();
         }
 
-        //
-        // POST: /Article/Create
+        /// <summary>
+        /// 添加收藏
+        /// </summary>
+        /// <param name="createArticleVm"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(CreateArticleViewModel createArticleVm)
         {
@@ -60,14 +84,14 @@ namespace ImPinker.Controllers
 					ArticleName = createArticleVm.ArticleName,
 					Description = createArticleVm.Description,
 					KeyWords = createArticleVm.KeyWords,
-					UserId =_userBll.GetModelByAspNetId( User.Identity.GetUserId()).Id,
+					UserId =UserBll.GetModelByAspNetId( User.Identity.GetUserId()).Id,
 					State = (int)ArticleStateEnum.BeCheck,   //待审核状态
    					CreateTime = DateTime.Now,
 					UpdateTime = DateTime.Now,
                     Company = ""
 	            };
 				//审核通过后添加索引
-	            var flag=_articleBll.Add(article);
+	            var flag=ArticleBll.Add(article);
                 return RedirectToAction("Index");
             }
             catch

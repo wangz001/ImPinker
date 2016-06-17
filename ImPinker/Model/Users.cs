@@ -24,6 +24,9 @@ namespace Model
 		private DateTime _updatetime;
 		private string _aspnetid;
 
+        /// <summary>
+        /// 系统生成的唯一id，md5格式，只在登录验证的时候用。业务处理里都用 int类型的id
+        /// </summary>
 		public string AspNetId
 		{
 			set { _aspnetid = value; }

@@ -6,37 +6,53 @@ using System.Web.Mvc;
 using BLL;
 using ImPinker.Common;
 using ImPinker.Models;
+using Model;
+using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
 {
     public class HomeController : Controller
     {
-        private static ArticleBll _articleBll = new ArticleBll();
+        private static readonly ArticleBll ArticleBll = new ArticleBll();
+        private const int IndexPageCount = 10;
 
+        /// <summary>
+        /// 首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
+            //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
             var list = new List<ArticleViewModel>();
-            var ds = _articleBll.GetListByPage("", " createtime desc ", 0, 100);
-            var articles = _articleBll.DataTableToList(ds.Tables[0]);
-            if (articles != null && articles.Count > 0)
+            var userInterestKey = "越野，自驾游";
+            if (string.IsNullOrEmpty(userInterestKey))
             {
-                foreach (var article in articles)
+                var ds = ArticleBll.GetIndexListByPage(1, IndexPageCount);
+                List<Article> articles = ArticleBll.DataTableToList(ds.Tables[0]);
+                if (articles != null && articles.Count > 0)
                 {
-                    if (article.ArticleName.Length > 25)
+                    foreach (var article in articles)
                     {
-                        article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
+                        if (article.ArticleName.Length > 25)
+                        {
+                            article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
+                        }
+                        list.Add(new ArticleViewModel()
+                        {
+                            ArticleName = article.ArticleName,
+                            ArticleUrl = article.Url,
+                            Description = article.Description,
+                            KeyWords = article.KeyWords,
+                        });
                     }
-                    list.Add(new ArticleViewModel()
-                    {
-                        ArticleName = article.ArticleName,
-                        ArticleUrl = article.Url,
-                        Description = article.Description,
-                        KeyWords = article.KeyWords,
-                    });
                 }
             }
-
-            ViewBag.ArticleVms = list;
+            else
+            {
+                list = EasyNetSolrUtil.Query(userInterestKey, 1, IndexPageCount);
+            }
+            ViewBag.ArticleJson =  JsonConvert.SerializeObject(list);
+            ViewBag.pageCount = IndexPageCount;
             return View();
         }
 

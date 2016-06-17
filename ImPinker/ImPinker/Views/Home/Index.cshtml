@@ -1,25 +1,35 @@
-﻿@using ImPinker.Models
-@{
+﻿@{
     ViewBag.Title = "Engine Start";
-    var articles = (List<ArticleViewModel>)ViewBag.ArticleVms;
 }
 
-@{
-    if (articles != null && articles.Count > 0)
-    {
-        foreach (var vm in articles)
-        {
-            <div class="row">
-                <div class="col-md-8">
-                    <a href="@vm.ArticleUrl" target="_blank">
-                        <h2>@vm.ArticleName</h2>
-                    </a>
-                    <p>
-                        @vm.Description
-                    </p>
-                </div>
+@Html.Partial("_NavPartial")
+<div id="articleConten">
+   
+</div>
+    <!--更多-->
+    <div class="b_zx_more clearfix">
+        <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
+    </div>
+<!--更多 end-->
+@section scripts
+{
+    <script type="text/javascript">
+        var pageCount = @ViewBag.pageCount;
+        var pageIndex = 1;
+        var jsonData = @Html.Raw(ViewBag.ArticleJson);
+    </script>
+    <script src="~/Scripts/Article/myArticle.js"></script>
+    <script type="text/template1">
+        <div class="row">
+            <div class="col-md-8">
+                <a href="$ArticleUrl$" target="_blank">
+                    <h2>$ArticleName$</h2>
+                </a>
+                <p>
+                    <span>$Description$</span>
+                    <span class="right">$CreateTime$</span>
+                </p>
             </div>
-        }
-    }
+        </div>
+    </script>
 }
-

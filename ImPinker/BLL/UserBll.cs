@@ -77,7 +77,6 @@ namespace BLL
 		/// </summary>
 		public Model.Users GetModelByCache(int Id)
 		{
-			
 			string CacheKey = "UserModel-" + Id;
 			object objModel = DataCache.GetCache(CacheKey);
 			if (objModel == null)
@@ -96,10 +95,13 @@ namespace BLL
 			return (Model.Users)objModel;
 		}
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="aspnetId">系统生成的md5  id</param>
+        /// <returns></returns>
 		public Model.Users GetModelByAspNetId(string aspnetId)
 		{
-
 			string CacheKey = "UserModel-" + aspnetId;
 			object objModel = DataCache.GetCache(CacheKey);
 			if (objModel == null)

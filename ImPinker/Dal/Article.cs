@@ -308,28 +308,51 @@ namespace DAL
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
-		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+		public DataSet GetMyListByPage(int userid, int pageNum, int count)
 		{
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
-			if (!string.IsNullOrEmpty(orderby.Trim()))
-			{
-				strSql.Append("order by T." + orderby);
-			}
-			else
-			{
-				strSql.Append("order by T.Id desc");
-			}
+			strSql.Append("order by T.CreateTime desc");
 			strSql.Append(")AS Row, T.*  from Article T ");
-			if (!string.IsNullOrEmpty(strWhere.Trim()))
-			{
-				strSql.Append(" WHERE " + strWhere);
-			}
+            strSql.Append(" WHERE UserId=@UserId");
 			strSql.Append(" ) TT");
-			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-			return DbHelperSQL.Query(strSql.ToString());
+			strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex");
+		    var startIndex = (pageNum - 1)*count+1;
+		    var endIndex = pageNum*count;
+            var paras = new SqlParameter[]
+		    {
+                new SqlParameter("@UserId",SqlDbType.Int){Value = userid},
+                new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+		    };
+			return DbHelperSQL.Query(strSql.ToString(),paras);
 		}
+
+        /// <summary>
+        /// 获取首页的文章
+        /// </summary>
+        /// <param name="pageNum"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+	    public DataSet GetIndexListByPage(int pageNum, int count)
+	    {
+            var strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            strSql.Append("order by T.CreateTime desc");
+            strSql.Append(")AS Row, T.*  from Article T ");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex");
+            var startIndex = (pageNum - 1) * count + 1;
+            var endIndex = pageNum * count;
+            var paras = new SqlParameter[]
+		    {
+                new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+		    };
+            return DbHelperSQL.Query(strSql.ToString(), paras);
+	    }
 	}
 }
 

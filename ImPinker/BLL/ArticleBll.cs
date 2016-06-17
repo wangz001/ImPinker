@@ -147,19 +147,22 @@ namespace BLL
 			return dal.GetRecordCount(strWhere);
 		}
 		/// <summary>
-		/// 分页获取数据列表
+		/// 分页获取用户数据列表
 		/// </summary>
-		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+		public DataSet GetMyListByPage( int userid, int pageNum, int count)
 		{
-			return dal.GetListByPage( strWhere,  orderby,  startIndex,  endIndex);
+			return dal.GetMyListByPage( userid,pageNum,count);
 		}
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		//public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-		//{
-			//return dal.GetList(PageSize,PageIndex,strWhere);
-		//}
+
+        /// <summary>
+        /// 分页获取首页数据列表
+        /// </summary>
+        public DataSet GetIndexListByPage(int pageNum, int count)
+        {
+            
+            return dal.GetIndexListByPage(pageNum, count);
+        }
+		
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
