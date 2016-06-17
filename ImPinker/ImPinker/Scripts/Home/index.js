@@ -12,11 +12,11 @@
     });
     function getNextPage(pageCount, pageIndex) {
         $.ajax({
-            url: "/Article/GetMyNextPage",
+            url: "/Home/GetNextPage",
             type: "get",
-            data: { pageNum: pageCount, pageIndex: pageIndex },
+            data: { pageCount: pageCount, pageNum: pageIndex },
             success:function(data) {
-                if (data==null||data=="") {
+                if (data==null||data==="") {
                     $("#loadmore").parent().hide();
                 } else {
                     var list = JSON.parse(data);

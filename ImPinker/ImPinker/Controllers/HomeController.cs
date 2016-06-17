@@ -22,12 +22,19 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            ViewBag.ArticleJson = GetByPage(1,IndexPageCount);
+            ViewBag.pageCount = IndexPageCount;
+            return View();
+        }
+
+        private string GetByPage(int pageNum, int pageCount)
+        {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
             var list = new List<ArticleViewModel>();
-            var userInterestKey = "越野，自驾游";
+            var userInterestKey = "";
             if (string.IsNullOrEmpty(userInterestKey))
             {
-                var ds = ArticleBll.GetIndexListByPage(1, IndexPageCount);
+                var ds = ArticleBll.GetIndexListByPage(pageNum, pageCount);
                 List<Article> articles = ArticleBll.DataTableToList(ds.Tables[0]);
                 if (articles != null && articles.Count > 0)
                 {
@@ -49,14 +56,29 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = EasyNetSolrUtil.Query(userInterestKey, 1, IndexPageCount);
+                list = EasyNetSolrUtil.Query(userInterestKey, pageNum, pageCount);
             }
-            ViewBag.ArticleJson =  JsonConvert.SerializeObject(list);
-            ViewBag.pageCount = IndexPageCount;
-            return View();
+            if (list.Count==0)
+            {
+                return string.Empty;
+            }
+            return JsonConvert.SerializeObject(list);
         }
 
         /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <param name="pageNum"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public string GetNextPage(int pageNum, int pageCount)
+        {
+            var str = GetByPage(pageNum, pageCount);
+            return str;
+        }
+
+    /// <summary>
         /// 搜索
         /// </summary>
         /// <param name="key"></param>

@@ -3,13 +3,13 @@
 }
 
 @Html.Partial("_NavPartial")
-<div id="articleConten">
-   
+<div class="b_newsfang" id="articleConten" style="display: block">
+
 </div>
-    <!--更多-->
-    <div class="b_zx_more clearfix">
-        <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
-    </div>
+<!--更多-->
+<div class="b_zx_more clearfix">
+    <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
+</div>
 <!--更多 end-->
 @section scripts
 {
@@ -18,17 +18,29 @@
         var pageIndex = 1;
         var jsonData = @Html.Raw(ViewBag.ArticleJson);
     </script>
-    <script src="~/Scripts/Article/myArticle.js"></script>
+    <script src="~/Scripts/Home/index.js"></script>
     <script type="text/template1">
-        <div class="row">
-            <div class="col-md-8">
-                <a href="$ArticleUrl$" target="_blank">
-                    <h2>$ArticleName$</h2>
-                </a>
+        <div class="b_zixunlist clearfix">
+            <div class="b_zxpic lt">
+                <img src="http://img10.fblife.com/attachments/20160510/1462848999.jpg.180x120.jpg" />
+            </div>
+            <div class="b_zxtuwen lt">
+                <h1>
+                    <a href="$ArticleUrl$" target="_blank">
+                        $ArticleName$
+                    </a>
+                </h1>
                 <p>
-                    <span>$Description$</span>
-                    <span class="right">$CreateTime$</span>
+                    $Description$
                 </p>
+                <div class="b_zixunxinxi clearfix">
+                    <div class="b_zxtime lt">
+                        $CreateTime$
+                    </div>
+                    <div class="b_zxother lt">
+                        <span class="b_zxotuij">推荐</span>
+                    </div>
+                </div>
             </div>
         </div>
     </script>
