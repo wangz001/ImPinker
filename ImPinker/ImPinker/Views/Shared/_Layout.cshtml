@@ -4,9 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title>@ViewBag.Title</title>
+    <!-- 越野e族css start-->
+    <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/css/common.css?updatetime=201605052" />
+    <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/css/head_foot.css?updatetime=201605052" />
+    <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/css/advert.css?updatetime=201605052" />
+    <!-- 越野e族css end-->
+    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
+    
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("品可评客", "Index", "Home", null, new {@class = "navbar-brand"})
+            @Html.ActionLink("EngineStart", "Index", "Home", null, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -37,13 +45,14 @@
 
     </div>
 </div>
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - 转动科技</p>
-    </footer>
-</div>
+    <div class="container body-content">
+        @Html.Partial("_NavPartial")
+        @RenderBody()
+        <hr/>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 转动科技</p>
+        </footer>
+    </div>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
