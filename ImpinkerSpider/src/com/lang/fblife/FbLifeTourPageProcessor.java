@@ -41,8 +41,6 @@ public class FbLifeTourPageProcessor implements PageProcessor {
             //page.putField("userid", new Html(answer).xpath("//a[@class='author-link']/@href"));
             exist = true;
         }
-        
-        
         if(!exist){
             page.setSkip(true);
         }
