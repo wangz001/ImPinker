@@ -12,6 +12,16 @@ public class Article {
 
 	public String company;
 	
+	public String coverImage;
+	
+	public String getCoverImage() {
+		return coverImage;
+	}
+
+	public void setCoverImage(String coverImage) {
+		this.coverImage = coverImage;
+	}
+
 	public String getCompany() {
 		return company;
 	}
