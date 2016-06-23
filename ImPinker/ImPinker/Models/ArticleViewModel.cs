@@ -26,6 +26,7 @@ namespace ImPinker.Models
 
 		public string PublisherName { get; set; }
 
+        public string CoverImage { get; set; }
 
 
 	}

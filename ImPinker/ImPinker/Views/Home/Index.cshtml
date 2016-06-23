@@ -3,14 +3,63 @@
 }
 
 @Html.Partial("_NavPartial")
-<div class="b_newsfang" id="articleConten" style="display: block">
+<div class="b_box_nocolor m1100">
+    <div class="b_onepart b_twopart clearfix" style="display: block">
+        <div class="b_oneyou rt">
+            <!--列表左侧 start-->
+            <div class="b_twoleft lt">
+                <div class="b_hotcar  two_tit clearfix">
+                    <h5><a href="http://www.fblife.com/html/gundong.html" target="_blank">今日要闻</a></h5>
+                    <div class="b_twoxingshi rt" id="nes_relit">
+                        <a href="javascript:void(0)" class="b_txshiact b_txshi"><em class="z_liebiao"></em>列表</a>
+                        <a href="javascript:void(0)" class="b_txshi"><em class="z_wangge"></em>网格</a>
+                    </div>
+                </div>
+                <div class="b_yaowenbut" id="nes_llist">
+                    <div class="b_twoliepan clearfix" id="zixun_btn" style="display:block;">
+                        <a href="javascript:void(0)" class="b_yaowen b_twolcur">最新</a>
+                        <a href="javascript:void(0)" class="b_yaowen">新车</a>
+                        <a href="javascript:void(0)" class="b_yaowen">导购</a>
+                        <a href="javascript:void(0)" class="b_yaowen">试驾</a>
+                        <a href="javascript:void(0)" class="b_yaowen">降价</a>
+                        <a href="javascript:void(0)" class="b_yaowen">文化</a>
+                        <a href="javascript:void(0)" class="b_yaowen">改装</a>
+                        <a href="javascript:void(0)" class="b_yaowen">用车</a>
+                        <a href="javascript:void(0)" class="b_yaowen">旅行</a>
+                        <a href="javascript:void(0)" class="b_yaowen">行业</a>
+                        <a href="javascript:void(0)" class="b_yaowen">铁骑</a>
+                        <a href="javascript:void(0)" class="b_yaowen">房车</a>
+                    </div>
+                </div>
+                <!--资讯列表-->
+                <div class="b_zxlistbor" id="today_news">
+                    <div class="b_wanglie lt" id="wanggelb">
+                        <!--列表形式-->
+                        <div class="b_newsfang" id="zixun_list" style="display:block;">
+                            <!--资讯列表---最新-->
+                            <div class="zixunone" id="articleConten" style="display: block;">
+                               
+                            </div>
+                            <!--更多-->
+                            <div class="b_zx_more clearfix">
+                                <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
+                            </div>
+                            <!--更多 end-->
+                            <!--资讯列表---最新 end-->
+                        </div>
+                        <!--列表形式 end-->
+                    </div>
+                </div>
+                <!--资讯列表 end---->
+            </div>
+            <!--列表左侧 end-->
+            <!--资讯右侧 start-->
+            @Html.Partial("_RightPartial");
+            <!--资讯右侧 end-->
+        </div>
+    </div>
+</div>
 
-</div>
-<!--更多-->
-<div class="b_zx_more clearfix">
-    <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
-</div>
-<!--更多 end-->
 @section scripts
 {
     <script type="text/javascript">
@@ -20,28 +69,28 @@
     </script>
     <script src="~/Scripts/Home/index.js"></script>
     <script type="text/template1">
-        <div class="b_zixunlist clearfix">
-            <div class="b_zxpic lt">
-                <img src="http://img10.fblife.com/attachments/20160510/1462848999.jpg.180x120.jpg" />
-            </div>
-            <div class="b_zxtuwen lt">
-                <h1>
-                    <a href="$ArticleUrl$" target="_blank">
-                        $ArticleName$
-                    </a>
-                </h1>
-                <p>
-                    $Description$
-                </p>
-                <div class="b_zixunxinxi clearfix">
-                    <div class="b_zxtime lt">
-                        $CreateTime$
+    <div class="b_zixunlist clearfix">
+        <div class="b_zxpic lt">
+            <a href="$ArticleUrl$" target="_blank">
+                <img width="180" height="120" src="$CoverImage$"
+                     data-src="$CoverImage$" class="lazyimg"></a>
+        </div>
+        <div class="b_zxtuwen lt">
+            <h1><a href="$ArticleUrl$" target="_blank"> $ArticleName$</a></h1>
+            <p>$Description$</p>
+            <div class="b_zixunxinxi clearfix">
+                <div class="b_zxtime lt">
+                    06-22 21:15
+                </div>
+                <div class="b_zxother rt">
+                    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare lt" style="padding-bottom:0px;" data="{'url':'http://newcar.fblife.com/html/20160622/173341.html','text':'在日前最新的一组路试谍照中，我们则欣喜的发现新一代牧马人除了会搭载2.0L涡轮增压四缸发动机之外，还将匹配一台八速自动变速箱。','title':'换装8AT 新一代牧马人内饰谍照曝光'}">
+                        <span class="bds_more"><em></em>分享</span>
                     </div>
-                    <div class="b_zxother lt">
-                        <span class="b_zxotuij">推荐</span>
-                    </div>
+                    <span class="b_zxliulan" id="brower_span_173341">0</span>
+                    <span class="b_zxotuij" id="like_span_173341">推荐<cite id="like_text_173341">10</cite></span>
                 </div>
             </div>
         </div>
-    </script>
+    </div>
+</script>
 }

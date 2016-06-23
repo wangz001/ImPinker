@@ -230,6 +230,7 @@
     <Content Include="Views\Article\MyArticle.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Shared\_NavPartial.cshtml" />
+    <Content Include="Views\Shared\_RightPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

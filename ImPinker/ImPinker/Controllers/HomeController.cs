@@ -50,6 +50,7 @@ namespace ImPinker.Controllers
                             ArticleUrl = article.Url,
                             Description = article.Description,
                             KeyWords = article.KeyWords,
+                            CoverImage = article.CoverImage
                         });
                     }
                 }
