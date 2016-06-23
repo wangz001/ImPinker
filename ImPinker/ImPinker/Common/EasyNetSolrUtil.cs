@@ -73,7 +73,7 @@ namespace ImPinker.Common
                     var keyWords = !solrDocument.ContainsKey("KeyWords") ? "" : solrDocument["KeyWords"].ToString();
                     var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
                     var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
-					//var coverImage = solrDocument["CoverImage"].ToString();
+					var coverImage = solrDocument["CoverImage"].ToString();
 					if (existArticles.Contains(travelId)) continue;
 				    if (articleName.Length > 25)
 				    {
@@ -86,7 +86,7 @@ namespace ImPinker.Common
 						ArticleUrl = url,
 						Description = description,
 						KeyWords = keyWords,
-						
+						CoverImage = coverImage
 						//CreateTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("yyyy-MM-dd")
 					};
 					resultLists.Add(searchvm);
