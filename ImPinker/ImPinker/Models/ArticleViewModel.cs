@@ -28,7 +28,7 @@ namespace ImPinker.Models
 
         public string CoverImage { get; set; }
 
-
+        public string CreateTime { get; set; }
 	}
 
 	public class CreateArticleViewModel

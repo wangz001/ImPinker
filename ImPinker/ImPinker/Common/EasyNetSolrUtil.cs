@@ -74,7 +74,8 @@ namespace ImPinker.Common
                     var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
                     var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
 					var coverImage = solrDocument["CoverImage"].ToString();
-					if (existArticles.Contains(travelId)) continue;
+				    var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("MM-dd hh:mm");
+                    if (existArticles.Contains(travelId)) continue;
 				    if (articleName.Length > 25)
 				    {
 				        articleName = articleName.Substring(0, 25) + "……";
@@ -86,8 +87,8 @@ namespace ImPinker.Common
 						ArticleUrl = url,
 						Description = description,
 						KeyWords = keyWords,
-						CoverImage = coverImage
-						//CreateTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("yyyy-MM-dd")
+						CoverImage = coverImage,
+						CreateTime = createTime
 					};
 					resultLists.Add(searchvm);
 					existArticles.Add(travelId);

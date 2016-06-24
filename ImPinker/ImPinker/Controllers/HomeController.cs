@@ -50,7 +50,8 @@ namespace ImPinker.Controllers
                             ArticleUrl = article.Url,
                             Description = article.Description,
                             KeyWords = article.KeyWords,
-                            CoverImage = article.CoverImage
+                            CoverImage = article.CoverImage,
+                            CreateTime = article.CreateTime.ToString("MM-dd hh:mm")
                         });
                     }
                 }
@@ -79,21 +80,7 @@ namespace ImPinker.Controllers
             return str;
         }
 
-    /// <summary>
-        /// 搜索
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public ActionResult Search(string key)
-        {
-            var list = new List<ArticleViewModel>();
-            if (!string.IsNullOrEmpty(key))
-            {
-                list = EasyNetSolrUtil.Query(key, 1, 10);
-            }
-            ViewBag.ArticleVms = list;
-            return View();
-        }
+    
 
         public ActionResult About()
         {

@@ -6,30 +6,31 @@
     }
 
     //加载下一页数据
-    $("#loadmore").bind('click', function() {
-        pageIndex = pageIndex + 1;
-        getNextPage(pageCount, pageIndex);
+    $("#loadmore").bind('click', function () {
+        pageNum = pageNum + 1;
+        getNextPage(pageNum, pageCount);
     });
-    function getNextPage(pageCount, pageIndex) {
+    function getNextPage(pageNum, pageCount) {
+        var key = $.getUrlParam("key");
         $.ajax({
-            url: "/Article/GetMyNextPage",
+            url: "/Search/GetNextPage",
             type: "get",
-            data: { pageCount: pageCount, pageIndex: pageIndex },
-            success:function(data) {
-                if (data==null||data=="") {
+            data: { key: key, pageNum: pageNum, pageCount: pageCount },
+            success: function (data) {
+                if (data == null || data == "") {
                     $("#loadmore").parent().hide();
                 } else {
                     var list = JSON.parse(data);
                     setCard(list);
                 }
             },
-            error:function(data) {
+            error: function (data) {
                 alert(data);
             }
-    });
+        });
     }
     //通过模板填充数据
-    function setCard (dataJson) {
+    function setCard(dataJson) {
         if (dataJson != null && dataJson.length > 0) {
             //获取模板上的HTML
             var html = $('script[type="text/template1"]').html();
@@ -38,7 +39,7 @@
             //对数据进行遍历
             $.each(dataJson, function (i, o) {
                 //这里取到o就是上面rows数组中的值, formatTemplate是最开始定义的方法.
-             arr.push(html.temp(o));
+                arr.push(html.temp(o));
             });
             $('#articleConten').append(arr.join(''));
         }

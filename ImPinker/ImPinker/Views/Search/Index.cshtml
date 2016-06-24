@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Engine Start";
+﻿@using ImPinker.Models
+@{
+    ViewBag.Title = "Search";
 }
 
 <div class="b_box_nocolor m1100">
@@ -8,7 +9,7 @@
             <!--列表左侧 start-->
             <div class="b_twoleft lt">
                 <div class="b_hotcar  two_tit clearfix">
-                    <h5><a href="http://www.fblife.com/html/gundong.html" target="_blank">今日要闻</a></h5>
+                    <h5><a href="http://www.fblife.com/html/gundong.html" target="_blank">我的收藏</a></h5>
                     <div class="b_twoxingshi rt" id="nes_relit">
                         <a href="javascript:void(0)" class="b_txshiact b_txshi"><em class="z_liebiao"></em>列表</a>
                         <a href="javascript:void(0)" class="b_txshi"><em class="z_wangge"></em>网格</a>
@@ -37,7 +38,7 @@
                         <div class="b_newsfang" id="zixun_list" style="display:block;">
                             <!--资讯列表---最新-->
                             <div class="zixunone" id="articleConten" style="display: block;">
-                               
+
                             </div>
                             <!--更多-->
                             <div class="b_zx_more clearfix">
@@ -58,38 +59,26 @@
         </div>
     </div>
 </div>
-
 @section scripts
 {
     <script type="text/javascript">
         var pageCount = @ViewBag.pageCount;
-        var pageIndex = 1;
-        var jsonData = @Html.Raw(ViewBag.ArticleJson);
+        var pageNum = 1;
+        var jsonData=@Html.Raw(ViewBag.ArticleVms);
     </script>
-    <script src="~/Scripts/Home/index.js"></script>
+    <script src="~/Scripts/Search/search.js"></script>
     <script type="text/template1">
-    <div class="b_zixunlist clearfix">
-        <div class="b_zxpic lt">
-            <a href="$ArticleUrl$" target="_blank">
-                <img width="180" height="120" src="$CoverImage$"
-                     data-src="$CoverImage$" class="lazyimg"></a>
-        </div>
-        <div class="b_zxtuwen lt">
-            <h1><a href="$ArticleUrl$" target="_blank"> $ArticleName$</a></h1>
-            <p style="height:40px">$Description$</p>
-            <div class="b_zixunxinxi clearfix">
-                <div class="b_zxtime lt" style="width:250px">
-                    <span>$CreateTime$</span>
-                </div>
-                <div class="b_zxother rt">
-                    <div id="bdshare" class=" lt" style="padding-bottom:0px;" >
-                        <span class="bds_more">来源：越野e族</span>
-                    </div>
-                    <span class="b_zxliulan" id="brower_span_173341">0</span>
-                    <span class="b_zxotuij" id="like_span_173341">赞<cite id="like_text_173341">10</cite></span>
-                </div>
+        <div class="row">
+            <div class="b_zxtuwen">
+                <a href="$ArticleUrl$" target="_blank">
+                    <h1>$ArticleName$</h1>
+                </a>
+                <p>
+                    <span>$Description$</span>
+                    <span class="right">$CreateTime$</span>
+                </p>
             </div>
         </div>
-    </div>
-</script>
+    </script>
 }
+

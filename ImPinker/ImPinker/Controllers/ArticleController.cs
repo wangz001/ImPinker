@@ -31,7 +31,7 @@ namespace ImPinker.Controllers
             var ds = ArticleBll.GetMyListByPage( userId, 1, MyPageCount);
             var articles = ArticleBll.DataTableToList(ds.Tables[0]);
             ViewBag.jsonData = JsonConvert.SerializeObject(articles);
-            ViewBag.pageNum = MyPageCount;
+            ViewBag.pageCount = MyPageCount;
             return View();
         }
 
@@ -39,13 +39,13 @@ namespace ImPinker.Controllers
         /// 分页获取数据接口
         /// </summary>
         /// <param name="pageIndex"></param>
-        /// <param name="pageNum"></param>
+        /// <param name="pageCount"></param>
         /// <returns></returns>
         [HttpGet]
-        public string GetMyNextPage(int pageIndex,int pageNum)
+        public string GetMyNextPage(int pageIndex, int pageCount)
         {
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var ds = ArticleBll.GetMyListByPage(userId, pageIndex, pageNum);
+            var ds = ArticleBll.GetMyListByPage(userId, pageIndex, pageCount);
             var articles = ArticleBll.DataTableToList(ds.Tables[0]);
             if (articles!=null&&articles.Count>0)
             {
