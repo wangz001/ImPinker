@@ -1,4 +1,4 @@
-package com.lang.autohome;
+package com.lang.bitauto;
 
 import java.util.List;
 
@@ -7,15 +7,15 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-public class AutohomeCulturePageProcessor implements PageProcessor {
+public class BitautoCulturePageProcessor implements PageProcessor {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
-	private static AutohomePipeline autohomePipeline = new AutohomePipeline();
+	private static BitautoPipeline bitautoPipeline = new BitautoPipeline();
 
 	public static void main(String[] args) {
-		Spider.create(new AutohomeCulturePageProcessor())
-				.addUrl("http://www.autohome.com.cn/culture/")
-				.addPipeline(autohomePipeline).thread(1).run();
+		Spider.create(new BitautoCulturePageProcessor())
+				.addUrl("http://www.bitauto.com/pingce/")
+				.addPipeline(bitautoPipeline).thread(1).run();
 	}
 
 	@Override

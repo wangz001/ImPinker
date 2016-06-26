@@ -1,4 +1,4 @@
-package com.lang.autohome;
+package com.lang.bitauto;
 
 import com.lang.common.Article;
 import com.lang.common.ArticleDao;
@@ -11,7 +11,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-public class AutohomePipeline implements Pipeline {
+public class BitautoPipeline implements Pipeline {
 
 	ArticleDao articleDao=new ArticleDao(); 
 	@Override
