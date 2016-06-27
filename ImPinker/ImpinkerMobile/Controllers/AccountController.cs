@@ -1,18 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using ImpinkerMobile.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 
 namespace ImpinkerMobile.Controllers
 {
 
+
     [Authorize]
     public class AccountController : Controller
     {
+        public AccountController()
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        {
+        }
+
+        public AccountController(UserManager<ApplicationUser> userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public UserManager<ApplicationUser> UserManager { get; private set; }
+
         //
         // GET: /Account/Index
 
@@ -40,7 +53,8 @@ namespace ImpinkerMobile.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                var user= UserManager.Find(model.UserName, model.Password);
+                if (user!=null)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
@@ -57,7 +71,6 @@ namespace ImpinkerMobile.Controllers
                     ModelState.AddModelError("", "提供的用户名或密码不正确。");
                 }
             }
-
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             return View(model);
         }
