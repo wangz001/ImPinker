@@ -2,10 +2,12 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Security;
+using BLL;
 using ImpinkerMobile.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using Model;
 
 namespace ImpinkerMobile.Controllers
 {
@@ -104,23 +106,35 @@ namespace ImpinkerMobile.Controllers
         {
             if (ModelState.IsValid)
             {
-                // 尝试注册用户
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
-
-                if (createStatus == MembershipCreateStatus.Success)
+                var user = new ApplicationUser() { UserName = model.UserName };
+                var result = UserManager.Create(user, model.Password);
+                if (result.Succeeded)
                 {
+                    AddLocalUser(user);
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                    ModelState.AddModelError("", "注册失败");
                 }
             }
-
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             return View(model);
+        }
+
+        private void AddLocalUser(ApplicationUser user)
+        {
+            var userBll = new UserBll();
+            var users = new Users
+            {
+                UserName = user.UserName,
+                AspNetId = user.Id,
+                CreateTime = DateTime.Now,
+                UpdateTime = DateTime.Now,
+                IsEnable = true
+            };//自己维护的用户表
+            var flag = userBll.Add(users);
         }
 
         //
