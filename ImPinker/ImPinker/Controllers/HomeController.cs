@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BLL;
-using ImPinker.Common;
-using ImPinker.Models;
 using Model;
 using Newtonsoft.Json;
 
@@ -30,7 +25,7 @@ namespace ImPinker.Controllers
         private string GetByPage(int pageNum, int pageCount)
         {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
-            var list = new List<ArticleViewModel>();
+            var list = new List<SolrSearchBll.ArticleViewModel>();
             var userInterestKey = "";
             if (string.IsNullOrEmpty(userInterestKey))
             {
@@ -44,7 +39,7 @@ namespace ImPinker.Controllers
                         {
                             article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
                         }
-                        list.Add(new ArticleViewModel()
+                        list.Add(new SolrSearchBll.ArticleViewModel()
                         {
                             ArticleName = article.ArticleName,
                             ArticleUrl = article.Url,
@@ -58,7 +53,7 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = EasyNetSolrUtil.Query(userInterestKey, pageNum, pageCount);
+                list = SolrSearchBll.Query(userInterestKey, pageNum, pageCount);
             }
             if (list.Count==0)
             {

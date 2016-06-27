@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using ImPinker.Common;
-using ImPinker.Models;
+using BLL;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
@@ -28,7 +24,7 @@ namespace ImPinker.Controllers
         {
             if (!string.IsNullOrEmpty(key))
             {
-                List<ArticleViewModel> list = EasyNetSolrUtil.Query(key, pageNum, pageCount);
+                List<SolrSearchBll.ArticleViewModel> list = SolrSearchBll.Query(key, pageNum, pageCount);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);

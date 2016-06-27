@@ -48,6 +48,7 @@
     <Compile Include="ArticleTagBll.cs" />
     <Compile Include="ArticleVote.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="SolrSearchBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBll.cs" />
   </ItemGroup>
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\Dal\DAL.csproj">
       <Project>{575cebf9-d9de-4977-b66d-8c280c78205e}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
+      <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
+      <Name>EasyNet.Solr</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
