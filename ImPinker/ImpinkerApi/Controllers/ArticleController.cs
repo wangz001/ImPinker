@@ -8,7 +8,6 @@ namespace ImpinkerApi.Controllers
 {
     public class ArticleController : Controller
     {
-
         //
         // GET: /Article/
 
