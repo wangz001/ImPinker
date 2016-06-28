@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BLL;
@@ -51,14 +52,14 @@ namespace ImpinkerMobile.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user= UserManager.Find(model.UserName, model.Password);
-                if (user!=null)
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    await SignInAsync(user, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -77,13 +78,27 @@ namespace ImpinkerMobile.Controllers
             return View(model);
         }
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        }
+
         //
         // GET: /Account/LogOff
 
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
-
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -98,20 +113,19 @@ namespace ImpinkerMobile.Controllers
 
         //
         // POST: /Account/Register
-
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public async Task<ActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
-                var result = UserManager.Create(user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    AddLocalUser(user);
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    await AddLocalUser(user);
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -123,7 +137,7 @@ namespace ImpinkerMobile.Controllers
             return View(model);
         }
 
-        private void AddLocalUser(ApplicationUser user)
+        private async Task<Boolean> AddLocalUser(ApplicationUser user)
         {
             var userBll = new UserBll();
             var users = new Users
@@ -135,6 +149,7 @@ namespace ImpinkerMobile.Controllers
                 IsEnable = true
             };//自己维护的用户表
             var flag = userBll.Add(users);
+            return flag > 0;
         }
 
         //
@@ -150,24 +165,22 @@ namespace ImpinkerMobile.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePasswordModel model)
+        public async Task<ActionResult> ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-
                 // 在某些出错情况下，ChangePassword 将引发异常，
                 // 而不是返回 false。
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
-                    changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    changePasswordSucceeded = result.Succeeded;
                 }
                 catch (Exception)
                 {
                     changePasswordSucceeded = false;
                 }
-
                 if (changePasswordSucceeded)
                 {
                     return RedirectToAction("ChangePasswordSuccess");
@@ -177,7 +190,6 @@ namespace ImpinkerMobile.Controllers
                     ModelState.AddModelError("", "当前密码不正确或新密码无效。");
                 }
             }
-
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             return View(model);
         }
