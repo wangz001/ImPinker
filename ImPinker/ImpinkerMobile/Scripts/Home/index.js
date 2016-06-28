@@ -6,8 +6,7 @@
     }
 
     //加载下一页数据
-    $("#loadmore").bind('click', function () {
-        $("#f_loadimg").show();
+    $("#loadmore").bind('click', function() {
         pageIndex = pageIndex + 1;
         getNextPage(pageCount, pageIndex);
     });
@@ -23,10 +22,8 @@
                     var list = JSON.parse(data);
                     setCard(list);
                 }
-                $("#f_loadimg").hide();
             },
-            error: function (data) {
-                $("#f_loadimg").hide();
+            error:function(data) {
                 alert(data);
             }
     });
