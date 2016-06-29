@@ -16,12 +16,16 @@ namespace ImpinkerMobile.Controllers
 
         public ActionResult Index(string key)
         {
-            if (string.IsNullOrEmpty(key))
+            var resultStr = "[]";
+            if (!string.IsNullOrEmpty(key))
             {
-                key = "越野";
+                resultStr = GetByPage(key, 1, 10);
+                if (string.IsNullOrEmpty(resultStr))
+                {
+                    resultStr = "[]";
+                }
             }
-            string result = GetByPage(key, 1, 10);
-            ViewBag.ArticleJson = result;
+            ViewBag.ArticleJson = resultStr;
             ViewBag.pageCount = IndexPageCount;
             return View();
         }

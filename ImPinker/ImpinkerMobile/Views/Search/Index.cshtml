@@ -2,6 +2,12 @@
     ViewBag.Title = "Engine Start";
 }
 <!-----最外层---->
+<!-----搜索框---->
+<div>
+    <span><input type="text" id="search_txt" placeholder="请输入要搜索的内容"></span>
+    <span><a href="javascript:;" id="btn_search">搜索</a></span>
+</div>
+<!-----搜索框end---->
 <div class="outter">
     <div class="wrap">
         <!-- 主体内容 -->
@@ -9,6 +15,7 @@
             <div class="pos">
                
                 @Html.Partial("_NavPartial")
+                
                 <!-----内容投放区域---->
                 <section class="each_panel">
                     <!-- news begin -->

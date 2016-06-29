@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
     //设置第一页数据
-    if (jsonData != "") {
+    if (jsonData != ""&&jsonData.length>0) {
         var data = jsonData;
         setCard(data);
     }
 
     //加载下一页数据
-    $("#loadmore").bind('click', function () {
+    $("#a_getmorenews").bind('click', function () {
         pageNum = pageNum + 1;
         getNextPage(pageNum, pageCount);
     });
@@ -44,4 +44,10 @@
             $('#articleConten').append(arr.join(''));
         }
     };
+
+    //点击搜索
+    $("#btn_search").bind("click", function() {
+        var key = $("#search_txt").val();
+        window.location = ("/Search/Index?key="+key);
+    });
 });
