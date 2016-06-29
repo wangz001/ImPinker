@@ -7,14 +7,13 @@
         <!-- 主体内容 -->
         <div class="lay-left">
             <div class="pos">
+               
                 @Html.Partial("_NavPartial")
                 <!-----内容投放区域---->
                 <section class="each_panel">
                     <!-- news begin -->
                     <section class="new">
-                        <ul id="articleConten">
-                            
-                        </ul>
+                        <ul id="articleConten"></ul>
                         <div class="f_loadimg" id="f_loadimg" style="display: none;">
                             <img src="http://static.fblife.com/static/wapnews/newwapnew/images/loading.gif">
                         </div>
@@ -25,7 +24,6 @@
                     </section>
                     <!-- news over -->
                 </section>
-                @Html.Partial("_FootPartial")
                 <!-----!内容投放区域---->
             </div>
         </div>
@@ -35,14 +33,17 @@
 {
     <script type="text/javascript">
         var pageCount = @ViewBag.pageCount;
-        var pageIndex = 1;
+        var pageNum = 1;
         var jsonData=@Html.Raw(ViewBag.ArticleJson);
     </script>
-    <script src="~/Scripts/Home/index.js"></script>
+    <script src="~/Scripts/Search/search.js"></script>
     <script type="text/template1">
         <li>
-            <section class="new_img"><a href="$ArticleUrl$">
-                                         <img src="$CoverImage$" /></a></section>
+            <section class="new_img">
+                <a href="$ArticleUrl$">
+                    <img src="$CoverImage$" />
+                </a>
+            </section>
             <section class="new_txt">
                 <p>
                     <a href="$ArticleUrl$">$ArticleName$</a>

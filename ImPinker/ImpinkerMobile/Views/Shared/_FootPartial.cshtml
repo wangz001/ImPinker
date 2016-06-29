@@ -1,9 +1,19 @@
 ﻿<section class="select">
     <form action='http://m.fblife.com/so/wap.php' method='get' id="form_search">
-        <section class="select_cen"><input type="text" value="" name="query" id="query" /><button class="but" type="submit" value=""></button></section>
+        <section class="select_cen">
+            <input type="text" value="" name="query" id="query" />
+            <button class="but" type="submit" value=""></button>
+        </section>
     </form>
     <section class="sec_b">
         <a href="http://m.fblife.com"><a href="http://m.fblife.com">触屏版</a>  |  <a href="http://.fblife.com">电脑版</a></a>
         <p>Copyright &copy; 2015 FBLIFE.All Rights Reserved.</p>
     </section>
 </section>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#query").bind("click", function() {
+            window.location = ("/Search/Index");
+        });
+    });
+</script>
