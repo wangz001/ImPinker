@@ -15,22 +15,7 @@
                         <a href="javascript:void(0)" class="b_txshi"><em class="z_wangge"></em>网格</a>
                     </div>
                 </div>
-                <div class="b_yaowenbut" id="nes_llist">
-                    <div class="b_twoliepan clearfix" id="zixun_btn" style="display: block; height: 51px; ">
-                        <a href="javascript:void(0)" class="b_yaowen b_twolcur">最新</a>
-                        <a href="javascript:void(0)" class="b_yaowen">新车</a>
-                        <a href="javascript:void(0)" class="b_yaowen">导购</a>
-                        <a href="javascript:void(0)" class="b_yaowen">试驾</a>
-                        <a href="javascript:void(0)" class="b_yaowen">降价</a>
-                        <a href="javascript:void(0)" class="b_yaowen">文化</a>
-                        <a href="javascript:void(0)" class="b_yaowen">改装</a>
-                        <a href="javascript:void(0)" class="b_yaowen">用车</a>
-                        <a href="javascript:void(0)" class="b_yaowen">旅行</a>
-                        <a href="javascript:void(0)" class="b_yaowen">行业</a>
-                        <a href="javascript:void(0)" class="b_yaowen">铁骑</a>
-                        <a href="javascript:void(0)" class="b_yaowen">房车</a>
-                    </div>
-                </div>
+                @Html.Partial("_TabListPartial")
                 <!--资讯列表-->
                 <div class="b_zxlistbor" id="today_news">
                     <div class="b_wanglie lt" id="wanggelb">
@@ -65,6 +50,20 @@
         var pageCount = @ViewBag.pageCount;
         var pageNum = 1;
         var jsonData=@Html.Raw(ViewBag.ArticleVms);
+        
+        $(document).ready(function() {
+            //tab导航选中状态
+            $("#tabList a").bind("click", function() {
+                $("#tabList a").removeClass("b_twolcur");
+                $(this).addClass("b_twolcur");
+            });
+            //页面加载完，tab选中状态
+            var tabS=$.getUrlParam("tab");
+            if (tabS!=null&&tabS.length>0) {
+                $("#tabList a").removeClass("b_twolcur");
+                $("#tabList a[txt=" + tabS + "]").addClass("b_twolcur");
+            }
+        }); 
     </script>
     <script src="~/Scripts/Search/search.js"></script>
     <script type="text/template1">

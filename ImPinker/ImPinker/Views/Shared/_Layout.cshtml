@@ -40,6 +40,10 @@
     });
     function search() {
         var keyword = $("#searchterm").val();
-        window.location = ("/Search/Index?key=" + keyword);
+        var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
+        if (tabStr!=null&&tabStr.length>0) {
+            keyword = keyword + "," + tabStr;
+        }
+        window.location = ("/Search/Index?key=" + keyword+"&tab="+tabStr);
     }
 </script>

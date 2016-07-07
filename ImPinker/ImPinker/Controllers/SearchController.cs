@@ -12,9 +12,11 @@ namespace ImPinker.Controllers
         // GET: /Search/
         public ActionResult Index(string key)
         {
-            
             string result = GetByPage(key, 1, 10);
-
+            if (string.IsNullOrEmpty(result))
+            {
+                result = "[]";
+            }
             ViewBag.ArticleVms = result;
             ViewBag.pageCount = IndexPageCount;
             return View();
