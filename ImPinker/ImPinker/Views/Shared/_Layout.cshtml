@@ -37,6 +37,13 @@
                 search();
             }
         });
+        //设置搜索框文本
+        var keys = $.getUrlParam("key");
+        var tabs = $("#tabList a[class='b_yaowen b_twolcur']").text();
+        if (keys != null && keys.length > 0) {
+            keys = keys.replace("," + tabs, "");
+            $("#searchterm").val(keys);
+        }
     });
     function search() {
         var keyword = $("#searchterm").val();
