@@ -56,6 +56,7 @@
             $("#tabList a").bind("click", function() {
                 $("#tabList a").removeClass("b_twolcur");
                 $(this).addClass("b_twolcur");
+                search();
             });
             //页面加载完，tab选中状态
             var tabS=$.getUrlParam("tab");
