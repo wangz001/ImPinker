@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using BLL;
 using ImPinker.Models;
 using Microsoft.AspNet.Identity;
@@ -14,11 +15,22 @@ namespace ImPinker.Controllers
 		private static readonly UserBll UserBll=new UserBll();
         private const int MyPageCount = 10;
 
-        //
-        // GET: /Article/
-        public ActionResult Index()
+        /// <summary>
+        /// 文章预览。爬虫抓取到的文章。即userid=2的文章。用户收藏的文章直接跳转到原始页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
         {
-            return View();
+            var indexId = "travels_" + id;
+            var article = SolrSearchBll.QueryById(indexId);
+            if (article!=null)
+            {
+                ViewBag.Article = article;
+                return View("Index");
+            }
+            //错误页
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -54,11 +66,14 @@ namespace ImPinker.Controllers
             return string.Empty;
         }
 
-        //
-        // GET: /Article/Details/5
+        /// <summary>
+        /// 文章预览。爬虫抓取到的文章。即userid=2的文章。用户收藏的文章直接跳转到原始页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int id)
         {
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
         //

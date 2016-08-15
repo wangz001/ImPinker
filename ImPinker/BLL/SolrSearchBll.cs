@@ -238,5 +238,51 @@ namespace BLL
 				}
 			}
 		}
+
+        /// <summary>
+        /// 根据id获取，爬虫爬取的文章。包含content
+        /// </summary>
+        /// <param name="docId"></param>
+        /// <returns></returns>
+        public static ArticleViewModel QueryById(string docId)
+	    {
+            var queryParam = new Dictionary<string, ICollection<string>>();
+            if (string.IsNullOrEmpty(docId))
+            {
+                return null;
+            }
+            queryParam.Add("hl", new List<string>() { "true" });
+            //高亮
+
+            var queryStr = new SolrQuery("id:" + docId);
+            var result = operations.Query(CoreName, "/select", queryStr, queryParam);
+            var highLightResult = highlightingParser.Parse(result);
+            var solrDocumentList = (SolrDocumentList)result.Get("response");
+            //整合返回的数据
+            if (solrDocumentList != null && solrDocumentList.Count > 0)
+            {
+                    var solrDocument = solrDocumentList[0];
+                    var idStr = solrDocument["id"].ToString();
+                    var travelId = Int32.Parse(idStr.Substring(idStr.IndexOf("_") + 1));
+                    var userId = Int32.Parse(solrDocument["UserId"].ToString());
+                    var articleName = !solrDocument.ContainsKey("ArticleName") ? "" : solrDocument["ArticleName"].ToString();
+                    var keyWords = !solrDocument.ContainsKey("KeyWords") ? "" : solrDocument["KeyWords"].ToString();
+                    var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
+                    var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
+                    var coverImage = !solrDocument.ContainsKey("CoverImage") ? "" : solrDocument["CoverImage"].ToString();
+                    var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("MM-dd hh:mm");
+                    var searchvm = new ArticleViewModel
+                    {
+                        ArticleName = articleName,
+                        ArticleUrl = url,
+                        Description = description,
+                        KeyWords = keyWords,
+                        CoverImage = coverImage,
+                        CreateTime = createTime
+                    };
+                    return searchvm;
+            }
+            return null;
+	    }
 	}
 }
