@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="jars/webmagic-core-0.5.2.jar"/>
 	<classpathentry kind="lib" path="jars/webmagic-extension-0.5.2.jar"/>
 	<classpathentry kind="lib" path="jars/xsoup-0.2.4.jar"/>
+	<classpathentry kind="lib" path="jars/solr-solrj-5.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

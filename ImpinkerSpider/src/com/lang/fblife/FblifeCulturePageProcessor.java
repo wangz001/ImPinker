@@ -2,6 +2,8 @@ package com.lang.fblife;
 
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrClient;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
