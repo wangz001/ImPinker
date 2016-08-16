@@ -42,11 +42,16 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 					.getHtml()
 					.xpath("//meta[@name='keywords']/@content")
 					.toString();
+			String content=page
+					.getHtml()//con_weibo
+					.xpath("//div[@id='con_weibo']/html()")
+				.toString();
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
 			page.putField("description", titleString);
 			page.putField("keyword", keyWord);
 			page.putField("CoverImage", firstImg);
+			page.putField("Content", content);
 		} else {
 			page.setSkip(true);
 		}

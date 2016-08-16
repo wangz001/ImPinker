@@ -23,7 +23,8 @@ namespace ImPinker.Controllers
         public ActionResult Index(int id)
         {
             var indexId = "travels_" + id;
-            var article = SolrSearchBll.QueryById(indexId);
+            //var article = SolrSearchBll.QueryById(indexId);
+            var article = ArticleBll.GetModel(id);
             if (article!=null)
             {
                 ViewBag.Article = article;

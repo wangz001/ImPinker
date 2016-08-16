@@ -116,6 +116,8 @@ namespace BLL
             public string CoverImage { get; set; }
 
             public string CreateTime { get; set; }
+
+            public string Content { get; set; }
         }
 
 		//public static int NewTravelIndex(Travels travle)

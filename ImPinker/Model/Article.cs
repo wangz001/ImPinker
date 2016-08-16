@@ -20,10 +20,8 @@ namespace Model{
 	/// Article:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class Article
+	public class Article
 	{
-		public Article()
-		{}
 		#region Model
 		private long _id;
 		private string _articlename;
@@ -33,6 +31,7 @@ namespace Model{
         private string _keywords;
         private string _company;
 		private string _description;
+	    private string _content;
 		private int _state;
 		private DateTime _createtime;
 		private DateTime _updatetime;
@@ -101,6 +100,14 @@ namespace Model{
 			set{ _description=value;}
 			get{return _description;}
 		}
+        /// <summary>
+        /// 文本内容，ntext类型。页面正文内容
+        /// </summary>
+        public string Content
+        {
+            set { _content = value; }
+            get { return _content; }
+        }
 		/// <summary>
 		///  状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过
 		/// </summary>

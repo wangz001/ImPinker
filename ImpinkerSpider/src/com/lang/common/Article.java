@@ -14,6 +14,16 @@ public class Article {
 	
 	public String coverImage;
 	
+	public String Content;
+	
+	public String getContent() {
+		return Content;
+	}
+
+	public void setContent(String content) {
+		Content = content;
+	}
+
 	public String getCoverImage() {
 		return coverImage;
 	}

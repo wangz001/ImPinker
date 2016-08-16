@@ -16,13 +16,13 @@ public class ArticleDao {
 	private boolean Add(Article article) {
 		String timeString = TUtil.getCurrentTime();
 		String sqlString = "INSERT INTO Article"
-				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company) "
-				+ "values (?,?,?,?,?,?,?,?,?,?)";
+				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company,Content) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] objects = new Object[] { article.getTitle(),
 				article.getUrlString(), article.getCoverImage(),
 				2, article.getKeyWord(),
 				article.getDescription(), 1, timeString, timeString,
-				article.getCompany() };
+				article.getCompany(),article.getContent() };
 		boolean flag = DBHelper.executeNonQuery(sqlString, objects) > 0;
 		return flag;
 	}

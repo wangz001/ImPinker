@@ -174,7 +174,7 @@ namespace DAL
 
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(
-				"select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime from Article ");
+				"select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,State,CreateTime,UpdateTime from Article ");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
 			{
@@ -243,6 +243,10 @@ namespace DAL
 				{
 					model.UpdateTime = DateTime.Parse(row["UpdateTime"].ToString());
 				}
+                if (row["Content"] != null && row["Content"].ToString()!="")
+                {
+                    model.Content = row["Content"].ToString();
+                }
 			}
 			return model;
 		}
@@ -253,7 +257,7 @@ namespace DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime ");
+            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,State,CreateTime,UpdateTime ");
 			strSql.Append(" FROM Article ");
 			if (strWhere.Trim() != "")
 			{

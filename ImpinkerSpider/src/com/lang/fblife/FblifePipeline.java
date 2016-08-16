@@ -24,6 +24,7 @@ public class FblifePipeline implements Pipeline {
 		article.setUrlString(resultItems.get("url").toString());
 		article.setCompany(CompanyEnum.Fblife.getName());
 		article.setCoverImage(resultItems.get("CoverImage").toString());
+		article.setContent(resultItems.get("Content").toString());
 		boolean flag=articleDao.NewArticle(article);
 		
 		System.out.println(resultItems.get("title"));
