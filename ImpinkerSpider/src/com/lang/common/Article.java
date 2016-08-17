@@ -2,6 +2,8 @@ package com.lang.common;
 
 public class Article {
 	
+	public int id;
+	
 	public String Title;
 	
 	public String KeyWord;
@@ -15,6 +17,14 @@ public class Article {
 	public String coverImage;
 	
 	public String Content;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getContent() {
 		return Content;

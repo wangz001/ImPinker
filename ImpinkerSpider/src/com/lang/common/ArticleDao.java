@@ -9,25 +9,25 @@ public class ArticleDao {
 		if (IsExist(article)) {
 			return true;
 		} else {
-			return Add(article);
+			return Add(article)>0;
 		}
 	}
 
-	private boolean Add(Article article) {
+	public int Add(Article article) {
 		String timeString = TUtil.getCurrentTime();
 		String sqlString = "INSERT INTO Article"
 				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company,Content) "
 				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] objects = new Object[] { article.getTitle(),
 				article.getUrlString(), article.getCoverImage(),
-				2, article.getKeyWord(),
+				AppStart.AdminUserId, article.getKeyWord(),
 				article.getDescription(), 1, timeString, timeString,
 				article.getCompany(),article.getContent() };
-		boolean flag = DBHelper.executeNonQuery(sqlString, objects) > 0;
-		return flag;
+		int  id = DBHelper.executeNonQuery(sqlString, objects);
+		return id;
 	}
 
-	private boolean IsExist(Article article) {
+	public boolean IsExist(Article article) {
 
 		String sqlString = "select id from article where url=?  ";
 		Object[] objects = new Object[] { article.getUrlString() };

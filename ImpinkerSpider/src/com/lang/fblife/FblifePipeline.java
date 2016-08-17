@@ -4,6 +4,7 @@ import com.lang.common.Article;
 import com.lang.common.ArticleDao;
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
+import com.lang.common.SolrJUtil;
 import com.lang.util.DBConnection;
 import com.lang.util.DBHelper;
 
@@ -25,8 +26,14 @@ public class FblifePipeline implements Pipeline {
 		article.setCompany(CompanyEnum.Fblife.getName());
 		article.setCoverImage(resultItems.get("CoverImage").toString());
 		article.setContent(resultItems.get("Content").toString());
-		boolean flag=articleDao.NewArticle(article);
 		
+		boolean flag=articleDao.IsExist(article);
+		if(!flag){
+			int id=articleDao.Add(article);
+			article.setId(id);
+			//添加索引
+			new SolrJUtil().AddDocs(article);
+		}
 		System.out.println(resultItems.get("title"));
 	}
 
