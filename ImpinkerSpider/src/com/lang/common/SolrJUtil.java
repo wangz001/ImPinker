@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 
 import com.lang.util.TUtil;
@@ -21,15 +22,15 @@ public class SolrJUtil {
 	    Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
 	      SolrInputDocument doc1 = new SolrInputDocument();
 	      doc1.addField("id", "travels_"+article.getId(), 1.0f);
-	      doc1.addField("userid", AppStart.AdminUserId, 1.0f);
+	      doc1.addField("UserId", AppStart.AdminUserId, 1.0f);
 	      doc1.addField("ArticleName", article.getTitle());
 	      doc1.addField("KeyWords", article.getKeyWord());
 	      doc1.addField("Description", article.getDescription());
 	      doc1.addField("Url", article.getUrlString());
-	      doc1.addField("CreateTime", TUtil.getCurrentTime());
-	      doc1.addField("UpdateTime", TUtil.getCurrentTime());
+	      doc1.addField("CreateTime","2016-08-11T08:37:54.87Z");
+	      doc1.addField("UpdateTime", "2016-08-11T08:37:54.87Z");
 	      doc1.addField("CoverImage", article.getCoverImage());
-	      doc1.addField("Content", article.getContent());
+	      //doc1.addField("Content", article.getContent());
 	      docs.add(doc1);
 	    try {
 	     
@@ -46,7 +47,8 @@ public class SolrJUtil {
 
 	      // the most optimal way of updating all your docs 
 	      // in one http request(432ms)
-	      server.add(docs.iterator());
+	    	server.add(docs.iterator());
+	    	 server.commit();
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }

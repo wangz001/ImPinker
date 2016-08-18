@@ -15,12 +15,6 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 
 	public static void main(String[] args) {
-//		Article article=new Article();
-//		article.setId(1);
-//		article.setTitle("测试solrj插入");
-//		article.setContent("负责蒙方地接的车辆是一台黑色的LC200，开车的人名字叫吉雅，他的车辆明显做了改装升高，前后都更换了FOX的减震器，装的轮胎型号是33吋+ 级别的255／85R16的百路驰MUT，这");
-//		new SolrJUtil().AddDocs(article);
-//		
 		
 		Spider.create(new FblifeCulturePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)

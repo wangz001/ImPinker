@@ -13,7 +13,7 @@ public class ArticleDao {
 		}
 	}
 
-	public int Add(Article article) {
+	public long Add(Article article) {
 		String timeString = TUtil.getCurrentTime();
 		String sqlString = "INSERT INTO Article"
 				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company,Content) "
@@ -23,7 +23,7 @@ public class ArticleDao {
 				AppStart.AdminUserId, article.getKeyWord(),
 				article.getDescription(), 1, timeString, timeString,
 				article.getCompany(),article.getContent() };
-		int  id = DBHelper.executeNonQuery(sqlString, objects);
+		int id = DBHelper.InsertAndRetId("Article",sqlString, objects);
 		return id;
 	}
 

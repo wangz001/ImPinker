@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry excluding="**/*.java" kind="src" path="resources"/>
 	<classpathentry kind="lib" path="jars/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="jars/assertj-core-1.5.0.jar"/>
@@ -29,5 +29,14 @@
 	<classpathentry kind="lib" path="jars/webmagic-extension-0.5.2.jar"/>
 	<classpathentry kind="lib" path="jars/xsoup-0.2.4.jar"/>
 	<classpathentry kind="lib" path="jars/solr-solrj-4.10.4.jar"/>
+	<classpathentry kind="lib" path="jars/commons-io-2.3.jar"/>
+	<classpathentry kind="lib" path="jars/httpclient-4.3.1.jar"/>
+	<classpathentry kind="lib" path="jars/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="jars/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="jars/jcl-over-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="jars/jul-to-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="jars/noggit-0.5.jar"/>
+	<classpathentry kind="lib" path="jars/wstx-asl-3.2.7.jar"/>
+	<classpathentry kind="lib" path="jars/zookeeper-3.4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -93,7 +93,6 @@ public final class DBHelper {
 			}
 
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException err) {
 
 			err.printStackTrace();

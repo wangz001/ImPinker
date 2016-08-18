@@ -29,7 +29,7 @@ public class FblifePipeline implements Pipeline {
 		
 		boolean flag=articleDao.IsExist(article);
 		if(!flag){
-			int id=articleDao.Add(article);
+			long id=articleDao.Add(article);
 			article.setId(id);
 			//添加索引
 			new SolrJUtil().AddDocs(article);
