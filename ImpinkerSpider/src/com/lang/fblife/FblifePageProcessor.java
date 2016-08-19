@@ -2,13 +2,12 @@ package com.lang.fblife;
 
 import java.util.List;
 
-import com.lang.main.myWebMagic;
-import com.lang.util.RegexUtil;
-
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+
+import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor {
 
@@ -17,8 +16,8 @@ public class FblifePageProcessor implements PageProcessor {
 
 	public static void main(String[] args) {
 		Spider.create(new FblifePageProcessor())
-				.addUrl("http://tour.fblife.com/").addPipeline(fbPipeline)
-				.thread(5).run();
+				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
+				.thread(1).run();
 	}
 
 	@Override
@@ -27,31 +26,20 @@ public class FblifePageProcessor implements PageProcessor {
 		List<String> fbLinks = page.getHtml().links()
 				.regex("(http://\\w+.fblife\\.com/html/\\w+/\\w+.html)").all();
 		page.addTargetRequests(fbLinks);
-		// page.putField("title",
-		// page.getHtml().xpath("//div[@class='content']/div/div/div[@class='tit']/h1/text()").toString());
-		// page.putField("content",
-		// page.getHtml().xpath("//div[@id='con_weibo']/tidyText()").toString());
-		// page.putField("tags",page.getHtml().xpath("//div[@class='BlogTags']/a/text()").all());
 		String thisUrlString = page.getUrl().toString();
 
-		if (RegexUtil.match(
-				"http://culture.fblife\\.com/html/\\w+/\\w+.html",
+		if (RegexUtil.match("http://culture.fblife\\.com/html/\\w+/\\w+.html",
 				thisUrlString)) {
-
+			new FblifeCulturePageProcessor().process(page);
+			return;
 		} else if (RegexUtil.match(
 				"http://tour.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-			System.out.println(page.getUrl());
+			new FbLifeTourPageProcessor().process(page);
+			return;
 		}
 
-		if (page.getResultItems().get("title") == null) {
-			// skip this page
-			page.setSkip(true);
-		}
+		page.setSkip(true);
 
-		// fbPipeline.process(page, this);
-		// page.putField("readme",
-		// page.getHtml().xpath("//div[@id='readme']/tidyText()"));
-		System.out.println(page.getResultItems().get("title"));
 		System.out.println(page.getUrl());
 
 	}

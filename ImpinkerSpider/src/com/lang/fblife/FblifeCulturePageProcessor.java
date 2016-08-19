@@ -7,6 +7,9 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import com.lang.common.ArticleTypeEnum;
+import com.lang.common.CompanyEnum;
+
 public class FblifeCulturePageProcessor implements PageProcessor {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
@@ -45,7 +48,8 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
 			page.putField("description", titleString);
-			page.putField("keyword", keyWord);
+			page.putField("keyword", keyWord + ArticleTypeEnum.WenHua.getName()
+					+ "," + CompanyEnum.Fblife.getName());
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
 		} else {
