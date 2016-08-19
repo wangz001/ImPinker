@@ -1,8 +1,6 @@
 package com.lang.fblife;
 
 import java.util.List;
-import com.lang.common.Article;
-import com.lang.common.SolrJUtil;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -15,7 +13,6 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 
 	public static void main(String[] args) {
-		
 		Spider.create(new FblifeCulturePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
 				.thread(1).run();
@@ -41,14 +38,10 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			if (arrStrings != null && arrStrings.size() > 0) {
 				firstImg = arrStrings.get(0);
 			}
-			String keyWord=page
-					.getHtml()
-					.xpath("//meta[@name='keywords']/@content")
-					.toString();
-			String content=page
-					.getHtml()//con_weibo
-					.xpath("//div[@id='con_weibo']/html()")
-				.toString();
+			String keyWord = page.getHtml()
+					.xpath("//meta[@name='keywords']/@content").toString();
+			String content = page.getHtml()// con_weibo
+					.xpath("//div[@id='con_weibo']/html()").toString();
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
 			page.putField("description", titleString);

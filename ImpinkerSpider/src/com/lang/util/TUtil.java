@@ -3,12 +3,12 @@ package com.lang.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.solr.common.util.DateUtil;
+
 /**
-* ʱ�乤����
-* 
-* @author way
-* 
-*/
+ * @author wangzheng1
+ *
+ */
 public class TUtil {
 
 	public static String getCurrentTime(){
@@ -26,5 +26,12 @@ public class TUtil {
 		return format.format(new Date(time));
 	}
 
-	
+	/**
+	 * 获取格林尼治标准时间格式
+	 * @param time
+	 * @return
+	 */
+    public static String getUTCTime(long time){
+    	return DateUtil.getThreadLocalDateFormat().format((time));
+    }
 }

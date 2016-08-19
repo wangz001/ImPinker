@@ -9,7 +9,7 @@ public class ArticleDao {
 		if (IsExist(article)) {
 			return true;
 		} else {
-			return Add(article)>0;
+			return Add(article) > 0;
 		}
 	}
 
@@ -22,11 +22,17 @@ public class ArticleDao {
 				article.getUrlString(), article.getCoverImage(),
 				AppStart.AdminUserId, article.getKeyWord(),
 				article.getDescription(), 1, timeString, timeString,
-				article.getCompany(),article.getContent() };
-		int id = DBHelper.InsertAndRetId("Article",sqlString, objects);
+				article.getCompany(), article.getContent() };
+		int id = DBHelper.InsertAndRetId("Article", sqlString, objects);
 		return id;
 	}
 
+	/**
+	 * 是否存在记录
+	 * 
+	 * @param article
+	 * @return true 存在；false 不存在
+	 */
 	public boolean IsExist(Article article) {
 
 		String sqlString = "select id from article where url=?  ";
