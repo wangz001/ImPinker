@@ -4,9 +4,9 @@
     <document name="article">  
         <entity name="article"  transformer="ClobTransformer" pk="table_id"
                  query="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
-						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage from Article"        
+						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Content from Article"        
                  deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
-						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage from Article"    
+						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Content from Article"    
                  deltaQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id FROM Article where CreateTime > '${dataimporter.last_index_time}'">             
                     <field column="table_id"      name="id"      />  
                     <field column="userid"      name="userid"      />
@@ -16,7 +16,8 @@
 					<field column="Url"      name="Url"      />
 					<field column="CreateTime"      name="CreateTime"      />
 					<field column="UpdateTime"      name="UpdateTime"      />
-					<field column="CoverImage"      name="CoverImage"      />					
+					<field column="CoverImage"      name="CoverImage"      />
+					<field column="Content"      name="Content"      />					
          </entity> 
 </document>
 </dataConfig>
