@@ -1,10 +1,16 @@
 package com.lang.fblife;
 
+import java.util.Date;
+
 import us.codecraft.webmagic.Spider;
+
+import com.lang.util.TUtil;
 
 public class FblifeMain {
 
 	public static void main(String[] args) {
+		TUtil.getUTCTime(new Date().getTime());
+		TUtil.getBJUtcTime();
 
 		TourPageStart();
 

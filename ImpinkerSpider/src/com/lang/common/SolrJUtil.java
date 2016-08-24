@@ -55,6 +55,7 @@ public class SolrJUtil {
 	private static void AddDocs(List<Article> articleLists) {
 		HttpSolrServer server = new HttpSolrServer(SOLR_URL + coreName);
 		Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+
 		String time = TUtil.getUTCTime(new Date().getTime());
 		for (Article article : articleLists) {
 			SolrInputDocument doc1 = new SolrInputDocument();
