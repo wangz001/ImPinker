@@ -1,5 +1,6 @@
 package com.lang.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,9 +37,29 @@ public class TUtil {
 	 * @return
 	 */
 	public static String getUTCTime(long time) {
-		System.out.print("utc时间："
-				+ DateUtil.getThreadLocalDateFormat().format((time)));
+		time = time + 8 * 60 * 60 * 1000; // 格林尼治时间+8小时==北京时间
+		// System.out.println("utc时间："
+		// + DateUtil.getThreadLocalDateFormat().format((time)));
 		return DateUtil.getThreadLocalDateFormat().format((time));
+	}
+
+	/**
+	 * 时间字符串转换为utc时间
+	 * 
+	 * @param time
+	 * @return
+	 */
+	public static String strToUTCTime(String time) {
+		try {
+			SimpleDateFormat myFormatter = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			Date date = myFormatter.parse(time);
+			String utcStr = getUTCTime(date.getTime());
+			return utcStr;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**

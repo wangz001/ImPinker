@@ -12,9 +12,9 @@ public class FblifeMain {
 		TUtil.getUTCTime(new Date().getTime());
 		TUtil.getBJUtcTime();
 
-		TourPageStart();
+		// TourPageStart();
 
-		CulturePageStart();
+		// CulturePageStart();
 	}
 
 	public static void CulturePageStart() {

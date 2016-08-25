@@ -1,23 +1,36 @@
 package com.lang.common;
 
 public class Article {
-	
+
 	public long id;
-	
+
 	public String Title;
-	
+
 	public String KeyWord;
-	
+
 	public String urlString;
-	
+
 	public String description;
 
 	public String company;
-	
+
 	public String coverImage;
-	
+
 	public String Content;
-	
+
+	/**
+	 * //文章发布时间
+	 */
+	public String createTime;
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -25,7 +38,7 @@ public class Article {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getContent() {
 		return Content;
 	}
@@ -81,5 +94,5 @@ public class Article {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

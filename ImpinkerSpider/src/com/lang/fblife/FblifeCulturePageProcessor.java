@@ -1,7 +1,5 @@
 package com.lang.fblife;
 
-import java.util.List;
-
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -28,30 +26,22 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 				.regex("(http://culture.fblife\\.com/html/\\w+/\\w+.html)")
 				.all());
 
-		String titleString = page
-				.getHtml()
-				.xpath("//div[@class='content']/div/div/div[@class='tit']/h1/text()")
-				.toString();
+		String titleString = FbLifeXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
-			String firstImg = "";
-			List<String> arrStrings = page
-					.getHtml()
-					.xpath("//div[@id='con_weibo']/div[@class='testdiv']/p/a/img/@src")
-					.all();
-			if (arrStrings != null && arrStrings.size() > 0) {
-				firstImg = arrStrings.get(0);
-			}
-			String keyWord = page.getHtml()
-					.xpath("//meta[@name='keywords']/@content").toString();
-			String content = page.getHtml()// con_weibo
-					.xpath("//div[@id='con_weibo']/html()").toString();
+			String firstImg = FbLifeXPathCommon.getFirstImg(page);
+			String keyWord = FbLifeXPathCommon.getKeyWordString(page);
+			String description = FbLifeXPathCommon.getDescription(page);
+			String content = FbLifeXPathCommon.getContentString(page);
+			String publishTime = FbLifeXPathCommon.getPublishTime(page);
+
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
-			page.putField("description", titleString);
+			page.putField("description", description);
 			page.putField("keyword", keyWord + ArticleTypeEnum.WenHua.getName()
 					+ "," + CompanyEnum.Fblife.getName());
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
+			page.putField("publishtime", publishTime);
 		} else {
 			page.setSkip(true);
 		}
