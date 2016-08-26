@@ -48,7 +48,5 @@ public class FblifePipeline implements Pipeline {
 			SolrJUtil solrJUtil = SolrJUtil.getInstance();
 			solrJUtil.AddDocs(article);
 		}
-		System.out.println(resultItems.get("title"));
 	}
-
 }

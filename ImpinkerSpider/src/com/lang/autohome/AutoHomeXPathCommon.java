@@ -1,17 +1,10 @@
-package com.lang.fblife;
+package com.lang.autohome;
 
 import java.util.List;
 
 import us.codecraft.webmagic.Page;
 
-/**
- * xpath 公共类，fblife
- * 
- * @author wangzheng1
- * 
- */
-public class FbLifeXPathCommon {
-
+public class AutoHomeXPathCommon {
 	/**
 	 * 获取title
 	 * 
