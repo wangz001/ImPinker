@@ -22,7 +22,7 @@ public class FblifePipeline implements Pipeline {
 		article.setKeyWord(resultItems.get("keyword").toString());
 		if (resultItems.get("description").toString().length() > 200) {
 			article.setDescription(resultItems.get("description").toString()
-					.substring(0, 200));
+					.substring(0, 198));
 		} else {
 			article.setDescription(resultItems.get("description").toString());
 		}
