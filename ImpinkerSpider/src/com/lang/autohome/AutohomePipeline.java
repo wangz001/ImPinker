@@ -31,7 +31,8 @@ public class AutohomePipeline implements Pipeline {
 		article.setCoverImage(resultItems.get("CoverImage").toString());
 		article.setContent(resultItems.get("Content").toString());
 		String timeString = "";
-		if ("" != resultItems.get("publishtime")) {
+		if (null != resultItems.get("publishtime")
+				&& "" != resultItems.get("publishtime")) {
 			timeString = resultItems.get("publishtime").toString();
 		} else {
 			timeString = TUtil.getCurrentTime();

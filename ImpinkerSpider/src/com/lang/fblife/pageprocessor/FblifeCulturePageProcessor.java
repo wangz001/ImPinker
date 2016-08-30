@@ -1,4 +1,4 @@
-package com.lang.fblife;
+package com.lang.fblife.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -7,6 +7,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
+import com.lang.fblife.FbLifeXPathCommon;
+import com.lang.fblife.FblifePipeline;
 
 public class FblifeCulturePageProcessor implements PageProcessor {
 

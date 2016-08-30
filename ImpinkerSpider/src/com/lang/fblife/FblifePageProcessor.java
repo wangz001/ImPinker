@@ -8,6 +8,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.fblife.pageprocessor.FbLifeTourPageProcessor;
+import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeEvaluatePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeNewsPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeReStylePageProcessor;

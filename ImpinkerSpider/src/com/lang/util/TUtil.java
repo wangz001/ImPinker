@@ -63,6 +63,26 @@ public class TUtil {
 	}
 
 	/**
+	 * 2016年08月30日 00:05 转换为yyyy-MM-dd HH:mm:ss 格式
+	 * 
+	 * @param time
+	 * @return
+	 */
+	public static String strToFormatStr(String time) {
+		try {
+			time = time.replace("年", "-").replace("月", "-").replace("日", "");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = format.parse(time);
+			SimpleDateFormat format2 = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			return format2.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
 	 * 获取北京标准时间格式
 	 * 
 	 * @return

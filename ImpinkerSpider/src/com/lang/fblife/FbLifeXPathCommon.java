@@ -4,6 +4,8 @@ import java.util.List;
 
 import us.codecraft.webmagic.Page;
 
+import com.lang.util.TUtil;
+
 /**
  * xpath 公共类，fblife
  * 
@@ -75,7 +77,7 @@ public class FbLifeXPathCommon {
 	 * @return
 	 */
 	public static String getContentString(Page page) {
-		String contentString = "//div[@id='con_weibo']/html()";
+		String contentString = "//div[@id='articleContent']/html()";
 		return page.getHtml()// con_weibo
 				.xpath(contentString).toString();
 	}
@@ -87,7 +89,12 @@ public class FbLifeXPathCommon {
 	 * @return
 	 */
 	public static String getPublishTime(Page page) {
-		String timeString = "//div[@class='tit']/div[@class='tit_xia']/p/span/text()";
-		return page.getHtml().xpath(timeString).toString();
+		String timeString = "//div[@id='articlewrap']/div[@class='article-info']/span/text()";
+		String timeStr = page.getHtml().xpath(timeString).toString();
+		if (timeStr != "" && timeStr.length() > 0) {
+			// 2016年08月30日 00:05 格式转换 yyyy-MM-dd hh:MM:ss
+			return TUtil.strToFormatStr(timeStr.trim());
+		}
+		return "";
 	}
 }

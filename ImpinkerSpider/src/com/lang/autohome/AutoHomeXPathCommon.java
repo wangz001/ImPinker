@@ -12,7 +12,7 @@ public class AutoHomeXPathCommon {
 	 * @return
 	 */
 	public static String getTitleString(Page page) {
-		String titleString = "//div[@class='content']/div/div/div[@class='tit']/h1/text()";
+		String titleString = "//div[@id='articlewrap']/h1/text()";
 		return page.getHtml().xpath(titleString).toString();
 	}
 
@@ -23,11 +23,11 @@ public class AutoHomeXPathCommon {
 	 * @return
 	 */
 	public static String getFirstImg(Page page) {
-		String firstImgString = "//div[@id='con_weibo']/div[@class='testdiv']/p/a/img/@src";
+		String firstImgString = "//div[@id='articleContent']/p/a/img/@src";
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
 		if (arrStrings == null || arrStrings.size() == 0) { // 格式2
-			String firstImgString2 = "//div[@id='con_weibo']/div[@class='testdiv']/p/img/@src";
+			String firstImgString2 = "//div[@id='articleContent']/p/img/@src";
 			arrStrings = page.getHtml().xpath(firstImgString2).all();
 		}
 		if (arrStrings != null && arrStrings.size() > 0) {
@@ -46,7 +46,7 @@ public class AutoHomeXPathCommon {
 	 * @return
 	 */
 	public static String getKeyWordString(Page page) {
-		String keyWordString = "//meta[@name='keywords']/@content";
+		String keyWordString = "//meta[@name='keywords']@content";
 		return page.getHtml().xpath(keyWordString).toString();
 	}
 

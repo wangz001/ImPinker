@@ -1,11 +1,15 @@
-package com.lang.autohome;
-
-import java.util.List;
+package com.lang.autohome.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+
+import com.lang.autohome.AutoHomeXPathCommon;
+import com.lang.autohome.AutohomePipeline;
+import com.lang.common.ArticleTypeEnum;
+import com.lang.common.CompanyEnum;
+import com.lang.fblife.FbLifeXPathCommon;
 
 public class AutohomeCulturePageProcessor implements PageProcessor {
 
@@ -23,25 +27,23 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 		// TODO Auto-generated method stub
 		page.addTargetRequests(page.getHtml().links()
 				.regex("(http://www.autohome.com.cn/culture/\\S+)").all());
-		String titleString = page.getHtml()
-				.xpath("//div[@id='articlewrap']/h1/text()")
-				.toString();
+
+		String titleString = AutoHomeXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
-			String keyword = page.getHtml()
-					.xpath("//meta[@name='keywords']@content").toString();
-			String firstImg = "";
-			List<String> arrStrings = page
-					.getHtml()
-					.xpath("//div[@id='articleContent']/p/a/img/@src")
-					.all();
-			if (arrStrings != null && arrStrings.size() > 0) {
-				firstImg = arrStrings.get(0);
-			}
+			String keyWord = AutoHomeXPathCommon.getKeyWordString(page);
+			String firstImg = AutoHomeXPathCommon.getFirstImg(page);
+			String description = FbLifeXPathCommon.getDescription(page);
+			String content = FbLifeXPathCommon.getContentString(page);
+			String publishTime = FbLifeXPathCommon.getPublishTime(page);
+
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
-			page.putField("description", titleString);
-			page.putField("keyword", keyword);
+			page.putField("description", description);
+			page.putField("keyword", keyWord + ArticleTypeEnum.WenHua.getName()
+					+ "," + CompanyEnum.Autohome.getName());
 			page.putField("CoverImage", firstImg);
+			page.putField("Content", content);
+			page.putField("publishtime", publishTime);
 		} else {
 			page.setSkip(true);
 		}

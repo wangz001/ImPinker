@@ -9,13 +9,7 @@ import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
 import com.lang.fblife.FbLifeXPathCommon;
 
-/**
- * 新闻
- * 
- * @author wangzheng1
- * 
- */
-public class AutoHomeNewsPageProcessor implements PageProcessor {
+public class AutoHomeEvaluatePageProcessor implements PageProcessor {
 
 	@Override
 	public Site getSite() {
@@ -26,7 +20,7 @@ public class AutoHomeNewsPageProcessor implements PageProcessor {
 	@Override
 	public void process(Page page) {
 		page.addTargetRequests(page.getHtml().links()
-				.regex("http://www.autohome.com.cn/news/\\S+").all());
+				.regex("http://www.autohome.com.cn/drive/\\S+").all());
 
 		String titleString = AutoHomeXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
@@ -39,7 +33,7 @@ public class AutoHomeNewsPageProcessor implements PageProcessor {
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);
 			page.putField("description", description);
-			page.putField("keyword", keyWord + ArticleTypeEnum.XinWen.getName()
+			page.putField("keyword", keyWord + ArticleTypeEnum.PingCe.getName()
 					+ "," + CompanyEnum.Autohome.getName());
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
