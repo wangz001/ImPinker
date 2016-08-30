@@ -1,6 +1,8 @@
-package com.lang.bitauto;
+package com.lang.bitauto.pageprocessor;
 
 import java.util.List;
+
+import com.lang.bitauto.BitautoPipeline;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
