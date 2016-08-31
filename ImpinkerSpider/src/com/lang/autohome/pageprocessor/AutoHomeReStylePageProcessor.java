@@ -7,7 +7,6 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import com.lang.autohome.AutoHomeXPathCommon;
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
-import com.lang.fblife.FbLifeXPathCommon;
 
 public class AutoHomeReStylePageProcessor implements PageProcessor {
 
@@ -26,9 +25,9 @@ public class AutoHomeReStylePageProcessor implements PageProcessor {
 		if (titleString != null && titleString.length() > 0) {
 			String keyWord = AutoHomeXPathCommon.getKeyWordString(page);
 			String firstImg = AutoHomeXPathCommon.getFirstImg(page);
-			String description = FbLifeXPathCommon.getDescription(page);
-			String content = FbLifeXPathCommon.getContentString(page);
-			String publishTime = FbLifeXPathCommon.getPublishTime(page);
+			String description = AutoHomeXPathCommon.getDescription(page);
+			String content = AutoHomeXPathCommon.getContentString(page);
+			String publishTime = AutoHomeXPathCommon.getPublishTime(page);
 
 			page.putField("url", page.getUrl());
 			page.putField("title", titleString);

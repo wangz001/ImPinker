@@ -22,7 +22,7 @@ public class FblifePageProcessor implements PageProcessor {
 	public static void main(String[] args) {
 		Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(3).run();
+				.thread(1).run();
 	}
 
 	@Override
