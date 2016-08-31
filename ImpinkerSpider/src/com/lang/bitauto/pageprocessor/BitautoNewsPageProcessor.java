@@ -14,6 +14,9 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 	public void process(Page page) {
 		List<String> bitautoLinks = page.getHtml().links()
 				.regex("http://news.bitauto.com/\\S+").all();
+		List<String> pingceLinks = page.getHtml().links()
+				.regex("http://www.bitauto.com/pingce/\\S+").all();
+		page.addTargetRequests(pingceLinks);
 		page.addTargetRequests(bitautoLinks);
 		String titleString = BitautoXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {

@@ -31,7 +31,7 @@ public class BitautoXPathCommon {
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
 		if (arrStrings == null || arrStrings.size() == 0) { // 格式2
-			String firstImgString2 = "//div[@class='article-contents']/p/img/@src";
+			String firstImgString2 = "//div[@class='article-contents']/p/span/img/@src";
 			arrStrings = page.getHtml().xpath(firstImgString2).all();
 		}
 		if (arrStrings != null && arrStrings.size() > 0) {
