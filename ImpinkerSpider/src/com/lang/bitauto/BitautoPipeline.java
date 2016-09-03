@@ -38,15 +38,18 @@ public class BitautoPipeline implements Pipeline {
 		}
 		article.setCreateTime(timeString);
 
-		boolean flag = articleDao.IsExist(article);
-		if (!flag) {
-			long id = articleDao.Add(article);
+		// 根据url获取id。如果id>0，表示存在，则重新做索引。如果==0，则表示不存在
+		long id = articleDao.GetIdByUrl(article.urlString);
+		if (id > 0) {
 			article.setId(id);
-			String timeStr = TUtil.strToUTCTime(article.getCreateTime());
-			article.setCreateTime(timeStr); // 转成utc时间格式
-			// 添加索引
-			SolrJUtil solrJUtil = SolrJUtil.getInstance();
-			solrJUtil.AddDocs(article);
+		} else {
+			id = articleDao.Add(article);
+			article.setId(id);
 		}
+		String timeStr = TUtil.strToUTCTime(article.getCreateTime());
+		article.setCreateTime(timeStr); // 转成utc时间格式
+		// 添加索引
+		SolrJUtil solrJUtil = SolrJUtil.getInstance();
+		solrJUtil.AddDocs(article);
 	}
 }
