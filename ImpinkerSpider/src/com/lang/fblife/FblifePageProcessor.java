@@ -2,6 +2,10 @@ package com.lang.fblife;
 
 import java.util.List;
 
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -14,12 +18,13 @@ import com.lang.fblife.pageprocessor.FblifeNewsPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeReStylePageProcessor;
 import com.lang.util.RegexUtil;
 
-public class FblifePageProcessor implements PageProcessor {
+public class FblifePageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 
-	public static void main(String[] args) {
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
 				.thread(1).run();
@@ -55,10 +60,7 @@ public class FblifePageProcessor implements PageProcessor {
 			new FblifeEvaluatePageProcessor().process(page);
 			return;
 		}
-
 		page.setSkip(true);
-
-		System.out.println(page.getUrl());
 	}
 
 	@Override

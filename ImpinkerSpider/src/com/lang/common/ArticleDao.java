@@ -1,5 +1,8 @@
 package com.lang.common;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.lang.util.DBHelper;
 
 public class ArticleDao {
@@ -38,5 +41,22 @@ public class ArticleDao {
 		Object[] objects = new Object[] { article.getUrlString() };
 		boolean flag = DBHelper.isExist(sqlString, objects);
 		return flag;
+	}
+
+	public int GetIdByUrl(String Url) {
+		String sqlString = "select id from article where url=?  ";
+		Object[] objects = new Object[] { Url };
+		ResultSet rs = DBHelper.executeQuery(sqlString, objects);
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					return id;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
 	}
 }

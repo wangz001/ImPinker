@@ -1,5 +1,9 @@
 package com.lang.autohome;
 
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -11,10 +15,17 @@ import com.lang.autohome.pageprocessor.AutoHomeReStylePageProcessor;
 import com.lang.autohome.pageprocessor.AutohomeCulturePageProcessor;
 import com.lang.util.RegexUtil;
 
-public class AutoHomePageProcessor implements PageProcessor {
+public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static AutohomePipeline autohomePipeline = new AutohomePipeline();
+
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		Spider.create(new AutoHomePageProcessor())
+				.addUrl("http://www.autohome.com.cn/")
+				.addPipeline(autohomePipeline).thread(5).run();
+	}
 
 	public static void main(String[] args) {
 		Spider.create(new AutoHomePageProcessor())
