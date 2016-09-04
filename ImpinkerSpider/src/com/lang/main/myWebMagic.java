@@ -1,5 +1,6 @@
 package com.lang.main;
 
+import org.apache.log4j.Logger;
 import org.quartz.SchedulerException;
 import org.quartz.TimeOfDay;
 
@@ -11,10 +12,13 @@ import com.lang.quartz.TestJob;
 
 public class MyWebMagic {
 
+	private static Logger logger = Logger.getLogger(MyWebMagic.class);
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		logger.info("spider启动");
 		try {
 			// 添加第一个任务 每隔10秒执行一次
 			QuartzUtil.addJob("job1", "trigger1", TestJob.class, new TimeOfDay(
