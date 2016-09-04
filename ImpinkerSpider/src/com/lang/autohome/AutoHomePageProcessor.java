@@ -27,12 +27,6 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 				.addPipeline(autohomePipeline).thread(5).run();
 	}
 
-	public static void main(String[] args) {
-		Spider.create(new AutoHomePageProcessor())
-				.addUrl("http://www.autohome.com.cn/")
-				.addPipeline(autohomePipeline).thread(1).run();
-	}
-
 	@Override
 	public Site getSite() {
 		// TODO Auto-generated method stub

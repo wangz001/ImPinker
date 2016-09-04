@@ -23,12 +23,6 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 				.addPipeline(bitautoPipeline).thread(5).run();
 	}
 
-	public static void main(String[] args) {
-		Spider.create(new BitautoPageProcessor())
-				.addUrl("http://www.bitauto.com/pingce/")
-				.addPipeline(bitautoPipeline).thread(1).run();
-	}
-
 	@Override
 	public Site getSite() {
 		return site;
