@@ -12,10 +12,9 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.monitor.SpiderMonitor;
-import us.codecraft.webmagic.monitor.SpiderStatusMXBean;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import com.lang.common.CustomSpiderStatus;
+import com.lang.common.SolrJUtil;
 import com.lang.fblife.pageprocessor.FbLifeTourPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeEvaluatePageProcessor;
@@ -31,28 +30,22 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		SpiderMonitor spiderMonitor = new SpiderMonitor() {
-			@Override
-			public SpiderStatusMXBean getSpiderStatusMBean(Spider spider,
-					MonitorSpiderListener monitorSpiderListener) {
-				return new CustomSpiderStatus(spider, monitorSpiderListener);
-			}
-		};
+
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(3);
+				.thread(8);
 		try {
-			spiderMonitor.register(spider);
-
+			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		spider.run();
+		SolrJUtil.getInstance().LastCommit();
 	}
 
 	@Override
 	public void process(Page page) {
+
 		// TODO Auto-generated method stub
 		List<String> fbLinks = page.getHtml().links()
 				.regex("(http://\\w+.fblife\\.com/html/\\w+/\\w+.html)").all();
