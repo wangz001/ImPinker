@@ -1,12 +1,13 @@
 package com.lang.quartz;
 
-import org.quartz.DailyTimeIntervalScheduleBuilder;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.TimeOfDay;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
@@ -57,16 +58,50 @@ public class QuartzUtil {
 				.startNow()
 				// 立即执行
 				.withSchedule(
-				// SimpleScheduleBuilder.simpleSchedule()
-				// .withIntervalInSeconds(seconds)// 时间间隔 单位：秒
-				// .repeatForever()// 一直执行
-						DailyTimeIntervalScheduleBuilder
-								.dailyTimeIntervalSchedule().onEveryDay()
-								.startingDailyAt(timeOfDay)).build();// 产生触发器
+						SimpleScheduleBuilder.simpleSchedule()
+								.withIntervalInSeconds(2)// 时间间隔 单位：秒
+								.repeatForever()// 一直执行
+				).build();// 产生触发器
 
 		// 向Scheduler中添加job任务和trigger触发器
 		sche.scheduleJob(jobDetail, trigger);
 		// 启动
 		sche.start();
+
+		// sche.shutdown(true);
+	}
+
+	/**
+	 * 
+	 * @param jobName
+	 *            任务名
+	 * @param triggerName
+	 *            触发器名
+	 * @param jobClass
+	 *            执行任务类
+	 * @param cronExpression
+	 *            触发器表达式
+	 * @throws SchedulerException
+	 */
+	public static void addJobCronTrigger(String jobName, String triggerName,
+			Class<? extends Job> jobClass, String cronExpression)
+			throws SchedulerException {
+		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+		Scheduler scheduler = schedulerFactory.getScheduler();
+
+		JobDetail jobDetail = JobBuilder.newJob(jobClass)
+				.withIdentity(jobName, JOB_GROUP_NAME).build();
+
+		// 触发时间点
+		CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder
+				.cronSchedule(cronExpression);
+		Trigger trigger = TriggerBuilder.newTrigger()
+				.withIdentity(triggerName, TRIGGER_GROUP_NAME)
+				.withSchedule(cronScheduleBuilder).build();
+
+		scheduler.scheduleJob(jobDetail, trigger);
+		scheduler.start();
+		log.info("addJob:" + jobDetail.getKey());
 	}
 }

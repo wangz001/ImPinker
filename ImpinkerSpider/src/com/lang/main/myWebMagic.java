@@ -1,8 +1,8 @@
 package com.lang.main;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.quartz.SchedulerException;
-import org.quartz.TimeOfDay;
 
 import com.lang.autohome.AutoHomePageProcessor;
 import com.lang.bitauto.BitautoPageProcessor;
@@ -12,30 +12,33 @@ import com.lang.quartz.TestJob;
 
 public class MyWebMagic {
 
-	private static Logger logger = Logger.getLogger(MyWebMagic.class);
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		PropertyConfigurator.configure("log4j.properties");
+		Logger logger = Logger.getLogger(MyWebMagic.class);
 		logger.info("spider启动");
+		// 添加第一个任务 每隔10秒执行一次
 		try {
-			// 添加第一个任务 每隔10秒执行一次
-			QuartzUtil.addJob("job1", "trigger1", TestJob.class, new TimeOfDay(
-					17, 27));
+
+			QuartzUtil.addJobCronTrigger("job1", "trigger1", TestJob.class,
+					"30 50-55 15 * * ?");
 
 			// fblife任务 每隔一天执行一次
-			QuartzUtil.addJob("fblifeSpider", "triggerFblife",
-					FblifePageProcessor.class, new TimeOfDay(17, 26));
+			QuartzUtil.addJobCronTrigger("fblifeSpider", "triggerFblife",
+					FblifePageProcessor.class, "30 07 18 * * ?");
 			// autohome任务 每隔一天执行一次
-			QuartzUtil.addJob("autohomeSpider", "triggerautohome",
-					AutoHomePageProcessor.class, new TimeOfDay(02, 26));
+			QuartzUtil.addJobCronTrigger("autohomeSpider", "triggerautohome",
+					AutoHomePageProcessor.class, "30 10 3 * * ?");
 			// bitauto任务 每隔一天执行一次
-			QuartzUtil.addJob("bitautoSpider", "triggerbitauto",
-					BitautoPageProcessor.class, new TimeOfDay(06, 26));
+			QuartzUtil.addJobCronTrigger("bitautoSpider", "triggerbitauto",
+					BitautoPageProcessor.class, "30 10 5 * * ?");
 		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 }

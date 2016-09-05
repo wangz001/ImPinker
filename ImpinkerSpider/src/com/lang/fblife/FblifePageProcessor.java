@@ -2,6 +2,8 @@ package com.lang.fblife;
 
 import java.util.List;
 
+import javax.management.JMException;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -9,8 +11,11 @@ import org.quartz.JobExecutionException;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
+import us.codecraft.webmagic.monitor.SpiderStatusMXBean;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import com.lang.common.CustomSpiderStatus;
 import com.lang.fblife.pageprocessor.FbLifeTourPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeEvaluatePageProcessor;
@@ -24,10 +29,26 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 
 	@Override
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		Spider.create(new FblifePageProcessor())
+	public void execute(JobExecutionContext context)
+			throws JobExecutionException {
+		SpiderMonitor spiderMonitor = new SpiderMonitor() {
+			@Override
+			public SpiderStatusMXBean getSpiderStatusMBean(Spider spider,
+					MonitorSpiderListener monitorSpiderListener) {
+				return new CustomSpiderStatus(spider, monitorSpiderListener);
+			}
+		};
+		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(1).run();
+				.thread(3);
+		try {
+			spiderMonitor.register(spider);
+
+		} catch (JMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		spider.run();
 	}
 
 	@Override

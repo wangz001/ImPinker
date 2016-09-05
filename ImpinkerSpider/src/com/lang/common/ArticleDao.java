@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lang.util.DBHelper;
+import com.lang.util.TUtil;
 
 public class ArticleDao {
 
@@ -24,7 +25,7 @@ public class ArticleDao {
 				article.getUrlString(), article.getCoverImage(),
 				AppStart.AdminUserId, article.getKeyWord(),
 				article.getDescription(), 1, article.getCreateTime(),
-				article.getCreateTime(), article.getCompany() };
+				TUtil.getCurrentTime(), article.getCompany() };
 		int id = DBHelper.InsertAndRetId("Article", sqlString, objects);
 		return id;
 	}

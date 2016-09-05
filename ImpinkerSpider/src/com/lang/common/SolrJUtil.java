@@ -41,7 +41,17 @@ public class SolrJUtil {
 			articleLists.add(article);
 		}
 		// 每次添加100条索引
-		if (articleLists.size() >= 50) {
+		if (articleLists.size() >= 100) {
+			AddDocs(articleLists);
+			articleLists.clear();
+		}
+	}
+
+	/**
+	 * 所有线程执行完后，把list里剩余的数据提交
+	 */
+	public void LastCommit() {
+		if (articleLists.size() > 0) {
 			AddDocs(articleLists);
 			articleLists.clear();
 		}

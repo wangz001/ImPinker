@@ -27,7 +27,7 @@ public class FblifePipeline implements Pipeline {
 			article.setDescription(resultItems.get("description").toString());
 		}
 		article.setUrlString(resultItems.get("url").toString());
-		article.setCompany(CompanyEnum.Yiche.getName());
+		article.setCompany(CompanyEnum.Fblife.getName());
 		article.setCoverImage(resultItems.get("CoverImage").toString());
 		article.setContent(resultItems.get("Content").toString());
 		String timeString = "";
