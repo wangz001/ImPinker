@@ -1,5 +1,7 @@
 package com.lang.bitauto;
 
+import javax.management.JMException;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -7,9 +9,11 @@ import org.quartz.JobExecutionException;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.bitauto.pageprocessor.BitautoNewsPageProcessor;
+import com.lang.common.SolrJUtil;
 
 public class BitautoPageProcessor implements PageProcessor, Job {
 
@@ -18,9 +22,16 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		Spider.create(new BitautoPageProcessor())
+		Spider spider = Spider.create(new BitautoPageProcessor())
 				.addUrl("http://www.bitauto.com/pingce/")
-				.addPipeline(bitautoPipeline).thread(5).run();
+				.addPipeline(bitautoPipeline).thread(5);
+		try {
+			SpiderMonitor.instance().register(spider);
+		} catch (JMException e) {
+			e.printStackTrace();
+		}
+		spider.run();
+		SolrJUtil.getInstance().LastCommit();
 	}
 
 	@Override

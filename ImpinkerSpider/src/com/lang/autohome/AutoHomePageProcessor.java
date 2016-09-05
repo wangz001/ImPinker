@@ -1,5 +1,7 @@
 package com.lang.autohome;
 
+import javax.management.JMException;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -7,12 +9,14 @@ import org.quartz.JobExecutionException;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.autohome.pageprocessor.AutoHomeEvaluatePageProcessor;
 import com.lang.autohome.pageprocessor.AutoHomeNewsPageProcessor;
 import com.lang.autohome.pageprocessor.AutoHomeReStylePageProcessor;
 import com.lang.autohome.pageprocessor.AutohomeCulturePageProcessor;
+import com.lang.common.SolrJUtil;
 import com.lang.util.RegexUtil;
 
 public class AutoHomePageProcessor implements PageProcessor, Job {
@@ -22,9 +26,16 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		Spider.create(new AutoHomePageProcessor())
+		Spider spider = Spider.create(new AutoHomePageProcessor())
 				.addUrl("http://www.autohome.com.cn/")
-				.addPipeline(autohomePipeline).thread(5).run();
+				.addPipeline(autohomePipeline).thread(5);
+		try {
+			SpiderMonitor.instance().register(spider);
+		} catch (JMException e) {
+			e.printStackTrace();
+		}
+		spider.run();
+		SolrJUtil.getInstance().LastCommit();
 	}
 
 	@Override

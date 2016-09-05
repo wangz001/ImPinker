@@ -75,7 +75,7 @@ public class SolrJUtil {
 			doc1.addField("KeyWords", article.getKeyWord());
 			doc1.addField("Description", article.getDescription());
 			doc1.addField("Url", article.getUrlString());
-			doc1.addField("CreateTime", time);
+			doc1.addField("CreateTime", article.getCreateTime());
 			doc1.addField("UpdateTime", time);
 			doc1.addField("CoverImage", article.getCoverImage());
 			doc1.addField("content", article.getContent());

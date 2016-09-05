@@ -7,6 +7,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
+import com.lang.common.SolrJUtil;
 import com.lang.fblife.FbLifeXPathCommon;
 import com.lang.fblife.FblifePipeline;
 
@@ -18,7 +19,9 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	public static void main(String[] args) {
 		Spider.create(new FblifeCulturePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(1).run();
+				.thread(3).run();
+		SolrJUtil.getInstance().LastCommit();
+		System.out.println("spider stop success!!");
 	}
 
 	@Override
