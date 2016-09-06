@@ -27,13 +27,13 @@ public class MyWebMagic {
 
 			// fblife任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("fblifeSpider", "triggerFblife",
-					FblifePageProcessor.class, "0 51 22 * * ?");
+					FblifePageProcessor.class, "0 40 20 * * ?");
 			// autohome任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("autohomeSpider", "triggerautohome",
-					AutoHomePageProcessor.class, "0 51 22 * * ?");
+					AutoHomePageProcessor.class, "0 41 20 * * ?");
 			// bitauto任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("bitautoSpider", "triggerbitauto",
-					BitautoPageProcessor.class, "0 51 22 * * ?");
+					BitautoPageProcessor.class, "0 41 20 * * ?");
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
