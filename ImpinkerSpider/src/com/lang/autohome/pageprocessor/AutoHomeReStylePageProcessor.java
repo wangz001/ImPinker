@@ -1,5 +1,7 @@
 package com.lang.autohome.pageprocessor;
 
+import java.util.Arrays;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -20,7 +22,15 @@ public class AutoHomeReStylePageProcessor implements PageProcessor {
 	public void process(Page page) {
 		page.addTargetRequests(page.getHtml().links()
 				.regex("http://www.autohome.com.cn/tuning/\\S+").all());
-
+		boolean isPagination = AutoHomeXPathCommon.isPagination(page);
+		if (isPagination) {
+			// 有分页
+			String allUrl = page.getUrl().toString()
+					.replace(".html", "-all.html");
+			page.addTargetRequests(Arrays.asList(allUrl));
+			page.setSkip(true);
+			return;
+		}
 		String titleString = AutoHomeXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
 			String keyWord = AutoHomeXPathCommon.getKeyWordString(page);

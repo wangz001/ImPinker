@@ -23,7 +23,7 @@ public class MyWebMagic {
 		try {
 
 			QuartzUtil.addJobCronTrigger("job1", "trigger1", TestJob.class,
-					"30 50-55 15 * * ?");
+					"30 10 9 * * ?");
 
 			// fblife任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("fblifeSpider", "triggerFblife",

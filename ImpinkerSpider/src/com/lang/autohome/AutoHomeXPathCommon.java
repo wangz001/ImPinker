@@ -90,4 +90,19 @@ public class AutoHomeXPathCommon {
 		}
 		return "";
 	}
+
+	/**
+	 * 判断文章是否有分页
+	 * 
+	 * @param page
+	 * @return
+	 */
+	public static boolean isPagination(Page page) {
+		String pagingContent = "//div[@id='articlewrap']/div[@class='page']/html()";
+		String pagingStr = page.getHtml().xpath(pagingContent).toString();
+		if (pagingStr != null && pagingStr != "" && pagingStr.length() > 0) {
+			return true;
+		}
+		return false;
+	}
 }

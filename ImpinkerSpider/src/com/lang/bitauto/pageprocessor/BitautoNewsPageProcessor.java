@@ -1,5 +1,6 @@
 package com.lang.bitauto.pageprocessor;
 
+import java.util.Arrays;
 import java.util.List;
 
 import us.codecraft.webmagic.Page;
@@ -18,6 +19,15 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 				.regex("http://www.bitauto.com/pingce/\\S+").all();
 		page.addTargetRequests(pingceLinks);
 		page.addTargetRequests(bitautoLinks);
+		boolean isPagination = BitautoXPathCommon.isPagination(page);
+		if (isPagination) {
+			// 有分页
+			String allUrl = page.getUrl().toString()
+					.replace(".html", "_all.html");
+			page.addTargetRequests(Arrays.asList(allUrl));
+			page.setSkip(true);
+			return;
+		}
 		String titleString = BitautoXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
 			String keyword = BitautoXPathCommon.getKeyWordString(page);

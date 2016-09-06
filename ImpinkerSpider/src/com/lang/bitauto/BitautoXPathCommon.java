@@ -100,4 +100,13 @@ public class BitautoXPathCommon {
 		}
 		return "";
 	}
+
+	public static boolean isPagination(Page page) {
+		String pagingContent = "//div[@id='content_bit']/div[@class='con_main']/div[@class='the_pages']/html()";
+		String pagingStr = page.getHtml().xpath(pagingContent).toString();
+		if (pagingStr != null && pagingStr != "" && pagingStr.length() > 0) {
+			return true;
+		}
+		return false;
+	}
 }

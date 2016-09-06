@@ -1,5 +1,7 @@
 package com.lang.autohome.pageprocessor;
 
+import java.util.Arrays;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -26,7 +28,15 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 		// TODO Auto-generated method stub
 		page.addTargetRequests(page.getHtml().links()
 				.regex("(http://www.autohome.com.cn/culture/\\S+)").all());
-
+		boolean isPagination = AutoHomeXPathCommon.isPagination(page);
+		if (isPagination) {
+			// 有分页
+			String allUrl = page.getUrl().toString()
+					.replace(".html", "-all.html");
+			page.addTargetRequests(Arrays.asList(allUrl));
+			page.setSkip(true);
+			return;
+		}
 		String titleString = AutoHomeXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
 			String keyWord = AutoHomeXPathCommon.getKeyWordString(page);

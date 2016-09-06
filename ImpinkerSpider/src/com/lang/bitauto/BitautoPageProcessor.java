@@ -34,6 +34,24 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 		SolrJUtil.getInstance().LastCommit();
 	}
 
+	/**
+	 * 调试用
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Spider spider = Spider.create(new BitautoPageProcessor())
+				.addUrl("http://www.bitauto.com/pingce/")
+				.addPipeline(bitautoPipeline).thread(1);
+		try {
+			SpiderMonitor.instance().register(spider);
+		} catch (JMException e) {
+			e.printStackTrace();
+		}
+		spider.run();
+		SolrJUtil.getInstance().LastCommit();
+	}
+
 	@Override
 	public Site getSite() {
 		return site;

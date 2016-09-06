@@ -24,13 +24,33 @@ import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor, Job {
 
-	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
+	private Site site = Site.me().setRetryTimes(3).setSleepTime(100); // 使用代理
+	// .setHttpProxyPool( Lists.newArrayList(new String[] { "192.168.0.2",
+	// "8080" },new String[] { "192.168.0.3", "8080" }))
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 
 	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 
+		Spider spider = Spider.create(new FblifePageProcessor())
+				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
+				.thread(8);
+		try {
+			SpiderMonitor.instance().register(spider);
+		} catch (JMException e) {
+			e.printStackTrace();
+		}
+		spider.run();
+		SolrJUtil.getInstance().LastCommit();
+	}
+
+	/**
+	 * 调试用
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
 				.thread(8);
