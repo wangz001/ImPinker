@@ -39,7 +39,7 @@ public class AutoHomeEvaluatePageProcessor implements PageProcessor {
 			String content = AutoHomeXPathCommon.getContentString(page);
 			String publishTime = AutoHomeXPathCommon.getPublishTime(page);
 
-			page.putField("url", page.getUrl());
+			page.putField("url", AutoHomeXPathCommon.getUrl(page));
 			page.putField("title", titleString);
 			page.putField("description", description);
 			page.putField("keyword", keyWord + ArticleTypeEnum.PingCe.getName()

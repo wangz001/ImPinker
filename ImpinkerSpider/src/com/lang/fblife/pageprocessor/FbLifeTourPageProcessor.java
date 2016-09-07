@@ -25,7 +25,7 @@ public class FbLifeTourPageProcessor implements PageProcessor {
 			String firstImg = FbLifeXPathCommon.getFirstImg(page);
 			String description = FbLifeXPathCommon.getDescription(page);
 			String publishTime = FbLifeXPathCommon.getPublishTime(page);
-			page.putField("url", page.getUrl());
+			page.putField("url", FbLifeXPathCommon.getUrl(page));
 			page.putField("title", titleString);
 			page.putField("description", description);
 			page.putField("keyword", keyWord + ArticleTypeEnum.LvXing.getName()

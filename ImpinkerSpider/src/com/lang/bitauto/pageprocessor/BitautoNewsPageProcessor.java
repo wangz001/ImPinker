@@ -30,13 +30,14 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 		}
 		String titleString = BitautoXPathCommon.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
+			String url = BitautoXPathCommon.getUrl(page);
 			String keyword = BitautoXPathCommon.getKeyWordString(page);
 			String firstImg = BitautoXPathCommon.getFirstImg(page);
 			String description = BitautoXPathCommon.getDescription(page);
 			String content = BitautoXPathCommon.getContentString(page);
 			String publishTime = BitautoXPathCommon.getPublishTime(page);
 
-			page.putField("url", page.getUrl());
+			page.putField("url", url);
 			page.putField("title", titleString);
 			page.putField("description", description);
 			page.putField("keyword", keyword);

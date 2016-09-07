@@ -105,4 +105,19 @@ public class AutoHomeXPathCommon {
 		}
 		return false;
 	}
+
+	/**
+	 * 获取url。对url作一些处理。去除锚点等
+	 * 
+	 * @param page
+	 * @return
+	 */
+	public static String getUrl(Page page) {
+		String url = page.getUrl().toString();
+		if (url.contains("#")) {
+			// http://news.bitauto.com/etaqzypzcs/20150528/2206534159.html#comment
+			url = url.substring(0, url.indexOf('#'));
+		}
+		return url;
+	}
 }

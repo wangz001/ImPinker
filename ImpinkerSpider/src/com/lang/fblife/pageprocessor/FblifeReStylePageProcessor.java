@@ -37,7 +37,7 @@ public class FblifeReStylePageProcessor implements PageProcessor {
 			String content = FbLifeXPathCommon.getContentString(page);
 			String publishTime = FbLifeXPathCommon.getPublishTime(page);
 
-			page.putField("url", page.getUrl());
+			page.putField("url", FbLifeXPathCommon.getUrl(page));
 			page.putField("title", titleString);
 			page.putField("description", description);
 			page.putField("keyword",
