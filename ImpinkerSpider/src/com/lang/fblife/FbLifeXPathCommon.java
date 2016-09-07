@@ -1,8 +1,11 @@
 package com.lang.fblife;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import us.codecraft.webmagic.Page;
+
+import com.lang.util.RegexUtil;
 
 /**
  * xpath 公共类，fblife
@@ -104,5 +107,52 @@ public class FbLifeXPathCommon {
 			url = url.substring(0, url.indexOf('#'));
 		}
 		return url;
+	}
+
+	/**
+	 * 判断文章是否有分页
+	 * 
+	 * @param page
+	 * @return
+	 */
+	public static boolean isPagination(Page page) {
+		String pagingContent = "//div[@id='page_div']/div[@class='channelpage']/html()";
+		String pagingStr = page.getHtml().xpath(pagingContent).toString();
+		if (pagingStr != null && pagingStr != "" && pagingStr.length() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public static String getPageKey(Page page) {
+		String reg = "http://\\w+\\.fblife\\.com/html/\\w+/(\\d+).*\\.html";
+		String key = page.getUrl().toString().replaceAll(reg, "$1");
+		return key;
+	}
+
+	public static String getPageIndex(Page page) {
+		String reg = "http://\\w+\\.fblife\\.com/html/\\w+/\\w+_(\\d+)\\.html";
+		String key = page.getUrl().toString().replaceAll(reg, "$1");
+		if (key == null || key == "" || key == page.getUrl().toString()) {
+			return "1";
+		}
+		return key;
+	}
+
+	public static List<String> getAllPageUrls(Page page) {
+		List<String> list = new ArrayList<String>();
+		list.add(page.getUrl().toString());
+		String pagingContent = "//div[@id='page_div']/div[@class='channelpage']";
+		List<String> test = (List<String>) page.getHtml().xpath(pagingContent)
+				.links().all();
+		for (String url : test) {
+			if (!list.contains(url)
+					&& RegexUtil.match(
+							"http://\\w+\\.fblife\\.com/html/\\w+/\\w+\\.html",
+							url)) {
+				list.add(url);
+			}
+		}
+		return list;
 	}
 }
