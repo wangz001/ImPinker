@@ -5,6 +5,7 @@ import java.util.List;
 
 import us.codecraft.webmagic.Page;
 
+import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.RegexUtil;
 
 /**
@@ -13,7 +14,7 @@ import com.lang.util.RegexUtil;
  * @author wangzheng1
  * 
  */
-public class FbLifeXPathCommon {
+public class FbLifeXPathCommon implements MotorXPathInterface {
 
 	/**
 	 * 获取title
@@ -21,7 +22,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getTitleString(Page page) {
+	public String getTitleString(Page page) {
 		String titleString = "//div[@class='content']/div/div/div[@class='tit']/h1/text()";
 		return page.getHtml().xpath(titleString).toString();
 	}
@@ -32,7 +33,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getFirstImg(Page page) {
+	public String getFirstImg(Page page) {
 		String firstImgString = "//div[@id='con_weibo']/div[@class='testdiv']/p/a/img/@src";
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
@@ -55,7 +56,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getKeyWordString(Page page) {
+	public String getKeyWordString(Page page) {
 		String keyWordString = "//meta[@name='keywords']/@content";
 		return page.getHtml().xpath(keyWordString).toString();
 	}
@@ -66,7 +67,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getDescription(Page page) {
+	public String getDescription(Page page) {
 		String descriptionString = "//meta[@name='description']/@content";
 		return page.getHtml().xpath(descriptionString).toString();
 	}
@@ -77,7 +78,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getContentString(Page page) {
+	public String getContentString(Page page) {
 		String contentString = "//div[@id='con_weibo']/html()";
 		return page.getHtml()// con_weibo
 				.xpath(contentString).toString();
@@ -89,7 +90,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getPublishTime(Page page) {
+	public String getPublishTime(Page page) {
 		String timeString = "//div[@class='tit']/div[@class='tit_xia']/p/span/text()";
 		return page.getHtml().xpath(timeString).toString();
 	}
@@ -100,7 +101,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getUrl(Page page) {
+	public String getUrl(Page page) {
 		String url = page.getUrl().toString();
 		if (url.contains("#")) {
 			// http://news.bitauto.com/etaqzypzcs/20150528/2206534159.html#comment
@@ -115,7 +116,7 @@ public class FbLifeXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static boolean isPagination(Page page) {
+	public boolean isPagination(Page page) {
 		String pagingContent = "//div[@id='page_div']/div[@class='channelpage']/html()";
 		String pagingStr = page.getHtml().xpath(pagingContent).toString();
 		if (pagingStr != null && pagingStr != "" && pagingStr.length() > 0) {
@@ -124,13 +125,13 @@ public class FbLifeXPathCommon {
 		return false;
 	}
 
-	public static String getPageKey(Page page) {
+	public String getPageKey(Page page) {
 		String reg = "http://\\w+\\.fblife\\.com/html/\\w+/(\\d+).*\\.html";
 		String key = page.getUrl().toString().replaceAll(reg, "$1");
 		return key;
 	}
 
-	public static String getPageIndex(Page page) {
+	public String getPageIndex(Page page) {
 		String reg = "http://\\w+\\.fblife\\.com/html/\\w+/\\w+_(\\d+)\\.html";
 		String key = page.getUrl().toString().replaceAll(reg, "$1");
 		if (key == null || key == "" || key == page.getUrl().toString()) {
@@ -139,7 +140,7 @@ public class FbLifeXPathCommon {
 		return key;
 	}
 
-	public static List<String> getAllPageUrls(Page page) {
+	public List<String> getAllPageUrls(Page page) {
 		List<String> list = new ArrayList<String>();
 		list.add(page.getUrl().toString());
 		String pagingContent = "//div[@id='page_div']/div[@class='channelpage']";

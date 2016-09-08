@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lang.fblife.FbLifeXPathCommon;
+import com.lang.factory.XPathFactory;
+import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.TUtil;
 
 public class MutilePageUtil {
@@ -34,26 +35,30 @@ public class MutilePageUtil {
 	private MutilePageUtil() {
 	}
 
-	public void AddMutilPage(MutilePageModel pageModel) {
-		if (objectMap.containsKey(pageModel.getPageKey())) {
-			List<MutilePageModel> pages = objectMap.get(pageModel.getPageKey());
+	public void AddMutilPage(MutilePageModel pageModel, CompanyEnum companyType) {
+		// 文章key ：1256325_2 ;companyId
+		String articleKey = pageModel.getPageKey() + "_"
+				+ companyType.getIndex();
+		if (objectMap.containsKey(articleKey)) {
+			List<MutilePageModel> pages = objectMap.get(articleKey);
 			pages.add(pageModel);
 
 			if (pages.size() == pageModel.getOtherPages().size()) {// 所有页面下载完，进行合并
-				CombinePages(pages);
-				objectMap.remove(pageModel.getPageKey());
+				CombinePages(pages, companyType);
+				objectMap.remove(articleKey);
 			} else {
-				objectMap.put(pageModel.getPageKey(), pages);
+				objectMap.put(articleKey, pages);
 			}
 		} else {
 			List<MutilePageModel> list = Arrays.asList(pageModel);
 			List<MutilePageModel> arrayList = new ArrayList<MutilePageModel>(
 					list);
-			objectMap.put(pageModel.getPageKey(), arrayList);
+			objectMap.put(articleKey, arrayList);
 		}
 	}
 
-	private void CombinePages(List<MutilePageModel> pages) {
+	private void CombinePages(List<MutilePageModel> pages,
+			CompanyEnum companyType) {
 
 		Collections.sort(pages, new Comparator<MutilePageModel>() {
 			@Override
@@ -67,32 +72,30 @@ public class MutilePageUtil {
 				}
 			}
 		});
-		CombineFB(pages);
+		CombineFB(pages, companyType);
 		System.out.println("合并。。。。。。。。。。");
 	}
 
-	private void CombineFB(List<MutilePageModel> pages) {
+	private void CombineFB(List<MutilePageModel> pages, CompanyEnum companyType) {
+		MotorXPathInterface motorXPath = new XPathFactory()
+				.createXPath(companyType);
 		MutilePageModel model = pages.get(0);
 		String otherContent = "";
 		for (MutilePageModel mutilemodel : pages) {
 			if (pages.indexOf(mutilemodel) == 0) {
 				continue;
 			}
-			otherContent += FbLifeXPathCommon.getContentString(mutilemodel
-					.getPage());
+			otherContent += motorXPath.getContentString(mutilemodel.getPage());
 		}
-		String titleString = FbLifeXPathCommon.getTitleString(model.getPage());
+		String titleString = motorXPath.getTitleString(model.getPage());
 		if (titleString != null && titleString.length() > 0) {
-			String url = FbLifeXPathCommon.getUrl(model.getPage());
-			String firstImg = FbLifeXPathCommon.getFirstImg(model.getPage());
-			String keyWord = FbLifeXPathCommon
-					.getKeyWordString(model.getPage());
-			String description = FbLifeXPathCommon.getDescription(model
-					.getPage());
-			String content = FbLifeXPathCommon
-					.getContentString(model.getPage()) + otherContent;
-			String publishTime = FbLifeXPathCommon.getPublishTime(model
-					.getPage());
+			String url = motorXPath.getUrl(model.getPage());
+			String firstImg = motorXPath.getFirstImg(model.getPage());
+			String keyWord = motorXPath.getKeyWordString(model.getPage());
+			String description = motorXPath.getDescription(model.getPage());
+			String content = motorXPath.getContentString(model.getPage())
+					+ otherContent;
+			String publishTime = motorXPath.getPublishTime(model.getPage());
 
 			Article article = new Article();
 			article.setTitle(titleString);
@@ -111,19 +114,8 @@ public class MutilePageUtil {
 
 			article.setCreateTime(timeString);
 			// 根据url获取id。如果id>0，表示存在，则重新做索引。如果==0，则表示不存在
-			ArticleDao articleDao = new ArticleDao();
-			long id = articleDao.GetIdByUrl(article.urlString);
-			if (id > 0) {
-				article.setId(id);
-			} else {
-				id = articleDao.Add(article);
-				article.setId(id);
-			}
-			String timeStr = TUtil.strToUTCTime(article.getCreateTime());
-			article.setCreateTime(timeStr); // 转成utc时间格式
-			// 添加索引
-			SolrJUtil solrJUtil = SolrJUtil.getInstance();
-			solrJUtil.AddDocs(article);
+			ArticleBll articleBll = new ArticleBll();
+			articleBll.AddArticle(article);
 		}
 
 	}

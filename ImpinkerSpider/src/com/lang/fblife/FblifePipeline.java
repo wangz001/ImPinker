@@ -5,14 +5,13 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import com.lang.common.Article;
-import com.lang.common.ArticleDao;
+import com.lang.common.ArticleBll;
 import com.lang.common.CompanyEnum;
-import com.lang.common.SolrJUtil;
 import com.lang.util.TUtil;
 
 public class FblifePipeline implements Pipeline {
 
-	ArticleDao articleDao = new ArticleDao();
+	ArticleBll articleBll = new ArticleBll();
 
 	@Override
 	public void process(ResultItems resultItems, Task task) {
@@ -39,17 +38,6 @@ public class FblifePipeline implements Pipeline {
 		article.setCreateTime(timeString);
 
 		// 根据url获取id。如果id>0，表示存在，则重新做索引。如果==0，则表示不存在
-		long id = articleDao.GetIdByUrl(article.urlString);
-		if (id > 0) {
-			article.setId(id);
-		} else {
-			id = articleDao.Add(article);
-			article.setId(id);
-		}
-		String timeStr = TUtil.strToUTCTime(article.getCreateTime());
-		article.setCreateTime(timeStr); // 转成utc时间格式
-		// 添加索引
-		SolrJUtil solrJUtil = SolrJUtil.getInstance();
-		solrJUtil.AddDocs(article);
+		articleBll.AddArticle(article);
 	}
 }

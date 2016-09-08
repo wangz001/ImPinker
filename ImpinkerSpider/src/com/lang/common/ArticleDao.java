@@ -8,14 +8,6 @@ import com.lang.util.TUtil;
 
 public class ArticleDao {
 
-	public boolean NewArticle(Article article) {
-		if (IsExist(article)) {
-			return true;
-		} else {
-			return Add(article) > 0;
-		}
-	}
-
 	public long Add(Article article) {
 
 		String sqlString = "INSERT INTO Article"

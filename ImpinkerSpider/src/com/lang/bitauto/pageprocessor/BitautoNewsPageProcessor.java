@@ -7,9 +7,13 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import com.lang.bitauto.BitautoXPathCommon;
+import com.lang.common.CompanyEnum;
+import com.lang.factory.XPathFactory;
+import com.lang.interfac.MotorXPathInterface;
 
 public class BitautoNewsPageProcessor implements PageProcessor {
+	private MotorXPathInterface yicheXPath = new XPathFactory()
+			.createXPath(CompanyEnum.Yiche);
 
 	@Override
 	public void process(Page page) {
@@ -19,7 +23,7 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 				.regex("http://www.bitauto.com/pingce/\\S+").all();
 		page.addTargetRequests(pingceLinks);
 		page.addTargetRequests(bitautoLinks);
-		boolean isPagination = BitautoXPathCommon.isPagination(page);
+		boolean isPagination = yicheXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页
 			String allUrl = page.getUrl().toString()
@@ -28,14 +32,14 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 			page.setSkip(true);
 			return;
 		}
-		String titleString = BitautoXPathCommon.getTitleString(page);
+		String titleString = yicheXPath.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
-			String url = BitautoXPathCommon.getUrl(page);
-			String keyword = BitautoXPathCommon.getKeyWordString(page);
-			String firstImg = BitautoXPathCommon.getFirstImg(page);
-			String description = BitautoXPathCommon.getDescription(page);
-			String content = BitautoXPathCommon.getContentString(page);
-			String publishTime = BitautoXPathCommon.getPublishTime(page);
+			String url = yicheXPath.getUrl(page);
+			String keyword = yicheXPath.getKeyWordString(page);
+			String firstImg = yicheXPath.getFirstImg(page);
+			String description = yicheXPath.getDescription(page);
+			String content = yicheXPath.getContentString(page);
+			String publishTime = yicheXPath.getPublishTime(page);
 
 			page.putField("url", url);
 			page.putField("title", titleString);

@@ -6,16 +6,17 @@ import us.codecraft.webmagic.Page;
 
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
+import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.RegexUtil;
 
-public class BitautoXPathCommon {
+public class BitautoXPathCommon implements MotorXPathInterface {
 	/**
 	 * 获取title
 	 * 
 	 * @param page
 	 * @return
 	 */
-	public static String getTitleString(Page page) {
+	public String getTitleString(Page page) {
 		String titleString = "//div[@id='content_bit']/div/article/h1/span[@class='yuanchuang']/text()";
 		return page.getHtml().xpath(titleString).toString();
 	}
@@ -26,7 +27,7 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getFirstImg(Page page) {
+	public String getFirstImg(Page page) {
 		String firstImgString = "//div[@class='article-contents']/p/a/img/@src";
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
@@ -49,7 +50,7 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getKeyWordString(Page page) {
+	public String getKeyWordString(Page page) {
 		String keyWordString = "//meta[@name='keywords']/@content";
 		String resultStr = page.getHtml().xpath(keyWordString).toString();
 		String articleTypeStr = ArticleTypeEnum.PingCe.getName();
@@ -68,7 +69,7 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getDescription(Page page) {
+	public String getDescription(Page page) {
 		String descriptionString = "//meta[@name='description']/@content";
 		return page.getHtml().xpath(descriptionString).toString();
 	}
@@ -79,7 +80,7 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getContentString(Page page) {
+	public String getContentString(Page page) {
 		String contentString = "//div[@class='article-contents]/html()";
 		return page.getHtml()// con_weibo
 				.xpath(contentString).toString();
@@ -91,7 +92,7 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getPublishTime(Page page) {
+	public String getPublishTime(Page page) {
 		String timeString = "//span[@id='time']/text()";
 		String timeStr = page.getHtml().xpath(timeString).toString();
 		if (timeStr != "" && timeStr.length() > 0) {
@@ -101,7 +102,7 @@ public class BitautoXPathCommon {
 		return "";
 	}
 
-	public static boolean isPagination(Page page) {
+	public boolean isPagination(Page page) {
 		String pagingContent = "//div[@id='content_bit']/div[@class='con_main']/div[@class='the_pages']/html()";
 		String pagingStr = page.getHtml().xpath(pagingContent).toString();
 		if (pagingStr != null && pagingStr != "" && pagingStr.length() > 0) {
@@ -116,12 +117,30 @@ public class BitautoXPathCommon {
 	 * @param page
 	 * @return
 	 */
-	public static String getUrl(Page page) {
+	public String getUrl(Page page) {
 		String url = page.getUrl().toString();
 		if (url.contains("#")) {
 			// http://news.bitauto.com/etaqzypzcs/20150528/2206534159.html#comment
 			url = url.substring(0, url.indexOf('#'));
 		}
 		return url;
+	}
+
+	@Override
+	public String getPageKey(Page page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPageIndex(Page page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getAllPageUrls(Page page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

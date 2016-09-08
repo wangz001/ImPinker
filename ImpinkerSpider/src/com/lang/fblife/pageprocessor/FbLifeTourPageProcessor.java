@@ -6,26 +6,30 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
-import com.lang.fblife.FbLifeXPathCommon;
+import com.lang.factory.XPathFactory;
+import com.lang.interfac.MotorXPathInterface;
 
 /**
  * 旅行
  */
 public class FbLifeTourPageProcessor implements PageProcessor {
 
+	private MotorXPathInterface fbXPath = new XPathFactory()
+			.createXPath(CompanyEnum.Fblife);
+
 	@Override
 	public void process(Page page) {
 		page.addTargetRequests(page.getHtml().links()
 				.regex("(http://tour.fblife\\.com/html/\\w+/\\w+.html)").all());
-		String titleString = FbLifeXPathCommon.getTitleString(page);
+		String titleString = fbXPath.getTitleString(page);
 		boolean exist = false;
 		if (titleString != null && titleString.length() > 0) {
-			String keyWord = FbLifeXPathCommon.getKeyWordString(page);
-			String content = FbLifeXPathCommon.getContentString(page);
-			String firstImg = FbLifeXPathCommon.getFirstImg(page);
-			String description = FbLifeXPathCommon.getDescription(page);
-			String publishTime = FbLifeXPathCommon.getPublishTime(page);
-			page.putField("url", FbLifeXPathCommon.getUrl(page));
+			String keyWord = fbXPath.getKeyWordString(page);
+			String content = fbXPath.getContentString(page);
+			String firstImg = fbXPath.getFirstImg(page);
+			String description = fbXPath.getDescription(page);
+			String publishTime = fbXPath.getPublishTime(page);
+			page.putField("url", fbXPath.getUrl(page));
 			page.putField("title", titleString);
 			page.putField("description", description);
 			page.putField("keyword", keyWord + ArticleTypeEnum.LvXing.getName()
