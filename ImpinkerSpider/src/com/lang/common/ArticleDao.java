@@ -52,4 +52,10 @@ public class ArticleDao {
 		}
 		return 0;
 	}
+
+	public ResultSet GetAllUrlAndId() {
+		String sqlString = "SELECT id,url FROM dbo.Article";
+		ResultSet rs = DBHelper.executeQuery(sqlString);
+		return rs;
+	}
 }

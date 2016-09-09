@@ -58,7 +58,11 @@ public class FbLifeXPathCommon implements MotorXPathInterface {
 	 */
 	public String getKeyWordString(Page page) {
 		String keyWordString = "//meta[@name='keywords']/@content";
-		return page.getHtml().xpath(keyWordString).toString();
+		String str = page.getHtml().xpath(keyWordString).toString();
+		if (str.length() > 50) {
+			str = str.substring(0, 50);
+		}
+		return str;
 	}
 
 	/**
