@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.JMException;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -20,19 +21,24 @@ import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeEvaluatePageProcessor;
 import com.lang.fblife.pageprocessor.FblifeNewsPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeReStylePageProcessor;
+import com.lang.main.MyWebMagic;
 import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor, Job {
 
-	private Site site = Site.me().setRetryTimes(3).setSleepTime(100); // 使用代理
-	// .setHttpProxyPool( Lists.newArrayList(new String[] { "192.168.0.2",
-	// "8080" },new String[] { "192.168.0.3", "8080" }))
+	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
+	// 使用代理
+	// .setHttpProxyPool(
+	// Lists.newArrayList(
+	// new String[] { "221.178.251.168", "3128" },
+	// new String[] { "163.125.158.237", "8888" }));
 	private static FblifePipeline fbPipeline = new FblifePipeline();
+	Logger logger = Logger.getLogger(MyWebMagic.class);
 
 	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-
+		logger.info("Fblife spider启动");
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
 				.thread(8);
@@ -43,6 +49,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		}
 		spider.run();
 		SolrJUtil.getInstance().LastCommit();
+		logger.info("Fblife spider 结束");
 	}
 
 	/**
@@ -51,6 +58,9 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		String tmpDir = System.getProperty("java.io.tmpdir");
+		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
 				.thread(8);

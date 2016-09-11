@@ -27,7 +27,7 @@ public class MyWebMagic {
 
 			// fblife任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("fblifeSpider", "triggerFblife",
-					FblifePageProcessor.class, "0 40 20 * * ?");
+					FblifePageProcessor.class, "0 15 13 * * ?");
 			// autohome任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("autohomeSpider", "triggerautohome",
 					AutoHomePageProcessor.class, "0 41 20 * * ?");
