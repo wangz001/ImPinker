@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using BLL;
 using Model;
+using Model.ViewModel;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
@@ -25,7 +26,7 @@ namespace ImPinker.Controllers
         private string GetByPage(int pageNum, int pageCount)
         {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
-            var list = new List<SolrSearchBll.ArticleViewModel>();
+            var list = new List<ArticleViewModel>();
             var userInterestKey = "";
             if (string.IsNullOrEmpty(userInterestKey))
             {
@@ -39,7 +40,7 @@ namespace ImPinker.Controllers
                         {
                             article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
                         }
-                        list.Add(new SolrSearchBll.ArticleViewModel()
+                        list.Add(new ArticleViewModel()
                         {
                             ArticleName = article.ArticleName,
                             ArticleUrl = article.Url,

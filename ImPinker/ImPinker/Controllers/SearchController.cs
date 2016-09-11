@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BLL;
+using Model.ViewModel;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
@@ -26,7 +27,7 @@ namespace ImPinker.Controllers
         {
             if (!string.IsNullOrEmpty(key))
             {
-                List<SolrSearchBll.ArticleViewModel> list = SolrSearchBll.Query(key, pageNum, pageCount);
+                List<ArticleViewModel> list = SolrSearchBll.Query(key, pageNum, pageCount);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);
