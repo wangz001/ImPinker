@@ -40,6 +40,6 @@
 	<classpathentry kind="lib" path="jars/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="lib" path="jars/quartz-2.2.1.jar"/>
 	<classpathentry kind="lib" path="jars/quartz-jobs-2.2.1.jar"/>
-	<classpathentry kind="lib" path="jars/webmagic-core-0.5.3.jar"/>
+	<classpathentry kind="lib" path="jars/webmagic-core-0.5.3.jar" sourcepath="C:/Users/wangzheng1/Desktop/webmagic-master-xbb/webmagic-master/webmagic-core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

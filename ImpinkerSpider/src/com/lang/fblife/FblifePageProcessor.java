@@ -1,11 +1,17 @@
 package com.lang.fblife;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 import javax.management.JMException;
 
 import org.apache.log4j.Logger;
-import org.assertj.core.util.Lists;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -16,6 +22,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import com.google.common.base.Joiner;
 import com.lang.common.SolrJUtil;
 import com.lang.fblife.pageprocessor.FbLifeTourPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
@@ -27,14 +34,13 @@ import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor, Job {
 
-	private Site site = Site.me()
-			.setRetryTimes(3)
-			.setSleepTime(100)
-			// 使用代理
-			.setHttpProxyPool(
-					Lists.newArrayList(
-							new String[] { "221.178.251.168", "3128" },
-							new String[] { "163.125.158.237", "8888" }));
+	/*
+	 * private Site site = Site .me() .setRetryTimes(3) .setSleepTime(100) //
+	 * 使用代理 .setHttpProxyPool( Lists.newArrayList( new String[] {
+	 * "123.57.155.168", "8123" }, new String[] { "123.57.155.168", "8123" }))
+	 * .addHeader("Proxy-Authorization", getMd5());
+	 */
+	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 
@@ -66,7 +72,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(8);
+				.thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {
@@ -78,7 +84,6 @@ public class FblifePageProcessor implements PageProcessor, Job {
 
 	@Override
 	public void process(Page page) {
-
 		// TODO Auto-generated method stub
 		List<String> fbLinks = page.getHtml().links()
 				.regex("(http://\\w+.fblife\\.com/html/\\w+/\\w+.html)").all();
@@ -113,7 +118,48 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	@Override
 	public Site getSite() {
 		// TODO Auto-generated method stub
+		site.addHeader("Proxy-Authorization", getMd5());
 		return site;
+	}
+
+	private String getMd5() {
+		// 定义申请获得的appKey和appSecret
+		String appkey = "194885822";
+		String secret = "7a1333d3c40e8ea691a1372e084f25e9";
+
+		// 创建参数表
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("app_key", appkey);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		format.setTimeZone(TimeZone.getTimeZone("GMT+8"));// 使用中国时间，以免时区不同导致认证错误
+		paramMap.put("timestamp", format.format(new Date()));
+
+		// 对参数名进行排序
+		String[] keyArray = paramMap.keySet().toArray(new String[0]);
+		Arrays.sort(keyArray);
+
+		// 拼接有序的参数名-值串
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(secret);
+		for (String key : keyArray) {
+			stringBuilder.append(key).append(paramMap.get(key));
+		}
+
+		stringBuilder.append(secret);
+		String codes = stringBuilder.toString();
+
+		// MD5编码并转为大写， 这里使用的是Apache codec
+		String sign = org.apache.commons.codec.digest.DigestUtils.md5Hex(codes)
+				.toUpperCase();
+
+		paramMap.put("sign", sign);
+
+		// 拼装请求头Proxy-Authorization的值，这里使用 guava 进行map的拼接
+		String authHeader = "MYH-AUTH-MD5 "
+				+ Joiner.on('&').withKeyValueSeparator("=").join(paramMap);
+
+		System.out.println(authHeader);
+		return authHeader;
 	}
 
 }
