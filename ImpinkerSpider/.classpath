@@ -25,7 +25,6 @@
 	<classpathentry exported="true" kind="lib" path="jars/log4j-1.2.17.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/slf4j-api-1.7.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/slf4j-log4j12-1.7.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="jars/webmagic-core-0.5.2.jar" sourcepath="C:/Users/wangzheng1/Desktop/flashsword20-webmagic-master/webmagic"/>
 	<classpathentry exported="true" kind="lib" path="jars/webmagic-extension-0.5.2.jar" sourcepath="C:/Users/Administrator/Desktop/Spider/flashsword20-webmagic-master/webmagic"/>
 	<classpathentry exported="true" kind="lib" path="jars/xsoup-0.2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/solr-solrj-4.10.4.jar"/>
@@ -41,5 +40,6 @@
 	<classpathentry kind="lib" path="jars/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="lib" path="jars/quartz-2.2.1.jar"/>
 	<classpathentry kind="lib" path="jars/quartz-jobs-2.2.1.jar"/>
+	<classpathentry kind="lib" path="jars/webmagic-core-0.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

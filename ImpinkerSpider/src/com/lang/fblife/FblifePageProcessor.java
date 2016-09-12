@@ -5,6 +5,7 @@ import java.util.List;
 import javax.management.JMException;
 
 import org.apache.log4j.Logger;
+import org.assertj.core.util.Lists;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -26,12 +27,14 @@ import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor, Job {
 
-	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
-	// 使用代理
-	// .setHttpProxyPool(
-	// Lists.newArrayList(
-	// new String[] { "221.178.251.168", "3128" },
-	// new String[] { "163.125.158.237", "8888" }));
+	private Site site = Site.me()
+			.setRetryTimes(3)
+			.setSleepTime(100)
+			// 使用代理
+			.setHttpProxyPool(
+					Lists.newArrayList(
+							new String[] { "221.178.251.168", "3128" },
+							new String[] { "163.125.158.237", "8888" }));
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 
