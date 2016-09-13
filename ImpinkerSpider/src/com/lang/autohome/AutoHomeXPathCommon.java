@@ -26,7 +26,7 @@ public class AutoHomeXPathCommon implements MotorXPathInterface {
 	 * @return
 	 */
 	public String getFirstImg(Page page) {
-		String firstImgString = "//div[@id='articleContent']/p/a/img/@src";
+		String firstImgString = "//div[@id='articleContent']/p//img/@src";
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
 		if (arrStrings == null || arrStrings.size() == 0) { // 格式2

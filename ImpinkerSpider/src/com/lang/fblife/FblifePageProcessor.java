@@ -56,10 +56,25 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		} catch (JMException e) {
 			e.printStackTrace();
 		}
-		spider.run();
+		spider.start();
+		// 超过10000次时，停止爬取。防止ip被封
+		while (true) {
+			if (fbRequestCount > 10000) {
+				spider.stop();
+				break;
+			}
+			try {
+				Thread.sleep(1000 * 3);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		SolrJUtil.getInstance().LastCommit();
 		logger.info("Fblife spider 结束");
 	}
+
+	private static int fbRequestCount = 0; // 记录总请求数
 
 	/**
 	 * 调试用
@@ -78,12 +93,26 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		} catch (JMException e) {
 			e.printStackTrace();
 		}
-		spider.run();
+		spider.start();
+		// 超过10000次时，停止爬取。防止ip被封
+		while (true) {
+			if (fbRequestCount > 10000) {
+				spider.stop();
+				break;
+			}
+			try {
+				Thread.sleep(1000 * 3);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		SolrJUtil.getInstance().LastCommit();
 	}
 
 	@Override
 	public void process(Page page) {
+		fbRequestCount++;
 		// TODO Auto-generated method stub
 		List<String> fbLinks = page.getHtml().links()
 				.regex("(http://\\w+.fblife\\.com/html/\\w+/\\w+.html)").all();
@@ -118,10 +147,15 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	@Override
 	public Site getSite() {
 		// TODO Auto-generated method stub
-		site.addHeader("Proxy-Authorization", getMd5());
+		// site.addHeader("Proxy-Authorization", getMd5());
 		return site;
 	}
 
+	/**
+	 * 蚂蚁代理获取key
+	 * 
+	 * @return
+	 */
 	private String getMd5() {
 		// 定义申请获得的appKey和appSecret
 		String appkey = "194885822";

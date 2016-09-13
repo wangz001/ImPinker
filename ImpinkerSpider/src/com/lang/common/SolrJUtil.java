@@ -12,7 +12,8 @@ import com.lang.util.TUtil;
 
 public class SolrJUtil {
 
-	static String SOLR_URL = "http://localhost:8080/solr/";
+	// static String SOLR_URL = "http://localhost:8080/solr/";
+	static String SOLR_URL = "http://101.200.175.157:8080/solr/";
 	static String coreName = "impinker";
 	static List<Article> articleLists = new ArrayList<Article>();
 

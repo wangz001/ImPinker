@@ -23,17 +23,17 @@ public class MyWebMagic {
 		try {
 
 			QuartzUtil.addJobCronTrigger("job1", "trigger1", TestJob.class,
-					"30 10 9 * * ?");
+					"/15 * * * * ?");
 
 			// fblife任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("fblifeSpider", "triggerFblife",
-					FblifePageProcessor.class, "0 15 13 * * ?");
+					FblifePageProcessor.class, "0 15 01 * * ?");
 			// autohome任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("autohomeSpider", "triggerautohome",
-					AutoHomePageProcessor.class, "0 41 20 * * ?");
+					AutoHomePageProcessor.class, "0 17 03 * * ?");
 			// bitauto任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("bitautoSpider", "triggerbitauto",
-					BitautoPageProcessor.class, "0 41 20 * * ?");
+					BitautoPageProcessor.class, "0 41 06 * * ?");
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

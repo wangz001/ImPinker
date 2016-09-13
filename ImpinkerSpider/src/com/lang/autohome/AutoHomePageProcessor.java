@@ -23,6 +23,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static AutohomePipeline autohomePipeline = new AutohomePipeline();
+	private static int autohomeRequestCount = 0;
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
@@ -34,7 +35,20 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 		} catch (JMException e) {
 			e.printStackTrace();
 		}
-		spider.run();
+		spider.start();
+		// 超过10000次时，停止爬取。防止ip被封
+		while (true) {
+			if (autohomeRequestCount > 10000) {
+				spider.stop();
+				break;
+			}
+			try {
+				Thread.sleep(1000 * 3);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		SolrJUtil.getInstance().LastCommit();
 	}
 
@@ -46,7 +60,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	@Override
 	public void process(Page page) {
-
+		autohomeRequestCount++;
 		page.addTargetRequests(page.getHtml().links()
 				.regex("http://\\www.autohome.com.cn/culture/\\S+").all());
 		page.addTargetRequests(page.getHtml().links()

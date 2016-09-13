@@ -28,7 +28,7 @@ public class BitautoXPathCommon implements MotorXPathInterface {
 	 * @return
 	 */
 	public String getFirstImg(Page page) {
-		String firstImgString = "//div[@class='article-contents']/p/a/img/@src";
+		String firstImgString = "//div[@class='article-contents']/p//img/@src";
 		String firstImg = "";
 		List<String> arrStrings = page.getHtml().xpath(firstImgString).all();
 		if (arrStrings == null || arrStrings.size() == 0) { // 格式2
