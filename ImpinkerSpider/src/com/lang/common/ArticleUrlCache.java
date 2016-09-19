@@ -2,8 +2,7 @@ package com.lang.common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Hashtable;
 
 /**
  * 数据库中url的缓存
@@ -13,7 +12,8 @@ import java.util.Map;
  */
 public class ArticleUrlCache {
 
-	static Map<String, Long> articleUrls = new HashMap<String, Long>();
+	static Hashtable<String, Long> articleUrls = new Hashtable<String, Long>();// Hashtable
+																				// 线程安全
 
 	private volatile static ArticleUrlCache articleUrlCache = null;
 
@@ -73,8 +73,10 @@ public class ArticleUrlCache {
 	 * @param url
 	 */
 	public void AddUrl(String url, long Id) {
-		if (!articleUrls.containsKey(url)) {
-			articleUrls.put(url, Id);
+		synchronized (ArticleUrlCache.class) {
+			if (!articleUrls.containsKey(url)) {
+				articleUrls.put(url, Id);
+			}
 		}
 	}
 

@@ -26,7 +26,7 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	public static void main(String[] args) {
 		Spider.create(new FblifeCulturePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(1).run();
+				.thread(3).run();
 		SolrJUtil.getInstance().LastCommit();
 		System.out.println("spider stop success!!");
 	}

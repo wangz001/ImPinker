@@ -38,13 +38,15 @@ public class SolrJUtil {
 	}
 
 	public void AddDocs(Article article) {
-		if (article != null) {
-			articleLists.add(article);
-		}
-		// 每次添加100条索引
-		if (articleLists.size() >= 100) {
-			AddDocs(articleLists);
-			articleLists.clear();
+		synchronized (ArticleUrlCache.class) {
+			if (article != null) {
+				articleLists.add(article);
+			}
+			// 每次添加100条索引
+			if (articleLists.size() >= 100) {
+				AddDocs(articleLists);
+				articleLists.clear();
+			}
 		}
 	}
 
