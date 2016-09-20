@@ -119,6 +119,10 @@ public class AutoHomeXPathCommon implements MotorXPathInterface {
 			// http://news.bitauto.com/etaqzypzcs/20150528/2206534159.html#comment
 			url = url.substring(0, url.indexOf('#'));
 		}
+		if (url.contains("?pvareaid")) {
+			// http://www.autohome.com.cn/tuning/201508/877895-all.html?pvareaid=102337
+			url = url.substring(0, url.indexOf("?pvareaid"));
+		}
 		return url;
 	}
 
