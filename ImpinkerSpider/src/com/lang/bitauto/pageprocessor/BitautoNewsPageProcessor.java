@@ -26,8 +26,15 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 		boolean isPagination = yicheXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页
-			String allUrl = page.getUrl().toString()
-					.replace(".html", "_all.html");
+			String allUrl = "";
+			String pageIndex = yicheXPath.getPageIndex(page);
+			if ("" == pageIndex) {
+				allUrl = page.getUrl().toString().replace(".html", "_all.html");
+			} else {
+				allUrl = page.getUrl().toString()
+						.replace("-" + pageIndex + ".html", "_all.html");
+			}
+
 			page.addTargetRequests(Arrays.asList(allUrl));
 			page.setSkip(true);
 			return;

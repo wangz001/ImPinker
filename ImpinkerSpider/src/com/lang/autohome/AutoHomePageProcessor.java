@@ -25,6 +25,32 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 	private static AutohomePipeline autohomePipeline = new AutohomePipeline();
 	private static int autohomeRequestCount = 0;
 
+	public static void main(String[] args) {
+		Spider spider = Spider.create(new AutoHomePageProcessor())
+				.addUrl("http://www.autohome.com.cn/")
+				.addPipeline(autohomePipeline).thread(5);
+		try {
+			SpiderMonitor.instance().register(spider);
+		} catch (JMException e) {
+			e.printStackTrace();
+		}
+		spider.start();
+		// 超过10000次时，停止爬取。防止ip被封
+		while (true) {
+			if (autohomeRequestCount > 10000) {
+				spider.stop();
+				break;
+			}
+			try {
+				Thread.sleep(1000 * 3);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		SolrJUtil.getInstance().LastCommit();
+	}
+
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Spider spider = Spider.create(new AutoHomePageProcessor())
