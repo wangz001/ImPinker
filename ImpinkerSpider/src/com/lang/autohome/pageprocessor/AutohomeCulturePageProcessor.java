@@ -30,12 +30,19 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 	public void process(Page page) {
 		// TODO Auto-generated method stub
 		page.addTargetRequests(page.getHtml().links()
-				.regex("(http://www.autohome.com.cn/culture/\\S+)").all());
+				.regex("(http://www.autohome.com.cn/culture/\\S*)").all());
 		boolean isPagination = autohomeXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页
-			String allUrl = page.getUrl().toString()
-					.replace(".html", "-all.html");
+			String allUrl = "";
+			String pageIndex = autohomeXPath.getPageIndex(page);
+			if ("" == pageIndex) {
+				allUrl = page.getUrl().toString().replace(".html", "-all.html");
+			} else {
+				allUrl = page.getUrl().toString()
+						.replace("-" + pageIndex + ".html", "-all.html");
+			}
+
 			page.addTargetRequests(Arrays.asList(allUrl));
 			page.setSkip(true);
 			return;

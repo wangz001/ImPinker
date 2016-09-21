@@ -73,10 +73,8 @@ public class ArticleUrlCache {
 	 * @param url
 	 */
 	public void AddUrl(String url, long Id) {
-		synchronized (ArticleUrlCache.class) {
-			if (!articleUrls.containsKey(url)) {
-				articleUrls.put(url, Id);
-			}
+		if (!articleUrls.containsKey(url)) {
+			articleUrls.put(url, Id);
 		}
 	}
 

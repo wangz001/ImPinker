@@ -33,7 +33,7 @@ public class MyWebMagic {
 					AutoHomePageProcessor.class, "0 50 21 * * ?");
 			// bitauto任务 每隔一天执行一次
 			QuartzUtil.addJobCronTrigger("bitautoSpider", "triggerbitauto",
-					BitautoPageProcessor.class, "0 50 01 * * ?");
+					BitautoPageProcessor.class, "0 50 22 * * ?");
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

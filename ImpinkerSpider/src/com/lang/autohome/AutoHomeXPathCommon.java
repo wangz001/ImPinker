@@ -134,8 +134,12 @@ public class AutoHomeXPathCommon implements MotorXPathInterface {
 
 	@Override
 	public String getPageIndex(Page page) {
-		// TODO Auto-generated method stub
-		return null;
+		String reg = "http://www.autohome.com.cn/\\w+/\\d+/\\w+-(\\d+)\\.html\\S*";
+		String key = page.getUrl().toString().replaceAll(reg, "$1");
+		if (key == null || key == "" || key == page.getUrl().toString()) {
+			return "";
+		}
+		return key;
 	}
 
 	@Override

@@ -35,8 +35,15 @@ public class AutoHomeNewsPageProcessor implements PageProcessor {
 		boolean isPagination = autohomeXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页
-			String allUrl = page.getUrl().toString()
-					.replace(".html", "-all.html");
+			String allUrl = "";
+			String pageIndex = autohomeXPath.getPageIndex(page);
+			if ("" == pageIndex) {
+				allUrl = page.getUrl().toString().replace(".html", "-all.html");
+			} else {
+				allUrl = page.getUrl().toString()
+						.replace("-" + pageIndex + ".html", "-all.html");
+			}
+
 			page.addTargetRequests(Arrays.asList(allUrl));
 			page.setSkip(true);
 			return;
