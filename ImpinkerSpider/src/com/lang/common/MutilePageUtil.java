@@ -37,23 +37,25 @@ public class MutilePageUtil {
 
 	public void AddMutilPage(MutilePageModel pageModel, CompanyEnum companyType) {
 		// 文章key ：1256325_2 ;companyId
-		String articleKey = pageModel.getPageKey() + "_"
-				+ companyType.getIndex();
-		if (objectMap.containsKey(articleKey)) {
-			List<MutilePageModel> pages = objectMap.get(articleKey);
-			pages.add(pageModel);
+		synchronized (MutilePageUtil.class) {
+			String articleKey = pageModel.getPageKey() + "_"
+					+ companyType.getIndex();
+			if (objectMap.containsKey(articleKey)) {
+				List<MutilePageModel> pages = objectMap.get(articleKey);
+				pages.add(pageModel);
 
-			if (pages.size() == pageModel.getOtherPages().size()) {// 所有页面下载完，进行合并
-				CombinePages(pages, companyType);
-				objectMap.remove(articleKey);
+				if (pages.size() == pageModel.getOtherPages().size()) {// 所有页面下载完，进行合并
+					CombinePages(pages, companyType);
+					objectMap.remove(articleKey);
+				} else {
+					objectMap.put(articleKey, pages);
+				}
 			} else {
-				objectMap.put(articleKey, pages);
+				List<MutilePageModel> list = Arrays.asList(pageModel);
+				List<MutilePageModel> arrayList = new ArrayList<MutilePageModel>(
+						list);
+				objectMap.put(articleKey, arrayList);
 			}
-		} else {
-			List<MutilePageModel> list = Arrays.asList(pageModel);
-			List<MutilePageModel> arrayList = new ArrayList<MutilePageModel>(
-					list);
-			objectMap.put(articleKey, arrayList);
 		}
 	}
 
