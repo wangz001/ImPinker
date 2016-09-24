@@ -93,4 +93,12 @@ public interface MotorXPathInterface {
 	 * @return
 	 */
 	public List<String> getAllPageUrls(Page page);
+
+	/**
+	 * 根据url地址分析出类型。文化、改装、新闻、旅行。。。。
+	 * 
+	 * @param urlStr
+	 * @return
+	 */
+	public String getTypeByUrl(String urlStr);
 }

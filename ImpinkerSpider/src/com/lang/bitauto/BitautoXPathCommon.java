@@ -147,4 +147,10 @@ public class BitautoXPathCommon implements MotorXPathInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String getTypeByUrl(String urlStr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

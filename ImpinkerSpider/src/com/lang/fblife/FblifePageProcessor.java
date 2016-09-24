@@ -24,11 +24,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.google.common.base.Joiner;
 import com.lang.common.SolrJUtil;
-import com.lang.fblife.pageprocessor.FbLifeTourPageProcessor;
 import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
-import com.lang.fblife.pageprocessor.FblifeEvaluatePageProcessor;
-import com.lang.fblife.pageprocessor.FblifeNewsPageProcessor;
-import com.lang.fblife.pageprocessor.FblifeReStylePageProcessor;
 import com.lang.main.MyWebMagic;
 import com.lang.util.RegexUtil;
 
@@ -87,7 +83,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(3);
+				.thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {
@@ -119,28 +115,36 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		page.addTargetRequests(fbLinks);
 		String thisUrlString = page.getUrl().toString();
 
-		if (RegexUtil.match("http://culture.fblife\\.com/html/\\w+/\\w+.html",
+		if (RegexUtil.match("http://\\w+.fblife\\.com/html/\\w+/\\w+.html",
 				thisUrlString)) {
-			new FblifeCulturePageProcessor().process(page);
-			return;
-		} else if (RegexUtil.match(
-				"http://tour.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-			new FbLifeTourPageProcessor().process(page);
-			return;
-		} else if (RegexUtil.match(
-				"http://restyle.fblife\\.com/html/\\w+/\\w+.html",
-				thisUrlString)) {
-			new FblifeReStylePageProcessor().process(page);
-			return;
-		} else if (RegexUtil.match(
-				"http://news.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-			new FblifeNewsPageProcessor().process(page);
-			return;
-		} else if (RegexUtil.match(
-				"http://drive.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-			new FblifeEvaluatePageProcessor().process(page);
-			return;
+			String reg = "http://(\\w+)\\.fblife\\.com/html/\\w+/\\w+.*\\.html";
+			String key = thisUrlString.replaceAll(reg, "$1");
+
+			List<String> arrStr = Arrays.asList("culture", "tour", "restyle",
+					"news", "drive");
+			if (arrStr.contains(key)) {
+				new FblifeCulturePageProcessor().process(page);
+				return;
+			}
 		}
+		// else if (RegexUtil.match(
+		// "http://tour.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
+		// new FbLifeTourPageProcessor().process(page);
+		// return;
+		// } else if (RegexUtil.match(
+		// "http://restyle.fblife\\.com/html/\\w+/\\w+.html",
+		// thisUrlString)) {
+		// new FblifeReStylePageProcessor().process(page);
+		// return;
+		// } else if (RegexUtil.match(
+		// "http://news.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
+		// new FblifeNewsPageProcessor().process(page);
+		// return;
+		// } else if (RegexUtil.match(
+		// "http://drive.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
+		// new FblifeEvaluatePageProcessor().process(page);
+		// return;
+		// }
 		page.setSkip(true);
 	}
 
