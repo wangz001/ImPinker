@@ -8,11 +8,16 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.autohome.AutohomePipeline;
-import com.lang.common.ArticleTypeEnum;
 import com.lang.common.CompanyEnum;
 import com.lang.factory.XPathFactory;
 import com.lang.interfac.MotorXPathInterface;
 
+/**
+ * 文化、改装、新闻、评测。使用该解析
+ * 
+ * @author Administrator
+ * 
+ */
 public class AutohomeCulturePageProcessor implements PageProcessor {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
@@ -28,9 +33,7 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 
 	@Override
 	public void process(Page page) {
-		// TODO Auto-generated method stub
-		page.addTargetRequests(page.getHtml().links()
-				.regex("(http://www.autohome.com.cn/culture/\\S*)").all());
+
 		boolean isPagination = autohomeXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页
@@ -49,17 +52,19 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 		}
 		String titleString = autohomeXPath.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
+			String urlString = autohomeXPath.getUrl(page);
 			String keyWord = autohomeXPath.getKeyWordString(page);
 			String firstImg = autohomeXPath.getFirstImg(page);
 			String description = autohomeXPath.getDescription(page);
 			String content = autohomeXPath.getContentString(page);
 			String publishTime = autohomeXPath.getPublishTime(page);
+			String articleTypeString = autohomeXPath.getTypeByUrl(urlString);
 
-			page.putField("url", autohomeXPath.getUrl(page));
+			page.putField("url", urlString);
 			page.putField("title", titleString);
 			page.putField("description", description);
-			page.putField("keyword", keyWord + ArticleTypeEnum.WenHua.getName()
-					+ "," + CompanyEnum.Autohome.getName());
+			page.putField("keyword", keyWord + articleTypeString + ","
+					+ CompanyEnum.Autohome.getName());
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
 			page.putField("publishtime", publishTime);

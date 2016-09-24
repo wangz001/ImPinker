@@ -127,24 +127,6 @@ public class FblifePageProcessor implements PageProcessor, Job {
 				return;
 			}
 		}
-		// else if (RegexUtil.match(
-		// "http://tour.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-		// new FbLifeTourPageProcessor().process(page);
-		// return;
-		// } else if (RegexUtil.match(
-		// "http://restyle.fblife\\.com/html/\\w+/\\w+.html",
-		// thisUrlString)) {
-		// new FblifeReStylePageProcessor().process(page);
-		// return;
-		// } else if (RegexUtil.match(
-		// "http://news.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-		// new FblifeNewsPageProcessor().process(page);
-		// return;
-		// } else if (RegexUtil.match(
-		// "http://drive.fblife\\.com/html/\\w+/\\w+.html", thisUrlString)) {
-		// new FblifeEvaluatePageProcessor().process(page);
-		// return;
-		// }
 		page.setSkip(true);
 	}
 

@@ -39,8 +39,6 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	@Override
 	public void process(Page page) {
 		// TODO Auto-generated method stub
-		page.addTargetRequests(page.getHtml().links()
-				.regex("(http://\\w+.fblife\\.com/html/\\w+/\\w+.html)").all());
 		boolean isPagination = fbXPath.isPagination(page);
 		if (isPagination) {
 			// 有分页的，单独处理

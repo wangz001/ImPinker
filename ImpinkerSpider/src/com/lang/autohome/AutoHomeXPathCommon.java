@@ -4,6 +4,7 @@ import java.util.List;
 
 import us.codecraft.webmagic.Page;
 
+import com.lang.common.ArticleTypeEnum;
 import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.TUtil;
 
@@ -150,7 +151,20 @@ public class AutoHomeXPathCommon implements MotorXPathInterface {
 
 	@Override
 	public String getTypeByUrl(String urlStr) {
-		// TODO Auto-generated method stub
-		return null;
+		String reg = "http://www.autohome.com.cn/(\\w+)/\\S+";
+		String key = urlStr.replaceAll(reg, "$1");
+		if ("culture".equals(key)) {
+			return ArticleTypeEnum.WenHua.getName();
+		}
+		if ("tuning".equals(key)) {
+			return ArticleTypeEnum.GaiZhuang.getName();
+		}
+		if ("news".equals(key)) {
+			return ArticleTypeEnum.XinWen.getName();
+		}
+		if ("drive".equals(key)) {
+			return ArticleTypeEnum.PingCe.getName();
+		}
+		return "汽车之家";
 	}
 }
