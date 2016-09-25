@@ -55,7 +55,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (fbRequestCount > 100) {
+			if (fbRequestCount > 10000) {
 				spider.stop();
 				spider.close();
 				fbRequestCount = 0; // 解决quartz第二次启动的问题
