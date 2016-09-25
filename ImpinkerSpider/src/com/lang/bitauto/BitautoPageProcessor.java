@@ -36,6 +36,8 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 		while (true) {
 			if (bitRequestCount > 10000) {
 				spider.stop();
+				spider.close();
+				bitRequestCount = 0; // 解决quartz第二次启动的问题
 				break;
 			}
 			try {

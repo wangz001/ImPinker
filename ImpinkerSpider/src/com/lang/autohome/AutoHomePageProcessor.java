@@ -68,6 +68,8 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 		while (true) {
 			if (autohomeRequestCount > 10000) {
 				spider.stop();
+				spider.close();
+				autohomeRequestCount = 0; // 解决quartz第二次启动的问题
 				break;
 			}
 			try {
