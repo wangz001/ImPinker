@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.management.JMException;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -17,6 +18,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.autohome.pageprocessor.AutohomeCulturePageProcessor;
 import com.lang.common.SolrJUtil;
+import com.lang.main.MyWebMagic;
 import com.lang.util.RegexUtil;
 
 public class AutoHomePageProcessor implements PageProcessor, Job {
@@ -24,6 +26,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static AutohomePipeline autohomePipeline = new AutohomePipeline();
 	private static int autohomeRequestCount = 0;
+	Logger logger = Logger.getLogger(MyWebMagic.class);
 	static List<String> typearrStr = Arrays.asList("culture", "tuning", "news",
 			"drive");
 
@@ -80,6 +83,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 			}
 		}
 		SolrJUtil.getInstance().LastCommit();
+		logger.info("autohome spider 结束");
 	}
 
 	@Override

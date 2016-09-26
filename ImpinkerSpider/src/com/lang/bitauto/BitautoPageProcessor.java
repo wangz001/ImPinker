@@ -2,6 +2,7 @@ package com.lang.bitauto;
 
 import javax.management.JMException;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -14,12 +15,14 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.bitauto.pageprocessor.BitautoNewsPageProcessor;
 import com.lang.common.SolrJUtil;
+import com.lang.main.MyWebMagic;
 
 public class BitautoPageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static BitautoPipeline bitautoPipeline = new BitautoPipeline();
 	private static int bitRequestCount = 0;
+	Logger logger = Logger.getLogger(MyWebMagic.class);
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
@@ -48,6 +51,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 			}
 		}
 		SolrJUtil.getInstance().LastCommit();
+		logger.info("bitauto spider 结束");
 	}
 
 	/**

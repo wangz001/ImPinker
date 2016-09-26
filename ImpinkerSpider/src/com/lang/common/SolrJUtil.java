@@ -5,19 +5,20 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 
+import com.lang.properties.AppProperties;
 import com.lang.util.TUtil;
 
 public class SolrJUtil {
 
-	static String SOLR_URL = "http://localhost:8080/solr/";
-	// static String SOLR_URL = "http://101.200.175.157:8080/solr/";
-	static String coreName = "impinker";
+	static String SOLR_URL = AppProperties.getPropertyByName("solr.url");;
+	static String coreName = AppProperties.getPropertyByName("solr.corename");;
 	static List<Article> articleLists = new ArrayList<Article>();
-
 	private volatile static SolrJUtil solrJUtil = null;
+	static Logger logger = Logger.getLogger(SolrJUtil.class);
 
 	/**
 	 * 单利模式，获取实例
@@ -54,9 +55,11 @@ public class SolrJUtil {
 	 * 所有线程执行完后，把list里剩余的数据提交
 	 */
 	public void LastCommit() {
-		if (articleLists.size() > 0) {
-			AddDocs(articleLists);
-			articleLists.clear();
+		synchronized (ArticleUrlCache.class) {
+			if (articleLists.size() > 0) {
+				AddDocs(articleLists);
+				articleLists.clear();
+			}
 		}
 	}
 
@@ -101,8 +104,9 @@ public class SolrJUtil {
 			// in one http request(432ms)
 			server.add(docs.iterator());
 			server.commit();
+			logger.info(TUtil.getCurrentTime() + docs.size());
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.info(e);
 		}
 	}
 

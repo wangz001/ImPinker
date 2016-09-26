@@ -4,13 +4,11 @@ import java.util.List;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.common.CompanyEnum;
 import com.lang.common.MutilePageModel;
 import com.lang.common.MutilePageUtil;
-import com.lang.common.SolrJUtil;
 import com.lang.factory.XPathFactory;
 import com.lang.fblife.FblifePipeline;
 import com.lang.interfac.MotorXPathInterface;
@@ -27,14 +25,6 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 	private MotorXPathInterface fbXPath = new XPathFactory()
 			.createXPath(CompanyEnum.Fblife);
-
-	public static void main(String[] args) {
-		Spider.create(new FblifeCulturePageProcessor())
-				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(3).run();
-		SolrJUtil.getInstance().LastCommit();
-		System.out.println("spider stop success!!");
-	}
 
 	@Override
 	public void process(Page page) {
