@@ -19,6 +19,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import com.lang.autohome.pageprocessor.AutohomeCulturePageProcessor;
 import com.lang.common.SolrJUtil;
 import com.lang.main.MyWebMagic;
+import com.lang.properties.AppProperties;
 import com.lang.util.RegexUtil;
 
 public class AutoHomePageProcessor implements PageProcessor, Job {
@@ -29,6 +30,8 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 	static List<String> typearrStr = Arrays.asList("culture", "tuning", "news",
 			"drive");
+	static int maxNum = Integer.parseInt(AppProperties
+			.getPropertyByName("spider.maxnum"));
 
 	public static void main(String[] args) {
 		Spider spider = Spider.create(new AutoHomePageProcessor())
@@ -69,7 +72,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (autohomeRequestCount > 10000) {
+			if (autohomeRequestCount > maxNum) {
 				spider.stop();
 				spider.close();
 				autohomeRequestCount = 0; // 解决quartz第二次启动的问题

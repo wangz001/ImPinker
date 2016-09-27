@@ -16,6 +16,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import com.lang.bitauto.pageprocessor.BitautoNewsPageProcessor;
 import com.lang.common.SolrJUtil;
 import com.lang.main.MyWebMagic;
+import com.lang.properties.AppProperties;
 
 public class BitautoPageProcessor implements PageProcessor, Job {
 
@@ -23,6 +24,8 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 	private static BitautoPipeline bitautoPipeline = new BitautoPipeline();
 	private static int bitRequestCount = 0;
 	Logger logger = Logger.getLogger(MyWebMagic.class);
+	static int maxNum = Integer.parseInt(AppProperties
+			.getPropertyByName("spider.maxnum"));
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
@@ -37,7 +40,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (bitRequestCount > 10000) {
+			if (bitRequestCount > maxNum) {
 				spider.stop();
 				spider.close();
 				bitRequestCount = 0; // 解决quartz第二次启动的问题

@@ -26,6 +26,7 @@ import com.google.common.base.Joiner;
 import com.lang.common.SolrJUtil;
 import com.lang.fblife.pageprocessor.FblifeCulturePageProcessor;
 import com.lang.main.MyWebMagic;
+import com.lang.properties.AppProperties;
 import com.lang.util.RegexUtil;
 
 public class FblifePageProcessor implements PageProcessor, Job {
@@ -39,6 +40,8 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static FblifePipeline fbPipeline = new FblifePipeline();
 	Logger logger = Logger.getLogger(MyWebMagic.class);
+	static int maxNum = Integer.parseInt(AppProperties
+			.getPropertyByName("spider.maxnum"));
 
 	@Override
 	public void execute(JobExecutionContext context)
@@ -46,7 +49,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		logger.info("Fblife spider启动");
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(8);
+				.thread(5);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {
@@ -55,7 +58,8 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (fbRequestCount > 10000) {
+			// spider.maxnum
+			if (fbRequestCount > maxNum) {
 				spider.stop();
 				spider.close();
 				fbRequestCount = 0; // 解决quartz第二次启动的问题
