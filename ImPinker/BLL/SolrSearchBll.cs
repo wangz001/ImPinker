@@ -36,9 +36,8 @@ namespace BLL
         /// <summary>
         /// 查询
         /// </summary>
-        public static List<ArticleViewModel> Query(string keyWord, int rowNum, int count)
+        public static IEnumerable<ArticleViewModel> Query(string keyWord, int rowNum, int count)
         {
-            var resultLists = new List<ArticleViewModel>();
             var queryParam = new Dictionary<string, ICollection<string>>();
             if (string.IsNullOrEmpty(keyWord))
             {
@@ -56,7 +55,18 @@ namespace BLL
             var result = SolrQueryOperations.Query(CoreName, "/select", queryStr, queryParam);
             var highLightResult = HighlightingParser.Parse(result);
             var solrDocumentList = (SolrDocumentList)result.Get("response");
-            //整合返回的数据
+            var resultLists = SolrDocToList(solrDocumentList);
+            return resultLists;
+        }
+
+        /// <summary>
+        /// 将solr 数据序列化为对象
+        /// </summary>
+        /// <param name="solrDocumentList"></param>
+        /// <returns></returns>
+        private static IEnumerable<ArticleViewModel> SolrDocToList(SolrDocumentList solrDocumentList)
+        {
+            var resultLists = new List<ArticleViewModel>();
             if (solrDocumentList != null && solrDocumentList.Count > 0)
             {
                 var existArticles = new List<int>();
@@ -91,7 +101,7 @@ namespace BLL
                 }
                 return resultLists;
             }
-            return null;
+            return resultLists;
         }
 
         /// <summary>
