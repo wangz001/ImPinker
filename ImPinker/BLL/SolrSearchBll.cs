@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using EasyNet.Solr;
 using EasyNet.Solr.Commons;
 using EasyNet.Solr.Impl;
+using Maticsoft.Common;
 using Model.ViewModel;
 
 namespace BLL
 {
     public class SolrSearchBll
     {
-        //private const string SolrUrl = "http://101.200.175.157:8080/solr/";
-        private const string SolrUrl = "http://localhost:8080/solr/";
+        private static readonly string SolrServer = ConfigurationManager.AppSettings.Get("SolrServer");
         private const string CoreName = "impinker";
 
         static readonly OptimizeOptions OptimizeOptions = new OptimizeOptions();
         static readonly ISolrResponseParser<NamedList, ResponseHeader> BinaryResponseHeaderParser = new BinaryResponseHeaderParser();
         static readonly IUpdateParametersConvert<NamedList> UpdateParametersConvert = new BinaryUpdateParametersConvert();
-        static readonly ISolrUpdateConnection<NamedList, NamedList> SolrUpdateConnection = new SolrUpdateConnection<NamedList, NamedList>() { ServerUrl = SolrUrl };
+        static readonly ISolrUpdateConnection<NamedList, NamedList> SolrUpdateConnection = new SolrUpdateConnection<NamedList, NamedList>() { ServerUrl = SolrServer };
         static readonly ISolrUpdateOperations<NamedList> UpdateOperations = new SolrUpdateOperations<NamedList, NamedList>(SolrUpdateConnection, UpdateParametersConvert) { ResponseWriter = "javabin" };
         static readonly BinaryHighlightingParser HighlightingParser = new BinaryHighlightingParser();
-        static readonly ISolrQueryConnection<NamedList> SolrQueryConnection = new SolrQueryConnection<NamedList>() { ServerUrl = SolrUrl };
+        static readonly ISolrQueryConnection<NamedList> SolrQueryConnection = new SolrQueryConnection<NamedList>() { ServerUrl = SolrServer };
         static readonly ISolrQueryOperations<NamedList> SolrQueryOperations = new SolrQueryOperations<NamedList>(SolrQueryConnection) { ResponseWriter = "javabin" };
 
-        static SolrSearchBll()
+        public SolrSearchBll()
         {
-
         }
 
         public static string Query()
@@ -36,7 +36,7 @@ namespace BLL
         /// <summary>
         /// 查询
         /// </summary>
-        public static IEnumerable<ArticleViewModel> Query(string keyWord, int rowNum, int count)
+        public static List<ArticleViewModel> Query(string keyWord, int rowNum, int count)
         {
             var queryParam = new Dictionary<string, ICollection<string>>();
             if (string.IsNullOrEmpty(keyWord))
@@ -64,7 +64,7 @@ namespace BLL
         /// </summary>
         /// <param name="solrDocumentList"></param>
         /// <returns></returns>
-        private static IEnumerable<ArticleViewModel> SolrDocToList(SolrDocumentList solrDocumentList)
+        private static List<ArticleViewModel> SolrDocToList(SolrDocumentList solrDocumentList)
         {
             var resultLists = new List<ArticleViewModel>();
             if (solrDocumentList != null && solrDocumentList.Count > 0)

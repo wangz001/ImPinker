@@ -18,6 +18,7 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            new SolrNetSearchBll().TestSolrNetSearch("越野");
             ViewBag.ArticleJson = GetByPage(1,IndexPageCount);
             ViewBag.pageCount = IndexPageCount;
             return View();
@@ -27,30 +28,10 @@ namespace ImPinker.Controllers
         {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
             var list = new List<ArticleViewModel>();
-            var userInterestKey = "";
+            const string userInterestKey = "";
             if (string.IsNullOrEmpty(userInterestKey))
             {
-                var ds = ArticleBll.GetIndexListByPage(pageNum, pageCount);
-                List<Article> articles = ArticleBll.DataTableToList(ds.Tables[0]);
-                if (articles != null && articles.Count > 0)
-                {
-                    foreach (var article in articles)
-                    {
-                        if (article.ArticleName.Length > 25)
-                        {
-                            article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
-                        }
-                        list.Add(new ArticleViewModel()
-                        {
-                            ArticleName = article.ArticleName,
-                            ArticleUrl = article.Url,
-                            Description = article.Description,
-                            KeyWords = article.KeyWords,
-                            CoverImage = article.CoverImage,
-                            CreateTime = article.CreateTime.ToString("MM-dd hh:mm")
-                        });
-                    }
-                }
+                list = ArticleBll.GetIndexListByPage(pageNum, pageCount);
             }
             else
             {

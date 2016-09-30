@@ -2,18 +2,19 @@
 using System.Data;
 using System.Collections.Generic;
 using Maticsoft.Common;
+using Model;
+using Model.ViewModel;
 
 namespace BLL
 {
 	/// <summary>
 	/// Article
 	/// </summary>
-	public partial class ArticleBll
+	public class ArticleBll
 	{
-		private readonly DAL.Article dal=new DAL.Article();
-		public ArticleBll()
-		{}
-		#region  BasicMethod
+		private readonly DAL.ArticleDal dal=new DAL.ArticleDal();
+		
+        #region  BasicMethod
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
@@ -25,7 +26,7 @@ namespace BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.Article model)
+		public bool Add(Article model)
 		{
 			return dal.Add(model);
 		}
@@ -33,7 +34,7 @@ namespace BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.Article model)
+		public bool Update(Article model)
 		{
 			return dal.Update(model);
 		}
@@ -43,7 +44,6 @@ namespace BLL
 		/// </summary>
 		public bool Delete(long Id)
 		{
-			
 			return dal.Delete(Id);
 		}
 		/// <summary>
@@ -59,16 +59,14 @@ namespace BLL
 		/// </summary>
 		public Model.Article GetModel(long Id)
 		{
-			
 			return dal.GetModel(Id);
 		}
 
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Model.Article GetModelByCache(long Id)
+		public Article GetModelByCache(long Id)
 		{
-			
 			string CacheKey = "ArticleModel-" + Id;
 			object objModel = DataCache.GetCache(CacheKey);
 			if (objModel == null)
@@ -84,7 +82,7 @@ namespace BLL
 				}
 				catch{}
 			}
-			return (Model.Article)objModel;
+			return (Article)objModel;
 		}
 
 		/// <summary>
@@ -94,17 +92,11 @@ namespace BLL
 		{
 			return dal.GetList(strWhere);
 		}
-		/// <summary>
-		/// 获得前几行数据
-		/// </summary>
-		public DataSet GetList(int Top,string strWhere,string filedOrder)
-		{
-			return dal.GetList(Top,strWhere,filedOrder);
-		}
+		
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.Article> GetModelList(string strWhere)
+		public List<Article> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -112,17 +104,16 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.Article> DataTableToList(DataTable dt)
+		public List<Article> DataTableToList(DataTable dt)
 		{
-			List<Model.Article> modelList = new List<Model.Article>();
+			var modelList = new List<Article>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				Model.Article model;
-				for (int n = 0; n < rowsCount; n++)
+			    for (int n = 0; n < rowsCount; n++)
 				{
-					model = dal.DataRowToModel(dt.Rows[n]);
-					if (model != null)
+				    Article model = dal.DataRowToModel(dt.Rows[n]);
+				    if (model != null)
 					{
 						modelList.Add(model);
 					}
@@ -131,14 +122,7 @@ namespace BLL
 			return modelList;
 		}
 
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetAllList()
-		{
-			return GetList("");
-		}
-
+		
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
@@ -157,17 +141,37 @@ namespace BLL
         /// <summary>
         /// 分页获取首页数据列表
         /// </summary>
-        public DataSet GetIndexListByPage(int pageNum, int count)
+        public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
-            
-            return dal.GetIndexListByPage(pageNum, count);
+            var listResult = new List<ArticleViewModel>();
+            var ds= dal.GetIndexListByPage(pageNum, count);
+            List<Article> articles = DataTableToList(ds.Tables[0]);
+            if (articles != null && articles.Count > 0)
+            {
+                foreach (var article in articles)
+                {
+                    if (article.ArticleName.Length > 25)
+                    {
+                        article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
+                    }
+                    listResult.Add(new ArticleViewModel()
+                    {
+                        ArticleName = article.ArticleName,
+                        ArticleUrl = article.Url,
+                        Description = article.Description,
+                        KeyWords = article.KeyWords,
+                        CoverImage = article.CoverImage,
+                        Company = article.Company,
+                        CreateTime = article.CreateTime.ToString("MM-dd hh:mm")
+                    });
+                }
+            }
+            return listResult;
         }
 		
 
 		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
+		
 	}
 }
 

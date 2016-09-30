@@ -3,24 +3,21 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using DBUtility;
+using Model;
 
 namespace DAL
 {
 	/// <summary>
 	/// 数据访问类:Article
 	/// </summary>
-	public class Article
+	public class ArticleDal
 	{
-		public Article()
-		{
-		}
-
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
 		public bool Exists(long Id)
 		{
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("select count(1) from Article");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
@@ -38,7 +35,7 @@ namespace DAL
 		/// </summary>
 		public bool Add(Model.Article model)
 		{
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("insert into Article(");
 			strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company)");
 			strSql.Append(" values (");
@@ -73,7 +70,7 @@ namespace DAL
 		/// </summary>
 		public bool Update(Model.Article model)
 		{
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("update Article set ");
 			strSql.Append("ArticleName=@ArticleName,");
 			strSql.Append("Url=@Url,");
@@ -126,7 +123,7 @@ namespace DAL
 		public bool Delete(long Id)
 		{
 
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("delete from Article ");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
@@ -151,7 +148,7 @@ namespace DAL
 		/// </summary>
 		public bool DeleteList(string Idlist)
 		{
-			StringBuilder strSql = new StringBuilder();
+			var strSql = new StringBuilder();
 			strSql.Append("delete from Article ");
 			strSql.Append(" where Id in (" + Idlist + ")  ");
 			int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
@@ -198,9 +195,9 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Article DataRowToModel(DataRow row)
+		public Article DataRowToModel(DataRow row)
 		{
-			Model.Article model = new Model.Article();
+			var model = new Article();
 			if (row != null)
 			{
 				if (row["Id"] != null && row["Id"].ToString() != "")
@@ -246,6 +243,10 @@ namespace DAL
                 if (row["Content"] != null && row["Content"].ToString()!="")
                 {
                     model.Content = row["Content"].ToString();
+                }
+                if (row["Company"] != null && row["Company"].ToString() != "")
+                {
+                    model.Company = row["Company"].ToString();
                 }
 			}
 			return model;

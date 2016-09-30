@@ -27,5 +27,7 @@ namespace Model.ViewModel
         public string CreateTime { get; set; }
 
         public string Content { get; set; }
+
+        public string Company { get; set; }
     }
 }
