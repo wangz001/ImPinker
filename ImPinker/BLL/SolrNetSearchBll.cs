@@ -15,8 +15,8 @@ namespace BLL
 {
     public class SolrNetSearchBll
     {
-        private static readonly ISolrOperations<ArticleViewModel> _solr; 
-        static SolrNetSearchBll() 
+        private static readonly ISolrOperations<ArticleViewModel> _solr;
+        static SolrNetSearchBll()
         {
             _solr = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
         }
@@ -37,41 +37,65 @@ namespace BLL
             var options = new QueryOptions();
             options.Rows = pageNum;
             options.Start = startNum;
-
+            //高亮
+            var high = new HighlightingParameters();
+            high.Fields = new List<string> { "ArticleName", "KeyWords", "Description" };
+            high.BeforeTerm = "<font color='red'><b>";
+            high.AfterTerm = "</b></font>";
+            options.Highlight = high;
 
             //创建查询条件
-            var qTB = new SolrQueryByField("text", keyWord);
+            var qName = new SolrQueryByField("ArticleName", keyWord);
+            var qKeywords = new SolrQueryByField("KeyWords", keyWord);
+            var qDescription = new SolrQueryByField("Description", keyWord);
 
             //创建条件集合
             var query = new List<ISolrQuery>();
             //添加条件
-            query.Add(qTB);
+            query.Add(qName);
+            query.Add(qKeywords);
+            query.Add(qDescription);
 
-          
+
             //按照时间倒排序.
             options.AddOrder(new SortOrder("CreateTime", Order.DESC));
 
 
             //条件集合之间的关系
-            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+            var qTBO = new SolrMultipleCriteriaQuery(query, "OR");
 
-            var high = new HighlightingParameters();
-            high.Fields = new List<string> { "ArticleName" };
-            high.BeforeTerm = "<font color='red'><b>";
-            high.AfterTerm = "</b></font>";
-            options.Highlight = high;
+
 
 
             //执行查询,有5个重载
             SolrQueryResults<ArticleViewModel> results = _solr.Query(qTBO, options);
 
             var highlights = results.Highlights;
-            foreach (var item in results)
+            if (highlights != null && highlights.Count > 0)
             {
-                var t = highlights[item.Id].Values.ToList()[0].ToList()[0];
-                item.ArticleName = t;
+                foreach (var item in results)
+                {
+                    var snippets = highlights[item.Id].Snippets;
+                    foreach (var snippet in snippets)
+                    {
+                        if (snippet.Key.Equals("ArticleName"))
+                        {
+                            var t = snippet.Value.ToList()[0];
+                            item.ArticleName = t;
+                        }
+                        if (snippet.Key.Equals("KeyWords"))
+                        {
+                            var t = snippet.Value.ToList()[0];
+                            item.KeyWords = t;
+                        }
+                        if (snippet.Key.Equals("Description"))
+                        {
+                            var t = snippet.Value.ToList()[0];
+                            item.Description = t;
+                        }
+                    }
+                }
             }
-
             total = results.NumFound;
             maxNum = total / pageNum + 1;
 
