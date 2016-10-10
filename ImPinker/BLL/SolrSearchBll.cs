@@ -80,7 +80,7 @@ namespace BLL
                     var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
                     var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
                     var coverImage = !solrDocument.ContainsKey("CoverImage") ? "" : solrDocument["CoverImage"].ToString();
-                    var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("MM-dd hh:mm");
+                    var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString());
                     if (existArticles.Contains(travelId)) continue;
                     if (articleName.Length > 25)
                     {
@@ -90,7 +90,7 @@ namespace BLL
                     var searchvm = new ArticleViewModel
                     {
                         ArticleName = articleName,
-                        ArticleUrl = url,
+                        Url = url,
                         Description = description,
                         KeyWords = keyWords,
                         CoverImage = coverImage,
@@ -169,11 +169,11 @@ namespace BLL
                 var description = !solrDocument.ContainsKey("Description") ? "" : solrDocument["Description"].ToString();
                 var url = !solrDocument.ContainsKey("Url") ? "" : solrDocument["Url"].ToString();
                 var coverImage = !solrDocument.ContainsKey("CoverImage") ? "" : solrDocument["CoverImage"].ToString();
-                var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString()).ToString("MM-dd hh:mm");
+                var createTime = DateTime.Parse(solrDocument["CreateTime"].ToString());
                 var searchvm = new ArticleViewModel
                 {
                     ArticleName = articleName,
-                    ArticleUrl = url,
+                    Url = url,
                     Description = description,
                     KeyWords = keyWords,
                     CoverImage = coverImage,

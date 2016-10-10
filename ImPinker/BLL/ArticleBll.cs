@@ -157,12 +157,12 @@ namespace BLL
                     listResult.Add(new ArticleViewModel()
                     {
                         ArticleName = article.ArticleName,
-                        ArticleUrl = article.Url,
+                        Url = article.Url,
                         Description = article.Description,
                         KeyWords = article.KeyWords,
                         CoverImage = article.CoverImage,
                         Company = article.Company,
-                        CreateTime = article.CreateTime.ToString("MM-dd hh:mm")
+                        CreateTime = article.CreateTime
                     });
                 }
             }

@@ -18,7 +18,6 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            new SolrNetSearchBll().TestSolrNetSearch("越野");
             ViewBag.ArticleJson = GetByPage(1,IndexPageCount);
             ViewBag.pageCount = IndexPageCount;
             return View();
@@ -35,7 +34,7 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = SolrSearchBll.Query(userInterestKey, pageNum, pageCount);
+                list = SolrNetSearchBll.Query(userInterestKey, pageNum, pageCount);
             }
             if (list.Count==0)
             {

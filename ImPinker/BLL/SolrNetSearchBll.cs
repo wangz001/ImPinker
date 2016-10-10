@@ -15,33 +15,35 @@ namespace BLL
 {
     public class SolrNetSearchBll
     {
-
-        public SolrNetSearchBll() 
+        private static readonly ISolrOperations<ArticleViewModel> _solr; 
+        static SolrNetSearchBll() 
         {
-            
+            _solr = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
         }
 
         public DataTable Result = new DataTable();
-        public int total;
-        public int maxNum;
-        public int pageNum = 36;
-
-        public void TestSolrNetSearch(string keyword)
+        public static int total;
+        public static int maxNum;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyWord"></param>
+        /// <param name="startNum">开始项</param>
+        /// <param name="pageNum">数据条数</param>
+        /// <returns></returns>
+        public static List<ArticleViewModel> Query(string keyWord, int startNum, int pageNum)
         {
-            //定义solr
-            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<testVm>>();
-
             //建立排序，条件.
-            QueryOptions options = new QueryOptions();
-            options.Rows = pageNum;//数据条数
-            options.Start = 0;//开始项
+            var options = new QueryOptions();
+            options.Rows = pageNum;
+            options.Start = startNum;
 
 
             //创建查询条件
-            var qTB = new SolrQueryByField("text", "越野");
+            var qTB = new SolrQueryByField("text", keyWord);
 
             //创建条件集合
-            List<ISolrQuery> query = new List<ISolrQuery>();
+            var query = new List<ISolrQuery>();
             //添加条件
             query.Add(qTB);
 
@@ -53,48 +55,29 @@ namespace BLL
             //条件集合之间的关系
             var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
 
-            //执行查询,有5个重载
-            SolrQueryResults<testVm> results = solr.Query(qTBO, options);
+            var high = new HighlightingParameters();
+            high.Fields = new List<string> { "ArticleName" };
+            high.BeforeTerm = "<font color='red'><b>";
+            high.AfterTerm = "</b></font>";
+            options.Highlight = high;
 
-            this.total = results.NumFound;
+
+            //执行查询,有5个重载
+            SolrQueryResults<ArticleViewModel> results = _solr.Query(qTBO, options);
+
+            var highlights = results.Highlights;
+            foreach (var item in results)
+            {
+                var t = highlights[item.Id].Values.ToList()[0].ToList()[0];
+                item.ArticleName = t;
+            }
+
+            total = results.NumFound;
             maxNum = total / pageNum + 1;
 
-          
-           
-        }
-
-        public class testVm
-        {
-             [SolrUniqueKey("id")]
-            public string Id { get; set; }
-
-            [SolrField("userid")]
-            public string Userid { get; set; }
-
-            [SolrField("ArticleName")]
-            public string ArticleName { get; set; }
-
-            [SolrField("Url")]
-            public string Url { get; set; }
-
-            [SolrField("Description")]
-            public string Description { get; set; }
-
-            [SolrField("KeyWords")]
-            public string KeyWords { get; set; }
-
-            [SolrField("CoverImage")]
-            public string CoverImage { get; set; }
-
-            [SolrField("CreateTime")]
-            public DateTime CreateTime { get; set; }
-
-            [SolrField("UpdateTime")]
-            public DateTime UpdateTime { get; set; }
-
-            [SolrField("Content")]
-            public string Content { get; set; }
+            return results;
 
         }
+
     }
 }

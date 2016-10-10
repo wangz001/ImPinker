@@ -27,7 +27,7 @@ namespace ImPinker.Controllers
         {
             if (!string.IsNullOrEmpty(key))
             {
-                List<ArticleViewModel> list = SolrSearchBll.Query(key, pageNum, pageCount);
+                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);
