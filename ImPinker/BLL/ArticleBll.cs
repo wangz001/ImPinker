@@ -143,6 +143,7 @@ namespace BLL
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
+            var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
             var ds= dal.GetIndexListByPage(pageNum, count);
             List<Article> articles = DataTableToList(ds.Tables[0]);
@@ -154,6 +155,11 @@ namespace BLL
                     {
                         article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
                     }
+                    if (articleNameLists.Contains(article.ArticleName))
+                    {//去除标题重复的数据,解决fblife 同一文章发在不同域名的问题
+                        continue;
+                    }
+                    articleNameLists.Add(article.ArticleName);
                     listResult.Add(new ArticleViewModel()
                     {
                         ArticleName = article.ArticleName,
