@@ -27,7 +27,9 @@ namespace ImPinker.Controllers
         {
             if (!string.IsNullOrEmpty(key))
             {
-                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount);
+                key = System.Web.HttpUtility.UrlDecode(key).Replace(" ",",");  //url解码，去除特殊字符
+                int totlaCount, maxNum;
+                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount,out totlaCount,out maxNum);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);

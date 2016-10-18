@@ -38,7 +38,7 @@ namespace Model.ViewModel
 
         [SolrField("Content")]
         public string Content { get; set; }
-
+        [SolrField("Company")]
         public string Company { get; set; }
     }
 }

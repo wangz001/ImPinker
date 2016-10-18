@@ -76,6 +76,7 @@
    <field name="UpdateTime" type="date" indexed="true" stored="true" omitNorms="true"/>
    <field name="CoverImage" type="string" indexed="false" stored="true" omitNorms="true"/>
    <field name="Content" type="string" indexed="false" stored="true" omitNorms="true"/>
+   <field name="Company" type="string" indexed="false" stored="true" omitNorms="true"/>
    
    <field name="TravelId" type="string" indexed="true" stored="true" omitNorms="true"/>
    <field name="PartType" type="string" indexed="true" stored="true" omitNorms="true"/>

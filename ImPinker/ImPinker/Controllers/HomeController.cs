@@ -34,7 +34,8 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = SolrNetSearchBll.Query(userInterestKey, pageNum, pageCount);
+                int totlaCount, maxNum;
+                list = SolrNetSearchBll.Query(userInterestKey, pageNum, pageCount,out totlaCount,out maxNum);
             }
             if (list.Count==0)
             {

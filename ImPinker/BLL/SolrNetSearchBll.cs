@@ -21,17 +21,16 @@ namespace BLL
             SolrInstance = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
         }
 
-        public static int total;
-        public static int maxNum;
-
         /// <summary>
         /// 查询-关键字简单查询
         /// </summary>
         /// <param name="keyWord"></param>
         /// <param name="startNum">开始项</param>
         /// <param name="pageNum">数据条数</param>
+        /// <param name="total"></param>
+        /// <param name="maxNum"></param>
         /// <returns></returns>
-        public static List<ArticleViewModel> Query(string keyWord, int startNum, int pageNum)
+        public static List<ArticleViewModel> Query(string keyWord, int startNum, int pageNum,out int total,out int maxNum)
         {
             //高亮
             var high = new HighlightingParameters();
@@ -66,17 +65,16 @@ namespace BLL
             options.Facet = facet;
 
             //创建查询条件
-            var qName = new SolrQueryByField("text", keyWord);
-            //var qKeywords = new SolrQueryByField("KeyWords", keyWord);
-            //var qDescription = new SolrQueryByField("Description", keyWord);
+            var qName = new SolrQueryByField("ArticleName", keyWord);
+            var qKeywords = new SolrQueryByField("KeyWords", keyWord);
+            var qDescription = new SolrQueryByField("Description", keyWord);
 
             //创建条件集合
             var query = new List<ISolrQuery>();
             //添加条件
             query.Add(qName);
-            //query.Add(qKeywords);
-            //query.Add(qDescription);
-
+            query.Add(qKeywords);
+            query.Add(qDescription);
 
             //按照时间倒排序.
             //options.AddOrder(new SortOrder("CreateTime", Order.DESC));
@@ -84,8 +82,6 @@ namespace BLL
 
             //条件集合之间的关系
             var qTBO = new SolrMultipleCriteriaQuery(query, "OR");
-
-
 
             //执行查询,有5个重载
             SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
@@ -130,7 +126,6 @@ namespace BLL
             maxNum = total / pageNum + 1;
 
             return results;
-
         }
 
     }
