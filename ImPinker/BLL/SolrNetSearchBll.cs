@@ -29,8 +29,10 @@ namespace BLL
         /// <param name="pageNum">数据条数</param>
         /// <param name="total"></param>
         /// <param name="maxNum"></param>
+        /// <param name="facetDic">facet分组标签</param>
         /// <returns></returns>
-        public static List<ArticleViewModel> Query(string keyWord, int startNum, int pageNum,out int total,out int maxNum)
+        public static List<ArticleViewModel> Query(string keyWord, int startNum, int pageNum
+            , out int total, out int maxNum,out Dictionary<string, int> facetDic)
         {
             //高亮
             var high = new HighlightingParameters();
@@ -61,8 +63,13 @@ namespace BLL
                     },
                 }
             };
+            //来源分组
+            var facetCompany = new FacetParameters
+            {
+                Queries = new[] { new SolrFacetFieldQuery("Company") }
+            };
 
-            options.Facet = facet;
+            options.Facet = facetCompany;
 
             //创建查询条件
             var qName = new SolrQueryByField("ArticleName", keyWord);
@@ -73,15 +80,15 @@ namespace BLL
             var query = new List<ISolrQuery>();
             //添加条件
             query.Add(qName);
-            query.Add(qKeywords);
-            query.Add(qDescription);
+            //query.Add(qKeywords);
+            //query.Add(qDescription);
 
             //按照时间倒排序.
             //options.AddOrder(new SortOrder("CreateTime", Order.DESC));
 
 
             //条件集合之间的关系
-            var qTBO = new SolrMultipleCriteriaQuery(query, "OR");
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
 
             //执行查询,有5个重载
             SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
@@ -114,12 +121,22 @@ namespace BLL
             }
 
             //时间分组test
-            DateFacetingResult dateFacetResult = results.FacetDates["CreateTime"];
+            //DateFacetingResult dateFacetResult = results.FacetDates["CreateTime"];
 
-            foreach (KeyValuePair<DateTime, int> dr in dateFacetResult.DateResults)
+            //foreach (KeyValuePair<DateTime, int> dr in dateFacetResult.DateResults)
+            //{
+            //    Console.WriteLine(dr.Key);
+            //    Console.WriteLine(dr.Value);
+            //}
+            //来源分组
+            var companyFacet = results.FacetFields["Company"];
+            facetDic=new Dictionary<string, int>();
+            foreach (var f in companyFacet)
             {
-                Console.WriteLine(dr.Key);
-                Console.WriteLine(dr.Value);
+                if (!string.IsNullOrEmpty(f.Key.Trim())&&f.Value>0)
+                {
+                    facetDic.Add(f.Key, f.Value);
+                }
             }
 
             total = results.NumFound;

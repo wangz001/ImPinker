@@ -35,7 +35,8 @@ namespace ImPinker.Controllers
             else
             {
                 int totlaCount, maxNum;
-                list = SolrNetSearchBll.Query(userInterestKey, pageNum, pageCount,out totlaCount,out maxNum);
+                Dictionary<string, int> facetDic;
+                list = SolrNetSearchBll.Query(userInterestKey, pageNum, pageCount, out totlaCount, out maxNum, out facetDic);
             }
             if (list.Count==0)
             {

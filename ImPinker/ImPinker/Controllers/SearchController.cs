@@ -13,28 +13,36 @@ namespace ImPinker.Controllers
         // GET: /Search/
         public ActionResult Index(string key)
         {
-            string result = GetByPage(key, 1, 10);
+            int totalCount, maxNum;
+            Dictionary<string, int> facetDic;
+            string result = GetByPage(key, 1, 10,out totalCount,out maxNum,out facetDic);
             if (string.IsNullOrEmpty(result))
             {
                 result = "[]";
             }
             ViewBag.ArticleVms = result;
             ViewBag.pageCount = IndexPageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.maxNum = maxNum;
+            ViewBag.facetDic = facetDic;
+
             return View();
         }
 
-        private string GetByPage(string key , int pageNum,int pageCount)
+        private string GetByPage(string key , int pageNum,int pageCount,out int totalCount,out int maxNum,out Dictionary<string, int> facetDic)
         {
             if (!string.IsNullOrEmpty(key))
             {
                 key = System.Web.HttpUtility.UrlDecode(key).Replace(" ",",");  //url解码，去除特殊字符
-                int totlaCount, maxNum;
-                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount,out totlaCount,out maxNum);
+                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount, out totalCount, out maxNum,out facetDic);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);
                 }
             }
+            totalCount=0;
+            maxNum=0;
+            facetDic=new Dictionary<string, int>();
             return string.Empty;
         }
 
@@ -48,7 +56,9 @@ namespace ImPinker.Controllers
         [HttpGet]
         public string GetNextPage(string key, int pageNum,int pageCount)
         {
-            return GetByPage(key, pageNum, pageCount);
+            int totalCount, maxNum;
+            Dictionary<string, int> facetDic;
+            return GetByPage(key, pageNum, pageCount, out totalCount, out maxNum,out facetDic);
         }
 	}
 }

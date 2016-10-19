@@ -1,6 +1,7 @@
 ﻿@using ImPinker.Models
 @{
     ViewBag.Title = "Search";
+    Dictionary<string, int> facetDic = ViewBag.facetDic;
 }
 
 <div class="b_box_nocolor m1100">
@@ -16,6 +17,19 @@
                     </div>
                 </div>
                 @Html.Partial("_TabListPartial")
+                
+                <p>共检索到 @Html.Raw(ViewBag.totalCount) 条相关结果</p>
+                @{
+                    foreach (var i in facetDic)
+                    {
+                        <span>
+                            <a>
+                                <i>@i.Key</i>
+                                <i>@i.Value</i>&nbsp;&nbsp;
+                        </a>
+                        </span>
+                    }
+                }
                 <!--资讯列表-->
                 <div class="b_zxlistbor" id="today_news">
                     <div class="b_wanglie lt" id="wanggelb">
