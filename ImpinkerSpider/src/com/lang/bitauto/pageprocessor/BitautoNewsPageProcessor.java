@@ -47,7 +47,7 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 			String description = yicheXPath.getDescription(page);
 			String content = yicheXPath.getContentString(page);
 			String publishTime = yicheXPath.getPublishTime(page);
-
+			String articleTypeString = yicheXPath.getTypeByUrl(url);
 			page.putField("url", url);
 			page.putField("title", titleString);
 			page.putField("description", description);

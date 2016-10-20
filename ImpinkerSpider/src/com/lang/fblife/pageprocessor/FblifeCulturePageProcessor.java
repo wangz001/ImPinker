@@ -60,8 +60,7 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			page.putField("url", urlStr);
 			page.putField("title", titleString);
 			page.putField("description", description);
-			page.putField("keyword", keyWord + articleTypeStr + ","
-					+ CompanyEnum.Fblife.getName());
+			page.putField("keyword", articleTypeStr);
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
 			page.putField("publishtime", publishTime);

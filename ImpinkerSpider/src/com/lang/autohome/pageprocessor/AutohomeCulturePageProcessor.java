@@ -63,8 +63,7 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 			page.putField("url", urlString);
 			page.putField("title", titleString);
 			page.putField("description", description);
-			page.putField("keyword", keyWord + articleTypeString + ","
-					+ CompanyEnum.Autohome.getName());
+			page.putField("keyword", articleTypeString);
 			page.putField("CoverImage", firstImg);
 			page.putField("Content", content);
 			page.putField("publishtime", publishTime);

@@ -11,11 +11,11 @@ namespace ImPinker.Controllers
         private const int IndexPageCount = 10;
         //
         // GET: /Search/
-        public ActionResult Index(string key)
+        public ActionResult Index(string key, string tab, string facet, string facetgroup)
         {
             int totalCount, maxNum;
             Dictionary<string, int> facetDic;
-            string result = GetByPage(key, 1, 10,out totalCount,out maxNum,out facetDic);
+            string result = GetByPage(key,tab, facet,facetgroup,1, 10,out totalCount,out maxNum,out facetDic);
             if (string.IsNullOrEmpty(result))
             {
                 result = "[]";
@@ -29,12 +29,12 @@ namespace ImPinker.Controllers
             return View();
         }
 
-        private string GetByPage(string key , int pageNum,int pageCount,out int totalCount,out int maxNum,out Dictionary<string, int> facetDic)
+        private string GetByPage(string key, string tab, string facet,string facetgroup, int pageNum, int pageCount, out int totalCount, out int maxNum, out Dictionary<string, int> facetDic)
         {
             if (!string.IsNullOrEmpty(key))
             {
                 key = System.Web.HttpUtility.UrlDecode(key).Replace(" ",",");  //url解码，去除特殊字符
-                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, pageNum, pageCount, out totalCount, out maxNum,out facetDic);
+                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, tab, facet,facetgroup, pageNum, pageCount, out totalCount, out maxNum, out facetDic);
                 if (list != null && list.Count > 0)
                 {
                     return JsonConvert.SerializeObject(list);
@@ -50,15 +50,18 @@ namespace ImPinker.Controllers
         /// 分页获取数据
         /// </summary>
         /// <param name="key"></param>
+        /// <param name="tab"></param>
+        /// <param name="facet"></param>
+        /// <param name="facetgroup"></param>
         /// <param name="pageNum">页码</param>
         /// <param name="pageCount">每页的个数</param>
         /// <returns></returns>
         [HttpGet]
-        public string GetNextPage(string key, int pageNum,int pageCount)
+        public string GetNextPage(string key, string tab, string facet, string facetgroup, int pageNum, int pageCount)
         {
             int totalCount, maxNum;
             Dictionary<string, int> facetDic;
-            return GetByPage(key, pageNum, pageCount, out totalCount, out maxNum,out facetDic);
+            return GetByPage(key, tab, facet, facetgroup, pageNum, pageCount, out totalCount, out maxNum, out facetDic);
         }
 	}
 }
