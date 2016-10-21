@@ -1,7 +1,8 @@
-﻿@using ImPinker.Models
+﻿@using Model.ViewModel
+@using Newtonsoft.Json
 @{
     ViewBag.Title = "Search";
-    Dictionary<string, int> facetDic = ViewBag.facetDic;
+    var searchVm = (SearchResultVm)ViewBag.searchVm;
 }
 
 <div class="b_box_nocolor m1100">
@@ -17,19 +18,51 @@
                     </div>
                 </div>
                 @Html.Partial("_TabListPartial")
-                
-                <p>共检索到 @Html.Raw(ViewBag.totalCount) 条相关结果</p>
-                @{
-                    foreach (var i in facetDic)
-                    {
-                        <span>
-                            <a>
-                                <i>@i.Key</i>
-                                <i>@i.Value</i>&nbsp;&nbsp;
-                        </a>
-                        </span>
+
+                <p>共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果</p>
+                <div>
+                    <span>来源：</span>
+                    @{
+                        foreach (var i in searchVm.FacetDicCompany)
+                        {
+                            <span>
+                                <a>
+                                    <i>@i.Key</i>
+                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                </a>
+                            </span>
+                        }
                     }
-                }
+                </div>
+                <div>
+                    <span>标签：</span>
+                    @{
+                        foreach (var i in searchVm.FacetDicTag)
+                        {
+                            <span>
+                                <a>
+                                    <i>@i.Key</i>
+                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                </a>
+                            </span>
+                        }
+                    }
+                </div>
+                <div>
+                    <span>时间：</span>
+                    @{
+                        foreach (var i in searchVm.FacetDicDateTime)
+                        {
+                            <span>
+                                <a>
+                                    <i>@i.Key</i>
+                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                </a>
+                            </span>
+                        }
+                    }
+                </div>
+               
                 <!--资讯列表-->
                 <div class="b_zxlistbor" id="today_news">
                     <div class="b_wanglie lt" id="wanggelb">
@@ -61,10 +94,10 @@
 @section scripts
 {
     <script type="text/javascript">
-        var pageCount = @ViewBag.pageCount;
+        var pageCount = @searchVm.PageCount;
         var pageNum = 1;
-        var jsonData=@Html.Raw(ViewBag.ArticleVms);
-        
+        var jsonData=@Html.Raw(JsonConvert.SerializeObject(searchVm.ArticleList));
+
         $(document).ready(function() {
             //tab导航选中状态
             $("#tabList a").bind("click", function() {
@@ -78,34 +111,34 @@
                 $("#tabList a").removeClass("b_twolcur");
                 $("#tabList a[txt=" + tabS + "]").addClass("b_twolcur");
             }
-        }); 
+        });
     </script>
     <script src="~/Scripts/Search/search.js"></script>
     <script type="text/template1">
-    <div class="b_zixunlist clearfix">
-        <div class="b_zxpic lt">
-            <a href="$ArticleUrl$" target="_blank">
-                <img width="180" height="120" src="$CoverImage$"
-                     data-src="$CoverImage$" class="lazyimg">
-            </a>
-        </div>
-        <div class="b_zxtuwen lt">
-            <h1><a href="$Url$" target="_blank"> $ArticleName$</a></h1>
-            <p style="height:40px">$Description$</p>
-            <div class="b_zixunxinxi clearfix">
-                <div class="b_zxtime lt" style="width:250px">
-                    <span>$CreateTime$</span>
-                </div>
-                <div class="b_zxother rt">
-                    <div id="bdshare" class=" lt" style="padding-bottom:0px;">
-                        <span class="bds_more">来源：$Company$</span>
+        <div class="b_zixunlist clearfix">
+            <div class="b_zxpic lt">
+                <a href="$ArticleUrl$" target="_blank">
+                    <img width="180" height="120" src="$CoverImage$"
+                         data-src="$CoverImage$" class="lazyimg">
+                </a>
+            </div>
+            <div class="b_zxtuwen lt">
+                <h1><a href="$Url$" target="_blank"> $ArticleName$</a></h1>
+                <p style="height:40px">$Description$</p>
+                <div class="b_zixunxinxi clearfix">
+                    <div class="b_zxtime lt" style="width:250px">
+                        <span>$CreateTime$</span>
                     </div>
-                    <span class="b_zxliulan" id="brower_span_173341">0</span>
-                    <span class="b_zxotuij" id="like_span_173341">赞<cite id="like_text_173341">10</cite></span>
+                    <div class="b_zxother rt">
+                        <div id="bdshare" class=" lt" style="padding-bottom:0px;">
+                            <span class="bds_more">来源：$Company$</span>
+                        </div>
+                        <span class="b_zxliulan" id="brower_span_173341">0</span>
+                        <span class="b_zxotuij" id="like_span_173341">赞<cite id="like_text_173341">10</cite></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</script>
+    </script>
 }
 

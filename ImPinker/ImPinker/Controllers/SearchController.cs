@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BLL;
+using Model.Dto;
 using Model.ViewModel;
 using Newtonsoft.Json;
 
@@ -8,60 +9,48 @@ namespace ImPinker.Controllers
 {
     public class SearchController : Controller
     {
-        private const int IndexPageCount = 10;
         //
-        // GET: /Search/
-        public ActionResult Index(string key, string tab, string facet, string facetgroup)
+        // GET: 搜索，获取首页数据
+        public ActionResult Index(SearchDto dto)
         {
-            int totalCount, maxNum;
-            Dictionary<string, int> facetDic;
-            string result = GetByPage(key,tab, facet,facetgroup,1, 10,out totalCount,out maxNum,out facetDic);
-            if (string.IsNullOrEmpty(result))
+            if (dto.PageNum==0)
             {
-                result = "[]";
+                dto.PageNum = 1;
             }
-            ViewBag.ArticleVms = result;
-            ViewBag.pageCount = IndexPageCount;
-            ViewBag.totalCount = totalCount;
-            ViewBag.maxNum = maxNum;
-            ViewBag.facetDic = facetDic;
-
+            if (dto.PageCount == 0)
+            {
+                dto.PageCount = 10;
+            }
+            var searchvm = GetByPage(dto);
+            ViewBag.searchVm = searchvm;
             return View();
-        }
-
-        private string GetByPage(string key, string tab, string facet,string facetgroup, int pageNum, int pageCount, out int totalCount, out int maxNum, out Dictionary<string, int> facetDic)
-        {
-            if (!string.IsNullOrEmpty(key))
-            {
-                key = System.Web.HttpUtility.UrlDecode(key).Replace(" ",",");  //url解码，去除特殊字符
-                List<ArticleViewModel> list = SolrNetSearchBll.Query(key, tab, facet,facetgroup, pageNum, pageCount, out totalCount, out maxNum, out facetDic);
-                if (list != null && list.Count > 0)
-                {
-                    return JsonConvert.SerializeObject(list);
-                }
-            }
-            totalCount=0;
-            maxNum=0;
-            facetDic=new Dictionary<string, int>();
-            return string.Empty;
         }
 
         /// <summary>
         /// 分页获取数据
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="tab"></param>
-        /// <param name="facet"></param>
-        /// <param name="facetgroup"></param>
-        /// <param name="pageNum">页码</param>
-        /// <param name="pageCount">每页的个数</param>
         /// <returns></returns>
         [HttpGet]
-        public string GetNextPage(string key, string tab, string facet, string facetgroup, int pageNum, int pageCount)
+        public string GetNextPage(SearchDto dto)
         {
-            int totalCount, maxNum;
-            Dictionary<string, int> facetDic;
-            return GetByPage(key, tab, facet, facetgroup, pageNum, pageCount, out totalCount, out maxNum, out facetDic);
+            var searchvm= GetByPage(dto);
+            if (searchvm.ArticleList != null && searchvm.ArticleList.Count > 0)
+            {
+                return JsonConvert.SerializeObject(searchvm.ArticleList);
+            }
+            return string.Empty;
         }
-	}
+
+        private SearchResultVm GetByPage(SearchDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.Key)) return null;
+            var urlDecode = System.Web.HttpUtility.UrlDecode(dto.Key);
+            if (urlDecode != null)
+                dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
+
+            var searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.PageNum , dto.PageCount);
+
+            return searchvm;
+        }
+    }
 }

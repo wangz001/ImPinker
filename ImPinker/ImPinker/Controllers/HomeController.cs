@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BLL;
-using Model;
 using Model.ViewModel;
 using Newtonsoft.Json;
 
@@ -34,9 +33,7 @@ namespace ImPinker.Controllers
             }
             else
             {
-                int totlaCount, maxNum;
-                Dictionary<string, int> facetDic;
-                list = SolrNetSearchBll.Query(userInterestKey,"","","", pageNum, pageCount, out totlaCount, out maxNum, out facetDic);
+                list = SolrNetSearchBll.Query(userInterestKey,"","","", pageNum, pageCount).ArticleList;
             }
             if (list.Count==0)
             {
