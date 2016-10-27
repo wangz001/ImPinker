@@ -33,7 +33,7 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = SolrNetSearchBll.Query(userInterestKey,"","","", pageNum, pageCount).ArticleList;
+                list = SolrNetSearchBll.Query(userInterestKey,"","","","", pageNum, pageCount).ArticleList;
             }
             if (list.Count==0)
             {

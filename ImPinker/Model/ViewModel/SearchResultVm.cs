@@ -9,6 +9,10 @@ namespace Model.ViewModel
     public class SearchResultVm
     {
         /// <summary>
+        /// 当前查询的url
+        /// </summary>
+        public string SearchUrl { get; set; }
+        /// <summary>
         /// 搜索结果
         /// </summary>
         public List<ArticleViewModel> ArticleList { get; set; }
@@ -32,14 +36,14 @@ namespace Model.ViewModel
         /// <summary>
         /// 来源分类
         /// </summary>
-        public Dictionary<string, int> FacetDicCompany { get; set; }
+        public List<FacetItemVm> FacetDicCompany { get; set; }
         /// <summary>
         /// 标签分类
         /// </summary>
-        public Dictionary<string, int> FacetDicTag { get; set; }
+        public List<FacetItemVm> FacetDicTag { get; set; }
         /// <summary>
         /// 时间分组
         /// </summary>
-        public Dictionary<string, int> FacetDicDateTime { get; set; } 
+        public List<FacetItemVm> FacetDicDateTime { get; set; } 
     }
 }

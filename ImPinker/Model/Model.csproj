@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="ViewModel\ArticleViewModel.cs" />
+    <Compile Include="ViewModel\FacetItemVm.cs" />
     <Compile Include="ViewModel\SearchResultVm.cs" />
   </ItemGroup>
   <ItemGroup>

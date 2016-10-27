@@ -26,9 +26,9 @@
                         foreach (var i in searchVm.FacetDicCompany)
                         {
                             <span>
-                                <a>
-                                    <i>@i.Key</i>
-                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                <a href="@i.Url">
+                                    <i>@i.Name</i>
+                                    <i>[@i.Count]</i>&nbsp;&nbsp;
                                 </a>
                             </span>
                         }
@@ -40,9 +40,9 @@
                         foreach (var i in searchVm.FacetDicTag)
                         {
                             <span>
-                                <a>
-                                    <i>@i.Key</i>
-                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                <a href="@i.Url">
+                                    <i>@i.Name</i>
+                                    <i>[@i.Count]</i>&nbsp;&nbsp;
                                 </a>
                             </span>
                         }
@@ -54,9 +54,9 @@
                         foreach (var i in searchVm.FacetDicDateTime)
                         {
                             <span>
-                                <a>
-                                    <i>@i.Key</i>
-                                    <i>[@i.Value]</i>&nbsp;&nbsp;
+                                <a href="@i.Url">
+                                    <i>@i.Name</i>
+                                    <i>[@i.Count]</i>&nbsp;&nbsp;
                                 </a>
                             </span>
                         }

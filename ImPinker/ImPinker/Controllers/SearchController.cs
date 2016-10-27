@@ -48,7 +48,7 @@ namespace ImPinker.Controllers
             if (urlDecode != null)
                 dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
 
-            var searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.PageNum , dto.PageCount);
+            var searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag,dto.FacetDateTime, dto.PageNum , dto.PageCount);
 
             return searchvm;
         }
