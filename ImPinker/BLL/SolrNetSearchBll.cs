@@ -32,6 +32,7 @@ namespace BLL
         {
             var searchParaStr = "Index?";
             searchParaStr += "key=" + keyWord + "&tab=" + tab;
+            
             if (!string.IsNullOrEmpty(facetCompany))
             {
                 searchParaStr += "&facetCompany=" + facetCompany;
@@ -44,6 +45,8 @@ namespace BLL
             {
                 searchParaStr += "&facetDateTime=" + facetDateTime;
             }
+            //选定的afcet查询条件
+            var facetSelectedList = new List<FacetItemVm>();
 
             var startNum = (pageNum - 1) * pageCount;
 
@@ -123,10 +126,20 @@ namespace BLL
             if (!string.IsNullOrEmpty(facetCompany)) //facet分组
             {
                 query.Add(new SolrQueryByField("Company", facetCompany));
+                facetSelectedList.Add(new FacetItemVm()
+                {
+                    Name = "来源：" + facetCompany,
+                    Url = searchParaStr.Replace("&facetCompany=" + facetCompany, "")
+                });
             }
             if (!string.IsNullOrEmpty(facetTag)) //facet分组
             {
                 query.Add(new SolrQueryByField("KeyWords", facetTag));
+                facetSelectedList.Add(new FacetItemVm()
+                {
+                    Name = "标签：" + facetTag,
+                    Url = searchParaStr.Replace("&facetTag=" + facetTag, "")
+                });
             }
 
             int index;
@@ -141,6 +154,11 @@ namespace BLL
                 qDateRange = new SolrQueryByRange<DateTime>("CreateTime", stime, etime);
                 //时间范围条件加入集合
                 query.Add(qDateRange);
+                facetSelectedList.Add(new FacetItemVm()
+                {
+                    Name = "时间：" + tupleTime.Item2,
+                    Url = searchParaStr.Replace("&facetDateTime=" + facetDateTime, "")
+                });
             }
 
             //按照时间倒排序.
@@ -244,7 +262,8 @@ namespace BLL
                 MaxPageNum = results.NumFound / pageNum + 1,
                 FacetDicCompany = facetDicCompany,
                 FacetDicTag = facetDicTag,
-                FacetDicDateTime = facetDicDateTime
+                FacetDicDateTime = facetDicDateTime,
+                FacetSelected = facetSelectedList
             };
             return searchVm;
         }

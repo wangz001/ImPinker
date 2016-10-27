@@ -43,12 +43,13 @@ namespace ImPinker.Controllers
 
         private SearchResultVm GetByPage(SearchDto dto)
         {
-            if (string.IsNullOrEmpty(dto.Key)) return null;
+            var searchvm=new SearchResultVm();
+            if (string.IsNullOrEmpty(dto.Key)) return searchvm;
             var urlDecode = System.Web.HttpUtility.UrlDecode(dto.Key);
             if (urlDecode != null)
                 dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
 
-            var searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag,dto.FacetDateTime, dto.PageNum , dto.PageCount);
+            searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag,dto.FacetDateTime, dto.PageNum , dto.PageCount);
 
             return searchvm;
         }

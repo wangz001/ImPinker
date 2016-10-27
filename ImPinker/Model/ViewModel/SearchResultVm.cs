@@ -44,6 +44,10 @@ namespace Model.ViewModel
         /// <summary>
         /// 时间分组
         /// </summary>
-        public List<FacetItemVm> FacetDicDateTime { get; set; } 
+        public List<FacetItemVm> FacetDicDateTime { get; set; }
+        /// <summary>
+        /// 已选择的facet分类.对应的链接是删除该条件后的链接
+        /// </summary>
+        public List<FacetItemVm> FacetSelected { get; set; } 
     }
 }

@@ -21,48 +21,73 @@
 
                 <p>共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果</p>
                 <div>
-                    <span>来源：</span>
                     @{
-                        foreach (var i in searchVm.FacetDicCompany)
+                        if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
                         {
-                            <span>
-                                <a href="@i.Url">
-                                    <i>@i.Name</i>
-                                    <i>[@i.Count]</i>&nbsp;&nbsp;
-                                </a>
-                            </span>
+                            <span>筛选：</span>
+                            foreach (var i in searchVm.FacetSelected)
+                            {
+                                <span>
+                                    <a href="@i.Url">
+                                        <i>@i.Name</i>&nbsp;&nbsp;
+                                    </a>
+                                </span>
+                            }
                         }
                     }
                 </div>
                 <div>
-                    <span>标签：</span>
                     @{
-                        foreach (var i in searchVm.FacetDicTag)
+                        if (searchVm.FacetDicCompany!=null&&searchVm.FacetDicCompany.Count > 0)
                         {
-                            <span>
-                                <a href="@i.Url">
-                                    <i>@i.Name</i>
-                                    <i>[@i.Count]</i>&nbsp;&nbsp;
-                                </a>
-                            </span>
+                            <span>来源：</span>
+                            foreach (var i in searchVm.FacetDicCompany)
+                            {
+                                <span>
+                                    <a href="@i.Url">
+                                        <i>@i.Name</i>
+                                        <i>[@i.Count]</i>&nbsp;&nbsp;
+                                    </a>
+                                </span>
+                            }
                         }
                     }
                 </div>
                 <div>
-                    <span>时间：</span>
                     @{
-                        foreach (var i in searchVm.FacetDicDateTime)
+                        if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
                         {
-                            <span>
-                                <a href="@i.Url">
-                                    <i>@i.Name</i>
-                                    <i>[@i.Count]</i>&nbsp;&nbsp;
-                                </a>
-                            </span>
+                            <span>标签：</span>
+                            foreach (var i in searchVm.FacetDicTag)
+                            {
+                                <span>
+                                    <a href="@i.Url">
+                                        <i>@i.Name</i>
+                                        <i>[@i.Count]</i>&nbsp;&nbsp;
+                                    </a>
+                                </span>
+                            }
                         }
                     }
                 </div>
-               
+                <div>
+                    @{
+                        if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                        {
+                            <span>时间：</span>
+                            foreach (var i in searchVm.FacetDicDateTime)
+                            {
+                                <span>
+                                    <a href="@i.Url">
+                                        <i>@i.Name</i>
+                                        <i>[@i.Count]</i>&nbsp;&nbsp;
+                                    </a>
+                                </span>
+                            }
+                        }
+                    }
+                </div>
+
                 <!--资讯列表-->
                 <div class="b_zxlistbor" id="today_news">
                     <div class="b_wanglie lt" id="wanggelb">
