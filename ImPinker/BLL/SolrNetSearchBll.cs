@@ -212,10 +212,11 @@ namespace BLL
                 var companyFacet = results.FacetFields["Company"];
                 foreach (var f in companyFacet)
                 {
-                    if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Value > 0)
+                    if (f.Value > 0)
                     {
+                        var key = string.IsNullOrEmpty(f.Key.Trim()) ? "其他" : f.Key;
                         facetDicCompany.Add(
-                            new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + f.Key });
+                            new FacetItemVm() { Name = key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + key });
                     }
                 }
             }

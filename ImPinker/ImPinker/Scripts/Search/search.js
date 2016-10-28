@@ -12,10 +12,17 @@
     });
     function getNextPage(pageNum, pageCount) {
         var key = $.getUrlParam("key");
+        var tab = $.getUrlParam("tab");
+        var facetCompany = $.getUrlParam("facetCompany");
+        var facetTag = $.getUrlParam("facetTag");
+        var facetDateTime = $.getUrlParam("facetDateTime");
         $.ajax({
             url: "/Search/GetNextPage",
             type: "get",
-            data: { key: key, pageNum: pageNum, pageCount: pageCount },
+            data: {
+                key: key, tab: tab, facetCompany: facetCompany, facetTag: facetTag, facetDateTime: facetDateTime,
+                pageNum: pageNum, pageCount: pageCount
+            },
             success: function (data) {
                 if (data == null || data == "") {
                     $("#loadmore").parent().hide();
@@ -42,6 +49,10 @@
                 arr.push(html.temp(o));
             });
             $('#articleConten').append(arr.join(''));
+        }
+        //设置加载按钮显示与隐藏
+        if (pageCount * pageNum >= totalCount) {
+            $("#loadmore").parent().hide();
         }
     };
 });

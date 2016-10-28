@@ -44,7 +44,7 @@ namespace ImPinker.Controllers
         private SearchResultVm GetByPage(SearchDto dto)
         {
             var searchvm=new SearchResultVm();
-            if (string.IsNullOrEmpty(dto.Key)) return searchvm;
+            if (string.IsNullOrEmpty(dto.Key)&&string.IsNullOrEmpty(dto.Tab)) return searchvm;
             var urlDecode = System.Web.HttpUtility.UrlDecode(dto.Key);
             if (urlDecode != null)
                 dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
