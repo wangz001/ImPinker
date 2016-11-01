@@ -2,13 +2,11 @@
 namespace Model
 {
 	/// <summary>
-	/// ArticleSnaps:实体类(属性说明自动提取数据库字段的描述信息)
+	/// 文章快照
 	/// </summary>
 	[Serializable]
-	public partial class ArticleSnaps
+	public class ArticleSnaps
 	{
-		public ArticleSnaps()
-		{}
 		#region Model
 		private int _id;
 		private long? _articleid;

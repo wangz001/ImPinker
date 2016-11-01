@@ -11,8 +11,8 @@ namespace Model
 		{}
 		#region Model
 		private long _id;
-		private long? _articleid;
-		private int? _userid;
+		private long _articleid;
+		private int _userid;
 		private bool _vote;
 		private DateTime? _createtime;
 		private DateTime? _updatetime;
@@ -27,7 +27,7 @@ namespace Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? ArticleId
+		public long ArticleId
 		{
 			set{ _articleid=value;}
 			get{return _articleid;}
@@ -35,7 +35,7 @@ namespace Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? UserId
+		public int UserId
 		{
 			set{ _userid=value;}
 			get{return _userid;}

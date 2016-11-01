@@ -162,6 +162,7 @@ namespace BLL
                     articleNameLists.Add(article.ArticleName);
                     listResult.Add(new ArticleViewModel()
                     {
+                        Id = article.Id.ToString(),
                         ArticleName = article.ArticleName,
                         Url = article.Url,
                         Description = article.Description,

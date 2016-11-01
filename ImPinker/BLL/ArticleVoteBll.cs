@@ -1,25 +1,47 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
+using DAL;
 using Maticsoft.Common;
+using ArticleVote = Model.ArticleVote;
 
 namespace BLL
 {
 	/// <summary>
 	/// ArticleVote
 	/// </summary>
-	public partial class ArticleVote
+	public class ArticleVoteBll
 	{
 		private readonly DAL.ArticleVote dal=new DAL.ArticleVote();
-		public ArticleVote()
+		public ArticleVoteBll()
 		{}
+        /// <summary>
+        /// 添加记录。一个人只能对一篇文章投票一次
+        /// </summary>
+        /// <param name="vote"></param>
+        /// <returns></returns>
+	    public bool AddVote(ArticleVote vote)
+	    {
+            if (Exists(vote.ArticleId,vote.UserId))
+            {
+                vote.UpdateTime = DateTime.Now;
+                return Update(vote);
+            }
+            else
+            {
+                vote.CreateTime = DateTime.Now;
+                vote.UpdateTime = DateTime.Now;
+                return Add(vote);
+            }
+	    }
+
 		#region  BasicMethod
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(long Id)
+		public bool Exists(long articleId,int userId)
 		{
-			return dal.Exists(Id);
+			return dal.Exists(articleId,userId);
 		}
 
 		/// <summary>
@@ -162,9 +184,7 @@ namespace BLL
 		//}
 
 		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
+		
 	}
 }
 

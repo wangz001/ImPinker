@@ -44,6 +44,8 @@
              arr.push(html.temp(o));
             });
             $('#articleConten').append(arr.join(''));
+            //绑定事件
+            bindVote();
         }
     };
 });
