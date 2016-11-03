@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BLL;
+using ImPinker.Filters;
 using ImPinker.Models;
 using Microsoft.AspNet.Identity;
 using Model;
@@ -38,6 +39,7 @@ namespace ImPinker.Controllers
         /// 我的文章
         /// </summary>
         /// <returns></returns>
+        [AuthorizationFilter]
         public ActionResult MyArticle()
         {
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
@@ -54,6 +56,7 @@ namespace ImPinker.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="pageCount"></param>
         /// <returns></returns>
+        [AuthorizationFilter]
         [HttpGet]
         public string GetMyNextPage(int pageIndex, int pageCount)
         {
@@ -79,6 +82,7 @@ namespace ImPinker.Controllers
 
         //
         // GET: /Article/Create
+        [AuthorizationFilter]
         public ActionResult Create()
         {
             return View();
@@ -89,6 +93,7 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <param name="createArticleVm"></param>
         /// <returns></returns>
+        [AuthorizationFilter]
         [HttpPost]
         public ActionResult Create(CreateArticleViewModel createArticleVm)
         {
@@ -112,6 +117,7 @@ namespace ImPinker.Controllers
 
         //
         // GET: /Article/Edit/5
+        [AuthorizationFilter]
         public ActionResult Edit(int id)
         {
             return RedirectToAction("Index");
@@ -119,6 +125,7 @@ namespace ImPinker.Controllers
 
         //
         // POST: /Article/Edit/5
+        [AuthorizationFilter]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -136,6 +143,7 @@ namespace ImPinker.Controllers
 
         //
         // GET: /Article/Delete/5
+        [AuthorizationFilter]
         public ActionResult Delete(int id)
         {
             return RedirectToAction("Index");
@@ -143,6 +151,7 @@ namespace ImPinker.Controllers
 
         //
         // POST: /Article/Delete/5
+        [AuthorizationFilter]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
