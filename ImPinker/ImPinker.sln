@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpinkerMobile", "ImpinkerM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpinkerApi", "ImpinkerApi\ImpinkerApi.csproj", "{03C21AE1-FE2B-460B-A511-2748B23A0700}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{03C21AE1-FE2B-460B-A511-2748B23A0700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03C21AE1-FE2B-460B-A511-2748B23A0700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03C21AE1-FE2B-460B-A511-2748B23A0700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

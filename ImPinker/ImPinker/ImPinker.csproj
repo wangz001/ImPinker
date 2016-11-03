@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\HttpWebAdapters.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -175,6 +178,7 @@
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Filters\ExceptionContextFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +199,7 @@
     <Content Include="Scripts\Article\myArticle.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Configs\log4net.config" />
     <None Include="Properties\PublishProfiles\ImpinkerWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\commonUtil.js" />
@@ -267,6 +272,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6f74233e-4fd6-4ccd-a8aa-fb5e45b9b123}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
       <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
