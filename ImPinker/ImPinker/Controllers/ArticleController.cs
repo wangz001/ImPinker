@@ -11,8 +11,8 @@ namespace ImPinker.Controllers
 {
     public class ArticleController : Controller
     {
-		private static readonly ArticleBll ArticleBll=new ArticleBll();
-		private static readonly UserBll UserBll=new UserBll();
+        private static readonly ArticleBll ArticleBll = new ArticleBll();
+        private static readonly UserBll UserBll = new UserBll();
         private const int MyPageCount = 10;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace ImPinker.Controllers
             var indexId = "travels_" + id;
             //var article = SolrSearchBll.QueryById(indexId);
             var article = ArticleBll.GetModel(id);
-            if (article!=null)
+            if (article != null)
             {
                 ViewBag.Article = article;
                 return View("Index");
@@ -41,7 +41,7 @@ namespace ImPinker.Controllers
         public ActionResult MyArticle()
         {
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var ds = ArticleBll.GetMyListByPage( userId, 1, MyPageCount);
+            var ds = ArticleBll.GetMyListByPage(userId, 1, MyPageCount);
             var articles = ArticleBll.DataTableToList(ds.Tables[0]);
             ViewBag.jsonData = JsonConvert.SerializeObject(articles);
             ViewBag.pageCount = MyPageCount;
@@ -60,7 +60,7 @@ namespace ImPinker.Controllers
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
             var ds = ArticleBll.GetMyListByPage(userId, pageIndex, pageCount);
             var articles = ArticleBll.DataTableToList(ds.Tables[0]);
-            if (articles!=null&&articles.Count>0)
+            if (articles != null && articles.Count > 0)
             {
                 return JsonConvert.SerializeObject(articles);
             }
@@ -92,31 +92,25 @@ namespace ImPinker.Controllers
         [HttpPost]
         public ActionResult Create(CreateArticleViewModel createArticleVm)
         {
-            try
+            var article = new Article
             {
-	            var article = new Article
-	            {
-					Url=createArticleVm.ArticleUrl,
-					ArticleName = createArticleVm.ArticleName,
-					Description = createArticleVm.Description,
-					KeyWords = createArticleVm.KeyWords,
-					UserId =UserBll.GetModelByAspNetId( User.Identity.GetUserId()).Id,
-					State = (int)ArticleStateEnum.BeCheck,   //待审核状态
-   					CreateTime = DateTime.Now,
-					UpdateTime = DateTime.Now,
-                    Company = ""
-	            };
-				//审核通过后添加索引
-	            var flag=ArticleBll.Add(article);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                Url = createArticleVm.ArticleUrl,
+                ArticleName = createArticleVm.ArticleName,
+                Description = createArticleVm.Description,
+                KeyWords = createArticleVm.KeyWords,
+                UserId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id,
+                State = (int)ArticleStateEnum.BeCheck,   //待审核状态
+                CreateTime = DateTime.Now,
+                UpdateTime = DateTime.Now,
+                Company = ""
+            };
+            //审核通过后添加索引
+            var flag = ArticleBll.Add(article);
+            return RedirectToAction("MyArticle");
+
         }
 
-	    //
+        //
         // GET: /Article/Edit/5
         public ActionResult Edit(int id)
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using BLL;
+using ImPinker.Filters;
 using Model.ViewModel;
 using Newtonsoft.Json;
 
@@ -13,11 +14,12 @@ namespace ImPinker.Controllers
 
         /// <summary>
         /// 首页
-        /// </summary>
+        /// </summary>默认缓存1分钟
         /// <returns></returns>
+        [OutputCache(Duration = 1, VaryByParam = "*")]
         public ActionResult Index()
         {
-            ViewBag.ArticleJson = GetByPage(1,IndexPageCount);
+            ViewBag.ArticleJson = GetByPage(1, IndexPageCount);
             ViewBag.pageCount = IndexPageCount;
             return View();
         }
@@ -33,9 +35,9 @@ namespace ImPinker.Controllers
             }
             else
             {
-                list = SolrNetSearchBll.Query(userInterestKey,"","","","", pageNum, pageCount).ArticleList;
+                list = SolrNetSearchBll.Query(userInterestKey, "", "", "", "", pageNum, pageCount).ArticleList;
             }
-            if (list.Count==0)
+            if (list.Count == 0)
             {
                 return string.Empty;
             }
@@ -48,6 +50,7 @@ namespace ImPinker.Controllers
         /// <param name="pageNum"></param>
         /// <param name="pageCount"></param>
         /// <returns></returns>
+        [OutputCache(Duration = 1, VaryByParam = "*")]
         [HttpGet]
         public string GetNextPage(int pageNum, int pageCount)
         {
@@ -55,15 +58,15 @@ namespace ImPinker.Controllers
             return str;
         }
 
-    
 
+        [AuthorizationFilter]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -24,3 +24,12 @@
     </div>
 </div>
 <div style="display: none" id="searchKey"></div>
+<script type="text/javascript">
+    var state = "@Html.Raw(Request.IsAuthenticated)";  //全局变量，标记是否登录
+    var LoginState = false;//;
+    if (state=="True") {
+        LoginState = true;
+    } else {
+        LoginState = false;
+    }
+</script>

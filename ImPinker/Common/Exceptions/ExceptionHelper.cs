@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Web;
+using BitAuto.Utils;
 using log4net;
 
 namespace Common.Exceptions
@@ -19,7 +20,7 @@ namespace Common.Exceptions
 				string warnMessage = string.Format(
 					"Http 404{0}IP:{1}{0}Url:{2}{0}Referer:{3}",
 					Environment.NewLine,
-					"WebUtil.GetClientIP()",
+					WebUtil.GetClientIP(),
 					GetRequestUrl(),
 					GetUrlReferrer()
 				);
@@ -30,7 +31,7 @@ namespace Common.Exceptions
 			string errorMessage = string.Format(
 				"{0}IP:{1}{0}Url:{2}{0}Referer:{3}",
 				Environment.NewLine,
-				"WebUtil.GetClientIP()",
+				WebUtil.GetClientIP(),
 				GetRequestUrl(),
 				GetUrlReferrer()
 			);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using ImPinker.Filters;
 using Microsoft.AspNet.Identity;
 using Model;
 
@@ -20,6 +21,7 @@ namespace ImPinker.Controllers
         {
             return "";
         }
+        [AuthorizationFilter]
         [HttpGet]
         public string UserVote(long articleId, int vote)
         {

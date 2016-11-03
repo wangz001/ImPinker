@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Filters\ExceptionContextFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

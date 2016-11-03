@@ -7,7 +7,7 @@ using Common.Exceptions;
 
 namespace ImPinker.Filters
 {
-    public class ExceptionContextFilter : IExceptionFilter
+    public class ExceptionContextFilter : FilterAttribute,IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
         {
