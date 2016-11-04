@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8B363AB-5600-4074-BBAD-5581ACE5CB50}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GetCarDataService</RootNamespace>
+    <AssemblyName>GetCarDataService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bita.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDll\Bita.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDll\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenSmtp, Version=1.11.0.29511, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDll\OpenSmtp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoHomeCountTask\CheckStyleUpdateByPropertyValue.cs" />
+    <Compile Include="AutoHomeCountTask\AddAndUpdateStatist.cs" />
+    <Compile Include="AutoHomeCountTask\SimilarCalculate.cs" />
+    <Compile Include="CarsDataCountTask\ExportHelper.cs" />
+    <Compile Include="CarsDataCountTask\FrontStyleProperty.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="GetAHAutoCarsData\GetBasicData.cs" />
+    <Compile Include="GetAHAutoCarsData\GetStyleProperty.cs" />
+    <Compile Include="GetAHAutoCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="GetCarsDataBll\GetStylePropertyValueBll.cs" />
+    <Compile Include="GetPcAutoCarsData\GetBasicData.cs" />
+    <Compile Include="GetPcAutoCarsData\GetProperty.cs" />
+    <Compile Include="GetPcAutoCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="GetXCAutoCarsData\GetBasicStyle.cs" />
+    <Compile Include="Properties\EnumName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumName.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GetAutoHomeCarsData\DataSetTransferHelper.cs" />
+    <Compile Include="GetAutoHomeCarsData\GetBasicData.cs" />
+    <Compile Include="GetAutoHomeCarsData\GetStyleProperty.cs" />
+    <Compile Include="GetAutoHomeCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GetQQAutoCarsData\GetBasicData.cs" />
+    <Compile Include="GetQQAutoCarsData\GetProperty.cs" />
+    <Compile Include="GetQQAutoCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="GetSHAutoCarsData\GetBasicData.cs" />
+    <Compile Include="GetSHAutoCarsData\GetProperty.cs" />
+    <Compile Include="GetSHAutoCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="GetXCAutoCarsData\GetBasicData.cs" />
+    <Compile Include="GetXCAutoCarsData\GetProperty.cs" />
+    <Compile Include="GetXCAutoCarsData\GetStylePropertyValues.cs" />
+    <Compile Include="Tools\HttpRequestProxy.cs" />
+    <Compile Include="Tools\ImportPropertyMap.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RefDll\Bita.Common.dll" />
+    <Content Include="RefDll\ChnCharInfo.dll" />
+    <Content Include="RefDll\HtmlAgilityPack.dll" />
+    <Content Include="RefDll\Newtonsoft.Json.dll" />
+    <Content Include="RefDll\OpenSmtp.dll" />
+    <Content Include="ResourceFile\ProxyIp.xml" />
+    <Content Include="ResourceFile\SerialUvInfo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceFile\stylePropertyJson.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AhBll\AhBll.csproj">
+      <Project>{38c701ad-97dd-466b-a43b-2a206152bb8a}</Project>
+      <Name>AhBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AhDal\AhDal.csproj">
+      <Project>{7dffceaa-f1e1-47cd-a901-ecb00a1ecc76}</Project>
+      <Name>AhDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AhModel\AhModel.csproj">
+      <Project>{356fb116-e9ef-41fb-8b18-a0b9d758a6fe}</Project>
+      <Name>AhModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\EnumName.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EnumName.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

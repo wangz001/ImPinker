@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ipList>
+  <item>
+    <ip>202.106.16.36</ip>
+    <port>3128</port>
+    <type>高匿</type>
+    <country>中国</country>
+  </item>
+  <item>
+    <ip>125.64.24.87</ip>
+    <port>80</port>
+    <type>高匿</type>
+    <country>中国</country>
+  </item>
+</ipList>

@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AuthorityPriorityEnum_Core" xml:space="preserve">
+    <value>系统权限</value>
+    <comment>权限级别</comment>
+  </data>
+  <data name="AuthorityPriorityEnum_Logic" xml:space="preserve">
+    <value>逻辑权限</value>
+    <comment>权限级别</comment>
+  </data>
+  <data name="EmailLogCategoryEnum_DataSyncError" xml:space="preserve">
+    <value>发布数据错误</value>
+    <comment>邮件日志的类别</comment>
+  </data>
+  <data name="EmailLogCategoryEnum_InformChangeError" xml:space="preserve">
+    <value>发布通知错误</value>
+    <comment>邮件日志的类别</comment>
+  </data>
+  <data name="EmailLogCategoryEnum_PropertyStructChange" xml:space="preserve">
+    <value>动态属性结构变更</value>
+    <comment>邮件日志的类别</comment>
+  </data>
+  <data name="EmailReceiverCompanyEnum_Other" xml:space="preserve">
+    <value>其他业务线</value>
+    <comment>业务线</comment>
+  </data>
+  <data name="EmailReceiverCompanyEnum_Taoche" xml:space="preserve">
+    <value>淘车</value>
+    <comment>业务线</comment>
+  </data>
+  <data name="EmailReceiverCompanyEnum_Yiche" xml:space="preserve">
+    <value>易车</value>
+    <comment>业务线</comment>
+  </data>
+  <data name="EmailReceiverCompanyEnum_Yipai" xml:space="preserve">
+    <value>易湃</value>
+    <comment>业务线</comment>
+  </data>
+  <data name="FilterEnum_Make" xml:space="preserve">
+    <value>make</value>
+  </data>
+  <data name="FilterEnum_Manufacturer" xml:space="preserve">
+    <value>manufacturer</value>
+  </data>
+  <data name="FilterEnum_MasterBrand" xml:space="preserve">
+    <value>masterBrand</value>
+  </data>
+  <data name="FilterEnum_Model" xml:space="preserve">
+    <value>model</value>
+  </data>
+  <data name="FilterEnum_Style" xml:space="preserve">
+    <value>style</value>
+  </data>
+  <data name="FilterEnum_Year" xml:space="preserve">
+    <value>year</value>
+  </data>
+  <data name="ImportantLevelEnum_General" xml:space="preserve">
+    <value>一般</value>
+    <comment>重要程度</comment>
+  </data>
+  <data name="ImportantLevelEnum_Important" xml:space="preserve">
+    <value>重要</value>
+    <comment>重要程度</comment>
+  </data>
+  <data name="ImportantLevelEnum_Other" xml:space="preserve">
+    <value>其他</value>
+    <comment>重要程度</comment>
+  </data>
+  <data name="LevelEnum_Level1" xml:space="preserve">
+    <value>PV_1-100</value>
+  </data>
+  <data name="LevelEnum_Level2" xml:space="preserve">
+    <value>PV_101-200</value>
+  </data>
+  <data name="LevelEnum_Level3" xml:space="preserve">
+    <value>PV_201-300</value>
+  </data>
+  <data name="LevelEnum_Level4" xml:space="preserve">
+    <value>PV_301-400</value>
+  </data>
+  <data name="LevelEnum_Level5" xml:space="preserve">
+    <value>PV_401-500</value>
+  </data>
+  <data name="LevelEnum_Level6" xml:space="preserve">
+    <value>PV_500以后</value>
+  </data>
+  <data name="ModelBodyFormEnum_Cross" xml:space="preserve">
+    <value>专用车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Hatchback" xml:space="preserve">
+    <value>两厢轿车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Micro" xml:space="preserve">
+    <value>Micro-Bus厢式车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Mpv" xml:space="preserve">
+    <value>Mpv</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Other" xml:space="preserve">
+    <value>其他</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Pickup" xml:space="preserve">
+    <value>Pick-up皮卡</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Sedans" xml:space="preserve">
+    <value>三厢轿车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Sports" xml:space="preserve">
+    <value>跑车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Suv" xml:space="preserve">
+    <value>Suv</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelBodyFormEnum_Wagon" xml:space="preserve">
+    <value>Wagon旅行车</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="ModelLevelEnum_Bus" xml:space="preserve">
+    <value>客车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Compact" xml:space="preserve">
+    <value>紧凑型车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Concept" xml:space="preserve">
+    <value>概念车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_HeavyTruck" xml:space="preserve">
+    <value>重卡</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_LightBus" xml:space="preserve">
+    <value>轻客</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_LightTruck" xml:space="preserve">
+    <value>轻卡</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Luxury" xml:space="preserve">
+    <value>豪华车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_MediumLarge" xml:space="preserve">
+    <value>中大型车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Middle" xml:space="preserve">
+    <value>中型车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Mini" xml:space="preserve">
+    <value>微型车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_MiniTruck" xml:space="preserve">
+    <value>微卡</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Mpv" xml:space="preserve">
+    <value>Mpv</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Other" xml:space="preserve">
+    <value>其他</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Pickup" xml:space="preserve">
+    <value>皮卡</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Small" xml:space="preserve">
+    <value>小型车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Sports" xml:space="preserve">
+    <value>跑车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Suv" xml:space="preserve">
+    <value>Suv</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelEnum_Van" xml:space="preserve">
+    <value>面包车</value>
+    <comment>车系级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_Other" xml:space="preserve">
+    <value>其他</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_SuvCompact" xml:space="preserve">
+    <value>紧凑型Suv</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_SuvFullSize" xml:space="preserve">
+    <value>大型Suv</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_SuvLarge" xml:space="preserve">
+    <value>中大型Suv</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_SuvMedium" xml:space="preserve">
+    <value>中型Suv</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ModelLevelSecondEnum_SuvSmall" xml:space="preserve">
+    <value>小型Suv</value>
+    <comment>车系二级级别</comment>
+  </data>
+  <data name="ProductionStatusEnum_InProduction" xml:space="preserve">
+    <value>在产</value>
+    <comment>生产状态</comment>
+  </data>
+  <data name="ProductionStatusEnum_StopProduction" xml:space="preserve">
+    <value>停产</value>
+    <comment>生产状态</comment>
+  </data>
+  <data name="ProductionStatusEnum_ToBeCheched" xml:space="preserve">
+    <value>待查</value>
+    <comment>生产状态</comment>
+  </data>
+  <data name="ProductionStatusEnum_ToBeProduced" xml:space="preserve">
+    <value>待产</value>
+    <comment>生产状态</comment>
+  </data>
+  <data name="SaleStatusEnum_Selling" xml:space="preserve">
+    <value>在销</value>
+    <comment>销售状态</comment>
+  </data>
+  <data name="SaleStatusEnum_StopSell" xml:space="preserve">
+    <value>停销</value>
+    <comment>销售状态</comment>
+  </data>
+  <data name="SaleStatusEnum_ToBeChecked" xml:space="preserve">
+    <value>待查</value>
+    <comment>销售状态</comment>
+  </data>
+  <data name="SaleStatusEnum_WaitForSale" xml:space="preserve">
+    <value>待销</value>
+    <comment>销售状态</comment>
+  </data>
+  <data name="StatusEnum_Disable" xml:space="preserve">
+    <value>停用</value>
+    <comment>状态</comment>
+  </data>
+  <data name="StatusEnum_Enable" xml:space="preserve">
+    <value>启用</value>
+    <comment>状态</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_Hatchback" xml:space="preserve">
+    <value>两厢</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_HatchbackHalf" xml:space="preserve">
+    <value>两厢半</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_Pickup" xml:space="preserve">
+    <value>皮卡</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_Sedans" xml:space="preserve">
+    <value>三厢</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_Singles" xml:space="preserve">
+    <value>单厢</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="StyleBodyTypeEnum_ToBeChecked" xml:space="preserve">
+    <value>待查</value>
+    <comment>车身形式</comment>
+  </data>
+  <data name="UseEnum_Business" xml:space="preserve">
+    <value>商务</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Cross" xml:space="preserve">
+    <value>Cross</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Family" xml:space="preserve">
+    <value>家用</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Fashion" xml:space="preserve">
+    <value>时尚</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Mpv" xml:space="preserve">
+    <value>多用途</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_OffRoad" xml:space="preserve">
+    <value>越野</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Other" xml:space="preserve">
+    <value>其他</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Recreation" xml:space="preserve">
+    <value>休闲</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Scooter" xml:space="preserve">
+    <value>代步</value>
+    <comment>车辆用途</comment>
+  </data>
+  <data name="UseEnum_Sport" xml:space="preserve">
+    <value>运动</value>
+    <comment>车辆用途</comment>
+  </data>
+</root>
