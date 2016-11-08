@@ -4,119 +4,79 @@
 @{
     ViewBag.Title = "Search";
     var searchVm = (SearchResultVm)ViewBag.searchVm;
+    <link href="~/Content/search.css" rel="stylesheet" />
 }
-
-<div class="b_box_nocolor m1100">
-    <div class="b_onepart b_twopart clearfix" style="display: block">
-        <div class="b_oneyou rt">
-            <!--列表左侧 start-->
-            <div class="b_twoleft lt">
-                <div class="b_hotcar  two_tit clearfix">
-                    <h5><a href="http://www.fblife.com/html/gundong.html" target="_blank">我的收藏</a></h5>
-                    <div class="b_twoxingshi rt" id="nes_relit">
-                        <a href="javascript:void(0)" class="b_txshiact b_txshi"><em class="z_liebiao"></em>列表</a>
-                        <a href="javascript:void(0)" class="b_txshi"><em class="z_wangge"></em>网格</a>
-                    </div>
-                </div>
-                @Html.Partial("_TabListPartial")
-
-                <p>共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果</p>
-                <div>
-                    @{
-                        if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
+<div id="containers" style="width: 1100px;margin:auto;">
+    <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果</div>
+    <div class="search-input">
+        <form id="searchForm" action="/search/thread" method="get">
+            <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
+            <div class="search-btn-area">
+                <a href="javascript:;" class="current">内容</a> <a href="/search/user?keyword=越野" methods="post">用户</a>
+                @{
+                    if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
+                    {
+                        foreach (var i in searchVm.FacetSelected)
                         {
-                            <span>筛选条件：</span>
-                            foreach (var i in searchVm.FacetSelected)
-                            {
-                                <span >
-                                    <a href="@i.Url">
-                                        <i>@i.Name</i>&nbsp;&nbsp;
-                                    </a>
-                                </span>
-                            }
-                        }
-}
-                </div>
-                <div>
-                    @{
-                        if (searchVm.FacetDicCompany!=null&&searchVm.FacetDicCompany.Count > 0)
-                        {
-                            <span>来源：</span>
-                            foreach (var i in searchVm.FacetDicCompany)
-                            {
-                                <span>
-                                    <a href="@i.Url">
-                                        <i>@i.Name</i>
-                                        <i>[@i.Count]</i>&nbsp;&nbsp;
-                                    </a>
-                                </span>
-                            }
+                            <a href="@i.Url">
+                                <i>@i.Name</i>&nbsp;&nbsp;
+                            </a>
                         }
                     }
-                </div>
-                <div>
-                    @{
-                        if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
+
+                    if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
+                    {
+                        foreach (var i in searchVm.FacetDicTag)
                         {
-                            <span>标签：</span>
-                            foreach (var i in searchVm.FacetDicTag)
-                            {
-                                <span>
-                                    <a href="@i.Url">
-                                        <i>@i.Name</i>
-                                        <i>[@i.Count]</i>&nbsp;&nbsp;
-                                    </a>
-                                </span>
-                            }
+                            <a href="@i.Url">
+                                <i>@i.Name</i>
+                                <i>[@i.Count]</i>&nbsp;&nbsp;
+                            </a>
                         }
                     }
-                </div>
-                <div>
-                    @{
-                        if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                    if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                    {
+                        foreach (var i in searchVm.FacetDicDateTime)
                         {
-                            <span>时间：</span>
-                            foreach (var i in searchVm.FacetDicDateTime)
-                            {
-                                <span>
-                                    <a href="@i.Url">
-                                        <i>@i.Name</i>
-                                        <i>[@i.Count]</i>&nbsp;&nbsp;
-                                    </a>
-                                </span>
-                            }
+                            <a href="@i.Url">
+                                <i>@i.Name</i>
+                                <i>[@i.Count]</i>&nbsp;&nbsp;
+                            </a>
                         }
                     }
-                </div>
-
-                <!--资讯列表-->
-                <div class="b_zxlistbor" id="today_news">
-                    <div class="b_wanglie lt" id="wanggelb">
-                        <!--列表形式-->
-                        <div class="b_newsfang" id="zixun_list" style="display:block;">
-                            <!--资讯列表---最新-->
-                            <div class="zixunone" id="articleConten" style="display: block;">
-
-                            </div>
-                            <!--更多-->
-                            <div class="b_zx_more clearfix">
-                                <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
-                            </div>
-                            <!--更多 end-->
-                            <!--资讯列表---最新 end-->
-                        </div>
-                        <!--列表形式 end-->
-                    </div>
-                </div>
-                <!--资讯列表 end---->
+                }
+                <button class="blue-middle-button" onclick="searchkey();">搜索</button>
             </div>
-            <!--列表左侧 end-->
-            <!--资讯右侧 start-->
-            @Html.Partial("_RightPartial");
-            <!--资讯右侧 end-->
+        </form>
+    </div>
+
+    <div class="search-interest">
+        <div class="head">
+            相关兴趣
+        </div>
+        <div class="body">
+            @{
+                if (searchVm.FacetDicCompany != null && searchVm.FacetDicCompany.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetDicCompany)
+                    {
+                        <a href="@i.Url">
+                            <em>@i.Name</em>
+                            <em>[@i.Count]</em>&nbsp;&nbsp;
+                        </a>
+                    }
+                }
+            }
         </div>
     </div>
 </div>
+
+<ul id="articleConten" class="search-thread-list" style="width: 1128px"></ul>
+<div class="clear"></div>
+<div class="topic-list">
+    <a href="javascript:;" id="load-more-topic">加载更多</a>
+</div>
+
 @section scripts
 {
     <script type="text/javascript">
@@ -142,30 +102,35 @@
     </script>
     <script src="~/Scripts/Search/search.js"></script>
     <script type="text/template1">
-        <div class="b_zixunlist clearfix">
-            <div class="b_zxpic lt">
-                <a href="$ArticleUrl$" target="_blank">
-                    <img width="180" height="120" src="$CoverImage$"
-                         data-src="$CoverImage$" class="lazyimg">
+        <li>
+            <div class="img-box">
+                <div class="interest-label">
+                    <div class="label"><a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a></div>
+                </div>
+                <a href="$Url$" target="_blank">
+                    <img src="$CoverImage$" class="upload">
                 </a>
-            </div>
-            <div class="b_zxtuwen lt">
-                <h1><a href="$Url$" target="_blank"> $ArticleName$</a></h1>
-                <p style="height:40px">$Description$</p>
-                <div class="b_zixunxinxi clearfix">
-                    <div class="b_zxtime lt" style="width:250px">
-                        <span>$CreateTime$</span>
-                    </div>
-                    <div class="b_zxother rt">
-                        <div id="bdshare" class=" lt" style="padding-bottom:0px;">
-                            <span class="bds_more">来源：$Company$</span>
-                        </div>
-                        <span class="b_zxotuij" id="like_span_173341">喜欢<cite id="like_text_173341">10</cite></span>
-                        <span class="b_zxotuij" id="like_span_173341">不喜欢<cite id="like_text_173341">10</cite></span>
-                    </div>
+                <div class="about-count">
+                    <span class="click"><i></i>4006</span>
+                    <span class="comment"><i></i>37</span>
+                    <span class="praise"><i></i>46</span>
                 </div>
             </div>
-        </div>
+            <h4>
+                <a href="$Url$" target="_blank">
+                    $ArticleName$
+                </a>
+            </h4>
+            <div class="user-info">
+                <a href="/lookat/home?userId=13476" target="_blank" class="user">
+                    <i>
+                        <img src="">
+                    </i>
+                    <em>$Company$</em>
+                </a>
+                <span class="pub-time">$CreateTime$</span>
+            </div>
+        </li>
     </script>
 }
 

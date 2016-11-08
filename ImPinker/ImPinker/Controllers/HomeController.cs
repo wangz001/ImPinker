@@ -10,7 +10,7 @@ namespace ImPinker.Controllers
     public class HomeController : Controller
     {
         private static readonly ArticleBll ArticleBll = new ArticleBll();
-        private const int IndexPageCount = 10;
+        private const int IndexPageCount = 20;
 
         /// <summary>
         /// 首页
@@ -19,7 +19,7 @@ namespace ImPinker.Controllers
         [OutputCache(Duration = 1, VaryByParam = "*")]
         public ActionResult Index()
         {
-            ViewBag.ArticleJson = GetByPage(1, IndexPageCount);
+            ViewBag.ArticleJson = GetByPage(1, 30);
             ViewBag.pageCount = IndexPageCount;
             return View();
         }

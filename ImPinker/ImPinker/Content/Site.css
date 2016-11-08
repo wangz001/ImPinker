@@ -10,11 +10,11 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 
 /* styles for validation helpers */
 .field-validation-error {
@@ -47,7 +47,7 @@ input[type="checkbox"].input-validation-error {
     margin-right: 10px;
 }
 
-.search-input {
+.search-inputhead {
     font-size: 15px;
     font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
     width: 330px;

@@ -28,6 +28,8 @@ namespace ImPinker
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/general.css",
+                      "~/Content/homepage.css",
                       "~/Content/site.css"));
         }
     }

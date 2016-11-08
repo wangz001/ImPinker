@@ -5,21 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <!-- 越野e族css start-->
+    <!-- 越野e族css start
     <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/index/css/common.css?updatetime=201605052" />
     <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/index/css/advert.css?updatetime=201605052" />
-    <!-- 越野e族css end-->
+     越野e族css end-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
 </head>
 <body>
     @Html.Partial("_HeadPartial")
-    <div class="body-content">
-        @RenderBody()
-        <hr />
-        @Html.Partial("_FootPartial")
-    </div>
+    @RenderBody()
+    @Html.Partial("_FootPartial")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

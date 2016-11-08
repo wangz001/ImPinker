@@ -6,7 +6,7 @@
     }
 
     //加载下一页数据
-    $("#loadmore").bind('click', function () {
+    $("#load-more-topic").bind('click', function () {
         $("#f_loadimg").show();
         pageIndex = pageIndex + 1;
         getNextPage(pageCount, pageIndex);
