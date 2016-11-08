@@ -1,0 +1,359 @@
+#container{
+	padding-bottom: 10px;
+}
+.crumb{
+	margin: 10px 0px 20px;
+	font-size: 12px;
+}
+.search-input{
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	padding: 20px;
+}
+.search-input #keyword{
+    width:100%;
+	padding:0px 10px;
+	font-size: 24px;
+	line-height: 58px;
+	height: 58px;
+	color: #999;
+	display:inline-block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	border:1px solid #eee;
+	border-radius: 5px;
+}
+.search-input .search-btn-area {
+	margin-top: 10px;
+	height: auto;
+	overflow: auto;
+}
+.search-input .search-btn-area button{
+	display: inline-block;
+	line-height: 36px;
+	border: none;
+	width: 108px;
+	text-align: center;
+	color: #fff;
+	background: #2175d0;
+	font-size: 16px;
+	float: right;
+	border-radius: 5px;
+	transition: all 0.2s linear;
+}
+.search-input .search-btn-area button:hover{
+	background: #449eff;
+}
+.search-input .search-btn-area button:active{
+	background: #0058b8;
+}
+.search-input .search-btn-area a{
+	display: inline-block;
+	line-height: 20px;
+	border: 1px solid #e3e6ee;
+	background: #fff;
+	font-size: 14px;
+	color: #999;
+	padding: 0px 10px;
+	border-radius: 5px;
+}
+.search-input .search-btn-area a:hover{
+	color: #fff;
+	background: #2175d0;
+	border-color: #2175d0;
+}
+.search-input .search-btn-area a:active{
+	background: #0058b8;
+	border-color: #0058b8;
+	color: #fff;
+}
+.search-input .search-btn-area .current{
+	border-color: #2175d0;
+	background: #2175d0;
+	color: #fff;
+}
+.search-interest,
+.search-topic{
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	height: auto;
+	overflow: auto;
+	margin-top: 10px;
+}
+.search-interest .head,
+.search-topic .head{
+	display: inline-block;
+	float: left;
+	width: 105px;
+	padding:10px 0px; 
+	text-align: center;
+}
+.search-interest .body,
+.search-topic .body{
+	display: inline-block;
+	vertical-align: middle;
+	float: left;
+	max-width:972px; 
+	font-size: 14px;
+	padding:11px 10px; 
+	border-left:1px solid #e3e6ee;
+}
+.search-interest .body a em,
+.search-topic .body a em{
+	color: #e97171;
+}
+/*内容结果列表*/
+.search-thread-list{
+	width: 1128px;
+	height: auto;
+	overflow: auto;
+	margin:0px auto 20px;
+}
+.search-thread-list li{
+	width: 270px;
+	height: 268px;
+	margin: -1px 5px 0px;
+	border:1px solid transparent;
+	float: left;
+	transition:all 0.3s linear;
+}
+.search-thread-list li .img-box{
+	width: 252px;
+	height: 168px;
+	margin: 10px;
+	margin-bottom: 0px;
+	background: #f4f4f4;
+	position: relative;
+}
+.search-thread-list li .img-box img{
+	width: 252px;
+	height: 168px;
+}
+.search-thread-list li:hover{
+	border-color: #e3e6ee;
+	background: #fff;
+	box-shadow: 0px 5px 10px 1px rgba(175,185,194,0.3);
+}
+.search-thread-list li .interest-label{
+	position: absolute;
+	display: table;
+	height: 18px;
+	line-height: 18px;
+	width: 252px;
+}
+.search-thread-list li .interest-label .label{
+	display: table-cell;
+	background: #000;
+	background: rgba(0,0,0,0.7);
+	text-align: center;
+	margin: 0;
+	width: 50%;
+}
+.search-thread-list li .interest-label .label:last-child{
+	border-left: 1px solid rgba(255,255,255,0.3);
+}
+.search-thread-list li .interest-label .label a{
+	color: #fff;
+	font-size: 12px;
+}
+.search-thread-list li .interest-label .label a:hover{
+	color: #2175d0;
+}
+.search-thread-list li .about-count{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	height: 35px;
+	background: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8)); /* Safari 5.1 - 6.0 */
+  	background: -o-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8)); /* Opera 11.1 - 12.0 */
+  	background: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8)); /* Firefox 3.6 - 15 */
+  	background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8)); /* 标准的语法 */
+  	color: #fff;
+  	font-size: 12px;
+  	text-align: right;
+}
+.search-thread-list li .about-count span{
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.search-thread-list li .about-count span i{
+	display: inline-block;
+	vertical-align: middle;
+	background: url(/images/xxxxxbbs-20.png) no-repeat;
+	margin-right: 5px;
+}
+.search-thread-list li .about-count .click i{
+	width: 16px;
+	height: 11px;
+	background-position:-30px -287px; 
+}
+.search-thread-list li .about-count .comment i{
+	width: 15px;
+	height: 14px;
+	background-position: -59px -286px;
+}
+.search-thread-list li .about-count .praise i{
+	width: 16px;
+	height: 24px;
+	background-position: -91px -283px;
+}
+.search-thread-list li h4{
+	margin:0px 10px;
+	font-size: 14px;
+	height: 55px;
+	line-height: 22px;
+}
+.search-thread-list li h4 a{
+	color: #666;
+	display: table-cell;
+	height: 55px;
+	vertical-align: middle;
+}
+.search-thread-list li h4 a em{
+	color: #e97171;
+}
+.search-thread-list li h4 a:hover{
+	color: #2175d0;
+}
+.search-thread-list li .user-info{
+	margin: 0px 10px;
+	font-size: 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e3e6ee;
+	height: auto;
+	overflow: auto;
+	transition: all 0.2s linear;
+}
+.search-thread-list li:hover .user-info{
+	border-bottom-color: transparent;
+}
+.search-thread-list li .user-info .user{
+	display: block;
+	float: left;
+	color: #666;
+}
+.search-thread-list li .user-info .user:hover{
+	color: #2175d0;
+}
+.search-thread-list li .user-info .user i{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border-radius: 25px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.search-thread-list li .user-info .pub-time{
+	display: inline-block;
+	float: right;
+	line-height: 25px;
+	color: #999;
+}
+.search-thread-list li .essence{
+	width: 15px;
+	height: 22px;
+	display: inline-block;
+	background: url(/images/xxxxxbbs-20.png) no-repeat -313px 0px;
+	vertical-align: text-top;
+}
+/*用户结果列表*/
+.search-user-list{
+	width: 1058px;
+	padding: 20px;
+	margin: auto;
+	border-radius: 5px;
+	background: #fff;
+	border:1px solid #e3e6ee;
+}
+.search-user-list{
+	margin: 20px auto;
+}
+.search-user-list .myfriend{
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+	min-height: 100px;
+}
+.search-user-list .myfriend dl{
+	height: auto;
+	overflow: auto;
+	min-height: 95px;
+}
+.search-user-list .myfriend dl dt,
+.search-user-list .myfriend dl dd{
+	float: left;
+}
+.search-user-list .myfriend dl dt{
+	height: 90px;
+	width: 90px;
+	position: relative;
+}
+.search-user-list .myfriend dl dt .headpic{
+	display: inline-block;
+	height: 90px;
+	width: 90px;
+	border-radius: 90px;
+	overflow: hidden;
+}
+.search-user-list .myfriend dl dt .male-mid,
+.search-user-list .myfriend dl dt .female-mid{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+.search-user-list .myfriend dl .friend-info{
+	margin-left: 20px;
+}
+.search-user-list .myfriend dl .friend-info h5{
+	margin: 0px;
+	font-size: 16px;
+}
+.search-user-list .myfriend dl .friend-info h5 a{
+	color: #666;
+}
+.search-user-list .myfriend dl .friend-info h5 a .level{
+	color: #4f94fb;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+}
+.search-user-list .myfriend dl .friend-info h5 a em{
+	color: #e97171;
+}
+.search-user-list .myfriend dl .friend-info h5 a:hover{
+	color: #2175d0;
+}
+.search-user-list .myfriend dl .friend-info .friend-info-count{
+	margin:15px 0px;
+}
+.search-user-list .myfriend dl .friend-info .friend-info-count li{
+	display: inline-block;
+	font-size: 12px;
+	color: #999;
+}
+.search-user-list .myfriend dl .friend-info .friend-info-count li em{
+	color: #2175d0;
+	font-size: 20px;
+}
+.search-user-list .myfriend dl .friend-info .friend-info-count .line{
+	display: inline-block;
+	width: 1px;
+	height: 20px;
+	background: #dfdfdf;
+	margin: 0px 10px;
+	vertical-align: text-bottom;
+}
+.search-user-list .myfriend dl .friend-info .signature{
+	margin: 0px;
+	font-size: 12px;
+	color: #999;
+	max-width: 650px;
+}
+.search-user-list .myfriend dl .button-area{
+	float: right;
+	margin-top: 26px;
+}

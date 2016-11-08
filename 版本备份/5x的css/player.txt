@@ -1,0 +1,61 @@
+.select-menu{
+	position: absolute;
+	bottom:30px;
+	width: 63px;
+	text-align: center;
+	height: 0px;
+	background: #000;
+	border-radius: 5px;
+	left: 50%;
+	margin-left: -30px;
+	overflow: hidden;
+	transition: all 0.2s linear;
+}
+.select-menu li{
+	position: static;
+	list-style: none;
+	margin:0px;
+	padding: 0px;
+	line-height: 30px;
+	height: 30px;
+}
+.select-menu li a{
+	display: block;
+	line-height: 24px;
+	font-size: 12px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 3px;
+	transition:all 0.2s linear;
+	margin: 3px;
+	margin-bottom: 0px;
+}
+.select-menu li a:hover{
+	color:#999;
+}
+.select-menu li .active{
+	background: #2175d0;
+}
+.select-menu li .active:hover{
+	
+	color: #fff;
+}
+.media-control-right-panel a[data-hd-indicator]{
+	display: inline-block;
+	line-height: 30px;
+	display:inline-block;
+	width:50px;
+	height:30px;
+	position:relative;
+	cursor:pointer;
+	overflow:visible;
+	font-size: 12px;
+	line-height: 30px;
+	text-align: center;
+}
+.media-control-right-panel a[data-hd-indicator] span{
+	line-height: 30px;
+}
+.media-control-right-panel a[data-hd-indicator]:hover .select-menu{
+	height: 63px;
+}
