@@ -24,8 +24,8 @@ namespace ImPinker.Controllers
         public ActionResult Index(int id)
         {
             var indexId = "travels_" + id;
-            var article = SolrNetSearchBll.GetArticleById(indexId);
-            //var article = ArticleBll.GetModel(id);
+            //var article = SolrNetSearchBll.GetArticleById(indexId);
+            var article = ArticleBll.GetModel(id);
             return new RedirectResult(article.Url);
             //抓取的内容显示比较混乱，直接跳转到源网页
             ViewBag.Article = article;
