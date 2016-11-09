@@ -269,5 +269,36 @@ namespace BLL
             return searchVm;
         }
 
+
+        public static ArticleViewModel GetArticleById(string travelId)
+        {
+            //创建条件集合
+            var query = new List<ISolrQuery>();
+            if (!string.IsNullOrEmpty(travelId))
+            {
+                var ar = new List<ISolrQuery>
+                {
+                    new SolrQueryByField("id", travelId)
+                };
+                //创建keyWord 条件集合的关系,是OR还是AND
+                var kw = new SolrMultipleCriteriaQuery(ar, "OR");
+                query.Add(kw);
+            }
+             //建立排序，条件.
+            var options = new QueryOptions
+            {
+                Start = 0,
+                Rows = 1
+            };
+
+             //条件集合之间的关系
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+
+
+            //执行查询,有5个重载
+            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+
+            return results[0];
+        }
     }
 }

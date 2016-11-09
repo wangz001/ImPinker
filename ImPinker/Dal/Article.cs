@@ -171,7 +171,7 @@ namespace DAL
 
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(
-				"select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,State,CreateTime,UpdateTime from Article ");
+				"select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,Company,State,CreateTime,UpdateTime from Article ");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
 			{

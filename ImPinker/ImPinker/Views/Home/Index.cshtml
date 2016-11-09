@@ -7,11 +7,7 @@
 <div class="topic-list">
     <a href="javascript:;" id="load-more-topic">加载更多</a>
 </div>
-<!--更多
-<div class="b_zx_more clearfix">
-    <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
-</div>
-更多 end-->
+
 @section scripts
 {
     <script type="text/javascript">
@@ -30,14 +26,14 @@
     <script src="~/Scripts/ArticleVote/articleVote.js"></script>
     <script type="text/template1">
         <li threadid="108832">
-            <a href="$Url$" target="_blank" class="img-box">
+            <a href="/Article?id=$Id$" target="_blank" class="img-box">
                 <img src="$CoverImage$" alt="$ArticleName$">
             </a>
             <span class="topic-info-box">
                 <a href="/topicinfo?topicId=3&amp;creatorTime=2" target="_blank" class="topic-lab" topicid="3" style="background: rgb(46, 75, 107);">秀最新/NB装备<i></i></a>
                 <em class="topic-pub-time">$CreateTime$</em>
             </span>
-            <h3 class="topic-title"><a href="/thread/108832.html" target="_blank">$ArticleName$</a></h3>
+            <h3 class="topic-title"><a href="/Article?id=$Id$" target="_blank">$ArticleName$</a></h3>
             <div class="topic-user-info">
                 <a href="/lookat/home?userId=35983" target="_blank" class="user-info">
                     <i><img src=""></i>

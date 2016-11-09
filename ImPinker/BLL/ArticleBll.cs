@@ -57,7 +57,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Article GetModel(long Id)
+		public Article GetModel(long Id)
 		{
 			return dal.GetModel(Id);
 		}

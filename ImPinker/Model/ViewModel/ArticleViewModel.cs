@@ -36,8 +36,8 @@ namespace Model.ViewModel
         [SolrField("UpdateTime")]
         public DateTime UpdateTime { get; set; }
 
-        [SolrField("Content")]
-        public string Content { get; set; }
+        [SolrField("content")]
+        public List<Object> Content { get; set; }
         [SolrField("Company")]
         public string Company { get; set; }
     }

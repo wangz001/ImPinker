@@ -1,87 +1,162 @@
 ﻿@using BLL
+@using Model.ViewModel
 
 @{
-    var article = (Model.Article)ViewBag.Article;
+    var article = (ArticleViewModel)ViewBag.Article;
     ViewBag.Title = article.ArticleName;
+    <link href="~/Content/thread.css" rel="stylesheet" />
+    <link href="~/Content/player.css" rel="stylesheet" />
 }
+@Html.Partial("_TabListPartial")
 
-<div class="b_box_nocolor m1100">
-    <div class="b_onepart b_twopart clearfix" style="display: block">
-        <div class="b_oneyou rt">
-            <!--列表左侧 start-->
-            <div class="b_twoleft lt">
-                @Html.Partial("_TabListPartial")
-                <div class="con_l clearfix">
-                    <div class="tit">
-                        <h1>@article.ArticleName</h1>
-                        <div class="tit_xia clearfix">
-                            <p>
-                                <span><i class="tit_time"></i>2016-08-09 16:31:27</span><span>来源：<i><a href="http://www.fblife.com/" target="_blank">越野e族</a></i></span><span>
-                                                                                                                                                                       </span>
-                            </p>
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="con_neir clearfix" id="con_weibo">
-                        @Html.Raw(article.Content)
-                    </div>
-
-                    <!-- 新闻详情页原帖推荐 -->
-                    <!-- 新闻详情页原帖推荐end -->
-                    <!--分页-->
-                    <!-- 等待加载图片-->
-                    <!--分页 end-->
-
-                    <div class="f_wzkeywords_pad clearfix">
-                        <div class="f_wzkeywords">
-                            <span>文章关键词：</span>
-                            <p>
-                                <!-- str_replace(' ', '&nbsp;', $info) -->
-
-                                <a href="http://news.fblife.com/tags_内蒙.html" target="_blank">内蒙</a>
-
-
-                                <a href="http://news.fblife.com/tags_蒙古.html" target="_blank">蒙古</a>
-
-
-                                <a href="http://news.fblife.com/tags_乌兰巴托.html" target="_blank">乌兰巴托</a>
-
-
-                                <a href="http://news.fblife.com/tags_mu X.html" target="_blank">mu X</a>
-
-
-                                <a href="http://news.fblife.com/tags_自驾.html" target="_blank">自驾</a>
-
-
-                                <a href="http://news.fblife.com/tags_俄罗斯.html" target="_blank">俄罗斯</a>
-
-
-                                <a href="http://news.fblife.com/tags_贝加尔湖.html" target="_blank">贝加尔湖</a>
-
-                            </p>
-                        </div>
-                        <div class="f_wzyo rt">
-                            责任编辑：王曙光
-                        </div>
-
-                    </div>
-                 <div class="tit_xadd">
-                        <!-- 资讯内页回复区通栏 -->
-                        <script language="JavaScript1.1" src="http://cast.aim.yoyi.com.cn/afp/door/;ap=v4ae620cac2566500001;ct=js;pu=n1428243fc09e7230001;/?">
-                        </script><a href="http://cast.aim.yoyi.com.cn/afp/wayl/;ad=w76113b8261e01780001;ap=v4ae620cac2566500001;as=z76116cd44b990c90001;pu=n1428243fc09e7230001;/?http://news.fblife.com/html/20160613/172953.html" target="_blank"><img src="http://cmstest.fblife.com/attachments/20160715/146856403692446.jpg" border="0" width="760" height="90"></a>
-                        <noscript>
-                            &lt;IFRAME SRC="http://cast.aim.yoyi.com.cn/afp/door/;ap=v4ae620cac2566500001;ct=if;pu=n1428243fc09e7230001;/?" NAME="adFrame_v4ae620cac2566500001" WIDTH="760" HEIGHT="90" FRAMEBORDER="no" BORDER="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no"&gt;
-                            &lt;/IFRAME&gt;
-                        </noscript>
-                        <!-- 资讯内页回复区通栏/End -->
-                    </div>
+<div id="container">
+    <div class="thread-main">
+        <!-- 文章主体 -->
+        <div class="article">
+            <input type="hidden" id="threadid" value="108619">
+            <input type="hidden" id="artistid" value="151935">
+            <h2>
+                <!-- 是否精华 -->
+                <i class="essence-mark"></i>
+                @article.ArticleName
+            </h2>
+            <div class="thread-info">
+                <div class="interest">
+                    <em class="ico"></em>
+                    <a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a>
+                </div>
+                <span class="click-count"><i></i>654</span>
+                <span class="publish-time">11月07日 19:20</span>
+            </div>
+            @Html.Raw(article.Content[0])
+            <!--分享-->
+            <div class="interest-share">
+                <div class="interest">
+                    所属兴趣：
+                    <a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a>
+                </div>
+                <div class="share bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1478688277964">
+                    <span>分享到：</span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
                 </div>
             </div>
-            <!--列表左侧 end-->
-            <!--资讯右侧 start-->
-            @Html.Partial("_RightPartial");
-            <!--资讯右侧 end-->
         </div>
+    </div>
+    <!--右侧区域-->
+    <div class="thread-right">
+        <div class="user-info">
+            <a href="/lookat/home?userId=151935" target="_blank" class="headpic">
+                <i style="background-image: url(http://imageqiniu.xxxxxbbs.com/Fuhh4QUUJ8JuOwLQXDzrQr2Q6eAR?imageMogr2/auto-orient/thumbnail/!100x100r/gravity/Center/crop/100x100);background-repeat: no-repeat;background-position: center;">
+
+
+                    <b class="male"></b>
+
+
+                    <!-- <img src=''> -->
+                </i>
+                <em>小磊哥</em>
+            </a>
+
+            <ul>
+                <li>
+                    关注
+
+                    <a href="/lookat/friend?userId=151935" target="_blank">0</a>
+
+
+                </li>
+                <span class="line"></span>
+                <li>
+                    粉丝
+
+                    <a href="/lookat/fins?userId=151935" target="_blank">3</a>
+
+
+                </li>
+                <span class="line"></span>
+                <li>
+                    作品
+
+                    <a href="/lookat/home?userId=151935" target="_blank">3</a>
+
+
+                </li>
+            </ul>
+
+            <div class="button-area" userid="151935">
+
+
+                <a href="javascript:;" class="white-button follow-btn" userid="151935" type="0"><i></i>关注</a>
+
+
+
+
+
+                <a href="javascript:;" class="white-button private-btn message-button" userid="151935"><i></i>发私信</a>
+
+
+            </div>
+
+        </div>
+
+        <div class="operate-record">
+            <h3><i></i>此帖荣誉记录</h3>
+            <ul>
+
+
+
+
+
+                <li>
+                    <div class="table">
+                        <span style="vertical-align: middle;">此帖入选 <a href="/topicinfo?topicId=14&amp;creatorTime=2" class="topic-label" target="_blank">X友车生活</a> 选题；</span>
+                        <span style="text-align: right;">
+                            <i>+500分</i><br>
+
+                            <em>+30金币</em>
+
+                        </span>
+                    </div>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <li>
+                    <div class="table">
+                        <div>
+                            <span>此帖被 <a href="/lookat/home?userId=2" target="_blank">"运营小妹1号"</a> 设为精华帖</span>
+                            <p style="margin-top:5px;">理由：精华鼓励 </p>
+                        </div>
+                        <span style="text-align: right;width:50px;">
+                            <i>+200分</i><br>
+                            <em>+10金币</em>
+                        </span>
+                    </div>
+                </li>
+
+
+
+
+            </ul>
+
+        </div>
+
     </div>
 </div>
 
+<div class="clear"></div>
