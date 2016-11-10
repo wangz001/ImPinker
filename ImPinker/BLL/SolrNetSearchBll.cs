@@ -297,8 +297,11 @@ namespace BLL
 
             //执行查询,有5个重载
             SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
-
-            return results[0];
+            if (results!=null&&results.Count>0)
+            {
+                return results[0];
+            }
+            return null;
         }
     }
 }

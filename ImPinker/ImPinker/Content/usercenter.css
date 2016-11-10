@@ -1,0 +1,1384 @@
+#container {
+	height: auto;
+	overflow: auto;
+}
+
+
+/*个人中心按钮*/
+
+.usercenter-blue-btn,
+.usercenter-red-btn {
+	display: inline-block;
+	font-size: 12px;
+	background: #fff;
+	border-width: 1px;
+	border-style: solid;
+	line-height: 18px;
+	text-align: center;
+	padding: 0px 10px;
+	border-radius: 3px;
+}
+
+.usercenter-blue-btn {
+	border-color: #2175d0;
+	color: #2175d0;
+}
+
+.usercenter-blue-btn:hover {
+	background: #2175d0;
+	color: #fff;
+}
+
+.usercenter-red-btn {
+	border-color: #da4141;
+	color: #da4141;
+}
+
+.usercenter-red-btn:hover {
+	background: #da4141;
+	color: #fff;
+}
+
+
+/*个人中心选题标签*/
+
+.usercenter-right .topic-lab {
+	position: absolute;
+	z-index: 3;
+	right: 20px;
+	top: 20px;
+}
+
+
+/*个人中心首页*/
+
+.usercenter-left {
+	width: 240px;
+	min-height: 1px;
+	float: left;
+	margin-right: 10px;
+}
+
+.usercenter-left .nav {
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	overflow: hidden;
+	background: #fff;
+	width: 238px;
+	top: -50px;
+	transition: all 0.2s linear;
+}
+
+.usercenter-left .nav-fixed {
+	top: 50px;
+}
+
+.usercenter-left .nav li {
+	text-align: center;
+	border-bottom: 1px solid #e3e6ee;
+	line-height: 55px;
+	background: #fff;
+	transition: all 0.2s linear;
+}
+
+.usercenter-left .nav li a {
+	color: #666;
+	display: block;
+	position: relative;
+}
+
+.usercenter-left .nav li .building {
+	position: absolute;
+	display: inline-block;
+	background-color: #e8e8e8;
+	color: #999;
+	width: 238px;
+	line-height: 56px;
+	text-align: center;
+	cursor: pointer;
+	top: 0px;
+	left: 0px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	transition: all 0.2s linear
+}
+
+.usercenter-left .nav li a:hover .building {
+	opacity: 1;
+	filter: alpha(opacity=1);
+}
+
+.usercenter-left .nav li a .remind-light {
+	position: absolute;
+	margin-left: 5px;
+	top: 20px;
+}
+
+.usercenter-left .nav li:hover {
+	background: #2175d0;
+	border-bottom-color: #2175d0;
+}
+
+.usercenter-left .nav .current {
+	background: #2175d0;
+}
+
+.usercenter-left .nav li:hover a,
+.usercenter-left .nav .current a {
+	color: #fff;
+}
+
+.usercenter-right {
+	width: 850px;
+	float: left;
+}
+
+.usercenter-right .user-info {
+	width: 848px;
+	min-height: 365px;
+	padding-bottom: 20px;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	background: #fff;
+}
+
+.usercenter-right .small-title {
+	font-size: 20px;
+	margin: 0px 20px;
+	line-height: 40px;
+	padding-top: 10px;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.usercenter-right .small-title a {
+	display: inline-block;
+	color: #666;
+	line-height: 40px;
+}
+
+.usercenter-right .small-title .line {
+	display: inline-block;
+	width: 1px;
+	height: 20px;
+	background: #eee;
+	vertical-align: middle;
+	margin: 0px 20px;
+}
+
+.usercenter-right .small-title a:hover {
+	color: #2175d0;
+}
+
+.usercenter-right .small-title .homepage-small-nav {
+	color: #2175d0;
+}
+
+.usercenter-right .small-title .homepage-small-nav:hover {
+	color: #449eff;
+}
+
+.usercenter-right .small-title .current {
+	color: #2175d0;
+	border-bottom: 3px solid #2175d0;
+}
+
+.usercenter-right .small-title .current em {
+	color: #2175d0
+}
+
+.usercenter-right .small-title em {
+	font-size: 12px;
+	color: #999;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.usercenter-right .user-info-box {
+	margin: 20px 20px;
+	height: 111px;
+}
+
+.usercenter-right .user-info-box .user-data {
+	float: left;
+	margin-top: 20px;
+	width: 360px;
+}
+
+.usercenter-right .user-info-box .user-data dt {
+	position: relative;
+	height: 90px;
+	width: 90px;
+	float: left;
+}
+
+.usercenter-right .user-info-box .user-data dt .headpic {
+	display: inline-block;
+	border-radius: 90px;
+	height: 90px;
+	width: 90px;
+	overflow: hidden;
+}
+
+.usercenter-right .user-info-box .user-data dt .male-mid,
+.usercenter-right .user-info-box .user-data dt .female-mid {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.usercenter-right .user-info-box .user-data dd {
+	float: left;
+	height: 90px;
+	margin-left: 20px;
+}
+
+.usercenter-right .user-info-box .user-data dd h5 {
+	font-size: 16px;
+	margin: 10px 0px 0px;
+}
+
+.usercenter-right .user-info-box .user-data dd h5 b {
+	display: inline-block;
+	font-style: italic;
+	color: #2175d0;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.usercenter-right .user-info-box .user-data dd ul {
+	margin-top: 10px;
+}
+
+.usercenter-right .user-info-box .user-data dd ul li {
+	display: inline-block;
+	height: 40px;
+	text-align: center;
+	padding: 0px 20px;
+}
+
+.usercenter-right .user-info-box .user-data dd ul li em {
+	display: block;
+	font-size: 20px;
+}
+
+.usercenter-right .user-info-box .user-data dd ul li em a {
+	color: #666;
+}
+
+.usercenter-right .user-info-box .user-data dd ul li em a:hover {
+	color: #2175d0;
+}
+
+.usercenter-right .user-info-box .user-data dd ul li i {
+	font-size: 12px;
+	color: #999;
+}
+
+.usercenter-right .user-info-box .user-data dd ul span {
+	display: inline-block;
+	width: 1px;
+	background: #dfdfdf;
+	height: 30px;
+}
+
+.usercenter-right .user-info-box .user-signature {
+	float: left;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	background: #fafbfe;
+	min-height: 109px;
+	width: 446px;
+}
+
+.usercenter-right .user-info-box .user-signature p {
+	margin: 20px;
+	margin-bottom: 0px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #eff3fa;
+	text-align: center;
+	font-size: 16px;
+}
+
+.usercenter-right .user-info-box .user-signature p .sig-ico-left,
+.usercenter-right .user-info-box .user-signature p .sig-ico-right {
+	display: inline-block;
+	width: 48px;
+	height: 39px;
+	background-image: url(/images/xxxxxbbs-20.png);
+	background-repeat: no-repeat;
+	vertical-align: text-bottom;
+}
+
+.usercenter-right .user-info-box .user-signature p .sig-ico-left {
+	background-position: -185px -245px;
+}
+
+.usercenter-right .user-info-box .user-signature p .sig-ico-right {
+	background-position: -238px -245px;
+}
+
+.usercenter-right .user-info-box .user-signature p .sig {
+	display: inline-block;
+	/*height: 50px;*/
+	height: auto;
+	/*overflow: auto;*/
+	max-width: 260px;
+	padding: 0px 20px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.usercenter-right .user-info-box .user-signature .sig-info {
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	line-height: 32px;
+}
+
+.usercenter-right .user-info-box .user-signature .sig-info em {
+	display: inline-block;
+	width: 1px;
+	height: 10px;
+	background: #dfdfdf;
+	margin: 0px 10px;
+}
+
+.usercenter-right .jf-coins-box {
+	display: inline-block;
+	text-align: left;
+	margin-left: 10px;
+}
+.usercenter-right .user-jf {
+	margin: 35px 10px 0px 10px;
+	height: 135px;
+	text-align: center;
+}
+
+.usercenter-right .user-jf .president {
+	display: inline-block;
+	height: 47px;
+	font-size: 12px;
+}
+
+.usercenter-right .user-jf .jf {
+	margin: 10px 0;
+}
+.usercenter-right .user-jf .recharge{
+	text-align: center;
+    color: #f7ae3b;
+    font-size: 12px;
+    position: relative;
+    display: inline-block;
+    width: 126px;
+    height: 24px;
+    line-height: 26px;
+    padding-left: 26px;
+    border: 1px solid #f7ae3b;
+    border-radius: 5px;
+    background:url(/images/head_icons.png) no-repeat 8px -194px;
+    margin-bottom: 10px;
+}
+.usercenter-right .user-jf .recharge:hover{
+	background:#f7ae3b url(/images/head_icons.png) no-repeat 8px -171px;
+	color: #FFFFFF;
+}
+.usercenter-right .user-jf .recharge i{
+	position: absolute;
+    right: 4px;
+    top: -4px;
+    display: block;
+    width: 19px;
+    height: 8px;
+    background: #fff url(/images/head_icons.png) no-repeat left top;
+}
+.usercenter-right .user-jf .jf i,
+.usercenter-right .user-jf .coin i {
+	display: inline-block;
+	width: 18px;
+	height: 20px;
+	vertical-align: text-bottom;
+	margin: 0px 5px;
+	background: url(/images/xxxxxbbs-21.png) no-repeat -690px -95px;
+}
+.usercenter-right .user-jf .coin i{
+	width: 20px;
+	background: url(/images/head_icons.png) no-repeat left -46px;
+}
+.usercenter-right .user-jf .coin .integral-rule,
+.usercenter-right .user-jf .jf .gold-rule {
+	font-size: 14px;
+	margin-top: 5px;
+	color: #666;
+	width: 30px;
+	position: relative;
+}
+
+.usercenter-right .user-jf .coin .integral-rule i ,
+.usercenter-right .user-jf .jf .gold-rule i {
+	width: 13px;
+	height: 13px;
+	line-height: 14px;
+	font-size: 12px;
+	text-align: center;
+	border: 1px solid #e4e4e4;
+	color: #B4B4B4;
+	background: #f8f8f8;
+	border-radius: 20px;
+	margin-right: 0px;
+	margin-bottom: 8px;
+	transition: all 0.2s linear;
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.usercenter-right .user-jf .jf b{
+	cursor: pointer;
+	color: #f7ae3b;
+}
+.usercenter-right .user-jf .coin b {
+	cursor: pointer;
+	color: #2275d1;
+}
+.usercenter-right .user-jf .coin .integral-rule:hover i,
+.usercenter-right .user-jf .jf .gold-rule:hover i{
+	background: #e97171;
+	color: #fff;
+	border-color: #e97171;
+}
+.usercenter-right .user-jf .role {
+	text-align: right;
+	word-spacing: 10px;
+}
+
+.usercenter-right .user-jf .line {
+	display: inline-block;
+	width: 1px;
+	height: 125px;
+	background: #dfdfdf;
+	margin: 0px 20px;
+	vertical-align: text-bottom;
+}
+
+.usercenter-right .user-jf .president {
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+.usercenter-right .user-jf .president ul {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.usercenter-right .user-jf .president ul li {
+	display: inline-block;
+	text-align: center;
+	margin-right: 12px;
+	vertical-align: middle;
+}
+
+.usercenter-right .user-jf .president ul li i {
+	border-radius: 5px;
+	height: 80px;
+	width: 80px;
+	display: inline-block;
+	overflow: hidden;
+	background: #f4f4f4;
+}
+
+.usercenter-right .user-jf .president ul li span {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #999;
+	margin-top: 15px;
+}
+
+.usercenter-right .message-nav {
+	width: 848px;
+	line-height: 56px;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	background: #fff;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.usercenter-right .message-nav ul {
+	display: inline-block;
+	font-size: 16px;
+}
+
+.usercenter-right .message-nav ul li {
+	display: inline-block;
+}
+
+.usercenter-right .message-nav ul span {
+	display: inline-block;
+	width: 1px;
+	height: 16px;
+	background: #dfdfdf;
+	vertical-align: text-bottom;
+}
+
+.usercenter-right .message-nav ul li a {
+	color: #666;
+	display: block;
+	padding: 0px 40px;
+	position: relative;
+}
+
+.usercenter-right .message-nav ul li:hover a {
+	color: #2175d0
+}
+
+.usercenter-right .my-threads,
+.usercenter-right .my-smalltopic {
+	margin-top: 10px;
+	width: 848px;
+	border: 1px solid #e3e6ee;
+	border-radius: 5px;
+	background: #fff;
+}
+
+
+/*好友管理页=======================================================================================================*/
+
+.usercenter-right .myfriend-list {
+	width: 848px;
+	border-radius: 5px;
+	background: #fff;
+	border: 1px solid #e3e6ee;
+}
+
+.usercenter-right .myfriend-list ul {
+	margin: 20px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend {
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+	min-height: 100px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl {
+	height: auto;
+	overflow: auto;
+	min-height: 95px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl dt,
+.usercenter-right .myfriend-list ul .myfriend dl dd {
+	float: left;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl dt {
+	height: 90px;
+	width: 90px;
+	position: relative;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl dt .headpic {
+	display: inline-block;
+	height: 90px;
+	width: 90px;
+	border-radius: 90px;
+	overflow: hidden;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl dt .male-mid,
+.usercenter-right .myfriend-list ul .myfriend dl dt .female-mid {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info {
+	margin-left: 20px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info h5 {
+	margin: 0px;
+	font-size: 16px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info h5 a {
+	color: #666;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info h5 a .level {
+	color: #2175d0;
+	font-size: 12px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info h5 a:hover {
+	color: #2175d0;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info .friend-info-count {
+	margin: 15px 0px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info .friend-info-count li {
+	display: inline-block;
+	font-size: 12px;
+	color: #999;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info .friend-info-count li em {
+	color: #2175d0;
+	font-size: 20px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info .friend-info-count .line {
+	display: inline-block;
+	width: 1px;
+	height: 20px;
+	background: #dfdfdf;
+	margin: 0px 10px;
+	vertical-align: text-bottom;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .friend-info .signature {
+	margin: 0px;
+	font-size: 12px;
+	color: #999;
+	max-width: 450px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .button-area {
+	float: right;
+	margin-top: 26px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .button-area .remove-blacklist-btn {
+	color: #999;
+	font-size: 14px;
+	line-height: 34px;
+	height: 34px;
+}
+
+.usercenter-right .myfriend-list ul .myfriend dl .button-area .remove-blacklist-btn:hover {
+	color: #fff;
+}
+
+
+/*消息中心---评论=======================================================================================================*/
+
+.small-title .comment-nav {
+	float: right;
+	font-size: 14px;
+	display: inline-block;
+}
+
+.small-title .comment-nav .current {
+	border: none;
+}
+
+.small-title .comment-nav span {
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	background: #eee;
+	vertical-align: middle;
+	margin: 0px 20px;
+}
+
+.my-comment {
+	width: 848px;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+}
+
+.my-comment .my-comment-list {
+	margin: 20px;
+}
+
+.my-comment .my-comment-list .comment-list {
+	height: auto;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+.my-comment .my-comment-list .comment-list.comment-list-top{
+	border-color: #dfdfdf;
+}
+.my-comment .my-comment-list .comment-list.comment-list-top ul{
+	text-align: center;
+}
+.my-comment .my-comment-list .comment-list.comment-list-top ul li{
+	display: inline-block;
+    width: 86px;
+    height: 80px;
+    margin: 12px;
+    position: relative;
+}
+.my-comment .my-comment-list .comment-list .comment-imgBox {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.my-comment .my-comment-list .comment-list h5,
+.my-comment .my-comment-list .comment-list p {
+	margin: 0px;
+}
+
+.my-comment .my-comment-list .comment-list dt,
+.my-comment .my-comment-list .comment-list dd {
+	float: left;
+}
+
+.my-comment .my-comment-list .comment-list dt {
+	position: relative;
+	width: 70px;
+	height: 70px;
+}
+
+.my-comment .my-comment-list .comment-list dt .headpic {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	border-radius: 70px;
+	overflow: hidden;
+}
+
+.my-comment .my-comment-list .comment-list dt .male-mid,
+.my-comment .my-comment-list .comment-list dt .female-mid {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+.my-comment .my-comment-list .comment-list dd {
+	/*	margin-left: 20px;
+	width: 718px;
+*/
+}
+
+.my-comment .my-comment-list .comment-list dd h5 {
+	font-size: 16px;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 .reply-btn,
+.my-comment .my-comment-list .comment-list dd h5 .reply-btn-active {
+	display: inline-block;
+	font-size: 12px;
+	background: #fff;
+	border-width: 1px;
+	border-style: solid;
+	line-height: 18px;
+	text-align: center;
+	padding: 0px 10px;
+	border-radius: 3px;
+	border-color: #2175d0;
+	color: #2175d0;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 .reply-btn-active {
+	background: #2175d0;
+	color: #fff;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 .reply-btn:hover {
+	background: #2175d0;
+	color: #fff;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 .username {
+	display: inline-block;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 em {
+	display: inline-block;
+	color: #999;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.my-comment .my-comment-list .comment-list dd h5 .button-area {
+	float: right;
+}
+
+.my-comment .my-comment-list .comment-list dd .comment-content {
+	margin-top: 10px;
+	font-size: 14px;
+	height: auto;
+	overflow: auto;
+}
+
+.my-comment .my-comment-list .comment-list .quote {
+	width: 715px;
+	border: 1px solid #eff3fa;
+	background: #fafbfe;
+	border-radius: 5px;
+	height: auto;
+	overflow: auto;
+	margin-top: 10px;
+}
+
+.my-comment .my-comment-list .comment-list .quote .quote-box {
+	font-size: 14px;
+	height: auto;
+	overflow: auto;
+	line-height: 18px;
+	margin: 10px;
+}
+
+.my-comment .my-comment-list .comment-list .quote .quote-title,
+.my-comment .my-comment-list .comment-list .quote .quote-content {
+	float: left;
+	padding-bottom: 5px;
+}
+
+.my-comment .my-comment-list .comment-list .quote.currentpage {
+	width: 400px;
+}
+
+.my-comment .my-comment-list .comment-list .quote p {
+	font-size: 14px;
+	/*margin: 10px;*/
+}
+
+.my-comment .my-comment-list .comment-list .quote p .emoji {
+	width: 1.2em;
+	height: 1.2em;
+}
+
+.my-comment .my-comment-list .comment-list .quote p .xxxxx-face {
+	width: auto;
+	height: 1.2em;
+}
+
+
+/*消息中心-私信*/
+
+.my-private {
+	margin: 20px;
+}
+
+.my-private .my-private-list {
+	height: auto;
+	overflow: auto;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.my-private .my-private-list dt,
+.my-private .my-private-list dd {
+	float: left;
+}
+
+.my-private .my-private-list dt {
+	position: relative;
+}
+
+.my-private .my-private-list dt .headpic {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	border-radius: 70px;
+	overflow: hidden;
+}
+
+.my-private .my-private-list dd {
+	margin-left: 20px;
+	width: 718px;
+}
+
+.my-private .my-private-list dd h5 {
+	margin: 0px;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.my-private .my-private-list dd h5 a {
+	display: inline-block;
+}
+
+.my-private .my-private-list dd h5 .adminIco {
+	vertical-align: text-bottom;
+}
+
+.my-private .my-private-list dd h5 span {
+	display: inline-block;
+	margin-left: 10px;
+	color: #999;
+	font-size: 12px;
+}
+
+.my-private .my-private-list dd h5 .button-area {
+	float: right;
+}
+
+.my-private .my-private-list dd .private-content {
+	font-size: 14px;
+	margin: 10px 0px;
+}
+
+.my-private .my-private-list dd .private-content .red-dot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background: #da4141;
+	border-radius: 8px;
+	vertical-align: top;
+}
+
+
+/*消息中心-系统消息*/
+
+.my-sysinfo {
+	margin: 20px;
+}
+
+.my-sysinfo .my-sysinfo-list {
+	color: #999;
+}
+
+.my-sysinfo .my-sysinfo-list dt {
+	height: 16px;
+	line-height: 16px;
+	font-size: 14px;
+}
+
+.my-sysinfo .my-sysinfo-list dt i {
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	border: 3px solid #2175d0;
+	border-radius: 10px;
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+.my-sysinfo .my-sysinfo-list dd {
+	border-left: 1px solid #2175d0;
+	margin-left: 8px;
+	min-height: 20px;
+	padding-bottom: 20px;
+}
+
+.my-sysinfo .my-sysinfo-list dd p {
+	margin: 0px;
+	margin-left: 20px;
+	padding: 10px 0px 20px 0px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	line-height: 22px;
+}
+
+
+/*帖子列表*/
+
+.my-thread,
+.my-thread-count {
+	width: 848px;
+	border: 1px solid #e3e6ee;
+	border-radius: 5px;
+	background: #fff;
+	margin-top: 10px;
+}
+
+.my-thread h3 .filter {
+	display: inline-block;
+	font-size: 14px;
+	color: #999;
+	border-radius: 3px;
+	border: 1px solid #eee;
+	width: 130px;
+	height: 28px;
+	vertical-align: text-bottom;
+	margin-left: 5px;
+	position: relative;
+}
+
+.my-thread h3 .filter .current-filter {
+	display: block;
+	padding: 0px 5px;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 3px;
+	color: #999;
+	padding: 0px 5px;
+	position: relative;
+	transition: all 0.2s linear;
+}
+
+.my-thread h3 .filter .current-filter em {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-width: 4px;
+	border-style: solid;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: top;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	float: right;
+	margin-right: 5px;
+	margin-top: 12px;
+	border-top-color: #e3e6ee;
+	vertical-align: middle;
+	transition: all 0.2s linear;
+}
+
+.my-thread h3 .filter ul {
+	position: absolute;
+	z-index: 5;
+	top: 30px;
+	width: 128px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	text-align: center;
+	height: 0px;
+	background-color: #fff;
+	overflow: hidden;
+	opacity: 0;
+	transition: all 0.2s linear;
+}
+
+.my-thread h3 .filter ul li {
+	transition: all 0.2s linear;
+}
+
+.my-thread h3 .filter ul li a {
+	color: #999;
+}
+
+.my-thread h3 .filter:hover ul {
+	opacity: 1;
+	height: 120px;
+	border: 1px solid #e3e6ee;
+}
+
+.my-thread h3 .filter ul li:hover {
+	background: #2175d0;
+}
+
+.my-thread h3 .filter ul li:hover a {
+	color: #fff;
+}
+
+.my-thread-count {
+	margin-top: 0px;
+	height: 251px;
+}
+
+.my-thread .my-thread-list {
+	width: 828px;
+	margin: 10px auto;
+	padding: 0px 10px 10px;
+	height: auto;
+	overflow: auto;
+}
+
+.my-thread .my-thread-list li {
+	width: 276px;
+	height: 275px;
+	float: left;
+	position: relative;
+	transition: all 0.2s linear;
+}
+
+.my-thread .my-thread-list li .essence {
+	width: 15px;
+	height: 22px;
+	display: inline-block;
+	background: url(/images/xxxxxbbs-20.png) no-repeat -313px 0px;
+	vertical-align: middle;
+}
+
+.my-thread .my-thread-list li .create-time {
+	display: block;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	font-size: 12px;
+	color: #fff;
+	background: #000;
+	background: rgba(0, 0, 0, 0.6);
+	width: 105px;
+	line-height: 20px;
+	text-align: center;
+	z-index: 3;
+}
+
+.my-thread .my-thread-list li:hover {
+	box-shadow: 0px 5px 10px 1px rgba(175, 185, 194, 0.3);
+}
+
+.my-thread .my-thread-list li .img-box {
+	display: block;
+	width: 256px;
+	height: 170px;
+	line-height: 170px;
+	position: relative;
+	margin: 10px;
+	margin-bottom: 0px;
+	overflow: hidden;
+	background-color: #f4f4f4;
+	text-align: center;
+}
+
+.my-thread .my-thread-list li .img-box .smallTopic {
+	position: absolute;
+	z-index: 3;
+	display: inline-block;
+	font-size: 12px;
+	width: 60px;
+	line-height: 22px;
+	text-align: center;
+	left: 10px;
+	bottom: 10px;
+	color: #fff;
+	background: #2175d0;
+	border-radius: 3px;
+}
+
+.my-thread .my-thread-list li .img-box img {}
+
+.my-thread .my-thread-list li h5 {
+	padding: 8px 10px 5px;
+	width: 256px;
+	height: 35px;
+	display: table-cell;
+	vertical-align: middle;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.my-thread .my-thread-list li h5 a {
+	color: #666;
+	display: inline-block;
+}
+
+.my-thread .my-thread-list li h5 a:hover {
+	color: #2175d0;
+}
+
+.my-thread .my-thread-list li .thread-info {
+	margin: 0px 10px;
+	border-top: 1px solid #e3e6ee;
+	padding: 8px 0px;
+	height: auto;
+	overflow: auto;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count {
+	font-size: 12px;
+	color: #999;
+	float: left;
+	line-height: 20px;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count .click-count,
+.my-thread .my-thread-list li .thread-info .thread-count .comment-count,
+.my-thread .my-thread-list li .thread-info .thread-count .praise-count {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count .click-count i,
+.my-thread .my-thread-list li .thread-info .thread-count .comment-count i,
+.my-thread .my-thread-list li .thread-info .thread-count .praise-count i {
+	display: inline-block;
+	background-image: url(/images/xxxxxbbs-20.png);
+	background-repeat: no-repeat;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count .click-count i {
+	background-position: 0px -211px;
+	width: 19px;
+	height: 15px;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count .comment-count i {
+	background-position: -43px -210px;
+	width: 18px;
+	height: 15px;
+}
+
+.my-thread .my-thread-list li .thread-info .thread-count .praise-count i {
+	background-position: -84px -207px;
+	width: 19px;
+	height: 18px;
+}
+
+.my-thread .my-thread-list li .thread-info .button-area {
+	float: right;
+}
+
+.my-thread .my-thread-list li .thread-info .button-area .has-favorite {
+	width: auto;
+	top: 0px;
+	right: 0px;
+	position: relative;
+	background-image: none;
+}
+
+
+/*我参与过的小话题*/
+
+.my-smalltopic .smalltopic-list {
+	height: auto;
+	overflow: auto;
+	width: 828px;
+	padding: 0px 10px;
+	margin: 10px auto 0px;
+	padding-bottom: 10px;
+}
+
+.my-smalltopic .smalltopic-list li {
+	float: left;
+	padding: 10px;
+	width: 256px;
+	transition: all 0.3s linear;
+}
+
+.my-smalltopic .smalltopic-list li:hover {
+	box-shadow: 0px 5px 10px 1px rgba(175, 185, 194, 0.3);
+}
+
+.my-smalltopic .smalltopic-list li .smalltopic-info {
+	font-size: 12px;
+	color: #999;
+	margin-top: 5px;
+}
+
+.my-smalltopic .smalltopic-list li .smalltopic-info .comment-count {
+	float: right;
+}
+
+.my-smalltopic .smalltopic-list li .smalltopic-info .comment-count i {
+	display: inline-block;
+	background-image: url(/images/xxxxxbbs-20.png);
+	background-repeat: no-repeat;
+	background-position: -43px -210px;
+	width: 18px;
+	height: 15px;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+
+/*浮层样式*/
+
+.rule-overlay {
+	z-index: 9989;
+}
+
+.rule-overlay .rule-box {
+	width: 688px;
+	height: 400px;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e3e6ee;
+	position: absolute;
+	left: 50%;
+	margin-left: -345px;
+	top: 100px;
+}
+
+.rule-overlay .rule-box h3 {
+	font-size: 20px;
+	line-height: 1em;
+	padding-bottom: 10px;
+	margin: 20px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.rule-overlay .rule-box h3 .close {
+	font-size: 30px;
+	color: #ccc;
+	float: right;
+}
+
+.rule-overlay .rule-box h3 .close:hover {
+	color: #2175d0;
+}
+
+.rule-overlay .rule-box .dialog {
+	margin: 0px 20px;
+	height: 300px;
+	overflow: hidden;
+	position: relative;
+}
+
+.rule-overlay .rule-box .dialog dl {
+	font-size: 14px;
+	line-height: 1.5em;
+}
+
+.rule-overlay .rule-box .dialog table {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.rule-overlay .rule-box .dialog .record h3,
+.rule-overlay .rule-box .dialog .record h5 {
+	margin: 0;
+}
+
+.rule-overlay .rule-box .dialog .record h5 {
+	font-size: 12px;
+	color: #999;
+	margin-bottom: 5px;
+}
+
+.rule-overlay .rule-box .dialog .record h3 {
+	font-size: 14px;
+	color: #666;
+	border-bottom: none;
+	padding-bottom: 0px;
+}
+
+.rule-overlay .rule-box .dialog .record li {
+	padding: 10px 0px;
+	border-bottom: 1px solid #eee;
+}
+
+.rule-overlay .rule-box .dialog .record dl dd,
+.rule-overlay .rule-box .dialog .record dl dt {
+	display: inline-block;
+}
+
+.rule-overlay .rule-box .dialog .record dl .score-dd {
+	float: right;
+}
+
+.rule-overlay .rule-box .dialog .record dl .score-dd i {
+	display: inline-block;
+	line-height: 20px;
+	border-radius: 20px;
+	width: 60px;
+	background: #e97171;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+}
+
+.rule-overlay .rule-box .dialog .load-more-record {
+	display: block;
+	text-align: center;
+	line-height: 30px;
+	font-size: 12px;
+	color: #fff;
+	background: #2175d0;
+	border-radius: 5px;
+	margin: 10px 0px;
+}
+
+.rule-overlay .rule-box .dialog .load-more-record:hover {
+	background: #449eff;
+}
+
+.rule-overlay .rule-box .dialog .load-more-record:active {
+	background: #0058b8;
+}

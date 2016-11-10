@@ -19,7 +19,7 @@ namespace ImPinker.Controllers
             }
             if (dto.PageCount == 0)
             {
-                dto.PageCount = 10;
+                dto.PageCount = 30;
             }
             var searchvm = GetByPage(dto);
             ViewBag.searchVm = searchvm;

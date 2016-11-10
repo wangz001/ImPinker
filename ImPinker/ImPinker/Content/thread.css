@@ -594,20 +594,24 @@
 	color: #ccc;
 	float: right;
 }
-.thread-main .article .thread-model{
+.thread-main .article .articlecontent{
 	width: 728px;
 	margin: 30px auto;
 }
-.thread-main .article .thread-model .img-box{
+.thread-main .article .articlecontent .img-box{
 	text-align: center;
 	background-color: #f4f4f4;
 	position: relative;
 	overflow: hidden;
 }
-.thread-main .article .thread-model .img-box img{
+.thread-main .article .articlecontent img{
+    text-align: center;
+	background-color: #f4f4f4;
+	position: relative;
+	overflow: hidden;
 	vertical-align: top;
 }
-.thread-main .article .thread-model .img-box .thread-image-comment-btn{
+.thread-main .article .articlecontent .img-box .thread-image-comment-btn{
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
@@ -626,17 +630,16 @@
     user-select:none;
 	transition: all 0.2s linear;
 }
-.thread-main .article .thread-model .img-box:hover .thread-image-comment-btn{
+.thread-main .article .articlecontent .img-box:hover .thread-image-comment-btn{
 	opacity: 1;
 }
-.thread-main .article .thread-model .description,
-.small-topic-article .description{
-	font-size: 14px;
+.thread-main .article .articlecontent p{
+	font-size: 17px;
 	line-height: 20px;
-	width: 688px;
+	width: 728px;
 	padding:14px 20px;
-	background-color: #323436;
-	color: #fff;
+	background-color:#fff ;
+	color: #323436;
 	word-wrap:break-word;
 }
 .small-topic-article .description{
@@ -645,7 +648,7 @@
 .small-topic-article .description p{
 	margin: 0px;
 }
-.thread-main .article .thread-model .description p{
+.thread-main .article .articlecontent p{
 	margin: 0px;
 	line-height: 24px;
 }

@@ -17,19 +17,30 @@ namespace ImPinker.Controllers
         private const int MyPageCount = 10;
 
         /// <summary>
-        /// 文章预览。爬虫抓取到的文章。即userid=2的文章。用户收藏的文章直接跳转到原始页面
+        /// 文章详情页。爬虫抓取到的文章。即userid=2的文章。用户收藏的文章直接跳转到原始页面
         /// </summary>
         /// <param name="id">文章id：travels_id  或者  id</param>
         /// <returns></returns>
-        public ActionResult Index(int id)
+        public ActionResult Index(string id)
         {
-            var indexId = "travels_" + id;
-            //var article = SolrNetSearchBll.GetArticleById(indexId);
-            var article = ArticleBll.GetModel(id);
-            return new RedirectResult(article.Url);
-            //抓取的内容显示比较混乱，直接跳转到源网页
-            ViewBag.Article = article;
-            return View("Index");
+            var idStr = id;
+            long idInt = 0;
+            if (!id.StartsWith("travels_"))
+            {
+                idStr = "travels_" + id;
+            }
+            else
+            {
+                long.TryParse(id.Replace("travels_", ""),out idInt);
+            }
+            var article = SolrNetSearchBll.GetArticleById(idStr);
+            if (article != null && article.Content != null && article.Content.Count>0)
+            {
+                ViewBag.Article = article;
+                return View("Index");
+            }
+            var temp = ArticleBll.GetModel(idInt);
+            return new RedirectResult(temp.Url);
         }
 
         /// <summary>

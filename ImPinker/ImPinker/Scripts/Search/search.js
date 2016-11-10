@@ -52,7 +52,7 @@
         }
         //设置加载按钮显示与隐藏
         if (pageCount * pageNum >= totalCount) {
-            $("#loadmore").parent().hide();
+            $("#load-more-topic").parent().hide();
         }
     };
 });

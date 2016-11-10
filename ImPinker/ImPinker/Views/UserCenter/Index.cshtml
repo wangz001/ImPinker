@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "个人中心-EngineStart";
+
+    <link href="~/Content/usercenter.css" rel="stylesheet" />
+}
+<div id="header" style="height: 0">
+
+    <div class="header-row-2">
+        <div class="header-container">
+            <ul class="navigator">
+                <li class="homepage"><a href="/index?topicId=0">选题</a></li>
+                <li class="interestpage">
+                    <a href="/interest/home?isallinterest=1&amp;interestType=0&amp;creatorTime=2&amp;isEssence=0&amp;commentCountMax=0&amp;clickMax=0">兴趣</a>
+                </li>
+                <li class="followpage"><a href="/concerns/myConcernsThreadList">关注的人</a></li>
+                <li class="rankpage"><a href="/rank/list">排行榜</a></li>
+                <li class="centerpage" style="border-right: 1px solid #dfdfdf;padding-right:15px"><a href="/center/home" style="color: rgb(33, 117, 208);">个人中心</a></li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="container" style="min-height: 557px;">
+    <div class="usercenter-left">
+        <ul class="nav nav-fixed" style="top: auto; bottom: 171px;">
+            <li><a href="/center/home">个人中心</a></li>
+            <li><a href="/center/fins" class="nav-friend">好友管理</a></li>
+            <li><a href="/center/news" class="nav-info">消息中心</a></li>
+            <li class="current"><a href="javascript:;">帖子管理</a></li>
+            <li><a href="/center/drafts">草稿箱</a></li>
+            <li><a href="/center/blacklist">黑名单</a></li>
+            <li><a href="/center/favorite">收藏管理</a></li>
+            <li><a href="http://xbshop.xxxxxbbs.com" target="_blank">兑换中心</a></li>
+            <li><a href="/center/setup" target="_blank">账号设置</a></li>
+        </ul>
+    </div>
+    <div class="usercenter-right">
+
+        <div class="my-thread" style="margin-top: 0px">
+            <input type="hidden" value="1">
+            <input type="hidden" value="0">
+            <h3 class="small-title">
+
+                所有帖子
+
+
+
+
+                <em>共有0篇</em>
+                <div class="filter">
+                    <a href="javascript:;" class="current-filter">
+
+                        所有帖子
+
+
+
+
+                        <em></em>
+                    </a>
+                    <ul>
+
+                        <li><a href="/center/thread?orderid=1&amp;typeid=2">精华帖子</a></li>
+                        <li><a href="/center/thread?orderid=1&amp;typeid=3">被选题收录</a></li>
+                        <li><a href="/center/thread?orderid=1&amp;typeid=4">被焦点图收录</a></li>
+
+
+
+
+                    </ul>
+                </div>
+                <!-- <em>共有0篇帖子</em> -->
+                <div class="comment-nav">
+
+
+                    <a href="javascript:;" style="color:#2175d0">
+
+
+
+                        最新发布
+                    </a>
+                    <span></span>
+
+
+
+                    <a href="/center/thread?orderid=2&amp;typeid=0">
+
+
+                        点击最高
+                    </a>
+                    <span></span>
+
+
+
+                    <a href="/center/thread?orderid=3&amp;typeid=0">
+
+
+                        评论最多
+                    </a>
+                </div>
+            </h3>
+            <ul class="my-thread-list">
+
+                <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 163px 0px;">这里空空如也</h2>
+
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+

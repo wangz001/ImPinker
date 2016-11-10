@@ -28,7 +28,9 @@
                 <span class="click-count"><i></i>654</span>
                 <span class="publish-time">11月07日 19:20</span>
             </div>
-            @Html.Raw(article.Content[0])
+            <div class="articlecontent">
+                @Html.Raw(article.Content[0])
+            </div>
             <!--分享-->
             <div class="interest-share">
                 <div class="interest">
@@ -106,13 +108,8 @@
             <h3><i></i>此帖荣誉记录</h3>
             <ul>
 
-
-
-
-
                 <li>
                     <div class="table">
-                        <span style="vertical-align: middle;">此帖入选 <a href="/topicinfo?topicId=14&amp;creatorTime=2" class="topic-label" target="_blank">X友车生活</a> 选题；</span>
                         <span style="text-align: right;">
                             <i>+500分</i><br>
 
@@ -121,20 +118,6 @@
                         </span>
                     </div>
                 </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 <li>
                     <div class="table">
@@ -148,9 +131,6 @@
                         </span>
                     </div>
                 </li>
-
-
-
 
             </ul>
 
