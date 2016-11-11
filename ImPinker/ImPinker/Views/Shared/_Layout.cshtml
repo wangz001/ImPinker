@@ -45,7 +45,7 @@
         var keyword = $("#searchterm").val();
         var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
         if (keyword != null && keyword.length > 0) {
-            window.location = ("/Search/Index?key=" + keyword + "&tab=" + tabStr);
+            window.open("/Search/Index?key=" + keyword + "&tab=" + tabStr,"_blank");
         }
     }
 </script>
