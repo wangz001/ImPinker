@@ -200,7 +200,7 @@
     <Content Include="Content\player.css" />
     <Content Include="Content\search.css" />
     <Content Include="Content\thread.css" />
-    <Content Include="Content\usercenter.txt" />
+    <Content Include="Content\usercenter.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -264,6 +264,8 @@
     <Content Include="Views\Shared\_FootPartial.cshtml" />
     <Content Include="Views\Shared\_TabListPartial.cshtml" />
     <Content Include="Views\UserCenter\Index.cshtml" />
+    <Content Include="Views\UserCenter\MyArticles.cshtml" />
+    <Content Include="Views\Shared\UserCenter_NavPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
