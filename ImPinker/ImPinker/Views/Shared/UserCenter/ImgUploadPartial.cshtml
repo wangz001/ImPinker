@@ -1,0 +1,117 @@
+﻿<link href="~/Content/imgselectarea.css" rel="stylesheet" />
+<link href="~/Scripts/Jcrop/jquery.Jcrop.css" rel="stylesheet" />
+<div class="imgcontainer" style="height:600px">
+    <a href="javascript:;" class="headpic_upload_button" onclick="savelogo()">保存</a>
+    <input id="imgFile" name="imgFile" type="file" style="width:100%" />
+    <div class="headpic_uploading">上传中</div>
+
+    <div id="original-img">
+        <div class="frame" id="original-pic-box" style="position:relative">
+            <img id="photo" src="" style="display:block; position:relative" />
+        </div>
+    </div>
+    <div class="headpic_container">
+        <h5>您上传的图片将会自动生成三种尺寸头像，请注意各尺寸的头像是否清晰。</h5>
+        <div class="big" style="float:left">
+            <div class="frame" style="width: 180px; height: 180px;">
+                <div style="width: 180px; height: 180px; margin-bottom: 15px; overflow: hidden;">
+                    <img id="preview180" src="" id="photo-large" />
+                </div>
+                <span>大尺寸头像180像素×180像素</span>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+<script src="~/Scripts/Jcrop/jquery.Jcrop.js"></script>
+<script src="~/Scripts/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#imgFile").change(function () {
+            ajaxFileUpload();
+        });
+    });
+    function ajaxFileUpload() {
+        $.ajaxFileUpload(
+            {
+                url: '/Upload/Upload', //用于文件上传的服务器端请求地址
+                type: "post",
+                secureuri: false, //一般设置为false
+                fileElementId: 'imgFile', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function(data, status)  //服务器成功响应处理函数
+                {
+                    $("#preview180").attr("src", data.imgurl);
+                    $("#photo").attr("src", data.imgurl);
+                    bindJcrop();
+                },
+                error: function(data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        );
+    }
+
+    var cc;
+    function savelogo() {
+        var url = $("#photo").attr("src");
+        var x1 = cc.x;
+        var y1 = cc.y;
+        var x2 = cc.x2;
+        var y2 = cc.y2;
+        $.ajaxFileUpload(
+            {
+                url: '/Upload/SaveJscropImg', //用于文件上传的服务器端请求地址
+                type: "post",
+                data: { path: url, x1: x1, y1: y1, x2: x2, y2: y2 },
+                secureuri: false, //一般设置为false
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (data, status)  //服务器成功响应处理函数
+                {
+                    $("#headimg").attr("src", data.imgurl);
+                    alert(data);
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        );
+    }
+
+</script>
+<script type="text/javascript">
+    function bindJcrop() {
+        // Create variables (in this scope) to hold the API and image size
+        var jcropApi, boundx, boundy;
+        $('#photo').Jcrop({
+            onChange: updatePreview,
+            onSelect: updatePreview,
+            aspectRatio: 1
+        }, function () {
+            // Use the API to get the real image size
+            var bounds = this.getBounds();
+            boundx = bounds[0];
+            boundy = bounds[1];
+            // Store the API in the jcrop_api variable
+            jcropApi = this;
+        });
+
+        function updatePreview(c) {
+            cc = c;
+            if (parseInt(c.w) > 0) {
+                var rx = 100 / c.w;
+                var ry = 100 / c.h;
+                $('#preview180').css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                    marginTop: '-' + Math.round(ry * c.y) + 'px'
+                });
+            }
+        };
+
+    }
+</script>

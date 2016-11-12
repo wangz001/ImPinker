@@ -14,7 +14,7 @@
         <li><a href="/center/drafts">草稿箱</a></li>
         <li><a href="/center/blacklist">黑名单</a></li>
         <li><a href="/center/favorite">收藏管理</a></li>
-        <li><a href="/center/setup" target="_blank">账号设置</a></li>
+        <li @(!string.IsNullOrEmpty(actionName) && actionName.StartsWith("usersetting") ? "class=current" : "")>@Html.ActionLink("账号设置", "UserSetting", "UserCenter")</li>
     </ul>
 </div>
 <!--nav end-->

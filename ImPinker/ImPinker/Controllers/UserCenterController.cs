@@ -29,5 +29,10 @@ namespace ImPinker.Controllers
             ViewBag.pageCount = 10;
             return View();
         }
+
+        public ActionResult UserSetting()
+        {
+            return View();
+        }
 	}
 }

@@ -1,6 +1,5 @@
 ﻿@{
-    ViewBag.Title = "个人中心-EngineStart";
-
+    ViewBag.Title = "个人中心-账户设置";
     <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
 <div id="header" style="height: 0">
@@ -14,7 +13,7 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img src="~/Content/Fj5s-vUKha2BNel9bVQYwtMdoVGX.jpg" /></em>
+                        <em class="headpic"><img id="headimg" src="~/Content/Fj5s-vUKha2BNel9bVQYwtMdoVGX.jpg" /></em>
                         <i class="male-mid"></i>
                     </dt>
                     <dd>
@@ -62,31 +61,16 @@
         </div>
         <div class="my-thread">
             <h3 class="small-title">
-                我发布过的帖子
+                头像设置
                 <div class="comment-nav">
                     <a href="/center/thread" class="homepage-small-nav">查看所有</a>
                 </div>
             </h3>
-            <ul class="my-thread-list">
-
-                <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
-
-
-            </ul>
+                <!--头像切割开始 -->
+                @Html.Partial("UserCenter/ImgUploadPartial")
+                <!--头像切割结束 -->
         </div>
-        <div class="my-smalltopic">
-            <h3 class="small-title">
-                我参与过的话题
-                <em>共参与0个话题</em>
-                <div class="comment-nav">
-                    <a href="/center/smalltopictlist" class="homepage-small-nav">查看所有</a>
-                </div>
-            </h3>
-
-            <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有参与过任何话题的讨论</h2>
-
-            <ul class="smalltopic-list"></ul>
-        </div>
+      
     </div>
 
 </div>

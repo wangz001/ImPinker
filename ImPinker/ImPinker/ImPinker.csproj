@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Filters\ExceptionContextFilter.cs" />
@@ -191,11 +192,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\user_center_setup.css" />
+    <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Fj5s-vUKha2BNel9bVQYwtMdoVGX.jpg" />
     <Content Include="Content\general.css" />
     <Content Include="Content\homepage.css" />
+    <Content Include="Content\imgselectarea.css" />
     <Content Include="Content\interest.css" />
     <Content Include="Content\jQwebUI-1.1.0.min.css" />
     <Content Include="Content\player.css" />
@@ -213,6 +217,11 @@
     <None Include="Properties\PublishProfiles\ImpinkerWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\commonUtil.js" />
+    <Content Include="Scripts\Jcrop\Jcrop.gif" />
+    <Content Include="Scripts\Jcrop\jquery.color.js" />
+    <Content Include="Scripts\Jcrop\jquery.Jcrop.css" />
+    <Content Include="Scripts\Jcrop\jquery.Jcrop.js" />
+    <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\Search\search.js" />
     <Content Include="Scripts\Home\index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -266,12 +275,15 @@
     <Content Include="Views\Shared\_TabListPartial.cshtml" />
     <Content Include="Views\UserCenter\Index.cshtml" />
     <Content Include="Views\UserCenter\MyArticles.cshtml" />
-    <Content Include="Views\Shared\UserCenter_NavPartial.cshtml" />
+    <Content Include="Views\Shared\UserCenter\UserCenter_NavPartial.cshtml" />
+    <Content Include="Views\UserCenter\UserSetting.cshtml" />
+    <Content Include="Views\Shared\UserCenter\ImgUploadPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Common\" />
     <Folder Include="Views\ArticleVote\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

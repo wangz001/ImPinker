@@ -11,13 +11,12 @@
      越野e族css end-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     @Html.Partial("_HeadPartial")
     @RenderBody()
     @Html.Partial("_FootPartial")
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
