@@ -1,6 +1,7 @@
-﻿@{
+﻿@using Model
+@{
     ViewBag.Title = "个人中心-EngineStart";
-
+    var user = (Users)ViewBag.User;
     <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
 <div id="header" style="height: 0">
@@ -14,12 +15,12 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img src="~/Content/Fj5s-vUKha2BNel9bVQYwtMdoVGX.jpg" /></em>
+                        <em class="headpic"><img src="@Path.Combine("/", user.ImgUrl).Replace("headimg/180", "headimg/100")" /></em>
                         <i class="male-mid"></i>
                     </dt>
                     <dd>
                         <h5>
-                            bwlang
+                           @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
                             <b>LV.1</b>
                         </h5>
                         <ul>

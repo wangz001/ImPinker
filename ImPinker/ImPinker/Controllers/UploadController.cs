@@ -6,11 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
+using Microsoft.AspNet.Identity;
 
 namespace ImPinker.Controllers
 {
     public class UploadController : Controller
     {
+        private static readonly UserBll UserBll = new UserBll();
         //
         // GET: /Upload/
         /// <summary>
@@ -22,24 +25,30 @@ namespace ImPinker.Controllers
         {
             string msg = string.Empty;
             string error = string.Empty;
-            string imgurl;
+            string imgurl=string.Empty;
             if (imgFile != null && imgFile.ContentLength != 0)
             {
                 if (!Directory.Exists(Server.MapPath("/imgtemp/")))//如果不存在就创建file文件夹
                 {
                     Directory.CreateDirectory(Server.MapPath("/imgtemp/"));
                 }
-                imgFile.SaveAs(Server.MapPath("/imgtemp/") + Path.GetFileName(imgFile.FileName));
+                imgurl =string.Format("/imgtemp/{0}_{1}", DateTime.Now.ToString("yyyyMMddHHmmss"),
+                    Path.GetFileName(imgFile.FileName));
+                imgFile.SaveAs(Server.MapPath("/") +imgurl);
                 msg = " 成功! 文件大小为:" + imgFile.ContentLength;
-                imgurl = "/imgtemp/" + imgFile.FileName;
                 string res = "{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + imgurl + "'}";
                 return Content(res);
             }
-            return Content("test");
+            return Content("{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + imgurl + "'}");
         }
         /// <summary>
-        /// 保存图片，裁剪过后的
+        ///  保存裁剪过后的图片
         /// </summary>
+        /// <param name="path">图片url</param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult SaveJscropImg(string path,int x1,int y1,int x2,int y2)
@@ -48,9 +57,18 @@ namespace ImPinker.Controllers
             var newPath = string.Empty;
             if (System.IO.File.Exists(sourcepath))
             {
-                newPath = (Server.MapPath("/") + string.Format("headimg/100/{1}_{0}.jpg", DateTime.Now.ToString("yyyyMMddHHmmss"), "25"));
-                //SaveImage(sourcepath, newPath, x2 - x1, y2 - y1, ImageFormat.Jpeg);
+                var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+                var newimgUrl = string.Format("headimg/180/{1}_{0}.jpg", DateTime.Now.ToString("yyyyMMddHHmmss"), userId);
+                newPath = (Server.MapPath("/") + newimgUrl);
+                //裁切图片,保存为180X180格式
                 ImgReduceCutOut(x1, y1, x2 - x1, y2 - y1, sourcepath, newPath);
+                //缩放、保存为3种格式
+                var img100 = newPath.Replace("headimg/180", "headimg/100");
+                SaveImage(newPath, img100,100, 100, ImageFormat.Jpeg);
+                var img40 = newPath.Replace("headimg/180", "headimg/40");
+                SaveImage(newPath, img40, 40, 40, ImageFormat.Jpeg);
+                //更新数据库
+                UserBll.UpdateHeadImg(userId,newimgUrl);
             }
             return Content("{ error:'" + "" + "', msg:'" + "ok" + "',imgurl:'" + newPath.Replace(Server.MapPath("/"),"/") + "'}");
         }
@@ -60,45 +78,26 @@ namespace ImPinker.Controllers
         {
             if (System.IO.File.Exists(oldImagePath))
             {
-                Bitmap bitmap = null;
-                try
+                //处理JPG质量的函数
+                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo ici = null;
+                foreach (ImageCodecInfo codec in codecs)
                 {
-                    var image = Image.FromFile(oldImagePath);
-                    bitmap = new Bitmap(image, newW, newH);
-                    Color pixel;//颜色匹对
-                    for (int i = 0; i < newW; i++)
+                    if (codec.MimeType == "image/jpeg")
                     {
-                        for (int j = 0; j < newH; j++)
-                        {
-                            pixel = bitmap.GetPixel(i, j);//获取旧图片的颜色值（ARGB存储方式）
-                            int r, g, b, a;
-                            r = pixel.R;
-                            g = pixel.G;
-                            b = pixel.B;
-                            a = pixel.A;
-
-                            //白色RGB(255，255，255),黑色（0,0,0）
-
-
-                            if (!Equals(imageFormat, ImageFormat.Png))   //png格式透明底不处理
-                            {
-                                if (a == 0)
-                                {
-                                    bitmap.SetPixel(i, j, Color.FromArgb(255, 255, 255));
-                                }
-                            }
-                        }
+                        ici = codec;
+                        break;
                     }
-                    bitmap.Save(newImagePath, imageFormat);
                 }
-                catch (Exception exception)
-                {
-                    throw exception;
-                }
-                finally
-                {
-                    bitmap.Dispose();
-                }
+                EncoderParameters ep = new EncoderParameters();
+                long level = 95L;
+                ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
+                
+                var bm = new Bitmap(oldImagePath);
+                var cutImg = bm.GetThumbnailImage(newW, newH, (ThumbnailCallback), IntPtr.Zero);
+                if (ici != null) cutImg.Save(newImagePath, ici, ep);
+                cutImg.Dispose();
+                bm.Dispose();
             }
 
         }
@@ -116,8 +115,8 @@ namespace ImPinker.Controllers
         public void ImgReduceCutOut(int startX, int startY, int int_Width, int int_Height, string input_ImgUrl, string out_ImgUrl)
         {
             // 上传标准图大小
-            int int_Standard_Width = 150;
-            int int_Standard_Height = 150;
+            int int_Standard_Width = 180;
+            int int_Standard_Height = 180;
 
             //其实在图片裁剪过程中还可以传更多的参数,如把原始图片缩小了再进行裁剪.本实例中是裁剪后,再裁剪后的图片缩小成150X80
             //通过连接创建Image对象

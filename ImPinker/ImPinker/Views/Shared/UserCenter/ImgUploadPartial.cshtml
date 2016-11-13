@@ -1,4 +1,8 @@
-﻿<link href="~/Content/imgselectarea.css" rel="stylesheet" />
+﻿@using Model
+@{
+    var user = (Users)ViewBag.User;
+}
+<link href="~/Content/imgselectarea.css" rel="stylesheet" />
 <link href="~/Scripts/Jcrop/jquery.Jcrop.css" rel="stylesheet" />
 <div class="imgcontainer" style="height:600px">
     <a href="javascript:;" class="headpic_upload_button" onclick="savelogo()">保存</a>
@@ -7,7 +11,7 @@
 
     <div id="original-img">
         <div class="frame" id="original-pic-box" style="position:relative">
-            <img id="photo" src="" style="display:block; position:relative" />
+            <img id="photo" src="@Path.Combine("/",user.ImgUrl)" style="display:block; position:relative" />
         </div>
     </div>
     <div class="headpic_container">
@@ -15,14 +19,14 @@
         <div class="big" style="float:left">
             <div class="frame" style="width: 180px; height: 180px;">
                 <div style="width: 180px; height: 180px; margin-bottom: 15px; overflow: hidden;">
-                    <img id="preview180" src="" id="photo-large" />
+                    <img id="preview180" src="@Path.Combine("/", user.ImgUrl)" id="photo-large" />
                 </div>
                 <span>大尺寸头像180像素×180像素</span>
             </div>
         </div>
 
     </div>
-    
+
 </div>
 <script src="~/Scripts/Jcrop/jquery.Jcrop.js"></script>
 <script src="~/Scripts/ajaxfileupload.js"></script>
@@ -33,6 +37,9 @@
         });
     });
     function ajaxFileUpload() {
+        $("#imgFile").change(function () {
+            ajaxFileUpload();
+        });
         $.ajaxFileUpload(
             {
                 url: '/Upload/Upload', //用于文件上传的服务器端请求地址
@@ -40,13 +47,13 @@
                 secureuri: false, //一般设置为false
                 fileElementId: 'imgFile', //文件上传空间的id属性  <input type="file" id="file" name="file" />
                 dataType: 'json', //返回值类型 一般设置为json
-                success: function(data, status)  //服务器成功响应处理函数
+                success: function (data, status)  //服务器成功响应处理函数
                 {
                     $("#preview180").attr("src", data.imgurl);
                     $("#photo").attr("src", data.imgurl);
                     bindJcrop();
                 },
-                error: function(data, status, e)//服务器响应失败处理函数
+                error: function (data, status, e)//服务器响应失败处理函数
                 {
                     alert(e);
                 }
@@ -61,6 +68,18 @@
         var y1 = cc.y;
         var x2 = cc.x2;
         var y2 = cc.y2;
+        var windowWidth = 300;
+        //获取图片的实际宽高,计算实际截取的图大小
+        var img = $("#photo")[0];
+        var naturewidth = img.width;
+        var natureheight = img.height;
+        if (naturewidth>=natureheight) {
+            var t = windowWidth / naturewidth;
+            x1 = Math.round(x1 / t);
+            y1 = Math.round(y1 / t);
+            x2 = Math.round(x2 / t);
+            y2 = Math.round(y2 / t);
+        }
         $.ajaxFileUpload(
             {
                 url: '/Upload/SaveJscropImg', //用于文件上传的服务器端请求地址

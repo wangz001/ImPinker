@@ -1,172 +1,15 @@
 [Header]
 [Footer]
 [Header]
-2016-11-12 10:55:02,774 [85] ERROR WebLogger [(null)] - 
+[Footer]
+[Header]
+2016-11-13 12:55:15,005 [56] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/UserCenter
-Referer:http://www.impinker.com/
-System.InvalidOperationException: 未找到分部视图“UserCenter_NavPartial”或没有视图引擎支持搜索的位置。搜索了以下位置: 
-~/Views/UserCenter/UserCenter_NavPartial.aspx
-~/Views/UserCenter/UserCenter_NavPartial.ascx
-~/Views/Shared/UserCenter_NavPartial.aspx
-~/Views/Shared/UserCenter_NavPartial.ascx
-~/Views/UserCenter/UserCenter_NavPartial.cshtml
-~/Views/UserCenter/UserCenter_NavPartial.vbhtml
-~/Views/Shared/UserCenter_NavPartial.cshtml
-~/Views/Shared/UserCenter_NavPartial.vbhtml
-   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
-   在 ASP._Page_Views_UserCenter_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\Index.cshtml:行号 10
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-2016-11-12 10:55:34,233 [75] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/UserCenter
-Referer:http://www.impinker.com/
-System.InvalidOperationException: 未找到分部视图“UserCenter_NavPartial”或没有视图引擎支持搜索的位置。搜索了以下位置: 
-~/Views/UserCenter/UserCenter_NavPartial.aspx
-~/Views/UserCenter/UserCenter_NavPartial.ascx
-~/Views/Shared/UserCenter_NavPartial.aspx
-~/Views/Shared/UserCenter_NavPartial.ascx
-~/Views/UserCenter/UserCenter_NavPartial.cshtml
-~/Views/UserCenter/UserCenter_NavPartial.vbhtml
-~/Views/Shared/UserCenter_NavPartial.cshtml
-~/Views/Shared/UserCenter_NavPartial.vbhtml
-   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
-   在 ASP._Page_Views_UserCenter_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\Index.cshtml:行号 10
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-11-12 10:55:38,168 [65] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/UserCenter
-Referer:http://www.impinker.com/
-System.InvalidOperationException: 未找到分部视图“UserCenter_NavPartial”或没有视图引擎支持搜索的位置。搜索了以下位置: 
-~/Views/UserCenter/UserCenter_NavPartial.aspx
-~/Views/UserCenter/UserCenter_NavPartial.ascx
-~/Views/Shared/UserCenter_NavPartial.aspx
-~/Views/Shared/UserCenter_NavPartial.ascx
-~/Views/UserCenter/UserCenter_NavPartial.cshtml
-~/Views/UserCenter/UserCenter_NavPartial.vbhtml
-~/Views/Shared/UserCenter_NavPartial.cshtml
-~/Views/Shared/UserCenter_NavPartial.vbhtml
-   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
-   在 ASP._Page_Views_UserCenter_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\Index.cshtml:行号 10
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-11-12 10:55:39,062 [85] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/UserCenter
-Referer:http://www.impinker.com/
-System.InvalidOperationException: 未找到分部视图“UserCenter_NavPartial”或没有视图引擎支持搜索的位置。搜索了以下位置: 
-~/Views/UserCenter/UserCenter_NavPartial.aspx
-~/Views/UserCenter/UserCenter_NavPartial.ascx
-~/Views/Shared/UserCenter_NavPartial.aspx
-~/Views/Shared/UserCenter_NavPartial.ascx
-~/Views/UserCenter/UserCenter_NavPartial.cshtml
-~/Views/UserCenter/UserCenter_NavPartial.vbhtml
-~/Views/Shared/UserCenter_NavPartial.cshtml
-~/Views/Shared/UserCenter_NavPartial.vbhtml
-   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
-   在 ASP._Page_Views_UserCenter_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\Index.cshtml:行号 10
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-11-12 10:55:39,213 [83] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/UserCenter
-Referer:http://www.impinker.com/
-System.InvalidOperationException: 未找到分部视图“UserCenter_NavPartial”或没有视图引擎支持搜索的位置。搜索了以下位置: 
-~/Views/UserCenter/UserCenter_NavPartial.aspx
-~/Views/UserCenter/UserCenter_NavPartial.ascx
-~/Views/Shared/UserCenter_NavPartial.aspx
-~/Views/Shared/UserCenter_NavPartial.ascx
-~/Views/UserCenter/UserCenter_NavPartial.cshtml
-~/Views/UserCenter/UserCenter_NavPartial.vbhtml
-~/Views/Shared/UserCenter_NavPartial.cshtml
-~/Views/Shared/UserCenter_NavPartial.vbhtml
-   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
-   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
-   在 ASP._Page_Views_UserCenter_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\Index.cshtml:行号 10
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-2016-11-12 15:19:20,538 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/Upload/Upload
+Url:http://www.impinker.com/Upload/SaveJscropImg
 Referer:http://www.impinker.com/UserCenter/UserSetting
-System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\ImPinker\ImPinker\imgtemp\152301q9mmtye0o7tagttf.jpg”的一部分。
-   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   在 System.IO.FileStream..ctor(String path, FileMode mode)
-   在 System.Web.HttpPostedFile.SaveAs(String filename)
-   在 ImPinker.Controllers.UploadController.Upload(HttpPostedFileBase imgFile, Nullable`1 resizeWidth, Nullable`1 resizeHeight) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 27
-   在 lambda_method(Closure , ControllerBase , Object[] )
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“windowWidth”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
@@ -178,18 +21,13 @@ System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\Im
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
 [Header]
-2016-11-12 15:25:11,824 [19] ERROR WebLogger [(null)] - 
+2016-11-13 13:12:14,828 [60] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/Upload/Upload
+Url:http://www.impinker.com/Upload/SaveJscropImg
 Referer:http://www.impinker.com/UserCenter/UserSetting
-System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\ImPinker\ImPinker\imgtemp\152301q9mmtye0o7tagttf.jpg”的一部分。
-   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   在 System.IO.FileStream..ctor(String path, FileMode mode)
-   在 System.Web.HttpPostedFile.SaveAs(String filename)
-   在 ImPinker.Controllers.UploadController.Upload(HttpPostedFileBase imgFile, Nullable`1 resizeWidth, Nullable`1 resizeHeight) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 32
-   在 lambda_method(Closure , ControllerBase , Object[] )
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“x1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
@@ -199,18 +37,13 @@ System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\Im
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-11-12 15:26:05,874 [22] ERROR WebLogger [(null)] - 
+2016-11-13 13:13:52,269 [56] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/Upload/Upload
+Url:http://www.impinker.com/Upload/SaveJscropImg
 Referer:http://www.impinker.com/UserCenter/UserSetting
-System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\ImPinker\ImPinker\imgtemp\152301ju9ijzwx96tswuo4.jpg”的一部分。
-   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   在 System.IO.FileStream..ctor(String path, FileMode mode)
-   在 System.Web.HttpPostedFile.SaveAs(String filename)
-   在 ImPinker.Controllers.UploadController.Upload(HttpPostedFileBase imgFile, Nullable`1 resizeWidth, Nullable`1 resizeHeight) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 32
-   在 lambda_method(Closure , ControllerBase , Object[] )
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“x1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
@@ -220,20 +53,13 @@ System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\Im
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-2016-11-12 15:27:30,728 [9] ERROR WebLogger [(null)] - 
+2016-11-13 13:14:49,539 [66] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/Upload/Upload
+Url:http://www.impinker.com/Upload/SaveJscropImg
 Referer:http://www.impinker.com/UserCenter/UserSetting
-System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\ImPinker\ImPinker\imgtemp\152301ju9ijzwx96tswuo4.jpg”的一部分。
-   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   在 System.IO.FileStream..ctor(String path, FileMode mode)
-   在 System.Web.HttpPostedFile.SaveAs(String filename)
-   在 ImPinker.Controllers.UploadController.Upload(HttpPostedFileBase imgFile, Nullable`1 resizeWidth, Nullable`1 resizeHeight) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 32
-   在 lambda_method(Closure , ControllerBase , Object[] )
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“y1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
@@ -243,15 +69,62 @@ System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitHubProject\ImPinker\Im
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-2016-11-12 15:32:19,184 [17] ERROR WebLogger [(null)] - 
+2016-11-13 13:16:29,241 [65] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Upload/SaveJscropImg
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“x1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-11-13 13:16:40,584 [34] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Upload/SaveJscropImg
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“x1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-11-13 13:18:18,738 [47] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Upload/SaveJscropImg
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.ArgumentException: 对于“ImPinker.Controllers.UploadController”中方法“System.Web.Mvc.ActionResult SaveJscropImg(System.String, Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“x1”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-11-13 13:20:18,190 [9] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/Upload/SaveJscropImg
 Referer:http://www.impinker.com/UserCenter/UserSetting
 System.Runtime.InteropServices.ExternalException (0x80004005): GDI+ 中发生一般性错误。
-   在 ImPinker.Controllers.UploadController.SaveImage(String oldImagePath, String newImagePath, Int32 newW, Int32 newH, ImageFormat imageFormat) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 102
-   在 ImPinker.Controllers.UploadController.SaveJscropImg(String path, Int32 x1, Int32 y1, Int32 x2, Int32 y2) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 51
+   在 System.Drawing.Image.Save(String filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
+   在 ImPinker.Controllers.UploadController.ImgReduceCutOut(Int32 startX, Int32 startY, Int32 int_Width, Int32 int_Height, String input_ImgUrl, String out_ImgUrl) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 171
+   在 ImPinker.Controllers.UploadController.SaveJscropImg(String path, Int32 x1, Int32 y1, Int32 x2, Int32 y2) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 63
    在 lambda_method(Closure , ControllerBase , Object[] )
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
@@ -262,16 +135,42 @@ System.Runtime.InteropServices.ExternalException (0x80004005): GDI+ 中发生一般性
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
+2016-11-13 13:21:08,879 [23] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Upload/SaveJscropImg
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.Runtime.InteropServices.ExternalException (0x80004005): GDI+ 中发生一般性错误。
+   在 System.Drawing.Image.Save(String filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
+   在 ImPinker.Controllers.UploadController.ImgReduceCutOut(Int32 startX, Int32 startY, Int32 int_Width, Int32 int_Height, String input_ImgUrl, String out_ImgUrl) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 139
+   在 ImPinker.Controllers.UploadController.SaveJscropImg(String path, Int32 x1, Int32 y1, Int32 x2, Int32 y2) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 63
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-11-13 13:25:48,310 [16] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Upload/SaveJscropImg
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.Runtime.InteropServices.ExternalException (0x80004005): GDI+ 中发生一般性错误。
+   在 System.Drawing.Image.Save(String filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
+   在 ImPinker.Controllers.UploadController.ImgReduceCutOut(Int32 startX, Int32 startY, Int32 int_Width, Int32 int_Height, String input_ImgUrl, String out_ImgUrl) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 139
+   在 ImPinker.Controllers.UploadController.SaveJscropImg(String path, Int32 x1, Int32 y1, Int32 x2, Int32 y2) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\UploadController.cs:行号 63
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
 [Header]
 [Footer]

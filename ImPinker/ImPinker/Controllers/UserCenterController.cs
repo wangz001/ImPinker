@@ -17,6 +17,8 @@ namespace ImPinker.Controllers
         // GET: /UserCenter/
         public ActionResult Index()
         {
+            var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            ViewBag.User = user;
             return View();
         }
 
@@ -32,6 +34,8 @@ namespace ImPinker.Controllers
 
         public ActionResult UserSetting()
         {
+            var user= UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            ViewBag.User = user;
             return View();
         }
 	}

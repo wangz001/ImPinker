@@ -198,6 +198,20 @@ namespace BLL
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
+
+        /// <summary>
+        /// 修改用户头像
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="newimgUrl"></param>
+        /// <returns></returns>
+	    public bool UpdateHeadImg(int userId, string newimgUrl)
+		{
+		    var user = dal.GetModel(userId);
+		    user.ImgUrl = newimgUrl;
+		    user.UpdateTime = DateTime.Now;
+		    return dal.Update(user);
+		}
 	}
 }
 
