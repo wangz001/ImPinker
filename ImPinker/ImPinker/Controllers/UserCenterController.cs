@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using ImPinker.Filters;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 
@@ -15,23 +16,19 @@ namespace ImPinker.Controllers
         private static readonly UserBll UserBll = new UserBll();
         //个人中心首页
         // GET: /UserCenter/
+       [AuthorizationFilter]
         public ActionResult Index()
         {
             var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
             ViewBag.User = user;
             return View();
         }
-
-        public ActionResult MyArticles()
-        {
-            var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var ds = ArticleBll.GetMyListByPage(userId, 1, 10);
-            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
-            ViewBag.jsonData = JsonConvert.SerializeObject(articles);
-            ViewBag.pageCount = 10;
-            return View();
-        }
-
+        
+        /// <summary>
+        /// 账号设置
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
         public ActionResult UserSetting()
         {
             var user= UserBll.GetModelByAspNetId(User.Identity.GetUserId());

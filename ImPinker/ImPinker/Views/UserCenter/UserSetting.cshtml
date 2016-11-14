@@ -3,6 +3,7 @@
     ViewBag.Title = "个人中心-账户设置";
     var user = (Users) ViewBag.User;
     <link href="~/Content/usercenter.css" rel="stylesheet" />
+    <link href="~/Content/user_center_setup.css" rel="stylesheet" />
 }
 <div id="header" style="height: 0">
 
@@ -61,6 +62,8 @@
             </div>
 
         </div>
+        
+      
         <div class="my-thread">
             <h3 class="small-title">
                 头像设置
@@ -73,7 +76,30 @@
                 <!--头像切割结束 -->
         </div>
       
-    </div>
+        <div class="user-info" id="user_setup">
+            <h3>昵称</h3>
+            <dl>
+                <dt>现昵称：</dt>
+                <dd id="o_n_n">@Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)</dd>
+            </dl>
+            <dl>
+                <dt>新昵称：</dt>
+                <dd><input type="text" id="n_n" class="tel_input" maxlength="50"></dd>
+            </dl>
+            <dl>
+                <dt></dt>
+                <dd><a href="javascript:;" class="user_setup_big_button save_button" onclick="unm('n_n','o_n_n');">保存</a></dd>
+            </dl>
+        </div>
 
+        <div class="user-info" id="user_setup">
+            <h3>密码修改</h3>
+            <dl>
+                <dt></dt>
+                <dd><a href="/Account/Manage" class="user_setup_big_button save_button">修改密码</a></dd>
+            </dl>
+        </div>
+
+    </div>
 </div>
 

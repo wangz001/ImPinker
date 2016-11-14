@@ -1,64 +1,71 @@
 ﻿@{
-    ViewBag.Title = "我的收藏";
+    ViewBag.Title = "个人中心-EngineStart";
+
+    <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
+<div id="header" style="height: 0">
 
-<div class="b_box_nocolor m1100">
-    <div class="b_onepart b_twopart clearfix" style="display: block">
-        <div class="b_oneyou rt">
-            <!--列表左侧 start-->
-            <div class="b_twoleft lt">
-                <div class="b_hotcar  two_tit clearfix">
-                    <h5><a href="http://www.fblife.com/html/gundong.html" target="_blank">我的收藏</a></h5>
-                    <div class="b_twoxingshi rt" id="nes_relit">
-                        <a href="javascript:void(0)" class="b_txshiact b_txshi"><em class="z_liebiao"></em>列表</a>
-                        <a href="javascript:void(0)" class="b_txshi"><em class="z_wangge"></em>网格</a>
-                    </div>
-                </div>
-                <div class="b_yaowenbut" id="nes_llist">
-                    <div class="b_twoliepan clearfix" id="zixun_btn" style="display: block; height: 51px; ">
-                        <a href="javascript:void(0)" class="b_yaowen b_twolcur">最新</a>
-                        <a href="javascript:void(0)" class="b_yaowen">新车</a>
-                        <a href="javascript:void(0)" class="b_yaowen">导购</a>
-                        <a href="javascript:void(0)" class="b_yaowen">试驾</a>
-                        <a href="javascript:void(0)" class="b_yaowen">降价</a>
-                        <a href="javascript:void(0)" class="b_yaowen">文化</a>
-                        <a href="javascript:void(0)" class="b_yaowen">改装</a>
-                        <a href="javascript:void(0)" class="b_yaowen">用车</a>
-                        <a href="javascript:void(0)" class="b_yaowen">旅行</a>
-                        <a href="javascript:void(0)" class="b_yaowen">行业</a>
-                        <a href="javascript:void(0)" class="b_yaowen">铁骑</a>
-                        <a href="javascript:void(0)" class="b_yaowen">房车</a>
-                    </div>
-                </div>
-                <!--资讯列表-->
-                <div class="b_zxlistbor" id="today_news">
-                    <div class="b_wanglie lt" id="wanggelb">
-                        <!--列表形式-->
-                        <div class="b_newsfang" id="zixun_list" style="display:block;">
-                            <!--资讯列表---最新-->
-                            <div class="zixunone" id="articleConten" style="display: block;">
-
-                            </div>
-                            <!--更多-->
-                            <div class="b_zx_more clearfix">
-                                <a href="javascript:void(0)" id="loadmore">更多&gt;&gt;</a>
-                            </div>
-                            <!--更多 end-->
-                            <!--资讯列表---最新 end-->
-                        </div>
-                        <!--列表形式 end-->
-                    </div>
-                </div>
-                <!--资讯列表 end---->
-            </div>
-            <!--列表左侧 end-->
-            <!--资讯右侧 start-->
-            @Html.Partial("_RightPartial");
-            <!--资讯右侧 end-->
-        </div>
-    </div>
 </div>
+<div id="container" style="min-height: 557px;">
+    @Html.Partial("UserCenter/UserCenter_NavPartial")
+    <div class="usercenter-right">
 
+        <div class="my-thread" style="margin-top: 0px">
+            <input type="hidden" value="1">
+            <input type="hidden" value="0">
+            <h3 class="small-title">
+                所有帖子
+                <em>共有0篇</em>
+                <div class="filter">
+                    <a href="javascript:;" class="current-filter">
+                        所有帖子
+                        <em></em>
+                    </a>
+                    <ul>
+                        <li><a href="/center/thread?orderid=1&amp;typeid=2">精华帖子</a></li>
+                        <li><a href="/center/thread?orderid=1&amp;typeid=3">被选题收录</a></li>
+                        <li><a href="/center/thread?orderid=1&amp;typeid=4">被焦点图收录</a></li>
+                    </ul>
+                </div>
+                <!-- <em>共有0篇帖子</em> -->
+                <div class="comment-nav">
+
+
+                    <a href="javascript:;" style="color:#2175d0">
+
+
+
+                        最新发布
+                    </a>
+                    <span></span>
+
+
+
+                    <a href="/center/thread?orderid=2&amp;typeid=0">
+
+
+                        点击最高
+                    </a>
+                    <span></span>
+                    <a href="/center/thread?orderid=3&amp;typeid=0">
+                        评论最多
+                    </a>
+                </div>
+            </h3>
+            <ul class="my-thread-list" id="articleConten">
+
+                <h2 style="display: none;font-size: 30px;color: #ccc; text-align: center; margin: 163px 0px;">这里空空如也</h2>
+
+
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
 @section scripts
 {
     <script type="text/javascript">
@@ -67,17 +74,18 @@
         var jsonData=@Html.Raw(ViewBag.jsonData);
     </script>
     <script src="~/Scripts/Article/myArticle.js"></script>
-<script type="text/template1">
-    <div class="row">
-        <div class="b_zxtuwen">
-            <a href="$Url$" target="_blank">
-                <h1>$ArticleName$</h1>
-            </a>
-            <p>
-                <span>$Description$</span>
-                <span class="right">$CreateTime$</span>
-            </p>
-        </div>
-    </div>
-</script>
+    <script type="text/template1">
+        <li>
+            <div class="b_zxtuwen">
+                <a href="$Url$" target="_blank">
+                    <h4>$ArticleName$</h4>
+                </a>
+                <p>
+                    <span>$Description$</span>
+                    <span class="right">$CreateTime$</span>
+                </p>
+            </div>
+        </li>
+    </script>
 }
+

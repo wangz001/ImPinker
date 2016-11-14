@@ -1,71 +1,5 @@
-@charset "utf-8";
-html,body{
-	margin:0;
-	padding:0;
-	}
-body{
-	font-family:"Microsoft YaHei","WenQuanYi Micro Hei","STHeiti-Light","tohoma,sans-serif";
-	background:#f4f4f4;
-	color:#666;
-	}
-input,
-select{
-	font-family:"Microsoft YaHei","WenQuanYi Micro Hei","STHeiti-Light","tohoma,sans-serif";
-	outline:none;
-	}
-select{
-	color:#666;
-	margin-right:10px;
-	
-	}
-::-moz-placeholder{color:#999;opacity:1}/*火狐浏览器下需要设置不透明度opacity:1*/
-:-ms-input-placeholder{color:#999;}
-::-webkit-input-placeholder{color:#999;}
-a{
-	color:#2175d0;
-	text-decoration:none;
-	}
-a:hover{
-	color:#449eff;
-	}
-a:active{
-	color:#0058b8;
-	}
-#header{
-	width:100%;
-	border-top:20px solid #626262;
-	padding-top:50px;
-	text-align:center;
-	margin:0px auto 48px;
-	}
-#header span,
-#header a{
-	display:inline-block;
-	}
-#header .spark{
-	height:80px;
-	width:320px;
-	background:url(/images/spark-logo.png) 0px 22px no-repeat;
-	}
-#header .xxxxxbbs{
-	height:80px;
-	width:320px;
-	background:url(/images/xxxxxbbs-logo.png) 50px 0px no-repeat;
-	}
-#header span{
-	height:50px;
-	width:1px;
-	margin-bottom:10px;
-	background:#626262;
-	}
-#container{
-	width:988px;
-	margin:auto;
-	border:1px solid #e1e1e1;
-	background:#fff;
-	border-radius:10px;
-	padding-bottom:20px;
-	}
+﻿@charset "utf-8";
+
 #user_setup{
 	border:none;
 	}
@@ -298,51 +232,21 @@ h4{
 	margin-top:2px;
 	border:1px solid #ccc;
 	}
-.big_box,.big_box_radio{
+#user_setup,.big_box_radio{
 	border:1px solid #ededed;
-	width:788px;
 	height:auto;
 	margin:auto;
 	margin-top:20px;
 	overflow:auto;
 	padding-bottom:10px;
 	}
-.big_box .headpic_box{
+#user_setup .headpic_box{
 	margin:0px 10px;
 	font-size:12px;
 	color:#999;
 	}
-.big_box .headpic_box .upload_button{
-	text-align:right;
-	background:url(/images/upload_ico.png) no-repeat 8px 5px #2175d0;
-	padding-right:20px
-	}
-.big_box .headpic_box .upload_button:hover{
-	background:url(/images/upload_ico.png) no-repeat 8px 5px #247fe2
-	}
-.big_box .headpic_box .upload_button:active{
-	background:url(/images/upload_ico.png) no-repeat 8px 5px #0058b8;
-	}
-.big_box .headpic_box .upload_intro{
-	line-height:30px;
-	}
-.big_box .headpic_box .upload_intro input{
-	vertical-align:middle;
-	margin-right:5px;
-	margin-top:0px;
-	}
-.big_box .headpic_box .original_pic{
-	width:298px;
-	height:298px;
-	border:1px solid #c8e0fb;
-	background:#c8e0fb;
-	text-align:center;
-	overflow:hidden;
-	}
-.big_box .headpic_box .original_pic img{
-	margin:auto;
-	}
-.big_box dl,.big_box_radio dl{
+
+#user_setup dl,.big_box_radio dl{
 	margin:0;
 	margin-left:20px;
 	padding:0;
@@ -352,13 +256,13 @@ h4{
 	font-size:12px;
 	clear:both;
 	}
-.big_box dl dt,.big_box dl dd{
+#user_setup dl dt,.big_box dl dd{
 	float:left;
 	margin:0;
 	padding:0px 0px 10px 0px;
 	line-height:30px
 	}
-.big_box dl dd input{
+#user_setup dl dd input{
 	height:28px;
 	line-height:28px;
 	border:1px solid #ccc;
@@ -366,19 +270,19 @@ h4{
 	width:254px;
 	padding-left:6px;
 	}
-.big_box dl dt,.big_box_radio dl dt{
+#user_setup dl dt,.big_box_radio dl dt{
 	width:50px;
 	text-align:left;
 	}
-.big_box dl dd{
+#user_setup dl dd{
 	color:#666;
 	font-weight:normal;
 	}
-.big_box dl dd .sex input{
+#user_setup dl dd .sex input{
 	width:10px;
 	height:10px;
 	}
-.big_box .save_button,.big_box_radio .save_button{
+#user_setup .save_button,.big_box_radio .save_button{
 	width:100px;
 	line-height:30px;
 	height:30px;
@@ -386,29 +290,29 @@ h4{
 	border:none;
 	border-radius:5px;
 	}
-.big_box .save_button:hover,.big_box_radio .save_button:hover{
+#user_setup .save_button:hover,.big_box_radio .save_button:hover{
 	background:#247fe2;
 	color:#fff;
 	}
-.big_box .save_button:active,.big_box_radio .save_button:active{
+#user_setup .save_button:active,.big_box_radio .save_button:active{
 	background:#0058b8;
 	color:#fff;
 	}
-.big_box table{
+#user_setup table{
 	margin-left:20px;
 	}
-.big_box table th{
+#user_setup table th{
 	color:#999;
 	font-size:12px;
 	text-align:right;
 	}
-.big_box table th,
-.big_box table td{
+#user_setup table th,
+#user_setup table td{
 	height:40px;
 	vertical-align:middle;
 	font-size:12px;
 	}
-.big_box table td input{
+#user_setup table td input{
 	height:28px;
 	line-height:28px;
 	border:1px solid #ccc;
