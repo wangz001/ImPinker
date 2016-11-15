@@ -3,6 +3,8 @@ package com.lang.util;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.lionsoul.jcseg.extractor.SummaryExtractor;
@@ -65,6 +67,7 @@ public class JcSegUtil {
 	 * @return
 	 */
 	public static List<String> GetKeyWords(String text) {
+		text = delHTMLTag(text);
 		try {
 			// 2, 构建TextRankKeywordsExtractor关键字提取器
 			TextRankKeywordsExtractor extractor = new TextRankKeywordsExtractor(
@@ -93,6 +96,7 @@ public class JcSegUtil {
 	 * @return
 	 */
 	public static String GetSummary(String text, int length) {
+		text = delHTMLTag(text);
 		try {
 			// 2, 构造TextRankSummaryExtractor自动摘要提取对象
 			SummaryExtractor extractor = new TextRankSummaryExtractor(seg,
@@ -118,6 +122,7 @@ public class JcSegUtil {
 	 * @return
 	 */
 	public static List<String> GetKeyphrase(String text) {
+		text = delHTMLTag(text);
 		List<String> keyphrases = null;
 		try {
 			// 2, 构建TextRankKeyphraseExtractor关键短语提取器
@@ -135,6 +140,46 @@ public class JcSegUtil {
 			logger.error(e);
 		}
 		return keyphrases;
+	}
+
+	private static final String regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; // 定义script的正则表达式
+	private static final String regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; // 定义style的正则表达式
+	private static final String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式
+	private static final String regEx_space = "\\s*|\t|\r|\n";// 定义空格回车换行符
+
+	/**
+	 * 去除html标签
+	 * 
+	 * @param htmlStr
+	 * @return
+	 */
+	private static String delHTMLTag(String htmlStr) {
+		Pattern p_script = Pattern.compile(regEx_script,
+				Pattern.CASE_INSENSITIVE);
+		Matcher m_script = p_script.matcher(htmlStr);
+		htmlStr = m_script.replaceAll(""); // 过滤script标签
+
+		Pattern p_style = Pattern
+				.compile(regEx_style, Pattern.CASE_INSENSITIVE);
+		Matcher m_style = p_style.matcher(htmlStr);
+		htmlStr = m_style.replaceAll(""); // 过滤style标签
+
+		Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
+		Matcher m_html = p_html.matcher(htmlStr);
+		htmlStr = m_html.replaceAll(""); // 过滤html标签
+
+		Pattern p_space = Pattern
+				.compile(regEx_space, Pattern.CASE_INSENSITIVE);
+		Matcher m_space = p_space.matcher(htmlStr);
+		htmlStr = m_space.replaceAll(""); // 过滤空格回车标签
+		return htmlStr.trim(); // 返回文本字符串
+	}
+
+	public static String getTextFromHtml(String htmlStr) {
+		htmlStr = delHTMLTag(htmlStr);
+		htmlStr = htmlStr.replaceAll("&nbsp;", "");
+		htmlStr = htmlStr.substring(0, htmlStr.indexOf("。") + 1);
+		return htmlStr;
 	}
 
 	private static void testGetKey() {

@@ -89,7 +89,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
 				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(5);
+				.thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {

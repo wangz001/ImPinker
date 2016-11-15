@@ -34,7 +34,6 @@ public class AppProperties {
 
 	public static String getPropertyByName(String name) {
 		String value = prop.getProperty(name);
-		logger.info("\nThe " + name + " property: " + value);
 		return value;
 	}
 }

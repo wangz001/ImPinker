@@ -11,13 +11,14 @@ public class ArticleDao {
 	public long Add(Article article) {
 
 		String sqlString = "INSERT INTO Article"
-				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company) "
-				+ "values (?,?,?,?,?,?,?,?,?,?)";
+				+ "(ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,PublishTime,Company) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] objects = new Object[] { article.getTitle(),
 				article.getUrlString(), article.getCoverImage(),
 				AppStart.AdminUserId, article.getKeyWord(),
-				article.getDescription(), 1, article.getCreateTime(),
-				TUtil.getCurrentTime(), article.getCompany() };
+				article.getDescription(), 1, TUtil.getCurrentTime(),
+				TUtil.getCurrentTime(), article.getCreateTime(),
+				article.getCompany() };
 		int id = DBHelper.InsertAndRetId("Article", sqlString, objects);
 		return id;
 	}
