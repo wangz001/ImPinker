@@ -34,7 +34,8 @@ namespace Model{
 	    private string _content;
 		private int _state;
 		private DateTime _createtime;
-		private DateTime _updatetime;
+        private DateTime _updatetime;
+        private DateTime _publishtime;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -100,14 +101,7 @@ namespace Model{
 			set{ _description=value;}
 			get{return _description;}
 		}
-        /// <summary>
-        /// 文本内容，ntext类型。页面正文内容
-        /// </summary>
-        public string Content
-        {
-            set { _content = value; }
-            get { return _content; }
-        }
+       
 		/// <summary>
 		///  状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过
 		/// </summary>
@@ -132,6 +126,11 @@ namespace Model{
 			set{ _updatetime=value;}
 			get{return _updatetime;}
 		}
+        public DateTime PublishTime
+        {
+            set { _publishtime = value; }
+            get { return _publishtime; }
+        }
 		#endregion Model
 
 	}

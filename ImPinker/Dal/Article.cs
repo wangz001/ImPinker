@@ -37,7 +37,7 @@ namespace DAL
 		{
 			var strSql = new StringBuilder();
 			strSql.Append("insert into Article(");
-			strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,Company)");
+            strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,PublishTime,Company)");
 			strSql.Append(" values (");
             strSql.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime,@Company)");
 			SqlParameter[] parameters =
@@ -51,6 +51,7 @@ namespace DAL
 				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
 				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.CreateTime },
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
+				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value = model.PublishTime},
                 new SqlParameter("@Company",SqlDbType.Char){Value = model.Company}, 
 			};
 			
@@ -79,7 +80,6 @@ namespace DAL
 			strSql.Append("KeyWords=@KeyWords,");
 			strSql.Append("Description=@Description,");
 			strSql.Append("State=@State,");
-			strSql.Append("CreateTime=@CreateTime,");
 			strSql.Append("UpdateTime=@UpdateTime");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
@@ -91,7 +91,6 @@ namespace DAL
 				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100),
 				new SqlParameter("@Description", SqlDbType.NVarChar, 200),
 				new SqlParameter("@State", SqlDbType.TinyInt, 1),
-				new SqlParameter("@CreateTime", SqlDbType.DateTime),
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime),
 				new SqlParameter("@Id", SqlDbType.BigInt, 8)
 			};
@@ -171,7 +170,7 @@ namespace DAL
 
 			StringBuilder strSql = new StringBuilder();
 			strSql.Append(
-				"select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,Company,State,CreateTime,UpdateTime from Article ");
+                "select  top 1 Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Company,State,CreateTime,UpdateTime,PublishTime from Article ");
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
 			{
@@ -240,9 +239,9 @@ namespace DAL
 				{
 					model.UpdateTime = DateTime.Parse(row["UpdateTime"].ToString());
 				}
-                if (row["Content"] != null && row["Content"].ToString()!="")
+                if (row["PublishTime"] != null && row["PublishTime"].ToString() != "")
                 {
-                    model.Content = row["Content"].ToString();
+                    model.PublishTime = DateTime.Parse(row["PublishTime"].ToString());
                 }
                 if (row["Company"] != null && row["Company"].ToString() != "")
                 {
@@ -258,33 +257,12 @@ namespace DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,Content,State,CreateTime,UpdateTime ");
+            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime ");
 			strSql.Append(" FROM Article ");
 			if (strWhere.Trim() != "")
 			{
 				strSql.Append(" where " + strWhere);
 			}
-			return DbHelperSQL.Query(strSql.ToString());
-		}
-
-		/// <summary>
-		/// 获得前几行数据
-		/// </summary>
-		public DataSet GetList(int Top, string strWhere, string filedOrder)
-		{
-			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select ");
-			if (Top > 0)
-			{
-				strSql.Append(" top " + Top.ToString());
-			}
-			strSql.Append(" Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime ");
-			strSql.Append(" FROM Article ");
-			if (strWhere.Trim() != "")
-			{
-				strSql.Append(" where " + strWhere);
-			}
-			strSql.Append(" order by " + filedOrder);
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 

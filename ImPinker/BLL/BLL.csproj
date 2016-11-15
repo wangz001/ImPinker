@@ -54,11 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleBll.cs" />
-    <Compile Include="ArticleJoinTagBll.cs" />
     <Compile Include="ArticleSnapsBll.cs" />
     <Compile Include="ArticleTagBll.cs" />
     <Compile Include="ArticleVoteBll.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="SolrNetSearchBll.cs" />
     <Compile Include="SolrSearchBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

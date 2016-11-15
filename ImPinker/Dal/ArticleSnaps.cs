@@ -53,10 +53,7 @@ namespace DAL
 					new SqlParameter("@Id", SqlDbType.Int,4),
 					new SqlParameter("@ArticleId", SqlDbType.BigInt,8),
 					new SqlParameter("@text", SqlDbType.Char,10)};
-			parameters[0].Value = model.Id;
-			parameters[1].Value = model.ArticleId;
-			parameters[2].Value = model.text;
-
+			
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
 			{
@@ -82,9 +79,7 @@ namespace DAL
 					new SqlParameter("@text", SqlDbType.Char,10),
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.ArticleId;
-			parameters[1].Value = model.text;
-			parameters[2].Value = model.Id;
-
+			
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
 			{
@@ -173,18 +168,7 @@ namespace DAL
 			Model.ArticleSnaps model=new Model.ArticleSnaps();
 			if (row != null)
 			{
-				if(row["Id"]!=null && row["Id"].ToString()!="")
-				{
-					model.Id=int.Parse(row["Id"].ToString());
-				}
-				if(row["ArticleId"]!=null && row["ArticleId"].ToString()!="")
-				{
-					model.ArticleId=long.Parse(row["ArticleId"].ToString());
-				}
-				if(row["text"]!=null)
-				{
-					model.text=row["text"].ToString();
-				}
+				
 			}
 			return model;
 		}
