@@ -274,7 +274,6 @@
     <Content Include="Views\Shared\_FootPartial.cshtml" />
     <Content Include="Views\Shared\_TabListPartial.cshtml" />
     <Content Include="Views\UserCenter\Index.cshtml" />
-    <Content Include="Views\UserCenter\MyArticles.cshtml" />
     <Content Include="Views\Shared\UserCenter\UserCenter_NavPartial.cshtml" />
     <Content Include="Views\UserCenter\UserSetting.cshtml" />
     <Content Include="Views\Shared\UserCenter\ImgUploadPartial.cshtml" />

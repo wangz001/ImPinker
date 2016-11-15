@@ -83,7 +83,7 @@ namespace ImPinker.Controllers
 				var user = new ApplicationUser() { UserName = model.UserName };
 				var result = await UserManager.CreateAsync(user, model.Password);
 				if (result.Succeeded)
-				{
+				{//注：aspnetuser  和localuser 分别在两个数据库中
 					AddLocalUser(user);
 					await SignInAsync(user, isPersistent: false);
 					return RedirectToAction("Index", "Home");

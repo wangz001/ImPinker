@@ -10,8 +10,9 @@ namespace ImPinker.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-			: base("ImPinker")
+            : base("ImpinkerUserSystem")
         {
+            //用户登录验证，用ImpinkerUserSystem  数据库，以后别的系统也可以用同一套账号登录
         }
     }
 }
