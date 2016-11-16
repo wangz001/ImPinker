@@ -90,7 +90,7 @@
                 success: function (data, status)  //服务器成功响应处理函数
                 {
                     $("#headimg").attr("src", data.imgurl);
-                    alert(data);
+                    window.location.reload();
                 },
                 error: function (data, status, e)//服务器响应失败处理函数
                 {

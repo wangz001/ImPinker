@@ -1,123 +1,108 @@
 ﻿using System;
 using System.Configuration;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Common.Utils
 {
     public class ImageUtils
     {
 
-        /// <summary>
-        /// 可用的域名
-        /// </summary>
-        private static string[] imageDomains;
-
         static ImageUtils()
         {
             string imageDomainStr = ConfigurationManager.AppSettings["ImageDomains"];
-            imageDomains = imageDomainStr.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>
-        /// 获得图片所在的域名
+        /// 图片裁剪方法
         /// </summary>
-        /// <param name="imageID"></param>
-        /// <returns></returns>
-        public static string GetImageDomain(int imageID)
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="intWidth"></param>
+        /// <param name="intHeight"></param>
+        /// <param name="inputImgUrl"></param>
+        /// <param name="outImgUrl"></param>
+        public static void ImgReduceCutOut(int startX, int startY, int intWidth, int intHeight, string inputImgUrl, string outImgUrl)
         {
-            int domainCount = imageDomains.Length;
-            int index = imageID % domainCount;
-            return imageDomains[index];
-        }
-
-        /// <summary>
-        /// 获得图片地址(不含域名和规格)
-        /// </summary>
-        /// <param name="imageID">图片ID</param>
-        /// <param name="imagePartialUrl">图片路径</param>
-        /// <returns></returns>
-        public static string GetImageUrlWithoutDomainAndSpecification(int imageID, string imagePartialUrl)
-        {
-            if (imageID <= 0)
+            //通过连接创建Image对象
+            Image oldimage = Image.FromFile(inputImgUrl);
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp.jpg";
+            oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
+            oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
+            var bm = new Bitmap(tempjpg);
+            //处理JPG质量的函数
+            var codecs = ImageCodecInfo.GetImageEncoders();
+            ImageCodecInfo ici = null;
+            foreach (var codec in codecs)
             {
-                throw new ArgumentException("imageID不能小于等于0");
+                if (codec.MimeType == "image/jpeg")
+                {
+                    ici = codec;
+                    break;
+                }
             }
-            if (string.IsNullOrEmpty(imagePartialUrl))
+            var ep = new EncoderParameters();
+            const long level = 95L;//图片质量
+            ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
+
+            // 裁剪图片
+            var cloneRect = new Rectangle(startX, startY, intWidth, intHeight);
+            PixelFormat format = bm.PixelFormat;
+            Bitmap cloneBitmap = bm.Clone(cloneRect, format);
+
+            //保存图片
+            cloneBitmap.Save(outImgUrl, ici, ep);
+            cloneBitmap.Dispose();
+            bm.Dispose();
+        }
+
+        public static bool ThumbnailCallback()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// 缩放图片
+        /// </summary>
+        /// <param name="oldImagePath"></param>
+        /// <param name="newImagePath"></param>
+        /// <param name="newW"></param>
+        /// <param name="newH"></param>
+        /// <param name="imageFormat"></param>
+        public static void ThumbnailImage(string oldImagePath, string newImagePath, int newW, int newH, ImageFormat imageFormat)
+        {
+            if (System.IO.File.Exists(oldImagePath))
             {
-                throw new ArgumentException("imagePath不能为空");
+                //处理JPG质量的函数
+                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo ici = null;
+                foreach (ImageCodecInfo codec in codecs)
+                {
+                    if (codec.MimeType == "image/jpeg")
+                    {
+                        ici = codec;
+                        break;
+                    }
+                }
+                var ep = new EncoderParameters();
+                const long level = 95L;
+                ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
+                var bm = new Bitmap(oldImagePath);
+                var oldW = bm.Width;
+                var oldH = bm.Height;
+                if (newW < oldW && newH < oldH)
+                {
+                    var cutImg = bm.GetThumbnailImage(newW, newH, (ThumbnailCallback), IntPtr.Zero);
+                    if (ici != null) cutImg.Save(newImagePath, ici, ep);
+                    cutImg.Dispose();
+                    bm.Dispose();
+                }
             }
-
-            int extensionIndex = imagePartialUrl.LastIndexOf('.');
-            string imageUrl = string.Format("/{0}_{1}_{{0}}{2}",
-                imagePartialUrl.Substring(0, extensionIndex),
-                imageID, imagePartialUrl.Substring(extensionIndex)
-            );
-            return imageUrl;
-        }
-
-        /// <summary>
-        /// 获取图片地址，不包含图片编号
-        /// </summary>
-        /// <param name="imagePartialUrl"></param>
-        /// <returns></returns>
-        public static string GetImageUrlWithoutDomainAndSpecification(string imagePartialUrl)
-        {
-            if (string.IsNullOrEmpty(imagePartialUrl))
-            {
-                throw new ArgumentException("imagePath不能为空");
-            }
-
-            int extensionIndex = imagePartialUrl.LastIndexOf('.');
-            string imageUrl = string.Format("/{0}_{{0}}{1}",
-                imagePartialUrl.Substring(0, extensionIndex),
-                 imagePartialUrl.Substring(extensionIndex)
-            );
-            return imageUrl;
-        }
-
-
-        /// <summary>
-        /// 获取图片路径，路径中不包含图片编号
-        /// </summary>
-        /// <param name="imageId"></param>
-        /// <param name="imagePartialUrl"></param>
-        /// <param name="specification"></param>
-        /// <returns></returns>
-        public static string GetImageUrlWithoutImageId(int imageId, string imagePartialUrl, int specification)
-        {
-            return string.Format("http://{0}{1}",
-                GetImageDomain(imageId),
-                string.Format(GetImageUrlWithoutDomainAndSpecification(imagePartialUrl),
-                                specification)
-                );
-        }
-
-        /// <summary>
-        /// 获得图片地址(不含规格)
-        /// </summary>
-        /// <param name="imageID">图片ID</param>
-        /// <param name="imagePartialUrl">图片路径</param>
-        /// <returns></returns>
-        public static string GetImageUrlWithoutSpecification(int imageID, string imagePartialUrl)
-        {
-            string imageUrl = string.Format("http://{0}{1}",
-                GetImageDomain(imageID),
-                GetImageUrlWithoutDomainAndSpecification(imageID, imagePartialUrl)
-            );
-            return imageUrl;
         }
 
 
 
-        /// <summary>
-        /// 获得图片地址
-        /// </summary>
-        /// <param name="imageID">图片大小</param>
-        /// <param name="imagePartialUrl">图片路径</param>
-        /// <param name="specific">图片规格</param>
-        /// <returns></returns>
-        public static string GetImageUrl(int imageID, string imagePartialUrl, int specification)
-        {
-            return string.Format(GetImageUrlWithoutSpecification(imageID, imagePartialUrl), specification);
-        }
+
+
     }
 }
