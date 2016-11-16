@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
+using ImDal;
+using ImModel;
 using Maticsoft.Common;
 
-namespace BLL
+namespace ImBLL
 {
 	/// <summary>
 	/// User
 	/// </summary>
 	public partial class UserBll
 	{
-		private readonly DAL.User dal=new DAL.User();
+		private readonly User dal=new User();
 		public UserBll()
 		{}
 		#region  BasicMethod
@@ -34,7 +36,7 @@ namespace BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int  Add(Model.Users model)
+		public int  Add(Users model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +44,7 @@ namespace BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.Users model)
+		public bool Update(Users model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +68,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Users GetModel(int Id)
+		public Users GetModel(int Id)
 		{
 			
 			return dal.GetModel(Id);
@@ -75,7 +77,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Model.Users GetModelByCache(int Id)
+		public Users GetModelByCache(int Id)
 		{
 			string CacheKey = "UserModel-" + Id;
 			object objModel = DataCache.GetCache(CacheKey);
@@ -92,7 +94,7 @@ namespace BLL
 				}
 				catch{}
 			}
-			return (Model.Users)objModel;
+			return (Users)objModel;
 		}
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace BLL
         /// </summary>
         /// <param name="aspnetId">系统生成的md5  id</param>
         /// <returns></returns>
-		public Model.Users GetModelByAspNetId(string aspnetId)
+		public Users GetModelByAspNetId(string aspnetId)
 		{
 			string CacheKey = "UserModel-" + aspnetId;
 			object objModel = DataCache.GetCache(CacheKey);
@@ -117,7 +119,7 @@ namespace BLL
 				}
 				catch { }
 			}
-			return (Model.Users)objModel;
+			return (Users)objModel;
 		}
 
 		/// <summary>
@@ -137,7 +139,7 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.Users> GetModelList(string strWhere)
+		public List<Users> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -145,13 +147,13 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.Users> DataTableToList(DataTable dt)
+		public List<Users> DataTableToList(DataTable dt)
 		{
-			List<Model.Users> modelList = new List<Model.Users>();
+			List<Users> modelList = new List<Users>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				Model.Users model;
+				Users model;
 				for (int n = 0; n < rowsCount; n++)
 				{
 					model = dal.DataRowToModel(dt.Rows[n]);

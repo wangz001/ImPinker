@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
+using System.Text;
 using DBUtility;
 
-namespace DAL
+namespace ImDal
 {
 	/// <summary>
 	/// 数据访问类:ArticleTag
@@ -42,7 +42,7 @@ namespace DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.ArticleTag model)
+		public bool Add(ImModel.ArticleTag model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ArticleTag(");
@@ -76,7 +76,7 @@ namespace DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.ArticleTag model)
+		public bool Update(ImModel.ArticleTag model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update ArticleTag set ");
@@ -157,7 +157,7 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleTag GetModel(int Id)
+		public ImModel.ArticleTag GetModel(int Id)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -167,7 +167,7 @@ namespace DAL
 					new SqlParameter("@Id", SqlDbType.Int,4)			};
 			parameters[0].Value = Id;
 
-			Model.ArticleTag model=new Model.ArticleTag();
+			ImModel.ArticleTag model=new ImModel.ArticleTag();
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{
@@ -183,9 +183,9 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleTag DataRowToModel(DataRow row)
+		public ImModel.ArticleTag DataRowToModel(DataRow row)
 		{
-			Model.ArticleTag model=new Model.ArticleTag();
+			ImModel.ArticleTag model=new ImModel.ArticleTag();
 			if (row != null)
 			{
 				if(row["Id"]!=null && row["Id"].ToString()!="")

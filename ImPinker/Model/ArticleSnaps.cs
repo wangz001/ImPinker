@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Model
+
+namespace ImModel
 {
     /// <summary>
     /// 文章快照

@@ -7,8 +7,8 @@
     <ProjectGuid>{93BDE6D6-9E84-41C6-8A91-D32A921FB402}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <RootNamespace>ImModel</RootNamespace>
+    <AssemblyName>ImModel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

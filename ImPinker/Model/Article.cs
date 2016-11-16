@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
 
-namespace Model{
+namespace ImModel{
 
 	public enum ArticleStateEnum
 	{

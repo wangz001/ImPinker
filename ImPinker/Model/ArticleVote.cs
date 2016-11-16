@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Model
+
+namespace ImModel
 {
 	/// <summary>
 	/// ArticleVote:实体类(属性说明自动提取数据库字段的描述信息)

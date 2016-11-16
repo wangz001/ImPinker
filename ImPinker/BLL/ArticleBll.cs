@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
+using ImDal;
+using ImModel;
+using ImModel.ViewModel;
 using Maticsoft.Common;
-using Model;
-using Model.ViewModel;
 
-namespace BLL
+namespace ImBLL
 {
 	/// <summary>
 	/// Article
 	/// </summary>
 	public class ArticleBll
 	{
-		private readonly DAL.ArticleDal dal=new DAL.ArticleDal();
+		private readonly ArticleDal dal=new ArticleDal();
 		
         #region  BasicMethod
 		/// <summary>

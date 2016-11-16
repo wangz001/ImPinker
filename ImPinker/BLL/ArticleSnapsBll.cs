@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
+using ImModel;
 using Maticsoft.Common;
 
-namespace BLL
+namespace ImBLL
 {
 	/// <summary>
 	/// ArticleSnaps
 	/// </summary>
 	public partial class ArticleSnapsBll
 	{
-		private readonly DAL.ArticleSnaps dal=new DAL.ArticleSnaps();
+		private readonly ImDal.ArticleSnaps dal=new ImDal.ArticleSnaps();
 		public ArticleSnapsBll()
 		{}
 		#region  BasicMethod
@@ -34,7 +35,7 @@ namespace BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.ArticleSnaps model)
+		public bool Add(ArticleSnaps model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +43,7 @@ namespace BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.ArticleSnaps model)
+		public bool Update(ArticleSnaps model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +67,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleSnaps GetModel(int Id)
+		public ArticleSnaps GetModel(int Id)
 		{
 			
 			return dal.GetModel(Id);
@@ -75,7 +76,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Model.ArticleSnaps GetModelByCache(int Id)
+		public ArticleSnaps GetModelByCache(int Id)
 		{
 			
 			string CacheKey = "ArticleSnapsModel-" + Id;
@@ -93,7 +94,7 @@ namespace BLL
 				}
 				catch{}
 			}
-			return (Model.ArticleSnaps)objModel;
+			return (ArticleSnaps)objModel;
 		}
 
 		/// <summary>
@@ -113,7 +114,7 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleSnaps> GetModelList(string strWhere)
+		public List<ArticleSnaps> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -121,13 +122,13 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleSnaps> DataTableToList(DataTable dt)
+		public List<ArticleSnaps> DataTableToList(DataTable dt)
 		{
-			List<Model.ArticleSnaps> modelList = new List<Model.ArticleSnaps>();
+			List<ArticleSnaps> modelList = new List<ArticleSnaps>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				Model.ArticleSnaps model;
+				ArticleSnaps model;
 				for (int n = 0; n < rowsCount; n++)
 				{
 					model = dal.DataRowToModel(dt.Rows[n]);

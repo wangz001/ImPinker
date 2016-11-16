@@ -311,17 +311,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
+    <ProjectReference Include="..\BLL\ImBLL.csproj">
       <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
-      <Name>BLL</Name>
+      <Name>ImBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
       <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
       <Name>EasyNet.Solr</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\ImModel.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
-      <Name>Model</Name>
+      <Name>ImModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -7,8 +7,8 @@
     <ProjectGuid>{575CEBF9-D9DE-4977-B66D-8C280C78205E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dal</RootNamespace>
-    <AssemblyName>Dal</AssemblyName>
+    <RootNamespace>ImDal</RootNamespace>
+    <AssemblyName>ImDal</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,9 +51,9 @@
       <Project>{dff30bf7-ff38-49fc-8314-81e338f08ab2}</Project>
       <Name>DBUtility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\ImModel.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
-      <Name>Model</Name>
+      <Name>ImModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

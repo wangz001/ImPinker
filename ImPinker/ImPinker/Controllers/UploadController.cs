@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BLL;
 using Common.Utils;
+using ImBLL;
 using Microsoft.AspNet.Identity;
 
 namespace ImPinker.Controllers

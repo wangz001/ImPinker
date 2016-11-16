@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using BLL;
+using ImBLL;
+using ImModel;
 using ImPinker.Filters;
 using ImPinker.Models;
 using Microsoft.AspNet.Identity;
-using Model;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers

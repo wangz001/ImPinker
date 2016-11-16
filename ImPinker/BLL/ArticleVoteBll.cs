@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using DAL;
+using System.Data;
+using ImModel;
 using Maticsoft.Common;
-using ArticleVote = Model.ArticleVote;
 
-namespace BLL
+namespace ImBLL
 {
 	/// <summary>
 	/// ArticleVote
 	/// </summary>
 	public class ArticleVoteBll
 	{
-		private readonly DAL.ArticleVote dal=new DAL.ArticleVote();
+		private readonly ImDal.ArticleVote dal=new ImDal.ArticleVote();
 		public ArticleVoteBll()
 		{}
         /// <summary>
@@ -47,7 +46,7 @@ namespace BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.ArticleVote model)
+		public bool Add(ArticleVote model)
 		{
 			return dal.Add(model);
 		}
@@ -55,7 +54,7 @@ namespace BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.ArticleVote model)
+		public bool Update(ArticleVote model)
 		{
 			return dal.Update(model);
 		}
@@ -79,7 +78,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleVote GetModel(long Id)
+		public ArticleVote GetModel(long Id)
 		{
 			
 			return dal.GetModel(Id);
@@ -88,7 +87,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Model.ArticleVote GetModelByCache(long Id)
+		public ArticleVote GetModelByCache(long Id)
 		{
 			
 			string CacheKey = "ArticleVoteModel-" + Id;
@@ -106,7 +105,7 @@ namespace BLL
 				}
 				catch{}
 			}
-			return (Model.ArticleVote)objModel;
+			return (ArticleVote)objModel;
 		}
 
 		/// <summary>
@@ -126,7 +125,7 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleVote> GetModelList(string strWhere)
+		public List<ArticleVote> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -134,13 +133,13 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleVote> DataTableToList(DataTable dt)
+		public List<ArticleVote> DataTableToList(DataTable dt)
 		{
-			List<Model.ArticleVote> modelList = new List<Model.ArticleVote>();
+			List<ArticleVote> modelList = new List<ArticleVote>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				Model.ArticleVote model;
+				ArticleVote model;
 				for (int n = 0; n < rowsCount; n++)
 				{
 					model = dal.DataRowToModel(dt.Rows[n]);

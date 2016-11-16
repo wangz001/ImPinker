@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
+using System.Text;
 using DBUtility;
 
-namespace DAL
+namespace ImDal
 {
     /// <summary>
     /// 数据访问类:ArticleVote
@@ -34,7 +34,7 @@ namespace DAL
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public bool Add(Model.ArticleVote model)
+        public bool Add(ImModel.ArticleVote model)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into ArticleVote(");
@@ -61,7 +61,7 @@ namespace DAL
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(Model.ArticleVote model)
+        public bool Update(ImModel.ArticleVote model)
         {
             var strSql = new StringBuilder();
             strSql.Append("update ArticleVote set ");
@@ -131,7 +131,7 @@ namespace DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.ArticleVote GetModel(long Id)
+        public ImModel.ArticleVote GetModel(long Id)
         {
 
             StringBuilder strSql = new StringBuilder();
@@ -141,7 +141,7 @@ namespace DAL
 					new SqlParameter("@Id", SqlDbType.BigInt,8)			};
             parameters[0].Value = Id;
 
-            Model.ArticleVote model = new Model.ArticleVote();
+            ImModel.ArticleVote model = new ImModel.ArticleVote();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -157,9 +157,9 @@ namespace DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.ArticleVote DataRowToModel(DataRow row)
+        public ImModel.ArticleVote DataRowToModel(DataRow row)
         {
-            Model.ArticleVote model = new Model.ArticleVote();
+            ImModel.ArticleVote model = new ImModel.ArticleVote();
             if (row != null)
             {
                 if (row["Id"] != null && row["Id"].ToString() != "")

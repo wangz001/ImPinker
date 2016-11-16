@@ -7,8 +7,8 @@
     <ProjectGuid>{235A6684-BCA8-41D3-98D6-586577F53FB2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL</RootNamespace>
-    <AssemblyName>BLL</AssemblyName>
+    <RootNamespace>ImBLL</RootNamespace>
+    <AssemblyName>ImBLL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -63,17 +63,17 @@
     <Compile Include="UserBll.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dal\DAL.csproj">
+    <ProjectReference Include="..\Dal\ImDAL.csproj">
       <Project>{575cebf9-d9de-4977-b66d-8c280c78205e}</Project>
-      <Name>DAL</Name>
+      <Name>ImDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
       <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
       <Name>EasyNet.Solr</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\ImModel.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
-      <Name>Model</Name>
+      <Name>ImModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

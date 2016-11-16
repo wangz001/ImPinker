@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using EasyNet.Solr;
 using EasyNet.Solr.Commons;
 using EasyNet.Solr.Impl;
-using Maticsoft.Common;
-using Model.ViewModel;
+using ImModel.ViewModel;
 
-namespace BLL
+namespace ImBLL
 {
     public class SolrSearchBll
     {

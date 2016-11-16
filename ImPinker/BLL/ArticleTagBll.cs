@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
+using ImModel;
 using Maticsoft.Common;
-using Model;
-namespace BLL
+
+namespace ImBLL
 {
 	/// <summary>
 	/// ArticleTag
 	/// </summary>
 	public partial class ArticleTagBll
 	{
-		private readonly DAL.ArticleTag dal=new DAL.ArticleTag();
+		private readonly ImDal.ArticleTag dal=new ImDal.ArticleTag();
 		public ArticleTagBll()
 		{}
 		#region  BasicMethod
@@ -34,7 +35,7 @@ namespace BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.ArticleTag model)
+		public bool Add(ArticleTag model)
 		{
 			return dal.Add(model);
 		}
@@ -42,7 +43,7 @@ namespace BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.ArticleTag model)
+		public bool Update(ArticleTag model)
 		{
 			return dal.Update(model);
 		}
@@ -66,7 +67,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleTag GetModel(int Id)
+		public ArticleTag GetModel(int Id)
 		{
 			
 			return dal.GetModel(Id);
@@ -75,7 +76,7 @@ namespace BLL
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Model.ArticleTag GetModelByCache(int Id)
+		public ArticleTag GetModelByCache(int Id)
 		{
 			
 			string CacheKey = "ArticleTagModel-" + Id;
@@ -93,7 +94,7 @@ namespace BLL
 				}
 				catch{}
 			}
-			return (Model.ArticleTag)objModel;
+			return (ArticleTag)objModel;
 		}
 
 		/// <summary>
@@ -113,7 +114,7 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleTag> GetModelList(string strWhere)
+		public List<ArticleTag> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -121,13 +122,13 @@ namespace BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<Model.ArticleTag> DataTableToList(DataTable dt)
+		public List<ArticleTag> DataTableToList(DataTable dt)
 		{
-			List<Model.ArticleTag> modelList = new List<Model.ArticleTag>();
+			List<ArticleTag> modelList = new List<ArticleTag>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				Model.ArticleTag model;
+				ArticleTag model;
 				for (int n = 0; n < rowsCount; n++)
 				{
 					model = dal.DataRowToModel(dt.Rows[n]);

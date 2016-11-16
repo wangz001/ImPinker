@@ -5,12 +5,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using BLL;
+using ImBLL;
+using ImModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ImPinker.Models;
-using Model;
 
 namespace ImPinker.Controllers
 {

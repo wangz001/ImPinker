@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
+using System.Text;
 using DBUtility;
-using Model;
+using ImModel;
 
-namespace DAL
+namespace ImDal
 {
 	/// <summary>
 	/// 数据访问类:User
@@ -44,7 +44,7 @@ namespace DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public int Add(Model.Users model)
+		public int Add(Users model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Users(");
@@ -79,7 +79,7 @@ namespace DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.Users model)
+		public bool Update(Users model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update Users set ");
@@ -179,7 +179,7 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Users GetModel(int Id)
+		public Users GetModel(int Id)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -190,7 +190,7 @@ namespace DAL
 			};
 			parameters[0].Value = Id;
 
-			Model.Users model=new Model.Users();
+			Users model=new Users();
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{
@@ -206,9 +206,9 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Users DataRowToModel(DataRow row)
+		public Users DataRowToModel(DataRow row)
 		{
-			Model.Users model=new Model.Users();
+			Users model=new Users();
 			if (row != null)
 			{
 				if(row["Id"]!=null && row["Id"].ToString()!="")
@@ -398,7 +398,7 @@ namespace DAL
 			SqlParameter[] parameters = {
 					new SqlParameter("@AspNetId", SqlDbType.NVarChar){Value = aspnetid}
 			};
-			Model.Users model = new Model.Users();
+			Users model = new Users();
 			DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
 			if (ds.Tables[0].Rows.Count > 0)
 			{

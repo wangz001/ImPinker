@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
+using System.Text;
 using DBUtility;
 
-namespace DAL
+namespace ImDal
 {
 	/// <summary>
 	/// 数据访问类:ArticleSnaps
@@ -42,7 +42,7 @@ namespace DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.ArticleSnaps model)
+		public bool Add(ImModel.ArticleSnaps model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ArticleSnaps(");
@@ -67,7 +67,7 @@ namespace DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.ArticleSnaps model)
+		public bool Update(ImModel.ArticleSnaps model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update ArticleSnaps set ");
@@ -137,7 +137,7 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleSnaps GetModel(int Id)
+		public ImModel.ArticleSnaps GetModel(int Id)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -147,7 +147,7 @@ namespace DAL
 					new SqlParameter("@Id", SqlDbType.Int,4)			};
 			parameters[0].Value = Id;
 
-			Model.ArticleSnaps model=new Model.ArticleSnaps();
+			ImModel.ArticleSnaps model=new ImModel.ArticleSnaps();
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{
@@ -163,9 +163,9 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.ArticleSnaps DataRowToModel(DataRow row)
+		public ImModel.ArticleSnaps DataRowToModel(DataRow row)
 		{
-			Model.ArticleSnaps model=new Model.ArticleSnaps();
+			ImModel.ArticleSnaps model=new ImModel.ArticleSnaps();
 			if (row != null)
 			{
 				

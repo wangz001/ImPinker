@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using BLL;
+using ImBLL;
+using ImModel.ViewModel;
 using ImPinker.Filters;
-using Model.ViewModel;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers

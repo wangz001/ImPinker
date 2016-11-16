@@ -6,9 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using BLL;
+using ImModel.ViewModel;
 using ImPinker.App_Start;
-using Model.ViewModel;
 
 namespace ImPinker
 {

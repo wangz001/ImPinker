@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
+using System.Text;
 using DBUtility;
-using Model;
+using ImModel;
 
-namespace DAL
+namespace ImDal
 {
 	/// <summary>
 	/// 数据访问类:Article
@@ -33,7 +33,7 @@ namespace DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(Model.Article model)
+		public bool Add(Article model)
 		{
 			var strSql = new StringBuilder();
 			strSql.Append("insert into Article(");
@@ -69,7 +69,7 @@ namespace DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(Model.Article model)
+		public bool Update(Article model)
 		{
 			var strSql = new StringBuilder();
 			strSql.Append("update Article set ");
@@ -165,7 +165,7 @@ namespace DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Model.Article GetModel(long Id)
+		public Article GetModel(long Id)
 		{
 
 			StringBuilder strSql = new StringBuilder();
@@ -178,7 +178,7 @@ namespace DAL
 			};
 			parameters[0].Value = Id;
 
-			Model.Article model = new Model.Article();
+			Article model = new Article();
 			DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
 			if (ds.Tables[0].Rows.Count > 0)
 			{

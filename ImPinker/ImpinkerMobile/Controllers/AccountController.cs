@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using BLL;
+using ImBLL;
+using ImModel;
 using ImpinkerMobile.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using Model;
 
 namespace ImpinkerMobile.Controllers
 {

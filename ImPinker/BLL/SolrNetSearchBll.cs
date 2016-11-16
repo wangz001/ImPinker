@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ImModel.ViewModel;
 using Microsoft.Practices.ServiceLocation;
-using Model.ViewModel;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 
-namespace BLL
+namespace ImBLL
 {
     public class SolrNetSearchBll
     {
