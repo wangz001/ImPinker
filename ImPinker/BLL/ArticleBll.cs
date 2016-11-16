@@ -179,7 +179,24 @@ namespace ImBLL
 		
 
 		#endregion  BasicMethod
-		
+
+        /// <summary>
+        /// 更新封面图地址
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="newUrl"></param>
+        /// <returns></returns>
+	    public bool UpdateCoverImage(long articleId,string newUrl)
+	    {
+            var article = GetModelByCache(articleId);
+	        if (article!=null)
+	        {
+	            article.CoverImage = newUrl;
+	            article.UpdateTime = DateTime.Now;
+	            return dal.Update(article);
+	        }
+	        return false;
+	    }
 	}
 }
 

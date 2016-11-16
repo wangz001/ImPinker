@@ -5,11 +5,9 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using GetCarDataService;
 using HtmlAgilityPack;
-using WebClient = System.Net.WebClient;
 
-namespace ScheduledTask.Tools
+namespace GetCarDataService.Tools
 {
     public static class HttpRequestProxy
     {

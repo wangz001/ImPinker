@@ -67,10 +67,6 @@
       <Project>{575cebf9-d9de-4977-b66d-8c280c78205e}</Project>
       <Name>ImDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
-      <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>
-      <Name>EasyNet.Solr</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\ImModel.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
       <Name>ImModel</Name>

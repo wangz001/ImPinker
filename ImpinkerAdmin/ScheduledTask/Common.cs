@@ -7,12 +7,12 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using Bita.Common;
+using GetCarDataService.Tools;
 using HtmlAgilityPack;
-using ScheduledTask.Tools;
 
 namespace GetCarDataService
 {
-	class Common
+	public class Common
 	{
 		public static HtmlDocument GetHtmlDocument(string uri, bool? utf8 = false)
 		{

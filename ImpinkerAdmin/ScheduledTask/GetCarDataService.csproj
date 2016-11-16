@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GetCarDataService</RootNamespace>
     <AssemblyName>GetCarDataService</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -30,6 +30,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -40,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,8 +51,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aliyun.OSS">
+      <HintPath>..\..\ImPinker\Lib\Aliyun.OSS.dll</HintPath>
+    </Reference>
     <Reference Include="Bita.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>RefDll\Bita.Common.dll</HintPath>
@@ -74,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -98,6 +105,8 @@
     <Compile Include="GetPcAutoCarsData\GetProperty.cs" />
     <Compile Include="GetPcAutoCarsData\GetStylePropertyValues.cs" />
     <Compile Include="GetXCAutoCarsData\GetBasicStyle.cs" />
+    <Compile Include="ImArticleFirstImage\ArticleFirstImageUpload.cs" />
+    <Compile Include="ImArticleFirstImage\Config.cs" />
     <Compile Include="Properties\EnumName.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,7 +128,6 @@
     <Compile Include="GetXCAutoCarsData\GetProperty.cs" />
     <Compile Include="GetXCAutoCarsData\GetStylePropertyValues.cs" />
     <Compile Include="Tools\HttpRequestProxy.cs" />
-    <Compile Include="Tools\ImportPropertyMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="RefDll\Bita.Common.dll" />
@@ -139,6 +147,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ImPinker\BLL\ImBLL.csproj">
+      <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
+      <Name>ImBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ImPinker\Common\Common.csproj">
+      <Project>{6f74233e-4fd6-4ccd-a8aa-fb5e45b9b123}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ImPinker\Model\ImModel.csproj">
+      <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
+      <Name>ImModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AhBll\AhBll.csproj">
       <Project>{38c701ad-97dd-466b-a43b-2a206152bb8a}</Project>
       <Name>AhBll</Name>

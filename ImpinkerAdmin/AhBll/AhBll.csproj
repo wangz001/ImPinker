@@ -65,18 +65,6 @@
       <Project>{356fb116-e9ef-41fb-8b18-a0b9d758a6fe}</Project>
       <Name>AhModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CarsDataDal\CarsDataDal.csproj">
-      <Project>{41aa66f2-e64f-4643-9efb-8fc36d796c06}</Project>
-      <Name>CarsDataDal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DomainEntity\DomainEntity.csproj">
-      <Project>{73578d72-5d05-4023-b2e6-fcf52cebe4a8}</Project>
-      <Name>DomainEntity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EntityRepository\EntityRepository.csproj">
-      <Project>{7b964465-8a1e-476e-9a67-1d6ef1c6177a}</Project>
-      <Name>EntityRepository</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

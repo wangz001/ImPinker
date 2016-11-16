@@ -84,27 +84,17 @@ namespace ImDal
 			strSql.Append(" where Id=@Id ");
 			SqlParameter[] parameters =
 			{
-				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100),
-				new SqlParameter("@Url", SqlDbType.VarChar, 200),
-				new SqlParameter("@CoverImage", SqlDbType.VarChar, 100),
-				new SqlParameter("@UserId", SqlDbType.Int, 4),
-				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100),
-				new SqlParameter("@Description", SqlDbType.NVarChar, 200),
-				new SqlParameter("@State", SqlDbType.TinyInt, 1),
-				new SqlParameter("@UpdateTime", SqlDbType.DateTime),
-				new SqlParameter("@Id", SqlDbType.BigInt, 8)
+				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =model.ArticleName },
+				new SqlParameter("@Url", SqlDbType.VarChar, 200){Value =model.Url },
+				new SqlParameter("@CoverImage", SqlDbType.VarChar, 100){Value =model.CoverImage },
+				new SqlParameter("@UserId", SqlDbType.Int, 4){Value =model.UserId },
+				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =model.KeyWords },
+				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
+				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime },
+				new SqlParameter("@Id", SqlDbType.BigInt, 8){Value =model.Id }
 			};
-			parameters[0].Value = model.ArticleName;
-			parameters[1].Value = model.Url;
-			parameters[2].Value = model.CoverImage;
-			parameters[3].Value = model.UserId;
-			parameters[4].Value = model.KeyWords;
-			parameters[5].Value = model.Description;
-			parameters[6].Value = model.State;
-			parameters[7].Value = model.CreateTime;
-			parameters[8].Value = model.UpdateTime;
-			parameters[9].Value = model.Id;
-
+			
 			int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 			if (rows > 0)
 			{
@@ -257,7 +247,7 @@ namespace ImDal
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime ");
+            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,PublishTime ");
 			strSql.Append(" FROM Article ");
 			if (strWhere.Trim() != "")
 			{

@@ -26,7 +26,7 @@ namespace Common.Utils
         {
             //通过连接创建Image对象
             Image oldimage = Image.FromFile(inputImgUrl);
-            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp.jpg";
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\tempcut.jpg";
             oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
             oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
             var bm = new Bitmap(tempjpg);
@@ -87,22 +87,19 @@ namespace Common.Utils
                 var ep = new EncoderParameters();
                 const long level = 95L;
                 ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
-                var bm = new Bitmap(oldImagePath);
-                var oldW = bm.Width;
-                var oldH = bm.Height;
-                if (newW < oldW && newH < oldH)
-                {
-                    var cutImg = bm.GetThumbnailImage(newW, newH, (ThumbnailCallback), IntPtr.Zero);
-                    if (ici != null) cutImg.Save(newImagePath, ici, ep);
-                    cutImg.Dispose();
-                    bm.Dispose();
-                }
+                //通过连接创建Image对象
+                Image oldimage = Image.FromFile(oldImagePath);
+                var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\tempthumb.jpg";
+                oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
+                oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
+                var bm = new Bitmap(tempjpg);
+                var cutImg = bm.GetThumbnailImage(newW, newH, (ThumbnailCallback), IntPtr.Zero);
+                if (ici != null) cutImg.Save(newImagePath, ici, ep);
+                cutImg.Dispose();
+                bm.Dispose();
+
             }
         }
-
-
-
-
 
     }
 }

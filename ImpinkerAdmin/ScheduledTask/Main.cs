@@ -2,7 +2,7 @@
 using GetCarDataService.AutoHomeCountTask;
 using GetCarDataService.GetAHAutoCarsData;
 using GetCarDataService.GetXCAutoCarsData;
-using ScheduledTask;
+using GetCarDataService.ImArticleFirstImage;
 using GetBasicData = GetCarDataService.GetXCAutoCarsData.GetBasicData;
 using GetStylePropertyValues = GetCarDataService.GetXCAutoCarsData.GetStylePropertyValues;
 
@@ -12,6 +12,10 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
+            //生成article封面图计划任务
+            ArticleFirstImageUpload.Start();
+            Console.ReadLine();
+
             GetAHAutoCarsData.GetBasicData.Get();
             Console.WriteLine("汽车之家数据获取完毕");
             Console.ReadLine();

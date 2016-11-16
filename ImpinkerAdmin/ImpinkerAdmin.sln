@@ -11,6 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhBll", "AhBll\AhBll.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCarDataService", "ScheduledTask\GetCarDataService.csproj", "{E8B363AB-5600-4074-BBAD-5581ACE5CB50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBUtility", "..\ImPinker\DBUtility\DBUtility.csproj", "{DFF30BF7-FF38-49FC-8314-81E338F08AB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImBLL", "..\ImPinker\BLL\ImBLL.csproj", "{235A6684-BCA8-41D3-98D6-586577F53FB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImDAL", "..\ImPinker\Dal\ImDAL.csproj", "{575CEBF9-D9DE-4977-B66D-8C280C78205E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImModel", "..\ImPinker\Model\ImModel.csproj", "{93BDE6D6-9E84-41C6-8A91-D32A921FB402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\ImPinker\Common\Common.csproj", "{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +43,26 @@ Global
 		{E8B363AB-5600-4074-BBAD-5581ACE5CB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8B363AB-5600-4074-BBAD-5581ACE5CB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8B363AB-5600-4074-BBAD-5581ACE5CB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF30BF7-FF38-49FC-8314-81E338F08AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235A6684-BCA8-41D3-98D6-586577F53FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235A6684-BCA8-41D3-98D6-586577F53FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235A6684-BCA8-41D3-98D6-586577F53FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235A6684-BCA8-41D3-98D6-586577F53FB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{575CEBF9-D9DE-4977-B66D-8C280C78205E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575CEBF9-D9DE-4977-B66D-8C280C78205E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575CEBF9-D9DE-4977-B66D-8C280C78205E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575CEBF9-D9DE-4977-B66D-8C280C78205E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93BDE6D6-9E84-41C6-8A91-D32A921FB402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93BDE6D6-9E84-41C6-8A91-D32A921FB402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93BDE6D6-9E84-41C6-8A91-D32A921FB402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93BDE6D6-9E84-41C6-8A91-D32A921FB402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F74233E-4FD6-4CCD-A8AA-FB5E45B9B123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
