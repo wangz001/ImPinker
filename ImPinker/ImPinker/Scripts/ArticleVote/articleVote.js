@@ -1,24 +1,19 @@
-﻿$(document).ready(function() {
-    //页面加载完成，绑定vote按钮事件
-    
-});
-
+﻿//在首页index.js 中，填充数据处绑定
 function bindVote() {
-    $(".b_zxotuij").unbind("click");//避免重复绑定
-    $(".b_zxotuij").bind("click", function () {
+    $(".praise-count").unbind("click");//避免重复绑定
+    $(".praise-count").bind("click", function () {
         if (!LoginState) {
             alert("请先登录~");
             return;
         }
+        
         var articleId = $(this).attr("articleid");
-        var vote = $(this).attr("vote");
-        var voteCount = $(this).find("cite")[0].innerText;
-        $(this).find("cite").html(Number(voteCount) + 1);
         $.ajax({
             url: "/ArticleVote/UserVote",
             type: "get",
-            data: { articleId: articleId, vote: vote },
+            data: { articleId: articleId, vote: 1 },
             success: function (data) {
+                alert("bingo！");
             },
             error: function (data) {
                 alert(data);

@@ -4,6 +4,9 @@ using SolrNet.Attributes;
 
 namespace ImModel.ViewModel
 {
+    /// <summary>
+    /// solr查询返回的序列化对象
+    /// </summary>
     public class ArticleViewModel
     {
         [SolrUniqueKey("id")]
@@ -37,5 +40,7 @@ namespace ImModel.ViewModel
         public List<Object> Content { get; set; }
         [SolrField("Company")]
         public string Company { get; set; }
+
+        public string CreateTimeStr { get; set; }
     }
 }

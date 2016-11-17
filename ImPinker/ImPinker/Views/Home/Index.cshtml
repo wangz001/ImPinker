@@ -2,7 +2,7 @@
     ViewBag.Title = "Engine Start";
 }
 @Html.Partial("_TabListPartial")
-<div class="topic-list"><p>今日新增320篇文章</p></div>
+<div class="topic-list"><p>今日新增320篇文章。车酷：精致的汽车生活社群</p></div>
 <ul class="topic-list" id="articleConten"></ul>
 <div class="clear"></div>
 <div class="topic-list">
@@ -32,20 +32,18 @@
             </a>
             <span class="topic-info-box">
                 <a href="/topicinfo?topicId=3&amp;creatorTime=2" target="_blank" class="topic-lab" topicid="3" style="background: rgb(46, 75, 107);">秀最新/NB装备<i></i></a>
-                <em class="topic-pub-time">$CreateTime$</em>
+                <em class="topic-pub-time">$CreateTimeStr$</em>
             </span>
             <h3 class="topic-title"><a href="/Article?id=$Id$" target="_blank">$ArticleName$</a></h3>
             <div class="topic-user-info">
                 <a href="/lookat/home?userId=35983" target="_blank" class="user-info">
-                    <i><img src=""></i>
                     <span>
                         $Company$
                     </span>
                 </a>
                 <div class="about-count">
                     <span class="click-count"><i></i><b>181</b></span>
-                    <span class="comment-count"><i></i><b>3</b></span>
-                    <span class="praise-count"><i></i><b>1</b></span>
+                    <span class="praise-count" articleid="$Id$"><i></i><b>喜欢，点个赞</b></span>
                 </div>
             </div>
         </li>

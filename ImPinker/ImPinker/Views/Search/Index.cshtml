@@ -1,6 +1,4 @@
-﻿@using System.Runtime.InteropServices
-@using ImModel.ViewModel
-@using Model.ViewModel
+﻿@using ImModel.ViewModel
 @using Newtonsoft.Json
 @{
     ViewBag.Title = "Search";
@@ -8,7 +6,7 @@
     <link href="~/Content/search.css" rel="stylesheet" />
 }
 <div id="containers" style="width: 1100px;margin:auto;">
-    <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果</div>
+    <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果  </div>
     <div class="search-input">
             <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
             <div class="search-btn-area">
@@ -131,12 +129,9 @@
             </h4>
             <div class="user-info">
                 <a href="/lookat/home?userId=13476" target="_blank" class="user">
-                    <i>
-                        <img src="">
-                    </i>
                     <em>$Company$</em>
                 </a>
-                <span class="pub-time">$CreateTime$</span>
+                <span class="pub-time">$CreateTimeStr$</span>
             </div>
         </li>
     </script>

@@ -63,6 +63,10 @@
     <Compile Include="UserBll.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6f74233e-4fd6-4ccd-a8aa-fb5e45b9b123}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dal\ImDAL.csproj">
       <Project>{575cebf9-d9de-4977-b66d-8c280c78205e}</Project>
       <Name>ImDAL</Name>

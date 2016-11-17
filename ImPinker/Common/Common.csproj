@@ -58,7 +58,7 @@
     <Compile Include="AlyOssUtil\BucketOperate.cs" />
     <Compile Include="AlyOssUtil\ObjectOperate.cs" />
     <Compile Include="AlyOssUtil\OssInstance.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="DateTimeUtil\TUtil.cs" />
     <Compile Include="Exceptions\ExceptionHelper.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

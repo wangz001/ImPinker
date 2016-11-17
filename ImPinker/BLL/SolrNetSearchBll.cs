@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.DateTimeUtil;
 using ImModel.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using SolrNet;
@@ -254,6 +255,11 @@ namespace ImBLL
             }
 
             #endregion
+            //时间格式转换，前台显示用
+            foreach (var articleViewModel in results)
+            {
+                articleViewModel.CreateTimeStr = TUtil.DateFormatToString(articleViewModel.CreateTime);
+            }
             var searchVm = new SearchResultVm()
             {
                 ArticleList = results,

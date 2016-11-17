@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using Common.DateTimeUtil;
 using ImDal;
 using ImModel;
 using ImModel.ViewModel;
@@ -176,7 +177,8 @@ namespace ImBLL
                         KeyWords = article.KeyWords,
                         CoverImage =imgDomain+ article.CoverImage,
                         Company = article.Company,
-                        CreateTime = article.CreateTime
+                        CreateTime = article.CreateTime,
+                        CreateTimeStr = TUtil.DateFormatToString(article.CreateTime)
                     });
                 }
             }
