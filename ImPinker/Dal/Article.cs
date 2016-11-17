@@ -247,7 +247,7 @@ namespace ImDal
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,PublishTime ");
+            strSql.Append("select Id,ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,Company,CreateTime,UpdateTime,PublishTime ");
 			strSql.Append(" FROM Article ");
 			if (strWhere.Trim() != "")
 			{

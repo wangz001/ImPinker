@@ -9,21 +9,10 @@ namespace ImBLL
 	/// <summary>
 	/// ArticleSnaps
 	/// </summary>
-	public partial class ArticleSnapsBll
+	public class ArticleSnapsBll
 	{
 		private readonly ImDal.ArticleSnaps dal=new ImDal.ArticleSnaps();
-		public ArticleSnapsBll()
-		{}
-		#region  BasicMethod
-
-		/// <summary>
-		/// 得到最大ID
-		/// </summary>
-		public int GetMaxId()
-		{
-			return dal.GetMaxId();
-		}
-
+		
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
@@ -33,68 +22,11 @@ namespace ImBLL
 		}
 
 		/// <summary>
-		/// 增加一条数据
-		/// </summary>
-		public bool Add(ArticleSnaps model)
-		{
-			return dal.Add(model);
-		}
-
-		/// <summary>
-		/// 更新一条数据
-		/// </summary>
-		public bool Update(ArticleSnaps model)
-		{
-			return dal.Update(model);
-		}
-
-		/// <summary>
-		/// 删除一条数据
-		/// </summary>
-		public bool Delete(int Id)
-		{
-			
-			return dal.Delete(Id);
-		}
-		/// <summary>
-		/// 删除一条数据
-		/// </summary>
-		public bool DeleteList(string Idlist )
-		{
-			return dal.DeleteList(Idlist );
-		}
-
-		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public ArticleSnaps GetModel(int Id)
+		public ArticleSnaps GetModel(long Id)
 		{
-			
 			return dal.GetModel(Id);
-		}
-
-		/// <summary>
-		/// 得到一个对象实体，从缓存中
-		/// </summary>
-		public ArticleSnaps GetModelByCache(int Id)
-		{
-			
-			string CacheKey = "ArticleSnapsModel-" + Id;
-			object objModel = DataCache.GetCache(CacheKey);
-			if (objModel == null)
-			{
-				try
-				{
-					objModel = dal.GetModel(Id);
-					if (objModel != null)
-					{
-						int ModelCache = ConfigHelper.GetConfigInt("ModelCache");
-						DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
-					}
-				}
-				catch{}
-			}
-			return (ArticleSnaps)objModel;
 		}
 
 		/// <summary>
@@ -104,13 +36,7 @@ namespace ImBLL
 		{
 			return dal.GetList(strWhere);
 		}
-		/// <summary>
-		/// 获得前几行数据
-		/// </summary>
-		public DataSet GetList(int Top,string strWhere,string filedOrder)
-		{
-			return dal.GetList(Top,strWhere,filedOrder);
-		}
+		
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
@@ -122,7 +48,7 @@ namespace ImBLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<ArticleSnaps> DataTableToList(DataTable dt)
+		private List<ArticleSnaps> DataTableToList(DataTable dt)
 		{
 			List<ArticleSnaps> modelList = new List<ArticleSnaps>();
 			int rowsCount = dt.Rows.Count;
@@ -141,21 +67,7 @@ namespace ImBLL
 			return modelList;
 		}
 
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetAllList()
-		{
-			return GetList("");
-		}
-
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public int GetRecordCount(string strWhere)
-		{
-			return dal.GetRecordCount(strWhere);
-		}
+		
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
@@ -163,18 +75,7 @@ namespace ImBLL
 		{
 			return dal.GetListByPage( strWhere,  orderby,  startIndex,  endIndex);
 		}
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		//public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-		//{
-			//return dal.GetList(PageSize,PageIndex,strWhere);
-		//}
-
-		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
+		
 	}
 }
 

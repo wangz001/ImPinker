@@ -106,7 +106,6 @@
     <Compile Include="GetPcAutoCarsData\GetStylePropertyValues.cs" />
     <Compile Include="GetXCAutoCarsData\GetBasicStyle.cs" />
     <Compile Include="ImArticleFirstImage\ArticleFirstImageUpload.cs" />
-    <Compile Include="ImArticleFirstImage\Config.cs" />
     <Compile Include="Properties\EnumName.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

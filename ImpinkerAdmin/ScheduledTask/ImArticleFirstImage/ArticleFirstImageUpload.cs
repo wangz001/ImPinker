@@ -11,66 +11,81 @@ using ImModel.ViewModel;
 
 namespace GetCarDataService.ImArticleFirstImage
 {
+    /// <summary>
+    /// 根据articlesnap表的firstimageurl，生成缩略图，上传到oss，并更新到article主表（solr索引自动更新或定时更新）
+    /// </summary>
     public class ArticleFirstImageUpload
     {
         static ArticleBll articleBll = new ArticleBll();
+        static ArticleSnapsBll articlesnapBll = new ArticleSnapsBll();
         private const string buckeyName = "myautos";
-
+        const string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
         public static void Start()
         {
-            GetAllArticles();
-        }
-        public static void GetAllArticles()
-        {
-            const string key = "articlefirstimg/img/{0}_{1}.jpg";
-            List<ArticleViewModel> list = articleBll.GetIndexListByPage(1, 20);
-            foreach (var articleViewModel in list)
+            Console.WriteLine("开始检查图片：" + DateTime.Now.Ticks);
+            var articleList = articleBll.GetArticlesWithoutCoverImage();
+            foreach (var article in articleList)
             {
-                if (!string.IsNullOrEmpty(articleViewModel.CoverImage) && articleViewModel.CoverImage.StartsWith("http://"))
+                var articleSnap = articlesnapBll.GetModel(article.Id);
+                if (articleSnap != null && !string.IsNullOrEmpty(articleSnap.FirstImageUrl))
                 {
-                    var imgoldUrl = articleViewModel.CoverImage;
-                    var newUrl = string.Format(key, articleViewModel.Id, DateTime.Now.Ticks);
-                    var flag=UploadToOss(imgoldUrl, newUrl);
+                    var firstimageUrl = articleSnap.FirstImageUrl;
+                    var imgurl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), article.Id, DateTime.Now.Ticks);
+                    var flag = UploadToOss(firstimageUrl, imgurl);
                     if (flag)
                     {
-                        articleBll.UpdateCoverImage(long.Parse(articleViewModel.Id),newUrl);
+                        var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
+                        if (!updateflag)
+                        {
+                            //记录错误日志
+                        }
                     }
                 }
             }
         }
 
-        public static bool UploadToOss( string imgUrl,string key)
+        /// <summary>
+        /// 生成360*240小图，上传到oss
+        /// </summary>
+        /// <param name="imgUrl"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool UploadToOss(string imgUrl, string key)
         {
             if (string.IsNullOrEmpty(imgUrl))
             {
                 return false;
             }
-            var tempdir = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp.jpg";
-            const int width = 360;
-            const int height = 240;
-            //下载
-            Uri myUri = new Uri(imgUrl);
-            WebRequest webRequest = WebRequest.Create(myUri);
-            WebResponse webResponse = webRequest.GetResponse();
-            Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
-            MemoryStream ms = new MemoryStream();
-            myImage.Save(ms, ImageFormat.Jpeg);
-            myImage.Save(tempdir);
-            //剪切(如果高大于2倍宽，剪切)
-            if ( 2*(myImage.Width)<myImage.Height)
+            try
             {
-                ImageUtils.ImgReduceCutOut(0,0,myImage.Width,myImage.Width*2/3,tempdir,tempdir);
+                var tempdir = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp.jpg";
+                const int width = 360;
+                const int height = 240;
+                //下载
+                Uri myUri = new Uri(imgUrl);
+                WebRequest webRequest = WebRequest.Create(myUri);
+                WebResponse webResponse = webRequest.GetResponse();
+                Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
+                MemoryStream ms = new MemoryStream();
+                myImage.Save(ms, ImageFormat.Jpeg);
+                myImage.Save(tempdir);
+                //剪切(如果高大于1.5倍宽，剪切)
+                if (1.5 * (myImage.Width) < myImage.Height)
+                {
+                    ImageUtils.ImgReduceCutOut(0, 0, myImage.Width, myImage.Width * 2 / 3, tempdir, tempdir);
+                }
+                //缩放
+                ImageUtils.ThumbnailImage(tempdir, tempdir, width, height, ImageFormat.Jpeg);
+
+                //保存
+                bool flag = ObjectOperate.UploadImage(buckeyName, tempdir, key);
+                return flag;
             }
-            //缩放
-            ImageUtils.ThumbnailImage(tempdir,tempdir,width,height,ImageFormat.Jpeg);
-
-            //保存
-            bool flag = ObjectOperate.UploadImage(buckeyName, tempdir, key);
-            return flag;
+            catch (Exception)
+            {
+                return false;
+            }
         }
-
-
-
     }
 
 }

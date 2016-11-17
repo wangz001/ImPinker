@@ -3,7 +3,7 @@
 namespace ImModel
 {
     /// <summary>
-    /// 文章快照
+    /// 文章快照，主要是用来重建索引
     /// </summary>
     [Serializable]
     public class ArticleSnaps

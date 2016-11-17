@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using ImDal;
 using ImModel;
@@ -144,6 +145,7 @@ namespace ImBLL
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
+            var imgDomain = ConfigurationManager.AppSettings["ArtilceCoverImageDomain"]; 
             var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
             var ds= dal.GetIndexListByPage(pageNum, count);
@@ -160,6 +162,10 @@ namespace ImBLL
                     {//去除标题重复的数据,解决fblife 同一文章发在不同域名的问题
                         continue;
                     }
+                    if (string.IsNullOrEmpty(article.CoverImage))
+                    {
+                        continue; //无图的不要
+                    }
                     articleNameLists.Add(article.ArticleName);
                     listResult.Add(new ArticleViewModel()
                     {
@@ -168,7 +174,7 @@ namespace ImBLL
                         Url = article.Url,
                         Description = article.Description,
                         KeyWords = article.KeyWords,
-                        CoverImage = article.CoverImage,
+                        CoverImage =imgDomain+ article.CoverImage,
                         Company = article.Company,
                         CreateTime = article.CreateTime
                     });
@@ -197,6 +203,16 @@ namespace ImBLL
 	        }
 	        return false;
 	    }
+        /// <summary>
+        /// 获取所有还未生成封面图oss的记录
+        /// </summary>
+        /// <returns></returns>
+	    public List<Article> GetArticlesWithoutCoverImage()
+        {
+            const string whereStr = " State =1 AND CoverImage='' ";
+            var list = GetModelList(whereStr);
+            return list;
+        }
 	}
 }
 

@@ -14,6 +14,7 @@ namespace GetCarDataService
         {
             //生成article封面图计划任务
             ArticleFirstImageUpload.Start();
+            Console.WriteLine("检查并上传oss图片结束");
             Console.ReadLine();
 
             GetAHAutoCarsData.GetBasicData.Get();
