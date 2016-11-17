@@ -1,66 +1,66 @@
 package com.lang.common;
 
+/**
+ * article 表和articleSnap两个表的内容
+ * 
+ * @author wangzheng1
+ * 
+ */
 public class Article {
 
-	public long id;
-
+	/**
+	 * 文章id
+	 */
+	public long Id;
+	/**
+	 * 名称
+	 */
 	public String Title;
-
+	/**
+	 * 关键词
+	 */
 	public String KeyWord;
-
-	public String urlString;
-
-	public String description;
-
-	public String company;
-
-	public String coverImage;
-
-	public String Content;
+	/**
+	 * 文章链接
+	 */
+	public String Url;
+	/**
+	 * 简介，关键短语
+	 */
+	public String Description;
+	/**
+	 * 来源
+	 */
+	public String Company;
 
 	/**
 	 * //文章发布时间
 	 */
-	public String createTime;
+	public String PublishTime;
 
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
+	/**
+	 * 第一张图片
+	 */
+	public String SnapFirstImageUrl;
+	/**
+	 * keyword标签
+	 */
+	public String SnapKeyWords;
+	/**
+	 * description标签
+	 */
+	public String SnapDescription;
+	/**
+	 * 正文内容
+	 */
+	public String SnapContent;
 
 	public long getId() {
-		return id;
+		return Id;
 	}
 
 	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getContent() {
-		return Content;
-	}
-
-	public void setContent(String content) {
-		Content = content;
-	}
-
-	public String getCoverImage() {
-		return coverImage;
-	}
-
-	public void setCoverImage(String coverImage) {
-		this.coverImage = coverImage;
-	}
-
-	public String getCompany() {
-		return company;
-	}
-
-	public void setCompany(String company) {
-		this.company = company;
+		Id = id;
 	}
 
 	public String getTitle() {
@@ -79,20 +79,68 @@ public class Article {
 		KeyWord = keyWord;
 	}
 
-	public String getUrlString() {
-		return urlString;
+	public String getUrl() {
+		return Url;
 	}
 
-	public void setUrlString(String urlString) {
-		this.urlString = urlString;
+	public void setUrl(String url) {
+		Url = url;
 	}
 
 	public String getDescription() {
-		return description;
+		return Description;
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		Description = description;
+	}
+
+	public String getCompany() {
+		return Company;
+	}
+
+	public void setCompany(String company) {
+		Company = company;
+	}
+
+	public String getPublishTime() {
+		return PublishTime;
+	}
+
+	public void setPublishTime(String publishTime) {
+		PublishTime = publishTime;
+	}
+
+	public String getSnapFirstImageUrl() {
+		return SnapFirstImageUrl;
+	}
+
+	public void setSnapFirstImageUrl(String snapFirstImageUrl) {
+		SnapFirstImageUrl = snapFirstImageUrl;
+	}
+
+	public String getSnapKeyWords() {
+		return SnapKeyWords;
+	}
+
+	public void setSnapKeyWords(String snapKeyWords) {
+		SnapKeyWords = snapKeyWords;
+	}
+
+	public String getSnapDescription() {
+		return SnapDescription;
+	}
+
+	public void setSnapDescription(String snapDescription) {
+		SnapDescription = snapDescription;
+	}
+
+	public String getSnapContent() {
+		return SnapContent;
+	}
+
+	public void setSnapContent(String snapContent) {
+		SnapContent = snapContent;
 	}
 
 }

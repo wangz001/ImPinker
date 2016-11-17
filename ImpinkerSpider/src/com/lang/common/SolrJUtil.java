@@ -80,11 +80,10 @@ public class SolrJUtil {
 			doc1.addField("ArticleName", article.getTitle());
 			doc1.addField("KeyWords", article.getKeyWord());
 			doc1.addField("Description", article.getDescription());
-			doc1.addField("Url", article.getUrlString());
-			doc1.addField("CreateTime", article.getCreateTime());
+			doc1.addField("Url", article.getUrl());
+			doc1.addField("CreateTime", article.getPublishTime());
 			doc1.addField("UpdateTime", time);
-			doc1.addField("CoverImage", article.getCoverImage());
-			doc1.addField("content", article.getContent());
+			doc1.addField("content", article.getSnapContent());
 			docs.add(doc1);
 		}
 		try {

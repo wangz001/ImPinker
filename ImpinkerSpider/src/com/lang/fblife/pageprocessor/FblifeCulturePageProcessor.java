@@ -2,8 +2,10 @@ package com.lang.fblife.pageprocessor;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
@@ -19,6 +21,7 @@ import com.lang.common.CompanyEnum;
 import com.lang.factory.XPathFactory;
 import com.lang.fblife.FblifePipeline;
 import com.lang.interfac.MotorXPathInterface;
+import com.lang.util.HtmlTagUtil;
 import com.lang.util.JcSegUtil;
 
 /**
@@ -64,26 +67,60 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			if (isPagination) {
 				String str = GetContentFromApi(page);
 				if (str != "") {
+					// str = unicode2String(str);// fblife接口需要转换
 					content = str;
+
 				}
 			}
+			content = HtmlTagUtil.delHrefTag(content);// 去除a标签
+
 			String publishTime = fbXPath.getPublishTime(page);
 			String articleTypeStr = fbXPath.getTypeByUrl(urlStr);
-			List<String> JcKeyWords = JcSegUtil.GetKeyWords(content);
-			String JcSummary = JcSegUtil.GetSummary(content, 80);
-			List<String> JcPhrases = JcSegUtil.GetKeyphrase(content);
+			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
+			tempContent = keyWord + description + tempContent;
+			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);
+			List<String> JcPhrases = JcSegUtil.GetKeyphrase(tempContent);
+			String JcSummary = JcSegUtil.GetSummary(tempContent, 80);
+
+			List<String> keywords = new ArrayList<String>();
+			keywords.add(articleTypeStr);
+			keywords.addAll(JcKeyWords);
+			keywords.addAll(JcPhrases);
+			String jckeywordsStr = StringUtils.join(keywords, ",");
+
 			page.putField("url", urlStr);
 			page.putField("title", titleString);
-			page.putField("description", description);
-			page.putField("keyword", keyWord);
-			page.putField("CoverImage", firstImg);
-			page.putField("Content", content);
+			page.putField("keyword", jckeywordsStr);
+			page.putField("description", JcSummary);
 			page.putField("publishtime", publishTime);
-			page.putField("jcKeyWords", JcKeyWords);
-			page.putField("jcSummary", JcSummary);
+			page.putField("snapCoverImage", firstImg);
+			page.putField("snapKeyWords", keyWord);
+			page.putField("snapDescription", JcSummary);
+			page.putField("snapContent", content);
 		} else {
 			page.setSkip(true);
 		}
+	}
+
+	/**
+	 * unicode 转字符串
+	 */
+	public static String unicode2String(String unicode) {
+
+		StringBuffer string = new StringBuffer();
+
+		String[] hex = unicode.split("\\\\u");
+
+		for (int i = 1; i < hex.length; i++) {
+
+			// 转换出每一个代码点
+			int data = Integer.parseInt(hex[i], 16);
+
+			// 追加成string
+			string.append((char) data);
+		}
+
+		return string.toString();
 	}
 
 	/**
@@ -99,8 +136,13 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 		String root = urlStr.substring(0, urlStr.indexOf("fblife.com/") + 10);
 		String url = api.replace("{0}", root).replace("{1}", pageKey);
 		String result = httpGet(url);
-		if (result != null && result != "")
+		if (result != null && result != "") {
+			// 暂时处理，后改为json对象处理
+			result = result.replace("{\"error\":0,\"content\":\"", "");
+			result = result.substring(0, result.length() - 2);// 移除 ”}
+
 			return result;
+		}
 		return "";
 	}
 

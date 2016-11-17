@@ -107,14 +107,14 @@ public class MutilePageUtil {
 			} else {
 				article.setDescription(description);
 			}
-			article.setUrlString(url);
+			article.setUrl(url);
 			article.setCompany(CompanyEnum.Fblife.getName());
-			article.setCoverImage(firstImg);
-			article.setContent(content);
+			article.setSnapFirstImageUrl(firstImg);
+			article.setSnapContent(content);
 			String timeString = "" != publishTime ? publishTime : TUtil
 					.getCurrentTime();
 
-			article.setCreateTime(timeString);
+			article.setPublishTime(timeString);
 			// 根据url获取id。如果id>0，表示存在，则重新做索引。如果==0，则表示不存在
 			ArticleBll articleBll = new ArticleBll();
 			articleBll.AddArticle(article);

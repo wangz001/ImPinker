@@ -15,22 +15,22 @@ public class ArticleBll {
 		// 根据url获取id。如果id>0，表示存在，则重新做索引。如果==0，则表示不存在
 
 		synchronized (ArticleBll.class) { // 解决多线程重复插入的问题
-			long id = GetIdByUrl(article.getUrlString());
+			long id = GetIdByUrl(article.getUrl());
 			if (id > 0) {
 				article.setId(id);
 			} else {
-				id = articleDao.Add(article);
+				id = articleDao.Add(article);// 同时向articlesnap表插入数据
 				if (id > 0) {
 					article.setId(id);
-					ArticleUrlCache.getInstance().AddUrl(
-							article.getUrlString(), id);// 添加到缓存
+
+					ArticleUrlCache.getInstance().AddUrl(article.getUrl(), id);// 添加到缓存
 				} else {
 					return; // 向数据库添加失败
 				}
 			}
 		}
-		String timeStr = TUtil.strToUTCTime(article.getCreateTime());
-		article.setCreateTime(timeStr); // 转成utc时间格式
+		String timeStr = TUtil.strToUTCTime(article.getPublishTime());
+		article.setPublishTime(timeStr); // 转成utc时间格式
 		// 添加索引
 		SolrJUtil solrJUtil = SolrJUtil.getInstance();
 		solrJUtil.AddDocs(article);
