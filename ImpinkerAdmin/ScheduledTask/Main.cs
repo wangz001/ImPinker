@@ -1,4 +1,5 @@
 ﻿using System;
+using Bita.Common;
 using GetCarDataService.AutoHomeCountTask;
 using GetCarDataService.GetAHAutoCarsData;
 using GetCarDataService.GetXCAutoCarsData;
@@ -12,6 +13,9 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
+            log4net.Config.XmlConfigurator.Configure();
+            new QuartzMain().Run();
+            Console.ReadLine();
             //生成article封面图计划任务
             ArticleFirstImageUpload.Start();
             Console.WriteLine("检查并上传oss图片结束");

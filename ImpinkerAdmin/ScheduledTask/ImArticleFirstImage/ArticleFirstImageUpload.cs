@@ -5,24 +5,32 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using Common.AlyOssUtil;
+using Common.Logging;
 using Common.Utils;
 using ImBLL;
 using ImModel.ViewModel;
+using Quartz;
 
 namespace GetCarDataService.ImArticleFirstImage
 {
     /// <summary>
     /// 根据articlesnap表的firstimageurl，生成缩略图，上传到oss，并更新到article主表（solr索引自动更新或定时更新）
     /// </summary>
-    public class ArticleFirstImageUpload
+    public class ArticleFirstImageUpload:IJob
     {
         static ArticleBll articleBll = new ArticleBll();
         static ArticleSnapsBll articlesnapBll = new ArticleSnapsBll();
         private const string buckeyName = "myautos";
         const string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
+        private static ILog _log = LogManager.GetLogger(typeof(ArticleFirstImageUpload));
+        public void Execute(IJobExecutionContext context)
+        {
+            _log.Info("开始检查图片：" + DateTime.Now.Ticks);
+            Start();
+            _log.Info("开始检查图片：" + DateTime.Now.Ticks);
+        }
         public static void Start()
         {
-            Console.WriteLine("开始检查图片：" + DateTime.Now.Ticks);
             var articleList = articleBll.GetArticlesWithoutCoverImage();
             foreach (var article in articleList)
             {
@@ -86,6 +94,8 @@ namespace GetCarDataService.ImArticleFirstImage
                 return false;
             }
         }
+
+        
     }
 
 }
