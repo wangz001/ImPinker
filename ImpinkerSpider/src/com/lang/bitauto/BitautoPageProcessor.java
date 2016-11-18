@@ -65,7 +65,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 	public static void main(String[] args) {
 		Spider spider = Spider.create(new BitautoPageProcessor())
 				.addUrl("http://www.bitauto.com/pingce/")
-				.addPipeline(bitautoPipeline).thread(5);
+				.addPipeline(bitautoPipeline).thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {

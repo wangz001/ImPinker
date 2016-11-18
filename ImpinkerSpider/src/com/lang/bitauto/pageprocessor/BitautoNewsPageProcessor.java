@@ -1,7 +1,10 @@
 package com.lang.bitauto.pageprocessor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -10,6 +13,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import com.lang.common.CompanyEnum;
 import com.lang.factory.XPathFactory;
 import com.lang.interfac.MotorXPathInterface;
+import com.lang.util.HtmlTagUtil;
+import com.lang.util.JcSegUtil;
 
 public class BitautoNewsPageProcessor implements PageProcessor {
 	private MotorXPathInterface yicheXPath = new XPathFactory()
@@ -41,20 +46,35 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 		}
 		String titleString = yicheXPath.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
-			String url = yicheXPath.getUrl(page);
-			String keyword = yicheXPath.getKeyWordString(page);
+			String urlStr = yicheXPath.getUrl(page);
+			String keyWord = yicheXPath.getKeyWordString(page);
 			String firstImg = yicheXPath.getFirstImg(page);
 			String description = yicheXPath.getDescription(page);
 			String content = yicheXPath.getContentString(page);
 			String publishTime = yicheXPath.getPublishTime(page);
-			String articleTypeString = yicheXPath.getTypeByUrl(url);
-			page.putField("url", url);
+			String articleTypeStr = yicheXPath.getTypeByUrl(urlStr);
+
+			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
+			tempContent = keyWord + description + tempContent;
+			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);
+			List<String> JcPhrases = JcSegUtil.GetKeyphrase(tempContent);
+			String JcSummary = JcSegUtil.GetSummary(tempContent, 80);
+
+			List<String> keywords = new ArrayList<String>();
+			keywords.add(articleTypeStr);
+			keywords.addAll(JcKeyWords);
+			keywords.addAll(JcPhrases);
+			String jckeywordsStr = StringUtils.join(keywords, ",");
+
+			page.putField("url", urlStr);
 			page.putField("title", titleString);
-			page.putField("description", description);
-			page.putField("keyword", keyword);
-			page.putField("CoverImage", firstImg);
-			page.putField("Content", content);
+			page.putField("keyword", jckeywordsStr);
+			page.putField("description", JcSummary);
 			page.putField("publishtime", publishTime);
+			page.putField("snapCoverImage", firstImg);
+			page.putField("snapKeyWords", keyWord);
+			page.putField("snapDescription", description);
+			page.putField("snapContent", content);
 		} else {
 			page.setSkip(true);
 		}

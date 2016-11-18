@@ -1,16 +1,11 @@
 package com.lang.fblife.pageprocessor;
 
-import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import us.codecraft.webmagic.Page;
@@ -22,6 +17,7 @@ import com.lang.factory.XPathFactory;
 import com.lang.fblife.FblifePipeline;
 import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.HtmlTagUtil;
+import com.lang.util.HttpUtil;
 import com.lang.util.JcSegUtil;
 
 /**
@@ -64,18 +60,16 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			String keyWord = fbXPath.getKeyWordString(page);
 			String description = fbXPath.getDescription(page);
 			String content = fbXPath.getContentString(page);
+			String publishTime = fbXPath.getPublishTime(page);
+			String articleTypeStr = fbXPath.getTypeByUrl(urlStr);
 			if (isPagination) {
 				String str = GetContentFromApi(page);
 				if (str != "") {
-					// str = unicode2String(str);// fblife接口需要转换
 					content = str;
-
 				}
 			}
-			content = HtmlTagUtil.delHrefTag(content);// 去除a标签
 
-			String publishTime = fbXPath.getPublishTime(page);
-			String articleTypeStr = fbXPath.getTypeByUrl(urlStr);
+			content = HtmlTagUtil.delHrefTag(content);// 去除a标签
 			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
 			tempContent = keyWord + description + tempContent;
 			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);
@@ -95,32 +89,11 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 			page.putField("publishtime", publishTime);
 			page.putField("snapCoverImage", firstImg);
 			page.putField("snapKeyWords", keyWord);
-			page.putField("snapDescription", JcSummary);
+			page.putField("snapDescription", description);
 			page.putField("snapContent", content);
 		} else {
 			page.setSkip(true);
 		}
-	}
-
-	/**
-	 * unicode 转字符串
-	 */
-	public static String unicode2String(String unicode) {
-
-		StringBuffer string = new StringBuffer();
-
-		String[] hex = unicode.split("\\\\u");
-
-		for (int i = 1; i < hex.length; i++) {
-
-			// 转换出每一个代码点
-			int data = Integer.parseInt(hex[i], 16);
-
-			// 追加成string
-			string.append((char) data);
-		}
-
-		return string.toString();
 	}
 
 	/**
@@ -130,52 +103,23 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 	 * @return
 	 */
 	private String GetContentFromApi(Page page) {
+		String returnStr = "";
 		String api = "{0}/ajax.php?c=news&a=getallpage&id={1}&curpage=0&t=1479212543400";
 		String pageKey = fbXPath.getPageKey(page);
 		String urlStr = fbXPath.getUrl(page);
 		String root = urlStr.substring(0, urlStr.indexOf("fblife.com/") + 10);
 		String url = api.replace("{0}", root).replace("{1}", pageKey);
-		String result = httpGet(url);
+		String result = HttpUtil.httpGet(url);
 		if (result != null && result != "") {
-			// 暂时处理，后改为json对象处理
-			result = result.replace("{\"error\":0,\"content\":\"", "");
-			result = result.substring(0, result.length() - 2);// 移除 ”}
-
-			return result;
+			JSONObject dataOfJson = JSONObject.fromObject(result);
+			if (dataOfJson.getInt("error") != 0) {
+				return null;
+			}
+			String content = dataOfJson.getString("content");
+			returnStr = content;
+			return returnStr;
 		}
 		return "";
-	}
-
-	/**
-	 * 发送get请求
-	 * 
-	 * @param url
-	 *            路径
-	 * @return
-	 */
-	public static String httpGet(String url) {
-		// get请求返回结果
-		String jsonResult = null;
-		try {
-			DefaultHttpClient client = new DefaultHttpClient();
-			// 发送get请求
-			HttpGet request = new HttpGet(url);
-			HttpResponse response = client.execute(request);
-
-			/** 请求发送成功，并得到响应 **/
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				/** 读取服务器返回过来的json字符串数据 **/
-				jsonResult = EntityUtils.toString(response.getEntity());
-				/** 把json字符串转换成json对象 **/
-				// jsonResult = JSONObject..fromObject(strResult);
-				url = URLDecoder.decode(url, "UTF-8");
-			} else {
-				logger.error("get请求提交失败:" + url);
-			}
-		} catch (IOException e) {
-			logger.error("get请求提交失败:" + url, e);
-		}
-		return jsonResult;
 	}
 
 	@Override

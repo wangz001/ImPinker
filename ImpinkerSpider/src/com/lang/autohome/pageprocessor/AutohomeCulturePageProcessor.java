@@ -1,6 +1,10 @@
 package com.lang.autohome.pageprocessor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -11,6 +15,8 @@ import com.lang.autohome.AutohomePipeline;
 import com.lang.common.CompanyEnum;
 import com.lang.factory.XPathFactory;
 import com.lang.interfac.MotorXPathInterface;
+import com.lang.util.HtmlTagUtil;
+import com.lang.util.JcSegUtil;
 
 /**
  * 文化、改装、新闻、评测。使用该解析
@@ -52,21 +58,35 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 		}
 		String titleString = autohomeXPath.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
-			String urlString = autohomeXPath.getUrl(page);
+			String urlStr = autohomeXPath.getUrl(page);
 			String keyWord = autohomeXPath.getKeyWordString(page);
 			String firstImg = autohomeXPath.getFirstImg(page);
 			String description = autohomeXPath.getDescription(page);
 			String content = autohomeXPath.getContentString(page);
 			String publishTime = autohomeXPath.getPublishTime(page);
-			String articleTypeString = autohomeXPath.getTypeByUrl(urlString);
+			String articleTypeStr = autohomeXPath.getTypeByUrl(urlStr);
 
-			page.putField("url", urlString);
+			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
+			tempContent = keyWord + description + tempContent;
+			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);
+			List<String> JcPhrases = JcSegUtil.GetKeyphrase(tempContent);
+			String JcSummary = JcSegUtil.GetSummary(tempContent, 80);
+
+			List<String> keywords = new ArrayList<String>();
+			keywords.add(articleTypeStr);
+			keywords.addAll(JcKeyWords);
+			keywords.addAll(JcPhrases);
+			String jckeywordsStr = StringUtils.join(keywords, ",");
+
+			page.putField("url", urlStr);
 			page.putField("title", titleString);
-			page.putField("description", description);
-			page.putField("keyword", articleTypeString);
-			page.putField("CoverImage", firstImg);
-			page.putField("Content", content);
+			page.putField("keyword", jckeywordsStr);
+			page.putField("description", JcSummary);
 			page.putField("publishtime", publishTime);
+			page.putField("snapCoverImage", firstImg);
+			page.putField("snapKeyWords", keyWord);
+			page.putField("snapDescription", description);
+			page.putField("snapContent", content);
 		} else {
 			page.setSkip(true);
 		}

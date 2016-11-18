@@ -44,5 +44,8 @@
 	<classpathentry kind="lib" path="jars/jcseg-analyzer-2.0.0.jar"/>
 	<classpathentry kind="lib" path="jars/jcseg-core-2.0.0.jar"/>
 	<classpathentry kind="lib" path="jars/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="jars/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="jars/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="jars/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
