@@ -66,6 +66,7 @@ public class AutohomeCulturePageProcessor implements PageProcessor {
 			String publishTime = autohomeXPath.getPublishTime(page);
 			String articleTypeStr = autohomeXPath.getTypeByUrl(urlStr);
 
+			content = HtmlTagUtil.delHrefTag(content);// 去除a标签
 			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
 			tempContent = keyWord + description + tempContent;
 			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);

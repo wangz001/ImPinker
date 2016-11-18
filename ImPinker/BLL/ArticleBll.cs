@@ -16,6 +16,7 @@ namespace ImBLL
 	public class ArticleBll
 	{
 		private readonly ArticleDal dal=new ArticleDal();
+        private readonly ArticleSnapsBll articleSnapsBll=new ArticleSnapsBll();
 		
         #region  BasicMethod
 		/// <summary>
@@ -142,7 +143,7 @@ namespace ImBLL
 		}
 
         /// <summary>
-        /// 分页获取首页数据列表
+        /// 分页获取首页数据列表,coverimage 不为空
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
@@ -211,9 +212,34 @@ namespace ImBLL
         /// <returns></returns>
 	    public List<Article> GetArticlesWithoutCoverImage()
         {
-            const string whereStr = " State =1 AND CoverImage='' ";
+            const string whereStr = " State =1 AND CoverImage IS NULL OR DATALENGTH(CoverImage)=0 ";
             var list = GetModelList(whereStr);
             return list;
+        }
+
+        /// <summary>
+        /// 获取model，包含snap表的content
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ArticleViewModel GetModelWithContent(long id)
+        {
+            var article = dal.GetModel(id);
+            var snap = articleSnapsBll.GetModel(id);
+            var vm = new ArticleViewModel()
+            {
+                Id = id.ToString(),
+                ArticleName = article.ArticleName,
+                Url = article.Url,
+                Userid = article.UserId.ToString(),
+                CoverImage = article.CoverImage,
+                KeyWords = article.KeyWords,
+                Description = article.Description,
+                Company = article.Company,
+                CreateTime= article.CreateTime,
+                Content = new List<Object>() { snap.Content }
+            };
+            return vm;
         }
 	}
 }

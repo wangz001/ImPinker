@@ -54,6 +54,7 @@ public class BitautoNewsPageProcessor implements PageProcessor {
 			String publishTime = yicheXPath.getPublishTime(page);
 			String articleTypeStr = yicheXPath.getTypeByUrl(urlStr);
 
+			content = HtmlTagUtil.delHrefTag(content);// 去除a标签
 			String tempContent = HtmlTagUtil.delHTMLTag(content);// 去除html标签
 			tempContent = keyWord + description + tempContent;
 			List<String> JcKeyWords = JcSegUtil.GetKeyWords(tempContent);
