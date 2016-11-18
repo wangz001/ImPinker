@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ImBLL;
 using ImModel;
+using ImModel.ViewModel;
 using ImPinker.Filters;
 using ImPinker.Models;
 using Microsoft.AspNet.Identity;
@@ -23,6 +24,7 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         public ActionResult Index(string id)
         {
+            var vm = new ArticleViewModel();
             var idStr = id;
             long idInt = 0;
             if (!id.StartsWith("travels_"))
@@ -33,11 +35,18 @@ namespace ImPinker.Controllers
             var article = SolrNetSearchBll.GetArticleById(idStr);
             if (article != null && article.Content != null && article.Content.Count > 0)
             {
-                ViewBag.Article = article;
-                return View("Index");
+                vm = article;
             }
-            var temp = ArticleBll.GetModel(idInt);
-            return new RedirectResult(temp.Url);
+            else
+            {
+                vm = ArticleBll.GetModelWithContent(idInt);
+            }
+            if (vm.Content==null)
+            {
+                return new RedirectResult(vm.Url);
+            }
+            ViewBag.Article = vm;
+            return View("Index");
         }
 
         /// <summary>
