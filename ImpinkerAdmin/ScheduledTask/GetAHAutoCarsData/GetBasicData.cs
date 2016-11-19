@@ -5,12 +5,19 @@ using AhBll;
 using AhModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Quartz;
 
 namespace GetCarDataService.GetAHAutoCarsData
 {
-    public class GetBasicData
+    public class GetBasicData:IJob
     {
         private const int CompanyId = (int)CompanyEnum.AHauto;
+
+        public void Execute(IJobExecutionContext context)
+        {
+            Get();
+        }
+
 
         /// <summary>
         /// 添加主品牌、品牌、车系、车型。参配名称信息
@@ -19,9 +26,10 @@ namespace GetCarDataService.GetAHAutoCarsData
         {
             try
             {
-                GetMasterBrand();
                 //车型参配
                 GetStyleProperty.GetProperty();
+                GetMasterBrand();
+                
             }
             catch (Exception e)
             {
@@ -120,7 +128,7 @@ namespace GetCarDataService.GetAHAutoCarsData
                 var modelId = innJObject["I"].ToString();
                 try
                 {
-                    HandleStyles(int.Parse(modelId));
+                    //HandleStyles(int.Parse(modelId));
                 }
                 catch (Exception e)
                 {
@@ -238,5 +246,7 @@ namespace GetCarDataService.GetAHAutoCarsData
             }
             return false;
         }
+
+        
     }
 }

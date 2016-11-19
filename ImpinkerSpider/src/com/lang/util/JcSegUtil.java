@@ -128,7 +128,7 @@ public class JcSegUtil {
 			extractor.setMaxIterateNum(100); // 设置pagerank算法最大迭代词库，非必须，使用默认即可
 			extractor.setWindowSize(5); // 设置textRank窗口大小，非必须，使用默认即可
 			extractor.setKeywordsNum(10); // 设置最大返回的关键词个数，默认为10
-			extractor.setMaxWordsNum(5); // 设置最大短语词长，默认为5
+			extractor.setMaxWordsNum(8); // 设置最大短语词长，默认为5
 			// 3, 从一个输入reader输入流中获取短语
 			keyphrases = extractor.getKeyphrase(new StringReader(text));
 		} catch (IOException e) {

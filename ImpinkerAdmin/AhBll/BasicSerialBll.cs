@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AhDal;
 using AhModel;
+using AhModel.ViewModel;
 
 namespace AhBll
 {
@@ -62,6 +63,17 @@ namespace AhBll
         public static BasicMasterBrand GetMasterBrand(int basicSerialId,int companyId)
         {
             return _serialDal.GetMasterBrand(basicSerialId,companyId);
+        }
+        /// <summary>
+        /// 获取所有车系信息，包括品牌名和主品牌名
+        /// </summary>
+        /// <returns></returns>
+        public List<BasicSerialVm> GetAllSerials(int companyId)
+        {
+            var list = new List<BasicSerialVm>();
+            list = _serialDal.GetAllSerials(companyId);
+
+            return list;
         }
     }
 }

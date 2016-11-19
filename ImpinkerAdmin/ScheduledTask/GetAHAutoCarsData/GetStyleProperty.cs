@@ -9,7 +9,7 @@ namespace GetCarDataService.GetAHAutoCarsData
     class GetStyleProperty
     {
         private const int CompanyId = (int)CompanyEnum.AHauto;
-        private const string DuibiUrl = "http://car.autohome.com.cn/duibi/chexing/carids=18111,0,0,0"; //给定一个车型id，解决无id时某些参配获取不到的问题
+        private const string DuibiUrl = "http://car.autohome.com.cn/duibi/chexing/carids=26768,0,0,0"; //给定一个车型id，解决无id时某些参配获取不到的问题
 
         /// <summary>
         /// 插入分组和动态属性

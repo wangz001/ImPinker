@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using AhModel;
+using AhModel.ViewModel;
 
 namespace AhDal
 {
@@ -180,7 +181,7 @@ namespace AhDal
             return lists;
         }
 
-        public BasicMasterBrand GetMasterBrand(int basicSerialId,int companyId)
+        public BasicMasterBrand GetMasterBrand(int basicSerialId, int companyId)
         {
             BasicMasterBrand mb = null;
             var strSql = new StringBuilder();
@@ -193,7 +194,7 @@ namespace AhDal
                         new SqlParameter("@SerialId",SqlDbType.Int){Value = basicSerialId} 
                                         };
             var ds = DbHelperSql.Query(strSql.ToString(), parameters);
-            if (ds!=null&&ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 var row = ds.Tables[0].Rows[0];
                 mb = new BasicMasterBrand
@@ -207,6 +208,56 @@ namespace AhDal
                 };
             }
             return mb;
+        }
+        /// <summary>
+        /// 获取所有车系信息，包括品牌名和主品牌名
+        /// </summary>
+        /// <returns></returns>
+        public List<BasicSerialVm> GetAllSerials(int companyId)
+        {
+            var sqlStr = @"
+SELECT  S.CompanyId ,
+        S.Id ,
+        S.Name AS SerialName ,
+        S.ManufacturerId AS MakeId ,
+        S.CreateTime ,
+        S.UpdateTime ,
+        S.IsRemoved ,
+        M.Name AS MakeName ,
+        MBJS.MasterBrandId ,
+        MB.Name AS MasterBrandName
+FROM    [CarsDataAutoHome].[dbo].[BasicSerial] S
+        JOIN dbo.BasicMake M ON S.ManufacturerId = M.Id
+        JOIN dbo.BasicMasterBrandJoinSerial MBJS ON S.Id = MBJS.SerialId
+        JOIN dbo.BasicMasterBrand MB ON MB.Id = MBJS.MasterBrandId
+WHERE   S.CompanyId = @CompanyId
+        AND S.IsRemoved = 0;
+";
+            SqlParameter[] parameters = { 
+                        new SqlParameter("@CompanyId",SqlDbType.Int){Value =companyId}
+                                        };
+            var ds = DbHelperSql.Query(sqlStr, parameters);
+            var list = new List<BasicSerialVm>();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    var vm = new BasicSerialVm
+                    {
+                        ID = Int32.Parse(row["Id"].ToString()),
+                        Name = row["SerialName"] == null ? "" : row["SerialName"].ToString(),
+                        CompanyId = Int32.Parse(row["CompanyId"].ToString()),
+                        CreateTime = DateTime.Parse(row["CreateTime"].ToString()),
+                        UpdateTime = DateTime.Parse(row["UpdateTime"].ToString()),
+                        IsRemoved = ((bool)row["IsRemoved"]) ? 1 : 0,
+                        MakeName = row["MakeName"] == null ? "" : row["MakeName"].ToString(),
+                        MasterBrandId = Int32.Parse(row["MasterBrandId"].ToString()),
+                        MasterBrandName = row["MasterBrandName"] == null ? "" : row["MasterBrandName"].ToString(),
+                    };
+                    list.Add(vm);
+                }
+            }
+            return list;
         }
     }
 }

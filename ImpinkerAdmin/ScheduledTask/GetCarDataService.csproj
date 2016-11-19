@@ -142,6 +142,7 @@
     <Compile Include="GetXCAutoCarsData\GetProperty.cs" />
     <Compile Include="GetXCAutoCarsData\GetStylePropertyValues.cs" />
     <Compile Include="QuartzMain.cs" />
+    <Compile Include="SolrDicGenerate\GenerateCarDataDic.cs" />
     <Compile Include="Tools\HttpRequestProxy.cs" />
   </ItemGroup>
   <ItemGroup>

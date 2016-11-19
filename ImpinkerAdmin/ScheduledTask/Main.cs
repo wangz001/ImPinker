@@ -4,6 +4,7 @@ using GetCarDataService.AutoHomeCountTask;
 using GetCarDataService.GetAHAutoCarsData;
 using GetCarDataService.GetXCAutoCarsData;
 using GetCarDataService.ImArticleFirstImage;
+using GetCarDataService.SolrDicGenerate;
 using GetBasicData = GetCarDataService.GetXCAutoCarsData.GetBasicData;
 using GetStylePropertyValues = GetCarDataService.GetXCAutoCarsData.GetStylePropertyValues;
 
@@ -13,6 +14,9 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
+            //GetAHAutoCarsData.GetBasicData.Get();
+            new GenerateCarDataDic().Execute(null);
+
             log4net.Config.XmlConfigurator.Configure();
             new QuartzMain().Run();
             Console.ReadLine();
@@ -21,7 +25,7 @@ namespace GetCarDataService
             Console.WriteLine("检查并上传oss图片结束");
             Console.ReadLine();
 
-            GetAHAutoCarsData.GetBasicData.Get();
+            
             Console.WriteLine("汽车之家数据获取完毕");
             Console.ReadLine();
             //SwitchCompany();
