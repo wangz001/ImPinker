@@ -62,6 +62,7 @@ namespace GetCarDataService
             _log.Info(string.Format("{0} will run at: {1}", jobOssImage.Key, runTime.ToString("r")));
             sched.Start();
             Thread.Sleep(10000);
+            _log.Info("quartz开始");
             Console.WriteLine("服务已启动");
             Console.ReadLine();
             //sched.Shutdown(true);

@@ -9,31 +9,21 @@ namespace ImBLL
 	/// <summary>
 	/// ArticleTag
 	/// </summary>
-	public partial class ArticleTagBll
+	public class ArticleTagBll
 	{
 		private readonly ImDal.ArticleTag dal=new ImDal.ArticleTag();
-		public ArticleTagBll()
-		{}
-		#region  BasicMethod
-
-		/// <summary>
-		/// 得到最大ID
-		/// </summary>
-		public int GetMaxId()
-		{
-			return dal.GetMaxId();
-		}
+		
 
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(int Id)
+		public bool Exists(string tagName)
 		{
-			return dal.Exists(Id);
+			return dal.Exists(tagName);
 		}
 
 		/// <summary>
-		/// 增加一条数据
+		/// 增加一条数据,
 		/// </summary>
 		public bool Add(ArticleTag model)
 		{
@@ -171,10 +161,6 @@ namespace ImBLL
 			//return dal.GetList(PageSize,PageIndex,strWhere);
 		//}
 
-		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
 	}
 }
 

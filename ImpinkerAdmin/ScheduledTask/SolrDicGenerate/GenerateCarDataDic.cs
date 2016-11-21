@@ -31,6 +31,10 @@ namespace GetCarDataService.SolrDicGenerate
                     var serialName = basicSerialVm.Name;
                     var makeName = basicSerialVm.MakeName;
                     var masterName = basicSerialVm.MasterBrandName;
+                    if (serialName.Contains("停售"))
+                    {
+                        continue; 
+                    }
                     //单一方式
                     AddToDicList(ref dicList, serialName);
                     AddToDicList(ref dicList, makeName);
@@ -38,11 +42,6 @@ namespace GetCarDataService.SolrDicGenerate
                     //组合方式1
                     AddToDicList(ref dicList, makeName + serialName);
                     AddToDicList(ref dicList, masterName + serialName);
-                    //组合方式2
-                    if (makeName != masterName)
-                    {
-                        AddToDicList(ref dicList, masterName + makeName + serialName);
-                    }
                 }
 
                 var listStylePropertyGroup = BasicStylePropertyGroupBll.GetList((int) CompanyEnum.AHauto);

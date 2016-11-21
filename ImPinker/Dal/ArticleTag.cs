@@ -9,31 +9,19 @@ namespace ImDal
 	/// <summary>
 	/// 数据访问类:ArticleTag
 	/// </summary>
-	public partial class ArticleTag
+	public class ArticleTag
 	{
-		public ArticleTag()
-		{}
-		#region  BasicMethod
-
-		/// <summary>
-		/// 得到最大ID
-		/// </summary>
-		public int GetMaxId()
-		{
-		return DbHelperSQL.GetMaxID("Id", "ArticleTag"); 
-		}
-
+		
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(int Id)
+        public bool Exists(string tagName)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) from ArticleTag");
-			strSql.Append(" where Id=@Id ");
+            strSql.Append(" where TagName=@TagName ");
 			SqlParameter[] parameters = {
-					new SqlParameter("@Id", SqlDbType.Int,4)			};
-			parameters[0].Value = Id;
+					new SqlParameter("@TagName", SqlDbType.NVarChar){Value = tagName}			};
 
 			return DbHelperSQL.Exists(strSql.ToString(),parameters);
 		}
@@ -46,22 +34,16 @@ namespace ImDal
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ArticleTag(");
-			strSql.Append("Id,TagName,UserId,IsDelete,CreateTime,UpdateTime)");
+            strSql.Append("TagName,UserId,IsDelete,FrountShowState,CreateTime,UpdateTime)");
 			strSql.Append(" values (");
-			strSql.Append("@Id,@TagName,@UserId,@IsDelete,@CreateTime,@UpdateTime)");
+            strSql.Append("@TagName,@UserId,@IsDelete,@FrountShowState,@CreateTime,@UpdateTime)");
 			SqlParameter[] parameters = {
-					new SqlParameter("@Id", SqlDbType.Int,4),
-					new SqlParameter("@TagName", SqlDbType.VarBinary,50),
-					new SqlParameter("@UserId", SqlDbType.Int,4),
-					new SqlParameter("@IsDelete", SqlDbType.Bit,1),
-					new SqlParameter("@CreateTime", SqlDbType.DateTime),
-					new SqlParameter("@UpdateTime", SqlDbType.DateTime)};
-			parameters[0].Value = model.Id;
-			parameters[1].Value = model.TagName;
-			parameters[2].Value = model.UserId;
-			parameters[3].Value = model.IsDelete;
-			parameters[4].Value = model.CreateTime;
-			parameters[5].Value = model.UpdateTime;
+					new SqlParameter("@TagName", SqlDbType.NVarChar){Value = model.TagName},
+					new SqlParameter("@UserId", SqlDbType.Int,4){Value = model.UserId},
+					new SqlParameter("@FrountShowState", SqlDbType.Int,4){Value = model.FrountShowState},
+					new SqlParameter("@IsDelete", SqlDbType.Bit,1){Value = model.IsDelete},
+					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
+					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}};
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -194,7 +176,7 @@ namespace ImDal
 				}
 				if(row["TagName"]!=null && row["TagName"].ToString()!="")
 				{
-					model.TagName=(byte[])row["TagName"];
+                    model.TagName = row["TagName"].ToString();
 				}
 				if(row["UserId"]!=null && row["UserId"].ToString()!="")
 				{
@@ -306,35 +288,6 @@ namespace ImDal
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 
-		/*
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-		{
-			SqlParameter[] parameters = {
-					new SqlParameter("@tblName", SqlDbType.VarChar, 255),
-					new SqlParameter("@fldName", SqlDbType.VarChar, 255),
-					new SqlParameter("@PageSize", SqlDbType.Int),
-					new SqlParameter("@PageIndex", SqlDbType.Int),
-					new SqlParameter("@IsReCount", SqlDbType.Bit),
-					new SqlParameter("@OrderType", SqlDbType.Bit),
-					new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
-					};
-			parameters[0].Value = "ArticleTag";
-			parameters[1].Value = "Id";
-			parameters[2].Value = PageSize;
-			parameters[3].Value = PageIndex;
-			parameters[4].Value = 0;
-			parameters[5].Value = 0;
-			parameters[6].Value = strWhere;	
-			return DbHelperSQL.RunProcedure("UP_GetRecordByPage",parameters,"ds");
-		}*/
-
-		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
 	}
 }
 
