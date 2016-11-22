@@ -18,7 +18,7 @@ namespace GetCarDataService
             //log4net.Config.XmlConfigurator.Configure();
             log4net.ILog log = log4net.LogManager.GetLogger("logerror");
 
-            //new ArticleTagAdd().Execute(null);
+            new ArticleTagAdd().Execute(null);
             //GetAHAutoCarsData.GetBasicData.Get();
             new GenerateCarDataDic().Execute(null);
             log.Info("开始");

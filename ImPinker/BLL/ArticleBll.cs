@@ -128,7 +128,7 @@ namespace ImBLL
 
 		
 		/// <summary>
-		/// 分页获取数据列表
+		/// 获取记录总数
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
@@ -241,6 +241,7 @@ namespace ImBLL
             };
             return vm;
         }
-	}
+
+	    }
 }
 
