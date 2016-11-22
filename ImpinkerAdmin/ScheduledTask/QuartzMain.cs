@@ -33,7 +33,7 @@ namespace GetCarDataService
             ITrigger triggerOssImage = TriggerBuilder.Create()
                 .WithIdentity("trigger1", "group1")
                 .StartAt(runTime)
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(5 * 60).RepeatForever())
+                .WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever())
                 .Build();
             sched.ScheduleJob(jobOssImage, triggerOssImage);
 

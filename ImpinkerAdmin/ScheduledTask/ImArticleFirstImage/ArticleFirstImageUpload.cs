@@ -27,7 +27,7 @@ namespace GetCarDataService.ImArticleFirstImage
         {
             _log.Info("开始检查图片：" + DateTime.Now.Ticks);
             Start();
-            _log.Info("开始检查图片：" + DateTime.Now.Ticks);
+            _log.Info("结束检查图片：" + DateTime.Now.Ticks);
         }
         public static void Start()
         {

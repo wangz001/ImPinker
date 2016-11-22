@@ -22,7 +22,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 	private static BitautoPipeline bitautoPipeline = new BitautoPipeline();
-	private static int bitRequestCount = 0;
+	private int bitRequestCount = 0;
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 	static int maxNum = Integer.parseInt(AppProperties
 			.getPropertyByName("spider.maxnum"));
