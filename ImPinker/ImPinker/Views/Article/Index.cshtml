@@ -22,10 +22,19 @@
             <div class="thread-info">
                 <div class="interest">
                     <em class="ico"></em>
-                    <a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a>
+                    @{
+                        foreach (var keyWord in article.KeyWords.Split(','))
+                        {
+                            if (!string.IsNullOrEmpty(keyWord))
+                            {
+                                <a href="#" target="_blank">@keyWord</a>
+                            }
+                        }
+                    }
+
                 </div>
                 <span class="click-count"><i></i>654</span>
-                <span class="publish-time">11月07日 19:20</span>
+                <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
             <div class="articlecontent">
                 @Html.Raw(article.Content[0])
