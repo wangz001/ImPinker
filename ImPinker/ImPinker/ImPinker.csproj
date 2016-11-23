@@ -210,6 +210,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ArticleVote\articleVote.js" />
+    <Content Include="Scripts\ArticleVote\articleComment.js" />
     <Content Include="Scripts\Article\myArticle.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -277,11 +278,11 @@
     <Content Include="Views\Shared\UserCenter\UserCenter_NavPartial.cshtml" />
     <Content Include="Views\UserCenter\UserSetting.cshtml" />
     <Content Include="Views\Shared\UserCenter\ImgUploadPartial.cshtml" />
+    <Content Include="Views\ArticleVote\ArticleComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Common\" />
-    <Folder Include="Views\ArticleVote\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>

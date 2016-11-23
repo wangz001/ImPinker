@@ -12,8 +12,7 @@
     <div class="thread-main">
         <!-- 文章主体 -->
         <div class="article">
-            <input type="hidden" id="threadid" value="108619">
-            <input type="hidden" id="artistid" value="151935">
+            <input type="hidden" id="articleId" value="@article.Id">
             <h2>
                 <!-- 是否精华 -->
                 <i class="essence-mark"></i>
@@ -23,11 +22,18 @@
                 <div class="interest">
                     <em class="ico"></em>
                     @{
+                        var i = 0;
                         foreach (var keyWord in article.KeyWords.Split(','))
                         {
+                            if (i > 5)
+                            {
+                                break;
+                            }
                             if (!string.IsNullOrEmpty(keyWord))
                             {
-                                <a href="#" target="_blank">@keyWord</a>
+                                <a href="/Search/Index?key=@keyWord" target="_blank" class="topic-lab"
+                                   topicid="3" style="background: rgb(46, 75, 107);">@keyWord<i></i></a>
+                                i++;
                             }
                         }
                     }
@@ -42,8 +48,8 @@
             <!--分享-->
             <div class="interest-share">
                 <div class="interest">
-                    所属兴趣：
-                    <a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a>
+                    转载自：
+                    <a href="@article.Url" target="_blank">@article.Company</a>
                 </div>
                 <div class="share bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1478688277964">
                     <span>分享到：</span>
@@ -54,6 +60,11 @@
                 </div>
             </div>
         </div>
+    
+        <!--评论区-->
+        @{
+            Html.RenderAction("ArticleComment","ArticleVote");
+        }
     </div>
     <!--右侧区域-->
     <div class="thread-right">
@@ -148,3 +159,7 @@
 </div>
 
 <div class="clear"></div>
+@section scripts
+{
+<script src="~/Scripts/ArticleVote/articleComment.js"></script>
+}

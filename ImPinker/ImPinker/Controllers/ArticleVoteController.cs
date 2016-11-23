@@ -14,6 +14,7 @@ namespace ImPinker.Controllers
     {
         private static readonly UserBll UserBll = new UserBll();
         private static readonly ArticleVoteBll ArticleVoteBll = new ArticleVoteBll();
+        private static readonly ArticleCommentBll ArticleCommentBll = new ArticleCommentBll();
          
         //
         // GET: /ArticleVote/
@@ -40,5 +41,43 @@ namespace ImPinker.Controllers
             return "success";
         }
 
+
+        /// <summary>
+        /// 文章评论
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult ArticleComment()
+        {
+            return PartialView("ArticleComment");
+        }
+
+        /// <summary>
+        /// 提交评论
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        [HttpPost]
+        public string ArticleCommentSubmit(int articleId,string content)
+        {
+            if (!string.IsNullOrEmpty(content))
+            {
+                var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+
+                if (articleId > 0)
+                {
+                    var model = new ArticleComment()
+                    {
+                        ArticleId = articleId,
+                        UserId = userId,
+                       Content = content,
+                       CreateTime = DateTime.Now,
+                    };
+                    return ArticleCommentBll.Add(model) ? "success" : "error";
+                }
+                return "success"; 
+            }
+            return "error";
+        }
 	}
 }

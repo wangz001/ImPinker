@@ -259,6 +259,8 @@ namespace ImBLL
             foreach (var articleViewModel in results)
             {
                 articleViewModel.CreateTimeStr = TUtil.DateFormatToString(articleViewModel.CreateTime);
+                
+                
             }
             var searchVm = new SearchResultVm()
             {
