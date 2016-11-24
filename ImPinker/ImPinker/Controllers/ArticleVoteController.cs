@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ImBLL;
 using ImModel;
+using ImModel.ViewModel;
 using ImPinker.Filters;
 using Microsoft.AspNet.Identity;
 
@@ -47,8 +48,22 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <returns></returns>
         [ChildActionOnly]
-        public ActionResult ArticleComment()
+        public ActionResult ArticleComment(ArticleViewModel articleViewModel)
         {
+            var articleId = articleViewModel.Id;
+            var commentLists = ArticleCommentBll.GetListsByArticleId(articleId,1,20);
+            var usersDic=new Dictionary<int,Users>();
+            foreach (var articleComment in commentLists)
+            {
+                var userId = articleComment.UserId;
+                var user = UserBll.GetModelByCache(userId);
+                if (!usersDic.ContainsKey(userId))
+                {
+                    usersDic.Add(userId,user);
+                }
+            }
+            ViewBag.CommentLists = commentLists;
+            ViewBag.UsersDic = usersDic;
             return PartialView("ArticleComment");
         }
 

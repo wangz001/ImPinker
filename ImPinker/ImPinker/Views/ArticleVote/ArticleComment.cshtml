@@ -1,4 +1,8 @@
-﻿@{
+﻿@using Common.DateTimeUtil
+@using ImModel
+@{
+    var commentLists = (List<ArticleComment>)ViewBag.CommentLists;
+    var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
 }
 <div class="comment" id="thread-comment">
     <h2>评论 <span>( 58条 )</span></h2>
@@ -6,10 +10,60 @@
         <textarea id="content" class="comment-textarea" placeholder="请发表评论，评论中不要带有侮辱国家或他人的言论，字数在500字以内。"></textarea>
         <div class="button-box" style="position: relative;">
             <div class="char-limit"><em>还可以输入</em> <i style="color: #2175d0;">500</i> <b>字</b></div>
-            
+
             <a href="javascript:;" type="submit" onclick="commentClick()" class="blue-button" id="comment-btn">发表评论</a>
             <div id="html5_1b28h2dmi10gu1oj4c61lvndgs3_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 568px; width: 36px; height: 42px; overflow: hidden; z-index: 0;"><input id="html5_1b28h2dmi10gu1oj4c61lvndgs3" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept="image/jpeg,image/gif,image/png"></div>
         </div>
     </div>
-</div>
+    @{
+        if (commentLists.Count > 0)
+        {
+            <h3>
+                <i class="shadow-left"></i>
+                全部评论
+                <i class="shadow-right"></i>
+                <div class="comment-order">
+                    <a href="javascript:;" class="latest current">最新</a>
+                    <a href="javascript:;" class="ordest">最旧</a>
+                    <a href="javascript:;" class="hottest">最热</a>
+                </div>
+            </h3><div class="all-comment">
+@{
+    foreach (var comment in commentLists)
+                {
+                var userid = comment.UserId;
+                var user = usersDic[userid];
+                <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
+                    <dt>
+                        <a href="/lookat/home?userId=151404" class="user" target="_blank">
+                            <i style="background-image: url(@user.ImgUrl);background-repeat: no-repeat;">
+                                <b class="male-small"></b>
+                            </i>
+                            <em>
+                                @user.UserName
+                            </em>
+                        </a>
+                        <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
+                        <span class="floor">[ <b>5</b>楼 ]</span>
+                        <a href="javascript:;" class="up-btn white-button" commentid="2435005">顶(<em>0</em>)</a>
+                    </dt>
+                    <dd class="comment-content">
+                        <p>
+                            @comment.Content
+                        </p>
+                    </dd>
+                    <dd class="comment-operate">
+                        <a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>
+                        | <a href="javascript:;" commentid="2435005" threadid="112575" class="reply-btn">回复</a>
+                    </dd>
+                </dl>
+                }
+}
+                
+            </div>
+        }
+    }
 
+
+
+</div>

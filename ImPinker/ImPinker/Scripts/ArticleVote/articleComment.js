@@ -7,7 +7,7 @@
         type: "post",
         data: { articleId: articleId, content: content },
         success: function (data) {
-            alert("bingo！");
+            window.location.reload();
         },
         error: function (data) {
             alert(data);
