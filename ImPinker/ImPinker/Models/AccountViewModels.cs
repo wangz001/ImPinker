@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Configuration;
 
 namespace ImPinker.Models
 {
@@ -59,5 +60,15 @@ namespace ImPinker.Models
         [Display(Name = "确认密码")]
         [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
+        
+        [Required]
+        [StringLength(11, ErrorMessage = "{0} 长度不符合规范。", MinimumLength = 11)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "手机号")]
+        public string PhoneNum { get; set; }
+
+        [Required]
+        [Display(Name = "验证码")]
+        public string CheckNum { get; set; }
     }
 }

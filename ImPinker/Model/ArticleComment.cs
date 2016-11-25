@@ -15,8 +15,10 @@ namespace ImModel
         public int UserId { get; set; }
 
         public string Content { get; set; }
-
-        public int ToUserId { get; set; }
+        /// <summary>
+        /// 回复某个评论，可为空
+        /// </summary>
+        public int ToCommentId { get; set; }
 
         public DateTime CreateTime { get; set; }
     }

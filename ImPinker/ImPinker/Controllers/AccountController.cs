@@ -5,12 +5,17 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using FastJSON;
 using ImBLL;
 using ImModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ImPinker.Models;
+using Top.Api;
+using Top.Api.Request;
+using Top.Api.Response;
+using WebGrease;
 
 namespace ImPinker.Controllers
 {
@@ -71,7 +76,40 @@ namespace ImPinker.Controllers
 			return View();
 		}
 
-		//
+        /// <summary>
+        /// 发送手机验证码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public string SendCheckNum(string phoneNum)
+        {
+            const string url = "http://gw.api.taobao.com/router/rest";  //测试环境
+            const string appkey = "23546735";
+            const string secret = "5ccfde439d81c9ae0aeb2df33fa6421e";
+
+            ITopClient client = new DefaultTopClient(url, appkey, secret);
+            var req = new AlibabaAliqinFcSmsNumSendRequest();
+            req.Extend = phoneNum;
+            req.SmsType = "normal";
+            req.SmsFreeSignName = "车酷网";
+            req.SmsParam = "{checknum:'5021'}";
+            req.RecNum = phoneNum;
+            req.SmsTemplateCode = "SMS_29665035";
+            AlibabaAliqinFcSmsNumSendResponse rsp = client.Execute(req);
+            /*
+             {"alibaba_aliqin_fc_sms_num_send_response":{"result":{"err_code":"0","model":"104761108414^1106594656700","success":true},"request_id":"utl29ly3axv"}}
+             */
+            if (rsp.IsError)
+            {
+                return "error";
+            }
+            phoneNumDic.Add(phoneNum,"5021");
+            return "ok";
+	    }
+
+        static Dictionary<string,string> phoneNumDic=new Dictionary<string, string>();
+            //
 		// POST: /Account/Register
 		[HttpPost]
 		[AllowAnonymous]
@@ -80,18 +118,27 @@ namespace ImPinker.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser() { UserName = model.UserName };
-				var result = await UserManager.CreateAsync(user, model.Password);
-				if (result.Succeeded)
-				{//注：aspnetuser  和localuser 分别在两个数据库中
-					AddLocalUser(user);
-					await SignInAsync(user, isPersistent: false);
-					return RedirectToAction("Index", "Home");
-				}
-				else
-				{
-					AddErrors(result);
-				}
+			    var phoneNum = model.PhoneNum;
+			    var checkNum = model.CheckNum;
+			    if (phoneNumDic.ContainsKey(phoneNum)&&phoneNumDic[phoneNum].Equals(checkNum))
+			    {
+                    var user = new ApplicationUser() { UserName = model.UserName };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {//注：aspnetuser  和localuser 分别在两个数据库中
+                        AddLocalUser(user);
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+			    }
+                else
+                {
+                    AddErrors(IdentityResult.Failed("手机验证码错误"));
+                }
 			}
 
 			// 如果我们进行到这一步时某个地方出错，则重新显示表单

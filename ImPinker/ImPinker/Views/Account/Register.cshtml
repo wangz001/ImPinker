@@ -30,6 +30,23 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNum, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNum, new { @class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="sendCheckNum" class="btn btn-default" value="发送验证码" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CheckNum, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CheckNum, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-default" value="注册" />
             </div>
@@ -40,4 +57,29 @@
 
 @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-    }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#sendCheckNum").bind('click',function() {
+                var phoneNum = $("#PhoneNum").val();
+                if (phoneNum!=null&&phoneNum.length==11) {
+                    $.ajax({
+                        url: "/Account/SendCheckNum",
+                        type: "post",
+                        data: { phoneNum: phoneNum },
+                        success: function (data) {
+                            if (data == null || data == "") {
+                                alert(data);
+                            } else {
+                                
+                            }
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+}

@@ -16,16 +16,16 @@ namespace ImDal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into ArticleComment(");
-            strSql.Append("ArticleId,UserId,Content,ToUserId,CreateTime)");
+            strSql.Append("ArticleId,UserId,Content,ToCommentId,CreateTime)");
             strSql.Append(" values (");
-            strSql.Append("@ArticleId,@UserId,@Content,@ToUserId,@CreateTime)");
+            strSql.Append("@ArticleId,@UserId,@Content,@ToCommentId,@CreateTime)");
             SqlParameter[] parameters = {
 					new SqlParameter("@ArticleId", SqlDbType.NVarChar){Value = model.ArticleId},
 					new SqlParameter("@UserId", SqlDbType.BigInt){Value = model.UserId},
 					new SqlParameter("@Content", SqlDbType.NVarChar){Value = model.Content},
-					model.ToUserId == 0
-                    ? new SqlParameter("@ToUserId", SqlDbType.BigInt) {Value = DBNull.Value}
-                    : new SqlParameter("@ToUserId", SqlDbType.BigInt) {Value = model.ToUserId},
+					model.ToCommentId == 0
+                    ? new SqlParameter("@ToCommentId", SqlDbType.BigInt) {Value = DBNull.Value}
+                    : new SqlParameter("@ToCommentId", SqlDbType.BigInt) {Value = model.ToCommentId},
 					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime}};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -100,9 +100,9 @@ WHERE   TT.row BETWEEN @startIndex AND @endIndex;
                     {
                         model.Content = row["Content"].ToString();
                     }
-                    if (row["ToUserId"] != null && row["ToUserId"].ToString() != "")
+                    if (row["ToCommentId"] != null && row["ToCommentId"].ToString() != "")
                     {
-                        model.ToUserId = int.Parse(row["ToUserId"].ToString());
+                        model.ToCommentId = int.Parse(row["ToCommentId"].ToString());
                     }
                     if (row["CreateTime"] != null && row["CreateTime"].ToString() != "")
                     {

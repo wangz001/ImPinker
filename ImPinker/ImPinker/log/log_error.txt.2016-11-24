@@ -1,15 +1,14 @@
 [Header]
 [Footer]
 [Header]
-2016-11-25 18:17:20,846 [28] ERROR WebLogger [(null)] - 
+[Footer]
+[Header]
+2016-11-24 19:17:02,031 [40] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/ArticleVote/ArticleCommentSubmit
-Referer:http://www.impinker.com/Article?id=55071
-System.Data.SqlClient.SqlException (0x80131904): 列名 'ToUserId' 无效。
-   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 466
-   在 ImDal.ArticleCommentDal.Add(ArticleComment model) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\ArticleCommentDal.cs:行号 31
-   在 ImBLL.ArticleCommentBll.Add(ArticleComment model) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleCommentBll.cs:行号 16
-   在 ImPinker.Controllers.ArticleVoteController.ArticleCommentSubmit(Int32 articleId, String content) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleVoteController.cs:行号 91
+Url:http://www.impinker.com/Article?id=travels_46517
+Referer:http://www.impinker.com/Search/Index?key=空间
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 44
    在 lambda_method(Closure , ControllerBase , Object[] )
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
@@ -20,16 +19,12 @@ System.Data.SqlClient.SqlException (0x80131904): 列名 'ToUserId' 无效。
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-ClientConnectionId:d7e9686d-6901-4be9-b465-2e1aba6a8dec
-2016-11-25 18:19:33,446 [25] ERROR WebLogger [(null)] - 
+2016-11-24 19:17:06,946 [33] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/ArticleVote/ArticleCommentSubmit
-Referer:http://www.impinker.com/Article?id=55071
-System.Data.SqlClient.SqlException (0x80131904): 列名 'ToUserId' 无效。
-   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 466
-   在 ImDal.ArticleCommentDal.Add(ArticleComment model) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\ArticleCommentDal.cs:行号 31
-   在 ImBLL.ArticleCommentBll.Add(ArticleComment model) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleCommentBll.cs:行号 16
-   在 ImPinker.Controllers.ArticleVoteController.ArticleCommentSubmit(Int32 articleId, String content) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleVoteController.cs:行号 91
+Url:http://www.impinker.com/Article?id=travels_46517
+Referer:http://www.impinker.com/Search/Index?key=空间
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 44
    在 lambda_method(Closure , ControllerBase , Object[] )
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
@@ -40,31 +35,12 @@ System.Data.SqlClient.SqlException (0x80131904): 列名 'ToUserId' 无效。
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-ClientConnectionId:d7e9686d-6901-4be9-b465-2e1aba6a8dec
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-2016-11-25 19:11:10,661 [17] ERROR WebLogger [(null)] - 
+2016-11-24 19:17:18,784 [48] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://www.impinker.com/Account/SendCheckNum
-Referer:http://www.impinker.com/Account/Register
-System.Exception: Could not find token at index 0
-   在 FastJSON.JsonParser.NextTokenCore()
-   在 FastJSON.JsonParser.ParseValue()
-   在 FastJSON.deserializer.ToObject(String json, Type type)
-   在 FastJSON.deserializer.ToObject[T](String json)
-   在 ImPinker.Controllers.AccountController.SendCheckNum(String phoneNum) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\AccountController.cs:行号 99
+Url:http://www.impinker.com/Article?id=travels_46517
+Referer:http://www.impinker.com/Search/Index?key=空间
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 44
    在 lambda_method(Closure , ControllerBase , Object[] )
    在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
@@ -75,8 +51,4 @@ System.Exception: Could not find token at index 0
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-[Footer]
-[Header]
-[Footer]
-[Header]
 [Footer]
