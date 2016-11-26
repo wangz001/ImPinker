@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.ModelConfiguration.Configuration;
 
 namespace ImPinker.Models
@@ -70,5 +71,28 @@ namespace ImPinker.Models
         [Required]
         [Display(Name = "验证码")]
         public string CheckNum { get; set; }
+    }
+
+    /// <summary>
+    /// 注册时手机验证码验证
+    /// </summary>
+    public class CheckNumModel
+    {
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        public string PhoneNum { get; set; }
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public string CheckNum { get; set; }
+        /// <summary>
+        /// 验证码发送时间
+        /// </summary>
+        public DateTime SendTime { get; set; }
+        /// <summary>
+        /// 用户请求的ip地址。防止恶意注册
+        /// </summary>
+        public string IpAddress { get; set; }
     }
 }

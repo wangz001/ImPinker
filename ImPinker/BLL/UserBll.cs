@@ -214,6 +214,20 @@ namespace ImBLL
 		    user.UpdateTime = DateTime.Now;
 		    return dal.Update(user);
 		}
+        /// <summary>
+        /// 判断该电话号码是否被注册
+        /// </summary>
+        /// <param name="phoneNum"></param>
+        /// <returns></returns>
+	    public Users GetModelByPhoneNum(string phoneNum)
+	    {
+            if (string.IsNullOrEmpty(phoneNum))
+            {
+                return null;
+            }
+            var user = dal.GetModelByPhoneNum(phoneNum);
+            return user;
+	    }
 	}
 }
 
