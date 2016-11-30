@@ -10,7 +10,7 @@
         @Html.AntiForgeryToken()
         <h4>创建新帐户。</h4>
         <hr />
-        @Html.ValidationSummary()
+        @Html.ValidationSummary(null,new { @id = "errormessagebox" })
         <div class="form-group">
             @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
@@ -67,10 +67,10 @@
                         type: "post",
                         data: { phoneNum: phoneNum },
                         success: function (data) {
-                            if (data == null || data == "") {
-                                alert(data);
+                            if (data.IsSuccess == 0 && data.Description != "") {
+                                alert(data.Description);
                             } else {
-                                
+                                //成功发送验证码
                             }
                         },
                         error: function (data) {

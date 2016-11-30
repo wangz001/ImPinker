@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -8,10 +9,12 @@ using System.Web.Mvc;
 using FastJSON;
 using ImBLL;
 using ImModel;
+using ImPinker.Common;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ImPinker.Models;
+using Newtonsoft.Json;
 using Top.Api;
 using Top.Api.Request;
 using Top.Api.Response;
@@ -85,10 +88,16 @@ namespace ImPinker.Controllers
         [AllowAnonymous]
         public string SendCheckNum(string phoneNum)
         {
-            RemoveFormPhoneNumDic();//移除过期的记录，防止内存过大
+            RemoveFromPhoneNumDic();//移除过期的记录，防止内存过大
             if (!CheckPhoneNum(phoneNum))
             {
-                return "error";
+                Response.ContentType = "application/json; charset=utf-8";  
+                return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "该号码已被注册，请直接登录",
+                    Data = ""
+                });
             }
             var checkNum = new Random().Next(100000, 999999);//验证码随机数生成
             var flag = Send(phoneNum, checkNum.ToString());
@@ -108,9 +117,19 @@ namespace ImPinker.Controllers
                 {
                     phoneNumDic.Add(phoneNum, model);
                 }
-                return "ok";
+                return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "成功",
+                    Data = ""
+                });
             }
-            return "error";
+            return JsonConvert.SerializeObject(new AjaxReturnViewModel
+            {
+                IsSuccess = 0,
+                Description = "发送验证码失败，再试一下",
+                Data = ""
+            });
         }
         #region 手机验证码
         private bool Send(string phoneNum, string checkNum)
@@ -163,7 +182,7 @@ namespace ImPinker.Controllers
         /// <summary>
         /// 移除过期的记录
         /// </summary>
-        private void RemoveFormPhoneNumDic()
+        private void RemoveFromPhoneNumDic()
         {
             if (phoneNumDic.Count > 0)
             {
