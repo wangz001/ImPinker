@@ -7,7 +7,9 @@ using ImBLL;
 using ImModel;
 using ImModel.ViewModel;
 using ImPinker.Filters;
+using ImPinker.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
 {
@@ -16,7 +18,7 @@ namespace ImPinker.Controllers
         private static readonly UserBll UserBll = new UserBll();
         private static readonly ArticleVoteBll ArticleVoteBll = new ArticleVoteBll();
         private static readonly ArticleCommentBll ArticleCommentBll = new ArticleCommentBll();
-         
+
         //
         // GET: /ArticleVote/
         public string Index()
@@ -29,15 +31,15 @@ namespace ImPinker.Controllers
         {
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
 
-            if (articleId>0)
+            if (articleId > 0)
             {
                 var model = new ArticleVote()
                 {
                     ArticleId = articleId,
                     UserId = userId,
-                    Vote = vote>0
+                    Vote = vote > 0
                 };
-                return ArticleVoteBll.AddVote(model)?"success":"error";
+                return ArticleVoteBll.AddVote(model) ? "success" : "error";
             }
             return "success";
         }
@@ -51,15 +53,15 @@ namespace ImPinker.Controllers
         public ActionResult ArticleComment(ArticleViewModel articleViewModel)
         {
             var articleId = articleViewModel.Id;
-            var commentLists = ArticleCommentBll.GetListsByArticleId(articleId,1,20);
-            var usersDic=new Dictionary<int,Users>();
+            var commentLists = ArticleCommentBll.GetCommentsWithToComments(articleId, 1, 20);
+            var usersDic = new Dictionary<int, Users>();
             foreach (var articleComment in commentLists)
             {
                 var userId = articleComment.UserId;
                 var user = UserBll.GetModelByCache(userId);
                 if (!usersDic.ContainsKey(userId))
                 {
-                    usersDic.Add(userId,user);
+                    usersDic.Add(userId, user);
                 }
             }
             ViewBag.CommentLists = commentLists;
@@ -73,8 +75,9 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         [AuthorizationFilter]
         [HttpPost]
-        public string ArticleCommentSubmit(int articleId,string content)
+        public string ArticleCommentSubmit(int articleId, string content)
         {
+            Response.ContentType = "application/json; charset=utf-8";
             if (!string.IsNullOrEmpty(content))
             {
                 var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
@@ -85,14 +88,42 @@ namespace ImPinker.Controllers
                     {
                         ArticleId = articleId,
                         UserId = userId,
-                       Content = content,
-                       CreateTime = DateTime.Now,
+                        Content = content,
+                        CreateTime = DateTime.Now,
                     };
-                    return ArticleCommentBll.Add(model) ? "success" : "error";
+                    var flag = ArticleCommentBll.Add(model);
+                    if (flag)
+                    {
+                        return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                            {
+                                IsSuccess = 1,
+                                Description = "该手机号码已被注册，请直接登录",
+                                Data = ""
+                            });
+                    }
+                    else
+                    {
+                        return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                                {
+                                    IsSuccess = 0,
+                                    Description = "该手机号码已被注册，请直接登录",
+                                    Data = ""
+                                });
+                    }
                 }
-                return "success"; 
+                return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "该手机号码已被注册，请直接登录",
+                    Data = ""
+                });
             }
-            return "error";
+            return JsonConvert.SerializeObject(new AjaxReturnViewModel
+            {
+                IsSuccess = 0,
+                Description = "该手机号码已被注册，请直接登录",
+                Data = ""
+            });
         }
-	}
+    }
 }

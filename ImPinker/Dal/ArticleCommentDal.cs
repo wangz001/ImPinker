@@ -114,5 +114,28 @@ WHERE   TT.row BETWEEN @startIndex AND @endIndex;
             }
             return list;
         }
+        /// <summary>
+        /// 根据id，获取列表
+        /// </summary>
+        /// <param name="toCommentIds"></param>
+        /// <returns></returns>
+        public List<ArticleComment> GetListsByIds(List<int> toCommentIds)
+        {
+            var list = new List<ArticleComment>();
+            var sqlStr = @"
+exec('SELECT * FROM ArticleComment WHERE id IN ('+@toCommentIds+')') 
+";
+            
+            var paras = new SqlParameter[]
+		    {
+                new SqlParameter("@toCommentIds",SqlDbType.VarChar){Value = string.Join(",",toCommentIds)}
+		    };
+            var ds = DbHelperSQL.Query(sqlStr, paras);
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                list = DsToList(ds);
+            }
+            return list;
+        }
     }
 }

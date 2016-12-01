@@ -10,29 +10,29 @@
         @Html.AntiForgeryToken()
         <h4>创建新帐户。</h4>
         <hr />
-        @Html.ValidationSummary(null,new { @id = "errormessagebox" })
+        @Html.ValidationSummary()
         <div class="form-group">
             @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id = "txt_username" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "txt_pass" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "txt_pass2" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.PhoneNum, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.PhoneNum, new { @class = "form-control"})
+                @Html.TextBoxFor(m => m.PhoneNum, new { @class = "form-control", id = "txt_phonenum" })
             </div>
         </div>
         <div class="form-group">
@@ -43,12 +43,17 @@
         <div class="form-group">
             @Html.LabelFor(m => m.CheckNum, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.CheckNum, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.CheckNum, new { @class = "form-control", id = "txt_checknum" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="注册" />
+                <p id="errormessage" style="color: red;display: none">输入法错误</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" onclick="return checkRegistForm()" class="btn btn-default" value="注册" />
             </div>
         </div>
     }
@@ -56,19 +61,54 @@
 <div class="clear"></div>
 
 @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#sendCheckNum").bind('click',function() {
-                var phoneNum = $("#PhoneNum").val();
-                if (phoneNum!=null&&phoneNum.length==11) {
+        function checkRegistForm() {
+            var username = $("#txt_username").val();
+            var pass1 = $("#txt_pass").val();
+            var pass2 = $("#txt_pass2").val();
+            var phonenum = $("#txt_phonenum").val();
+            var checknum = $("#txt_checknum").val();
+            if (username == "") {
+                $("#errormessage").html("请输入用户名");
+                $("#errormessage").show();
+                return false;
+            }
+            if (pass1 == '' || pass2 == ''||pass1.length<6) {
+                $("#errormessage").html("密码至少有6位数字或字母组成");
+                $("#errormessage").show();
+                return false;
+            }
+            if (pass1 != pass2) {
+                $("#errormessage").html("密码输入不一致，请重新输入");
+                $("#errormessage").show();
+                return false;
+            }
+            if (phonenum == '') {
+                $("#errormessage").html("请输入手机号码");
+                $("#errormessage").show();
+                return false;
+            } if (checknum == '') {
+                $("#errormessage").html("请输入短信验证码");
+                $("#errormessage").show();
+                return false;
+            }
+            $("#errormessage").hide();
+            return true;
+        }
+
+        $(document).ready(function () {
+            $("#sendCheckNum").bind('click', function () {
+                var phoneNum = $("#txt_phonenum").val();
+                if (phoneNum != null && phoneNum.length == 11) {
                     $.ajax({
                         url: "/Account/SendCheckNum",
                         type: "post",
                         data: { phoneNum: phoneNum },
                         success: function (data) {
                             if (data.IsSuccess == 0 && data.Description != "") {
-                                alert(data.Description);
+                                $("#errormessage").html(data.Description);
+                                $("#errormessage").show();
                             } else {
                                 //成功发送验证码
                             }

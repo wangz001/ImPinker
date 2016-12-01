@@ -1,7 +1,8 @@
 ﻿@using Common.DateTimeUtil
 @using ImModel
+@using ImModel.ViewModel
 @{
-    var commentLists = (List<ArticleComment>)ViewBag.CommentLists;
+    var commentLists = (List<ArticleCommentVm>)ViewBag.CommentLists;
     var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
 }
 <div class="comment" id="thread-comment">
@@ -10,7 +11,7 @@
         <textarea id="content" class="comment-textarea" placeholder="请发表评论，评论中不要带有侮辱国家或他人的言论，字数在500字以内。"></textarea>
         <div class="button-box" style="position: relative;">
             <div class="char-limit"><em>还可以输入</em> <i style="color: #2175d0;">500</i> <b>字</b></div>
-
+            <em style="color: red;display: none" id="loginmessage">请先登录~</em>
             <a href="javascript:;" type="submit" onclick="commentClick()" class="blue-button" id="comment-btn">发表评论</a>
             <div id="html5_1b28h2dmi10gu1oj4c61lvndgs3_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 568px; width: 36px; height: 42px; overflow: hidden; z-index: 0;"><input id="html5_1b28h2dmi10gu1oj4c61lvndgs3" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept="image/jpeg,image/gif,image/png"></div>
         </div>
@@ -28,9 +29,9 @@
                     <a href="javascript:;" class="hottest">最热</a>
                 </div>
             </h3><div class="all-comment">
-@{
-    foreach (var comment in commentLists)
-                {
+                @{
+            foreach (var comment in commentLists)
+            {
                 var userid = comment.UserId;
                 var user = usersDic[userid];
                 <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
@@ -52,14 +53,46 @@
                             @comment.Content
                         </p>
                     </dd>
+                    @{
+                if (comment.ListToComment!=null&&comment.ListToComment.Count > 0)
+                {
+                    var tocomment = comment.ListToComment[0];
+                    if (tocomment!=null)
+                    {
+  var user2 = usersDic[tocomment.UserId];
+                    
+                    <dl class="quote">
+                        <a href="javascript:;" class="open-dialog">查看对话</a>
+                        <dt>
+                            <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
+                                <i class="head-img" style="background-image: url(http://imageqiniu.xxxxxbbs.com/Fj5s-vUKha2BNel9bVQYwtMdoVGX?imageMogr2/auto-orient/thumbnail/!30x30r/gravity/Center/crop/30x30);background-repeat: no-repeat;">
+
+                                    <b class="male-small"></b>
+                                </i>
+                                @user2.UserName
+                            </a>
+                            @TUtil.DateFormatToString(tocomment.CreateTime)
+                            [ <b>31</b>楼 ]
+                        </dt>
+                        <dd>
+                            <p>
+                                @tocomment.Content
+                            </p>
+                        </dd>
+                    </dl>
+                    }
+                    
+                }
+                    }
+
                     <dd class="comment-operate">
                         <a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>
                         | <a href="javascript:;" commentid="2435005" threadid="112575" class="reply-btn">回复</a>
                     </dd>
                 </dl>
+            }
                 }
-}
-                
+
             </div>
         }
     }

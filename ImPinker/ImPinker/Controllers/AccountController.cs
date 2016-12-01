@@ -95,7 +95,7 @@ namespace ImPinker.Controllers
                 return JsonConvert.SerializeObject(new AjaxReturnViewModel
                 {
                     IsSuccess = 0,
-                    Description = "该号码已被注册，请直接登录",
+                    Description = "该手机号码已被注册，请直接登录",
                     Data = ""
                 });
             }
@@ -217,7 +217,7 @@ namespace ImPinker.Controllers
                 if (!(phoneNumDic.ContainsKey(phoneNum)
                     && phoneNumDic[phoneNum].CheckNum.Equals(checkNum)))
                 {
-                    AddErrors(IdentityResult.Failed("您输入的验证码有误"));
+                    AddErrors(IdentityResult.Failed("您输入的手机验证码有误"));
                     return View(model);
                 }
                 var user = new ApplicationUser() { UserName = model.UserName };
