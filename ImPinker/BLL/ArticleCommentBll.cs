@@ -25,22 +25,39 @@ namespace ImBLL
         /// <returns></returns>
         public List<ArticleComment> GetListsByArticleId(string articleId,int rowNum,int count)
         {
-            var list= dal.GetListsByArticleId(articleId,rowNum,count);
-            
-            return list;
+            int totalcount;
+            var ds= dal.GetListsByArticleId(articleId,rowNum,count,out totalcount);
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                return dal.DtToList(ds.Tables[0]);
+            }
+            return null;
         }
 
-        public List<ArticleCommentVm> GetCommentsWithToComments(string articleId, int rowNum, int count)
+        /// <summary>
+        /// 分页获取文章评论，带有引用的评论
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <param name="rowNum"></param>
+        /// <param name="count"></param>
+        /// <param name="totalCount">总记录数，分页用</param>
+        /// <returns></returns>
+        public List<ArticleCommentVm> GetCommentsWithToComments(string articleId, int rowNum, int count,out int totalCount)
         {
             var returnList = new List<ArticleCommentVm>();
-            var list = GetListsByArticleId(articleId, rowNum, count);
-            var toCommentIds = list.Select(m => m.ToCommentId).Distinct();
-            //关联评论
-            var commentIds = toCommentIds as int[] ?? toCommentIds.ToArray();
-            
-                var list2 = dal.GetListsByIds(commentIds.ToList());
-                
-            foreach (var articleComment in list)
+            var ds = dal.GetListsByArticleId(articleId, rowNum, count,out totalCount);
+            var list1 = new List<ArticleComment>();
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                list1 = dal.DtToList(ds.Tables[0]);
+            }
+            var list2 = new List<ArticleComment>();
+            if (ds != null && ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
+            {
+                list2 = dal.DtToList(ds.Tables[1]);
+            }
+
+            foreach (var articleComment in list1)
             {
                 var model = new ArticleCommentVm()
                 {
@@ -50,7 +67,6 @@ namespace ImBLL
                     ToCommentId = articleComment.ToCommentId,
                     UserId = articleComment.UserId,
                     CreateTime = articleComment.CreateTime
-
                 };
                 if (articleComment.ToCommentId>0)
                 {

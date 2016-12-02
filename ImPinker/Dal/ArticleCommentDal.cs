@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DBUtility;
 using ImModel;
+using ImModel.ViewModel;
 
 namespace ImDal
 {
@@ -40,15 +41,16 @@ namespace ImDal
         }
 
         /// <summary>
-        /// 获取文章的评论详情
+        /// 获取文章的评论详情,返回两个datatable.第二个为引用的评论
         /// </summary>
         /// <param name="articleId"></param>
         /// <param name="pageNum"></param>
         /// <param name="count"></param>
+        /// <param name="totalCount"></param>
         /// <returns></returns>
-        public List<ArticleComment> GetListsByArticleId(string articleId, int pageNum, int count)
+        public DataSet GetListsByArticleId(string articleId, int pageNum, int count,out int totalCount)
         {
-            var list = new List<ArticleComment>();
+            
             var sqlStr = @"
 SELECT  *
 FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.createtime DESC ) AS row ,
@@ -56,8 +58,15 @@ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.createtime DESC ) AS row ,
           FROM      ArticleComment T
           WHERE     T.articleid = @articleid
         ) TT
-WHERE   TT.row BETWEEN @startIndex AND @endIndex;
+WHERE   TT.row BETWEEN @startIndex AND @endIndex
 ";
+
+            var sqlStr2 = new StringBuilder();
+            sqlStr2.Append("SELECT  * FROM    ArticleComment WHERE   id IN ( SELECT  temp.tocommentid  FROM    ( ");
+            sqlStr2.Append(sqlStr);
+            sqlStr2.Append(" ) temp )");
+            var sqlStr3 = "SELECT    COUNT(id)   FROM  ArticleComment T   WHERE     T.articleid = @articleid";
+            var sql = sqlStr + sqlStr2+sqlStr3;
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
             var paras = new SqlParameter[]
@@ -66,21 +75,19 @@ WHERE   TT.row BETWEEN @startIndex AND @endIndex;
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
 		    };
-            var ds = DbHelperSQL.Query(sqlStr, paras);
-            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
-            {
-                list = DsToList(ds);
-
-            }
-            return list;
+            //返回两个datatable
+            var ds = DbHelperSQL.Query(sql, paras);
+            var table3 = ds.Tables[2];
+            totalCount = Int32.Parse(table3.Rows[0][0].ToString());
+            return ds;
         }
 
-        private List<ArticleComment> DsToList(DataSet ds)
+        public List<ArticleComment> DtToList(DataTable dt)
         {
             var list = new List<ArticleComment>();
-            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
+                foreach (DataRow row in dt.Rows)
                 {
                     var model = new ArticleComment();
 
@@ -122,18 +129,24 @@ WHERE   TT.row BETWEEN @startIndex AND @endIndex;
         public List<ArticleComment> GetListsByIds(List<int> toCommentIds)
         {
             var list = new List<ArticleComment>();
-            var sqlStr = @"
-exec('SELECT * FROM ArticleComment WHERE id IN ('+@toCommentIds+')') 
-";
-            
-            var paras = new SqlParameter[]
-		    {
-                new SqlParameter("@toCommentIds",SqlDbType.VarChar){Value = string.Join(",",toCommentIds)}
-		    };
-            var ds = DbHelperSQL.Query(sqlStr, paras);
+            //var sqlStr = @"exec('SELECT * FROM ArticleComment WHERE id IN ('+@toCommentIds+')') ";      
+            //exec方式，跟直接拼sql类似，无法形成查询计划
+            var sql = new StringBuilder();
+            var paras = new SqlParameter[toCommentIds.Count];
+            sql.Append("SELECT * FROM ArticleComment WHERE id IN (");
+            var i = 0;
+            foreach (var commentId in toCommentIds)
+            {
+                sql.Append(i == 0 ? "@commentId" + i : ",@commentId" + i);
+                paras[i] = new SqlParameter("@commentId" + i, SqlDbType.Int) { Value = commentId };
+                i++;
+            }
+            sql.Append(")");
+
+            var ds = DbHelperSQL.Query(sql.ToString(), paras);
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                list = DsToList(ds);
+                list = DtToList(ds.Tables[0]);
             }
             return list;
         }

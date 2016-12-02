@@ -52,8 +52,9 @@ namespace ImPinker.Controllers
         [ChildActionOnly]
         public ActionResult ArticleComment(ArticleViewModel articleViewModel)
         {
+            int totalCount = 0;
             var articleId = articleViewModel.Id;
-            var commentLists = ArticleCommentBll.GetCommentsWithToComments(articleId, 1, 20);
+            var commentLists = ArticleCommentBll.GetCommentsWithToComments(articleId, 1, 20,out totalCount);
             var usersDic = new Dictionary<int, Users>();
             foreach (var articleComment in commentLists)
             {
@@ -66,6 +67,7 @@ namespace ImPinker.Controllers
             }
             ViewBag.CommentLists = commentLists;
             ViewBag.UsersDic = usersDic;
+            ViewBag.TotalCount = totalCount;
             return PartialView("ArticleComment");
         }
 
@@ -75,7 +77,7 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         [AuthorizationFilter]
         [HttpPost]
-        public string ArticleCommentSubmit(int articleId, string content)
+        public string ArticleCommentSubmit(int articleId, int commentid, string content)
         {
             Response.ContentType = "application/json; charset=utf-8";
             if (!string.IsNullOrEmpty(content))
@@ -89,6 +91,7 @@ namespace ImPinker.Controllers
                         ArticleId = articleId,
                         UserId = userId,
                         Content = content,
+                        ToCommentId = commentid,
                         CreateTime = DateTime.Now,
                     };
                     var flag = ArticleCommentBll.Add(model);

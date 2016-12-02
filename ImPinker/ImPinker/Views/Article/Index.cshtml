@@ -60,10 +60,10 @@
                 </div>
             </div>
         </div>
-    
+
         <!--评论区-->
         @{
-            Html.RenderAction("ArticleComment","ArticleVote",article);
+            Html.RenderAction("ArticleComment", "ArticleVote", article);
         }
     </div>
     <!--右侧区域-->
@@ -92,52 +92,30 @@
                 <span class="line"></span>
                 <li>
                     粉丝
-
                     <a href="/lookat/fins?userId=151935" target="_blank">3</a>
-
-
                 </li>
                 <span class="line"></span>
                 <li>
                     作品
-
                     <a href="/lookat/home?userId=151935" target="_blank">3</a>
-
-
                 </li>
             </ul>
-
             <div class="button-area" userid="151935">
-
-
                 <a href="javascript:;" class="white-button follow-btn" userid="151935" type="0"><i></i>关注</a>
-
-
-
-
-
                 <a href="javascript:;" class="white-button private-btn message-button" userid="151935"><i></i>发私信</a>
-
-
             </div>
-
         </div>
-
         <div class="operate-record">
             <h3><i></i>此帖荣誉记录</h3>
             <ul>
-
                 <li>
                     <div class="table">
                         <span style="text-align: right;">
                             <i>+500分</i><br>
-
                             <em>+30金币</em>
-
                         </span>
                     </div>
                 </li>
-
                 <li>
                     <div class="table">
                         <div>
@@ -150,16 +128,26 @@
                         </span>
                     </div>
                 </li>
-
             </ul>
-
         </div>
-
     </div>
 </div>
 
 <div class="clear"></div>
 @section scripts
 {
-<script src="~/Scripts/ArticleVote/articleComment.js"></script>
+    <script src="~/Scripts/ArticleVote/articleComment.js"></script>
+    <script type="text/templateReComment">
+        <div class="reply-box">
+            <textarea id="reply-content" placeholder="请发表回复，回复中不要带有侮辱国家或他人的言论。" class=""></textarea>
+            <div class="button-box" style="position: relative;">
+                <div class="char-limit">
+                    <em>还可以输入</em> <i style="color: #2175d0;">500</i> <b>字</b>
+                </div><a href="javascript:;" class="face-btn"><i></i>发表情</a>
+                <a href="javascript:;" id="reply-pickfiles" class="upload-img-btn" style="z-index: 1;">
+                    <i></i>发图片
+                </a> <a href="javascript:;" id="pub-reply" class="blue-button">回复评论</a>
+            </div>
+        </div>
+    </script>
 }

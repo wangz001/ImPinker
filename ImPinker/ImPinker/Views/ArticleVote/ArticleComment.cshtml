@@ -4,9 +4,10 @@
 @{
     var commentLists = (List<ArticleCommentVm>)ViewBag.CommentLists;
     var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
+    var totalcount = (int)ViewBag.TotalCount;
 }
 <div class="comment" id="thread-comment">
-    <h2>评论 <span>( 58条 )</span></h2>
+    <h2>评论 <span>( @totalcount 条 )</span></h2>
     <div class="pubcomment">
         <textarea id="content" class="comment-textarea" placeholder="请发表评论，评论中不要带有侮辱国家或他人的言论，字数在500字以内。"></textarea>
         <div class="button-box" style="position: relative;">
@@ -37,7 +38,7 @@
                 <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
                     <dt>
                         <a href="/lookat/home?userId=151404" class="user" target="_blank">
-                            <i style="background-image: url(@user.ImgUrl);background-repeat: no-repeat;">
+                            <i style="background-image: url(@user.ImgUrl.Replace("headimg/limit", "headimg/40"));background-repeat: no-repeat;">
                                 <b class="male-small"></b>
                             </i>
                             <em>
@@ -54,49 +55,58 @@
                         </p>
                     </dd>
                     @{
-                if (comment.ListToComment!=null&&comment.ListToComment.Count > 0)
+                if (comment.ListToComment != null && comment.ListToComment.Count > 0)
                 {
                     var tocomment = comment.ListToComment[0];
-                    if (tocomment!=null)
+                    if (tocomment != null)
                     {
-  var user2 = usersDic[tocomment.UserId];
-                    
-                    <dl class="quote">
-                        <a href="javascript:;" class="open-dialog">查看对话</a>
-                        <dt>
-                            <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
-                                <i class="head-img" style="background-image: url(http://imageqiniu.xxxxxbbs.com/Fj5s-vUKha2BNel9bVQYwtMdoVGX?imageMogr2/auto-orient/thumbnail/!30x30r/gravity/Center/crop/30x30);background-repeat: no-repeat;">
+                        var user2 = usersDic[tocomment.UserId];
 
-                                    <b class="male-small"></b>
-                                </i>
-                                @user2.UserName
-                            </a>
-                            @TUtil.DateFormatToString(tocomment.CreateTime)
-                            [ <b>31</b>楼 ]
-                        </dt>
-                        <dd>
-                            <p>
-                                @tocomment.Content
-                            </p>
-                        </dd>
-                    </dl>
+                        <dl class="quote">
+                            <a href="javascript:;" class="open-dialog">查看对话</a>
+                            <dt>
+                                <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
+                                    <i class="head-img" style="background-image: url(@user2.ImgUrl.Replace("headimg/limit", "headimg/40")); background-repeat: no-repeat;">
+                                        <b class="male-small"></b>
+                                    </i>
+                                    @user2.UserName
+                                </a>
+                                @TUtil.DateFormatToString(tocomment.CreateTime)
+                                [ <b>31</b>楼 ]
+                            </dt>
+                            <dd>
+                                <p>
+                                    @tocomment.Content
+                                </p>
+                            </dd>
+                        </dl>
                     }
-                    
+
                 }
                     }
-
                     <dd class="comment-operate">
                         <a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>
-                        | <a href="javascript:;" commentid="2435005" threadid="112575" class="reply-btn">回复</a>
+                        | <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
                     </dd>
                 </dl>
             }
+            if (totalcount > 20)
+            {
+                <div class="commentPage-box">
+                    <a href="javascript:;" class="prev-page gray">上一页</a><ul id="commentPage" style="display: inline-block;">
+                        <li pageid="1" class="cur-page"><a href="javascript:;">1</a></li>
+                        <li pageid="2" class="no-cur-page"><a href="javascript:;">2</a></li>
+                        <li pageid="3" class="no-cur-page"><a href="javascript:;">3</a></li>
+                        <li pageid="4" class="no-cur-page"><a href="javascript:;">4</a></li>
+                        <li pageid="5" class="no-cur-page"><a href="javascript:;">5</a></li>
+                        <li pageid="6" class="no-cur-page"><a href="javascript:;">6</a></li>
+                        <li pageid="7" class="no-cur-page"><a href="javascript:;">7</a></li>
+                        <li pageid="8" class="no-cur-page"><a href="javascript:;">8</a></li>
+                    </ul><a href="javascript:;" class="next-page">下一页</a>
+                </div>
+            }
                 }
-
             </div>
         }
     }
-
-
-
 </div>
