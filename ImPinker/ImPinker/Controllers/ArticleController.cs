@@ -84,18 +84,9 @@ namespace ImPinker.Controllers
             return string.Empty;
         }
 
-        /// <summary>
-        /// 文章预览。爬虫抓取到的文章。即userid=2的文章。用户收藏的文章直接跳转到原始页面
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult Details(int id)
-        {
-            return View("Index");
-        }
-
+        #region 用户收藏网络连接相关操作
         //
-        // GET: /Article/Create
+        // 添加收藏
         [AuthorizationFilter]
         public ActionResult Create()
         {
@@ -180,5 +171,21 @@ namespace ImPinker.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #endregion
+
+        #region 用户发帖子相关操作
+        /// <summary>
+        /// 发新帖子
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        public ActionResult CreateThread()
+        {
+            return View();
+        }
+
+
+        #endregion
+
     }
 }
