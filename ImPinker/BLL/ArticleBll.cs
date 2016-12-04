@@ -257,6 +257,15 @@ namespace ImBLL
             };
             return vm;
         }
+
+        public bool AddThread(string content, string name)
+        {
+            var articleModle = new Article
+            {
+                
+            };
+            return dal.AddThread(content, name);
+        }
     }
 }
 

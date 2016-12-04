@@ -185,6 +185,29 @@ namespace ImPinker.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 发新帖子
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        public ActionResult CreateThread(string content,string name)
+        {
+            if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(name))
+            {
+                return null;
+            }
+            var result = ArticleBll.AddThread(content,name);
+
+
+
+            return RedirectToAction("Index",new {id=0});
+        }
+
+
+
+        /// <summary>
+        /// ueeditor 插件初始化，获取配置，上传等
+        /// </summary>
         [AuthorizationFilter]
         public void InitUeEditor()
         {

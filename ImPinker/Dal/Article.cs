@@ -327,6 +327,11 @@ WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
 		    };
             return DbHelperSQL.Query(strSql, paras);
         }
+
+        public bool AddThread(string content, string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
