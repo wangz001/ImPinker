@@ -190,17 +190,42 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <returns></returns>
         [AuthorizationFilter]
-        public ActionResult CreateThread(string content,string name)
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CreateThread(CreateThreadVm model)
         {
-            if (string.IsNullOrEmpty(content) || string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(model.Content) || string.IsNullOrEmpty(model.ArticleName))
             {
-                return null;
+                AddErrors(IdentityResult.Failed("不能为空"));
+                return View(model);
             }
-            var result = ArticleBll.AddThread(content,name);
+            var vm = new CreateThreadVm
+            {
+                ArticleName = model.ArticleName,
+                Content = model.Content,
+                Userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id,
+                Coverimage = "",
+                Keywords = "",
+                Description = "",
+                Createtime = DateTime.Now,
+                Updatetime = DateTime.Now,
+                State = ArticleStateEnum.Normal
+            };
+            var flag = ArticleBll.AddThread(vm);
+            if (flag)
+            {
+                return RedirectToAction("MyArticle");
+            }
+            AddErrors(IdentityResult.Failed("有错误"));
+            return View(model);
+        }
 
-
-
-            return RedirectToAction("Index",new {id=0});
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
 

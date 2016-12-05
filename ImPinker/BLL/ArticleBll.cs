@@ -257,14 +257,14 @@ namespace ImBLL
             };
             return vm;
         }
-
-        public bool AddThread(string content, string name)
+        /// <summary>
+        /// 发布新帖子。操作article和articlesnap表，使用事务
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddThread(CreateThreadVm vm)
         {
-            var articleModle = new Article
-            {
-                
-            };
-            return dal.AddThread(content, name);
+            return dal.AddThread(vm);
         }
     }
 }

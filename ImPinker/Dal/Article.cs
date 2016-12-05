@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 using DBUtility;
 using ImModel;
+using ImModel.ViewModel;
 
 namespace ImDal
 {
@@ -328,9 +331,61 @@ WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
             return DbHelperSQL.Query(strSql, paras);
         }
 
-        public bool AddThread(string content, string name)
+        /// <summary>
+        /// 发布新帖子。操作article和articlesnap表，使用事务
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddThread(CreateThreadVm model)
         {
-            throw new NotImplementedException();
+            var sql1 = new StringBuilder();
+            sql1.Append("insert into Article(");
+            sql1.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime)");
+            sql1.Append(" values (");
+            sql1.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime)");
+            SqlParameter[] parameters1 =
+			{
+				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =model.ArticleName },
+				new SqlParameter("@CoverImage", SqlDbType.VarChar, 100){Value =model.Coverimage },
+				new SqlParameter("@Url", SqlDbType.VarChar){Value ="" },
+				new SqlParameter("@UserId", SqlDbType.Int, 4){Value = model.Userid},
+				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =model.Keywords },
+				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
+				new SqlParameter("@ConTent", SqlDbType.NVarChar){Value =model.Content },
+				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
+				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.Updatetime},
+			};
+
+            const string sql2 = @"
+INSERT INTO [dbo].[ArticleSnaps]
+           ([ArticleId]
+           ,[ConTent]
+           ,[CreateTime])
+     VALUES
+           ((SELECT IDENT_CURRENT('Article')),@ConTent,@CreateTime)
+";
+            SqlParameter[] parameters2 =
+			{
+				new SqlParameter("@ConTent", SqlDbType.NVarChar){Value =model.Content },
+				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime },
+			};
+
+            var strlist = new List<CommandInfo>
+            {
+                new CommandInfo()
+                {
+                    CommandText = sql1.ToString(),
+                    Parameters = parameters1
+                },
+                new CommandInfo()
+                {
+                    CommandText = sql2,
+                    Parameters = parameters2
+                }
+            };
+            int rows = DbHelperSQL.ExecuteSqlTran(strlist);
+            return rows > 0;
         }
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Users.cs" />
     <Compile Include="ViewModel\ArticleCommentVm.cs" />
     <Compile Include="ViewModel\ArticleViewModel.cs" />
+    <Compile Include="ViewModel\CreateThreadVm.cs" />
     <Compile Include="ViewModel\FacetItemVm.cs" />
     <Compile Include="ViewModel\SearchResultVm.cs" />
   </ItemGroup>

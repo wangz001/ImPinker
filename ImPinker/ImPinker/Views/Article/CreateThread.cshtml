@@ -5,10 +5,16 @@
 }
 
 <div>
-    <input type="text" placeholder="请输入标题" id="threadName" style="padding: 30px; margin: 30px; width: 900px; "/>
-    <script id="container" name="content" type="text/plain" style="width: 1000px; height: 500px;">
+    @using (Html.BeginForm("CreateThread", "Article", FormMethod.Post))
+{
+
+    <input type="text" name="ArticleName" placeholder="请输入标题" id="threadName" style="padding: 30px; margin: 30px; width: 900px; " />
+    <script id="container" name="Content" type="text/plain" style="width: 1000px; height: 500px;">
     </script>
-    <input id="btn_publish" type="button" value="发布"/>
+        <input id="btn_publish" type="submit" value="发布" />
+        <hr />
+        @Html.ValidationSummary()
+    }
 </div>
 
 @section scripts
@@ -24,12 +30,23 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var ue = UE.getEditor('container');
-
+            return;
             $("#btn_publish").bind("click", function () {
                 var flag = ue.hasContents();
                 if (flag) {
                     var content = ue.getContent();
-                    alert(content);
+                    var articleName = $("#threadName").val();
+                    $.ajax({
+                        url: "/Article/CreateThread",
+                        type: "post",
+                        data: { name: articleName, content: content },
+                        success: function (data) {
+                            alert("bingo！");
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
                 }
 
             });

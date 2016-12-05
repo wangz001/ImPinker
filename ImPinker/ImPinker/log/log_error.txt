@@ -317,3 +317,248 @@ System.IO.DirectoryNotFoundException: 未能找到路径“D:\GitProject\ImPinker\ImPin
 [Footer]
 [Header]
 [Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-05 19:35:14,485 [15] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.Web.HttpRequestValidationException (0x80004005): 从客户端(content="<p><strong><span sty...")中检测到有潜在危险的 Request.Form 值。
+   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpValueCollection.GetValues(String name)
+   在 System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.get_ValidatedResult()
+   在 System.Web.Mvc.NameValueCollectionValueProvider.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.ValueProviderCollection.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__16(AsyncCallback asyncCallback, Object asyncState)
+2016-12-05 19:39:30,572 [26] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.Web.HttpRequestValidationException (0x80004005): 从客户端(content="<p>aaaa</p>")中检测到有潜在危险的 Request.Form 值。
+   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpValueCollection.GetValues(String name)
+   在 System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.get_ValidatedResult()
+   在 System.Web.Mvc.NameValueCollectionValueProvider.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.ValueProviderCollection.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__16(AsyncCallback asyncCallback, Object asyncState)
+[Footer]
+[Header]
+2016-12-05 19:43:04,086 [16] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.Web.HttpRequestValidationException (0x80004005): 从客户端(content="<p>aadfd风格的广泛的<br/><...")中检测到有潜在危险的 Request.Form 值。
+   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpValueCollection.GetValues(String name)
+   在 System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.get_ValidatedResult()
+   在 System.Web.Mvc.NameValueCollectionValueProvider.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.ValueProviderCollection.GetValue(String key, Boolean skipValidation)
+   在 System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__16(AsyncCallback asyncCallback, Object asyncState)
+[Footer]
+[Header]
+2016-12-05 19:44:52,481 [24] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.CreateThread(HtmlString content, String name) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 197
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-05 19:46:53,370 [35] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.InvalidCastException: 无法将类型为“System.Data.Common.DbParameter[]”的对象强制转换为类型“System.Data.SqlClient.SqlParameter[]”。
+   在 DBUtility.DbHelperSQL.ExecuteSqlTran(List`1 cmdList) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 570
+   在 ImDal.ArticleDal.AddThread(CreateThreadVm model) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\Article.cs:行号 386
+   在 ImBLL.ArticleBll.AddThread(CreateThreadVm vm) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 267
+   在 ImPinker.Controllers.ArticleController.CreateThread(String content, String name) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 213
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-05 19:48:09,596 [28] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.Data.SqlClient.SqlException (0x80131904): 不能将值 NULL 插入列 'Url'，表 'ImPinker.dbo.Article'；列不允许有 Null 值。INSERT 失败。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 DBUtility.DbHelperSQL.ExecuteSqlTran(List`1 cmdList) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 570
+   在 ImDal.ArticleDal.AddThread(CreateThreadVm model) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\Article.cs:行号 386
+   在 ImBLL.ArticleBll.AddThread(CreateThreadVm vm) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 267
+   在 ImPinker.Controllers.ArticleController.CreateThread(String content, String name) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 213
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+ClientConnectionId:939d5215-bf88-4a15-84de-c40ca6025679
+[Footer]
+[Header]
+2016-12-05 19:50:48,071 [30] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.Data.SqlClient.SqlException (0x80131904): 列名 'CreateTim' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 DBUtility.DbHelperSQL.ExecuteSqlTran(List`1 cmdList) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 570
+   在 ImDal.ArticleDal.AddThread(CreateThreadVm model) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\Article.cs:行号 387
+   在 ImBLL.ArticleBll.AddThread(CreateThreadVm vm) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 267
+   在 ImPinker.Controllers.ArticleController.CreateThread(String content, String name) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 213
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+ClientConnectionId:13276be8-7862-4b5d-97d9-db6d767eb8c1
+[Footer]
+[Header]
+2016-12-05 19:53:31,529 [15] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index/0
+Referer:http://www.impinker.com/article/createthread
+SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 [::1]:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 168
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.GetArticleById(String travelId) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 307
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 36
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-05 19:55:28,087 [7] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article?id=55131
+Referer:
+SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 [::1]:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 168
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.GetArticleById(String travelId) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 307
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 36
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-05 19:57:17,878 [25] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index/0
+Referer:http://www.impinker.com/article/createthread
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 45
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-05 20:16:45,313 [73] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/CreateThread
+Referer:http://www.impinker.com/article/createthread
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.CreateThread(CreateThreadVm model) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 201
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Header]
+[Footer]
