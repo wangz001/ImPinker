@@ -39,7 +39,6 @@
                     }
 
                 </div>
-                <span class="click-count"><i></i>654</span>
                 <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
             <div class="articlecontent">
@@ -47,10 +46,15 @@
             </div>
             <!--分享-->
             <div class="interest-share">
-                <div class="interest">
+                @{
+                    if (!string.IsNullOrEmpty(article.Company))
+                    {
+                        <div class="interest">
                     转载自：
                     <a href="@article.Url" target="_blank">@article.Company</a>
                 </div>
+                    }
+                }
                 <div class="share bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1478688277964">
                     <span>分享到：</span>
                     <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>

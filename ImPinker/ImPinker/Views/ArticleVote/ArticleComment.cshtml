@@ -30,7 +30,8 @@
                     <a href="javascript:;" class="hottest">最热</a>
                 </div>
             </h3><div class="all-comment">
-                @{
+                     @{
+                         var i = 0;
             foreach (var comment in commentLists)
             {
                 var userid = comment.UserId;
@@ -38,7 +39,7 @@
                 <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
                     <dt>
                         <a href="/lookat/home?userId=151404" class="user" target="_blank">
-                            <i style="background-image: url(@user.ImgUrl.Replace("headimg/limit", "headimg/40"));background-repeat: no-repeat;">
+                            <i style="background-image: url(@user.ImgUrl.Replace("headimg/limit", "/headimg/40"));background-repeat: no-repeat;">
                                 <b class="male-small"></b>
                             </i>
                             <em>
@@ -46,7 +47,7 @@
                             </em>
                         </a>
                         <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
-                        <span class="floor">[ <b>5</b>楼 ]</span>
+                        <span class="floor">[ <b>@(totalcount-i)</b>楼 ]</span>
                         <a href="javascript:;" class="up-btn white-button" commentid="2435005">顶(<em>0</em>)</a>
                     </dt>
                     <dd class="comment-content">
@@ -66,7 +67,7 @@
                             <a href="javascript:;" class="open-dialog">查看对话</a>
                             <dt>
                                 <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
-                                    <i class="head-img" style="background-image: url(@user2.ImgUrl.Replace("headimg/limit", "headimg/40")); background-repeat: no-repeat;">
+                                    <i class="head-img" style="background-image: url(@user2.ImgUrl.Replace("headimg/limit", "/headimg/40")); background-repeat: no-repeat;">
                                         <b class="male-small"></b>
                                     </i>
                                     @user2.UserName
@@ -89,6 +90,7 @@
                         | <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
                     </dd>
                 </dl>
+                i ++;
             }
             if (totalcount > 20)
             {
