@@ -1,4 +1,5 @@
 ﻿@using ImModel
+@using ImPinker.Common
 @{
     ViewBag.Title = "个人中心-账户设置";
     var user = (Users) ViewBag.User;
@@ -16,7 +17,7 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img id="headimg" src="@Path.Combine("/", user.ImgUrl).Replace("headimg/limit", "headimg/100")" /></em>
+                        <em class="headpic"><img id="headimg" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)" /></em>
                         <i class="male-mid"></i>
                     </dt>
                     <dd>

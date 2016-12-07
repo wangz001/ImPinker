@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace Common.Utils
 {
@@ -26,7 +27,7 @@ namespace Common.Utils
         {
             //通过连接创建Image对象
             Image oldimage = Image.FromFile(inputImgUrl);
-            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\tempcut.jpg";
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempcut.jpg";
             oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
             oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
             var bm = new Bitmap(tempjpg);
@@ -49,7 +50,10 @@ namespace Common.Utils
             var cloneRect = new Rectangle(startX, startY, intWidth, intHeight);
             PixelFormat format = bm.PixelFormat;
             Bitmap cloneBitmap = bm.Clone(cloneRect, format);
-
+            if (!Directory.Exists(Path.GetDirectoryName(outImgUrl)))//如果不存在就创建file文件夹
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(outImgUrl));
+            }
             //保存图片
             cloneBitmap.Save(outImgUrl, ici, ep);
             cloneBitmap.Dispose();
@@ -89,7 +93,11 @@ namespace Common.Utils
                 ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
                 //通过连接创建Image对象
                 Image oldimage = Image.FromFile(oldImagePath);
-                var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\tempthumb.jpg";
+                var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempthumb.jpg";
+                if (!Directory.Exists(Path.GetDirectoryName(newImagePath)))//如果不存在就创建file文件夹
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(newImagePath));
+                }
                 oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
                 oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
                 var bm = new Bitmap(tempjpg);

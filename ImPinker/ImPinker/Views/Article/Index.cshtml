@@ -50,9 +50,9 @@
                     if (!string.IsNullOrEmpty(article.Company))
                     {
                         <div class="interest">
-                    转载自：
-                    <a href="@article.Url" target="_blank">@article.Company</a>
-                </div>
+                            转载自：
+                            <a href="@article.Url" target="_blank">@article.Company</a>
+                        </div>
                     }
                 }
                 <div class="share bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1478688277964">
@@ -71,70 +71,9 @@
         }
     </div>
     <!--右侧区域-->
-    <div class="thread-right">
-        <div class="user-info">
-            <a href="/lookat/home?userId=151935" target="_blank" class="headpic">
-                <i style="background-image: url(http://imageqiniu.xxxxxbbs.com/Fuhh4QUUJ8JuOwLQXDzrQr2Q6eAR?imageMogr2/auto-orient/thumbnail/!100x100r/gravity/Center/crop/100x100);background-repeat: no-repeat;background-position: center;">
-
-
-                    <b class="male"></b>
-
-
-                    <!-- <img src=''> -->
-                </i>
-                <em>小磊哥</em>
-            </a>
-
-            <ul>
-                <li>
-                    关注
-
-                    <a href="/lookat/friend?userId=151935" target="_blank">0</a>
-
-
-                </li>
-                <span class="line"></span>
-                <li>
-                    粉丝
-                    <a href="/lookat/fins?userId=151935" target="_blank">3</a>
-                </li>
-                <span class="line"></span>
-                <li>
-                    作品
-                    <a href="/lookat/home?userId=151935" target="_blank">3</a>
-                </li>
-            </ul>
-            <div class="button-area" userid="151935">
-                <a href="javascript:;" class="white-button follow-btn" userid="151935" type="0"><i></i>关注</a>
-                <a href="javascript:;" class="white-button private-btn message-button" userid="151935"><i></i>发私信</a>
-            </div>
-        </div>
-        <div class="operate-record">
-            <h3><i></i>此帖荣誉记录</h3>
-            <ul>
-                <li>
-                    <div class="table">
-                        <span style="text-align: right;">
-                            <i>+500分</i><br>
-                            <em>+30金币</em>
-                        </span>
-                    </div>
-                </li>
-                <li>
-                    <div class="table">
-                        <div>
-                            <span>此帖被 <a href="/lookat/home?userId=2" target="_blank">"运营小妹1号"</a> 设为精华帖</span>
-                            <p style="margin-top:5px;">理由：精华鼓励 </p>
-                        </div>
-                        <span style="text-align: right;width:50px;">
-                            <i>+200分</i><br>
-                            <em>+10金币</em>
-                        </span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @{
+        Html.RenderAction("ArticleWriterInfo", "UserCenter", article);
+    }
 </div>
 
 <div class="clear"></div>

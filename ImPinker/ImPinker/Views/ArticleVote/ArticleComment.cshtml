@@ -1,6 +1,7 @@
 ﻿@using Common.DateTimeUtil
 @using ImModel
 @using ImModel.ViewModel
+@using ImPinker.Common
 @{
     var commentLists = (List<ArticleCommentVm>)ViewBag.CommentLists;
     var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
@@ -39,7 +40,7 @@
                 <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
                     <dt>
                         <a href="/lookat/home?userId=151404" class="user" target="_blank">
-                            <i style="background-image: url(@user.ImgUrl.Replace("headimg/limit", "/headimg/40"));background-repeat: no-repeat;">
+                            <i style="background-image: url(@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40));background-repeat: no-repeat;">
                                 <b class="male-small"></b>
                             </i>
                             <em>
@@ -67,7 +68,7 @@
                             <a href="javascript:;" class="open-dialog">查看对话</a>
                             <dt>
                                 <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
-                                    <i class="head-img" style="background-image: url(@user2.ImgUrl.Replace("headimg/limit", "/headimg/40")); background-repeat: no-repeat;">
+                                    <i class="head-img" style="background-image: url(@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40)); background-repeat: no-repeat;">
                                         <b class="male-small"></b>
                                     </i>
                                     @user2.UserName

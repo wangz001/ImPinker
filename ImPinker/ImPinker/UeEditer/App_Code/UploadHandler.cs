@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Common.AlyOssUtil;
 
 /// <summary>
 /// UploadHandler 的摘要说明
@@ -74,6 +75,11 @@ public class UploadHandler : Handler
             File.WriteAllBytes(localPath, uploadFileBytes);
             Result.Url = savePath;
             Result.State = UploadState.Success;
+            //上传到oss，页面读取的时候，取oss的图片
+            string buckeyName = "myautos";
+            ObjectOperate.UploadImage(buckeyName, localPath, savePath.Substring(1));
+            //删除保存在本地的图片。
+            File.Delete(localPath);
         }
         catch (Exception e)
         {

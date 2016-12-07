@@ -1,4 +1,5 @@
 ﻿@using ImModel
+@using ImPinker.Common
 @{
     var user = (Users)ViewBag.User;
 }
@@ -11,7 +12,7 @@
 
     <div id="original-img">
         <div class="frame" id="original-pic-box" style="position:relative">
-            <img id="photo" src="@Path.Combine("/",user.ImgUrl)" style="display:block; position:relative" />
+            <img id="photo" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 180)" style="display:block; position:relative" />
         </div>
     </div>
     <div class="headpic_container">
@@ -19,7 +20,7 @@
         <div class="big" style="float:left">
             <div class="frame" style="width: 180px; height: 180px;">
                 <div style="width: 180px; height: 180px; margin-bottom: 15px; overflow: hidden;">
-                    <img id="preview180" src="@Path.Combine("/", user.ImgUrl)" id="photo-large" />
+                    <img id="preview180" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 180)" id="photo-large" />
                 </div>
                 <span>大尺寸头像180像素×180像素</span>
             </div>

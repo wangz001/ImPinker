@@ -176,6 +176,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\ImageUrlHelper.cs" />
     <Compile Include="Common\JsonResultHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
@@ -565,6 +566,7 @@
     <Content Include="UeEditer\third-party\video-js\font\vjs.svg" />
     <Content Include="UeEditer\third-party\video-js\font\vjs.ttf" />
     <Content Include="UeEditer\third-party\video-js\font\vjs.woff" />
+    <Content Include="Views\UserCenter\ArticleWriterInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

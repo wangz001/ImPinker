@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ImBLL;
+using ImModel;
+using ImModel.ViewModel;
 using ImPinker.Filters;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -34,6 +36,21 @@ namespace ImPinker.Controllers
             var user= UserBll.GetModelByAspNetId(User.Identity.GetUserId());
             ViewBag.User = user;
             return View();
+        }
+
+        /// <summary>
+        /// 文章详情页，该文章作者信息
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult ArticleWriterInfo(ArticleViewModel articleViewModel)
+        {
+            int totalCount = 0;
+            var articleId = articleViewModel.Id;
+            var userid = articleViewModel.Userid;
+            var user = UserBll.GetModelByCache(Int32.Parse(userid));
+            ViewBag.Writer = user;
+            return PartialView();
         }
 	}
 }
