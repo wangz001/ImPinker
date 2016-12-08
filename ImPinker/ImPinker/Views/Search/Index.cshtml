@@ -1,7 +1,7 @@
 ﻿@using ImModel.ViewModel
 @using Newtonsoft.Json
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "搜索";
     var searchVm = (SearchResultVm)ViewBag.searchVm;
     <link href="~/Content/search.css" rel="stylesheet" />
 }
@@ -10,7 +10,7 @@
     <div class="search-input">
             <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
             <div class="search-btn-area">
-                <a href="javascript:;" class="current">内容</a> <a href="/search/user?keyword=越野" methods="post">用户</a>
+                <a href="javascript:;" class="current">筛选：</a>
                 @{
                     if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
                     {

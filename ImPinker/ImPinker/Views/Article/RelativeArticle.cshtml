@@ -1,0 +1,30 @@
+﻿@using ImModel.ViewModel
+
+@{
+    var list = (List<ArticleViewModel>)ViewBag.RelativeArticle;
+    if (list != null && list.Count > 0)
+    {
+        <div class="operate-record r-hot">
+            <h3><strong>相关文章推荐</strong></h3>
+
+            @{
+        foreach (ArticleViewModel vm in list)
+        {
+            <dl class="">
+                <dt>
+                    <a target="_blank" href="/Article/Index?id=@vm.Id">
+                        <img alt="" src="@vm.CoverImage" sizes="60px" width="70" height="60">
+                    </a>
+                </dt>
+                <dd>
+                    <a target="_blank" href="/Article/Index?id=@vm.Id">
+                        @Html.Raw(vm.ArticleName)
+                    </a>
+                    <p>@vm.CreateTimeStr</p>
+                </dd>
+            </dl>
+        }
+            }
+        </div>
+    }
+}

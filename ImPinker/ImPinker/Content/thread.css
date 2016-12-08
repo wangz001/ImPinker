@@ -2287,6 +2287,58 @@
                 border-bottom: 1px solid #f7f7f7;
             }
 
+    /*右侧====相关文章推荐======================================================================================*/
+    .thread-right .r-hot dl {
+        height: 90px;
+        padding: 15px;
+        border-bottom: solid 1px #eee;
+    }
+
+    .thread-right .r-hot dt {
+        float: left;
+        font-size: 0;
+    }
+
+        .thread-right .r-hot dt a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+        }
+
+    .thread-right .r-hot dd {
+        position: relative;
+        float: left;
+        width: 175px;
+        height: 60px;
+        padding-left: 15px;
+        font-size: 12px;
+        color: #999;
+    }
+
+        .thread-right .r-hot dd a {
+            overflow: hidden;
+            display: inline-block;
+            width: 175px;
+            height: 44px;
+            font-size: 14px;
+            line-height: 22px;
+            color: #666;
+            vertical-align: top;
+        }
+
+        .thread-right .r-hot dd p {
+            line-height: 20px;
+        }
+
+        .thread-right .r-hot dd span {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            padding: 0 8px;
+            border: 1px solid #b5b5b5;
+            border-radius: 30px;
+        }
+
 .thread-main .article .articlecontent table {
     border-top-color: rgb(191, 201, 226);
     border-right-color: rgb(191, 201, 226);

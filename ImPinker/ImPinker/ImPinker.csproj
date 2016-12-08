@@ -567,6 +567,7 @@
     <Content Include="UeEditer\third-party\video-js\font\vjs.ttf" />
     <Content Include="UeEditer\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\UserCenter\ArticleWriterInfo.cshtml" />
+    <Content Include="Views\Article\RelativeArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

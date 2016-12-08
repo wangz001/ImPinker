@@ -71,11 +71,17 @@
         }
     </div>
     <!--右侧区域-->
-    @{
-        Html.RenderAction("ArticleWriterInfo", "UserCenter", article);
-    }
-</div>
+    <div class="thread-right">
+        @{
+            //作者信息
+            Html.RenderAction("ArticleWriterInfo", "UserCenter", article);
 
+            //相关文章推荐
+            Html.RenderAction("RelativeArticle", "Article", article);
+
+        }
+    </div>
+</div>
 <div class="clear"></div>
 @section scripts
 {

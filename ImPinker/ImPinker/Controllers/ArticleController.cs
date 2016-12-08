@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -48,6 +50,22 @@ namespace ImPinker.Controllers
             }
             ViewBag.Article = vm;
             return View("Index");
+        }
+
+        /// <summary>
+        /// 文章详情页，右侧相关文章推荐
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult RelativeArticle(ArticleViewModel articleViewModel)
+        {
+            var list=new List<ArticleViewModel>();
+            if (!string.IsNullOrEmpty(articleViewModel.KeyWords))
+            {
+                list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle",articleViewModel.KeyWords,false, 1, 5).ArticleList;
+            }
+            ViewBag.RelativeArticle = list;
+            return PartialView();
         }
 
         /// <summary>

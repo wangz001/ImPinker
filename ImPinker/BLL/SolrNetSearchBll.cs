@@ -18,7 +18,7 @@ namespace ImBLL
         }
 
         /// <summary>
-        /// 查询-关键字简单查询
+        /// 搜索-关键字简单查询
         /// </summary>
         /// <param name="keyWord"></param>
         /// <param name="tab">标签分类:新闻,改装,评测等</param>
@@ -33,7 +33,7 @@ namespace ImBLL
         {
             var searchParaStr = "Index?";
             searchParaStr += "key=" + keyWord + "&tab=" + tab;
-            
+
             if (!string.IsNullOrEmpty(facetCompany))
             {
                 searchParaStr += "&facetCompany=" + facetCompany;
@@ -259,8 +259,8 @@ namespace ImBLL
             foreach (var articleViewModel in results)
             {
                 articleViewModel.CreateTimeStr = TUtil.DateFormatToString(articleViewModel.CreateTime);
-                
-                
+
+
             }
             var searchVm = new SearchResultVm()
             {
@@ -277,7 +277,135 @@ namespace ImBLL
             return searchVm;
         }
 
+        /// <summary>
+        /// 根据不同的viewtype。不同页面的搜索框。有通过标签跳转的，有页面的相关文章等
+        /// </summary>
+        /// <param name="ViewType"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="IsHighLight"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        public static SearchResultVm QueryByViewTpye(string ViewType, string keyWord, bool IsHighLight
+            , int pageNum, int pageCount)
+        {
+            switch (ViewType)
+            {
+                case "RelativeArticle":
+                    //文章详情页，右侧相关车型推荐
+                    IsHighLight = false;
+                    break;
+                case "MyArticles":
+                    //搜索我发的帖子和我收藏的帖子
+                    //userid=。。。。。
+                    break;
+                case "3":
+                    break;
+                default: break;
+            }
+            var startNum = (pageNum - 1) * pageCount;
 
+            #region 查询条件
+
+            //建立排序，条件.
+            var options = new QueryOptions
+            {
+                Start = startNum,
+                Rows = pageCount
+            };
+            if (IsHighLight)
+            {
+                //高亮设置
+                var high = new HighlightingParameters
+                {
+                    Fields = new List<string> { "ArticleName", "KeyWords", "Description" },
+                    BeforeTerm = "<font color='red'><b>",
+                    AfterTerm = "</b></font>"
+                };
+                options.Highlight = high;
+            }
+
+            //创建条件集合
+            var query = new List<ISolrQuery>();
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                var ar = new List<ISolrQuery>
+                {
+                    new SolrQueryByField("ArticleName", keyWord),
+                    new SolrQueryByField("KeyWords", keyWord),
+                    new SolrQueryByField("Description", keyWord)
+                };
+                //创建keyWord 条件集合的关系,是OR还是AND
+                var kw = new SolrMultipleCriteriaQuery(ar, "OR");
+                query.Add(kw);
+            }
+
+            //按照时间倒排序.
+            //options.AddOrder(new SortOrder("CreateTime", Order.DESC));
+
+            //条件集合之间的关系
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+
+            #endregion
+
+            //执行查询,有5个重载
+            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+
+            # region 高亮处理
+
+            if (IsHighLight)
+            {
+                var highlights = results.Highlights;
+                if (highlights != null && highlights.Count > 0)
+                {
+                    foreach (var item in results)
+                    {
+                        var snippets = highlights[item.Id].Snippets;
+                        foreach (var snippet in snippets)
+                        {
+                            if (snippet.Key.Equals("ArticleName"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.ArticleName = t;
+                            }
+                            if (snippet.Key.Equals("KeyWords"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.KeyWords = t;
+                            }
+                            if (snippet.Key.Equals("Description"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.Description = t;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            //时间格式转换，前台显示用
+            foreach (var articleViewModel in results)
+            {
+                articleViewModel.CreateTimeStr = TUtil.DateFormatToString(articleViewModel.CreateTime);
+            }
+            var searchVm = new SearchResultVm()
+            {
+                ArticleList = results,
+                PageCount = pageCount,
+                PageNum = pageNum,
+                TotalCount = results.NumFound,
+                MaxPageNum = results.NumFound / pageNum + 1
+            };
+            return searchVm;
+        }
+
+
+        /// <summary>
+        /// 获取文章详情
+        /// </summary>
+        /// <param name="travelId"></param>
+        /// <returns></returns>
         public static ArticleViewModel GetArticleById(string travelId)
         {
             //创建条件集合
@@ -292,20 +420,20 @@ namespace ImBLL
                 var kw = new SolrMultipleCriteriaQuery(ar, "OR");
                 query.Add(kw);
             }
-             //建立排序，条件.
+            //建立排序，条件.
             var options = new QueryOptions
             {
                 Start = 0,
                 Rows = 1
             };
 
-             //条件集合之间的关系
+            //条件集合之间的关系
             var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
 
 
             //执行查询,有5个重载
             SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
-            if (results!=null&&results.Count>0)
+            if (results != null && results.Count > 0)
             {
                 return results[0];
             }
