@@ -158,3 +158,108 @@ System.NullReferenceException: 未将对象引用设置到对象的实例。
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-09 18:48:51,116 [62] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/HotTag?hotTag=越野江湖
+Referer:http://www.impinker.com/
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_Search_HotTag_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Search\HotTag.cshtml:行号 22
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-09 18:49:54,701 [48] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/HotTag?hotTag=越野江湖
+Referer:http://www.impinker.com/
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_Search_HotTag_cshtml.<>c__DisplayClass5.<Execute>b__4() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Search\HotTag.cshtml:行号 30
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClassb.<RenderSection>b__9(TextWriter tw)
+   在 ASP._Page_Views_Shared__Layout_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Shared\_Layout.cshtml:行号 21
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-09 18:50:10,723 [68] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/HotTag?hotTag=越野江湖
+Referer:http://www.impinker.com/
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_Search_HotTag_cshtml.<>c__DisplayClass5.<Execute>b__4() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Search\HotTag.cshtml:行号 33
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClassb.<RenderSection>b__9(TextWriter tw)
+   在 ASP._Page_Views_Shared__Layout_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Shared\_Layout.cshtml:行号 21
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-09 18:51:50,175 [66] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/HotTag?hotTag=越野江湖
+Referer:http://www.impinker.com/
+SolrNet.Exceptions.SolrConnectionException: <?xml version="1.0" encoding="UTF-8"?>
+<response>
+<lst name="responseHeader"><int name="status">400</int><int name="QTime">364</int><lst name="params"><str name="facet">true</str><arr name="facet.query"><str>CreateTime:[2016-12-02T18:51:49.433Z TO 2016-12-09T18:51:49.433Z]</str><str>CreateTime:[2016-11-25T18:51:49.433Z TO 2016-12-09T18:51:49.433Z]</str><str>CreateTime:[2016-11-09T18:51:49.433Z TO 2016-12-09T18:51:49.433Z]</str><str>CreateTime:[2016-06-09T18:51:49.433Z TO 2016-12-09T18:51:49.433Z]</str><str>CreateTime:[1996-12-09T18:51:49.433Z TO 2016-06-09T18:51:49.433Z]</str></arr><str name="start">-30</str><str name="q">((ArticleName:(越野江湖) OR KeyWords:(越野江湖) OR Description:(越野江湖)) AND KeyWords:(越野江湖))</str><str name="hl.simple.pre">&lt;font color='red'&gt;&lt;b&gt;</str><str name="hl.simple.post">&lt;/b&gt;&lt;/font&gt;</str><str name="hl.fl">ArticleName,KeyWords,Description</str><arr name="facet.field"><str>Company</str><str>KeyWords</str></arr><str name="hl">true</str><str name="version">2.2</str><str name="rows">30</str></lst></lst><lst name="error"><str name="msg">'start' parameter cannot be negative</str><int name="code">400</int></lst>
+</response>
+ ---> System.Net.WebException: 远程服务器返回错误: (400) 错误的请求。
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 162
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.Query(String keyWord, String tab, String facetCompany, String facetTag, String facetDateTime, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 174
+   在 ImPinker.Controllers.SearchController.GetByPage(SearchDto dto) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\SearchController.cs:行号 52
+   在 ImPinker.Controllers.SearchController.HotTag(String hotTag) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\SearchController.cs:行号 68
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-09 18:55:03,542 [61] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_49739
+Referer:http://www.impinker.com/Search/HotTag?hotTag=越野江湖
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 47
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
