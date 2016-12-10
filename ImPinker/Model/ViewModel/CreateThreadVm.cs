@@ -19,6 +19,7 @@ namespace ImModel.ViewModel
         /// <summary>
         /// 封面图
         /// </summary>
+        [Required]
         public string Coverimage { get; set; }
         public int Userid { get; set; }
         public string Keywords { get; set; }

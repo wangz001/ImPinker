@@ -33,5 +33,9 @@
         /// 时间范围
         /// </summary>
         public string FacetDateTime { get; set; }
+        /// <summary>
+        /// 是否高亮
+        /// </summary>
+        public bool IsHighLight { get; set; }
     }
 }

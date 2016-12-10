@@ -32,7 +32,7 @@
                             if (!string.IsNullOrEmpty(keyWord))
                             {
                                 <a href="/Search/Index?key=@keyWord" target="_blank" class="topic-lab"
-                                   topicid="3" style="background: rgb(46, 75, 107);">@keyWord<i></i></a>
+                                   topicid="3" style="background: rgb(46, 75, 107); margin: 5px;">@keyWord<i></i></a>
                                 i++;
                             }
                         }
@@ -55,13 +55,6 @@
                         </div>
                     }
                 }
-                <div class="share bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1478688277964">
-                    <span>分享到：</span>
-                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-                </div>
             </div>
         </div>
 
@@ -73,12 +66,14 @@
     <!--右侧区域-->
     <div class="thread-right">
         @{
-            //作者信息
-            Html.RenderAction("ArticleWriterInfo", "UserCenter", article);
-
+            if (string.IsNullOrEmpty(article.Company))  //company为空，表示是原创文章，不是抓取的
+            {
+                //作者信息
+                Html.RenderAction("ArticleWriterInfo", "UserCenter", article);
+            }
+            
             //相关文章推荐
             Html.RenderAction("RelativeArticle", "Article", article);
-
         }
     </div>
 </div>

@@ -38,6 +38,7 @@ $(document).ready(function () {
         var commentId = $(this).attr("commentid");
         var html = $('script[type="text/templateReComment"]').html();
         $(this.parentElement.parentElement).append(html);
+        $("#reply-content").focus();
         $("#pub-reply").bind("click", function() {
             var content = $("#reply-content").val();
             if (content != null && content != '') {

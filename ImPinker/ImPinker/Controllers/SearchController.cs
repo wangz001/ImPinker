@@ -21,6 +21,7 @@ namespace ImPinker.Controllers
             {
                 dto.PageCount = 30;
             }
+            dto.IsHighLight = true;
             var searchvm = GetByPage(dto);
             ViewBag.searchVm = searchvm;
             return View();
@@ -40,7 +41,11 @@ namespace ImPinker.Controllers
             }
             return string.Empty;
         }
-
+        /// <summary>
+        /// 搜索，按分页获取数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         private SearchResultVm GetByPage(SearchDto dto)
         {
             var searchvm = new SearchResultVm();
@@ -57,23 +62,24 @@ namespace ImPinker.Controllers
         /// <summary>
         /// 首页热门标签分类及文章热门标签页面
         /// </summary>
-        /// <param name="hotTag"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        public ActionResult HotTag(string hotTag)
+        public ActionResult HotTag(SearchDto dto)
         {
-            var dto = new SearchDto()
+            if (dto.PageNum == 0)
             {
-                FacetCompany = "",
-                FacetDateTime = "",
-                FacetTag = "",
-                Key = hotTag,
-                PageNum = 1,
-                PageCount = 30,
-                Tab = hotTag
-            };
-            var searchvm = GetByPage(dto);
+                dto.PageNum = 1;
+            }
+            if (dto.PageCount == 0)
+            {
+                dto.PageCount = 30;
+            }
+            dto.IsHighLight = false;
+            var searchvm = SolrNetSearchBll.QueryHotTag(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount, false); ;
+            ViewBag.HotTag = dto.Key;
             ViewBag.searchVm = searchvm;
             return View();
         }
+
     }
 }

@@ -6,16 +6,51 @@
     <link href="~/Content/search.css" rel="stylesheet" />
 }
 <div id="containers" style="width: 1100px;margin:auto;">
-    <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果  </div>
+    <div class="crumb">当前位置：<a href="/">首页</a> &gt;热门标签  </div>
     <div class="search-input">
-        <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
         <div class="search-btn-area">
-            <button class="blue-middle-button" onclick="searchKeyWord()">搜索</button>
+            <i>筛选：</i>
+            @{
+                if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetSelected)
+                    {
+                        <a href="@i.Url">
+                            <i>@i.Name</i>
+                        </a>
+                    }
+                }
+
+                if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetDicTag)
+                    {
+                        <a href="@i.Url">
+                            <i>@i.Name</i>&nbsp;&nbsp;
+                            <i style="color:blue">[@i.Count]</i>
+                        </a>
+                    }
+                }
+                if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                {
+                    <hr/><i>按时间筛选:</i>
+                    foreach (var i in searchVm.FacetDicDateTime)
+                    {
+                        <a href="@i.Url">
+                            <i>@i.Name</i>
+                            <i>[@i.Count]</i>&nbsp;&nbsp;
+                        </a>
+                    }
+                }
+            }
         </div>
+
     </div>
 
-    <div class="search-interest">
-        
+   
+    <div class="tag-name">
+        <h2><strong>@Html.Raw(ViewBag.HotTag)</strong></h2>
+        <i>共有 @Html.Raw(searchVm.TotalCount)篇文章</i>
     </div>
 </div>
 
@@ -61,9 +96,6 @@
     <script type="text/template1">
         <li>
             <div class="img-box">
-                <div class="interest-label">
-                    <div class="label"><a href="/interest/interestinfo?interestId=63&amp;creatorTime=2" target="_blank">拍汽车</a></div>
-                </div>
                 <a href="/Article/Index?id=$Id$" target="_blank">
                     <img src="$CoverImage$" class="upload">
                 </a>

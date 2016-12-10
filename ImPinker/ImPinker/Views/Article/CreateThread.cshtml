@@ -15,6 +15,10 @@
             <script id="contain" name="Content" type="text/plain" style="width: 100%; height: 800px;">
             </script>
         </div>
+         <a onclick="UpLoadCover()">文章封面图</a>
+    <input id="imgFile" name="imgFile" type="file" style="width: 100%" />
+        <img id="preview180" src="" style="width: 300px; height: 300px"/>
+    <input type="hidden" name="Coverimage" id="imgPath"/>
         <input id="btn_publish" type="submit" value="发布" />
         <hr />
         @Html.ValidationSummary()
@@ -30,10 +34,11 @@
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/UeEditer/lang/zh-cn/zh-cn.js"></script>
 
-
+<script src="~/Scripts/ajaxfileupload.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var ue = UE.getEditor('contain');
+
 
             $("#btn_publish").bind("click", function () {
                 var flag = ue.hasContents();
@@ -53,14 +58,41 @@
                         }
                     });
                 }
+            });
 
+            $(function () {
+                $("#imgFile").change(function () {
+                    ajaxFileUpload();
+                });
             });
         });
 
+        //上传封面图
+       
+        function ajaxFileUpload() {
+            $("#imgFile").change(function () {
+                ajaxFileUpload();
+            });
+            $.ajaxFileUpload(
+                {
+                    url: '/Upload/Upload', //用于文件上传的服务器端请求地址
+                    type: "post",
+                    secureuri: false, //一般设置为false
+                    fileElementId: 'imgFile', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                    dataType: 'json', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        $("#preview180").attr("src", data.imgurl);
+                        $("#imgPath").val(data.imgurl);
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        alert(e);
+                    }
+                }
+            );
+        }
+
     </script>
-
-
-
-
 }
 

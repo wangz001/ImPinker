@@ -70,7 +70,7 @@
        // 'deletetable', //删除表格
        // 'cleardoc', //清空文档
        // 'insertparagraphbeforetable', //"表格前插入行"
-        'insertcode', //代码语言
+        //'insertcode', //代码语言
         'fontfamily', //字体
         'fontsize', //字号
         'paragraph', //段落格式

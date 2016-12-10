@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Common.AlyOssUtil;
+using Common.Utils;
 using ImBLL;
 using ImModel;
 using ImModel.ViewModel;
@@ -217,22 +222,36 @@ namespace ImPinker.Controllers
                 AddErrors(IdentityResult.Failed("不能为空"));
                 return View(model);
             }
-            var vm = new CreateThreadVm
+            if (!string.IsNullOrEmpty(model.Coverimage))
             {
-                ArticleName = model.ArticleName,
-                Content = model.Content,
-                Userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id,
-                Coverimage = "",
-                Keywords = "",
-                Description = "",
-                Createtime = DateTime.Now,
-                Updatetime = DateTime.Now,
-                State = ArticleStateEnum.Normal
-            };
-            var flag = ArticleBll.AddThread(vm);
-            if (flag)
-            {
-                return RedirectToAction("MyArticle");
+                var sourcepath = Server.MapPath("/") + model.Coverimage;
+                string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
+                var coverimage = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id, DateTime.Now.Ticks);
+                
+                //缩放
+                ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
+                string buckeyName = "myautos";
+                var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage);
+                if (ossSucess)
+                {
+                    var vm = new CreateThreadVm
+                    {
+                        ArticleName = model.ArticleName,
+                        Content = model.Content,
+                        Userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id,
+                        Coverimage = coverimage,
+                        Keywords = "",
+                        Description = "",
+                        Createtime = DateTime.Now,
+                        Updatetime = DateTime.Now,
+                        State = ArticleStateEnum.Normal
+                    };
+                    var flag = ArticleBll.AddThread(vm);
+                    if (flag)
+                    {
+                        return RedirectToAction("MyArticle");
+                    }
+                }
             }
             AddErrors(IdentityResult.Failed("有错误"));
             return View(model);
