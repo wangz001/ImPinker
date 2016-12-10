@@ -13,7 +13,10 @@ function bindVote() {
             type: "get",
             data: { articleId: articleId, vote: 1 },
             success: function (data) {
-                alert("bingo！");
+                $(".dialog-layer").show();
+                $(".confirm").bind('click', function () {
+                    $(".dialog-layer").hide();
+                });
             },
             error: function (data) {
                 alert(data);

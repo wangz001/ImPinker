@@ -8,43 +8,43 @@
 <div id="containers" style="width: 1100px;margin:auto;">
     <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果  </div>
     <div class="search-input">
-            <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
-            <div class="search-btn-area">
-                <a href="javascript:;" class="current">筛选：</a>
-                @{
-                    if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
+        <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
+        <div class="search-btn-area">
+            <a href="javascript:;" class="current">筛选：</a>
+            @{
+                if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetSelected)
                     {
-                        foreach (var i in searchVm.FacetSelected)
-                        {
-                            <a href="@i.Url">
-                                <i>@i.Name</i>&nbsp;&nbsp;
-                            </a>
-                        }
-                    }
-
-                    if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
-                    {
-                        foreach (var i in searchVm.FacetDicTag)
-                        {
-                            <a href="@i.Url">
-                                <i>@i.Name</i>
-                                <i style="color:red">[@i.Count]</i>
-                            </a>
-                        }
-                    }
-                    if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
-                    {
-                        foreach (var i in searchVm.FacetDicDateTime)
-                        {
-                            <a href="@i.Url">
-                                <i>@i.Name</i>
-                                <i>[@i.Count]</i>&nbsp;&nbsp;
-                            </a>
-                        }
+                        <a href="@i.Url">
+                            <i>@i.Name</i>&nbsp;&nbsp;
+                        </a>
                     }
                 }
-                <button class="blue-middle-button" onclick="searchKeyWord()">搜索</button>
-            </div>
+
+                if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetDicTag)
+                    {
+                        <a href="@i.Url">
+                            <i>@i.Name</i>
+                            <i style="color:red">[@i.Count]</i>
+                        </a>
+                    }
+                }
+                if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                {
+                    foreach (var i in searchVm.FacetDicDateTime)
+                    {
+                        <a href="@i.Url">
+                            <i>@i.Name</i>
+                            <i>[@i.Count]</i>&nbsp;&nbsp;
+                        </a>
+                    }
+                }
+            }
+            <button class="blue-middle-button" onclick="searchKeyWord()">搜索</button>
+        </div>
     </div>
 
     <div class="search-interest">
@@ -99,7 +99,7 @@
                 $("#tabList a[txt=" + tabS + "]").addClass("b_twolcur");
             }
         });
-        
+
         //大搜索框搜索事件
         function searchKeyWord() {
             var keyWord = $("#keyword").val();

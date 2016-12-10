@@ -1,6 +1,15 @@
 ﻿@{
     ViewBag.Title = "车酷-MyAutos";
 }
+<div class="dialog-layer" style="display: none;">
+    <div id="dialog" style="top: 200px;">
+        <p>点赞成功！</p>
+        <div class="button-box">
+            <a href="javascript:;" class="cancel" style="display: none;">取消</a>
+            <a href="javascript:;" class="confirm" style="border-color: rgb(33, 117, 208); background: rgb(33, 117, 208);">确定</a>
+        </div>
+    </div>
+</div>
 @Html.Partial("_TabListPartial")
 <div class="topic-list"><p>今日新增320篇文章。车酷：精致的汽车生活社群</p></div>
 <ul class="topic-list" id="articleConten"></ul>
@@ -44,7 +53,7 @@
                 </a>
                 <div class="about-count">
                     <span class="click-count"><i></i><b>181</b></span>
-                    <span class="praise-count" articleid="$Id$"><i></i><b>喜欢，点个赞</b></span>
+                    <a><span class="praise-count" articleid="$Id$"><i></i><b>喜欢，点个赞</b></span></a>
                 </div>
             </div>
         </li>
