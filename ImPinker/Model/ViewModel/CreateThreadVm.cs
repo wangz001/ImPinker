@@ -20,6 +20,7 @@ namespace ImModel.ViewModel
         /// 封面图
         /// </summary>
         [Required]
+        [Display(Name = "封面图")]
         public string Coverimage { get; set; }
         public int Userid { get; set; }
         public string Keywords { get; set; }
@@ -28,6 +29,7 @@ namespace ImModel.ViewModel
         /// 帖子内容
         /// </summary>
         [Required]
+        [Display(Name = "帖子正文")]
         [DataType(DataType.Html)]
         public string Content { get; set; }
         /// <summary>

@@ -49,7 +49,7 @@ namespace ImPinker.Controllers
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
-            if (vm.Content==null)
+            if (vm.Content == null)
             {
                 return new RedirectResult(vm.Url);
             }
@@ -64,10 +64,10 @@ namespace ImPinker.Controllers
         [ChildActionOnly]
         public ActionResult RelativeArticle(ArticleViewModel articleViewModel)
         {
-            var list=new List<ArticleViewModel>();
+            var list = new List<ArticleViewModel>();
             if (!string.IsNullOrEmpty(articleViewModel.KeyWords))
             {
-                list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle",articleViewModel.KeyWords,false, 1, 5).ArticleList;
+                list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle", articleViewModel.KeyWords, false, 1, 5).ArticleList;
             }
             ViewBag.RelativeArticle = list;
             return PartialView();
@@ -227,7 +227,7 @@ namespace ImPinker.Controllers
                 var sourcepath = Server.MapPath("/") + model.Coverimage;
                 string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
                 var coverimage = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id, DateTime.Now.Ticks);
-                
+
                 //缩放
                 ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
                 string buckeyName = "myautos";
@@ -257,6 +257,79 @@ namespace ImPinker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 修改帖子
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        public ActionResult UpdateThread(int articleId)
+        {
+            var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            var article = ArticleBll.GetModelByCache(articleId);
+            if (article != null && article.UserId == userid)
+            {
+                ViewBag.Article = article;
+                return View();
+            }
+            ViewBag.Article = null;
+            return View();
+        }
+
+        /// <summary>
+        /// 修改帖子
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateThread(CreateThreadVm model)
+        {
+            var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            
+            if (string.IsNullOrEmpty(model.Content) || string.IsNullOrEmpty(model.ArticleName))
+            {
+                AddErrors(IdentityResult.Failed("不能为空"));
+                return View(model);
+            }
+            if (!string.IsNullOrEmpty(model.Coverimage))
+            {
+                var coverimage = model.Coverimage;
+                if (!model.Coverimage.StartsWith("articlefirstimg/"))
+                {
+                    var sourcepath = Server.MapPath("/") + model.Coverimage;
+                    string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
+                    coverimage = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id, DateTime.Now.Ticks);
+
+                    //缩放
+                    ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
+                    string buckeyName = "myautos";
+                    var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage);
+                }
+                var article = ArticleBll.GetModelByCache(model.ArticleId);
+                var vm = new CreateThreadVm
+                   {
+                       ArticleId = model.ArticleId,
+                       ArticleName = model.ArticleName,
+                       Content = model.Content,
+                       Userid = userid,
+                       Coverimage = coverimage,
+                       Keywords = "",
+                       Description = "",
+                       Createtime = article.CreateTime,
+                       Updatetime = DateTime.Now,
+                       State = ArticleStateEnum.Normal
+                   };
+                var flag = ArticleBll.UpdateThread(vm);
+                if (flag)
+                {
+                    return RedirectToAction("MyArticle");
+                }
+            }
+            AddErrors(IdentityResult.Failed("有错误"));
+            return View(model);
+        }
+
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -274,7 +347,7 @@ namespace ImPinker.Controllers
         public void InitUeEditor()
         {
             Handler action = null;
-            var context=System.Web.HttpContext.Current;
+            var context = System.Web.HttpContext.Current;
             var aa = context.Request["action"];
             switch (aa)
             {

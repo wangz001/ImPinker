@@ -568,6 +568,7 @@
     <Content Include="Views\UserCenter\ArticleWriterInfo.cshtml" />
     <Content Include="Views\Article\RelativeArticle.cshtml" />
     <Content Include="Views\Search\HotTag.cshtml" />
+    <Content Include="Views\Article\UpdateThread.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -387,6 +387,56 @@ INSERT INTO [dbo].[ArticleSnaps]
             int rows = DbHelperSQL.ExecuteSqlTran(strlist);
             return rows > 0;
         }
+        /// <summary>
+        /// 修改帖子
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public bool UpdateThread(CreateThreadVm vm)
+        {
+            var sql1 = new StringBuilder();
+            sql1.Append("UPDATE Article set ");
+            sql1.Append("ArticleName=@ArticleName,CoverImage=@CoverImage,KeyWords=@KeyWords,Description=@Description,UpdateTime=@UpdateTime ");
+            sql1.Append(" WHERE ");
+            sql1.Append("UserId=@UserId and Id=@Id ");
+            SqlParameter[] parameters1 =
+			{
+                new SqlParameter("@Id", SqlDbType.BigInt){Value =vm.ArticleId },
+				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =vm.ArticleName },
+				new SqlParameter("@CoverImage", SqlDbType.VarChar, 100){Value =vm.Coverimage },
+				new SqlParameter("@UserId", SqlDbType.Int, 4){Value = vm.Userid},
+				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =vm.Keywords },
+				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =vm.Description },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = vm.Updatetime},
+			};
+
+            const string sql2 = @"
+UPDATE [dbo].[ArticleSnaps]
+           SET [ConTent]=@ConTent
+     where ArticleId=@ArticleId
+";
+            SqlParameter[] parameters2 =
+			{
+				new SqlParameter("@ArticleId", SqlDbType.BigInt){Value =vm.ArticleId },
+				new SqlParameter("@ConTent", SqlDbType.Text){Value =vm.Content },
+			};
+
+            var strlist = new List<CommandInfo>
+            {
+                new CommandInfo()
+                {
+                    CommandText = sql1.ToString(),
+                    Parameters = parameters1
+                },
+                new CommandInfo()
+                {
+                    CommandText = sql2,
+                    Parameters = parameters2
+                }
+            };
+            int rows = DbHelperSQL.ExecuteSqlTran(strlist);
+            return rows > 0;
+        }
     }
 }
 

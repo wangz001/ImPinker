@@ -266,6 +266,11 @@ namespace ImBLL
         {
             return dal.AddThread(vm);
         }
+
+        public bool UpdateThread(CreateThreadVm vm)
+        {
+            return dal.UpdateThread(vm);
+        }
     }
 }
 

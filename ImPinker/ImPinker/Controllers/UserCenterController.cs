@@ -22,7 +22,10 @@ namespace ImPinker.Controllers
         public ActionResult Index()
         {
             var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            var ds = ArticleBll.GetMyListByPage(user.Id, 1, 3);
+            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
             ViewBag.User = user;
+           ViewBag.Articles = articles;
             return View();
         }
         

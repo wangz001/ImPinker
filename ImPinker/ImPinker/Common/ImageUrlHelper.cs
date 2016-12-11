@@ -34,5 +34,29 @@ namespace ImPinker.Common
                 return ""; //默认的图片
             }
         }
+        /// <summary>
+        /// 获取文章的封面图
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static string GetArticleCoverImage(string url, int size)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                if (!url.StartsWith("http://"))
+                {
+                    return Path.Combine(imgDomain, url);
+                }
+                else
+                {
+                    return url;
+                }
+            }
+            else
+            {
+                return ""; //默认的图片
+            }
+        }
     }
 }

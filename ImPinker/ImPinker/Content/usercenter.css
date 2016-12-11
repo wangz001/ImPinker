@@ -304,7 +304,7 @@
 	display: inline-block;
 	width: 48px;
 	height: 39px;
-	background-image: url(/images/xxxxxbbs-20.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	vertical-align: text-bottom;
 }
@@ -1069,7 +1069,7 @@
 }
 
 .my-thread .my-thread-list {
-	width: 828px;
+	width: 848px;
 	margin: 10px auto;
 	padding: 0px 10px 10px;
 	height: auto;
@@ -1077,8 +1077,8 @@
 }
 
 .my-thread .my-thread-list li {
-	width: 100%;
-	height: 105px;
+	    width: 276px;
+    height: 275px;
 	float: left;
 	position: relative;
 	transition: all 0.2s linear;
@@ -1088,7 +1088,7 @@
 	width: 15px;
 	height: 22px;
 	display: inline-block;
-	background: url(/images/xxxxxbbs-20.png) no-repeat -313px 0px;
+	background: url() no-repeat -313px 0px;
 	vertical-align: middle;
 }
 
@@ -1186,7 +1186,7 @@
 .my-thread .my-thread-list li .thread-info .thread-count .comment-count i,
 .my-thread .my-thread-list li .thread-info .thread-count .praise-count i {
 	display: inline-block;
-	background-image: url(/images/xxxxxbbs-20.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	vertical-align: middle;
 	margin-right: 3px;
@@ -1257,7 +1257,7 @@
 
 .my-smalltopic .smalltopic-list li .smalltopic-info .comment-count i {
 	display: inline-block;
-	background-image: url(/images/xxxxxbbs-20.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	background-position: -43px -210px;
 	width: 18px;

@@ -3,10 +3,20 @@
 @{
     ViewBag.Title = "个人中心-EngineStart";
     var user = (Users)ViewBag.User;
+    var articles = (List<Article>)ViewBag.Articles;
     <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
 <div id="header" style="height: 0">
 
+</div>
+<div class="dialog-layer" style="display: none;">
+    <div id="dialog" style="top: 200px;">
+        <p>是否要删除这篇帖子？</p>
+        <div class="button-box">
+            <a href="javascript:;" class="cancel" style="display: inline-block;">取消</a>
+            <a href="javascript:;" class="confirm" style="border-color: rgb(233, 113, 113); background: rgb(233, 113, 113);">确定</a>
+        </div>
+    </div>
 </div>
 <div id="container" style="min-height: 557px;">
     @Html.Partial("UserCenter/UserCenter_NavPartial")
@@ -21,7 +31,7 @@
                     </dt>
                     <dd>
                         <h5>
-                           @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
+                            @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
                             <b>LV.1</b>
                         </h5>
                         <ul>
@@ -42,23 +52,23 @@
                         </ul>
                     </dd>
                 </dl>
-                <div class="user-signature">
-                    <p>
-                        <i class="sig-ico-left"></i>
-                        <span class="sig">
+                @*<div class="user-signature">
+                        <p>
+                            <i class="sig-ico-left"></i>
+                            <span class="sig">
 
-                            神秘如我，什么也不留下
-                        </span>
-                        <i class="sig-ico-right"></i>
-                    </p>
-                    <div class="sig-info">
-                        <span>生日：<input type="hidden" value="UserInfo{userid=148524, username='null', nickname='bwlang', phonenumber='18911186941', email='', emailverify=0, userpwd='5d3b6402f5ebc14ebe7dafacd08dbeae', userlogo='Fj5s-vUKha2BNel9bVQYwtMdoVGX', usersex=1, provinceid=0, provincename='', cityid=0, cityname='', birthday='', isbirthdayprivacy=0, createtime=Sun Sep 18 18:00:01 CST 2016, createtimeStr='null', isadministrator=0, userstate=0, disabletime=null, userExpand=com.xxxxxbbs.model.domain.UserExpand@3e5d9e4c, userStatistics=com.xxxxxbbs.model.domain.UserStatistics@2d7fd417}"></span>
-                        <em></em>
-                        <span>注册时间：2016-09-18</span>
-                        <em></em>
-                        <span>所在地：</span>
-                    </div>
-                </div>
+                                神秘如我，什么也不留下
+                            </span>
+                            <i class="sig-ico-right"></i>
+                        </p>
+                        <div class="sig-info">
+                            <span>生日：<input type="hidden" value="UserInfo{userid=148524, username='null', nickname='bwlang', phonenumber='18911186941', email='', emailverify=0, userpwd='5d3b6402f5ebc14ebe7dafacd08dbeae', userlogo='Fj5s-vUKha2BNel9bVQYwtMdoVGX', usersex=1, provinceid=0, provincename='', cityid=0, cityname='', birthday='', isbirthdayprivacy=0, createtime=Sun Sep 18 18:00:01 CST 2016, createtimeStr='null', isadministrator=0, userstate=0, disabletime=null, userExpand=com.xxxxxbbs.model.domain.UserExpand@3e5d9e4c, userStatistics=com.xxxxxbbs.model.domain.UserStatistics@2d7fd417}"></span>
+                            <em></em>
+                            <span>注册时间：2016-09-18</span>
+                            <em></em>
+                            <span>所在地：</span>
+                        </div>
+                    </div>*@
             </div>
 
         </div>
@@ -66,14 +76,46 @@
             <h3 class="small-title">
                 我发布过的帖子
                 <div class="comment-nav">
-                    <a href="/center/thread" class="homepage-small-nav">查看所有</a>
+                    <a href="/Article/MyArticle" class="homepage-small-nav">查看所有</a>
                 </div>
             </h3>
             <ul class="my-thread-list">
+                @{
+                    if (articles != null && articles.Count > 0)
+                    {
+                        foreach (var article in articles)
+                        {
+                            <li>
+                                <a href="/topicinfo?topicId=&amp;creatorTime=2" class="topic-lab" target="_blank" topicid=""></a>
+                                <a href="/thread/109456.html" class="img-box" target="_blank">
+                                    <span class="create-time">11月11日 19:03</span>
+                                    <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage,0)" class="upload">
+                                </a>
+                                <h5 class="thread-title">
+                                    <a href="/thread/109456.html" target="_blank">
+                                        @article.ArticleName
+                                    </a>
+                                </h5>
+                                <div class="thread-info">
+                                    <div class="thread-count">
+                                        <span class="click-count"><i></i>64</span>
+                                        <span class="comment-count"><i></i>1</span>
+                                        <span class="praise-count"><i></i>0</span>
+                                    </div>
+                                    <div class="button-area">
+                                        <a href="/Article/UpdateThread?articleId=@article.Id" target="_blank" class="usercenter-blue-btn thread-modify-btn" >修改</a>
+                                        <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" threadid="@article.Id">删除</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
 
-                <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
-
-
+                    }
+                    else
+                    {
+                        <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
+                    }
+                }
             </ul>
         </div>
         <div class="my-smalltopic">
@@ -81,7 +123,7 @@
                 我参与过的话题
                 <em>共参与0个话题</em>
                 <div class="comment-nav">
-                    <a href="/center/smalltopictlist" class="homepage-small-nav">查看所有</a>
+                    <a href="javascript:;" class="homepage-small-nav">查看所有</a>
                 </div>
             </h3>
 
