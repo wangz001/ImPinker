@@ -266,12 +266,15 @@ namespace ImPinker.Controllers
         {
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
             var article = ArticleBll.GetModelByCache(articleId);
+            var snap = new ArticleSnapsBll().GetModel(articleId);
             if (article != null && article.UserId == userid)
             {
+                ViewBag.ArticleContent = snap.Content;
                 ViewBag.Article = article;
                 return View();
             }
             ViewBag.Article = null;
+            ViewBag.ArticleContent = "";
             return View();
         }
 
