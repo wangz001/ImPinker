@@ -51,6 +51,16 @@ namespace ImBLL
             return dal.Delete(Id);
         }
         /// <summary>
+        /// 用户删除帖子
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public bool DeleteThread(int userid,long Id)
+        {
+            return dal.DeleteThread(userid, Id);
+        }
+        /// <summary>
         /// 删除一条数据
         /// </summary>
         public bool DeleteList(string Idlist)
@@ -137,8 +147,10 @@ namespace ImBLL
         /// <summary>
         /// 分页获取用户数据列表
         /// </summary>
-        public DataSet GetMyListByPage(int userid, int pageNum, int count)
+        public DataSet GetMyListByPage(int userid, int pageNum, int count,out int allCount)
         {
+            allCount = 0;
+            var ds = dal.GetMyListByPage(userid, pageNum, count);
             return dal.GetMyListByPage(userid, pageNum, count);
         }
 

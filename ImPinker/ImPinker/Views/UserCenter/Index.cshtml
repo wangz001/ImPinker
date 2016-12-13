@@ -26,7 +26,7 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl,100)" /></em>
+                        <em class="headpic"><img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)" /></em>
                         <i class="male-mid"></i>
                     </dt>
                     <dd>
@@ -35,15 +35,6 @@
                             <b>LV.1</b>
                         </h5>
                         <ul>
-                            <li style="padding-left: 0px;">
-                                <em><a href="/center/friend">3</a></em>
-                                <i>关注</i>
-                            </li>
-                            <span></span>
-                            <li>
-                                <em><a href="/center/fins">0</a></em>
-                                <i>粉丝</i>
-                            </li>
                             <span></span>
                             <li>
                                 <em><a href="/center/thread">0</a></em>
@@ -89,7 +80,7 @@
                                 <a href="/topicinfo?topicId=&amp;creatorTime=2" class="topic-lab" target="_blank" topicid=""></a>
                                 <a href="/thread/109456.html" class="img-box" target="_blank">
                                     <span class="create-time">11月11日 19:03</span>
-                                    <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage,0)" class="upload">
+                                    <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" class="upload">
                                 </a>
                                 <h5 class="thread-title">
                                     <a href="/thread/109456.html" target="_blank">
@@ -103,8 +94,8 @@
                                         <span class="praise-count"><i></i>0</span>
                                     </div>
                                     <div class="button-area">
-                                        <a href="/Article/UpdateThread?articleId=@article.Id" target="_blank" class="usercenter-blue-btn thread-modify-btn" >修改</a>
-                                        <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" threadid="@article.Id">删除</a>
+                                        <a href="/Article/UpdateThread?articleId=@article.Id" target="_blank" class="usercenter-blue-btn thread-modify-btn">修改</a>
+                                        <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" onclick="confirmDelete(@article.Id)">删除</a>
                                     </div>
                                 </div>
                             </li>
@@ -113,7 +104,7 @@
                     }
                     else
                     {
-                        <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
+                        <h2 style="font-size: 30px; color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
                     }
                 }
             </ul>
@@ -127,11 +118,31 @@
                 </div>
             </h3>
 
-            <h2 style="font-size: 30px;color: #ccc; text-align: center; margin: 50px 0px;">您还没有参与过任何话题的讨论</h2>
+            <h2 style="font-size: 30px; color: #ccc; text-align: center; margin: 50px 0px;">您还没有参与过任何话题的讨论</h2>
 
             <ul class="smalltopic-list"></ul>
         </div>
     </div>
 
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function confirmDelete(articleid) {
+            $(".dialog-layer").show();
+            $(".dialog-layer .cancel").bind('click', function () {
+                $(".dialog-layer").hide();
+                return;
+            });
+            $(".dialog-layer .confirm").bind('click', function () {
+                $(".dialog-layer").hide();
+                ///Article/DeleteThread?articleId=
+                
+                window.location.href = "/Article/DeleteThread?articleId=" + articleid;
+                return true;
+            });
+        }
+    </script>
+}
 

@@ -269,7 +269,7 @@ namespace ImPinker.Controllers
             var snap = new ArticleSnapsBll().GetModel(articleId);
             if (article != null && article.UserId == userid)
             {
-                ViewBag.ArticleContent = snap.Content;
+                ViewBag.ArticleContent = snap.Content.Replace("\"", "'");
                 ViewBag.Article = article;
                 return View();
             }
@@ -332,6 +332,20 @@ namespace ImPinker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 删除帖子
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        [HttpGet]
+        public ActionResult DeleteThread(long articleId)
+        {
+            var userinfo = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            var flag = ArticleBll.DeleteThread(userinfo.Id,articleId);
+            return RedirectToAction("Index","UserCenter");
+        }
+        
 
         private void AddErrors(IdentityResult result)
         {

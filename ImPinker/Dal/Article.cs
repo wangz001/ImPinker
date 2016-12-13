@@ -114,7 +114,6 @@ namespace ImDal
         /// </summary>
         public bool Delete(long Id)
         {
-
             var strSql = new StringBuilder();
             strSql.Append("delete from Article ");
             strSql.Append(" where Id=@Id ");
@@ -125,14 +124,25 @@ namespace ImDal
             parameters[0].Value = Id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return rows > 0;
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteThread(int userid,long Id)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append("update Article ");
+            strSql.Append(" set State=0 where Id=@Id and UserId=@UserId ");
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
+				new SqlParameter("@Id", SqlDbType.BigInt){Value = Id}
+			};
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            return rows > 0;
         }
 
         /// <summary>
@@ -291,9 +301,10 @@ namespace ImDal
             strSql.Append(" SELECT ROW_NUMBER() OVER (");
             strSql.Append("order by T.CreateTime desc");
             strSql.Append(")AS Row, T.*  from Article T ");
-            strSql.Append(" WHERE UserId=@UserId");
+            strSql.Append(" WHERE UserId=@UserId and state=1");
             strSql.Append(" ) TT");
-            strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex");
+            strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex ;");
+            strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state=1");
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
             var paras = new SqlParameter[]
