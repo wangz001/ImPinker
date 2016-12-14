@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using ImBLL;
 using ImModel.ViewModel;
@@ -21,6 +22,7 @@ namespace ImPinker.Controllers
         {
             ViewBag.ArticleJson = GetByPage(1, IndexPageCount);
             ViewBag.pageCount = IndexPageCount;
+            ViewBag.DailyAdded = ArticleBll.GetRecordCount(string.Format(" CreateTime > '{0}' ", DateTime.Now.AddDays(-1).ToShortDateString()));//今日新增文章
             return View();
         }
 

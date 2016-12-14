@@ -1,95 +1,129 @@
-﻿@{
+﻿@using ImModel
+@using ImPinker.Common
+@{
     ViewBag.Title = "个人中心-EngineStart";
-
+    var articles = (List<Article>)ViewBag.Articles;
     <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
-<div id="header" style="height: 0">
-
+<div class="dialog-layer" style="display: none;">
+    <div id="dialog" style="top: 200px;">
+        <p>是否要删除这篇帖子？</p>
+        <div class="button-box">
+            <a href="javascript:;" class="cancel" style="display: inline-block;">取消</a>
+            <a href="javascript:;" class="confirm" style="border-color: rgb(233, 113, 113); background: rgb(233, 113, 113);">确定</a>
+        </div>
+    </div>
 </div>
 <div id="container" style="min-height: 557px;">
     @Html.Partial("UserCenter/UserCenter_NavPartial")
     <div class="usercenter-right">
-
         <div class="my-thread" style="margin-top: 0px">
             <input type="hidden" value="1">
             <input type="hidden" value="0">
             <h3 class="small-title">
                 所有帖子
-                <em>共有0篇</em>
-                <div class="filter">
-                    <a href="javascript:;" class="current-filter">
-                        所有帖子
-                        <em></em>
-                    </a>
-                    <ul>
-                        <li><a href="/center/thread?orderid=1&amp;typeid=2">精华帖子</a></li>
-                        <li><a href="/center/thread?orderid=1&amp;typeid=3">被选题收录</a></li>
-                        <li><a href="/center/thread?orderid=1&amp;typeid=4">被焦点图收录</a></li>
-                    </ul>
-                </div>
-                <a href="/Article/CreateThread" target="_blank" class="current-filter">
-                    发新帖子
-                    <em></em>
-                </a>
-                <!-- <em>共有0篇帖子</em> -->
+                <em>共有 @ViewBag.totalCount 篇</em>
+                @*<div class="filter">
+                        <a href="javascript:;" class="current-filter">
+                            所有帖子
+                            <em></em>
+                        </a>
+                        <ul>
+                            <li><a href="/center/thread?orderid=1&amp;typeid=2">精华帖子</a></li>
+                            <li><a href="/center/thread?orderid=1&amp;typeid=3">被选题收录</a></li>
+                            <li><a href="/center/thread?orderid=1&amp;typeid=4">被焦点图收录</a></li>
+                        </ul>
+                    </div>*@
                 <div class="comment-nav">
-
-
-                    <a href="javascript:;" style="color:#2175d0">
-
-
-
-                        最新发布
-                    </a>
-                    <span></span>
-
-
-
-                    <a href="/center/thread?orderid=2&amp;typeid=0">
-
-
-                        点击最高
-                    </a>
-                    <span></span>
-                    <a href="/center/thread?orderid=3&amp;typeid=0">
-                        评论最多
+                    <a href="/Article/CreateThread" target="_blank" class="current-filter">
+                        发新帖子
+                        <em></em>
                     </a>
                 </div>
             </h3>
-            <ul class="my-thread-list" id="articleConten">
+            <ul class="my-thread-list">
+                @{
+                    if (articles != null && articles.Count > 0)
+                    {
+                        foreach (var article in articles)
+                        {
+                <li>
+                    <a href="/Article/Index?id=@article.Id" class="img-box" target="_blank">
+                        <span class="create-time">@article.CreateTime</span>
+                        <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" class="upload">
+                    </a>
+                    <h5 class="thread-title">
+                        <a href="/Article/Index?id=@article.Id" target="_blank">
+                            @article.ArticleName
+                        </a>
+                    </h5>
+                    <div class="thread-info">
+                        <div class="thread-count">
+                            <span class="click-count"><i></i>64</span>
+                            <span class="comment-count"><i></i>1</span>
+                            <span class="praise-count"><i></i>0</span>
+                        </div>
+                        <div class="button-area">
+                            <a href="/Article/UpdateThread?articleId=@article.Id" target="_blank" class="usercenter-blue-btn thread-modify-btn">修改</a>
+                            <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" onclick="confirmDelete(@article.Id)">删除</a>
+                        </div>
+                    </div>
+                </li>
+                        }
 
-                <h2 style="display: none;font-size: 30px;color: #ccc; text-align: center; margin: 163px 0px;">这里空空如也</h2>
-
-
-
-
+                    }
+                    else
+                    {
+                <h2 style="font-size: 30px; color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
+                    }
+                }
             </ul>
-
+            @{
+                var totalCount = (double)ViewBag.totalCount;
+                var pageIndex = (int)ViewBag.pageIndex;
+                var pageCount = (int)ViewBag.pageCount;
+                if (totalCount > pageCount)
+                {
+                    <div id="pageNum" style="display:block">
+                        @{
+                    var pages = Math.Ceiling(totalCount / pageCount);
+                    if (pageIndex > 1)
+                    {
+                        <a href="/Article/MyArticle?pageIndex=1&pageCount=@pageCount">首页</a>
+                            <a class="next" href="/Article/MyArticle?pageIndex=@(pageIndex-1)&pageCount=@pageCount">上一页</a>
+                    }
+                    for (var i = 1; i <= pages; i++)
+                    {
+                        var href = string.Format("/Article/MyArticle?pageIndex={0}&pageCount={1}", i, pageCount);
+                        var classStr = pageIndex == i ? "class=current-page" : "";
+                        <a @classStr href="@href">@i</a>
+                    }
+                    <a class="next" href="/Article/MyArticle?pageIndex=@(pageIndex+1)&pageCount=@pageCount">下一页</a>
+                            <a href="/Article/MyArticle?pageIndex=@pages&pageCount=@pageCount">尾页</a>
+                            <span class="jump">共 @pages 页</span>
+                        }
+                    </div>
+                }
+            }
         </div>
-
     </div>
-
 </div>
 @section scripts
 {
-    <script type="text/javascript">
-        var pageCount = @ViewBag.pageCount;
-        var pageIndex = 1;
-        var jsonData=@Html.Raw(ViewBag.jsonData);
-    </script>
     <script src="~/Scripts/Article/myArticle.js"></script>
-    <script type="text/template1">
-        <li>
-            <div class="b_zxtuwen">
-                <a href="/Article/index/?id=$Id$" target="_blank">
-                    <h4>$ArticleName$</h4>
-                </a>
-                <p>
-                    <span>$Description$</span>
-                    <span class="right">$CreateTime$</span>
-                </p>
-            </div>
-        </li>
+    <script type="text/javascript">
+        function confirmDelete(articleid) {
+            $(".dialog-layer").show();
+            $(".dialog-layer .cancel").bind('click', function () {
+                $(".dialog-layer").hide();
+                return;
+            });
+            $(".dialog-layer .confirm").bind('click', function () {
+                $(".dialog-layer").hide();
+                window.location.href = "/Article/DeleteThread?articleId=" + articleid;
+                return true;
+            });
+        }
     </script>
 }
 

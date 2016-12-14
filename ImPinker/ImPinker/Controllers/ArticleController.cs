@@ -23,7 +23,6 @@ namespace ImPinker.Controllers
     {
         private static readonly ArticleBll ArticleBll = new ArticleBll();
         private static readonly UserBll UserBll = new UserBll();
-        private const int MyPageCount = 10;
 
         /// <summary>
         /// 文章详情页。爬虫抓取到的文章,即userid=2的文章。用户收藏的文章直接跳转到原始页面
@@ -78,34 +77,18 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <returns></returns>
         [AuthorizationFilter]
-        public ActionResult MyArticle()
+        public ActionResult MyArticle(int ? pageIndex, int ? pageCount)
         {
+            int pageNum = (int) (pageIndex > 0 ? pageIndex : 1);
+            int pagecount = (int)(pageCount > 0 ? pageCount : 9); ;
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var ds = ArticleBll.GetMyListByPage(userId, 1, MyPageCount);
-            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
-            ViewBag.jsonData = JsonConvert.SerializeObject(articles);
-            ViewBag.pageCount = MyPageCount;
+            int totalCount;
+            var articles = ArticleBll.GetMyListByPage(userId, pageNum, pagecount, out totalCount);
+            ViewBag.pageIndex = pageNum;
+            ViewBag.pageCount = pagecount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.Articles = articles;
             return View();
-        }
-
-        /// <summary>
-        /// 分页获取数据接口
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageCount"></param>
-        /// <returns></returns>
-        [AuthorizationFilter]
-        [HttpGet]
-        public string GetMyNextPage(int pageIndex, int pageCount)
-        {
-            var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var ds = ArticleBll.GetMyListByPage(userId, pageIndex, pageCount);
-            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
-            if (articles != null && articles.Count > 0)
-            {
-                return JsonConvert.SerializeObject(articles);
-            }
-            return string.Empty;
         }
 
         #region 用户收藏网络连接相关操作
@@ -427,5 +410,7 @@ namespace ImPinker.Controllers
 
         #endregion
 
+
+        public int pageindex { get; set; }
     }
 }

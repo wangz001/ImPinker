@@ -17,25 +17,14 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img id="headimg" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)" /></em>
-                        <i class="male-mid"></i>
+                        <em class="headpic"><img id="headimg" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)"/></em>
+                        @*<i class="male-mid"></i>*@
                     </dt>
                     <dd>
                         <h5>
-                            @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName:user.ShowName)
-                            <b>LV.1</b>
+                            @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
                         </h5>
                         <ul>
-                            <li style="padding-left: 0px;">
-                                <em><a href="/center/friend">3</a></em>
-                                <i>关注</i>
-                            </li>
-                            <span></span>
-                            <li>
-                                <em><a href="/center/fins">0</a></em>
-                                <i>粉丝</i>
-                            </li>
-                            <span></span>
                             <li>
                                 <em><a href="/center/thread">0</a></em>
                                 <i>作品</i>
@@ -43,28 +32,9 @@
                         </ul>
                     </dd>
                 </dl>
-                <div class="user-signature">
-                    <p>
-                        <i class="sig-ico-left"></i>
-                        <span class="sig">
-
-                            神秘如我，什么也不留下
-                        </span>
-                        <i class="sig-ico-right"></i>
-                    </p>
-                    <div class="sig-info">
-                        <span>生日：<input type="hidden" value="UserInfo{userid=148524, username='null', nickname='bwlang', phonenumber='18911186941', email='', emailverify=0, userpwd='5d3b6402f5ebc14ebe7dafacd08dbeae', userlogo='Fj5s-vUKha2BNel9bVQYwtMdoVGX', usersex=1, provinceid=0, provincename='', cityid=0, cityname='', birthday='', isbirthdayprivacy=0, createtime=Sun Sep 18 18:00:01 CST 2016, createtimeStr='null', isadministrator=0, userstate=0, disabletime=null, userExpand=com.xxxxxbbs.model.domain.UserExpand@3e5d9e4c, userStatistics=com.xxxxxbbs.model.domain.UserStatistics@2d7fd417}"></span>
-                        <em></em>
-                        <span>注册时间：2016-09-18</span>
-                        <em></em>
-                        <span>所在地：</span>
-                    </div>
-                </div>
             </div>
-
         </div>
-        
-      
+
         <div class="my-thread">
             <h3 class="small-title">
                 头像设置
@@ -72,12 +42,12 @@
                     <a href="/center/thread" class="homepage-small-nav">查看所有</a>
                 </div>
             </h3>
-                <!--头像切割开始 -->
-                @Html.Partial("UserCenter/ImgUploadPartial")
-                <!--头像切割结束 -->
+            <!--头像切割开始 -->
+            @Html.Partial("UserCenter/ImgUploadPartial")
+            <!--头像切割结束 -->
         </div>
-      
-        <div class="user-info" id="user_setup">
+
+        <div class="user-info">
             <h3>昵称</h3>
             <dl>
                 <dt>现昵称：</dt>
@@ -85,15 +55,15 @@
             </dl>
             <dl>
                 <dt>新昵称：</dt>
-                <dd><input type="text" id="n_n" class="tel_input" maxlength="50"></dd>
+                <dd><input type="text" id="showname" class="tel_input" maxlength="50"></dd>
             </dl>
             <dl>
                 <dt></dt>
-                <dd><a href="javascript:;" class="user_setup_big_button save_button" onclick="unm('n_n','o_n_n');">保存</a></dd>
+                <dd><a href="javascript:;" class="user_setup_big_button save_button" onclick="saveshowname('n_n', 'o_n_n');">保存</a></dd>
             </dl>
         </div>
 
-        <div class="user-info" id="user_setup">
+        <div class="user-info">
             <h3>密码修改</h3>
             <dl>
                 <dt></dt>
@@ -103,4 +73,12 @@
 
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        function saveshowname() {
+            var showname = $("#showname").val();
+            window.location.href = "/UserCenter/UpdateShowName?showname="+showname;
+        }
+    </script>
+}
 

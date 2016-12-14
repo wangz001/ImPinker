@@ -56,7 +56,7 @@ namespace ImBLL
         /// <param name="userid"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public bool DeleteThread(int userid,long Id)
+        public bool DeleteThread(int userid, long Id)
         {
             return dal.DeleteThread(userid, Id);
         }
@@ -147,11 +147,20 @@ namespace ImBLL
         /// <summary>
         /// 分页获取用户数据列表
         /// </summary>
-        public DataSet GetMyListByPage(int userid, int pageNum, int count,out int allCount)
+        public List<Article> GetMyListByPage(int userid, int pageNum, int count, out int totalaCount)
         {
-            allCount = 0;
+            totalaCount = 0;
             var ds = dal.GetMyListByPage(userid, pageNum, count);
-            return dal.GetMyListByPage(userid, pageNum, count);
+            var list = new List<Article>();
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                list = DataTableToList(ds.Tables[0]);
+            }
+            if (ds != null && ds.Tables[1] != null)
+            {
+                int.TryParse(ds.Tables[1].Rows[0][0].ToString(), out totalaCount);
+            }
+            return list;
         }
 
         /// <summary>
@@ -250,7 +259,7 @@ namespace ImBLL
         {
             var article = dal.GetModel(id);
             var snap = articleSnapsBll.GetModel(id);
-            if (article==null||snap==null)
+            if (article == null || snap == null)
             {
                 return null;
             }

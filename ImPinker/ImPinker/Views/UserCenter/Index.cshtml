@@ -27,17 +27,17 @@
                 <dl class="user-data">
                     <dt>
                         <em class="headpic"><img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)" /></em>
-                        <i class="male-mid"></i>
+                        @*<i class="male-mid"></i>*@
                     </dt>
                     <dd>
                         <h5>
                             @Html.Raw(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
-                            <b>LV.1</b>
+                            @*<b>LV.1</b>*@
                         </h5>
                         <ul>
                             <span></span>
                             <li>
-                                <em><a href="/center/thread">0</a></em>
+                                <em><a href="/center/thread">@ViewBag.totalCount</a></em>
                                 <i>作品</i>
                             </li>
                         </ul>
@@ -77,13 +77,12 @@
                         foreach (var article in articles)
                         {
                             <li>
-                                <a href="/topicinfo?topicId=&amp;creatorTime=2" class="topic-lab" target="_blank" topicid=""></a>
-                                <a href="/thread/109456.html" class="img-box" target="_blank">
-                                    <span class="create-time">11月11日 19:03</span>
+                                <a href="/Article/Index?id=@article.Id" class="img-box" target="_blank">
+                                    <span class="create-time">@article.CreateTime</span>
                                     <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" class="upload">
                                 </a>
                                 <h5 class="thread-title">
-                                    <a href="/thread/109456.html" target="_blank">
+                                    <a href="/Article/Index?id=@article.Id" target="_blank">
                                         @article.ArticleName
                                     </a>
                                 </h5>

@@ -22,10 +22,11 @@ namespace ImPinker.Controllers
         public ActionResult Index()
         {
             var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
-            var ds = ArticleBll.GetMyListByPage(user.Id, 1, 3);
-            var articles = ArticleBll.DataTableToList(ds.Tables[0]);
+           var totalCount = 0;
+            var articles = ArticleBll.GetMyListByPage(user.Id, 1, 3,out totalCount);
             ViewBag.User = user;
            ViewBag.Articles = articles;
+           ViewBag.totalCount = totalCount;
             return View();
         }
         
@@ -39,6 +40,26 @@ namespace ImPinker.Controllers
             var user= UserBll.GetModelByAspNetId(User.Identity.GetUserId());
             ViewBag.User = user;
             return View();
+        }
+        /// <summary>
+        /// 用户修改显示昵称
+        /// </summary>
+        /// <param name="showname"></param>
+        /// <returns></returns>
+        [AuthorizationFilter]
+        public ActionResult UpdateShowName(string showname)
+        {
+            var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            if (!string.IsNullOrEmpty(showname))
+            {
+                user.ShowName = showname;
+                var falg = UserBll.Update(user);
+                if (falg)
+                {
+                    return RedirectToAction("UserSetting");
+                }
+            }
+            return View("Index");
         }
 
         /// <summary>

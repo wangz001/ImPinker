@@ -232,7 +232,7 @@ h4{
 	margin-top:2px;
 	border:1px solid #ccc;
 	}
-#user_setup,.big_box_radio{
+.user-info,.big_box_radio{
 	border:1px solid #ededed;
 	height:auto;
 	margin:auto;
@@ -240,13 +240,13 @@ h4{
 	overflow:auto;
 	padding-bottom:10px;
 	}
-#user_setup .headpic_box{
+.user-info .headpic_box{
 	margin:0px 10px;
 	font-size:12px;
 	color:#999;
 	}
 
-#user_setup dl,.big_box_radio dl{
+.user-info dl,.big_box_radio dl{
 	margin:0;
 	margin-left:20px;
 	padding:0;
@@ -256,13 +256,13 @@ h4{
 	font-size:12px;
 	clear:both;
 	}
-#user_setup dl dt,.big_box dl dd{
+.user-info dl dt,.big_box dl dd{
 	float:left;
 	margin:0;
 	padding:0px 0px 10px 0px;
 	line-height:30px
 	}
-#user_setup dl dd input{
+.user-info dl dd input{
 	height:28px;
 	line-height:28px;
 	border:1px solid #ccc;
@@ -270,49 +270,49 @@ h4{
 	width:254px;
 	padding-left:6px;
 	}
-#user_setup dl dt,.big_box_radio dl dt{
-	width:50px;
+.user-info dl dt,.big_box_radio dl dt{
+	width:150px;
 	text-align:left;
 	}
-#user_setup dl dd{
+.user-info dl dd{
 	color:#666;
 	font-weight:normal;
 	}
-#user_setup dl dd .sex input{
+.user-info dl dd .sex input{
 	width:10px;
 	height:10px;
 	}
-#user_setup .save_button,.big_box_radio .save_button{
-	width:100px;
+.user-info .save_button,.big_box_radio .save_button{
+	width:120px;
 	line-height:30px;
-	height:30px;
+	height:40px;
 	color:#fff;
 	border:none;
 	border-radius:5px;
 	}
-#user_setup .save_button:hover,.big_box_radio .save_button:hover{
+.user-info .save_button:hover,.big_box_radio .save_button:hover{
 	background:#247fe2;
 	color:#fff;
 	}
-#user_setup .save_button:active,.big_box_radio .save_button:active{
+.user-info .save_button:active,.big_box_radio .save_button:active{
 	background:#0058b8;
 	color:#fff;
 	}
-#user_setup table{
+.user-info table{
 	margin-left:20px;
 	}
-#user_setup table th{
+.user-info table th{
 	color:#999;
 	font-size:12px;
 	text-align:right;
 	}
-#user_setup table th,
-#user_setup table td{
+.user-info table th,
+.user-info table td{
 	height:40px;
 	vertical-align:middle;
 	font-size:12px;
 	}
-#user_setup table td input{
+.user-info table td input{
 	height:28px;
 	line-height:28px;
 	border:1px solid #ccc;
