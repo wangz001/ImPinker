@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Common.DateTimeUtil;
 using ImBLL;
 using ImModel.ViewModel;
+using ImPinker.Common;
 using ImPinker.Filters;
 using Newtonsoft.Json;
 
@@ -20,16 +22,15 @@ namespace ImPinker.Controllers
         [OutputCache(Duration = 1, VaryByParam = "*")]
         public ActionResult Index()
         {
-            ViewBag.ArticleJson = GetByPage(1, IndexPageCount);
             ViewBag.pageCount = IndexPageCount;
             ViewBag.DailyAdded = ArticleBll.GetRecordCount(string.Format(" CreateTime > '{0}' ", DateTime.Now.AddDays(-1).ToShortDateString()));//今日新增文章
             return View();
         }
 
-        private string GetByPage(int pageNum, int pageCount)
+        private List<ArticleViewModel> GetByPage(int pageNum, int pageCount)
         {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
-            var list = new List<ArticleViewModel>();
+            List<ArticleViewModel> list;
             const string userInterestKey = "";
             if (string.IsNullOrEmpty(userInterestKey))
             {
@@ -39,11 +40,7 @@ namespace ImPinker.Controllers
             {
                 list = SolrNetSearchBll.Query(userInterestKey, "", "", "", "", pageNum, pageCount).ArticleList;
             }
-            if (list.Count == 0)
-            {
-                return string.Empty;
-            }
-            return JsonConvert.SerializeObject(list);
+            return list;
         }
 
         /// <summary>
@@ -54,10 +51,10 @@ namespace ImPinker.Controllers
         /// <returns></returns>
         [OutputCache(Duration = 1, VaryByParam = "*")]
         [HttpGet]
-        public string GetNextPage(int pageNum, int pageCount)
+        public ActionResult GetNextPage(int pageNum, int pageCount)
         {
-            var str = GetByPage(pageNum, pageCount);
-            return str;
+            var list = GetByPage(pageNum, pageCount);
+            return PartialView("_Index_Article",list);
         }
 
 

@@ -569,6 +569,8 @@
     <Content Include="Views\Article\RelativeArticle.cshtml" />
     <Content Include="Views\Search\HotTag.cshtml" />
     <Content Include="Views\Article\UpdateThread.cshtml" />
+    <Content Include="Views\Home\_Index_Article.cshtml" />
+    <Content Include="Views\Search\_Index_Article.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

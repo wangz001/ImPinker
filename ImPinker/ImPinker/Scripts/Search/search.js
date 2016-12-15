@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
     //设置第一页数据
-    if (jsonData != "") {
-        var data = jsonData;
-        setCard(data);
-    }
+    //if (jsonData != "") {
+    //    var data = jsonData;
+    //    setCard(data);
+    //}
 
     //加载下一页数据
     $("#load-more-topic").bind('click', function () {
@@ -27,8 +27,9 @@
                 if (data == null || data == "") {
                     $("#loadmore").parent().hide();
                 } else {
-                    var list = JSON.parse(data);
-                    setCard(list);
+                    $('#articleConten').append(data);
+                    //var list = JSON.parse(data);
+                    //setCard(list);
                 }
             },
             error: function (data) {

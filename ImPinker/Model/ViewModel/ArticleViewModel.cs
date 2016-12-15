@@ -41,6 +41,5 @@ namespace ImModel.ViewModel
         [SolrField("Company")]
         public string Company { get; set; }
 
-        public string CreateTimeStr { get; set; }
     }
 }

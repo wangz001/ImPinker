@@ -1,4 +1,5 @@
-﻿@{
+﻿@using ImModel.ViewModel
+@{
     ViewBag.Title = "车酷-MyAutos";
 }
 <div class="dialog-layer" style="display: none;">
@@ -12,7 +13,11 @@
 </div>
 @Html.Partial("_TabListPartial")
 <div class="topic-list"><p>今日新增 @ViewBag.DailyAdded 篇文章。</p></div>
-<ul class="topic-list" id="articleConten"></ul>
+<ul class="topic-list" id="articleConten">
+    @{
+        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+    }
+</ul>
 <div class="clear"></div>
 <div class="topic-list">
     <a href="javascript:;" id="load-more-topic">加载更多</a>
@@ -23,7 +28,6 @@
     <script type="text/javascript">
         var pageCount = @ViewBag.pageCount;
         var pageIndex = 1;
-        var jsonData = @Html.Raw(ViewBag.ArticleJson);
         //tab导航选中状态
         $(document).ready(function() {
             $("#tabList a").bind("click", function() {
@@ -34,28 +38,4 @@
     </script>
     <script src="~/Scripts/Home/index.js"></script>
     <script src="~/Scripts/ArticleVote/articleVote.js"></script>
-    <script type="text/template1">
-        <li threadid="108832">
-            <a href="/Article/Index?id=$Id$" target="_blank" class="img-box">
-                <img src="$CoverImage$" alt="$ArticleName$">
-            </a>
-            <span class="topic-info-box">
-                <a href="/Search/Index?key=$KeyWords$" target="_blank" class="topic-lab"
-                   topicid="3" style="background: rgb(46, 75, 107);">$KeyWords$<i></i></a>
-                <em class="topic-pub-time">$CreateTimeStr$</em>
-            </span>
-            <h3 class="topic-title"><a href="/Article/Index?id=$Id$" target="_blank">$ArticleName$</a></h3>
-            <div class="topic-user-info">
-                <a href="/lookat/home?userId=35983" target="_blank" class="user-info">
-                    <span>
-                        $Company$
-                    </span>
-                </a>
-                <div class="about-count">
-                    <span class="click-count"><i></i><b>181</b></span>
-                    <a><span class="praise-count" articleid="$Id$"><i></i><b>喜欢，点个赞</b></span></a>
-                </div>
-            </div>
-        </li>
-    </script>
 }

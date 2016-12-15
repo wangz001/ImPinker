@@ -190,7 +190,7 @@ p {
 .face-btn i,
 .face-btn b {
 	display: block;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	background-position: -684px 0px;
 	width: 25px;
@@ -325,7 +325,7 @@ p {
 	width: 30px;
 	height: 30px;
 	border-radius: 30px;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 }
 
@@ -345,7 +345,7 @@ p {
 	width: 20px;
 	height: 20px;
 	border-radius: 20px;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 }
 
@@ -365,7 +365,7 @@ p {
 	width: 12px;
 	height: 12px;
 	border-radius: 12px;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 }
 
@@ -386,7 +386,7 @@ p {
 	display: inline-block;
 	width: 36px;
 	height: 36px;
-	background: url(/images/xxxxxbbs-223.png) -71px -72px;
+	background: url() -71px -72px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -415,7 +415,7 @@ p {
 	display: inline-block;
 	width: 20px;
 	height: 19px;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 }*/
 
@@ -508,7 +508,7 @@ p {
 .user-home-btn i {
 	display: inline-block;
 	vertical-align: middle;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	margin-right: 5px;
 }
@@ -600,7 +600,7 @@ p {
 	display: inline-block;
 	height: 14px;
 	width: 30px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -247px -5px;
+	background: url() no-repeat -247px -5px;
 	vertical-align: text-bottom;
 }
 
@@ -610,7 +610,7 @@ p {
 	position: absolute;
 	top: -11px;
 	left: -12px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -842px 0px;
+	background: url() no-repeat -842px 0px;
 }
 
 
@@ -877,7 +877,7 @@ p {
 .private-overlay #private-pickfiles i,
 .reply-box .button-box #reply-pickfiles i {
 	display: block;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	background-position: -740px 0px;
 	width: 25px;
@@ -1387,7 +1387,7 @@ p {
 #header .nav-shop i {
 	display: inline-block;
 	background-color: #fff;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	width: 17px;
 	height: 17px;
 	border-radius: 17px;
@@ -1450,7 +1450,7 @@ p {
 
 #header .header-row-1 .header-row-1-col-2 .nav-topic:hover,
 #header .header-row-1 .header-row-1-col-2 .nav-topic-active {
-	background: url(/images/xxxxxbbs-223.png) no-repeat -356px 33px;
+	background: url() no-repeat -356px 33px;
 }
 
 #header .header-row-1 .header-row-1-col-2 a {
@@ -1614,14 +1614,14 @@ p {
 	display: inline-block;
 	width: 12px;
 	height: 14px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -1130px 0px;
+	background: url() no-repeat -1130px 0px;
 	vertical-align: text-bottom;
 	margin-right: 5px;
 }
 
 #header .header-row-1 .header-row-1-col-3 .search-box .search-btn {
 	display: inline-block;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -127px -114px;
+	background: url() no-repeat -127px -114px;
 	width: 24px;
 	height: 24px;
 	margin-left: 12px;
@@ -2106,7 +2106,7 @@ p {
 	display: inline-block;
 	width: 15px;
 	height: 16px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -1104px 0px;
+	background: url() no-repeat -1104px 0px;
 	margin-right: 5px;
 	vertical-align: text-bottom;
 }
@@ -2122,7 +2122,7 @@ p {
 	border-radius: 13px;
 	vertical-align: middle;
 	background-color: #489ffe;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 	background-position: -124px -144px;
 	margin-right: 5px;
@@ -2154,7 +2154,7 @@ p {
 	float: left;
 	width: 201px;
 	height: 60px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat 0px 0px;
+	background: url() no-repeat 0px 0px;
 	margin-top: 20px;
 }
 
@@ -2204,7 +2204,7 @@ p {
 	width: 159px;
 	height: 19px;
 	margin-top: 5px;
-	background: url(/images/xxxxxbbs-223.png) -491px -297px no-repeat;
+	background: url() -491px -297px no-repeat;
 }
 
 
@@ -2238,7 +2238,7 @@ p {
 
 .side-bar a i {
 	display: inline-block;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 	background-repeat: no-repeat;
 }
 
@@ -2340,11 +2340,11 @@ p {
 	width: 21px;
 	height: 20px;
 	margin-bottom: 5px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -444px -299px;
+	background: url() no-repeat -444px -299px;
 }
 
 .side-pub-thread:hover {
-	background: url(/images/side-pub-thread-btn-hover.png) no-repeat;
+	background: url() no-repeat;
 }
 
 .side-pub-thread:active {}
@@ -2419,7 +2419,7 @@ p {
 #footer .left-footer .spark-logo {
 	width: 480px;
 	height: 48px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -184px -77px;
+	background: url() no-repeat -184px -77px;
 	float: left;
 	margin-top: 20px;
 }
@@ -2476,7 +2476,7 @@ p {
 #footer .right-footer .footer-taobao-btn i {
 	display: inline-block;
 	vertical-align: middle;
-	background-image: url(/images/xxxxxbbs-223.png);
+	background-image: url();
 }
 
 #footer .right-footer .footer-weibo-btn i {
@@ -2522,7 +2522,7 @@ p {
 	height: 24px;
 	margin-left: 10px;
 	margin-top: 20px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -442px 0px;
+	background: url() no-repeat -442px 0px;
 }
 
 #footer .right-footer .weibo-list .xm {
@@ -2531,7 +2531,7 @@ p {
 	height: 25px;
 	margin-left: 10px;
 	margin-top: 20px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -442px -32px;
+	background: url() no-repeat -442px -32px;
 }
 
 #footer .right-footer .weibo-list-show {
@@ -2546,7 +2546,7 @@ p {
 	position: absolute;
 	width: 155px;
 	height: 155px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -491px -129px;
+	background: url() no-repeat -491px -129px;
 	top: 0px;
 	left: 0px;
 	transition: all 0.2s linear;
@@ -2563,7 +2563,7 @@ p {
 	display: inline-block;
 	position: absolute;
 	width: 155px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -659px -129px;
+	background: url() no-repeat -659px -129px;
 	left: 0px;
 	top: 155px;
 	opacity: 0;
@@ -2599,7 +2599,7 @@ p {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
-	background: url(/images/jingdun.png) no-repeat 0px 0px;
+	background: url() no-repeat 0px 0px;
 	margin-right: 5px;
 }
 
@@ -3119,7 +3119,7 @@ p {
 	bottom: 266px;
 	width: 212px;
 	height: 63px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -1248px 0px;
+	background: url() no-repeat -1248px 0px;
 	text-align: right;
 	display: none;
 	z-index: 999;
@@ -3128,11 +3128,11 @@ p {
 	display: inline-block;
 	width: 42px;
 	height: 18px;
-	background: url(/images/xxxxxbbs-223.png) no-repeat -1253px -73px;
+	background: url() no-repeat -1253px -73px;
 	transition: all 0s linear;
 }
 .re-aside-mention a:hover{
-	background: url(/images/xxxxxbbs-223.png) no-repeat -1298px -73px;
+	background: url() no-repeat -1298px -73px;
 }
 .re-aside {
 	position: fixed;

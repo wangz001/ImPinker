@@ -211,8 +211,7 @@ namespace ImBLL
                         KeyWords = article.KeyWords,
                         CoverImage = imgDomain + article.CoverImage,
                         Company = article.Company,
-                        CreateTime = article.CreateTime,
-                        CreateTimeStr = TUtil.DateFormatToString(article.CreateTime)
+                        CreateTime = article.CreateTime
                     });
                 }
             }

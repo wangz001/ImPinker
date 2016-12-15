@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Common.DateTimeUtil;
 using ImBLL;
 using ImModel.Dto;
 using ImModel.ViewModel;
+using ImPinker.Common;
 using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
@@ -19,7 +21,7 @@ namespace ImPinker.Controllers
             }
             if (dto.PageCount == 0)
             {
-                dto.PageCount = 30;
+                dto.PageCount = 10;
             }
             dto.IsHighLight = true;
             var searchvm = GetByPage(dto);
@@ -32,14 +34,10 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public string GetNextPage(SearchDto dto)
+        public ActionResult GetNextPage(SearchDto dto)
         {
             var searchvm = GetByPage(dto);
-            if (searchvm.ArticleList != null && searchvm.ArticleList.Count > 0)
-            {
-                return JsonConvert.SerializeObject(searchvm.ArticleList);
-            }
-            return string.Empty;
+            return PartialView("_Index_Article", searchvm.ArticleList);
         }
         /// <summary>
         /// 搜索，按分页获取数据
@@ -53,9 +51,7 @@ namespace ImPinker.Controllers
             var urlDecode = System.Web.HttpUtility.UrlDecode(dto.Key);
             if (urlDecode != null)
                 dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
-
             searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount);
-
             return searchvm;
         }
 

@@ -1,5 +1,4 @@
 ﻿@using ImModel.ViewModel
-@using Newtonsoft.Json
 @{
     ViewBag.Title = "热门";
     var searchVm = (SearchResultVm)ViewBag.searchVm;
@@ -54,70 +53,22 @@
     </div>
 </div>
 
-<ul id="articleConten" class="search-thread-list" style="width: 1128px"></ul>
+<ul id="articleConten" class="search-thread-list" style="width: 1128px">
+    @Html.Partial("_Index_Article", searchVm.ArticleList)
+</ul>
 <div class="clear"></div>
 <div class="topic-list">
     <a href="javascript:;" id="load-more-topic">加载更多</a>
 </div>
-
 @section scripts
 {
     <script type="text/javascript">
         var totalCount=@searchVm.TotalCount;
         var pageCount = @searchVm.PageCount;
         var pageNum = 1;
-        var jsonData=@Html.Raw(JsonConvert.SerializeObject(searchVm.ArticleList));
-
-        $(document).ready(function() {
-            //搜索框关键字
-            var keys = $.getUrlParam("key");
-            $("#keyword").val(keys);
-            //tab导航选中状态
-            $("#tabList a").bind("click", function() {
-                $("#tabList a").removeClass("b_twolcur");
-                $(this).addClass("b_twolcur");
-                search();
-            });
-            //页面加载完，tab选中状态
-            var tabS=$.getUrlParam("tab");
-            if (tabS!=null&&tabS.length>0) {
-                $("#tabList a").removeClass("b_twolcur");
-                $("#tabList a[txt=" + tabS + "]").addClass("b_twolcur");
-            }
-        });
-
-        //大搜索框搜索事件
-        function searchKeyWord() {
-            var keyWord = $("#keyword").val();
-            window.location = ("/Search/Index?key=" + keyWord);
-        }
     </script>
     <script src="~/Scripts/Search/search.js"></script>
-    <script type="text/template1">
-        <li>
-            <div class="img-box">
-                <a href="/Article/Index?id=$Id$" target="_blank">
-                    <img src="$CoverImage$" class="upload">
-                </a>
-                <div class="about-count">
-                    <span class="click"><i></i>4006</span>
-                    <span class="comment"><i></i>37</span>
-                    <span class="praise"><i></i>46</span>
-                </div>
-            </div>
-            <h4>
-                <a href="/Article/Index?id=$Id$" target="_blank">
-                    $ArticleName$
-                </a>
-            </h4>
-            <div class="user-info">
-                <a href="/lookat/home?userId=13476" target="_blank" class="user">
-                    <em>$Company$</em>
-                </a>
-                <span class="pub-time">$CreateTimeStr$</span>
-            </div>
-        </li>
-    </script>
+    
 }
 
 

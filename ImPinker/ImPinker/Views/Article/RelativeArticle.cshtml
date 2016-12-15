@@ -1,4 +1,6 @@
-﻿@using ImModel.ViewModel
+﻿@using Common.DateTimeUtil
+@using ImModel.ViewModel
+@using ImPinker.Common
 
 @{
     var list = (List<ArticleViewModel>)ViewBag.RelativeArticle;
@@ -13,14 +15,14 @@
             <dl class="">
                 <dt>
                     <a target="_blank" href="/Article/Index?id=@vm.Id">
-                        <img alt="" src="@vm.CoverImage" sizes="60px" width="70" height="60">
+                        <img alt="" src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" sizes="60px" width="70" height="60">
                     </a>
                 </dt>
                 <dd>
                     <a target="_blank" href="/Article/Index?id=@vm.Id">
                         @Html.Raw(vm.ArticleName)
                     </a>
-                    <p>@vm.CreateTimeStr</p>
+                    <p>@TUtil.DateFormatToString(vm.CreateTime)</p>
                 </dd>
             </dl>
         }

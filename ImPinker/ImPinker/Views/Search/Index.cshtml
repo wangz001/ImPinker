@@ -6,9 +6,10 @@
     <link href="~/Content/search.css" rel="stylesheet" />
 }
 <div id="containers" style="width: 1100px;margin:auto;">
-    <div class="crumb">当前位置：<a href="/">首页</a> &gt;共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果  </div>
+    <div class="crumb">当前位置：<a href="/">首页</a> &gt;  </div>
     <div class="search-input">
         <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
+        共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果
         <div class="search-btn-area">
             <a href="javascript:;" class="current">筛选：</a>
             @{
@@ -68,7 +69,9 @@
     </div>
 </div>
 
-<ul id="articleConten" class="search-thread-list" style="width: 1128px"></ul>
+<ul id="articleConten" class="search-thread-list" style="width: 1128px">
+    @Html.Partial("_Index_Article", searchVm.ArticleList)
+</ul>
 <div class="clear"></div>
 <div class="topic-list">
     <a href="javascript:;" id="load-more-topic">加载更多</a>
@@ -80,26 +83,12 @@
         var totalCount=@searchVm.TotalCount;
         var pageCount = @searchVm.PageCount;
         var pageNum = 1;
-        var jsonData=@Html.Raw(JsonConvert.SerializeObject(searchVm.ArticleList));
 
         $(document).ready(function() {
             //搜索框关键字
             var keys = $.getUrlParam("key");
             $("#keyword").val(keys);
-            //tab导航选中状态
-            $("#tabList a").bind("click", function() {
-                $("#tabList a").removeClass("b_twolcur");
-                $(this).addClass("b_twolcur");
-                search();
-            });
-            //页面加载完，tab选中状态
-            var tabS=$.getUrlParam("tab");
-            if (tabS!=null&&tabS.length>0) {
-                $("#tabList a").removeClass("b_twolcur");
-                $("#tabList a[txt=" + tabS + "]").addClass("b_twolcur");
-            }
         });
-
         //大搜索框搜索事件
         function searchKeyWord() {
             var keyWord = $("#keyword").val();
