@@ -18,13 +18,16 @@ namespace GetCarDataService
             //log4net.Config.XmlConfigurator.Configure();
             log4net.ILog log = log4net.LogManager.GetLogger("logerror");
 
-            new ArticleTagAdd().Execute(null);
-            //GetAHAutoCarsData.GetBasicData.Get();
-            new GenerateCarDataDic().Execute(null);
+            
             log.Info("开始");
             new QuartzMain().Run();
             
             Console.ReadLine();
+
+            new ArticleTagAdd().Execute(null);
+            //GetAHAutoCarsData.GetBasicData.Get();
+            new GenerateCarDataDic().Execute(null);
+
             //生成article封面图计划任务
             ArticleFirstImageUpload.Start();
             Console.WriteLine("检查并上传oss图片结束");

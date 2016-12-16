@@ -11,7 +11,7 @@ using Quartz;
 namespace GetCarDataService.ArticleTagManage
 {
     /// <summary>
-    /// ArticleTag  添加，用于标签前台展示用
+    /// 文章标签添加，用于标签前台展示用
     /// </summary>
     public class ArticleTagAdd : IJob
     {

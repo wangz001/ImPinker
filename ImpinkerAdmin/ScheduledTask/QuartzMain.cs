@@ -15,7 +15,7 @@ namespace GetCarDataService
         private static ILog _log = LogManager.GetLogger(typeof(QuartzMain));
         public void Run()
         {
-            NameValueCollection ncv = new NameValueCollection();
+            var ncv = new NameValueCollection();
             ncv["quartz.scheduler.instanceName"] = "TestScheduler";
             ncv["quartz.scheduler.instanceId"] = "instance_one";
             ncv["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool, Quartz";
