@@ -207,6 +207,7 @@ namespace ImBLL
                         Id = article.Id.ToString(),
                         ArticleName = article.ArticleName,
                         Url = article.Url,
+                        Userid = article.UserId.ToString(),
                         Description = article.Description,
                         KeyWords = article.KeyWords,
                         CoverImage = imgDomain + article.CoverImage,
@@ -258,10 +259,7 @@ namespace ImBLL
         {
             var article = dal.GetModel(id);
             var snap = articleSnapsBll.GetModel(id);
-            if (article == null || snap == null)
-            {
-                return null;
-            }
+            
             var vm = new ArticleViewModel()
             {
                 Id = id.ToString(),
@@ -273,7 +271,7 @@ namespace ImBLL
                 Description = article.Description,
                 Company = article.Company,
                 CreateTime = article.CreateTime,
-                Content = new List<Object>() { snap.Content }
+                Content =snap==null? null: new List<Object>() { snap.Content }
             };
             return vm;
         }

@@ -25,14 +25,14 @@
 </div>
 <a id="maodian" style="display:block; height:0; width:0; line-height:0; font-size:0"></a>
 <div id="header">
-        <div class="header-container">
+        <div class="header-container" style="display: none">
             <div class="side-bar" style="bottom: 20px; opacity: 1; right: auto;">
-                <div class="down-app">
+                @*<div class="down-app">
                     <a href="/html/app.html" target="_blank" class="app">
                         <em>下载客户端</em>
                         <i></i>
                     </a>
-                </div>
+                </div>*@
                 <a href="#maodian" class="go-top">
                     <em>返回顶部</em>
                 </a>
@@ -48,4 +48,19 @@
     } else {
         LoginState = false;
     }
+    
+    //返回顶部按钮绑定事件
+    $(document).ready(function () {
+
+        $(window).scroll(function () {
+            var top = $(document).scrollTop();
+            if (top > 300) {
+                $(".header-container").fadeIn();
+            } else {
+                $(".header-container").fadeOut();
+            }
+            var topa = $(document).scrollBottom();
+        });
+    });
+
 </script>

@@ -369,3 +369,229 @@ System.InvalidOperationException: Î´ÕÒµ½·Ö²¿ÊÓÍ¼¡°_HotTag_Article¡±»òÃ»ÓÐÊÓÍ¼ÒýÇ
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
+[Header]
+2016-12-16 22:31:04,749 [17] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.ArgumentNullException: Öµ²»ÄÜÎª null¡£
+²ÎÊýÃû: String
+   ÔÚ System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   ÔÚ System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   ÔÚ ASP._Page_Views_Home__Index_Article_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:ÐÐºÅ 24
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:31:04,951 [17] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.Web.HttpException (0x80004005): Ö´ÐÐ´¦Àí³ÌÐò¡°System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper¡±µÄ×ÓÇëÇóÊ±³ö´í¡£ ---> System.ArgumentNullException: Öµ²»ÄÜÎª null¡£
+²ÎÊýÃû: String
+   ÔÚ System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   ÔÚ System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   ÔÚ ASP._Page_Views_Home__Index_Article_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:ÐÐºÅ 24
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   ÔÚ System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   ÔÚ System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   ÔÚ System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   ÔÚ System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   ÔÚ System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   ÔÚ System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   ÔÚ System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
+   ÔÚ ASP._Page_Views_Home_Index_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:ÐÐºÅ 18
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:33:29,198 [23] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.ArgumentNullException: Öµ²»ÄÜÎª null¡£
+²ÎÊýÃû: String
+   ÔÚ System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   ÔÚ System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   ÔÚ ASP._Page_Views_Home__Index_Article_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:ÐÐºÅ 24
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:33:29,200 [23] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.Web.HttpException (0x80004005): Ö´ÐÐ´¦Àí³ÌÐò¡°System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper¡±µÄ×ÓÇëÇóÊ±³ö´í¡£ ---> System.ArgumentNullException: Öµ²»ÄÜÎª null¡£
+²ÎÊýÃû: String
+   ÔÚ System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   ÔÚ System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   ÔÚ ASP._Page_Views_Home__Index_Article_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:ÐÐºÅ 24
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   ÔÚ System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   ÔÚ System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   ÔÚ System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   ÔÚ System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   ÔÚ System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   ÔÚ System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   ÔÚ System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
+   ÔÚ ASP._Page_Views_Home_Index_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:ÐÐºÅ 18
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-16 22:51:06,318 [20] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54899
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ImPinker.Controllers.ArticleController.Index(String id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:ÐÐºÅ 51
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:51:10,924 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54093
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ImPinker.Controllers.ArticleController.Index(String id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:ÐÐºÅ 51
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:52:28,795 [14] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ImPinker.Controllers.ArticleController.Index(String id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:ÐÐºÅ 51
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 23:13:26,370 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ImPinker.Controllers.ArticleController.Index(String id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:ÐÐºÅ 51
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-16 23:16:14,211 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ASP._Page_Views_Article_Index_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Article\Index.cshtml:ÐÐºÅ 45
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 23:16:22,145 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=Ì½ÏÕÔ½Ò°
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ASP._Page_Views_Article_Index_cshtml.Execute() Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Article\Index.cshtml:ÐÐºÅ 45
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   ÔÚ System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   ÔÚ System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

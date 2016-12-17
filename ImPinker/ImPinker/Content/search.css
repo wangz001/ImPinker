@@ -64,8 +64,10 @@
 	font-size: 14px;
 	color: #999;
 	padding:  5px;
-	border-radius: 5px;
+	border-radius: 20px;
     margin: 5px 6px 5px 0;
+    color: blue;
+    text-decoration: none;
 }
 .search-input .search-btn-area a:hover{
 	color: #fff;
@@ -362,4 +364,8 @@
 .search-user-list .myfriend dl .button-area{
 	float: right;
 	margin-top: 26px;
+}
+
+a{
+    text-decoration: none;
 }

@@ -42,7 +42,7 @@
                 <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
             <div class="articlecontent">
-                @Html.Raw(article.Content[0])
+                @Html.Raw(article.Content==null? "":article.Content[0])
             </div>
             <!--分享-->
             <div class="interest-share">

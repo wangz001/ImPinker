@@ -1,4 +1,5 @@
 ﻿@using Common.DateTimeUtil
+@using ImBLL
 @using ImModel.ViewModel
 @using ImPinker.Common
 @{
@@ -18,9 +19,9 @@
                 </span>
                 <h3 class="topic-title"><a href="/Article/Index?id=@vm.Id" target="_blank">@vm.ArticleName</a></h3>
                 <div class="topic-user-info">
-                    <a href="/lookat/home?userId=35983" target="_blank" class="user-info">
+                    <a href="javascript:;" target="_blank" class="user-info">
                         <span>
-                            @vm.Company
+                            @Html.Raw(string.IsNullOrEmpty(vm.Company) ? new UserBll().GetModelByCache(Int32.Parse(vm.Userid)).UserName : vm.Company)
                         </span>
                     </a>
                     <div class="about-count">

@@ -48,10 +48,6 @@ namespace ImPinker.Controllers
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
-            if (vm.Content == null)
-            {
-                return new RedirectResult(vm.Url);
-            }
             ViewBag.Article = vm;
             return View("Index");
         }
