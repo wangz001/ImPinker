@@ -206,7 +206,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\image\arrow_next.png" />
+    <Content Include="Content\image\arrow_pre.png" />
+    <Content Include="Content\image\logo2.jpg.jpg" />
+    <Content Include="Content\image\logo2.png.png" />
+    <Content Include="Content\image\tubiao100.jpg" />
     <Content Include="Content\pubthread.css" />
+    <Content Include="Scripts\Swiper\css\swiper.css" />
+    <Content Include="Scripts\Swiper\css\swiper.min.css" />
+    <Content Include="Scripts\Swiper\js\swiper.jquery.js" />
+    <Content Include="Scripts\Swiper\js\swiper.jquery.min.js" />
+    <Content Include="Scripts\Swiper\js\swiper.jquery.umd.js" />
+    <Content Include="Scripts\Swiper\js\swiper.jquery.umd.min.js" />
+    <Content Include="Scripts\Swiper\js\swiper.js" />
+    <Content Include="Scripts\Swiper\js\swiper.min.js" />
     <Content Include="UeEditer\lang\en\en.js" />
     <Content Include="UeEditer\lang\en\images\addimage.png" />
     <Content Include="UeEditer\lang\en\images\alldeletebtnhoverskin.png" />
@@ -571,6 +584,10 @@
     <Content Include="Views\Article\UpdateThread.cshtml" />
     <Content Include="Views\Home\_Index_Article.cshtml" />
     <Content Include="Views\Search\_Index_Article.cshtml" />
+    <Content Include="Scripts\Swiper\js\maps\swiper.jquery.min.js.map" />
+    <Content Include="Scripts\Swiper\js\maps\swiper.jquery.umd.min.js.map" />
+    <Content Include="Scripts\Swiper\js\maps\swiper.min.js.map" />
+    <Content Include="Views\Home\_Index_Swiper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,9 @@
 ﻿@using ImModel.ViewModel
 @{
     ViewBag.Title = "车酷-MyAutos";
+    <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet"/>
+
+    
 }
 <div class="dialog-layer" style="display: none;">
     <div id="dialog" style="top: 200px;">
@@ -11,6 +14,12 @@
         </div>
     </div>
 </div>
+<div class="" style="margin-left: 200px;">
+    <a><img src="/Content/image/logo2.png.png" /></a>
+</div>
+@{
+    Html.RenderAction("SlideSwiper");
+}
 @Html.Partial("_TabListPartial")
 <div class="topic-list"><p>今日新增 @ViewBag.DailyAdded 篇文章。</p></div>
 <ul class="topic-list" id="articleConten">
@@ -25,6 +34,7 @@
 
 @section scripts
 {
+
     <script type="text/javascript">
         var pageCount = @ViewBag.pageCount;
         var pageIndex = 1;
@@ -38,6 +48,7 @@
             //点赞选中事件
             bindVote();
         });
+        
     </script>
     <script src="~/Scripts/Home/index.js"></script>
     <script src="~/Scripts/ArticleVote/articleVote.js"></script>

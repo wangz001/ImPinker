@@ -1,0 +1,599 @@
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-14 21:39:09,171 [37] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/UserCenter/UpdateShowName?showname=车酷-王铮
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_UserCenter_UserSetting_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\UserCenter\UserSetting.cshtml:行号 13
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-14 22:16:00,027 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/GetMyNextPage?pageIndex=3&pageCount=2
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.GetMyNextPage(Int32 pageIndex, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 103
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:16:00,632 [7] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.GetMyNextPage(Int32 pageIndex, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 103
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:17:50,544 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=4&pageCount=2
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.GetMyNextPage(Int32 pageIndex, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 103
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:19:01,191 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=4&pageCount=2
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.GetMyNextPage(Int32 pageIndex, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 103
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:19:08,850 [18] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/GetMyNextPage?pageIndex=2&pageCount=2
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=4&pageCount=2
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.GetMyNextPage(Int32 pageIndex, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 103
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:19:08,852 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/MyArticle
+Referer:
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.MyArticle() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 84
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-14 22:19:13,485 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 找不到网络路径。
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 760
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 738
+   在 ImDal.ArticleDal.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\Dal\Article.cs:行号 342
+   在 ImBLL.ArticleBll.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 174
+   在 ImPinker.Controllers.HomeController.GetByPage(Int32 pageNum, Int32 pageCount) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\HomeController.cs:行号 34
+   在 ImPinker.Controllers.HomeController.Index() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\HomeController.cs:行号 22
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+[Footer]
+[Header]
+2016-12-14 22:36:11,209 [28] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/MyArticle
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=1&pageCount=2
+System.ArgumentException: 对于“ImPinker.Controllers.ArticleController”中方法“System.Web.Mvc.ActionResult MyArticle(Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“pageIndex”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+   在 System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-14 22:42:49,535 [36] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/MyArticle
+Referer:http://www.impinker.com/Article/GetMyNextPage?pageIndex=1&pageCount=2
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 无法将 null 转换为“int”，因为后者是不可以为 null 的值类型
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 ASP._Page_Views_Article_MyArticle_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Article\MyArticle.cshtml:行号 85
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-14 22:52:52,666 [22] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_34862
+Referer:http://www.impinker.com/Article/Index?id=55070
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-15 20:28:37,640 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_50144
+Referer:http://www.impinker.com/Search/HotTag?key=房车旅行
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-15 20:28:41,983 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_47871
+Referer:http://www.impinker.com/Search/HotTag?key=房车旅行
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-15 20:28:46,948 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_50536
+Referer:http://www.impinker.com/Search/HotTag?key=房车旅行
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-15 23:28:39,944 [18] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54905
+Referer:http://www.impinker.com/Search/Index?key=越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-16 00:03:57,825 [50] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/HotTag?key=探险越野
+Referer:http://www.impinker.com/Article/Index?id=54982
+System.DivideByZeroException: 尝试除以零。
+   在 ImBLL.SolrNetSearchBll.QueryHotTag(String keyWord, String tab, String facetCompany, String facetTag, String facetDateTime, Int32 pageNum, Int32 pageCount, Boolean isHighLight) 位置 d:\GitProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 512
+   在 ImPinker.Controllers.SearchController.HotTag(SearchDto dto) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\SearchController.cs:行号 74
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-16 00:21:30,186 [49] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/GetNextPage?key=发动机&tab=&facetCompany=&facetTag=&facetDateTime=&pageNum=2&pageCount=10
+Referer:http://www.impinker.com/Search/Index?key=发动机
+System.InvalidOperationException: 未找到分部视图“_HotTag_Article”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Search/_HotTag_Article.aspx
+~/Views/Search/_HotTag_Article.ascx
+~/Views/Shared/_HotTag_Article.aspx
+~/Views/Shared/_HotTag_Article.ascx
+~/Views/Search/_HotTag_Article.cshtml
+~/Views/Search/_HotTag_Article.vbhtml
+~/Views/Shared/_HotTag_Article.cshtml
+~/Views/Shared/_HotTag_Article.vbhtml
+   在 System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 00:21:36,638 [52] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Search/GetNextPage?key=发动机&tab=&facetCompany=&facetTag=&facetDateTime=&pageNum=3&pageCount=10
+Referer:http://www.impinker.com/Search/Index?key=发动机
+System.InvalidOperationException: 未找到分部视图“_HotTag_Article”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Search/_HotTag_Article.aspx
+~/Views/Search/_HotTag_Article.ascx
+~/Views/Shared/_HotTag_Article.aspx
+~/Views/Shared/_HotTag_Article.ascx
+~/Views/Search/_HotTag_Article.cshtml
+~/Views/Search/_HotTag_Article.vbhtml
+~/Views/Shared/_HotTag_Article.cshtml
+~/Views/Shared/_HotTag_Article.vbhtml
+   在 System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-16 22:31:04,749 [17] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.ArgumentNullException: 值不能为 null。
+参数名: String
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ASP._Page_Views_Home__Index_Article_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:行号 24
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:31:04,951 [17] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentNullException: 值不能为 null。
+参数名: String
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ASP._Page_Views_Home__Index_Article_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:行号 24
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
+   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 18
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:33:29,198 [23] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.ArgumentNullException: 值不能为 null。
+参数名: String
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ASP._Page_Views_Home__Index_Article_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:行号 24
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:33:29,200 [23] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/
+Referer:
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentNullException: 值不能为 null。
+参数名: String
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ASP._Page_Views_Home__Index_Article_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Article.cshtml:行号 24
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
+   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 18
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-16 22:51:06,318 [20] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54899
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:51:10,924 [13] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54093
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 22:52:28,795 [14] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 23:13:26,370 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+2016-12-16 23:16:14,211 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_Article_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Article\Index.cshtml:行号 45
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2016-12-16 23:16:22,145 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=travels_54903
+Referer:http://www.impinker.com/Search/HotTag?key=探险越野
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP._Page_Views_Article_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Article\Index.cshtml:行号 45
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

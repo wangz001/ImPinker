@@ -57,6 +57,17 @@ namespace ImPinker.Controllers
             return PartialView("_Index_Article",list);
         }
 
+        /// <summary>
+        /// 首页轮播图
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult SlideSwiper()
+        {
+            var list = GetByPage(1, 12);
+            return PartialView("_Index_Swiper",list);
+        }
+
 
         [AuthorizationFilter]
         public ActionResult About()

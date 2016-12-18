@@ -328,7 +328,7 @@ namespace ImDal
 SELECT  *
 FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS Row ,
                     T.*
-          FROM      Article T WHERE T.CoverImage IS NOT NULL AND DATALENGTH(T.CoverImage)>0
+          FROM      Article T WHERE T.STATE=1 AND  T.CoverImage IS NOT NULL AND DATALENGTH(T.CoverImage)>0
         ) TT
 WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
 ";
