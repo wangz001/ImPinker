@@ -5,26 +5,25 @@
 }
 <!-- Swiper -->
 <div class="swiper-container" style="width: 1100px; height: 300px;">
+    <div class="swiper-wrapper">
         @{
-            for (int i = 0; i < list.Count; i++)
+            var pages = Math.Ceiling(list.Count / 3.0);
+            for (var i = 0; i < pages; i++)
             {
-                var vm=list[i];
-                if (i%3 == 0)
+                <div class="swiper-slide">
+                    @{
+                for (var j = 0; j < 3; j++)
                 {
-                    Html.Raw("<div class=\"swiper-slide\">");
-                    <a href="/Article/Index?id=@vm.Id">
-                        <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />
-                    </a>
-                    Html.Raw("</div>");
-                }
-                else
-                {
-                    <a href="/Article/Index?id=@vm.Id">
+                    var vm = list[i * 3 + j];
+                    <a href="/Article/Index?id=@vm.Id" target="_blank">
                         <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />
                     </a>
                 }
+                    }
+                </div>
             }
         }
+    </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
     <!-- Add Arrows -->
@@ -32,18 +31,3 @@
     <div class="swiper-button-prev"></div>
 </div>
 
-<script src="~/Scripts/Swiper/js/swiper.jquery.js"></script>
-<script type="text/javascript">
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 30,
-        centeredSlides: true,
-        mousewheelControl: true,
-        loop: true,
-        autoplay: 2500,
-        autoplayDisableOnInteraction: false
-    });
-</script>

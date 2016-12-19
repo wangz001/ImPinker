@@ -12,11 +12,11 @@
                     <a href="/Article/Index?id=@vm.Id" target="_blank">
                         <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" class="upload">
                     </a>
-                    <div class="about-count">
+                    @*<div class="about-count">
                         <span class="click"><i></i>4006</span>
                         <span class="comment"><i></i>37</span>
                         <span class="praise"><i></i>46</span>
-                    </div>
+                    </div>*@
                 </div>
                 <h4>
                     <a href="/Article/Index?id=@vm.Id" target="_blank">
@@ -24,9 +24,7 @@
                     </a>
                 </h4>
                 <div class="user-info">
-                    <a href="/lookat/home?userId=13476" target="_blank" class="user">
                         <em>@vm.Company</em>
-                    </a>
                     <span class="pub-time">@TUtil.DateFormatToString(vm.CreateTime)</span>
                 </div>
             </li>

@@ -1,9 +1,9 @@
 ﻿@using ImModel.ViewModel
 @{
     ViewBag.Title = "车酷-MyAutos";
-    <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet"/>
+    <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet" />
 
-    
+
 }
 <div class="dialog-layer" style="display: none;">
     <div id="dialog" style="top: 200px;">
@@ -34,7 +34,7 @@
 
 @section scripts
 {
-
+    <script src="~/Scripts/Swiper/js/swiper.jquery.js"></script>
     <script type="text/javascript">
         var pageCount = @ViewBag.pageCount;
         var pageIndex = 1;
@@ -47,8 +47,23 @@
 
             //点赞选中事件
             bindVote();
+
+            
         });
-        
+        //首页轮播图初始化
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            mousewheelControl: true,
+            loop: true,
+            preventClicks : false,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false
+        });
     </script>
     <script src="~/Scripts/Home/index.js"></script>
     <script src="~/Scripts/ArticleVote/articleVote.js"></script>
