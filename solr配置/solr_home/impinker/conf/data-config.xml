@@ -3,8 +3,9 @@
     <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=ImPinker" user="sa" password="funnycar2015"/>
     <document name="article">  
         <entity name="article"  transformer="ClobTransformer" pk="table_id"
-                 query="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
-						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Content,Company from Article "        
+                 query="SELECT 'travels_'+convert(varchar(100),T1.Id) as table_id,T1.UserId
+						,T1.ArticleName,T1.KeyWords,T1.Description,T1.Url,T1.CreateTime,T1.UpdateTime,T1.CoverImage,T2.Content,T1.Company from Article T1 
+						left join ArticleSnaps T2 on T1.Id=T2.ArticleId "        
                  deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
 						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Content,Company from Article where userid>1000 "    
                  deltaQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id FROM Article WHERE userid>1000 and CreateTime > '${dataimporter.last_index_time}'">             

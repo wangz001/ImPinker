@@ -68,7 +68,7 @@ namespace ImPinker.Controllers
             }
             if (dto.PageCount == 0)
             {
-                dto.PageCount = 30;
+                dto.PageCount = 32;
             }
             dto.IsHighLight = false;
             var searchvm = SolrNetSearchBll.QueryHotTag(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount, false); ;
