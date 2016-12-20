@@ -12,7 +12,6 @@ namespace GetCarDataService
 {
     public class QuartzMain
     {
-        private static ILog _log = LogManager.GetLogger(typeof(QuartzMain));
         public void Run()
         {
             var ncv = new NameValueCollection();
@@ -46,7 +45,7 @@ namespace GetCarDataService
                 .StartAt(runTime)
                 .WithSimpleSchedule(x => x.WithIntervalInHours(12).RepeatForever())
                 .Build();
-            sched.ScheduleJob(jobAHData, triggerAHData);
+            //sched.ScheduleJob(jobAHData, triggerAHData);
 
             //生成词典
             IJobDetail jobGenerateSolrDic = JobBuilder.Create<GenerateCarDataDic>()
@@ -57,12 +56,12 @@ namespace GetCarDataService
                 .StartAt(runTime)
                 .WithSimpleSchedule(x => x.WithIntervalInHours(12).RepeatForever())
                 .Build();
-            sched.ScheduleJob(jobGenerateSolrDic, triggerGenerateSolrDic);
+            //sched.ScheduleJob(jobGenerateSolrDic, triggerGenerateSolrDic);
 
-            _log.Info(string.Format("{0} will run at: {1}", jobOssImage.Key, runTime.ToString("r")));
+            Common.WriteInfoLog(string.Format("{0} will run at: {1}", jobOssImage.Key, runTime.ToString("r")));
             sched.Start();
             Thread.Sleep(10000);
-            _log.Info("quartz开始");
+            Common.WriteInfoLog("quartz开始");
             Console.WriteLine("服务已启动");
             Console.ReadLine();
             //sched.Shutdown(true);

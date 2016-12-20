@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 
+import com.lang.impinker.model.Article;
 import com.lang.properties.AppProperties;
 import com.lang.util.TUtil;
 

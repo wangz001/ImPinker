@@ -1,4 +1,4 @@
-package com.lang.common;
+package com.lang.impinker.model;
 
 /**
  * article 表和articleSnap两个表的内容

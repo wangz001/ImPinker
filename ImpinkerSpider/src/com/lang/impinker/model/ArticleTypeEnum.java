@@ -1,21 +1,22 @@
-package com.lang.common;
+package com.lang.impinker.model;
 
-public enum CompanyEnum {
-	Fblife("越野e族", 1), Autohome("汽车之家", 2), Yiche("易车", 3), Xcar("爱卡汽车", 4), PCauto(
-			"太平洋汽车", 5);
+public enum ArticleTypeEnum {
+
+	XinWen("新闻", 1), LvXing("旅行", 2), YueYe("越野", 3), ZiJiaYou("自驾游", 4), PingCe(
+			"评测", 5), ChuanYue("穿越", 6), GaiZhuang("改装", 7), WenHua("文化", 8);
 	// 成员变量
 	private String name;
 	private int index;
 
 	// 构造方法
-	private CompanyEnum(String name, int index) {
+	private ArticleTypeEnum(String name, int index) {
 		this.name = name;
 		this.index = index;
 	}
 
 	// 普通方法
 	public static String getName(int index) {
-		for (CompanyEnum c : CompanyEnum.values()) {
+		for (ArticleTypeEnum c : ArticleTypeEnum.values()) {
 			if (c.getIndex() == index) {
 				return c.name;
 			}

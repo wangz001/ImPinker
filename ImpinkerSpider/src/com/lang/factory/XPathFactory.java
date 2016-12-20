@@ -2,8 +2,8 @@ package com.lang.factory;
 
 import com.lang.autohome.AutoHomeXPathCommon;
 import com.lang.bitauto.BitautoXPathCommon;
-import com.lang.common.CompanyEnum;
 import com.lang.fblife.FbLifeXPathCommon;
+import com.lang.impinker.model.CompanyEnum;
 import com.lang.interfac.MotorXPathInterface;
 
 public class XPathFactory {

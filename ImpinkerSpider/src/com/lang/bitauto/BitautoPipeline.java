@@ -4,9 +4,9 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-import com.lang.common.Article;
-import com.lang.common.ArticleBll;
-import com.lang.common.CompanyEnum;
+import com.lang.impinker.bll.ArticleBll;
+import com.lang.impinker.model.Article;
+import com.lang.impinker.model.CompanyEnum;
 import com.lang.util.TUtil;
 
 public class BitautoPipeline implements Pipeline {

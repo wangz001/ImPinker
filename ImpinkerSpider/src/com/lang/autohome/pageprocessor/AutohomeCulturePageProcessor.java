@@ -12,8 +12,8 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import com.lang.autohome.AutohomePipeline;
-import com.lang.common.CompanyEnum;
 import com.lang.factory.XPathFactory;
+import com.lang.impinker.model.CompanyEnum;
 import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.HtmlTagUtil;
 import com.lang.util.JcSegUtil;

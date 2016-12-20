@@ -5,7 +5,7 @@ import java.util.List;
 
 import us.codecraft.webmagic.Page;
 
-import com.lang.common.ArticleTypeEnum;
+import com.lang.impinker.model.ArticleTypeEnum;
 import com.lang.interfac.MotorXPathInterface;
 import com.lang.util.RegexUtil;
 

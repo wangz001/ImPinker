@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import com.lang.impinker.dal.ArticleDao;
+
 /**
  * 数据库中url的缓存
  * 

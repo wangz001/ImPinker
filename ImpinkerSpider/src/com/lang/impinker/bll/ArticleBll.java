@@ -1,5 +1,9 @@
-package com.lang.common;
+package com.lang.impinker.bll;
 
+import com.lang.common.ArticleUrlCache;
+import com.lang.common.SolrJUtil;
+import com.lang.impinker.dal.ArticleDao;
+import com.lang.impinker.model.Article;
 import com.lang.util.TUtil;
 
 public class ArticleBll {

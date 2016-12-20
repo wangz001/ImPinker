@@ -1,10 +1,12 @@
-package com.lang.common;
+package com.lang.impinker.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.lang.common.AppStart;
+import com.lang.impinker.model.Article;
 import com.lang.util.DBHelper;
 import com.lang.util.TUtil;
 

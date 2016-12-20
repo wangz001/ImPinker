@@ -22,12 +22,11 @@ namespace GetCarDataService.ImArticleFirstImage
         static ArticleSnapsBll articlesnapBll = new ArticleSnapsBll();
         private const string buckeyName = "myautos";
         const string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
-        private static ILog _log = LogManager.GetLogger(typeof(ArticleFirstImageUpload));
         public void Execute(IJobExecutionContext context)
         {
-            _log.Info("开始检查图片：" + DateTime.Now.Ticks);
+            Common.WriteInfoLog("开始检查图片：" + DateTime.Now.Ticks);
             Start();
-            _log.Info("结束检查图片：" + DateTime.Now.Ticks);
+            Common.WriteInfoLog("结束检查图片：" + DateTime.Now.Ticks);
         }
         public static void Start()
         {
@@ -76,6 +75,10 @@ namespace GetCarDataService.ImArticleFirstImage
                 Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
                 MemoryStream ms = new MemoryStream();
                 myImage.Save(ms, ImageFormat.Jpeg);
+                if (!Directory.Exists(Path.GetDirectoryName(tempdir)))//如果不存在就创建file文件夹
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(tempdir));
+                }
                 myImage.Save(tempdir);
                 //剪切(如果高大于1.5倍宽，剪切)
                 if (1.5 * (myImage.Width) < myImage.Height)

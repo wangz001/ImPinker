@@ -116,7 +116,7 @@ namespace GetCarDataService
 			using (var fileStream = File.Open(txtLogUrl, FileMode.Append, FileAccess.Write))
 			using (var streamWriter = new StreamWriter(fileStream))
 			{
-				streamWriter.WriteLine(logContent);
+				streamWriter.WriteLine("[{0}]:{1}",DateTime.Now.ToLongTimeString(),logContent);
 				streamWriter.Close();
 				fileStream.Close();
 			}
