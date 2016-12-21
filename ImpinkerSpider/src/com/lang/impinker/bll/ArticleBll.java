@@ -1,7 +1,6 @@
 package com.lang.impinker.bll;
 
 import com.lang.common.ArticleUrlCache;
-import com.lang.common.SolrJUtil;
 import com.lang.impinker.dal.ArticleDao;
 import com.lang.impinker.model.Article;
 import com.lang.util.TUtil;
@@ -33,9 +32,9 @@ public class ArticleBll {
 		}
 		String timeStr = TUtil.strToUTCTime(article.getPublishTime());
 		article.setPublishTime(timeStr); // 转成utc时间格式
-		// 添加索引
-		SolrJUtil solrJUtil = SolrJUtil.getInstance();
-		solrJUtil.AddDocs(article);
+		// 添加索引......改为由生成封面图时向solr添加索引。2016-12-21
+		// SolrJUtil solrJUtil = SolrJUtil.getInstance();
+		// solrJUtil.AddDocs(article);
 	}
 
 	private long GetIdByUrl(String Url) {

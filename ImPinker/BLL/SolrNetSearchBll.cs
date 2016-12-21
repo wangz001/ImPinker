@@ -681,5 +681,16 @@ namespace ImBLL
             }
             return null;
         }
+        /// <summary>
+        /// 批量添加索引文件
+        /// </summary>
+        /// <returns></returns>
+        public static bool AddIndex(List<ArticleViewModel> list )
+        {
+            if (list == null || list.Count <= 0) return false;
+            SolrInstance.AddRange(list);
+            var result=SolrInstance.Commit();
+            return result.Status>0;
+        }
     }
 }

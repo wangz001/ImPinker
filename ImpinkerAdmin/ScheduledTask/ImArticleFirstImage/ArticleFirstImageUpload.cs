@@ -37,6 +37,7 @@ namespace GetCarDataService.ImArticleFirstImage
         }
         public static void Start()
         {
+            var solrIndexList=new List<ArticleViewModel>();//准备添加索引的集合
             var articleList = articleBll.GetArticlesWithoutCoverImage();
             foreach (var article in articleList)
             {
@@ -52,7 +53,23 @@ namespace GetCarDataService.ImArticleFirstImage
                         if (!updateflag)
                         {
                             Common.WriteErrorLog("生成封面图错误：" + imgurl);
+                            continue;
                         }
+                        var vm = new ArticleViewModel
+                        {
+                            Id = "travels_" + article.Id,
+                            ArticleName = article.ArticleName,
+                            Company = article.Company,
+                            CoverImage = imgurl,
+                            KeyWords = article.KeyWords,
+                            Description = article.Description,
+                            Content = new List<object>{articleSnap.Content},
+                            Url = article.Url,
+                            CreateTime = article.CreateTime,
+                            UpdateTime = article.UpdateTime,
+                            Userid = article.UserId.ToString()
+                        };
+                        solrIndexList.Add(vm);
                     }
                     else
                     {
@@ -60,6 +77,9 @@ namespace GetCarDataService.ImArticleFirstImage
                     }
                 }
             }
+            SolrNetSearchBll.AddIndex(solrIndexList);
+            Common.WriteInfoLog("本次处理文章数：" + solrIndexList.Count);
+            Console.WriteLine("本次处理文章数：" + solrIndexList.Count);
         }
 
         /// <summary>
