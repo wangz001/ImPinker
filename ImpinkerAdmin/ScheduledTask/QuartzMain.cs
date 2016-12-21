@@ -35,6 +35,7 @@ namespace GetCarDataService
                 .WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever())
                 .Build();
             sched.ScheduleJob(jobOssImage, triggerOssImage);
+            Common.WriteInfoLog("quartz——生成封面图服务");
 
             //抓取汽车之家车型数据
             IJobDetail jobAHData = JobBuilder.Create<GetAHAutoCarsData.GetBasicData>()
@@ -46,6 +47,7 @@ namespace GetCarDataService
                 .WithSimpleSchedule(x => x.WithIntervalInHours(12).RepeatForever())
                 .Build();
             //sched.ScheduleJob(jobAHData, triggerAHData);
+            Common.WriteInfoLog("quartz获取汽车之家车型数据");
 
             //生成词典
             IJobDetail jobGenerateSolrDic = JobBuilder.Create<GenerateCarDataDic>()
@@ -57,11 +59,12 @@ namespace GetCarDataService
                 .WithSimpleSchedule(x => x.WithIntervalInHours(12).RepeatForever())
                 .Build();
             //sched.ScheduleJob(jobGenerateSolrDic, triggerGenerateSolrDic);
+            Common.WriteInfoLog("quartz生成车型名称词典");
 
             Common.WriteInfoLog(string.Format("{0} will run at: {1}", jobOssImage.Key, runTime.ToString("r")));
             sched.Start();
-            Thread.Sleep(10000);
-            Common.WriteInfoLog("quartz开始");
+            Thread.Sleep(1000);
+            
             Console.WriteLine("服务已启动");
             Console.ReadLine();
             //sched.Shutdown(true);

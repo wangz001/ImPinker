@@ -24,9 +24,16 @@ namespace GetCarDataService.ImArticleFirstImage
         const string ImgUrlformat = "articlefirstimg/{0}/{1}_{2}.jpg";
         public void Execute(IJobExecutionContext context)
         {
-            Common.WriteInfoLog("开始检查图片：" + DateTime.Now.Ticks);
-            Start();
-            Common.WriteInfoLog("结束检查图片：" + DateTime.Now.Ticks);
+            Common.WriteInfoLog("生成封面图服务启动");
+            try
+            {
+                Start();
+            }
+            catch (Exception e)
+            {
+                Common.WriteErrorLog("生成封面图服务exception:"+e);
+            }
+            Common.WriteInfoLog("生成封面图服务结束");
         }
         public static void Start()
         {
@@ -44,8 +51,12 @@ namespace GetCarDataService.ImArticleFirstImage
                         var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
                         if (!updateflag)
                         {
-                            //记录错误日志
+                            Common.WriteErrorLog("生成封面图错误：" + imgurl);
                         }
+                    }
+                    else
+                    {
+                        Common.WriteErrorLog("上传图片到oss错误：" + imgurl);
                     }
                 }
             }
@@ -87,18 +98,15 @@ namespace GetCarDataService.ImArticleFirstImage
                 }
                 //缩放
                 ImageUtils.ThumbnailImage(tempdir, tempdir, width, height, ImageFormat.Jpeg);
-
                 //保存
                 bool flag = ObjectOperate.UploadImage(buckeyName, tempdir, key);
                 return flag;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Common.WriteErrorLog("生成封面图错误：" + key +".Exception: "+e);
                 return false;
             }
         }
-
-        
     }
-
 }

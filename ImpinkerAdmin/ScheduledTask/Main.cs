@@ -1,6 +1,4 @@
 ﻿using System;
-using Bita.Common;
-using Common.Utils;
 using GetCarDataService.ArticleTagManage;
 using GetCarDataService.AutoHomeCountTask;
 using GetCarDataService.GetAHAutoCarsData;
@@ -16,12 +14,8 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
-            //log4net.Config.XmlConfigurator.Configure();
-            //log4net.ILog log = log4net.LogManager.GetLogger("logerror");
-
-            Common.WriteInfoLog("开始");
+            Common.WriteInfoLog("程序启动");
             new QuartzMain().Run();
-            
             Console.ReadLine();
 
             new ArticleTagAdd().Execute(null);
