@@ -12,7 +12,7 @@ namespace ImModel.ViewModel
         [SolrUniqueKey("id")]
         public string Id { get; set; }
 
-        [SolrField("userid")]
+        [SolrField("UserId")]
         public string Userid { get; set; }
 
         [SolrField("ArticleName")]

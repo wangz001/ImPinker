@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Configuration;
 using GetCarDataService.ArticleTagManage;
 using GetCarDataService.AutoHomeCountTask;
 using GetCarDataService.GetAHAutoCarsData;
 using GetCarDataService.GetXCAutoCarsData;
 using GetCarDataService.ImArticleFirstImage;
 using GetCarDataService.SolrDicGenerate;
+using ImModel.ViewModel;
 using GetBasicData = GetCarDataService.GetXCAutoCarsData.GetBasicData;
 using GetStylePropertyValues = GetCarDataService.GetXCAutoCarsData.GetStylePropertyValues;
 
@@ -14,6 +16,10 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
+            //appstart
+            string solrServer = ConfigurationManager.AppSettings.Get("SolrServer");
+            SolrNet.Startup.Init<ArticleViewModel>(solrServer);
+
             Common.WriteInfoLog("程序启动");
             new QuartzMain().Run();
             Console.ReadLine();
