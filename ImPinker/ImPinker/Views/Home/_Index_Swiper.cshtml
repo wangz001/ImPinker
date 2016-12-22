@@ -14,6 +14,7 @@
                     @{
                 for (var j = 0; j < 3; j++)
                 {
+                    if(i * 3 + j>=list.Count) {break;}
                     var vm = list[i * 3 + j];
                     <a href="/Article/Index?id=@vm.Id" target="_blank">
                         <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />

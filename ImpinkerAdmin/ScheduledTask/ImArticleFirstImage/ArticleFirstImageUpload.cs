@@ -35,7 +35,7 @@ namespace GetCarDataService.ImArticleFirstImage
             }
             Common.WriteInfoLog("生成封面图服务结束");
         }
-        public static void Start()
+        public void Start()
         {
             var solrIndexList=new List<ArticleViewModel>();//准备添加索引的集合
             var articleList = articleBll.GetArticlesWithoutCoverImage();
@@ -96,7 +96,7 @@ namespace GetCarDataService.ImArticleFirstImage
             }
             try
             {
-                var tempdir = AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp.jpg";
+                var tempdir =string.Format(AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp_{0}.jpg",DateTime.Now.Ticks);
                 const int width = 360;
                 const int height = 240;
                 //下载

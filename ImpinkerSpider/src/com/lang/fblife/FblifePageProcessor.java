@@ -88,8 +88,8 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		String tmpDir = System.getProperty("java.io.tmpdir");
 		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
-				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
-				.thread(1);
+				.setExitWhenComplete(true).addUrl("http://www.fblife.com/")
+				.addPipeline(fbPipeline).thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
 		} catch (JMException e) {
@@ -99,6 +99,9 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
 			if (fbRequestCount > 10000) {
+				int alive = spider.getThreadAlive();
+				System.err.println(alive);
+				spider.close();
 				spider.stop();
 				break;
 			}

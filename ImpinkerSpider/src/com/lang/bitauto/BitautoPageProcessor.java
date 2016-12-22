@@ -41,6 +41,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
 			if (bitRequestCount > maxNum) {
+
 				spider.stop();
 				spider.close();
 				bitRequestCount = 0; // 解决quartz第二次启动的问题
