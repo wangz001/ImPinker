@@ -4,20 +4,20 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("你好 " + User.Identity.GetUserName() + "~", "Index", "UserCenter", routeValues: null, htmlAttributes: new { title = "管理" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
-        @*<li>@Html.ActionLink("发新帖", "CreateThread", "Article", routeValues: null, htmlAttributes: new { title = "发布链接" })</li>*@
-    </ul>
+        <div class="user-info-box">
+            <a href="/UserCenter/Index" class="header-username">
+                <span class="line-left">@User.Identity.GetUserName()</span>
+                <em></em>
+            </a>
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="header-username">注销</a>
+            </div>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="user-info-box">
+        @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class="header-username"})
+        @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" ,@class="header-username"})
+    </div>
+   
 }

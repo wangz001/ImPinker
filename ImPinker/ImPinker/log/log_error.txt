@@ -1,14 +1,14 @@
 [Header]
 [Footer]
 [Header]
-2016-12-22 21:06:55,331 [7] ERROR WebLogger [(null)] - 
+2016-12-25 21:44:17,340 [18] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -17,14 +17,14 @@ System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:06:55,497 [7] ERROR WebLogger [(null)] - 
+2016-12-25 21:44:17,494 [18] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -58,14 +58,13 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:21,389 [10] ERROR WebLogger [(null)] - 
+2016-12-25 21:44:42,519 [4] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -74,14 +73,13 @@ System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:21,390 [10] ERROR WebLogger [(null)] - 
+2016-12-25 21:44:42,520 [4] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -115,14 +113,13 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:25,717 [7] ERROR WebLogger [(null)] - 
+2016-12-25 21:46:23,327 [13] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -131,14 +128,13 @@ System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:25,718 [7] ERROR WebLogger [(null)] - 
+2016-12-25 21:46:23,328 [13] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -172,14 +168,13 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:26,967 [11] ERROR WebLogger [(null)] - 
+2016-12-25 21:47:56,112 [4] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -188,14 +183,13 @@ System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:26,968 [11] ERROR WebLogger [(null)] - 
+2016-12-25 21:47:56,114 [4] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -229,14 +223,16 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:36,438 [11] ERROR WebLogger [(null)] - 
+[Footer]
+[Header]
+2016-12-25 21:48:42,302 [17] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
@@ -245,983 +241,14 @@ System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:36,439 [11] ERROR WebLogger [(null)] - 
+2016-12-25 21:48:42,427 [17] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://www.impinker.com/
 Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,015 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,016 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,597 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,598 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,731 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,732 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,903 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:37,904 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,036 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,037 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,167 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,168 [7] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,317 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,318 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,560 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,561 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,787 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,788 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,915 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:38,916 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:39,400 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:39,403 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:39,565 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:39,566 [9] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,044 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,045 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,297 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,299 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,486 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,487 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,595 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,597 [11] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
-   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
-   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
-   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
-   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
-   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
-   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
-   在 ASP._Page_Views_Home_Index_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\Index.cshtml:行号 21
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,762 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
-   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
-   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
-2016-12-22 21:08:40,763 [8] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/
-Referer:
-System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
-参数名: index
-   在 System.Collections.Generic.List`1.get_Item(Int32 index)
-   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 17
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> System.InvalidCastException: 无法将类型为“<TakeIterator>d__3a`1[ImModel.ViewModel.ArticleViewModel]”的对象强制转换为类型“System.Collections.Generic.List`1[ImModel.ViewModel.ArticleViewModel]”。
+   在 CallSite.Target(Closure , CallSite , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 ASP._Page_Views_Home__Index_Swiper_cshtml.Execute() 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Views\Home\_Index_Swiper.cshtml:行号 4
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
    在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
    在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)

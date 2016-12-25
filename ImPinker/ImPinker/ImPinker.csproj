@@ -209,9 +209,8 @@
     <Content Include="Configs\HotTagConfig.xml" />
     <Content Include="Content\image\arrow_next.png" />
     <Content Include="Content\image\arrow_pre.png" />
-    <Content Include="Content\image\logo2.jpg.jpg" />
-    <Content Include="Content\image\logo2.png.png" />
-    <Content Include="Content\image\tubiao100.jpg" />
+    <Content Include="Content\image\logo_100.png" />
+    <Content Include="Content\image\logo_3.png" />
     <Content Include="Content\pubthread.css" />
     <Content Include="Scripts\Swiper\css\swiper.css" />
     <Content Include="Scripts\Swiper\css\swiper.min.css" />

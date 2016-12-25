@@ -1,44 +1,79 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("MyAutos —— 爱车人的圈子", "Index", "Home", null, new { @class = "navbar-brand" })
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("旅行", "About", "Home")</li>
-                <li>@Html.ActionLink("越野", "Contact", "Home")</li>
-                <li>
-                    <div class="search-form">
-                        <input name="searchterm" id="searchterm" type="text" class="search-inputhead" placeholder="请输入你想搜索的内容"/>
-                        <a href="javascript:;" class="search-submit"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve"><path fill="#FFFFFF" d="M5.89,11.594c1.32,0,2.532-0.461,3.49-1.229l7.267,7.268c0.122,0.119,0.28,0.182,0.439,0.182s0.319-0.063,0.44-0.182c0.242-0.244,0.242-0.639,0-0.881L10.26,9.486c0.767-0.958,1.229-2.17,1.229-3.49c0-3.087-2.511-5.598-5.599-5.598c-3.087,0-5.598,2.511-5.598,5.598S2.803,11.594,5.89,11.594 M5.89,1.642c2.401,0,4.354,1.953,4.354,4.354S8.291,10.35,5.89,10.35c-2.4,0-4.354-1.953-4.354-4.354S3.489,1.642,5.89,1.642"/></svg></a>
-                    </div>
+﻿<a id="maodian" style="display:block; height:0; width:0; line-height:0; font-size:0"></a>
+<div id="header">
+    <div class="header-row-1">
+        <div class="header-container">
+            <div class="header-row-1-col-1">
+                @Html.ActionLink("MyAutos —— 爱车人的圈子", "Index", "Home", null, new { @class = "navbar-right" })
+            </div>
+            <ul class="header-row-1-col-2">
+                <li class="nav-shop" ms-controller="wrap">
+                @Html.ActionLink("旅行", "About", "Home")</li>
+                
+               
+                <li class="nav-interest">
+                    <a href="/interest/home?isallinterest=1&amp;interestType=0&amp;creatorTime=2&amp;isEssence=0&amp;commentCountMax=0&amp;clickMax=0">兴趣</a>
                 </li>
+                <li class="nav-follow"><a href="/concerns/myConcernsThreadList">关注的人</a></li>
+                <li class="nav-ranklist"><a href="/rank/list">排行榜</a></li>
             </ul>
-            @Html.Partial("_LoginPartial")
+            <div class="header-row-1-col-4">
+                <div class="user-info-box">
+                    @Html.Partial("_LoginPartial")
+                </div>
+                <a href="http://xbshop.xxxxxbbs.com" target="_blank" class="xbshop-btn"><i></i>兑换中心</a>
+            </div>
+
+            <div class="header-row-1-col-3">
+                <div class="search-box">
+                    <a href="javascript:;" class="search-btn" onclick="searchkey($('#keyword001'));"></a>
+                    <input type="hidden" id="keyword002" value="airx A7空气净化器">
+                    <input type="text" id="keyword001" placeholder="airx A7空气净化器" autocomplete="off">
+                    <div class="search-record">
+                        <span><em></em><i></i></span>
+                        <div class="search-record-box">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </div>
-</div>
-<a id="maodian" style="display:block; height:0; width:0; line-height:0; font-size:0"></a>
-<div id="header">
-        <div class="header-container" style="display: none">
+    <div class="header-row-2">
+        <div class="header-container">
+
+            <a href="/thread/input" class="side-pub-thread" target="_blank" style="opacity: 1; right: auto;"></a>
+
+            <a class="logo" href="/"></a>
+            <ul class="navigator">
+                <li class="homepage"><a href="/index?topicId=0" style="color: rgb(33, 117, 208);">选题</a></li>
+                <li class="interestpage">
+                    <a href="/interest/home?isallinterest=1&amp;interestType=0&amp;creatorTime=2&amp;isEssence=0&amp;commentCountMax=0&amp;clickMax=0">兴趣</a>
+                </li>
+                <li class="followpage"><a href="/concerns/myConcernsThreadList">关注的人</a></li>
+                <li class="rankpage"><a href="/rank/list">排行榜</a></li>
+                <li class="centerpage" style="border-right: 1px solid #dfdfdf; padding-right: 15px"><a href="/center/home">个人中心</a></li>
+                <a href="http://5x666.taobao.com" target="_blank" class="shop-btn">
+                    5X兴趣社区官方商店<em></em>
+                    <!-- <img src="/images/161111.jpg" style="width:210px;height:auto"/> -->
+                </a>
+            </ul>
             <div class="side-bar" style="bottom: 20px; opacity: 1; right: auto;">
                 @*<div class="down-app">
-                    <a href="/html/app.html" target="_blank" class="app">
-                        <em>下载客户端</em>
-                        <i></i>
-                    </a>
-                </div>*@
+                <a href="/html/app.html" target="_blank" class="app">
+                    <em>下载客户端</em>
+                    <i></i>
+                </a>
+            </div>*@
                 <a href="#maodian" class="go-top">
                     <em>返回顶部</em>
                 </a>
             </div>
+        </div>
     </div>
 </div>
+
+
 <div style="display: none" id="searchKey"></div>
 <script type="text/javascript">
     var state = "@Html.Raw(Request.IsAuthenticated)";  //全局变量，标记是否登录
@@ -55,9 +90,9 @@
         $(window).scroll(function () {
             var top = $(document).scrollTop();
             if (top > 300) {
-                $(".header-container").fadeIn();
+                $(".side-bar").fadeIn();
             } else {
-                $(".header-container").fadeOut();
+                $(".side-bar").fadeOut();
             }
         });
     });

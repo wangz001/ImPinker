@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Common.DateTimeUtil;
 using ImBLL;
@@ -64,7 +65,13 @@ namespace ImPinker.Controllers
         [ChildActionOnly]
         public ActionResult SlideSwiper()
         {
-            var list = GetByPage(1, 12);
+            var list = GetByPage(1, 35);
+            if (list.Count > 12)
+            {
+                var a = list.Take(12).ToList();
+                return PartialView("_Index_Swiper", a);
+            }
+
             return PartialView("_Index_Swiper",list);
         }
 
