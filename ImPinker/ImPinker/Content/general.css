@@ -48,6 +48,7 @@ body {
 }
 
 
+
 /* 定义全局交互样式 */
 
 ::selection {
@@ -1781,7 +1782,7 @@ p {
 	display: inline-block;
 	width: 7px;
 	height: 4px;
-	background: url(/images/head_icons.png) no-repeat -77px -80px;
+	/*background: url(/images/head_icons.png) no-repeat -77px -80px;*/
 	vertical-align: middle;
 	transition: all 0.2s linear;
 }
@@ -1927,7 +1928,7 @@ p {
 }
 
 #header .header-row-1 .header-row-1-col-4 .user-info-box .user-info-list .gratuity-top .my-coins i {
-	background: url(/images/head_icons.png) no-repeat left -18px;
+	/*background: url(/images/head_icons.png) no-repeat left -18px;*/
 	display: inline-block;
 	width: 18px;
 	height: 20px;
@@ -1947,7 +1948,7 @@ p {
 	padding-left: 26px;
 	border: 1px solid #f7ae3b;
 	border-radius: 5px;
-	background:url(/images/head_icons.png) no-repeat 10px -194px;
+	/*background:url(/images/head_icons.png) no-repeat 10px -194px;*/
 	transition: all 0.2s linear;
 }
 
@@ -1958,10 +1959,10 @@ p {
 	display: block;
 	width: 19px;
 	height: 8px;
-	background: #fff url(/images/head_icons.png) no-repeat left top;
+	/*background: #fff url(/images/head_icons.png) no-repeat left top;*/
 }
 #header .header-row-1 .header-row-1-col-4 .user-info-box .user-info-list .gratuity-top .recharge:hover{
-	background:#f7ae3b url(/images/head_icons.png) no-repeat 10px -171px;
+	/*background:#f7ae3b url(/images/head_icons.png) no-repeat 10px -171px;*/
 	color: #FFFFFF;
 }
 #header .header-row-1 .header-row-1-col-4 .user-info-box .user-info-list .gratuity-bottom {
@@ -2328,7 +2329,7 @@ p {
 	height: 140px;
 	font-size: 16px;
 	line-height: 18px;
-	background: url(/images/side-pub-thread-btn-link.png) no-repeat;
+	/*background: url(/images/side-pub-thread-btn-link.png) no-repeat;*/
 	border-radius: 5px;
 	color: #fff;
 	top: 180px;
@@ -2778,7 +2779,7 @@ p {
 	width: 14px;
 	vertical-align: text-bottom;
 	margin-right: 5px;
-	background: url(/images/head_icons.png) no-repeat left -102px;
+	/*background: url(/images/head_icons.png) no-repeat left -102px;*/
 }
 
 .re-contentbox {
@@ -2823,7 +2824,7 @@ p {
 	display: block;
 	height: 36px;
 	width: 104px;
-	background: url(/images/head_icons.png) no-repeat -42px -125px;
+	/*background: url(/images/head_icons.png) no-repeat -42px -125px;*/
 }
 
 .re-style a.alipay span {
@@ -2855,7 +2856,7 @@ p {
 	height: 14px;
 	margin-right: 4px;
 	vertical-align: middle;
-	background: url(/images/head_icons.png) no-repeat left -75px;
+	/*background: url(/images/head_icons.png) no-repeat left -75px;*/
 }
 
 .re-gold a span {
@@ -2881,7 +2882,7 @@ p {
 	display: block;
 	right: 0;
 	top: -22px;
-	background: url(/images/head_icons.png) no-repeat -379px -1px;
+	/*background: url(/images/head_icons.png) no-repeat -379px -1px;*/
 }
 
 .re-style a.active,
@@ -2897,7 +2898,7 @@ p {
 	height: 15px;
 	right: -1px;
 	bottom: -1px;
-	background: url(/images/head_icons.png) no-repeat left -132px;
+	/*background: url(/images/head_icons.png) no-repeat left -132px;*/
 }
 
 .re-style a.active small,
@@ -2946,7 +2947,7 @@ p {
 	display: inline-block;
 	width: 14px;
 	height: 14px;
-	background: url(/images/head_icons.png) no-repeat -40px -75px;
+	/*background: url(/images/head_icons.png) no-repeat -40px -75px;*/
 	vertical-align: text-top;
 	cursor: pointer;
 	padding-right: 6px;
@@ -3290,4 +3291,37 @@ p {
 
 a{
     text-decoration: none;
+}
+
+/*head搜索框样式*/
+#searchinput{
+    width: 186px;
+    height: 28px;
+    padding: 0 6px 0 10px;
+    line-height: 28px;
+    font-size: 14px;
+    border: 1px solid #f90;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.search-submit-btn {
+    display: inline-block;
+    width: 75px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 3px;
+    color: #fff;
+    font-size: 16px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #f90;
+}
+.search-submit-btn .search-icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 17px;
+    height: 16px;
+    margin: 7px 4px 0 10px;
+    background: url(/content/image/search_icon_blue.png) no-repeat -286px -221px;
 }

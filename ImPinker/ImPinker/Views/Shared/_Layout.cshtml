@@ -27,6 +27,9 @@
         $(".search-submit").click(function () {
             search();
         });
+        $(".search-submit-btn").click(function () {
+            search();
+        });
         //回车
         $(document).keydown(function (event) {
             if (event.keyCode == 13) {
@@ -44,7 +47,8 @@
         
     });
     function search() {
-        var keyword = $("#searchterm").val();
+        //var keyword = $("#searchterm").val();
+        var keyword = $("#searchinput").val();
         var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
         if (keyword != null && keyword.length > 0) {
             window.open("/Search/Index?key=" + keyword + "&tab=" + tabStr,"_blank");

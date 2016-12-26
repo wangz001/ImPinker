@@ -8,8 +8,6 @@
             <ul class="header-row-1-col-2">
                 <li class="nav-shop" ms-controller="wrap">
                 @Html.ActionLink("旅行", "About", "Home")</li>
-                
-               
                 <li class="nav-interest">
                     <a href="/interest/home?isallinterest=1&amp;interestType=0&amp;creatorTime=2&amp;isEssence=0&amp;commentCountMax=0&amp;clickMax=0">兴趣</a>
                 </li>
@@ -25,9 +23,9 @@
 
             <div class="header-row-1-col-3">
                 <div class="search-box">
-                    <a href="javascript:;" class="search-btn" onclick="searchkey($('#keyword001'));"></a>
+                    <a href="javascript:;" class="search-btn" ></a>
                     <input type="hidden" id="keyword002" value="airx A7空气净化器">
-                    <input type="text" id="keyword001" placeholder="airx A7空气净化器" autocomplete="off">
+                    <input type="text" id="searchterm" placeholder="airx A7空气净化器" autocomplete="off">
                     <div class="search-record">
                         <span><em></em><i></i></span>
                         <div class="search-record-box">
@@ -46,17 +44,20 @@
 
             <a class="logo" href="/"></a>
             <ul class="navigator">
-                <li class="homepage"><a href="/index?topicId=0" style="color: rgb(33, 117, 208);">选题</a></li>
-                <li class="interestpage">
-                    <a href="/interest/home?isallinterest=1&amp;interestType=0&amp;creatorTime=2&amp;isEssence=0&amp;commentCountMax=0&amp;clickMax=0">兴趣</a>
+                <li>
+                    <form>
+                        <input type="text" id="searchinput" placeholder="airx A7空气净化器">
+                        <a class="search-submit-btn">
+                            <i class="search-icon"></i>
+                            搜索
+                        </a>
+                    </form>
                 </li>
+                
                 <li class="followpage"><a href="/concerns/myConcernsThreadList">关注的人</a></li>
                 <li class="rankpage"><a href="/rank/list">排行榜</a></li>
                 <li class="centerpage" style="border-right: 1px solid #dfdfdf; padding-right: 15px"><a href="/center/home">个人中心</a></li>
-                <a href="http://5x666.taobao.com" target="_blank" class="shop-btn">
-                    5X兴趣社区官方商店<em></em>
-                    <!-- <img src="/images/161111.jpg" style="width:210px;height:auto"/> -->
-                </a>
+                
             </ul>
             <div class="side-bar" style="bottom: 20px; opacity: 1; right: auto;">
                 @*<div class="down-app">
