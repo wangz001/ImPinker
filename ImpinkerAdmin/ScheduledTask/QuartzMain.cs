@@ -28,12 +28,13 @@ namespace GetCarDataService
             //上传图片
             IJobDetail jobOssImage = JobBuilder.Create<ArticleFirstImageUpload>()
                 .WithIdentity("ArticleFirstImageUpload", "group1")
+                //.StoreDurably(true)
                 .Build();
             ITrigger triggerOssImage = TriggerBuilder.Create()
                 .WithIdentity("trigger1", "group1")
                 .StartAt(runTime)
                 .WithPriority(1)
-                .WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever())
+                .WithSimpleSchedule(x => x.WithIntervalInMinutes(2).RepeatForever())
                 .Build();
             sched.ScheduleJob(jobOssImage, triggerOssImage);
             Common.WriteInfoLog("quartz——生成封面图服务");

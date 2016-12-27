@@ -289,6 +289,17 @@ namespace ImBLL
         {
             return dal.UpdateThread(vm);
         }
+    
+        /// <summary>
+        /// 修改文章状态
+        /// </summary>
+        /// <param name="articleStateEnum"></param>
+        public bool UpdateState(long articleId,ArticleStateEnum articleState)
+        {
+            var article = this.GetModelByCache(articleId);
+            article.State = (int)articleState;
+            return Update(article);
+        }
     }
 }
 
