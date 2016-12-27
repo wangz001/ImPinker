@@ -48,6 +48,7 @@ namespace ImPinker.Controllers
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
+            vm.Id = idInt.ToString();
             ViewBag.Article = vm;
             return View("Index");
         }

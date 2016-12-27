@@ -23,7 +23,7 @@ namespace ImBLL
         /// <param name="rowNum"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public List<ArticleComment> GetListsByArticleId(string articleId,int rowNum,int count)
+        public List<ArticleComment> GetListsByArticleId(long articleId,int rowNum,int count)
         {
             int totalcount;
             var ds= dal.GetListsByArticleId(articleId,rowNum,count,out totalcount);
@@ -42,7 +42,7 @@ namespace ImBLL
         /// <param name="count"></param>
         /// <param name="totalCount">总记录数，分页用</param>
         /// <returns></returns>
-        public List<ArticleCommentVm> GetCommentsWithToComments(string articleId, int rowNum, int count,out int totalCount)
+        public List<ArticleCommentVm> GetCommentsWithToComments(long articleId, int rowNum, int count,out int totalCount)
         {
             var returnList = new List<ArticleCommentVm>();
             var ds = dal.GetListsByArticleId(articleId, rowNum, count,out totalCount);

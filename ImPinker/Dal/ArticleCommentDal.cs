@@ -48,7 +48,7 @@ namespace ImDal
         /// <param name="count"></param>
         /// <param name="totalCount"></param>
         /// <returns></returns>
-        public DataSet GetListsByArticleId(string articleId, int pageNum, int count,out int totalCount)
+        public DataSet GetListsByArticleId(long articleId, int pageNum, int count,out int totalCount)
         {
             
             var sqlStr = @"

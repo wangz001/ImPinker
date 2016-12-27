@@ -53,7 +53,7 @@ namespace ImPinker.Controllers
         public ActionResult ArticleComment(ArticleViewModel articleViewModel)
         {
             int totalCount = 0;
-            var articleId = articleViewModel.Id;
+            var articleId = long.Parse(articleViewModel.Id);
             var commentLists = ArticleCommentBll.GetCommentsWithToComments(articleId, 1, 20,out totalCount);
             var usersDic = new Dictionary<int, Users>();
             foreach (var articleComment in commentLists)

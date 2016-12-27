@@ -3294,13 +3294,21 @@ a{
 }
 
 /*head搜索框样式*/
+.search-container{
+    float: left;
+    position: relative;
+    font-size: 16px;
+    margin-top: 45px;
+    margin-left: 300px;
+}
+
 #searchinput{
-    width: 186px;
-    height: 28px;
+    width: 216px;
+    height: 30px;
     padding: 0 6px 0 10px;
-    line-height: 28px;
-    font-size: 14px;
-    border: 1px solid #f90;
+    line-height: 30px;
+    font-size: 16px;
+    border: 1px solid #1d5cbb;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
@@ -3315,13 +3323,14 @@ a{
     font-size: 16px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #f90;
+    background-color: #1d5cbb;
 }
 .search-submit-btn .search-icon {
     display: inline-block;
     vertical-align: top;
-    width: 17px;
+    /*width: 17px;*/
     height: 16px;
     margin: 7px 4px 0 10px;
-    background: url(/content/image/search_icon_blue.png) no-repeat -286px -221px;
+    background: url(/content/image/search_icon.png) no-repeat 0px 0px;
 }
+a:hover{text-decoration:none;}
