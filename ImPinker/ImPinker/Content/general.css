@@ -2391,7 +2391,7 @@ p {
 #footer .left-footer .about {
 	background: #292b2d;
 	border-radius: 5px;
-	width: 300px;
+	width: 200px;
 	line-height: 42px;
 	text-align: center;
 }
@@ -2420,14 +2420,6 @@ p {
 	color: #2175d0;
 }
 
-#footer .left-footer .spark-logo {
-	width: 480px;
-	height: 48px;
-	background: url() no-repeat -184px -77px;
-	float: left;
-	margin-top: 20px;
-}
-
 #footer .left-footer .copyright {
 	clear: both;
 	padding-top: 15px;
@@ -2454,7 +2446,7 @@ p {
 #footer .right-footer {
 	float: right;
 	width: 160px;
-	height: 200px;
+	height: 160px;
 	position: relative;
 	word-spacing: 0px;
 }

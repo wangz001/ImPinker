@@ -210,6 +210,7 @@
     <Content Include="Content\about.css" />
     <Content Include="Content\image\arrow_next.png" />
     <Content Include="Content\image\arrow_pre.png" />
+    <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
     <Content Include="Content\image\search_icon_16.png" />
     <Content Include="Content\image\search_icon_32.png" />
     <Content Include="Content\image\logo_100.png" />

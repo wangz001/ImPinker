@@ -1,17 +1,20 @@
 ﻿<div id="footer">
     <div class="container">
         <div class="left-footer">
-            <ul class="nav navbar-nav">
-                <li> @DateTime.Now.Year - 转动科技-MyAutos </li>
+            <ul class="about">
+                @*<li> @DateTime.Now.Year - 转动科技-MyAutos </li>*@
                 <li> @Html.ActionLink("关于车酷", "About", "Home") </li>
-                <li>联系方式：qq：1127942005</li>
-                @*<li>@Html.ActionLink("联系方式", "Contact", "Home")</li>*@
+                <span class="line"></span>
+                <li>@Html.ActionLink("联系我们", "About", "Home")</li>
             </ul>
             <div class="clear"></div>
             <div class="copyright">
                 <span>©2016-2017 www.myautos.cn All Rights Reserved</span>
                 <span>Beijing MYCARS INTELLIGENCE Co.,Ltd.</span><span>京ICP备125698521639号-1</span><br>
             </div>
+        </div>
+        <div class="right-footer">
+            <img src="/content/image/qrcode_for_gh_7f5be927b079_258.jpg" style="width:155px;height:155px"/>
         </div>
     </div>
 </div>
