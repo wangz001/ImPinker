@@ -1,0 +1,60 @@
+﻿@charset "utf-8";
+/* CSS Document */
+#container{
+	background:none;
+	position:relative;
+	}
+.about-main{
+	margin:0 auto;
+	margin-top:20px;
+	width:748px;
+	padding:50px 50px 50px 50px;
+	background:#fff;
+	border-radius:10px;
+	border:1px solid #f4f4f4;
+	box-shadow:0px 2px 10px 2px #e8e8e8;
+	}
+
+.about-main dt{
+    padding: 20px 0 0 0;
+	padding-bottom:0px;
+	font-size:24px;
+	color:#cccccc;
+	}
+.about-main dt span{
+    display: block;
+    float: right;
+    font-size: 14px;
+    color: #2175d0;
+    margin-top: 14px;
+}
+
+.about-main dd{
+	font-size:14px;
+	line-height:21px;
+	}
+.about-main .article p{
+	color:#747474;
+	/*text-indent:2em;*/
+    line-height: 30px;
+    font-size: 14px;
+	}
+.about-main .article .weibo{
+	text-align:right;
+	padding-bottom:30px;
+	border-bottom:1px solid #ededed;	
+	}
+.about-main .article .app{
+	margin-top:50px;
+	}
+.about-main .icon{
+    width: 750px;
+    height: 250px;
+    overflow: hidden;
+}
+.about-main .icon img{
+    background-size: cover;
+    width: 750px;
+    height: 380px;
+    margin-top: -18px;
+}

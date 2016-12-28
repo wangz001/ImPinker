@@ -24,16 +24,19 @@
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".search-submit").click(function () {
-            search();
+        $(".search-btn").click(function () {
+            var keyword = $("#searchterm").val();
+            search(keyword);
         });
         $(".search-submit-btn").click(function () {
-            search();
+            var keyword = $("#searchinput").val();
+            search(keyword);
         });
         //回车
         $(document).keydown(function (event) {
             if (event.keyCode == 13) {
-                search();
+                var keyword = $("#searchinput").val();
+                search(keyword);
             }
         });
         //设置搜索框文本
@@ -46,9 +49,9 @@
 
         
     });
-    function search() {
+    //搜索
+    function search(keyword) {
         //var keyword = $("#searchterm").val();
-        var keyword = $("#searchinput").val();
         var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
         if (keyword != null && keyword.length > 0) {
             window.open("/Search/Index?key=" + keyword + "&tab=" + tabStr,"_blank");

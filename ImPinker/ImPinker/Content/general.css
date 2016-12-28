@@ -1,6 +1,6 @@
 html,
 body {
-	background: #E0EEE0;
+	background: #f3f2e8;
 	color: #666;
 	margin: 0;
 	padding: 0;
@@ -1623,10 +1623,11 @@ p {
 
 #header .header-row-1 .header-row-1-col-3 .search-box .search-btn {
 	display: inline-block;
-	background: url() no-repeat -127px -114px;
-	width: 24px;
-	height: 24px;
+	background: url("/content/image/search_icon_16.png");
+	width: 16px;
+	height: 16px;
 	margin-left: 12px;
+    margin-top: 3px;
 }
 
 #header .header-row-1 .header-row-1-col-3 input {
@@ -2217,6 +2218,7 @@ p {
 	z-index: 1001;
 	width: 50px;
 	margin-left: 1120px;
+    margin-bottom: 200px;
 	bottom: 20px;
 	transition: all 0.2s linear;
 }
@@ -2240,7 +2242,7 @@ p {
 
 .side-bar a i {
 	display: inline-block;
-	background-image: url();
+	background-image: url("/content/image/search_icon_32.png");
 	background-repeat: no-repeat;
 }
 
@@ -3328,9 +3330,9 @@ a{
 .search-submit-btn .search-icon {
     display: inline-block;
     vertical-align: top;
-    /*width: 17px;*/
+    width: 17px;
     height: 16px;
     margin: 7px 4px 0 10px;
-    background: url(/content/image/search_icon.png) no-repeat 0px 0px;
+    background: url("/content/image/search_icon_16.png");
 }
 a:hover{text-decoration:none;}

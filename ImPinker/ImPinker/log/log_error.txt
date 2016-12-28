@@ -1224,3 +1224,22 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
    在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-28 16:00:47,439 [33] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Home/Contact
+Referer:http://www.impinker.com/
+System.Web.Mvc.HttpAntiForgeryException (0x80004005): 所需的防伪 Cookie“__RequestVerificationToken”不存在。
+   在 System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
+   在 System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__16(AsyncCallback asyncCallback, Object asyncState)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
