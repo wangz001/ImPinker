@@ -76,7 +76,6 @@ namespace ImPinker.Controllers
         }
 
 
-        [AuthorizationFilter]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

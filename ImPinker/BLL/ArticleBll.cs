@@ -168,7 +168,6 @@ namespace ImBLL
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
-            var imgDomain = ConfigurationManager.AppSettings["ArtilceCoverImageDomain"];
             var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
             var ds = dal.GetIndexListByPage(pageNum, count);
@@ -181,10 +180,10 @@ namespace ImBLL
                     {
                         article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
                     }
-                    if (articleNameLists.Contains(article.ArticleName))
-                    {//去除标题重复的数据,解决fblife 同一文章发在不同域名的问题
-                        continue;
-                    }
+                    //if (articleNameLists.Contains(article.ArticleName))
+                    //{//去除标题重复的数据,解决fblife 同一文章发在不同域名的问题
+                    //    continue;
+                    //}
                     if (string.IsNullOrEmpty(article.CoverImage))
                     {
                         continue; //无图的不要
@@ -210,7 +209,7 @@ namespace ImBLL
                         Userid = article.UserId.ToString(),
                         Description = article.Description,
                         KeyWords = article.KeyWords,
-                        CoverImage = imgDomain + article.CoverImage,
+                        CoverImage = article.CoverImage,
                         Company = article.Company,
                         CreateTime = article.CreateTime
                     });

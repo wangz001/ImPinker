@@ -351,9 +351,9 @@ WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
         {
             var sql1 = new StringBuilder();
             sql1.Append("insert into Article(");
-            sql1.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime)");
+            sql1.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,PublishTime,CreateTime,UpdateTime)");
             sql1.Append(" values (");
-            sql1.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime)");
+            sql1.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@PublishTime,@CreateTime,@UpdateTime)");
             SqlParameter[] parameters1 =
 			{
 				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =model.ArticleName },
@@ -364,6 +364,7 @@ WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
 				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
 				new SqlParameter("@ConTent", SqlDbType.NVarChar){Value =model.Content },
 				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
+				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value =model.Createtime },
 				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime },
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.Updatetime},
 			};

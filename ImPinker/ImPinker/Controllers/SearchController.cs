@@ -21,7 +21,7 @@ namespace ImPinker.Controllers
             }
             if (dto.PageCount == 0)
             {
-                dto.PageCount = 10;
+                dto.PageCount = 32;
             }
             dto.IsHighLight = true;
             var searchvm = GetByPage(dto);

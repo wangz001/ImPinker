@@ -91,7 +91,7 @@ namespace ImPinker.Controllers
                 }
                 catch (Exception e)
                 {
-
+                    return Content("{ error:'" + e + "', msg:'" + "error" + "',imgurl:''}");
                 }
             }
             return Content("{ error:'" + "" + "', msg:'" + "ok" + "',imgurl:'" + limitPath.Replace(Server.MapPath("/"), "/") + "'}");

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "个人中心-EngineStart";
     var user = (Users)ViewBag.User;
+    var headImg = string.IsNullOrEmpty(user.ImgUrl) ? "/content/image/icon_head_90.png" : ImageUrlHelper.GetHeadImageUrl(user.ImgUrl,100);
     var articles = (List<Article>)ViewBag.Articles;
     <link href="~/Content/usercenter.css" rel="stylesheet" />
 }
@@ -26,7 +27,9 @@
             <div class="user-info-box">
                 <dl class="user-data">
                     <dt>
-                        <em class="headpic"><img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 100)" /></em>
+                        <a href="/UserCenter/UserSetting">
+                            <em class="headpic"><img src="@headImg" /></em>
+                        </a>
                         @*<i class="male-mid"></i>*@
                     </dt>
                     <dd>

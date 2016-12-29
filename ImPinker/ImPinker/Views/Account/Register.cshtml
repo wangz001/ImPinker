@@ -38,6 +38,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" id="sendCheckNum" class="btn btn-default" value="发送验证码" />
+                <span id="checkNumMess" style="display: none;color: red">验证码已发送，请注意查收</span>
             </div>
         </div>
         <div class="form-group">
@@ -110,7 +111,7 @@
                                 $("#errormessage").html(data.Description);
                                 $("#errormessage").show();
                             } else {
-                                //成功发送验证码
+                                $("#checkNumMess").show();
                             }
                         },
                         error: function (data) {
