@@ -232,7 +232,7 @@ namespace ImBLL
                 var tagsFacet = results.FacetFields["KeyWords"];
                 foreach (var f in tagsFacet)
                 {
-                    if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Value > 0)
+                    if (!string.IsNullOrEmpty(f.Key.Trim())&&f.Key.Trim().Count()>1 && f.Value > 0)
                     {
                         facetDicTag.Add(new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
                     }
@@ -483,7 +483,7 @@ namespace ImBLL
                 var tagsFacet = results.FacetFields["KeyWords"];
                 foreach (var f in tagsFacet)
                 {
-                    if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Value > 0)
+                    if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Key.Trim().Count() > 1 && f.Value > 0)
                     {
                         facetDicTag.Add(new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
                     }

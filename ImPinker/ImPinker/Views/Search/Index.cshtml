@@ -6,49 +6,54 @@
     <link href="~/Content/search.css" rel="stylesheet" />
 }
 <div id="containers" style="width: 1100px;margin:auto;">
-    <div class="crumb">当前位置：<a href="/">首页</a> &gt;  </div>
+    <div class="crumb">当前位置：<a href="javascript:;">搜索页</a>   </div>
     <div class="search-input">
-        <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
+        <div class="search-input-submit" style="position: relative">
+            <input id="keyword" name="keyword" type="text" value="越野" autocomplete="off">
+            <button class="blue-middle-button" onclick="searchKeyWord()">搜索</button>
+        </div>
+        
         共检索到 @Html.Raw(searchVm.TotalCount) 条相关结果
         <div class="search-btn-area">
-            <a href="javascript:;" class="current">筛选：</a>
-            @{
-                if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
-                {
-                    foreach (var i in searchVm.FacetSelected)
+                @{
+                    if (searchVm.FacetSelected != null && searchVm.FacetSelected.Count > 0)
                     {
-                        <a href="@i.Url">
-                            <i>@i.Name</i>&nbsp;&nbsp;
-                        </a>
+                        <i>已选条件：</i>
+                        foreach (var i in searchVm.FacetSelected)
+                        {
+                            <a href="@i.Url" class="selected">
+                                <i>@i.Name [X]</i>&nbsp;&nbsp;
+                            </a>
+                        }
                     }
                 }
-
-                if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
-                {
-                    foreach (var i in searchVm.FacetDicTag)
+                <br /><i>筛选：</i>
+                @{
+                    if (searchVm.FacetDicTag != null && searchVm.FacetDicTag.Count > 0)
                     {
-                        <a href="@i.Url">
-                            <i>@i.Name</i>
-                            <i style="color:red">[@i.Count]</i>
-                        </a>
+                        foreach (var i in searchVm.FacetDicTag)
+                        {
+                            <a href="@i.Url">
+                                <i>@i.Name</i>
+                                <i style="color:red">[@i.Count]</i>
+                            </a>
+                        }
+                    }
+                    if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
+                    {
+                        foreach (var i in searchVm.FacetDicDateTime)
+                        {
+                            <a href="@i.Url">
+                                <i>@i.Name</i>
+                                <i style="color:red">[@i.Count]</i>&nbsp;&nbsp;
+                            </a>
+                        }
                     }
                 }
-                if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
-                {
-                    foreach (var i in searchVm.FacetDicDateTime)
-                    {
-                        <a href="@i.Url">
-                            <i>@i.Name</i>
-                            <i>[@i.Count]</i>&nbsp;&nbsp;
-                        </a>
-                    }
-                }
-            }
-            <button class="blue-middle-button" onclick="searchKeyWord()">搜索</button>
         </div>
     </div>
 
-    <div class="search-interest">
+    @*<div class="search-interest">
         <div class="head">
             相关兴趣
         </div>
@@ -60,13 +65,13 @@
                     {
                         <a href="@i.Url">
                             <em>@i.Name</em>
-                            <em >[@i.Count]</em>&nbsp;&nbsp;
+                            <em>[@i.Count]</em>&nbsp;&nbsp;
                         </a>
                     }
                 }
             }
         </div>
-    </div>
+    </div>*@
 </div>
 
 <ul id="articleConten" class="search-thread-list" style="width: 1128px">

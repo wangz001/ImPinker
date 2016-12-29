@@ -224,7 +224,7 @@ namespace ImPinker.Controllers
                         Description = "",
                         Createtime = DateTime.Now,
                         Updatetime = DateTime.Now,
-                        State = ArticleStateEnum.Normal
+                        State = ArticleStateEnum.BeCheck
                     };
                     var flag = ArticleBll.AddThread(vm);
                     if (flag)
@@ -323,7 +323,7 @@ namespace ImPinker.Controllers
         {
             var userinfo = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
             var flag = ArticleBll.DeleteThread(userinfo.Id,articleId);
-            return RedirectToAction("Index","UserCenter");
+            return RedirectToAction("MyArticle","Article");
         }
         
 

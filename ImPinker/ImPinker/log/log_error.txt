@@ -1251,3 +1251,42 @@ System.Web.Mvc.HttpAntiForgeryException (0x80004005): 所需的防伪 Cookie“__Reque
 [Footer]
 [Header]
 [Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2016-12-29 16:37:26,019 [16] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/MyArticle
+Referer:http://www.impinker.com/UserCenter/UserSetting
+System.Exception: '<' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 754
+   在 ImDal.ArticleDal.GetMyListByPage(Int32 userid, Int32 pageNum, Int32 count) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\Article.cs:行号 316
+   在 ImBLL.ArticleBll.GetMyListByPage(Int32 userid, Int32 pageNum, Int32 count, Int32& totalaCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 153
+   在 ImPinker.Controllers.ArticleController.MyArticle(Nullable`1 pageIndex, Nullable`1 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 83
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

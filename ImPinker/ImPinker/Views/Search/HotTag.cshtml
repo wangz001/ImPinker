@@ -32,27 +32,23 @@
                 }
                 if (searchVm.FacetDicDateTime != null && searchVm.FacetDicDateTime.Count > 0)
                 {
-                    <hr/><i>按时间筛选:</i>
+                    <br/><i>时间:</i>
                     foreach (var i in searchVm.FacetDicDateTime)
                     {
                         <a href="@i.Url">
                             <i>@i.Name</i>
-                            <i>[@i.Count]</i>&nbsp;&nbsp;
+                            <i style="color:red">[@i.Count]</i>&nbsp;&nbsp;
                         </a>
                     }
                 }
             }
         </div>
-
     </div>
-
-   
     <div class="tag-name">
         <h2><strong>@Html.Raw(ViewBag.HotTag)</strong></h2>
         <i>共有 @Html.Raw(searchVm.TotalCount)篇文章</i>
     </div>
 </div>
-
 <ul id="articleConten" class="search-thread-list" style="width: 1128px">
     @Html.Partial("_Index_Article", searchVm.ArticleList)
 </ul>
@@ -68,7 +64,6 @@
         var pageNum = 1;
     </script>
     <script src="~/Scripts/Search/search.js"></script>
-    
 }
 
 

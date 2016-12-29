@@ -19,7 +19,7 @@
 	padding: 20px;
 }
 .search-input #keyword{
-    width:100%;
+    width:88%;
 	padding:0px 10px;
 	font-size: 24px;
 	line-height: 58px;
@@ -33,38 +33,39 @@
 	border-radius: 5px;
 }
 .search-input .search-btn-area {
-	margin-top: 10px;
+	margin-top: 0px;
 	height: auto;
 	overflow: auto;
 }
-.search-input .search-btn-area button{
+.search-input .search-input-submit button{
 	display: inline-block;
 	line-height: 36px;
+    height: 58px;
 	border: none;
 	width: 108px;
 	text-align: center;
 	color: #fff;
 	background: #2175d0;
-	font-size: 16px;
+	font-size: 24px;
 	float: right;
 	border-radius: 5px;
 	transition: all 0.2s linear;
 }
-.search-input .search-btn-area button:hover{
+.search-input .search-input-submit button:hover{
 	background: #449eff;
 }
-.search-input .search-btn-area button:active{
+.search-input .search-input-submit button:active{
 	background: #0058b8;
 }
 .search-input .search-btn-area a{
 	display: inline-block;
-	line-height: 20px;
+	line-height: 15px;
 	border: 1px solid #e3e6ee;
 	background: #fff;
 	font-size: 14px;
 	color: #999;
 	padding:  5px;
-	border-radius: 20px;
+	border-radius: 15px;
     margin: 5px 6px 5px 0;
     color: blue;
     text-decoration: none;
@@ -79,11 +80,27 @@
 	border-color: #0058b8;
 	color: #fff;
 }
-.search-input .search-btn-area .current{
-	border-color: #2175d0;
-	background: #2175d0;
-	color: #fff;
+/**已选筛选条件*/
+.search-input .search-btn-area .selected{
+	display: inline-block;
+	line-height: 15px;
+	border: 1px solid #e3e6ee;
+	background: #fff;
+	font-size: 14px;
+	color: #999;
+	padding:  5px;
+	border-radius: 15px;
+    margin: 5px 6px 5px 0;
+    color: red;
+    text-decoration: none;
 }
+.search-input .search-btn-area .selected:hover{
+	color: red;
+	background: #fff;
+	border-color: #fff;
+}
+
+
 .search-interest,
 .search-topic{
 	background: #fff;

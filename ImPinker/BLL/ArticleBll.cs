@@ -145,7 +145,7 @@ namespace ImBLL
             return dal.GetRecordCount(strWhere);
         }
         /// <summary>
-        /// 分页获取用户数据列表
+        /// 分页获取用户数据列表,包括已发布的,待审核,审核未通过d 
         /// </summary>
         public List<Article> GetMyListByPage(int userid, int pageNum, int count, out int totalaCount)
         {

@@ -14,7 +14,7 @@ namespace ImPinker.Common
         /// 获取头像url地址
         /// </summary>
         /// <param name="url">数据库保存的url</param>
-        /// <param name="size">尺寸（180，100，40）</param>
+        /// <param name="size">尺寸（180，100，40）0表示原图limit</param>
         /// <returns></returns>
         public static string GetHeadImageUrl(string url,int size)
         {
@@ -22,7 +22,7 @@ namespace ImPinker.Common
             {
                 if (!url.StartsWith("http://"))
                 {
-                    return Path.Combine(imgDomain, url.Replace("headimg/limit", "headimg/"+size));
+                    return Path.Combine(imgDomain, size==0 ? url : url.Replace("headimg/limit", "headimg/"+size));
                 }
                 else
                 {

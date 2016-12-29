@@ -47,6 +47,8 @@
                     {
                         foreach (var article in articles)
                         {
+                            var aritclestate = article.State != 1 ? (article.State == 2 ? "待审核" : "审核不通过") : "";
+                            var str = article.State != 1 ? "<a href=\"javascript:;\" class=\"usercenter-blue-btn thread-modify-btn\">" + aritclestate + "</a>" : "";
                 <li>
                     <a href="/Article/Index?id=@article.Id" class="img-box" target="_blank">
                         <span class="create-time">@article.CreateTime</span>
@@ -59,11 +61,12 @@
                     </h5>
                     <div class="thread-info">
                         <div class="thread-count">
-                            <span class="click-count"><i></i>64</span>
-                            <span class="comment-count"><i></i>1</span>
+                            <span class="click-count"><i></i>0</span>
+                            <span class="comment-count"><i></i>0</span>
                             <span class="praise-count"><i></i>0</span>
                         </div>
                         <div class="button-area">
+                            @Html.Raw(str)
                             <a href="/Article/UpdateThread?articleId=@article.Id" target="_blank" class="usercenter-blue-btn thread-modify-btn">修改</a>
                             <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" onclick="confirmDelete(@article.Id)">删除</a>
                         </div>

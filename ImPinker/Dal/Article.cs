@@ -301,10 +301,10 @@ namespace ImDal
             strSql.Append(" SELECT ROW_NUMBER() OVER (");
             strSql.Append("order by T.CreateTime desc");
             strSql.Append(")AS Row, T.*  from Article T ");
-            strSql.Append(" WHERE UserId=@UserId and state=1");
+            strSql.Append(" WHERE UserId=@UserId and state<>0");
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex ;");
-            strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state=1");
+            strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state<>0");
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
             var paras = new SqlParameter[]

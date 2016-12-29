@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link rel="icon" type="image/x-icon" href="/content/image/logo_100.png" />
-    <!-- 越野e族css start
-    <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/index/css/common.css?updatetime=201605052" />
-    <link rel="stylesheet" type="text/css" href="http://static.fblife.com/static/webnew/index/css/advert.css?updatetime=201605052" />
-     越野e族css end-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -22,39 +18,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".search-btn").click(function () {
-            var keyword = $("#searchterm").val();
-            search(keyword);
-        });
-        $(".search-submit-btn").click(function () {
-            var keyword = $("#searchinput").val();
-            search(keyword);
-        });
-        //回车
-        $(document).keydown(function (event) {
-            if (event.keyCode == 13) {
-                var keyword = $("#searchinput").val();
-                search(keyword);
-            }
-        });
-        //设置搜索框文本
-        var keys = $.getUrlParam("key");
-        var tabs = $("#tabList a[class='b_yaowen b_twolcur']").text();
-        if (keys != null && keys.length > 0) {
-            keys = keys.replace("," + tabs, "");
-            $("#searchterm").val(keys);
-        }
 
-        
-    });
-    //搜索
-    function search(keyword) {
-        //var keyword = $("#searchterm").val();
-        var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
-        if (keyword != null && keyword.length > 0) {
-            window.open("/Search/Index?key=" + keyword + "&tab=" + tabStr,"_blank");
-        }
-    }
-</script>

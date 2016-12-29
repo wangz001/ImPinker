@@ -3,7 +3,7 @@
     <div class="header-row-1">
         <div class="header-container">
             <div class="header-row-1-col-1">
-                @Html.ActionLink("MyAutos —— 爱车人的圈子", "Index", "Home", null, new { @class = "navbar-right" })
+                @Html.ActionLink("关于车酷", "Index", "Home", null, new { @class = "navbar-right" })
             </div>
             <ul class="header-row-1-col-2">
                 <li class="nav-shop" ms-controller="wrap">
@@ -18,13 +18,13 @@
                 <div class="user-info-box">
                     @Html.Partial("_LoginPartial")
                 </div>
-                <a href="#" target="_blank" class="xbshop-btn"><i></i>车库圈子</a>
+                @*<a href="#" target="_blank" class="xbshop-btn"><i></i>车库圈子</a>*@
             </div>
 
-            <div class="header-row-1-col-3">
+            @*<div class="header-row-1-col-3">
                 <div class="search-box">
                     <a href="javascript:;" class="search-btn" ></a>
-                    <input type="text" id="searchterm" placeholder="新疆自驾游" autocomplete="off">
+                    <input type="text" id="searchterm" placeholder="乌兰布统冬日自驾游" autocomplete="off">
                     <div class="search-record">
                         <span><em></em><i></i></span>
                         <div class="search-record-box">
@@ -32,8 +32,7 @@
                         </div>
                     </div>
                 </div>
-                
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="header-row-2">
@@ -41,7 +40,7 @@
             <a class="logo" href="/Home/Index"></a>
             <div>
                 <div class="search-container">
-                    <input type="text" id="searchinput" placeholder="新疆自驾游">
+                    <input type="text" id="searchinput" placeholder="乌兰布统冬日自驾游">
                     <a class="search-submit-btn">
                         <i class="search-icon"></i>
                         搜索
@@ -53,8 +52,7 @@
                     <li class="centerpage" ><a href="#">我的车库</a></li>
                 </ul>
             </div>
-            
-            <div class="side-bar" style="bottom: 20px; opacity: 1; right: auto;">
+            <div class="side-bar" style="bottom: 20px; opacity: 1; right: auto;display: none">
                 @*<div class="down-app">
                 <a href="/html/app.html" target="_blank" class="app">
                     <em>下载客户端</em>
@@ -81,9 +79,8 @@
         LoginState = false;
     }
     
-    //返回顶部按钮绑定事件
     $(document).ready(function () {
-
+        //返回顶部按钮绑定事件
         $(window).scroll(function () {
             var top = $(document).scrollTop();
             if (top > 300) {
@@ -92,6 +89,38 @@
                 $(".side-bar").fadeOut();
             }
         });
+        
+        //两个搜索框的事件绑定
+        $(".search-btn").click(function () {
+            var keyword = $("#searchterm").val();
+            search(keyword);
+        });
+        $(".search-submit-btn").click(function () {
+            var keyword = $("#searchinput").val();
+            search(keyword);
+        });
+        //回车
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                var keyword = $("#searchinput").val();
+                search(keyword);
+            }
+        });
+        //设置搜索框文本
+        var keys = $.getUrlParam("key");
+        var tabs = $("#tabList a[class='b_yaowen b_twolcur']").text();
+        if (keys != null && keys.length > 0) {
+            keys = keys.replace("," + tabs, "");
+            $("#searchterm").val(keys);
+        }
     });
 
+    //搜索
+    function search(keyword) {
+        //var keyword = $("#searchterm").val();
+        var tabStr = $("#tabList a[class='b_yaowen b_twolcur']").text();
+        if (keyword != null && keyword.length > 0) {
+            window.open("/Search/Index?key=" + keyword + "&tab=" + tabStr,"_blank");
+        }
+    }
 </script>
