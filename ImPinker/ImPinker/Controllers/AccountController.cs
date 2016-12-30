@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -134,6 +135,7 @@ namespace ImPinker.Controllers
         #region 手机验证码
         private bool Send(string phoneNum, string checkNum)
         {
+            string smsTemplateCode = ConfigurationManager.AppSettings["SmsTemplateCode"];
             const string url = "http://gw.api.taobao.com/router/rest";  //测试环境
             const string appkey = "23546735";
             const string secret = "5ccfde439d81c9ae0aeb2df33fa6421e";
@@ -144,7 +146,7 @@ namespace ImPinker.Controllers
             req.SmsFreeSignName = "车酷网";
             req.SmsParam = string.Format("{{checknum:'{0}'}}", checkNum);
             req.RecNum = phoneNum;
-            req.SmsTemplateCode = "SMS_29665035";
+            req.SmsTemplateCode = smsTemplateCode;
             AlibabaAliqinFcSmsNumSendResponse rsp = client.Execute(req);
             if (rsp.IsError)
             {

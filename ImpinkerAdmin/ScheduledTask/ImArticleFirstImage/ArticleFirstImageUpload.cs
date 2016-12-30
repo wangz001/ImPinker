@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Net.Configuration;
 using Common.AlyOssUtil;
 using Common.Logging;
 using Common.Utils;
@@ -44,53 +45,61 @@ namespace GetCarDataService.ImArticleFirstImage
             var articleList = articleBll.GetArticlesWithoutCoverImage();
             foreach (var article in articleList)
             {
-                //标志生成封面图是否成功
-                var isSuccess = false;
-                try
+                var flag=UpdateArticleImage(article,ref solrIndexList);
+            }
+            //更新索引
+            SolrNetSearchBll.AddIndex(solrIndexList);
+            Common.WriteInfoLog("本次处理文章数：" + solrIndexList.Count);
+            Console.WriteLine("本次处理文章数：" + solrIndexList.Count);
+        }
+
+        /// <summary>
+        /// 修改文章的封面图
+        /// </summary>
+        /// <param name="article"></param>
+        /// <param name="solrIndexList">待创建solr索引的article集合</param>
+        /// <returns></returns>
+        public static bool UpdateArticleImage(Article article,ref List<ArticleViewModel> solrIndexList)
+        {
+            //标志生成封面图是否成功
+            var isSuccess = false;
+            try
+            {
+                var articleSnap = articlesnapBll.GetModel(article.Id);
+                if (articleSnap != null && !string.IsNullOrEmpty(articleSnap.FirstImageUrl))
                 {
-                    var articleSnap = articlesnapBll.GetModel(article.Id);
-                    if (articleSnap != null && !string.IsNullOrEmpty(articleSnap.FirstImageUrl))
+                    var firstimageUrl = articleSnap.FirstImageUrl;
+                    var imgurl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), article.Id, DateTime.Now.Ticks);
+                    var flag = UploadToOss(firstimageUrl, imgurl);
+                    if (flag)
                     {
-                        var firstimageUrl = articleSnap.FirstImageUrl;
-                        var imgurl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), article.Id, DateTime.Now.Ticks);
-                        var flag = UploadToOss(firstimageUrl, imgurl);
-                        if (flag)
+                        var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
+                        if (!updateflag)
                         {
-                            var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
-                            if (!updateflag)
-                            {
-                                Common.WriteErrorLog("生成封面图错误：" + imgurl);
-                                continue;
-                            }
-                            var vm = new ArticleViewModel
-                            {
-                                Id = "travels_" + article.Id,
-                                ArticleName = article.ArticleName,
-                                Company = article.Company,
-                                CoverImage = imgurl,
-                                KeyWords = article.KeyWords,
-                                Description = article.Description,
-                                Content = new List<object> { articleSnap.Content },
-                                Url = article.Url,
-                                CreateTime = article.CreateTime,
-                                UpdateTime = article.UpdateTime,
-                                Userid = article.UserId.ToString()
-                            };
-                            solrIndexList.Add(vm);
-                            isSuccess = true;
+                            Common.WriteErrorLog("生成封面图错误：" + imgurl);
+                            return false;
                         }
-                        else
+                        var vm = new ArticleViewModel
                         {
-                            isSuccess = false;
-                            Common.WriteErrorLog("上传图片到oss错误：" + imgurl);
-                        }
+                            Id = "travels_" + article.Id,
+                            ArticleName = article.ArticleName,
+                            Company = article.Company,
+                            CoverImage = imgurl,
+                            KeyWords = article.KeyWords,
+                            Description = article.Description,
+                            Content = new List<object> { articleSnap.Content },
+                            Url = article.Url,
+                            CreateTime = article.CreateTime,
+                            UpdateTime = article.UpdateTime,
+                            Userid = article.UserId.ToString()
+                        };
+                        solrIndexList.Add(vm);
+                        isSuccess = true;
                     }
-                    
-                }
-                catch (Exception e)
-                {
-                    isSuccess = false;
-                    Common.WriteErrorLog("生成封面图服务exception:" + e);
+                    else
+                    {
+                        Common.WriteErrorLog("上传图片到oss错误：" + imgurl);
+                    }
                 }
                 if (!isSuccess)
                 {
@@ -98,10 +107,12 @@ namespace GetCarDataService.ImArticleFirstImage
                     articleBll.UpdateState(article.Id, ArticleStateEnum.BeCheck);
                 }
             }
-            //更新索引
-            SolrNetSearchBll.AddIndex(solrIndexList);
-            Common.WriteInfoLog("本次处理文章数：" + solrIndexList.Count);
-            Console.WriteLine("本次处理文章数：" + solrIndexList.Count);
+            catch (Exception e)
+            {
+                isSuccess = false;
+                Common.WriteErrorLog("生成封面图服务exception:" + e);
+            }
+            return isSuccess;
         }
 
         /// <summary>
