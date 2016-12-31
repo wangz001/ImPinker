@@ -50,7 +50,7 @@ namespace GetCarDataService.ImArticleFirstImage
             //更新索引
             SolrNetSearchBll.AddIndex(solrIndexList);
             Common.WriteInfoLog("本次处理文章数：" + solrIndexList.Count);
-            Console.WriteLine("本次处理文章数：" + solrIndexList.Count);
+            Console.WriteLine("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]本次处理文章数：" + solrIndexList.Count);
         }
 
         /// <summary>
