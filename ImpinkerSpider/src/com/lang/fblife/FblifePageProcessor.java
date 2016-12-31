@@ -12,6 +12,7 @@ import java.util.TimeZone;
 import javax.management.JMException;
 
 import org.apache.log4j.Logger;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -29,6 +30,7 @@ import com.lang.main.MyWebMagic;
 import com.lang.properties.AppProperties;
 import com.lang.util.RegexUtil;
 
+@DisallowConcurrentExecution
 public class FblifePageProcessor implements PageProcessor, Job {
 
 	/*
@@ -48,7 +50,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 			throws JobExecutionException {
 		logger.info("Fblife spider启动");
 		Spider spider = Spider.create(new FblifePageProcessor())
-				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline)
+				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline).setExitWhenComplete(true)
 				.thread(5);
 		try {
 			SpiderMonitor.instance().register(spider);

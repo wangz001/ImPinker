@@ -6,6 +6,7 @@ import java.util.List;
 import javax.management.JMException;
 
 import org.apache.log4j.Logger;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -22,6 +23,7 @@ import com.lang.main.MyWebMagic;
 import com.lang.properties.AppProperties;
 import com.lang.util.RegexUtil;
 
+@DisallowConcurrentExecution
 public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
