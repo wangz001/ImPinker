@@ -10,20 +10,24 @@
             var pages = Math.Ceiling(list.Count / 3.0);
             for (var i = 0; i < pages; i++)
             {
-                <div class="swiper-slide">
-                    @{
+                
                 for (var j = 0; j < 3; j++)
                 {
-                    if(i * 3 + j>=list.Count) {break;}
+                    if (i * 3 + j >= list.Count) { break; }
                     var vm = list[i * 3 + j];
-                    <a href="/Article/Index?id=@vm.Id" target="_blank">
-                        <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />
-                    </a>
+                    <div class="swiper-slide img-box">
+                        <a class="img-box" href="/Article/Index?id=@vm.Id" target="_blank">
+                            <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />
+                        </a>
+                        <div class="title-box">
+                                <label>@vm.ArticleName</label>
+                            </div>
+                    </div>
                 }
-                    }
-                </div>
+
+
             }
-        }
+}
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>

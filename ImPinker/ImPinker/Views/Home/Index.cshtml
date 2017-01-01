@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "车酷-MyAutos";
     <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet" />
-
+    <link href="~/Scripts/Swiper/css/myswiper.css" rel="stylesheet" />
 
 }
 <div class="dialog-layer" style="display: none;">
@@ -58,8 +58,10 @@
             mousewheelControl: true,
             loop: true,
             preventClicks : false,
-            autoplay: 2500,
-            autoplayDisableOnInteraction: false
+            autoplay: 4000,
+            autoplayDisableOnInteraction: false,
+            slidesPerView : 3,
+            slidesPerGroup : 3,
         });
     </script>
     <script src="~/Scripts/Home/index.js"></script>

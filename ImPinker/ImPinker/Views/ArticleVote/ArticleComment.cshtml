@@ -74,7 +74,7 @@
                                     @user2.UserName
                                 </a>
                                 @TUtil.DateFormatToString(tocomment.CreateTime)
-                                [ <b>31</b>楼 ]
+                                @*[ <b>31</b>楼 ]*@
                             </dt>
                             <dd>
                                 <p>
@@ -87,8 +87,8 @@
                 }
                     }
                     <dd class="comment-operate">
-                        <a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>
-                        | <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
+                        @*<a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>|*@
+                         <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
                     </dd>
                 </dl>
                 i ++;
