@@ -77,20 +77,7 @@ namespace Common.Utils
         {
             if (System.IO.File.Exists(oldImagePath))
             {
-                //处理JPG质量的函数
-                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-                ImageCodecInfo ici = null;
-                foreach (ImageCodecInfo codec in codecs)
-                {
-                    if (codec.MimeType == "image/jpeg")
-                    {
-                        ici = codec;
-                        break;
-                    }
-                }
-                var ep = new EncoderParameters();
-                const long level = 95L;
-                ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
+                
                 //通过连接创建Image对象
                 Image oldimage = Image.FromFile(oldImagePath);
                 var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempthumb.jpg";
@@ -100,14 +87,32 @@ namespace Common.Utils
                 }
                 oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
                 oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
-                var bm = new Bitmap(tempjpg);
-                var cutImg = bm.GetThumbnailImage(newW, newH, (ThumbnailCallback), IntPtr.Zero);
-                if (ici != null) cutImg.Save(newImagePath, ici, ep);
-                cutImg.Dispose();
-                bm.Dispose();
 
+                System.Drawing.Image image = System.Drawing.Image.FromFile(tempjpg); //利用Image对象装载源图像
+                //接着创建一个System.Drawing.Bitmap对象，并设置你希望的缩略图的宽度和高度。
+                int srcWidth = image.Width;
+                int srcHeight = image.Height;
+                int thumbWidth = newW;
+                int thumbHeight = newH;
+                Bitmap bmp = new Bitmap(thumbWidth, thumbHeight);
+                //从Bitmap创建一个System.Drawing.Graphics对象，用来绘制高质量的缩小图。
+                System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
+                //设置 System.Drawing.Graphics对象的SmoothingMode属性为HighQuality
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+                //下面这个也设成高质量
+                gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                //下面这个设成High
+                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+                //把原始图像绘制成上面所设置宽高的缩小图
+                System.Drawing.Rectangle rectDestination = new System.Drawing.Rectangle(0, 0, thumbWidth, thumbHeight);
+                gr.DrawImage(image, rectDestination, 0, 0, srcWidth, srcHeight, GraphicsUnit.Pixel);
+                //保存图像，大功告成！
+                bmp.Save(newImagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                //释放资源
+                bmp.Dispose();
+                image.Dispose();
             }
         }
-
+      
     }
 }

@@ -16,6 +16,11 @@ namespace GetCarDataService
     {
         private static void Main(string[] args)
         {
+
+            ///test
+            //ArticleFirstImageUpload.UploadToOss("aaa","");
+
+
             //appstart
             string solrServer = ConfigurationManager.AppSettings.Get("SolrServer");
             SolrNet.Startup.Init<ArticleViewModel>(solrServer);
