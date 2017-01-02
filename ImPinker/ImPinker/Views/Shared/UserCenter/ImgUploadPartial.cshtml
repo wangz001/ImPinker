@@ -41,6 +41,8 @@
         $("#imgFile").change(function () {
             ajaxFileUpload();
         });
+        var file = $("#imgFile");
+        
         $.ajaxFileUpload(
             {
                 url: '/Upload/Upload', //用于文件上传的服务器端请求地址
@@ -74,7 +76,7 @@
         var img = $("#photo")[0];
         var naturewidth = img.width;
         var natureheight = img.height;
-        if (naturewidth>=natureheight) {
+        if (naturewidth >= natureheight) {
             var t = windowWidth / naturewidth;
             x1 = Math.round(x1 / t);
             y1 = Math.round(y1 / t);
