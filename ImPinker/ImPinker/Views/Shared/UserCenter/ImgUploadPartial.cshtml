@@ -2,14 +2,20 @@
 @using ImPinker.Common
 @{
     var user = (Users)ViewBag.User;
+     <link href="~/Scripts/webUpload/webuploader.css" rel="stylesheet" />
+    <script src="~/Scripts/webUpload/webuploader.html5only.js"></script>
 }
 <link href="~/Content/imgselectarea.css" rel="stylesheet" />
 <link href="~/Scripts/Jcrop/jquery.Jcrop.css" rel="stylesheet" />
 <div class="imgcontainer" style="height:600px">
-    <a href="javascript:;" class="headpic_upload_button" onclick="savelogo()">保存</a>
-    <input id="imgFile" name="imgFile" type="file" style="width:100%" />
-    <div class="headpic_uploading">上传中</div>
-
+    <div id="uploader" class="wu-example">
+        <!--用来存放文件信息-->
+        <div class="btns">
+            <div id="picker">选择图片</div>
+            <div class="webuploader-pick" onclick="savelogo()">保存</div>
+        </div>
+        <div id="thelist" class="uploader-list"></div>
+    </div>
     <div id="original-img">
         <div class="frame" id="original-pic-box" style="position:relative">
             <img id="photo" src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 0)" style="display:block; position:relative" />
@@ -30,79 +36,65 @@
 
 </div>
 <script src="~/Scripts/Jcrop/jquery.Jcrop.js"></script>
-<script src="~/Scripts/ajaxfileupload.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $("#imgFile").change(function () {
-            ajaxFileUpload();
-        });
+    //上传封面图
+    var $ = jQuery,
+    $list = $('#thelist'),
+    $btn = $('#ctlBtn'),
+    state = 'pending';
+    var uploader = WebUploader.create({
+        // 选完文件后，是否自动上传。
+        auto: true,
+        // 文件接收服务端。
+        server: '/Upload/BaiduUpload',
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker',
+        method: 'POST',
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
     });
-    function ajaxFileUpload() {
-        $("#imgFile").change(function () {
-            ajaxFileUpload();
-        });
-        var file = $("#imgFile");
-        
-        $.ajaxFileUpload(
-            {
-                url: '/Upload/Upload', //用于文件上传的服务器端请求地址
-                type: "post",
-                secureuri: false, //一般设置为false
-                fileElementId: 'imgFile', //文件上传空间的id属性  <input type="file" id="file" name="file" />
-                dataType: 'json', //返回值类型 一般设置为json
-                success: function (data, status)  //服务器成功响应处理函数
-                {
-                    $("#preview180").attr("src", data.imgurl);
-                    $("#photo").attr("src", data.imgurl);
-                    bindJcrop();
-                },
-                error: function (data, status, e)//服务器响应失败处理函数
-                {
-                    alert(e);
-                }
-            }
-        );
-    }
+    // 当有文件被添加进队列的时候
+    uploader.on('fileQueued', function (file) {
+        $list.append('<div id="' + file.id + '" class="item">' +
+            '<h5 class="info">' + file.name + '</h5>' +
+            '<p class="state">等待上传...</p>' +
+        '</div>');
+    });
 
-    var cc;
-    function savelogo() {
-        var url = $("#photo").attr("src");
-        var x1 = cc.x;
-        var y1 = cc.y;
-        var x2 = cc.x2;
-        var y2 = cc.y2;
-        var windowWidth = 300;
-        //获取图片的实际宽高,计算实际截取的图大小
-        var img = $("#photo")[0];
-        var naturewidth = img.width;
-        var natureheight = img.height;
-        if (naturewidth >= natureheight) {
-            var t = windowWidth / naturewidth;
-            x1 = Math.round(x1 / t);
-            y1 = Math.round(y1 / t);
-            x2 = Math.round(x2 / t);
-            y2 = Math.round(y2 / t);
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function (file, percentage) {
+        var $li = $('#' + file.id),
+            $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<div class="progress progress-striped active">' +
+              '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+              '</div>' +
+            '</div>').appendTo($li).find('.progress-bar');
         }
-        $.ajaxFileUpload(
-            {
-                url: '/Upload/SaveJscropImg', //用于文件上传的服务器端请求地址
-                type: "post",
-                data: { path: url, x1: x1, y1: y1, x2: x2, y2: y2 },
-                secureuri: false, //一般设置为false
-                dataType: 'json', //返回值类型 一般设置为json
-                success: function (data, status)  //服务器成功响应处理函数
-                {
-                    $("#headimg").attr("src", data.imgurl);
-                    window.location.reload();
-                },
-                error: function (data, status, e)//服务器响应失败处理函数
-                {
-                    alert(e);
-                }
-            }
-        );
-    }
 
+        $li.find('p.state').text('上传中');
+
+        $percent.css('width', percentage * 100 + '%');
+    });
+
+
+    uploader.on('uploadSuccess', function (file, data) {
+        $('#' + file.id).find('p.state').text('图片上传成功');
+        $("#preview180").attr("src", data.fileName);
+        $("#photo").attr("src", data.fileName);
+        bindJcrop();
+    });
+
+    uploader.on('uploadError', function (file) {
+        $('#' + file.id).find('p.state').text('上传出错');
+    });
+
+    uploader.on('uploadComplete', function (file) {
+        $('#' + file.id).find('.progress').fadeOut();
+    });
 </script>
 <script type="text/javascript">
     function bindJcrop() {
@@ -135,5 +127,49 @@
             }
         };
 
+    }
+
+    var cc;
+    function savelogo() {
+        if (cc == null) {
+            alert("请选择区域");
+            return;
+        }
+
+        var url = $("#photo").attr("src");
+        var x1 = cc.x;
+        var y1 = cc.y;
+        var x2 = cc.x2;
+        var y2 = cc.y2;
+        var windowWidth = 300;
+        //获取图片的实际宽高,计算实际截取的图大小
+        var img = $("#photo")[0];
+        var naturewidth = img.width;
+        var natureheight = img.height;
+        if (naturewidth >= natureheight) {
+            var t = windowWidth / naturewidth;
+            x1 = Math.round(x1 / t);
+            y1 = Math.round(y1 / t);
+            x2 = Math.round(x2 / t);
+            y2 = Math.round(y2 / t);
+        }
+        $.ajax(
+            {
+                url: '/Upload/SaveJscropImg', //用于文件上传的服务器端请求地址
+                type: "post",
+                data: { path: url, x1: x1, y1: y1, x2: x2, y2: y2 },
+                secureuri: false, //一般设置为false
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (data, status)  //服务器成功响应处理函数
+                {
+                    $("#headimg").attr("src", data.imgurl);
+                    window.location.reload();
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        );
     }
 </script>

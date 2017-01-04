@@ -3,13 +3,15 @@
 @model dynamic
 
 @{
-    ViewBag.Title = "发新贴";
+    ViewBag.Title = "修改帖子";
     var article = (Article)ViewBag.Article;
     <link href="~/Content/thread.css" rel="stylesheet" />
+    <link href="~/Scripts/webUpload/webuploader.css" rel="stylesheet" />
+    <script src="~/Scripts/webUpload/webuploader.html5only.js"></script>
 }
 
 <div id="container">
-    <h5 class="crumb"><em>当前位置：</em><a href="/index">首页</a>&gt;<a href="../">话题列表</a>&gt;阅读话题</h5>
+    <h5 class="crumb"><em>当前位置：</em><a href="/index">个人中心</a>&gt;<a href="../">我的帖子</a>&gt;修改</h5>
     @using (Html.BeginForm("UpdateThread", "Article", FormMethod.Post))
     {
         <input type="hidden" name="ArticleId" value="@article.Id" />
@@ -18,11 +20,13 @@
             <script id="contain" name="Content" type="text/plain" style="width: 100%; height: 800px;">
             </script>
         </div>
-        <a href="javascript:;" id="pickfiles-img" style="position: relative; z-index: 1;">
-            上传封面图片
-            <input id="imgFile" name="imgFile" type="file" style="width: 100%;" />
-        </a>
-
+        <div id="uploader" class="wu-example">
+            <!--用来存放文件信息-->
+            <div class="btns">
+                <div id="picker">设置封面图</div>
+            </div>
+            <div id="thelist" class="uploader-list"></div>
+        </div>
         <img id="preview180" src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" style="width: 300px; height: 300px" />
         <input type="hidden" value="@article.CoverImage" name="Coverimage" id="imgPath" />
         <hr />
@@ -44,13 +48,12 @@
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/UeEditer/lang/zh-cn/zh-cn.js"></script>
-
-    <script src="~/Scripts/ajaxfileupload.js"></script>
+    <script src="~/Scripts/webUpload/uploadImg.js"></script>
     <script type="text/javascript">
         var content = "@Html.Raw(ViewBag.ArticleContent)";;
         $(document).ready(function () {
             var ue = UE.getEditor('contain');
-            ue.ready(function() {
+            ue.ready(function () {
                 ue.setContent(content);
             });
 
@@ -80,33 +83,6 @@
                 });
             });
         });
-
-        //上传封面图
-
-        function ajaxFileUpload() {
-            $("#imgFile").change(function () {
-                ajaxFileUpload();
-            });
-            $.ajaxFileUpload(
-                {
-                    url: '/Upload/Upload', //用于文件上传的服务器端请求地址
-                    type: "post",
-                    secureuri: false, //一般设置为false
-                    fileElementId: 'imgFile', //文件上传空间的id属性  <input type="file" id="file" name="file" />
-                    dataType: 'json', //返回值类型 一般设置为json
-                    success: function (data, status)  //服务器成功响应处理函数
-                    {
-                        $("#preview180").attr("src", data.imgurl);
-                        $("#imgPath").val(data.imgurl);
-                    },
-                    error: function (data, status, e)//服务器响应失败处理函数
-                    {
-                        alert(e);
-                    }
-                }
-            );
-        }
-
     </script>
 }
 

@@ -228,6 +228,10 @@
     <Content Include="Scripts\Swiper\js\swiper.jquery.umd.min.js" />
     <Content Include="Scripts\Swiper\js\swiper.js" />
     <Content Include="Scripts\Swiper\js\swiper.min.js" />
+    <Content Include="Scripts\webUpload\uploadImg.js" />
+    <Content Include="Scripts\webUpload\webuploader.css" />
+    <Content Include="Scripts\webUpload\webuploader.html5only.js" />
+    <Content Include="Scripts\webUpload\webuploader.js" />
     <Content Include="UeEditer\lang\en\en.js" />
     <Content Include="UeEditer\lang\en\images\addimage.png" />
     <Content Include="UeEditer\lang\en\images\alldeletebtnhoverskin.png" />
@@ -428,7 +432,6 @@
     <Content Include="UeEditer\themes\default\images\wordpaste.png" />
     <Content Include="UeEditer\themes\iframe.css" />
     <Content Include="Content\user_center_setup.css" />
-    <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\general.css" />

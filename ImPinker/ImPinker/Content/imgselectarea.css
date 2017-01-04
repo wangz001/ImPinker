@@ -57,7 +57,7 @@ body{
 #original-img{
 	width:300px;
 	height:300px;
-	background: url(../images/box_bg.jpg) no-repeat #e8f1fb;
+	background: url() no-repeat #e8f1fb;
 	border:1px solid #c8e0fb;
 	float:left;
 	position:relative;
@@ -169,7 +169,6 @@ max-width:300px;
 	text-align:center;
 	width:60px;
 	padding-left:20px;
-	background: url(../images/upload_ico.png) no-repeat 5px 5px #2175d0;
 	border:1px solid #1961af;
 	cursor:pointer;
 	margin-bottom:10px;
@@ -180,7 +179,6 @@ max-width:300px;
 	text-align:center;
 	width:60px;
 	padding-left:20px;
-	background: url(../images/upload_ico.png) no-repeat 5px 5px #eee;
 	border:1px solid #ccc;
 	margin-bottom:10px;	
 	display:none;

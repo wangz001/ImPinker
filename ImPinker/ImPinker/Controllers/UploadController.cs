@@ -45,6 +45,32 @@ namespace ImPinker.Controllers
             return Content("{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + imgurl + "'}");
         }
         /// <summary>
+        /// 百度webupload 上传图片
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult BaiduUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return Json(new { success = false });   
+            }
+            try
+            {
+                var fileName = "/Upload/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + file.FileName;
+                using (var flieStream = new FileStream(Server.MapPath("~/")+fileName, FileMode.Create))
+                {
+                    file.InputStream.CopyTo(flieStream);
+                }
+                return Json(new { success = true, fileName = fileName }); 
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, errormes = e }); 
+            }
+        }
+        /// <summary>
         ///  保存裁剪过后的图片
         /// </summary>
         /// <param name="path">图片url</param>
@@ -65,8 +91,10 @@ namespace ImPinker.Controllers
                 try
                 {
                     var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+                    //保存到数据库中的路径和oss的路径
                     var limitimgUrl = string.Format(headImageLimit, DateTime.Now.ToString("yyyyMMdd"), userId, DateTime.Now.ToString("yyyyMMddHHmmss"));
-                    limitPath = (Server.MapPath("/") + limitimgUrl);
+                    //本地路径
+                    limitPath = (Server.MapPath("/Upload/") + limitimgUrl);
                     //裁切图片
                     ImageUtils.ImgReduceCutOut(x1, y1, x2 - x1, y2 - y1, sourcepath, limitPath);
                     var flag=UploadToOss(limitPath, limitimgUrl);
@@ -74,10 +102,10 @@ namespace ImPinker.Controllers
                     int[] imgSize = {180,100,40};
                     foreach (var size in imgSize)
                     {
-                        var tempimgUrl = limitimgUrl.Replace("headimg/limit", "headimg/" + size);
-                        var tempimgPath = (Server.MapPath("/") + tempimgUrl);
+                        var saveimgUrl = limitimgUrl.Replace("headimg/limit", "headimg/" + size);
+                        var tempimgPath = limitPath.Replace("headimg/limit", "headimg/" + size);
                         ImageUtils.ThumbnailImage(limitPath, tempimgPath, size, size, ImageFormat.Jpeg);
-                        flag=UploadToOss(tempimgPath, tempimgUrl);
+                        flag=UploadToOss(tempimgPath, saveimgUrl);
                         if (!flag)
                         {
                             //error
@@ -91,10 +119,10 @@ namespace ImPinker.Controllers
                 }
                 catch (Exception e)
                 {
-                    return Content("{ error:'" + e + "', msg:'" + "error" + "',imgurl:''}");
+                    return Json(new { success = false, errormes = e }); 
                 }
             }
-            return Content("{ error:'" + "" + "', msg:'" + "ok" + "',imgurl:'" + limitPath.Replace(Server.MapPath("/"), "/") + "'}");
+            return Json(new { success = true, fileName = limitPath.Replace(Server.MapPath("/"), "/") }); 
         }
         
         /// <summary>
