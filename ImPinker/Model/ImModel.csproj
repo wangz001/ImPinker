@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="ArticleComment.cs" />
+    <Compile Include="ArticleCommentVote.cs" />
     <Compile Include="ArticleSnaps.cs" />
     <Compile Include="ArticleTag.cs" />
     <Compile Include="ArticleVote.cs" />

@@ -219,6 +219,7 @@
     <Content Include="Content\image\search_icon.png" />
     <Content Include="Content\image\search_icon_blue.png" />
     <Content Include="Content\pubthread.css" />
+    <Content Include="Scripts\ArticleVote\articleCommentVote.js" />
     <Content Include="Scripts\Swiper\css\myswiper.css" />
     <Content Include="Scripts\Swiper\css\swiper.css" />
     <Content Include="Scripts\Swiper\css\swiper.min.css" />

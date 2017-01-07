@@ -18,7 +18,10 @@ namespace ImPinker.Controllers
         private static readonly UserBll UserBll = new UserBll();
         private static readonly ArticleVoteBll ArticleVoteBll = new ArticleVoteBll();
         private static readonly ArticleCommentBll ArticleCommentBll = new ArticleCommentBll();
+        private static readonly ArticleCommentVoteBll ArticleCommentVoteBll = new ArticleCommentVoteBll();
 
+        
+        #region 文章点赞
         //
         // GET: /ArticleVote/
         public string Index()
@@ -44,6 +47,9 @@ namespace ImPinker.Controllers
             return "success";
         }
 
+        #endregion 
+
+        #region 文章评论
 
         /// <summary>
         /// 文章评论
@@ -128,5 +134,31 @@ namespace ImPinker.Controllers
                 Data = ""
             });
         }
+
+        #endregion
+
+        #region 给文章的评论点赞
+        [AuthorizationFilter]
+        [HttpPost]
+        public ActionResult ArticleCommentVote(int commentId,int vote)
+        {
+            var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+
+            if (commentId > 0)
+            {
+                var model = new ArticleCommentVote()
+                {
+                    ArticleCommentId = commentId,
+                    UserId = userId,
+                    Vote = vote > 0,
+                    CreateTime=DateTime.Now,
+                    UpdateTime=DateTime.Now
+                };
+                return ArticleCommentVoteBll.AddVote(model) ? Json("success") : Json("error");
+            }
+            return Json("success");
+        }
+
+        #endregion
     }
 }

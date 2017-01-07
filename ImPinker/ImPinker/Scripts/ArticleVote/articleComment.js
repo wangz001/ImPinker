@@ -46,4 +46,7 @@ $(document).ready(function () {
             }
         });
     });
+
+    //给评论点赞
+    bindArticleCommentVote();
 });
