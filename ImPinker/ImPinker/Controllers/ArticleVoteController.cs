@@ -61,6 +61,7 @@ namespace ImPinker.Controllers
             int totalCount = 0;
             var articleId = long.Parse(articleViewModel.Id);
             var commentLists = ArticleCommentBll.GetCommentsWithToComments(articleId, 1, 20,out totalCount);
+
             var usersDic = new Dictionary<int, Users>();
             foreach (var articleComment in commentLists)
             {
@@ -76,7 +77,7 @@ namespace ImPinker.Controllers
             ViewBag.TotalCount = totalCount;
             return PartialView("ArticleComment");
         }
-
+        
         /// <summary>
         /// 提交评论
         /// </summary>
@@ -154,7 +155,13 @@ namespace ImPinker.Controllers
                     CreateTime=DateTime.Now,
                     UpdateTime=DateTime.Now
                 };
-                return ArticleCommentVoteBll.AddVote(model) ? Json("success") : Json("error");
+                var flag = ArticleCommentVoteBll.AddVote(model);
+                return Json(new AjaxReturnViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "该手机号码已被注册，请直接登录",
+                    Data = commentId
+                });
             }
             return Json("success");
         }

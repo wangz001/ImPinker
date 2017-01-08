@@ -52,13 +52,14 @@ namespace ImDal
         {
             
             var sqlStr = @"
-SELECT  *
-FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.createtime DESC ) AS row ,
+SELECT  tt.Id,tt.ArticleId,tt.UserId,tt.ToCommentId,tt.Content,tt.CreateTime,count(acv.articlecommentid) as CommentVoteCount
+ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.createtime DESC ) AS row ,
                     T.*
           FROM      ArticleComment T
           WHERE     T.articleid = @articleid
-        ) TT
-WHERE   TT.row BETWEEN @startIndex AND @endIndex
+        ) TT left join ArticleCommentVote acv on tt.id=acv.articlecommentid 
+ WHERE   TT.row BETWEEN @startIndex AND @endIndex
+ group by tt.Id,tt.ArticleId,tt.UserId,tt.ToCommentId,tt.Content,tt.CreateTime
 ";
 
             var sqlStr2 = new StringBuilder();
@@ -150,5 +151,7 @@ WHERE   TT.row BETWEEN @startIndex AND @endIndex
             }
             return list;
         }
+
+       
     }
 }

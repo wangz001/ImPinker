@@ -12,7 +12,9 @@ function bindArticleCommentVote() {
             type: "post",
             data: { commentId: commentId, vote: 1 },
             success: function (data) {
-                alert("点赞成功");
+                var count = new Number($("em[commentid='" + data.Data + "']").text());
+                
+                $("em[commentid='" + data.Data + "']").html(count+1);
             },
             error: function (data) {
                 alert(data);

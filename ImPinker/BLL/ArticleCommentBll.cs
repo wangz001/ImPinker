@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ImDal;
 using ImModel;
 using ImModel.ViewModel;
+using System.Data;
 
 namespace ImBLL
 {
@@ -46,35 +47,52 @@ namespace ImBLL
         {
             var returnList = new List<ArticleCommentVm>();
             var ds = dal.GetListsByArticleId(articleId, rowNum, count,out totalCount);
-            var list1 = new List<ArticleComment>();
-            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
-            {
-                list1 = dal.DtToList(ds.Tables[0]);
-            }
-            var list2 = new List<ArticleComment>();
+            var listToComment = new List<ArticleComment>();
             if (ds != null && ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
             {
-                list2 = dal.DtToList(ds.Tables[1]);
+                listToComment = dal.DtToList(ds.Tables[1]);
             }
-
-            foreach (var articleComment in list1)
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                var model = new ArticleCommentVm()
+                foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    Id = articleComment.Id,
-                    ArticleId = articleComment.ArticleId,
-                    Content = articleComment.Content,
-                    ToCommentId = articleComment.ToCommentId,
-                    UserId = articleComment.UserId,
-                    CreateTime = articleComment.CreateTime
-                };
-                if (articleComment.ToCommentId>0)
-                {
-                    model.ListToComment = new List<ArticleComment>(){list2.FirstOrDefault(m => m.Id == articleComment.ToCommentId)};
+                    var model = new ArticleCommentVm();
+
+                    if (row["Id"] != null && row["Id"].ToString() != "")
+                    {
+                        model.Id = long.Parse(row["Id"].ToString());
+                    }
+                    if (row["ArticleId"] != null)
+                    {
+                        model.ArticleId = long.Parse(row["ArticleId"].ToString());
+                    }
+                    if (row["UserId"] != null)
+                    {
+                        model.UserId = int.Parse(row["UserId"].ToString());
+                    }
+                    if (row["Content"] != null)
+                    {
+                        model.Content = row["Content"].ToString();
+                    }
+                    if (row["ToCommentId"] != null && row["ToCommentId"].ToString() != "")
+                    {
+                        model.ToCommentId = int.Parse(row["ToCommentId"].ToString());
+                    }
+                    if (row["CreateTime"] != null && row["CreateTime"].ToString() != "")
+                    {
+                        model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
+                    }
+                    if (row["CommentVoteCount"] != null && row["CommentVoteCount"].ToString() != "")
+                    {
+                        model.ArticleCommentVoteCount = int.Parse(row["CommentVoteCount"].ToString());
+                    }
+                    model.ListToComment = new List<ArticleComment>() { listToComment.FirstOrDefault(m => m.Id == model.ToCommentId) };
+                    returnList.Add(model);
                 }
-                returnList.Add(model);
             }
+            
             return returnList;
         }
+        
     }
 }

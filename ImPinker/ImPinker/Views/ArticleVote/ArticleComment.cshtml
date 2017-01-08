@@ -23,18 +23,19 @@
         {
             <h3>
                 <i class="shadow-left"></i>
-                全部评论
+                热门评论
                 <i class="shadow-right"></i>
-                <div class="comment-order">
-                    <a href="javascript:;" class="latest current">最新</a>
-                    <a href="javascript:;" class="ordest">最旧</a>
-                    <a href="javascript:;" class="hottest">最热</a>
-                </div>
-            </h3><div class="all-comment" id="commentContent">
-                     @{
-                         var i = 0;
-            foreach (var comment in commentLists)
+            </h3>
+            <div class="all-comment">
+                @{
+
+            var hotComment = commentLists.OrderByDescending(m => m.ArticleCommentVoteCount).Take(5).ToList();
+            foreach (var comment in hotComment)
             {
+                if (comment.ArticleCommentVoteCount == 0)
+                {
+                    continue;
+                }
                 var userid = comment.UserId;
                 var user = usersDic[userid];
                 <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
@@ -48,8 +49,8 @@
                             </em>
                         </a>
                         <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
-                        <span class="floor">[ <b>@(totalcount-i)</b>楼 ]</span>
-                        <a href="javascript:;" class="up-btn white-button" commentid="@comment.Id">顶(<em>0</em>)</a>
+                        <span class="floor">[ <b></b>楼 ]</span>
+                        <a href="javascript:;" class="up-btn white-button" commentid="@comment.Id">顶(<em commentid="@comment.Id">@comment.ArticleCommentVoteCount</em>)</a>
                     </dt>
                     <dd class="comment-content">
                         <p>
@@ -88,10 +89,87 @@
                     }
                     <dd class="comment-operate">
                         @*<a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>|*@
-                         <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
+                        <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
                     </dd>
                 </dl>
-                i ++;
+            }
+
+                }
+            </div>
+        }
+        if (commentLists.Count > 0)
+        {
+            <h3>
+                <i class="shadow-left"></i>
+                全部评论
+                <i class="shadow-right"></i>
+                <div class="comment-order">
+                    <a href="javascript:;" class="latest current">最新</a>
+                    <a href="javascript:;" class="ordest">最旧</a>
+                    <a href="javascript:;" class="hottest">最热</a>
+                </div>
+            </h3><div class="all-comment" id="commentContent">
+                @{
+            var i = 0;
+            foreach (var comment in commentLists)
+            {
+                var userid = comment.UserId;
+                var user = usersDic[userid];
+                <dl commentid="@comment.Id" class="comment-list" iscurrentpage="false">
+                    <dt>
+                        <a href="/lookat/home?userId=151404" class="user" target="_blank">
+                            <i style="background-image: url(@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40));background-repeat: no-repeat;">
+                                <b class="male-small"></b>
+                            </i>
+                            <em>
+                                @user.UserName
+                            </em>
+                        </a>
+                        <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
+                        <span class="floor">[ <b>@(totalcount - i)</b>楼 ]</span>
+                        <a href="javascript:;" class="up-btn white-button" commentid="@comment.Id">顶(<em commentid="@comment.Id">@comment.ArticleCommentVoteCount</em>)</a>
+                    </dt>
+                    <dd class="comment-content">
+                        <p>
+                            @comment.Content
+                        </p>
+                    </dd>
+                    @{
+                if (comment.ListToComment != null && comment.ListToComment.Count > 0)
+                {
+                    var tocomment = comment.ListToComment[0];
+                    if (tocomment != null)
+                    {
+                        var user2 = usersDic[tocomment.UserId];
+
+                        <dl class="quote">
+                            @*<a href="javascript:;" class="open-dialog">查看对话</a>*@
+                            <dt>
+                                <a href="/lookat/home?userId=148524" class="head-pic" target="_blank">
+                                    <i class="head-img" style="background-image: url(@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40)); background-repeat: no-repeat;">
+                                        <b class="male-small"></b>
+                                    </i>
+                                    @user2.UserName
+                                </a>
+                                @TUtil.DateFormatToString(tocomment.CreateTime)
+                                @*[ <b>31</b>楼 ]*@
+                            </dt>
+                            <dd>
+                                <p>
+                                    @tocomment.Content
+                                </p>
+                            </dd>
+                        </dl>
+                    }
+
+                }
+                    }
+                    <dd class="comment-operate">
+                        @*<a href="javascript:;" commentid="2435005" threadid="112575" userid="151404" type="2" class="report-btn">举报</a>|*@
+                        <a href="javascript:;" commentid="@comment.Id" articleid="@comment.ArticleId" class="reply-btn">回复</a>
+                    </dd>
+                </dl>
+                i++;
             }
             if (totalcount > 20)
             {

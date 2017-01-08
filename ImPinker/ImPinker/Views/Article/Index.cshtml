@@ -59,9 +59,11 @@
         </div>
 
         <!--评论区-->
-        @{
-            Html.RenderAction("ArticleComment", "ArticleVote", article);
-        }
+        <div id="commentarea">
+            @{
+                Html.RenderAction("ArticleComment", "ArticleVote", article);
+            }
+        </div>
     </div>
     <!--右侧区域-->
     <div class="thread-right">
