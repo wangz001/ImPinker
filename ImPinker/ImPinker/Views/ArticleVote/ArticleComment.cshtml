@@ -49,8 +49,7 @@
                             </em>
                         </a>
                         <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
-                        <span class="floor">[ <b></b>楼 ]</span>
-                        <a href="javascript:;" class="up-btn white-button" commentid="@comment.Id">顶(<em commentid="@comment.Id">@comment.ArticleCommentVoteCount</em>)</a>
+                        <a href="javascript:;" class="up-btn white-button" onclick="ArticleCommentVote(this,@comment.Id,@comment.ArticleCommentVoteCount)">顶(<em>@comment.ArticleCommentVoteCount</em>)</a>
                     </dt>
                     <dd class="comment-content">
                         <p>
@@ -105,8 +104,8 @@
                 <i class="shadow-right"></i>
                 <div class="comment-order">
                     <a href="javascript:;" class="latest current">最新</a>
-                    <a href="javascript:;" class="ordest">最旧</a>
-                    <a href="javascript:;" class="hottest">最热</a>
+                    @*<a href="javascript:;" class="ordest">最旧</a>
+                    <a href="javascript:;" class="hottest">最热</a>*@
                 </div>
             </h3><div class="all-comment" id="commentContent">
                 @{
@@ -127,7 +126,7 @@
                         </a>
                         <span class="create-time">@TUtil.DateFormatToString(comment.CreateTime)</span>
                         <span class="floor">[ <b>@(totalcount - i)</b>楼 ]</span>
-                        <a href="javascript:;" class="up-btn white-button" commentid="@comment.Id">顶(<em commentid="@comment.Id">@comment.ArticleCommentVoteCount</em>)</a>
+                        <a href="javascript:;" onclick="ArticleCommentVote(this,@comment.Id,@comment.ArticleCommentVoteCount)" class="up-btn white-button">顶(<em>@comment.ArticleCommentVoteCount</em>)</a>
                     </dt>
                     <dd class="comment-content">
                         <p>

@@ -336,3 +336,39 @@ System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerU
 [Footer]
 [Header]
 [Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2017-01-09 21:02:57,784 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/ArticleVote/ArticleCommentVote
+Referer:http://www.impinker.com/Article/Index?id=57176
+System.Data.SqlClient.SqlException (0x80131904): 违反了 UNIQUE KEY 约束 'IX_ArticleCommentVote'。不能在对象 'dbo.ArticleCommentVote' 中插入重复键。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.ArticleCommentVoteDal.AddVote(ArticleCommentVote model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\ArticleCommentVoteDal.cs:行号 39
+   在 ImBLL.ArticleCommentVoteBll.AddVote(ArticleCommentVote model) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleCommentVoteBll.cs:行号 16
+   在 ImPinker.Controllers.ArticleVoteController.ArticleCommentVote(Int32 commentId, Int32 vote) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleVoteController.cs:行号 158
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+ClientConnectionId:4bd6701d-d508-462c-99a4-c3794fb3a011
+Error Number:2627,State:1,Class:14
+[Footer]
+[Header]
+[Footer]

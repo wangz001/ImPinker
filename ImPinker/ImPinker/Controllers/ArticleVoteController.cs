@@ -156,14 +156,22 @@ namespace ImPinker.Controllers
                     UpdateTime=DateTime.Now
                 };
                 var flag = ArticleCommentVoteBll.AddVote(model);
-                return Json(new AjaxReturnViewModel
+                if (flag)
                 {
-                    IsSuccess = 1,
-                    Description = "该手机号码已被注册，请直接登录",
-                    Data = commentId
-                });
+                    return Json(new AjaxReturnViewModel
+                    {
+                        IsSuccess = 1,
+                        Description = "",
+                        Data = commentId
+                    });
+                }
             }
-            return Json("success");
+            return Json(new AjaxReturnViewModel
+            {
+                IsSuccess = 0,
+                Description = "error",
+                Data = commentId
+            });
         }
 
         #endregion

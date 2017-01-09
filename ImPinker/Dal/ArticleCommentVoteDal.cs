@@ -46,5 +46,23 @@ INSERT INTO [dbo].[ArticleCommentVote]
                 return false;
             }
         }
+        /// <summary>
+        /// 判断是否存在
+        /// </summary>
+        /// <param name="articleCommentId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool IsExist(long articleCommentId, int userId)
+        {
+            var sql = @"
+select Id from ArticleCommentVote where ArticleCommentId=@ArticleCommentId and UserId=@UserId
+";
+            SqlParameter[] parameters = {
+					new SqlParameter("@ArticleCommentId", System.Data.SqlDbType.BigInt,8){Value =articleCommentId},
+					new SqlParameter("@UserId", SqlDbType.Int){Value = userId}};
+
+            var flag = DbHelperSQL.Exists(sql,parameters);
+            return flag;
+        }
     }
 }

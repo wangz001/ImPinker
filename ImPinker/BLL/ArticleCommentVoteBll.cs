@@ -11,9 +11,33 @@ namespace ImBLL
     {
         private static ArticleCommentVoteDal articleCommentVoteDal = new ArticleCommentVoteDal();
 
-        public static bool AddVote(ImModel.ArticleCommentVote model)
+        /// <summary>
+        /// 添加赞。articleCommentId，UserId 唯一性约束
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddVote(ImModel.ArticleCommentVote model)
         {
+            if (IsExist(model.ArticleCommentId, model.UserId))
+            {
+                return false;
+            }
             return articleCommentVoteDal.AddVote(model);
+        }
+        /// <summary>
+        /// 判断对象是否存在
+        /// </summary>
+        /// <param name="articleCommentId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool IsExist(long articleCommentId, int userId)
+        {
+            var flag = false;
+            if (articleCommentId > 0 && userId > 0)
+            {
+                flag = articleCommentVoteDal.IsExist(articleCommentId, userId);
+            }
+            return flag;
         }
     }
 }
