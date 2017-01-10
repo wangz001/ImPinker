@@ -373,37 +373,12 @@ Error Number:2627,State:1,Class:14
 [Header]
 [Footer]
 [Header]
-2017-01-10 10:47:17,518 [10] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/Home/Contact
-Referer:
-System.Web.Mvc.HttpAntiForgeryException (0x80004005): 所需的防伪 Cookie“__RequestVerificationToken”不存在。
-   在 System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
-   在 System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__16(AsyncCallback asyncCallback, Object asyncState)
 [Footer]
 [Header]
-2017-01-10 11:02:27,983 [25] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://www.impinker.com/Home/Contact
-Referer:
-System.Web.HttpParseException (0x80004005): “-”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
-
-   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
-   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
-   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
-   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
-   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
-   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
-   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
-   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
-   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
-   在 System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
-   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
-   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
-   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
-   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
 [Footer]

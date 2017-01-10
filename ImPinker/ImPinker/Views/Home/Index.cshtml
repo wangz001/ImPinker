@@ -5,15 +5,6 @@
     <link href="~/Scripts/Swiper/css/myswiper.css" rel="stylesheet" />
 
 }
-<div class="dialog-layer" style="display: none;">
-    <div id="dialog" style="top: 200px;">
-        <p>点赞成功！</p>
-        <div class="button-box">
-            <a href="javascript:;" class="cancel" style="display: none;">取消</a>
-            <a href="javascript:;" class="confirm" style="border-color: rgb(33, 117, 208); background: rgb(33, 117, 208);">确定</a>
-        </div>
-    </div>
-</div>
 @{
     Html.RenderAction("SlideSwiper");
 }
@@ -45,7 +36,7 @@
             //点赞选中事件
             bindVote();
 
-            
+
         });
         //首页轮播图初始化
         var swiper = new Swiper('.swiper-container', {

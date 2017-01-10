@@ -13,13 +13,10 @@ function bindVote() {
             type: "get",
             data: { articleId: articleId, vote: 1 },
             success: function (data) {
-                $(".dialog-layer").show();
-                $(".confirm").bind('click', function () {
-                    $(".dialog-layer").hide();
-                });
+                showTips("谢谢点赞~~~~~", 1500, 1);
             },
             error: function (data) {
-                alert(data);
+                showTips("Sorry，系统出错了~", 1500, 0);
             }
         });
     });

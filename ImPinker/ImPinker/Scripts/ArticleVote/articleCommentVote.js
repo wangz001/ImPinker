@@ -1,4 +1,4 @@
-﻿//在articlecomment.js 中，填充数据处绑定
+﻿//对评论的点赞方法
 function ArticleCommentVote(obj,commentId,count) {
     if (!LoginState) {
         alert("请先登录~");
@@ -12,12 +12,13 @@ function ArticleCommentVote(obj,commentId,count) {
         success: function (data) {
             if (data.IsSuccess == "1") {
                 $(obj).find("em").html(count + 1);
+                VoteAnimate(obj);
             } else {
-                alert("您已经评价过该评论~");
+                showTips("您已经评价过该评论~",1500,0);
             }
         },
         error: function (data) {
-            alert(data);
+            showTips("Sorry，出错咯~", 1500,0);
         }
     });
 }
