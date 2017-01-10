@@ -82,7 +82,6 @@ namespace ImPinker.Controllers
 
             return View();
         }
-        [ValidateAntiForgeryToken]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
