@@ -2,5 +2,5 @@ package com.lang.common;
 
 public class AppStart {
 
-	public static int AdminUserId=2;
+	public static int AdminUserId=5;
 }

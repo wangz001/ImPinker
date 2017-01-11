@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.lang.properties.AppProperties;
+
 public class DBConnection {
 	// Sqlserver
 	public static final String DBDRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	public static final String DBURL = "jdbc:sqlserver://101.200.175.157:1433; DatabaseName=ImPinker";
-	public static final String DBUSER = "sa";
-	public static final String DBPASS = "funnycar2015";
+	public static final String DBURL = AppProperties.getPropertyByName("dburl");
+	public static final String DBUSER = AppProperties.getPropertyByName("dbuser");
+	public static final String DBPASS =AppProperties.getPropertyByName("dbpath");
 	// 本地mysql---------------------
 	/*public static final String DBDRIVER = "com.mysql.jdbc.Driver";
 	public static final String DBURL = "jdbc:mysql://127.0.0.1:3306/newpinker";

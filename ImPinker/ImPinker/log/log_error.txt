@@ -442,3 +442,30 @@ System.InvalidOperationException: ´ËÇëÇóÒÑ±»×èÖ¹£¬ÒòÎªµ±ÓÃÔÚ GET ÇëÇóÖÐÊ±£¬»á½«Ã
 [Footer]
 [Header]
 [Footer]
+[Header]
+[Footer]
+[Header]
+2017-01-12 00:24:49,739 [14] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=57297
+Referer:http://www.impinker.com/Article/Index?id=57297
+System.NullReferenceException: Î´½«¶ÔÏóÒýÓÃÉèÖÃµ½¶ÔÏóµÄÊµÀý¡£
+   ÔÚ ImBLL.ArticleBll.GetModelWithContent(Int64 id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:ÐÐºÅ 262
+   ÔÚ ImPinker.Controllers.ArticleController.Index(String id) Î»ÖÃ d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:ÐÐºÅ 49
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass30.<BeginInvokeActionMethodWithFilters>b__2f(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
