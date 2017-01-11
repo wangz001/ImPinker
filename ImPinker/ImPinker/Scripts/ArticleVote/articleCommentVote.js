@@ -13,8 +13,9 @@ function ArticleCommentVote(obj,commentId,count) {
             if (data.IsSuccess == "1") {
                 $(obj).find("em").html(count + 1);
                 VoteAnimate(obj);
+                showTips("ok，点赞成功~", 1500, 1);
             } else {
-                showTips("您已经评价过该评论~",1500,0);
+                showTips("您已经评价过该评论~",1500,2);
             }
         },
         error: function (data) {

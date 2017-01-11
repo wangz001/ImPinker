@@ -69,10 +69,16 @@ function VoteAnimate(obj) {
 function showTips(txt, time, status) {
     var htmlCon = '';
     if (txt != '') {
-        if (status != 0 && status != undefined) {
+        //提示
+        if (status != undefined && status == 2) {
+            htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:rgba(189, 179, 55, 0.92);border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;">'
+                            + '<img src="/content/image/icon-ok.png" style="vertical-align: middle;margin-right:5px;" alt="OK，"/>' + txt + '</div>';
+        } else if (status != 0 && status != undefined) {
+            //ok
             htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#4AAF33;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;">'
                 + '<img src="/content/image/icon-ok.png" style="vertical-align: middle;margin-right:5px;" alt="OK，"/>' + txt + '</div>';
         } else {
+            //error
             htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#D84C31;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;">'
                 + '<img src="/content/image/icon-error.png" style="vertical-align: middle;margin-right:5px;" alt="Error，"/>' + txt + '</div>';
         }

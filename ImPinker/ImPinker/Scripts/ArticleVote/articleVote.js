@@ -10,10 +10,15 @@ function bindVote() {
         var articleId = $(this).attr("articleid");
         $.ajax({
             url: "/ArticleVote/UserVote",
-            type: "get",
+            type: "post",
             data: { articleId: articleId, vote: 1 },
             success: function (data) {
-                showTips("谢谢点赞~~~~~", 1500, 1);
+                if (data.IsSuccess == 1) {
+                    showTips("谢谢点赞~~~~~", 1500, 1);
+                } else {
+                    showTips("您已赞过该篇文章~~", 1500, 2);
+                }
+                
             },
             error: function (data) {
                 showTips("Sorry，系统出错了~", 1500, 0);

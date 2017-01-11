@@ -29,8 +29,8 @@ namespace ImPinker.Controllers
             return "";
         }
         [AuthorizationFilter]
-        [HttpGet]
-        public string UserVote(long articleId, int vote)
+        [HttpPost]
+        public ActionResult UserVote(long articleId, int vote)
         {
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
 
@@ -42,9 +42,29 @@ namespace ImPinker.Controllers
                     UserId = userId,
                     Vote = vote > 0
                 };
-                return ArticleVoteBll.AddVote(model) ? "success" : "error";
+                var flag = ArticleVoteBll.AddVote(model);
+                if (flag)
+                {
+                    return Json(new AjaxReturnViewModel
+                    {
+                        IsSuccess = 1,
+                        Description = ""
+                    });
+                }
+                else
+                {
+                    return Json(new AjaxReturnViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = ""
+                    });
+                }
             }
-            return "success";
+            return Json(new AjaxReturnViewModel
+            {
+                IsSuccess = 0,
+                Description = ""
+            });
         }
 
         #endregion 

@@ -23,8 +23,7 @@ namespace ImBLL
 	    {
             if (Exists(vote.ArticleId,vote.UserId))
             {
-                vote.UpdateTime = DateTime.Now;
-                return Update(vote);
+                return false;
             }
             else
             {
