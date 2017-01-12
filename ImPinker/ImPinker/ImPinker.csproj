@@ -179,12 +179,14 @@
     <Compile Include="Common\ImageUrlHelper.cs" />
     <Compile Include="Common\JsonResultHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleCollectionController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserCenterController.cs" />
+    <Compile Include="Controllers\UserRelationController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Filters\ExceptionContextFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -546,7 +548,9 @@
     <Content Include="UeEditer\ueditor.parse.js" />
     <Content Include="UeEditer\ueditor.parse.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -606,7 +610,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ArticleCollection\" />
     <Folder Include="Views\Upload\" />
+    <Folder Include="Views\UserRelation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
