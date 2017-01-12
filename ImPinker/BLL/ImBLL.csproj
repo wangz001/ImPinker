@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleBll.cs" />
+    <Compile Include="ArticleCollectionBll.cs" />
     <Compile Include="ArticleCommentBll.cs" />
     <Compile Include="ArticleCommentVoteBll.cs" />
     <Compile Include="ArticleSnapsBll.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="SolrSearchBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBll.cs" />
+    <Compile Include="UserRelationBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
