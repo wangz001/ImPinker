@@ -212,6 +212,8 @@
     <Content Include="Content\about.css" />
     <Content Include="Content\image\arrow_next.png" />
     <Content Include="Content\image\arrow_pre.png" />
+    <Content Include="Content\image\icon-collect-ok.png" />
+    <Content Include="Content\image\icon-collect.png" />
     <Content Include="Content\image\icon-error.png" />
     <Content Include="Content\image\icon-ok.png" />
     <Content Include="Content\image\icon_head_90.png" />
@@ -224,6 +226,7 @@
     <Content Include="Content\image\search_icon_blue.png" />
     <Content Include="Content\pubthread.css" />
     <Content Include="Scripts\ArticleVote\articleCommentVote.js" />
+    <Content Include="Scripts\ArticleVote\articleCollect.js" />
     <Content Include="Scripts\voteAnimation.js" />
     <Content Include="Scripts\Swiper\css\myswiper.css" />
     <Content Include="Scripts\Swiper\css\swiper.css" />

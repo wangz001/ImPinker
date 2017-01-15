@@ -590,7 +590,7 @@
                 display: inline-block;
                 width: 17px;
                 height: 28px;
-                background: url(/images/xxxxxbbs-223.png) no-repeat -219px 0px;
+                background: url(/) no-repeat -219px 0px;
                 vertical-align: middle;
             }
 
@@ -612,7 +612,7 @@
                     width: 15px;
                     height: 15px;
                     vertical-align: text-bottom;
-                    background: url(/images/xxxxxbbs-223.png) no-repeat -786px -60px;
+                    background: url() no-repeat -786px -60px;
                     margin-right: 10px;
                 }
 
@@ -652,17 +652,63 @@
                     display: inline-block;
                     vertical-align: middle;
                     margin-right: 5px;
-                    background-image: url(/images/xxxxxbbs-223.png);
+                    background-image: url();
                     background-repeat: no-repeat;
                 }
 
                 .thread-main .article .thread-info .click-count i {
-                    width: 19px;
-                    height: 14px;
-                    background-position: 0px -211px;
+                    width: 20px;
+                    height: 20px;
+                    background-image: url(/content/image/icon-collect.png);
                     vertical-align: middle;
                 }
+            /**收藏开始*/
+            .thread-main .article .thread-info .click-collect {
+                float: right;
+                margin-left: 20px;
+                font-size: 12px;
+                margin-top: 1px;
+                line-height: 16px;
+            }
 
+                .thread-main .article .thread-info .click-collect i {
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 5px;
+                    background-image: url();
+                    background-repeat: no-repeat;
+                }
+
+                .thread-main .article .thread-info .click-collect i {
+                    width: 20px;
+                    height: 20px;
+                    background-image: url(/content/image/icon-collect.png);
+                    vertical-align: middle;
+                }
+            /**收藏成功*/
+            .thread-main .article .thread-info .click-collect-ok {
+                float: right;
+                margin-left: 20px;
+                font-size: 12px;
+                margin-top: 1px;
+                line-height: 16px;
+            }
+
+            .thread-main .article .thread-info .click-collect-ok i {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+                background-image: url();
+                background-repeat: no-repeat;
+            }
+
+            .thread-main .article .thread-info .click-collect-ok i {
+                width: 20px;
+                height: 20px;
+                background-image: url(/content/image/icon-collect-ok.png);
+                vertical-align: middle;
+            }
+            /**收藏结束*/
             .thread-main .article .thread-info .comment-count i {
                 width: 18px;
                 height: 16px;
