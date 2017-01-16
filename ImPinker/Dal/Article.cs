@@ -202,51 +202,51 @@ namespace ImDal
             var model = new Article();
             if (row != null)
             {
-                if (row["Id"] != null && row["Id"].ToString() != "")
+                if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
                 {
                     model.Id = long.Parse(row["Id"].ToString());
                 }
-                if (row["ArticleName"] != null)
+                if (row.Table.Columns.Contains("ArticleName") && row["ArticleName"] != null)
                 {
                     model.ArticleName = row["ArticleName"].ToString();
                 }
-                if (row["Url"] != null)
+                if (row.Table.Columns.Contains("Url") && row["Url"] != null)
                 {
                     model.Url = row["Url"].ToString();
                 }
-                if (row["CoverImage"] != null)
+                if (row.Table.Columns.Contains("CoverImage") && row["CoverImage"] != null)
                 {
                     model.CoverImage = row["CoverImage"].ToString();
                 }
-                if (row["UserId"] != null && row["UserId"].ToString() != "")
+                if (row.Table.Columns.Contains("UserId") && row["UserId"] != null && row["UserId"].ToString() != "")
                 {
                     model.UserId = int.Parse(row["UserId"].ToString());
                 }
-                if (row["KeyWords"] != null)
+                if (row.Table.Columns.Contains("KeyWords") && row["KeyWords"] != null)
                 {
                     model.KeyWords = row["KeyWords"].ToString();
                 }
-                if (row["Description"] != null)
+                if (row.Table.Columns.Contains("Description") && row["Description"] != null)
                 {
                     model.Description = row["Description"].ToString();
                 }
-                if (row["State"] != null && row["State"].ToString() != "")
+                if (row.Table.Columns.Contains("State") && row["State"] != null && row["State"].ToString() != "")
                 {
                     model.State = int.Parse(row["State"].ToString());
                 }
-                if (row["CreateTime"] != null && row["CreateTime"].ToString() != "")
+                if (row.Table.Columns.Contains("CreateTime") && row["CreateTime"] != null && row["CreateTime"].ToString() != "")
                 {
                     model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
                 }
-                if (row["UpdateTime"] != null && row["UpdateTime"].ToString() != "")
+                if (row.Table.Columns.Contains("UpdateTime") && row["UpdateTime"] != null && row["UpdateTime"].ToString() != "")
                 {
                     model.UpdateTime = DateTime.Parse(row["UpdateTime"].ToString());
                 }
-                if (row["PublishTime"] != null && row["PublishTime"].ToString() != "")
+                if (row.Table.Columns.Contains("PublishTime") && row["PublishTime"] != null && row["PublishTime"].ToString() != "")
                 {
                     model.PublishTime = DateTime.Parse(row["PublishTime"].ToString());
                 }
-                if (row["Company"] != null && row["Company"].ToString() != "")
+                if (row.Table.Columns.Contains("Company") && row["Company"] != null && row["Company"].ToString() != "")
                 {
                     model.Company = row["Company"].ToString();
                 }

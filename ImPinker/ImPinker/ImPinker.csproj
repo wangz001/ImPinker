@@ -610,10 +610,10 @@
     <Content Include="Scripts\Swiper\js\maps\swiper.jquery.umd.min.js.map" />
     <Content Include="Scripts\Swiper\js\maps\swiper.min.js.map" />
     <Content Include="Views\Home\_Index_Swiper.cshtml" />
+    <Content Include="Views\ArticleCollection\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ArticleCollection\" />
     <Folder Include="Views\Upload\" />
     <Folder Include="Views\UserRelation\" />
   </ItemGroup>

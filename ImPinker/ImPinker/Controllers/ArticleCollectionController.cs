@@ -20,8 +20,17 @@ namespace ImPinker.Controllers
         // 我的收藏，首页
         // GET: /ArticleCollection/
         [AuthorizationFilter]
-        public ActionResult Index()
+        public ActionResult Index(int? pageIndex, int? pageCount)
         {
+            int pageNum = (int)(pageIndex > 0 ? pageIndex : 1);
+            int pagecount = (int)(pageCount > 0 ? pageCount : 9); 
+            var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            int totalCount;
+            var lists = _articleCollectBll.GetMyListByPage(userid, pageNum, pagecount, out totalCount);
+            ViewBag.pageIndex = pageNum;
+            ViewBag.pageCount = pagecount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.Articles = lists;
             return View();
         }
         /// <summary>
@@ -35,11 +44,10 @@ namespace ImPinker.Controllers
         {
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
             var flag = _articleCollectBll.AddCollect(articleId, userid);
-
             return Json(new AjaxReturnViewModel
             {
                 IsSuccess = flag ? 1: 0,
-                Description = ""
+                Description = "ok"
             });
         }
         /// <summary>
@@ -50,8 +58,13 @@ namespace ImPinker.Controllers
         [AuthorizationFilter]
         public ActionResult RemoveCollect(long articleId)
         {
-
-            return Json("");
+            var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
+            bool flag = _articleCollectBll.RemoveCollect(articleId, userid);
+            return Json(new AjaxReturnViewModel
+            {
+                IsSuccess = flag ? 1 : 0,
+                Description = "ok"
+            });
         }
     }
 }
