@@ -10,14 +10,12 @@
         <li @(!string.IsNullOrEmpty(actionName)
             && actionName.StartsWith("index") && coutrollerName.StartsWith("usercenter") ? "class=current" : "") >@Html.ActionLink("个人中心", "Index", "UserCenter")</li>
         <li @(!string.IsNullOrEmpty(actionName) && actionName.StartsWith("myarticle") ? "class=current" : "")>@Html.ActionLink("帖子管理", "MyArticle", "Article")</li>
+        <li @(!string.IsNullOrEmpty(coutrollerName) && coutrollerName.StartsWith("articlecollection") && actionName.StartsWith("index") ? "class=current" : "")>@Html.ActionLink("收藏管理", "Index", "ArticleCollection")</li>
         <li @(!string.IsNullOrEmpty(actionName) && actionName.StartsWith("usersetting") ? "class=current" : "")>@Html.ActionLink("账号设置", "UserSetting", "UserCenter")</li>
-        <li @(!string.IsNullOrEmpty(coutrollerName) && coutrollerName.StartsWith("articlecollection")
-                && actionName.StartsWith("index") ? "class=current" : "")>@Html.ActionLink("收藏管理", "Index", "ArticleCollection")</li>
-        <li><a href="#" class="nav-friend">好友管理</a></li>
-        <li><a href="#" class="nav-info">消息中心</a></li>
+        <li><a href="#">好友管理</a></li>
+        <li><a href="#">消息中心</a></li>
         <li><a href="#">草稿箱</a></li>
         <li><a href="#">黑名单</a></li>
-        
     </ul>
 </div>
 <!--nav end-->

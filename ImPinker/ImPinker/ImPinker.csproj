@@ -611,6 +611,8 @@
     <Content Include="Scripts\Swiper\js\maps\swiper.min.js.map" />
     <Content Include="Views\Home\_Index_Swiper.cshtml" />
     <Content Include="Views\ArticleCollection\Index.cshtml" />
+    <Content Include="Views\Account\FindPassWord.cshtml" />
+    <Content Include="Views\Account\FindPassWord_NewPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

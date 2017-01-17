@@ -273,6 +273,10 @@ namespace ImDal
 				{
 					model.UpdateTime=DateTime.Parse(row["UpdateTime"].ToString());
 				}
+                if (row["AspNetId"] != null)
+                {
+                    model.AspNetId = row["AspNetId"].ToString();
+                }
 			}
 			return model;
 		}

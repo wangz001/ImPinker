@@ -7,7 +7,7 @@
 }
 <div class="dialog-layer" style="display: none;">
     <div id="dialog" style="top: 200px;">
-        <p>是否要删除这篇帖子？</p>
+        <p>是否取消收藏该帖子？</p>
         <div class="button-box">
             <a href="javascript:;" class="cancel" style="display: inline-block;">取消</a>
             <a href="javascript:;" class="confirm" style="border-color: rgb(233, 113, 113); background: rgb(233, 113, 113);">确定</a>
@@ -48,7 +48,7 @@
 
                                     </div>
                                     <div class="button-area">
-                                        <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" onclick="unCollect(this,@article.Id)">取消收藏</a>
+                                        <a href="javascript:;" class="usercenter-red-btn thread-delete-btn" onclick="confirmUnCollect(this,@article.Id)">取消收藏</a>
                                     </div>
                                 </div>
                             </li>
@@ -93,20 +93,41 @@
 </div>
 @section scripts
 {
-    <script src="~/Scripts/ArticleVote/articleCollect.js"></script>
     <script type="text/javascript">
-        function confirmDelete(articleid) {
+        function confirmUnCollect(obj, articleId) {
             $(".dialog-layer").show();
             $(".dialog-layer .cancel").bind('click', function () {
                 $(".dialog-layer").hide();
-                return;
             });
             $(".dialog-layer .confirm").bind('click', function () {
                 $(".dialog-layer").hide();
-                window.location.href = "/Article/DeleteThread?articleId=" + articleid;
+                unCollect(obj, articleId)
                 return true;
             });
         }
+        //取消收藏
+        function unCollect(obj, articleId) {
+            var url = "/ArticleCollection/RemoveCollect";
+            $.ajax({
+                url: url,
+                type: "post",
+                data: { articleId: articleId },
+                async: true,
+                success: function (data) {
+                    if (data.IsSuccess == "1") {
+                        $(obj).closest("li").remove();
+                        showTips("取消收藏成功~", 1500, 1);
+                    } else {
+                
+                    }
+                },
+                error: function (data) {
+                    showTips("Sorry，出错咯~", 1500, 0);
+                }
+            });
+        }
+
+        
     </script>
 }
 

@@ -76,5 +76,6 @@ namespace ImPinker.Controllers
             ViewBag.Writer = user;
             return PartialView();
         }
-	}
+	
+    }
 }

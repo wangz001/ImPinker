@@ -8,5 +8,6 @@ namespace ImDal
 {
     public class UserRelationDal
     {
+        //public 
     }
 }

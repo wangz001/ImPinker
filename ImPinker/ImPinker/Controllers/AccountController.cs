@@ -90,13 +90,43 @@ namespace ImPinker.Controllers
         public string SendCheckNum(string phoneNum)
         {
             RemoveFromPhoneNumDic();//移除过期的记录，防止内存过大
+
+            //获取action。判断是注册页的验证码，或者是找回密码页的验证码
+            var actionName = HttpContext.Request.UrlReferrer.AbsolutePath;
+            var isPhonoeNumExists = CheckPhoneNumIsExists(phoneNum);
+            if ("/Account/Register".Equals(actionName))
+            {
+                if (isPhonoeNumExists)
+                {
+                    Response.ContentType = "application/json; charset=utf-8";
+                    return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = "该手机号码已被注册，请直接登录",
+                        Data = ""
+                    });
+                }
+            }
+            else if ("/Account/FindPassWord".Equals(actionName))
+            {
+                if (!isPhonoeNumExists)
+                {
+                    Response.ContentType = "application/json; charset=utf-8";
+                    return JsonConvert.SerializeObject(new AjaxReturnViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = "该手机号码不存在！",
+                        Data = ""
+                    });
+                }
+            }
             if (!CheckPhoneNum(phoneNum))
             {
-                Response.ContentType = "application/json; charset=utf-8";  
+                Response.ContentType = "application/json; charset=utf-8";
                 return JsonConvert.SerializeObject(new AjaxReturnViewModel
                 {
                     IsSuccess = 0,
-                    Description = "该手机号码已被注册，请直接登录",
+                    Description = "验证码发送间隔小于一分钟，请稍后再试",
                     Data = ""
                 });
             }
@@ -155,7 +185,7 @@ namespace ImPinker.Controllers
             return true;
         }
         /// <summary>
-        /// 验证电话号码是否被注册， 是否1分钟内已发送过验证码等，后期要加上ip验证，防止恶意注册
+        /// 是否1分钟内已发送过验证码等，后期要加上ip验证，防止恶意注册
         /// </summary>
         /// <param name="phoneNum"></param>
         /// <returns>ture,可以继续注册；false：不可继续注册</returns>
@@ -169,12 +199,21 @@ namespace ImPinker.Controllers
                     return false;
                 }
             }
+            return true;
+        }
+        /// <summary>
+        /// 验证电话号码是否已注册
+        /// </summary>
+        /// <param name="phoneNum"></param>
+        /// <returns>true:已注册；false：未注册</returns>
+        private bool CheckPhoneNumIsExists(string phoneNum)
+        {
             var user = _userBll.GetModelByPhoneNum(phoneNum);
             if (user != null && user.PhoneNum.Length > 0)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
         /// <summary>
         /// 存储电话号码和验证码。注册成功后调用移除方法，超过30分钟的记录都移除。
@@ -226,7 +265,7 @@ namespace ImPinker.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {//注：aspnetuser  和localuser 分别在两个数据库中
-                    AddLocalUser(user, phoneNum);
+                    AddLocalUser(user, phoneNum, model.Password);
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -239,11 +278,12 @@ namespace ImPinker.Controllers
             return View(model);
         }
 
-        private void AddLocalUser(ApplicationUser user, string phoneNum)
+        private void AddLocalUser(ApplicationUser user, string phoneNum,string passWord)
         {
             var users = new Users
             {
                 UserName = user.UserName,
+                PassWord=passWord,
                 AspNetId = user.Id,
                 PhoneNum = phoneNum,
                 CreateTime = DateTime.Now,
@@ -252,6 +292,86 @@ namespace ImPinker.Controllers
             };//自己维护的用户表
             var flag = _userBll.Add(users);
         }
+
+
+        #region 找回密码
+        /// <summary>
+        /// 找回密码页面
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult FindPassWord()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 找回密码页
+        /// </summary>
+        /// <param name="phoneNum"></param>
+        /// <param name="checkNum"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult FindPassWord(FindPassWordViewModel model)
+        {
+            ViewBag.ReturnUrl = Url.Action("FindPassWord");
+            if (ModelState.IsValid)
+            {
+                if (phoneNumDic.ContainsKey(model.PhoneNum)
+                        && (DateTime.Now - phoneNumDic[model.PhoneNum].SendTime).TotalSeconds > 600)
+                {
+                    AddErrors(IdentityResult.Failed("手机验证码超时，10分钟内有效。请重新获取验证码"));
+                    return View();
+                }
+                if (!(phoneNumDic.ContainsKey(model.PhoneNum)
+                    && phoneNumDic[model.PhoneNum].CheckNum.Equals(model.CheckNum)))
+                {
+                    AddErrors(IdentityResult.Failed("您输入的手机验证码有误"));
+                    return View();
+                }
+                ViewBag.phoneNum = model.PhoneNum;
+                return View("FindPassWord_NewPass");
+            }
+            return View();
+        }
+        /// <summary>
+        /// 保存新密码
+        /// </summary>
+        /// <param name="pass1"></param>
+        /// <param name="pass2"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveNewPassWord(FindPassWordNewPassViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userBll.GetModelByPhoneNum(model.PhoneNum);
+                if (user != null)
+                {
+                    IdentityResult result = await UserManager.ChangePasswordAsync(user.AspNetId, user.PassWord, model.Password);
+                    if (result.Succeeded)
+                    {
+                        user.PassWord = model.Password;
+                        user.UpdateTime = DateTime.Now;
+                        var flag = _userBll.Update(user);
+                        if (flag)
+                        {
+                            return RedirectToAction("Login");
+                        }
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+            }
+            return View("FindPassWord_NewPass");
+        }
+        #endregion
+
 
         //
         // POST: /Account/Disassociate
@@ -476,6 +596,8 @@ namespace ImPinker.Controllers
             }
             base.Dispose(disposing);
         }
+
+
 
         #region 帮助程序
         // Used for XSRF protection when adding external logins

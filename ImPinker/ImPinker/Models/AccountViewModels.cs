@@ -95,4 +95,42 @@ namespace ImPinker.Models
         /// </summary>
         public string IpAddress { get; set; }
     }
+
+    /// <summary>
+    /// 找回密码vm
+    /// </summary>
+    public class FindPassWordViewModel
+    {
+        [Required]
+        [StringLength(11, ErrorMessage = "{0} 长度不符合规范。", MinimumLength = 11)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "手机号")]
+        public string PhoneNum { get; set; }
+
+        [Required]
+        [Display(Name = "验证码")]
+        public string CheckNum { get; set; }
+    }
+
+    /// <summary>
+    /// 找回密码vm
+    /// </summary>
+    public class FindPassWordNewPassViewModel
+    {
+        [Required]
+        [StringLength(11, ErrorMessage = "{0} 长度不符合规范。", MinimumLength = 11)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "手机号")]
+        public string PhoneNum { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "密码")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "确认密码")]
+        [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
+        public string ConfirmPassword { get; set; }
+    }
 }
