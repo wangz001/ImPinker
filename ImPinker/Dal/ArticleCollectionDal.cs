@@ -17,7 +17,7 @@ namespace ImDal
         public bool IsExist(long articleId, int userid)
         {
             var sql = @"
-select Id from ArticleCollection where ArticleId=@ArticleId and UserId=1
+select Id from ArticleCollection where ArticleId=@ArticleId and UserId=@UserId
 ";
             SqlParameter[] parameters = {
 					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value =articleId},
