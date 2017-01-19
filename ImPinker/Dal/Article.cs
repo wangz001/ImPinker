@@ -325,12 +325,13 @@ namespace ImDal
         public DataSet GetIndexListByPage(int pageNum, int count)
         {
             const string strSql = @"
-SELECT  *
-FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS Row ,
+SELECT  TT.Id,TT.ArticleName,TT.Url,TT.CoverImage,TT.ComPany,TT.KeyWords,TT.CreateTime,COUNT(av.ArticleId) as voteCount 
+ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS Row ,
                     T.*
           FROM      Article T WHERE T.STATE=1 AND  T.CoverImage IS NOT NULL AND DATALENGTH(T.CoverImage)>0
-        ) TT
-WHERE   TT.Row BETWEEN @startIndex AND @endIndex;
+        ) TT left join ArticleVote AV on TT.Id=AV.ArticleId 
+WHERE   TT.Row BETWEEN @startIndex AND @endIndex 
+ group by TT.Id,TT.ArticleName,TT.Url,TT.CoverImage,TT.ComPany,TT.KeyWords,TT.CreateTime;
 ";
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;

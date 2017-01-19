@@ -171,48 +171,59 @@ namespace ImBLL
             var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
             var ds = dal.GetIndexListByPage(pageNum, count);
-            List<Article> articles = DataTableToList(ds.Tables[0]);
-            if (articles != null && articles.Count > 0)
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                foreach (var article in articles)
+                foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    if (article.ArticleName.Length > 25)
+                    var model = new ArticleViewModel();
+                    if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
                     {
-                        article.ArticleName = article.ArticleName.Substring(0, 25) + "……";
+                        model.Id = row["Id"].ToString();
                     }
-                    //if (articleNameLists.Contains(article.ArticleName))
-                    //{//去除标题重复的数据,解决fblife 同一文章发在不同域名的问题
-                    //    continue;
-                    //}
-                    if (string.IsNullOrEmpty(article.CoverImage))
+                    if (row.Table.Columns.Contains("ArticleName") && row["ArticleName"] != null)
                     {
-                        continue; //无图的不要
+                        model.ArticleName = row["ArticleName"].ToString();
                     }
-                    articleNameLists.Add(article.ArticleName);
-
+                    if (model.ArticleName.Length > 25)
+                    {
+                        model.ArticleName = model.ArticleName.Substring(0, 25) + "……";
+                    }
+                    if (row.Table.Columns.Contains("Url") && row["Url"] != null)
+                    {
+                        model.Url = row["Url"].ToString();
+                    }
+                    if (row.Table.Columns.Contains("CoverImage") && row["CoverImage"] != null)
+                    {
+                        model.CoverImage = row["CoverImage"].ToString();
+                    }
+                    if (row.Table.Columns.Contains("KeyWords") && row["KeyWords"] != null)
+                    {
+                        model.KeyWords = row["KeyWords"].ToString();
+                    }
                     //keywords只去一个，首页及搜索页显示用
-                    var keyStr = article.KeyWords;
+                    var keyStr = model.KeyWords;
                     var keyArr = keyStr.Split(',');
                     if (keyArr.Length > 1)
                     {
-                        article.KeyWords = keyArr[1];
+                        model.KeyWords = keyArr[1];
                     }
                     else
                     {
-                        article.KeyWords = "";
+                        model.KeyWords = "";
                     }
-                    listResult.Add(new ArticleViewModel()
+                    if (row.Table.Columns.Contains("CreateTime") && row["CreateTime"] != null && row["CreateTime"].ToString() != "")
                     {
-                        Id = article.Id.ToString(),
-                        ArticleName = article.ArticleName,
-                        Url = article.Url,
-                        Userid = article.UserId.ToString(),
-                        Description = article.Description,
-                        KeyWords = article.KeyWords,
-                        CoverImage = article.CoverImage,
-                        Company = article.Company,
-                        CreateTime = article.CreateTime
-                    });
+                        model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
+                    }
+                    if (row.Table.Columns.Contains("Company") && row["Company"] != null && row["Company"].ToString() != "")
+                    {
+                        model.Company = row["Company"].ToString();
+                    }
+                    if (row.Table.Columns.Contains("voteCount") && row["voteCount"] != null && row["voteCount"].ToString() != "")
+                    {
+                        model.VoteCount = int.Parse(row["voteCount"].ToString());
+                    }
+                    listResult.Add(model);
                 }
             }
             return listResult;

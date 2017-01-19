@@ -40,6 +40,9 @@ namespace ImModel.ViewModel
         public List<Object> Content { get; set; }
         [SolrField("Company")]
         public string Company { get; set; }
-
+        /// <summary>
+        /// 文章被赞的总数
+        /// </summary>
+        public int VoteCount { get; set; }
     }
 }
