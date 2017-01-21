@@ -56,6 +56,11 @@ public class FblifeCulturePageProcessor implements PageProcessor {
 		String titleString = fbXPath.getTitleString(page);
 		if (titleString != null && titleString.length() > 0) {
 			String urlStr = fbXPath.getUrl(page);
+			//去掉分页的的_index.html   的页面，防止重复
+			String pageIndex =fbXPath.getPageIndex(page);
+			if(pageIndex!=null&&"1"!=pageIndex){
+				urlStr=urlStr.replace("_"+pageIndex,"" );
+			}
 			String firstImg = fbXPath.getFirstImg(page);
 			String keyWord = fbXPath.getKeyWordString(page);
 			String description = fbXPath.getDescription(page);
