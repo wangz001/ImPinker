@@ -216,6 +216,8 @@
     <Content Include="Content\image\icon-collect.png" />
     <Content Include="Content\image\icon-error.png" />
     <Content Include="Content\image\icon-ok.png" />
+    <Content Include="Content\image\icon-zan-ok.png" />
+    <Content Include="Content\image\icon-zan.png" />
     <Content Include="Content\image\icon_head_90.png" />
     <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
     <Content Include="Content\image\search_icon_16.png" />

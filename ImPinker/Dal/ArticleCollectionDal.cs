@@ -168,7 +168,7 @@ UPDATE [dbo].[ArticleCollection]
   select * from (
 	select ROW_NUMBER() over(
 		order by AC.CreateTime desc) as row,
-		A.Id,A.ArticleName,A.Url,A.CoverImage  
+		A.Id,A.ArticleName,A.Url,A.CoverImage,A.CreateTime   
 		from Article A join ArticleCollection AC on A.Id=AC.ArticleId
 	where AC.UserId=@UserId and AC.State=1
   ) TT WHERE TT.Row between @startIndex and @endIndex ;

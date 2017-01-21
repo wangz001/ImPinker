@@ -20,14 +20,20 @@ namespace ImBLL
         /// <returns></returns>
         public bool AddCollect(long articleId,int userid)
         {
-            var isExists = dal.IsExist(articleId,userid);
-            if (isExists)
-            {
-                return false;
+            var model = dal.GetModel(articleId, userid);
+            if (model!=null)
+            {//如果是取消收藏，重新修改状态为收藏
+                if (model.State == ArticleCollectionStateEnum.UnCollect)
+                {
+                    model.State = ArticleCollectionStateEnum.Collect;
+                    model.UpdateTime = DateTime.Now;
+                    bool flag = dal.UpdateCollect(model);
+                    return flag;
+                }
             }
             else
             {
-                var model = new ArticleCollection
+                var newModel = new ArticleCollection
                 {
                     ArticleId = articleId,
                     UserId = userid,
@@ -35,8 +41,9 @@ namespace ImBLL
                     CreateTime = DateTime.Now,
                     UpdateTime = DateTime.Now
                 };
-                return dal.AddCollect(model);
+                return dal.AddCollect(newModel);
             }
+            return false;
         }
         /// <summary>
         /// 取消收藏

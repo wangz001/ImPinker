@@ -35,7 +35,7 @@
                         {
                             <li>
                                 <a href="/Article/Index?id=@article.Id" class="img-box" target="_blank">
-                                    <span class="create-time">@article.CreateTime</span>
+                                    <span class="create-time">@Common.DateTimeUtil.TUtil.DateFormatToString(article.CreateTime)</span>
                                     <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" class="upload">
                                 </a>
                                 <h5 class="thread-title">
@@ -57,7 +57,7 @@
                     }
                     else
                     {
-                        <h2 style="font-size: 30px; color: #ccc; text-align: center; margin: 50px 0px;">您还没有发布过任何帖子</h2>
+                        <h2 style="font-size: 30px; color: #ccc; text-align: center; margin: 50px 0px;">您还没有收藏过任何帖子</h2>
                     }
                 }
             </ul>

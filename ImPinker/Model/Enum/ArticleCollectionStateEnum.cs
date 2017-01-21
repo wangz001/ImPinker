@@ -12,10 +12,19 @@ namespace ImModel.Enum
     /// </summary>
     public enum ArticleCollectionStateEnum
     {
+        /// <summary>
+        /// 删除
+        /// </summary>
         [Description("删除")]
         Delete=0,
+        /// <summary>
+        /// 收藏
+        /// </summary>
         [Description("收藏")]
         Collect=1,
+        /// <summary>
+        /// 取消收藏
+        /// </summary>
         [Description("取消收藏")]
         UnCollect=2
     }
