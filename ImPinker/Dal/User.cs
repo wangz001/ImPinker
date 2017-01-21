@@ -183,7 +183,7 @@ namespace ImDal
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime from Users ");
+            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)

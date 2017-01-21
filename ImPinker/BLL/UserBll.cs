@@ -92,7 +92,9 @@ namespace ImBLL
 						DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
 					}
 				}
-				catch{}
+				catch{
+                
+                }
 			}
 			return (Users)objModel;
 		}

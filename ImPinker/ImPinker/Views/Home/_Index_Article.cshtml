@@ -25,8 +25,8 @@
                         </span>
                     </a>
                     <div class="about-count">
-                        <span class="click-count"><i></i><b>@vm.VoteCount</b></span>
-                        <a><span class="praise-count" articleid="@vm.Id"><i></i><b>喜欢，点个赞</b></span></a>
+                        @*<span class="click-count"><i></i><b>@vm.VoteCount</b></span>*@
+                        <span class="praise-count" onclick="articleVote(this,@vm.Id,@vm.VoteCount)"><i></i><b>@vm.VoteCount</b></span>
                     </div>
                 </div>
             </li>
