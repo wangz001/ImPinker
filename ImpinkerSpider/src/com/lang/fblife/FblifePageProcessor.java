@@ -44,13 +44,14 @@ public class FblifePageProcessor implements PageProcessor, Job {
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 	static int maxNum = Integer.parseInt(AppProperties
 			.getPropertyByName("spider.maxnum"));
+	static String startUrl="http://fblife.com/";
 
 	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		logger.info("Fblife spider启动");
 		Spider spider = Spider.create(new FblifePageProcessor())
-				.addUrl("http://www.fblife.com/").addPipeline(fbPipeline).setExitWhenComplete(true)
+				.addUrl(startUrl).addPipeline(fbPipeline).setExitWhenComplete(true)
 				.thread(5);
 		try {
 			SpiderMonitor.instance().register(spider);
@@ -90,7 +91,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		String tmpDir = System.getProperty("java.io.tmpdir");
 		System.out.println(tmpDir);
 		Spider spider = Spider.create(new FblifePageProcessor())
-				.setExitWhenComplete(true).addUrl("http://www.fblife.com/")
+				.setExitWhenComplete(true).addUrl(startUrl)
 				.addPipeline(fbPipeline).thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
@@ -100,7 +101,7 @@ public class FblifePageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (fbRequestCount > 10000) {
+			if (fbRequestCount > 100) {
 				int alive = spider.getThreadAlive();
 				System.err.println(alive);
 				spider.close();

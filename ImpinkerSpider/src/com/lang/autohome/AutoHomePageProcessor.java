@@ -37,7 +37,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 
 	public static void main(String[] args) {
 		Spider spider = Spider.create(new AutoHomePageProcessor())
-				.addUrl("http://www.autohome.com.cn/")
+				.addUrl("http://www.autohome.com.cn/all/")
 				.addPipeline(autohomePipeline).thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);
@@ -47,7 +47,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 		spider.start();
 		// 超过10000次时，停止爬取。防止ip被封
 		while (true) {
-			if (autohomeRequestCount > 10000) {
+			if (autohomeRequestCount > 100) {
 				spider.stop();
 				break;
 			}
@@ -64,7 +64,7 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Spider spider = Spider.create(new AutoHomePageProcessor())
-				.addUrl("http://www.autohome.com.cn/")
+				.addUrl("http://www.autohome.com.cn/all/")
 				.addPipeline(autohomePipeline).thread(5);
 		try {
 			SpiderMonitor.instance().register(spider);
@@ -102,7 +102,9 @@ public class AutoHomePageProcessor implements PageProcessor, Job {
 		autohomeRequestCount++;
 		page.addTargetRequests(page.getHtml().links()
 				.regex("http://www.autohome.com.cn/\\w+/\\d+/\\S*").all());
-
+		//添加文章列表页，底部分页链接
+		page.addTargetRequests(page.getHtml().links()
+				.regex("http://www.autohome.com.cn/all/\\S*").all());
 		String thisUrlString = page.getUrl().toString();
 
 		if (RegexUtil.match("http://www.autohome.com.cn/\\w+/\\S+",

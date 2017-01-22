@@ -26,11 +26,12 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 	Logger logger = Logger.getLogger(MyWebMagic.class);
 	static int maxNum = Integer.parseInt(AppProperties
 			.getPropertyByName("spider.maxnum"));
+	private static String startUrl="http://news.bitauto.com/";
 
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Spider spider = Spider.create(new BitautoPageProcessor())
-				.addUrl("http://www.bitauto.com/pingce/")
+				.addUrl(startUrl)
 				.addPipeline(bitautoPipeline).thread(5);
 		try {
 			SpiderMonitor.instance().register(spider);
@@ -64,7 +65,7 @@ public class BitautoPageProcessor implements PageProcessor, Job {
 	 */
 	public static void main(String[] args) {
 		Spider spider = Spider.create(new BitautoPageProcessor())
-				.addUrl("http://www.bitauto.com/pingce/")
+				.addUrl(startUrl)
 				.addPipeline(bitautoPipeline).thread(1);
 		try {
 			SpiderMonitor.instance().register(spider);

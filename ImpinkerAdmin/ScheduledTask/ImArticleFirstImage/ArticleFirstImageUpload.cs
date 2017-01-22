@@ -45,7 +45,11 @@ namespace GetCarDataService.ImArticleFirstImage
             var articleList = articleBll.GetArticlesWithoutCoverImage();
             foreach (var article in articleList)
             {
-                var flag=UpdateArticleImage(article,ref solrIndexList);
+                if (article.State == (int)ArticleStateEnum.BeCheck)
+                {
+                    continue;
+                }
+                var flag = UpdateArticleImage(article, ref solrIndexList);
             }
             //更新索引
             SolrNetSearchBll.AddIndex(solrIndexList);
@@ -59,58 +63,50 @@ namespace GetCarDataService.ImArticleFirstImage
         /// <param name="article"></param>
         /// <param name="solrIndexList">待创建solr索引的article集合</param>
         /// <returns></returns>
-        public static bool UpdateArticleImage(Article article,ref List<ArticleViewModel> solrIndexList)
+        public static bool UpdateArticleImage(Article article, ref List<ArticleViewModel> solrIndexList)
         {
             //标志生成封面图是否成功
             var isSuccess = false;
-            try
+            var articleSnap = articlesnapBll.GetModel(article.Id);
+            if (articleSnap != null && !string.IsNullOrEmpty(articleSnap.FirstImageUrl))
             {
-                var articleSnap = articlesnapBll.GetModel(article.Id);
-                if (articleSnap != null && !string.IsNullOrEmpty(articleSnap.FirstImageUrl))
+                var firstimageUrl = articleSnap.FirstImageUrl;
+                var imgurl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), article.Id, DateTime.Now.Ticks);
+                var flag = UploadToOss(firstimageUrl, imgurl);
+                if (flag)
                 {
-                    var firstimageUrl = articleSnap.FirstImageUrl;
-                    var imgurl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), article.Id, DateTime.Now.Ticks);
-                    var flag = UploadToOss(firstimageUrl, imgurl);
-                    if (flag)
+                    var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
+                    if (!updateflag)
                     {
-                        var updateflag = articleBll.UpdateCoverImage(article.Id, imgurl);
-                        if (!updateflag)
-                        {
-                            Common.WriteErrorLog("生成封面图错误：" + imgurl);
-                            return false;
-                        }
-                        var vm = new ArticleViewModel
-                        {
-                            Id = "travels_" + article.Id,
-                            ArticleName = article.ArticleName,
-                            Company = article.Company,
-                            CoverImage = imgurl,
-                            KeyWords = article.KeyWords,
-                            Description = article.Description,
-                            Content = new List<object> { articleSnap.Content },
-                            Url = article.Url,
-                            CreateTime = article.CreateTime,
-                            UpdateTime = article.UpdateTime,
-                            Userid = article.UserId.ToString()
-                        };
-                        solrIndexList.Add(vm);
-                        isSuccess = true;
+                        Common.WriteErrorLog("生成封面图错误：" + imgurl);
+                        return false;
                     }
-                    else
+                    var vm = new ArticleViewModel
                     {
-                        Common.WriteErrorLog("上传图片到oss错误：" + imgurl);
-                    }
+                        Id = "travels_" + article.Id,
+                        ArticleName = article.ArticleName,
+                        Company = article.Company,
+                        CoverImage = imgurl,
+                        KeyWords = article.KeyWords,
+                        Description = article.Description,
+                        Content = new List<object> { articleSnap.Content },
+                        Url = article.Url,
+                        CreateTime = article.CreateTime,
+                        UpdateTime = article.UpdateTime,
+                        Userid = article.UserId.ToString()
+                    };
+                    solrIndexList.Add(vm);
+                    isSuccess = true;
                 }
-                if (!isSuccess)
+                else
                 {
-                    //生成封面图失败，将article状态设置为待审核，后期由人工操作，上传封面图
-                    articleBll.UpdateState(article.Id, ArticleStateEnum.BeCheck);
+                    Common.WriteErrorLog("上传图片到oss错误：" + imgurl);
                 }
             }
-            catch (Exception e)
+            if (!isSuccess)
             {
-                isSuccess = false;
-                Common.WriteErrorLog("生成封面图服务exception:" + e);
+                //生成封面图失败，将article状态设置为待审核，后期由人工操作，上传封面图
+                articleBll.UpdateState(article.Id, ArticleStateEnum.BeCheck);
             }
             return isSuccess;
         }
@@ -127,39 +123,31 @@ namespace GetCarDataService.ImArticleFirstImage
             {
                 return false;
             }
-            try
+            var tempdir = string.Format(AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp_{0}.jpg", DateTime.Now.Ticks);
+            const int width = 360;
+            const int height = 240;
+            //下载
+            Uri myUri = new Uri(imgUrl);
+            WebRequest webRequest = WebRequest.Create(myUri);
+            WebResponse webResponse = webRequest.GetResponse();
+            Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
+            MemoryStream ms = new MemoryStream();
+            myImage.Save(ms, ImageFormat.Jpeg);
+            if (!Directory.Exists(Path.GetDirectoryName(tempdir)))//如果不存在就创建file文件夹
             {
-                var tempdir = string.Format(AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp_{0}.jpg", DateTime.Now.Ticks);
-                const int width = 360;
-                const int height = 240;
-                //下载
-                Uri myUri = new Uri(imgUrl);
-                WebRequest webRequest = WebRequest.Create(myUri);
-                WebResponse webResponse = webRequest.GetResponse();
-                Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
-                MemoryStream ms = new MemoryStream();
-                myImage.Save(ms, ImageFormat.Jpeg);
-                if (!Directory.Exists(Path.GetDirectoryName(tempdir)))//如果不存在就创建file文件夹
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(tempdir));
-                }
-                myImage.Save(tempdir);
-                //剪切(如果高大于1.5倍宽，剪切)
-                if (1.5 * (myImage.Width) < myImage.Height)
-                {
-                    ImageUtils.ImgReduceCutOut(0, 0, myImage.Width, myImage.Width * 2 / 3, tempdir, tempdir);
-                }
-                //缩放
-                ImageUtils.ThumbnailImage(tempdir, tempdir, width, height, ImageFormat.Jpeg);
-                //保存
-                bool flag = ObjectOperate.UploadImage(buckeyName, tempdir, key);
-                return flag;
+                Directory.CreateDirectory(Path.GetDirectoryName(tempdir));
             }
-            catch (Exception e)
+            myImage.Save(tempdir);
+            //剪切(如果高大于1.5倍宽，剪切)
+            if (1.5 * (myImage.Width) < myImage.Height)
             {
-                Common.WriteErrorLog("生成封面图错误：" + key + ".Exception: " + e);
-                return false;
+                ImageUtils.ImgReduceCutOut(0, 0, myImage.Width, myImage.Width * 2 / 3, tempdir, tempdir);
             }
+            //缩放
+            ImageUtils.ThumbnailImage(tempdir, tempdir, width, height, ImageFormat.Jpeg);
+            //保存
+            bool flag = ObjectOperate.UploadImage(buckeyName, tempdir, key);
+            return flag;
         }
     }
 }
