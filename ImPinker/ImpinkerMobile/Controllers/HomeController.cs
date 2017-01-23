@@ -20,7 +20,7 @@ namespace ImpinkerMobile.Controllers
             return View();
         }
 
-        private string GetByPage(int pageNum, int pageCount)
+        private List<ArticleViewModel> GetByPage(int pageNum, int pageCount)
         {
             //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
             var list = new List<ArticleViewModel>();
@@ -31,13 +31,10 @@ namespace ImpinkerMobile.Controllers
             }
             else
             {
-                list = SolrSearchBll.Query(userInterestKey, pageNum, pageCount);
+                //list = SolrNetSearchBll.Query(userInterestKey, "", "","","",pageNum,pageCount);
             }
-            if (list.Count == 0)
-            {
-                return string.Empty;
-            }
-            return JsonConvert.SerializeObject(list);
+            
+            return list;
         }
 
         /// <summary>
@@ -47,10 +44,10 @@ namespace ImpinkerMobile.Controllers
         /// <param name="pageCount"></param>
         /// <returns></returns>
         [HttpGet]
-        public string GetNextPage(int pageNum, int pageCount)
+        public ActionResult GetNextPage(int pageNum, int pageCount)
         {
-            var str = GetByPage(pageNum, pageCount);
-            return str;
+            var list = GetByPage(pageNum, pageCount);
+            return PartialView("_Index_Article", list);
         }
 
         public ActionResult About()

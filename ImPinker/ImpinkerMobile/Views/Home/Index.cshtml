@@ -1,59 +1,80 @@
 ﻿@{
-    ViewBag.Title = "Engine Start";
+    ViewBag.Title = "车酷";
 }
-<!-----最外层---->
-<div class="outter">
-    <div class="wrap">
-        <!-- 主体内容 -->
-        <div class="lay-left">
-            <div class="pos">
-                @Html.Partial("_NavPartial")
-                <!-----内容投放区域---->
-                <section class="each_panel">
-                    <!-- news begin -->
-                    <section class="new">
-                        <ul id="articleConten">
-                            
-                        </ul>
-                        <div class="f_loadimg" id="f_loadimg" style="display: none;">
-                            <img src="http://static.fblife.com/static/wapnews/newwapnew/images/loading.gif">
-                        </div>
-                        <div class="f_ionload" id="loadmore">
-                            <span style="color: red; font-size: 14px; display: none;" id="span_timeout">加载超时</span>
-                            <a href="javascript:void(0)" id="a_getmorenews">点击加载更多</a>
-                        </div>
-                    </section>
-                    <!-- news over -->
-                </section>
-                @Html.Partial("_FootPartial")
-                <!-----!内容投放区域---->
+<div class="page" id="page-infinite-scroll-bottom">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left open-panel"></a>
+        <a class="button button-link button-nav pull-right external" href="/Search/Index" data-transition='slide-out'>
+            <span class="icon icon-search"></span>
+            搜搜
+        </a>
+        <h1 class="title">@ViewBag.Title</h1>
+    </header>
+    @Html.Partial("~/Views/Shared/_NavPartial.cshtml")
+    <div class="content infinite-scroll" data-distance="100">
+        <div class="card-content">
+            <div class="list-block media-list">
+                <div class="list-block media-list" id="content">
+                    @{
+                        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- 加载提示符 -->
+        <div class="infinite-scroll-preloader">
+            <div class="preloader">
             </div>
         </div>
     </div>
 </div>
-@section scripts
+@section Foot
 {
     <script type="text/javascript">
-        var pageCount = @ViewBag.pageCount;
-        var pageIndex = 1;
-        var jsonData=@Html.Raw(ViewBag.ArticleJson);
-    </script>
-    <script src="~/Scripts/Home/index.js"></script>
-    <script type="text/template1">
-        <li>
-            <section class="new_img"><a href="$ArticleUrl$">
-                                         <img src="$CoverImage$" /></a></section>
-            <section class="new_txt">
-                <p>
-                    <a href="$ArticleUrl$">$ArticleName$</a>
-                </p>
-                <section>$Description$...</section>
-                <section>
-                    <div class="new_time">$CreateTime$</div>
-                    <div class="new_ly">0</div>
-                    <div class="clear"></div>
-                </section>
-            </section>
-        </li>
+        $(function () {
+            'use strict';
+            //无限滚动
+            $(document).on("pageInit", "#page-infinite-scroll-bottom", function (e, id, page) {
+                $(page).on('infinite', function () {
+                    // 如果正在加载，则退出
+                    if (loading) return;
+                    // 设置flag
+                    loading = true;
+                    // 模拟1s的加载过程
+                    getList();
+                });
+            });
+            $.init();
+        });
+        $(document).ready(function () {
+            SetTabSelected('tab_index');
+            $('.infinite-scroll-preloader').remove();
+        });
+        var pagenum = 2; //页码
+        var count = 10; //每次取的数据数
+        var loading = false;
+        var getList = function () {
+            // 重置加载flag
+            loading = false;
+            var data = {
+                pageCount: count, pageNum: pagenum
+            };
+            $.ajax({
+                url: "/Home/GetNextPage",
+                type: "GET",
+                data: data,
+                async: false,
+                success: function (dataresult) {
+                    if (dataresult != null && dataresult.length > 0) {
+                        $("#content").append(dataresult);
+                        pagenum++;
+                    } else {
+                        $.toast('没有更多数据');
+                    }
+                    $('.infinite-scroll-preloader').remove();
+                }
+            });
+        };
+        
     </script>
 }

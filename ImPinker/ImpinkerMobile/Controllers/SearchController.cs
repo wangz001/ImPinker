@@ -35,11 +35,11 @@ namespace ImpinkerMobile.Controllers
         {
             if (!string.IsNullOrEmpty(key))
             {
-                List<ArticleViewModel> list = SolrSearchBll.Query(key, pageNum, pageCount);
-                if (list != null && list.Count > 0)
-                {
-                    return JsonConvert.SerializeObject(list);
-                }
+                //List<ArticleViewModel> list = SolrNetSearchBll.Query(key, "", "", "", "", pageNum, pageCount);
+                //if (list != null && list.Count > 0)
+                //{
+                //    return JsonConvert.SerializeObject(list);
+                //}
             }
             return string.Empty;
         }

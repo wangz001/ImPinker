@@ -1,0 +1,23 @@
+﻿@using Common.DateTimeUtil
+@using ImBLL
+@using ImModel.ViewModel
+@{
+    var list = (List<ArticleViewModel>)Model;
+    if (list != null && list.Count > 0)
+    {
+        foreach (var vm in list)
+        {
+            <li class="item-content">
+                <div class="item-media">
+                    <img src="@ImPinker.Common.ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" width="80" height="60">
+                </div>
+                <div class="item-inner">
+                    <div class="item-title-row">
+                        <div class="item-title">@vm.ArticleName</div>
+                    </div>
+                    <div class="item-subtitle">@vm.KeyWords @TUtil.DateFormatToString(vm.CreateTime)</div>
+                </div>
+            </li>
+        }
+    }
+}
