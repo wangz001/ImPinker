@@ -11,17 +11,19 @@
         <h1 class="title">@ViewBag.Title</h1>
     </header>
     @Html.Partial("~/Views/Shared/_NavPartial.cshtml")
-    <div class="content infinite-scroll" data-distance="100">
-        <div class="list-block media-list" >
-            <ul id="content">
-                @{
-                    Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
-                }
-            </ul>
-        </div>
-        <!-- 加载提示符 -->
-        <div class="infinite-scroll-preloader">
-            <div class="preloader">
+    <div class="content infinite-scroll  native-scroll" data-distance="100">
+        <div class="card-content">
+            <div class="list-block media-list">
+                <ul id="content">
+                    @{
+                        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+                    }
+                </ul>
+            </div>
+            <!-- 加载提示符 -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader">
+                </div>
             </div>
         </div>
     </div>

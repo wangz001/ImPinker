@@ -18,8 +18,10 @@
             </div>
             <a id="btnsearch" class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
         </div>
-        <div class="list-block media-list " id="content">
-            <ul>
+        <div >曲目列表</div>
+        <div class="list-block media-list " >
+           
+            <ul id="content">
                 @Html.Partial("_Index_Article", searchVm.ArticleList)
             </ul>
         </div>
@@ -38,7 +40,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             SetTabSelected('tab-label');
-
+            var length = $('#content li').length;
+            if (length > 20) {
+                $('.infinite-scroll-preloader').show();
+            } else {
+                $('.infinite-scroll-preloader').hide();
+            }
             //无限加载
             'use strict';
             //无限滚动
@@ -51,6 +58,7 @@
                     loading = true;
                     // 重置加载flag
                     loading = false;
+                    
                     getList();
                     $.refreshScroller();
 

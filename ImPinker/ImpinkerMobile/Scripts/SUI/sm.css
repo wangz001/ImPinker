@@ -1151,7 +1151,7 @@ a:active {
 }
 /* === Lists === */
 .list-block {
-  margin: 1.75rem 0;
+  /*margin: 1.75rem 0;*/
   font-size: 0.85rem;
   /*
     .swipeout {
