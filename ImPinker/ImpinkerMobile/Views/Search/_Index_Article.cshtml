@@ -15,10 +15,10 @@
                 <div class="item-inner">
                     <div class="item-title-row">
                         <a href="/Article/Index?id=@vm.Id" target="_blank" class="item-link item-content">
-                            <div class="item-title">@vm.ArticleName</div>
+                            <div class="item-title">@Html.Raw(vm.ArticleName)</div>
                         </a>
                     </div>
-                    <div class="item-subtitle">@vm.KeyWords</div>
+                    <div class="item-subtitle">@Html.Raw(vm.KeyWords)</div>
                 </div>
             </li>
         }

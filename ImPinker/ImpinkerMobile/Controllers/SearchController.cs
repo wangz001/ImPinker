@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ImBLL;
+using ImModel.Dto;
 using ImModel.ViewModel;
 using Newtonsoft.Json;
 
@@ -15,33 +16,31 @@ namespace ImpinkerMobile.Controllers
         //
         // GET: /Search/
 
-        public ActionResult Index(string key)
+        public ActionResult Index(SearchDto dto)
         {
-            var resultStr = "[]";
-            if (!string.IsNullOrEmpty(key))
+            if (dto.PageNum == 0)
             {
-                resultStr = GetByPage(key, 1, 10);
-                if (string.IsNullOrEmpty(resultStr))
-                {
-                    resultStr = "[]";
-                }
+                dto.PageNum = 1;
             }
-            ViewBag.ArticleJson = resultStr;
-            ViewBag.pageCount = IndexPageCount;
+            if (dto.PageCount == 0)
+            {
+                dto.PageCount = 32;
+            }
+            dto.IsHighLight = true;
+            var searchvm = GetByPage(dto);
+            ViewBag.searchVm = searchvm;
             return View();
         }
 
-        private string GetByPage(string key, int pageNum, int pageCount)
+        private SearchResultVm GetByPage(SearchDto dto)
         {
-            if (!string.IsNullOrEmpty(key))
-            {
-                //List<ArticleViewModel> list = SolrNetSearchBll.Query(key, "", "", "", "", pageNum, pageCount);
-                //if (list != null && list.Count > 0)
-                //{
-                //    return JsonConvert.SerializeObject(list);
-                //}
-            }
-            return string.Empty;
+            var searchvm = new SearchResultVm();
+            if (string.IsNullOrEmpty(dto.Key) && string.IsNullOrEmpty(dto.Tab)) return searchvm;
+            var urlDecode = HttpUtility.UrlDecode(dto.Key);
+            if (urlDecode != null)
+                dto.Key = urlDecode.Replace(" ", ",");  //url解码，去除特殊字符
+            searchvm = SolrNetSearchBll.Query(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount);
+            return searchvm;
         }
 
         /// <summary>
@@ -52,9 +51,10 @@ namespace ImpinkerMobile.Controllers
         /// <param name="pageCount">每页的个数</param>
         /// <returns></returns>
         [HttpGet]
-        public string GetNextPage(string key, int pageNum, int pageCount)
+        public ActionResult GetNextPage(SearchDto dto)
         {
-            return GetByPage(key, pageNum, pageCount);
+            var searchvm = GetByPage(dto);
+            return PartialView("_Index_Article", searchvm.ArticleList);
         }
     }
 }

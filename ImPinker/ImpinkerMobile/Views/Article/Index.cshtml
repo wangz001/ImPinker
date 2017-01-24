@@ -1,5 +1,56 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿@using ImModel.ViewModel
 
-<h2>Index</h2>
+@{
+    var article = (ArticleViewModel)ViewBag.Article;
+    ViewBag.Title = article.ArticleName;
+
+}
+<div id="page-preloader" class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">view</h1>
+    </header>
+    <div class="content content-padded">
+        <!-- 文章主体 -->
+        <div class="article" id="thread-container">
+            <input type="hidden" id="articleId" value="@article.Id">
+            <h3>
+                <!-- 是否精华 -->
+                <i class="essence-mark"></i>
+                @article.ArticleName
+            </h3>
+            <div class="thread-info">
+
+                <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
+            </div>
+            <div class="articlecontent">
+                @Html.Raw(article.Content == null ? "" : article.Content[0])
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            //加载css文件，重新布局文章的样式
+            var link = document.createElement('link');
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+            link.href = '/Content/thread.css';
+            document.getElementsByTagName("head")[0].appendChild(link);
+            //sui组件初始化
+            $.init();
+        });
+    
+    </script>
+    }

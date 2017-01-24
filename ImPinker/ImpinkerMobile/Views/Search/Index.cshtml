@@ -1,67 +1,87 @@
-﻿@{
-    ViewBag.Title = "Engine Start";
+﻿@using ImModel.ViewModel
+@{
+    ViewBag.Title = "搜索";
+    var searchVm = (SearchResultVm)ViewBag.searchVm;
 }
-<!-----最外层---->
-<!-----搜索框---->
-<div>
-    <span><input type="text" id="search_txt" placeholder="请输入要搜索的内容"></span>
-    <span><a href="javascript:;" id="btn_search">搜索</a></span>
-</div>
-<!-----搜索框end---->
-<div class="outter">
-    <div class="wrap">
-        <!-- 主体内容 -->
-        <div class="lay-left">
-            <div class="pos">
-               
-                @Html.Partial("_NavPartial")
-                
-                <!-----内容投放区域---->
-                <section class="each_panel">
-                    <!-- news begin -->
-                    <section class="new">
-                        <ul id="articleConten"></ul>
-                        <div class="f_loadimg" id="f_loadimg" style="display: none;">
-                            <img src="http://static.fblife.com/static/wapnews/newwapnew/images/loading.gif">
-                        </div>
-                        <div class="f_ionload" id="loadmore">
-                            <span style="color: red; font-size: 14px; display: none;" id="span_timeout">加载超时</span>
-                            <a href="javascript:void(0)" id="a_getmorenews">点击加载更多</a>
-                        </div>
-                    </section>
-                    <!-- news over -->
-                </section>
-                <!-----!内容投放区域---->
+<div class="page" id="page-infinite-scroll-bottom">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left " href="/Home/Index">
+            <span class="icon icon-left"></span>返回
+        </a>
+        <h1 class="title">@ViewBag.Title</h1>
+    </header>
+    @Html.Partial("~/Views/Shared/_NavPartial.cshtml")
+    <div class="content infinite-scroll" data-distance="100">
+        <div class="searchbar row">
+            <div class="search-input col-85">
+                <input type="search" id='txtsearch' placeholder='输入关键字...' />
+            </div>
+            <a id="btnsearch" class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
+        </div>
+        <div class="list-block media-list " id="content">
+            @Html.Partial("_Index_Article", searchVm.ArticleList)
+        </div>
+        <!-- 加载提示符 -->
+        <div class="infinite-scroll-preloader">
+            <div class="preloader">
             </div>
         </div>
     </div>
+
 </div>
+
 @section scripts
 {
-    <script type="text/javascript">
-        var pageCount = @ViewBag.pageCount;
-        var pageNum = 1;
-        var jsonData=@Html.Raw(ViewBag.ArticleJson);
-    </script>
     <script src="~/Scripts/Search/search.js"></script>
-    <script type="text/template1">
-        <li>
-            <section class="new_img">
-                <a href="$ArticleUrl$">
-                    <img src="$CoverImage$" />
-                </a>
-            </section>
-            <section class="new_txt">
-                <p>
-                    <a href="$ArticleUrl$">$ArticleName$</a>
-                </p>
-                <section>$Description$...</section>
-                <section>
-                    <div class="new_time">$CreateTime$</div>
-                    <div class="new_ly">0</div>
-                    <div class="clear"></div>
-                </section>
-            </section>
-        </li>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SetTabSelected('tab-label');
+
+            //无限加载
+            'use strict';
+            //无限滚动
+            $(document).on("pageInit", "#page-infinite-scroll-bottom", function (e, id, page) {
+                var loading = false;
+                $(page).on('infinite', function () {
+                    // 如果正在加载，则退出
+                    if (loading) return;
+                    // 设置flag
+                    loading = true;
+                    // 重置加载flag
+                    loading = false;
+                    getList();
+                    $.refreshScroller();
+
+                });
+            });
+            $.init();
+        });
+        var pagenum = 2; //页码
+        var count = 30; //每次取的数据数
+        var loading = false;
+        var getList = function () {
+            var key = "乌兰布统自驾游";
+            // 重置加载flag
+            loading = false;
+            var data = {
+                key: key, pageCount: count, pageNum: pagenum
+            };
+            $.ajax({
+                url: "/Search/GetNextPage",
+                type: "GET",
+                data: data,
+                async: false,
+                success: function (dataresult) {
+                    if (dataresult != null && dataresult.length > 0) {
+                        $("#content").append(dataresult);
+                        pagenum++;
+                    } else {
+                        $.toast('没有更多数据');
+                        $('.infinite-scroll-preloader').remove();
+                    }
+                }
+            });
+        };
+
     </script>
 }

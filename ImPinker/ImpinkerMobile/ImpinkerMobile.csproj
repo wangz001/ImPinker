@@ -71,6 +71,10 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SolrNet, Version=0.5.0.1002, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\SolrNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -191,6 +195,7 @@
     <Compile Include="Startup1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\thread.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\impinkerMobile.pubxml" />
@@ -198,6 +203,7 @@
     <Content Include="Scripts\Home\index.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\Search\search.js" />
+    <Content Include="Scripts\SUI\sm.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -226,6 +232,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Home\_Index_Article.cshtml" />
+    <Content Include="Views\Search\_Index_Article.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -237,6 +244,10 @@
     <ProjectReference Include="..\BLL\ImBLL.csproj">
       <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
       <Name>ImBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6f74233e-4fd6-4ccd-a8aa-fb5e45b9b123}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\EasyNet.Solr\EasyNet.Solr.csproj">
       <Project>{68d7b310-d02c-4503-9caa-9f3af0d24fb5}</Project>

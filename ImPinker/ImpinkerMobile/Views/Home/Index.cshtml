@@ -12,14 +12,10 @@
     </header>
     @Html.Partial("~/Views/Shared/_NavPartial.cshtml")
     <div class="content infinite-scroll" data-distance="100">
-        <div class="card-content">
-            <div class="list-block media-list">
-                <div class="list-block media-list" id="content">
-                    @{
-                        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
-                    }
-                </div>
-            </div>
+        <div class="list-block media-list " id="content">
+            @{
+                Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+            }
         </div>
         <!-- 加载提示符 -->
         <div class="infinite-scroll-preloader">
@@ -28,30 +24,34 @@
         </div>
     </div>
 </div>
-@section Foot
+@section scripts
 {
     <script type="text/javascript">
-        $(function () {
+        $(document).ready(function () {
+            SetTabSelected('tab_index');
+            //无限加载
             'use strict';
             //无限滚动
             $(document).on("pageInit", "#page-infinite-scroll-bottom", function (e, id, page) {
+                var loading = false;
                 $(page).on('infinite', function () {
                     // 如果正在加载，则退出
                     if (loading) return;
                     // 设置flag
                     loading = true;
                     // 模拟1s的加载过程
-                    getList();
+                    setTimeout(function () {
+                        // 重置加载flag
+                        loading = false;
+                        getList();
+                        $.refreshScroller();
+                    }, 1000);
                 });
             });
             $.init();
         });
-        $(document).ready(function () {
-            SetTabSelected('tab_index');
-            $('.infinite-scroll-preloader').remove();
-        });
         var pagenum = 2; //页码
-        var count = 10; //每次取的数据数
+        var count = 30; //每次取的数据数
         var loading = false;
         var getList = function () {
             // 重置加载flag
@@ -71,10 +71,10 @@
                     } else {
                         $.toast('没有更多数据');
                     }
-                    $('.infinite-scroll-preloader').remove();
+                    //$('.infinite-scroll-preloader').remove();
                 }
             });
         };
-        
+
     </script>
 }
