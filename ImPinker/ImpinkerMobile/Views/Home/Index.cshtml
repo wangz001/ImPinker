@@ -12,10 +12,12 @@
     </header>
     @Html.Partial("~/Views/Shared/_NavPartial.cshtml")
     <div class="content infinite-scroll" data-distance="100">
-        <div class="list-block media-list " id="content">
-            @{
-                Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
-            }
+        <div class="list-block media-list" >
+            <ul id="content">
+                @{
+                    Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+                }
+            </ul>
         </div>
         <!-- 加载提示符 -->
         <div class="infinite-scroll-preloader">

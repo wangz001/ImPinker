@@ -19,7 +19,9 @@
             <a id="btnsearch" class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
         </div>
         <div class="list-block media-list " id="content">
-            @Html.Partial("_Index_Article", searchVm.ArticleList)
+            <ul>
+                @Html.Partial("_Index_Article", searchVm.ArticleList)
+            </ul>
         </div>
         <!-- 加载提示符 -->
         <div class="infinite-scroll-preloader">

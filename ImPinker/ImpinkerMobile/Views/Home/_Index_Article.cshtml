@@ -6,19 +6,21 @@
     {
         foreach (var vm in list)
         {
-            <li class="item-content">
-                <div class="item-media">
-                    <a href="/Article/Index?id=@vm.Id" target="_blank" class="item-link item-content">
-                        <img src="@ImPinker.Common.ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" width="80" height="60">
-                    </a>
-                </div>
-                <div class="item-inner">
-                    <div class="item-title-row">
+            <li>
+                <div class="item-content">
+                    <div class="item-media">
                         <a href="/Article/Index?id=@vm.Id" target="_blank" class="item-link item-content">
-                            <div class="item-title">@vm.ArticleName</div>
+                            <img src="@ImPinker.Common.ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" width="80" height="60">
                         </a>
                     </div>
-                    <div class="item-subtitle">@vm.KeyWords</div>
+                    <div class="item-inner">
+                        <div class="item-title-row">
+                            <a href="/Article/Index?id=@vm.Id" target="_blank" class="item-link item-content">
+                                <div class="item-title">@vm.ArticleName</div>
+                            </a>
+                        </div>
+                        <div class="item-subtitle">@vm.KeyWords</div>
+                    </div>
                 </div>
             </li>
         }
