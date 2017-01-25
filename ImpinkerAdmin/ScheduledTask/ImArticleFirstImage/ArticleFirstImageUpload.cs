@@ -126,18 +126,27 @@ namespace GetCarDataService.ImArticleFirstImage
             var tempdir = string.Format(AppDomain.CurrentDomain.BaseDirectory + "\\Upload\\temp_{0}.jpg", DateTime.Now.Ticks);
             const int width = 360;
             const int height = 240;
-            //下载
-            Uri myUri = new Uri(imgUrl);
-            WebRequest webRequest = WebRequest.Create(myUri);
-            WebResponse webResponse = webRequest.GetResponse();
-            Bitmap myImage = new Bitmap(webResponse.GetResponseStream());
-            MemoryStream ms = new MemoryStream();
-            myImage.Save(ms, ImageFormat.Jpeg);
-            if (!Directory.Exists(Path.GetDirectoryName(tempdir)))//如果不存在就创建file文件夹
+            Bitmap myImage;
+            try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(tempdir));
+                //下载
+                Uri myUri = new Uri(imgUrl);
+                WebRequest webRequest = WebRequest.Create(myUri);
+                WebResponse webResponse = webRequest.GetResponse();
+                myImage = new Bitmap(webResponse.GetResponseStream());
+                MemoryStream ms = new MemoryStream();
+                myImage.Save(ms, ImageFormat.Jpeg);
+                if (!Directory.Exists(Path.GetDirectoryName(tempdir)))//如果不存在就创建file文件夹
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(tempdir));
+                }
+                myImage.Save(tempdir);
             }
-            myImage.Save(tempdir);
+            catch (Exception e)
+            {
+                Common.WriteErrorLog("下载图片出错：" + imgUrl);
+                return false;
+            }
             //剪切(如果高大于1.5倍宽，剪切)
             if (1.5 * (myImage.Width) < myImage.Height)
             {
