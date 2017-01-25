@@ -15,7 +15,11 @@ namespace ImpinkerMobile.Controllers
         private const int IndexPageCount = 10;
         //
         // GET: /Search/
-
+        /// <summary>
+        /// 搜索首页
+        /// </summary>
+        /// <param name="dto">搜索的有关参数</param>
+        /// <returns></returns>
         public ActionResult Index(SearchDto dto)
         {
             if (dto.PageNum == 0)
@@ -28,6 +32,7 @@ namespace ImpinkerMobile.Controllers
             }
             dto.IsHighLight = true;
             var searchvm = GetByPage(dto);
+            ViewBag.searchKey = dto.Key;
             ViewBag.searchVm = searchvm;
             return View();
         }
@@ -55,6 +60,12 @@ namespace ImpinkerMobile.Controllers
         {
             var searchvm = GetByPage(dto);
             return PartialView("_Index_Article", searchvm.ArticleList);
+        }
+
+        public ActionResult HotSearchKey()
+        {
+            string[] keys = { "越野老炮", "自驾游", "越野穿越", "秋名山车神", "动手达人", "技术探讨"}; 
+            return PartialView("_Search_HotKey",keys);
         }
     }
 }

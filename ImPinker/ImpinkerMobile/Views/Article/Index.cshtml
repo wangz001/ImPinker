@@ -3,7 +3,6 @@
 @{
     var article = (ArticleViewModel)ViewBag.Article;
     ViewBag.Title = article.ArticleName;
-
 }
 <div id="page-preloader" class="page">
     <header class="bar bar-nav">
@@ -11,25 +10,32 @@
             <span class="icon icon-left"></span>
             返回
         </a>
-        <h1 class="title">view</h1>
+        <h1 class="title">文章</h1>
     </header>
     <div class="content content-padded">
         <!-- 文章主体 -->
         <div class="article" id="thread-container">
             <input type="hidden" id="articleId" value="@article.Id">
-            <h3>
-                <!-- 是否精华 -->
-                <i class="essence-mark"></i>
-                @article.ArticleName
-            </h3>
-            <div class="thread-info">
+            <div class="header">
+                <h1>
+                    <!-- 是否精华 -->
+                    <i class="essence-mark"></i>
+                    @article.ArticleName
+                </h1>
+                <div class="thread-info">
 
-                <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
+                    <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
+                </div>
             </div>
             <div class="articlecontent">
                 @Html.Raw(article.Content == null ? "" : article.Content[0])
+                
             </div>
-
+            <div class="article-footer">
+                <p>转载自:@article.Company</p>
+                <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
+                <p>欢迎关注车酷公众账号</p>
+            </div>
         </div>
 
 

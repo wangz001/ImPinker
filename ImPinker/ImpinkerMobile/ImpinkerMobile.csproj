@@ -195,6 +195,8 @@
     <Compile Include="Startup1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\image\logo_100.png" />
+    <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
     <Content Include="Content\thread.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -233,6 +235,7 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Home\_Index_Article.cshtml" />
     <Content Include="Views\Search\_Index_Article.cshtml" />
+    <Content Include="Views\Search\_Search_HotKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

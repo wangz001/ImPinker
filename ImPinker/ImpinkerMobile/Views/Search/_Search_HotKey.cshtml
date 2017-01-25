@@ -1,0 +1,16 @@
+﻿@{
+    var list = (string [])Model;
+    if (list != null && list.ToList().Count > 0)
+    {
+        <ul>
+            @{
+        foreach (var searchkey in list)
+        {
+            <li>
+                @Html.ActionLink(searchkey, "Index", "Search", new { key = searchkey }, null)
+            </li>
+        }
+            }
+        </ul>
+    }
+}

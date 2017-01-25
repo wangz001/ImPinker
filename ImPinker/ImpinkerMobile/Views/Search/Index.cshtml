@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "搜索";
     var searchVm = (SearchResultVm)ViewBag.searchVm;
+    var searchKey = ViewBag.searchKey;
 }
 <div class="page" id="page-infinite-scroll-bottom">
     <header class="bar bar-nav">
@@ -18,9 +19,19 @@
             </div>
             <a id="btnsearch" class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
         </div>
-        <div >曲目列表</div>
-        <div class="list-block media-list " >
-           
+        <div>
+            @{
+                if (string.IsNullOrEmpty(searchKey))
+                {
+                    Html.RenderAction("HotSearchKey", "Search");
+                }
+                else
+                {
+                    <span>共有 @searchVm.TotalCount 条结果</span>
+                }
+            }
+        </div>
+        <div class="list-block media-list ">
             <ul id="content">
                 @Html.Partial("_Index_Article", searchVm.ArticleList)
             </ul>
@@ -39,7 +50,7 @@
     <script src="~/Scripts/Search/search.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            SetTabSelected('tab-label');
+            SetTabSelected('tab_me');
             var length = $('#content li').length;
             if (length > 20) {
                 $('.infinite-scroll-preloader').show();
@@ -58,7 +69,7 @@
                     loading = true;
                     // 重置加载flag
                     loading = false;
-                    
+
                     getList();
                     $.refreshScroller();
 
