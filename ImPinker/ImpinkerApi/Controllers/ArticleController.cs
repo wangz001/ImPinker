@@ -30,6 +30,13 @@ namespace ImpinkerApi.Controllers
         public JsonResult GetByPage(int pageNum, int pageSize)
         {
             var list = GetListsByPage(pageNum, pageSize);
+            if (list != null && list.Count > 0)
+            {
+                foreach (var item in list)
+                {
+                    item.CoverImage = ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(item.CoverImage, 0);
+                }
+            }
             return Json(new { success = true, data = list },JsonRequestBehavior.AllowGet); 
         }
 

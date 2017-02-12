@@ -24,23 +24,56 @@
 
 	<body>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div class="mui-slider">
-				<div class="mui-slider-group">
-					<div class="mui-slider-item">
-						<!-- 具体内容 -->
-						<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/shuijiao.jpg">
+						</a>
 					</div>
-					<!--第二个内容区-->
+					<!-- 第一张 -->
 					<div class="mui-slider-item">
-						<img class="mui-media-object mui-pull-left" src="images/muwu.jpg">
-						<!-- 具体内容 -->
+						<a href="#">
+							<img src="images/shuijiao.jpg">
+						</a>
 					</div>
+					<!-- 第二张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/muwu.jpg">
+						</a>
+					</div>
+					<!-- 第三张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/cbd.jpg">
+						</a>
+					</div>
+					<!-- 第四张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/yuantiao.jpg">
+						</a>
+					</div>
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/shuijiao.jpg">
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
 				</div>
 			</div>
 			<div class="mui-scroll">
-				<ul class="mui-table-view">
+				<ul class="mui-table-view" id="list">
 					<li class="mui-table-view-cell mui-media">
-						<a href="javascript:;">
+						<a href="view/article/preview.html">
 							<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
 							<div class="mui-media-body">
 								幸福
@@ -89,7 +122,8 @@
 		/**
 		 * 上拉加载具体业务实现
 		 */
-		var pageNum=1;
+		var pageNum = 1;
+
 		function pullupRefresh() {
 			//			setTimeout(function() {
 			//				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
@@ -113,15 +147,15 @@
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				success: function(data) {
-					var list=data.data;
+					var list = data.data;
 					for(var i = 0; i < list.length; i++) {
-						var item=list[i];
+						var item = list[i];
 						var table = document.body.querySelector('.mui-table-view');
 						var li = document.createElement('li');
 						li.className = 'mui-table-view-cell mui-media';
-						li.innerHTML = '<a href="javascript:;">' +
-							'<img class="mui-media-object mui-pull-left" src="images/cbd.jpg"><div class="mui-media-body">' +
-							item.ArticleName+'<p class="mui-ellipsis">'+item.Company+'</p></div></a>';
+						li.innerHTML = '<a href="view/article/preview.html" articleid="'+item.Url+'">' +
+							'<img class="mui-media-object mui-pull-left" src="' + item.CoverImage + '"><div class="mui-media-body">' +
+							item.ArticleName + '<p class="mui-ellipsis">' + item.Company + '</p></div></a>';
 						table.appendChild(li);
 					}
 					pageNum++;
@@ -129,6 +163,97 @@
 				}
 			});
 		}
+
+		/*
+		 * 列表点击事件
+		 * */
+		var aniShow = "pop-in";
+		mui('#list').on('tap', 'a', function() {
+			var id = this.getAttribute('href');
+			var href = this.href;
+			var type = "common"; // this.getAttribute("open-type");
+			var articleid=this.getAttribute('articleid');
+			//不使用父子模板方案的页面
+			if(type == "common") {
+				var webview_style = {
+					popGesture: "close"
+				};
+				//侧滑菜单需动态控制一下zindex值；
+				if(~id.indexOf('offcanvas-')) {
+					webview_style.zindex = 9998;
+					webview_style.popGesture = ~id.indexOf('offcanvas-with-right') ? "close" : "none";
+				}
+				//图标界面需要启动硬件加速
+				if(~id.indexOf('icons.html')) {
+					webview_style.hardwareAccelerated = true;
+				}
+				mui.openWindow({
+					id: id,
+					url: this.href,
+					styles: webview_style,
+					show: {
+						aniShow: aniShow
+					},
+					waiting: {
+						autoShow: false
+					},
+						extras: {
+							articleid: articleid //扩展参数
+						}
+				});
+			} else if(id && ~id.indexOf('.html')) {
+				if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {
+					mui.openWindow({
+						id: id,
+						url: this.href,
+						styles: {
+							popGesture: 'close'
+						},
+						show: {
+							aniShow: aniShow
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				} else {
+					//TODO  by chb 当初这么设计，是为了一个App中有多个模板，目前仅有一个模板的情况下，实际上无需这么复杂
+					//使用父子模板方案打开的页面
+					//获得共用模板组
+					var template = getTemplate('default');
+					//判断是否显示右上角menu图标；
+					var showMenu = ~href.indexOf('popovers.html') ? true : false;
+					//获得共用父模板
+					var headerWebview = template.header;
+					//获得共用子webview
+					var contentWebview = template.content;
+					var title = this.innerText.trim();
+					//通知模板修改标题，并显示隐藏右上角图标；
+					mui.fire(headerWebview, 'updateHeader', {
+						title: title,
+						showMenu: showMenu,
+						target: href,
+						aniShow: aniShow
+					});
+
+					if(mui.os.ios || (mui.os.android && parseFloat(mui.os.version) < 4.4)) {
+						var reload = true;
+						if(!template.loaded) {
+							if(contentWebview.getURL() != this.href) {
+								contentWebview.loadURL(this.href);
+							} else {
+								reload = false;
+							}
+						} else {
+							reload = false;
+						}
+						(!reload) && contentWebview.show();
+
+						headerWebview.show(aniShow, 150);
+					}
+				}
+			}
+		});
 	</script>
 
 </html>

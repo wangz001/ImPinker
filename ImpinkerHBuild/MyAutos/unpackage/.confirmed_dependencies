@@ -22,7 +22,19 @@
       "images/shuijiao.jpg",
       "js/mui.min.js",
       "css/mui.min.css",
-      "fonts/mui.ttf"
+      "fonts/mui.ttf",
+      "images/yuantiao.jpg",
+      "/images/yuantiao.jpg"
+    ],
+    "refer": [
+      "view/article/preview.html"
+    ]
+  },
+  "view/article/preview.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
     ],
     "refer": []
   }
