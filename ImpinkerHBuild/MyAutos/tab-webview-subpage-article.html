@@ -84,6 +84,21 @@
 				</ul>
 			</div>
 		</div>
+	<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">拍照或录像</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">选取现有的</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture" class=""><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script>
@@ -125,20 +140,6 @@
 		var pageNum = 1;
 
 		function pullupRefresh() {
-			//			setTimeout(function() {
-			//				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
-			//				var table = document.body.querySelector('.mui-table-view');
-			//				var cells = document.body.querySelectorAll('.mui-table-view-cell');
-			//				for(var i = cells.length, len = i + 20; i < len; i++) {
-			//					var li = document.createElement('li');
-			//					li.className = 'mui-table-view-cell mui-media';
-			//					li.innerHTML = '<a href="javascript:;">' +
-			//						'<img class="mui-media-object mui-pull-left" src="images/cbd.jpg"><div class="mui-media-body">' +
-			//						'CBD<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p></div></a>';
-			//					table.appendChild(li);
-			//				}
-			//			}, 1000);
-
 			mui.ajax('http://api.myautos.cn/Article/GetByPage', {
 				data: {
 					pageNum: pageNum,
@@ -153,7 +154,7 @@
 						var table = document.body.querySelector('.mui-table-view');
 						var li = document.createElement('li');
 						li.className = 'mui-table-view-cell mui-media';
-						li.innerHTML = '<a href="view/article/preview.html" articleid="'+item.Url+'">' +
+						li.innerHTML = '<a href="view/article/preview.html" articleid="' + item.Id + '">' +
 							'<img class="mui-media-object mui-pull-left" src="' + item.CoverImage + '"><div class="mui-media-body">' +
 							item.ArticleName + '<p class="mui-ellipsis">' + item.Company + '</p></div></a>';
 						table.appendChild(li);
@@ -172,11 +173,12 @@
 			var id = this.getAttribute('href');
 			var href = this.href;
 			var type = "common"; // this.getAttribute("open-type");
-			var articleid=this.getAttribute('articleid');
+			var articleid = this.getAttribute('articleid');
 			//不使用父子模板方案的页面
 			if(type == "common") {
 				var webview_style = {
-					popGesture: "close"
+					popGesture: "close",
+					
 				};
 				//侧滑菜单需动态控制一下zindex值；
 				if(~id.indexOf('offcanvas-')) {
@@ -197,9 +199,9 @@
 					waiting: {
 						autoShow: false
 					},
-						extras: {
-							articleid: articleid //扩展参数
-						}
+					extras: {
+						articleid: "http://m.myautos.cn/Article/Index?id="+articleid //扩展参数
+					}
 				});
 			} else if(id && ~id.indexOf('.html')) {
 				if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {

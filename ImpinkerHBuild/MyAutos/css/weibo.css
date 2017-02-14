@@ -1,0 +1,7 @@
+.mui-card .mui-card-content{
+	margin: inherit;
+}
+
+.mui-pull-bottom-pocket, .mui-pull-top-pocket{
+	height: 60px;
+}

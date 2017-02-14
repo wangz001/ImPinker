@@ -8,68 +8,71 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
-			}
-			.title {
-				padding: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 15px;
-				background-color: #fff;
-			}
-		</style>
+		<link rel="stylesheet" href="css/weibo.css" />
 	</head>
 
 	<body>
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
-				<div class="title">
-					这是webview模式选项卡中的第2个子页面，该页面展示一个支持下拉刷新、上拉加载的消息列表
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
+			<div class="mui-scroll mui-table-view">
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img src="images/logo.png">
+						<div class="mui-media-body">
+							小Mf
+							<p>发表于 2016-06-30 15:30</p>
+						</div>
+					</div>
+					<div class="mui-card-content">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">赞</a>
+						<a class="mui-card-link">评论</a>
+						<a class="mui-card-link">桂林山水风景区</a>
+					</div>
 				</div>
-				<ul class="mui-table-view mui-table-view-chevron">
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 1</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 2</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 3</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 4</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 5</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 6</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 7</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 8</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 9</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 10</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 11</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 12</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 13</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 14</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 15</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 16</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 17</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 18</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 19</a>
-					</li>
-					<li class="mui-table-view-cell"><a href="" class="mui-navigate-right">Item 20</a>
-					</li>
-				</ul>
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img src="images/logo.png">
+						<div class="mui-media-body">
+							小Mf
+							<p>发表于 2016-06-30 15:30</p>
+						</div>
+					</div>
+					<div class="mui-card-content">
+						<img src="images/logo.png" alt="" width="30%">
+						<img src="images/logo.png" alt="" width="30%">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+						<img src="images/yuantiao.jpg" alt="" width="30%">
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">赞</a>
+						<a class="mui-card-link">评论</a>
+						<a class="mui-card-link">桂林山水风景区</a>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img src="images/logo.png">
+						<div class="mui-media-body">
+							小Mf
+							<p>发表于 2016-06-30 15:30</p>
+						</div>
+					</div>
+					<div class="mui-card-content">
+						<img src="images/yuantiao.jpg" alt="" width="90%">
+
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">赞</a>
+						<a class="mui-card-link">评论</a>
+						<a class="mui-card-link">桂林山水风景区</a>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
@@ -94,7 +97,7 @@
 				setTimeout(function() {
 					var table = document.body.querySelector('.mui-table-view');
 					var cells = document.body.querySelectorAll('.mui-table-view-cell');
-					for (var i = cells.length, len = i + 3; i < len; i++) {
+					for(var i = cells.length, len = i + 3; i < len; i++) {
 						var li = document.createElement('li');
 						li.className = 'mui-table-view-cell';
 						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
@@ -113,7 +116,7 @@
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
 					var table = document.body.querySelector('.mui-table-view');
 					var cells = document.body.querySelectorAll('.mui-table-view-cell');
-					for (var i = cells.length, len = i + 20; i < len; i++) {
+					for(var i = cells.length, len = i + 20; i < len; i++) {
 						var li = document.createElement('li');
 						li.className = 'mui-table-view-cell';
 						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
@@ -123,4 +126,5 @@
 			}
 		</script>
 	</body>
+
 </html>

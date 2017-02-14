@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/weibo/weibo_add.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发送</button>
+			<h1 class="mui-title">发布微博</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<div class="mui-inline">问题和意见</div>
+
+			</div>
+		</div>
+		<div class="row mui-input-row">
+			<textarea id='question' class="mui-input-clear question" placeholder="请详细描述你的问题和意见..."></textarea>
+		</div>
+		<p>图片(选填,提供问题截图,总大小10M以下)</p>
+		<div id="image-list" class="row image-list">
+			<div class="image-item space">
+				<div class="image-close">X</div>
+				<div class="image-up"></div>
+				<div class="file" id="image-1"></div>
+			</div>
+		</div>
+		<p>QQ/邮箱</p>
+		<div class="mui-input-row">
+			<input id='contact' type="text" class="mui-input-clear contact" placeholder="(选填,方便我们联系你 )" />
+		</div>
+		<div class="mui-content-padded">
+			<div class="mui-inline">应用评分</div>
+			<div class="icons mui-inline" style="margin-left: 6px;">
+				<i data-index="1" class="mui-icon mui-icon-star"></i>
+				<i data-index="2" class="mui-icon mui-icon-star"></i>
+				<i data-index="3" class="mui-icon mui-icon-star"></i>
+				<i data-index="4" class="mui-icon mui-icon-star"></i>
+				<i data-index="5" class="mui-icon mui-icon-star"></i>
+			</div>
+		</div><br />
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+
+</html>

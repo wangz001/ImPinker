@@ -12,7 +12,9 @@
       "tab-webview-subpage-setting.html",
       "tab-webview-subpage-chat.html",
       "tab-webview-subpage-contact.html",
-      "tab-webview-subpage-weibo.html"
+      "tab-webview-subpage-weibo.html",
+      "view/weibo/weibo_new.html",
+      "view/search/search.html"
     ]
   },
   "tab-webview-subpage-article.html": {
@@ -34,8 +36,37 @@
     "resources": [
       "js/mui.min.js",
       "fonts/mui.ttf",
-      "css/mui.min.css"
+      "css/mui.min.css",
+      "images/yuantiao.jpg"
     ],
     "refer": []
+  },
+  "tab-webview-subpage-weibo.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/yuantiao.jpg",
+      "images/logo.png",
+      "fonts/mui.ttf",
+      "css/weibo.css"
+    ],
+    "refer": []
+  },
+  "view/weibo/weibo_new.html": {
+    "resources": [
+      "css/weibo/weibo_add.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/weibo/weibo_add.js"
+    ],
+    "refer": []
+  },
+  "view/search/search.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
   }
 }

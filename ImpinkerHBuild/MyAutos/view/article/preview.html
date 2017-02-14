@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -9,13 +8,92 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-transparent">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">顶部选项卡-可左右拖动(div)</h1>
+			<h1 class="mui-title">文章详情</h1>
+			<a  class="mui-icon mui-icon-paperplane mui-pull-right" style="color: #999;"></a>
 		</header>
+
+		<div id="content" class="mui-content">
+
+		</div>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="#share">
+				<span class="mui-icon mui-icon-paperplane"></span>
+			</a>
+
+			
+		</nav>
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">分享给微信好友</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">分享到微信朋友圈</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">分享到新浪微博</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture" class=""><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			
+			//plusReady事件后，在里面接收参数
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var articleid = self.articleid;
+				mui.init({
+					subpages: [{
+						url: articleid,
+						id: articleid,
+						styles: {
+							
+							top: '45px', //mui标题栏默认高度为45px；
+							bottom: '40px' //默认为0px，可不定义；
+						}
+					}]
+				});
+//mui.ajax(articleid,{
+//	data:{
+//		category:'news'
+//	},
+//	dataType:'text/html',//服务器返回json格式数据
+//	type:'get',//HTTP请求类型
+//	success:function(data){
+//		var title = document.getElementById("content");
+//		title.innerHTML=data;
+//	}
+//});
+			});
+
+			//分享按钮
+			mui('body').on('shown', '.mui-popover', function(e) {
+				//console.log('shown', e.detail.id);//detail为当前popover元素
+			});
+			mui('body').on('hidden', '.mui-popover', function(e) {
+				//console.log('hidden', e.detail.id);//detail为当前popover元素
+			});
+
+			mui('body').on('tap', '.mui-popover-action li>a', function() {
+				var a = this,
+					parent;
+				//根据点击按钮，反推当前是哪个actionsheet
+				for(parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+					if(parent.classList.contains('mui-popover-action')) {
+						break;
+					}
+				}
+				//关闭actionsheet
+				mui('#' + parent.id).popover('toggle');
+
+			});
 		</script>
 	</body>
 
