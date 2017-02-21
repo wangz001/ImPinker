@@ -127,17 +127,76 @@
 					var index = e.index; // 
 					switch(index) {
 						case 1:
-							//写自己的逻辑
-							mui.openWindow({
-								url: "view/weibo/weibo_new.html",
-								id: "newweibo",
-								show: {
-									aniShow: 'slide-in-right',
-									duration: 200
-								}
-							});
+							//拍照
+							captureImage();
+
+							function captureImage() {
+								var cmr = plus.camera.getCamera();
+								var res = cmr.supportedImageResolutions[0];
+								var fmt = cmr.supportedImageFormats[0];
+								console.log("Resolution: " + res + ", Format: " + fmt);
+								cmr.captureImage(function(path) {
+										alert("Capture image success: " + path);
+									},
+									function(error) {
+										alert("Capture image failed: " + error.message);
+									}, {
+										resolution: res,
+										format: fmt
+									}
+								);
+							}
+
+							//							mui.openWindow({
+							//								url: "view/weibo/weibo_new.html",
+							//								id: "newweibo",
+							//								show: {
+							//									aniShow: 'slide-in-right',
+							//									duration: 200
+							//								}
+							//							});
 							break;
 						case 2:
+							//摄像
+							var cmr = null;
+							// 摄像
+							videoCapture();
+							function videoCapture() {
+								cmr = plus.camera.getCamera();
+								var res = cmr.supportedVideoResolutions[0];
+								var fmt = cmr.supportedVideoFormats[0];
+								console.log("Resolution: " + res + ", Format: " + fmt);
+								cmr.startVideoCapture(function(path) {
+										alert("Capture video success: " + path);
+									},
+									function(error) {
+										alert("Capture video failed: " + error.message);
+									}, {
+										resolution: res,
+										format: fmt
+									}
+								);
+								// 拍摄10s后自动完成 
+								setTimeout(stopCapture, 10000);
+							}
+							// 停止摄像
+							function stopCapture() {
+								console.log("stopCapture");
+								cmr.stopVideoCapture();
+							}
+							break;
+						case 3:
+							//从相册选择图片
+							plus.gallery.pick(function(e) {
+								for(var i in e.files) {
+									console.log(e.files[i]);
+								}
+							}, function(e) {
+								console.log("取消选择图片");
+							}, {
+								filter: "image",
+								multiple: true
+							});
 							break;
 					}
 				});
