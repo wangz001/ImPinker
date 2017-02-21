@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ImpinkerApi.Models;
 
 namespace ImpinkerApi.Controllers
 {
@@ -10,96 +11,44 @@ namespace ImpinkerApi.Controllers
     {
         //
         // GET: /Account/
-
-        public ActionResult Index()
+        public JsonResult Index()
         {
-            return View();
+            return Json(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = "aaa",
+                Description = "ok"
+            },JsonRequestBehavior.AllowGet);
         }
-
-        //
-        // GET: /Account/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Create
-
+        
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Login(string username, string password)
         {
-            try
+            var isSuccess = false;
+            var description = "ok";
+            if (!string.IsNullOrEmpty(username)&&!string.IsNullOrEmpty(password))
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                //username  用户名或者电话号码
+                if (username=="admin"&&password=="123")
+                {
+                    isSuccess = true;
+                }
+                else
+                {
+                    description = "用户名或密码错误";
+                }
             }
-            catch
+            else
             {
-                return View();
+                description = "用户名或密码不能为空";
             }
+            return Json(new JsonResultViewModel
+            {
+                IsSuccess = isSuccess ? 1 : 0,
+                Data = "aaa",
+                Description = description
+            });
         }
 
-        //
-        // GET: /Account/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Account/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

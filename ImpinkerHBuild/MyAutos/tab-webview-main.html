@@ -41,7 +41,7 @@
 				<span class="mui-tab-label">设置</span>
 			</a>
 		</nav>
-		
+
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
@@ -111,12 +111,34 @@
 			//新建微博页面
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "view/weibo/weibo_new.html",
-					id: "newweibo",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
+
+				var btnArray = [{
+					title: '拍照'
+				}, {
+					title: '摄像'
+				}, {
+					title: '从相册选择'
+				}];
+				plus.nativeUI.actionSheet({
+					title: "title",
+					cancel: '取消',
+					buttons: btnArray
+				}, function(e) {
+					var index = e.index; // 
+					switch(index) {
+						case 1:
+							//写自己的逻辑
+							mui.openWindow({
+								url: "view/weibo/weibo_new.html",
+								id: "newweibo",
+								show: {
+									aniShow: 'slide-in-right',
+									duration: 200
+								}
+							});
+							break;
+						case 2:
+							break;
 					}
 				});
 			});

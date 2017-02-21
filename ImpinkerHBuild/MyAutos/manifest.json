@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "tab-webview-main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -267,6 +267,59 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/app.js",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [
+					"reg.html",
+					"tab-webview-main.html",
+					"forget_password.html"
+				],
+				"priority": 0
+			},
+			"reg.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/app.js",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"forget_password.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-subpage-setting.html": {
+				"resources": [
+					"css/mui.min.css",
+					"view/setting/setting.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/setting/setting.html": {
+				"resources": [
+					"js/mui.js",
+					"js/feedback.js",
+					"css/mui.css",
+					"js/mui.view.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -279,8 +332,6 @@
 				"view/weibo/index.html",
 				"view/partialView/_nav_partial.html",
 				"view/news/tab-webview-subpage-about.html",
-				"js/mui.js",
-				"css/mui.css",
 				"view/news/tab-webview-subpage-contact.html"
 			]
 		}
