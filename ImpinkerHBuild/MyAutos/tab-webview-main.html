@@ -136,7 +136,7 @@
 								var fmt = cmr.supportedImageFormats[0];
 								console.log("Resolution: " + res + ", Format: " + fmt);
 								cmr.captureImage(function(path) {
-										alert("Capture image success: " + path);
+										toNewWeiBo(path);
 									},
 									function(error) {
 										alert("Capture image failed: " + error.message);
@@ -147,20 +147,13 @@
 								);
 							}
 
-							//							mui.openWindow({
-							//								url: "view/weibo/weibo_new.html",
-							//								id: "newweibo",
-							//								show: {
-							//									aniShow: 'slide-in-right',
-							//									duration: 200
-							//								}
-							//							});
 							break;
 						case 2:
 							//摄像
 							var cmr = null;
 							// 摄像
 							videoCapture();
+
 							function videoCapture() {
 								cmr = plus.camera.getCamera();
 								var res = cmr.supportedVideoResolutions[0];
@@ -191,6 +184,7 @@
 								for(var i in e.files) {
 									console.log(e.files[i]);
 								}
+								toNewWeiBo(e.files[0]);
 							}, function(e) {
 								console.log("取消选择图片");
 							}, {
@@ -201,6 +195,20 @@
 					}
 				});
 			});
+
+			function toNewWeiBo(path) {
+				mui.openWindow({
+					url: "view/weibo/weibo_new.html",
+					id: "newweibo",
+					extras: {
+						path: path //扩展参数
+					},
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+			}
 			//搜索页跳转；
 			document.getElementById('search').addEventListener('tap', function() {
 				mui.openWindow({

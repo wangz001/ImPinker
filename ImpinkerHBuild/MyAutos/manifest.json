@@ -254,7 +254,10 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"js/weibo/weibo_add.js"
+					"js/weibo/weibo_add.js",
+					"images/logo.png",
+					"images/iconfont-tianjia.png",
+					"js/feedback.js"
 				],
 				"refer": [],
 				"priority": 0

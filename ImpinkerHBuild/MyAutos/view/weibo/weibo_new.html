@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en" class="feedback">
 
 	<head>
 		<meta charset="UTF-8">
@@ -17,45 +17,33 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-content-padded">
-				<div class="mui-inline">问题和意见</div>
+				<div class="mui-inline">本站小记</div>
 
 			</div>
 		</div>
 		<div class="row mui-input-row">
-			<textarea id='question' class="mui-input-clear question" placeholder="请详细描述你的问题和意见..."></textarea>
+			<textarea id='question' class="mui-input-clear question" placeholder="请说说现在的想法和感受..."></textarea>
 		</div>
 		<p>图片(选填,提供问题截图,总大小10M以下)</p>
 		<div id="image-list" class="row image-list">
-			<div class="image-item space">
-				<div class="image-close">X</div>
-				<div class="image-up"></div>
-				<div class="file" id="image-1">
-					<img src="../../images/logo.png"/> 
-				</div>
-			</div>
+			
 		</div>
-		<p>QQ/邮箱</p>
-		<div class="mui-input-row">
-			<input id='contact' type="text" class="mui-input-clear contact" placeholder="(选填,方便我们联系你 )" />
-		</div>
-		<div class="mui-content-padded">
-			<div class="mui-inline">应用评分</div>
-			<div class="icons mui-inline" style="margin-left: 6px;">
-				<i data-index="1" class="mui-icon mui-icon-star"></i>
-				<i data-index="2" class="mui-icon mui-icon-star"></i>
-				<i data-index="3" class="mui-icon mui-icon-star"></i>
-				<i data-index="4" class="mui-icon mui-icon-star"></i>
-				<i data-index="5" class="mui-icon mui-icon-star"></i>
-			</div>
-		</div><br />
+		<p>所在位置：北京市海淀区颐和园风景区</p>
+		<br />
 		</div>
 
-		
 		<script src="../../js/mui.min.js"></script>
 
 		<script type="text/javascript">
 			mui.init();
-
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var path = self.path;
+				var img = document.createElement('img');
+				img.src=path;
+				document.getElementById('image-1').appendChild(img);
+				console.log(path);
+			});
 		</script>
 		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
 	</body>

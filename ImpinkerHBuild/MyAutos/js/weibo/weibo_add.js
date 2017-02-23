@@ -125,9 +125,6 @@
 				}, function(zipe) {
 					mui.toast('压缩失败！')
 				});
-				
-
-				
 			}, function(e) {
 				mui.toast(e.message);
 			},{});
