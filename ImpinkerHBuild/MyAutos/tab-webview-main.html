@@ -160,10 +160,21 @@
 								var fmt = cmr.supportedVideoFormats[0];
 								console.log("Resolution: " + res + ", Format: " + fmt);
 								cmr.startVideoCapture(function(path) {
-										alert("Capture video success: " + path);
+										console.log("Capture video success: " + path);
+										mui.openWindow({
+											url: "view/weibo/weibo_new_video.html",
+											id: "newweibovideo",
+											extras: {
+												path: path //扩展参数
+											},
+											show: {
+												aniShow: 'slide-in-right',
+												duration: 200
+											}
+										});
 									},
 									function(error) {
-										alert("Capture video failed: " + error.message);
+										console.log("Capture video failed: " + error.message);
 									}, {
 										resolution: res,
 										format: fmt

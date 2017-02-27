@@ -15,7 +15,8 @@
 			"tab-webview-subpage-weibo.html",
 			"view/weibo/weibo_new.html",
 			"view/search/search.html",
-			"tab-webview-subpage-article.html"
+			"tab-webview-subpage-article.html",
+			"view/weibo/weibo_new_video.html"
 		]
 	},
 	"tab-webview-subpage-article.html": {
@@ -119,6 +120,12 @@
 			"js/feedback.js",
 			"css/mui.css",
 			"js/mui.view.js"
+		]
+	},
+	"view/weibo/weibo_new_video.html": {
+		"resources": [
+			"js/weibo/weibo_add.js",
+			"css/weibo/weibo_add.css"
 		]
 	}
 }
