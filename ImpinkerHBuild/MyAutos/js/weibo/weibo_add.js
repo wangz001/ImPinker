@@ -1,6 +1,6 @@
 /*!
  * ======================================================
- * FeedBack Template For MUI (http://dev.dcloud.net.cn/mui)
+ * weibo Template For MUI (http://dev.dcloud.net.cn/mui)
  * =======================================================
  * @version:1.0.0
  * @author:cuihongbao@dcloud.io
@@ -10,22 +10,22 @@
 	var size = null;
 	var imageIndexIdNum = 0;
 	var starIndex = 0;
-	var feedback = {
+	var weibo = {
 		question: document.getElementById('question'),
 		contact: document.getElementById('contact'),
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit')
 	};
-	var url = 'https://service.dcloud.net.cn/feedback';
-	feedback.files = [];
-	feedback.uploader = null;
-	feedback.deviceInfo = null;
+	var url = 'https://service.dcloud.net.cn/weibo';
+	weibo.files = [];
+	weibo.uploader = null;
+	weibo.deviceInfo = null;
 	mui.plusReady(function() {
 		//设备信息，无需修改
-		feedback.deviceInfo = {
+		weibo.deviceInfo = {
 				appid: plus.runtime.appid,
 				imei: plus.device.imei, //设备标识
-				images: feedback.files, //图片文件
+				images: weibo.files, //图片文件
 				p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
 				md: plus.device.model, //设备型号
 				app_version: plus.runtime.version,
@@ -36,22 +36,22 @@
 		//获取参数
 		var self = plus.webview.currentWebview();
 		var path = self.path;
-		feedback.addFile(path);
+		weibo.addFile(path);
 		console.log(path);
 		var name = path.substr(path.lastIndexOf('/') + 1);
-		console.log("name:" + name);
-		feedback.addFile(path);
-
+		console.log("name-------:" + name);
+		weibo.addFile(path);
+		weibo.newPlaceholder(path);
 	});
 	/**
 	 *提交成功之后，恢复表单项 
 	 */
-	feedback.clearForm = function() {
-		feedback.question.value = '';
-		feedback.contact.value = '';
-		feedback.imageList.innerHTML = '';
-		feedback.newPlaceholder();
-		feedback.files = [];
+	weibo.clearForm = function() {
+		weibo.question.value = '';
+		weibo.contact.value = '';
+		weibo.imageList.innerHTML = '';
+		weibo.newPlaceholder();
+		weibo.files = [];
 		index = 0;
 		size = 0;
 		imageIndexIdNum = 0;
@@ -64,11 +64,11 @@
 			}
 		})
 	};
-	feedback.getFileInputArray = function() {
-		return [].slice.call(feedback.imageList.querySelectorAll('.file'));
+	weibo.getFileInputArray = function() {
+		return [].slice.call(weibo.imageList.querySelectorAll('.file'));
 	};
-	feedback.addFile = function(path) {
-		feedback.files.push({
+	weibo.addFile = function(path) {
+		weibo.files.push({
 			name: "images" + index,
 			path: path
 		});
@@ -77,8 +77,8 @@
 	/**
 	 * 初始化图片域占位
 	 */
-	feedback.newPlaceholder = function() {
-		var fileInputArray = feedback.getFileInputArray();
+	weibo.newPlaceholder = function(path) {
+		var fileInputArray = weibo.getFileInputArray();
 		if(fileInputArray &&
 			fileInputArray.length > 0 &&
 			fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
@@ -96,7 +96,7 @@
 		//小X的点击事件
 		closeButton.addEventListener('tap', function(event) {
 			setTimeout(function() {
-				feedback.imageList.removeChild(placeholder);
+				weibo.imageList.removeChild(placeholder);
 			}, 0);
 			return false;
 		}, false);
@@ -126,14 +126,14 @@
 						return mui.toast('文件超大,请重新选择~');
 					}
 					if(!self.parentNode.classList.contains('space')) { //已有图片
-						feedback.files.splice(index - 1, 1, {
+						weibo.files.splice(index - 1, 1, {
 							name: "images" + index,
 							path: e
 						});
 					} else { //加号
 						placeholder.classList.remove('space');
-						feedback.addFile(zip.target);
-						feedback.newPlaceholder();
+						weibo.addFile(zip.target);
+						weibo.newPlaceholder();
 					}
 					up.classList.remove('image-up');
 					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
@@ -144,34 +144,61 @@
 				mui.toast(e.message);
 			}, {});
 		}, false);
+		if(path!=null){
+			var name = path.substr(path.lastIndexOf('/') + 1);
+				console.log("name:" + name);
+
+				plus.zip.compressImage({
+					src: path,
+					dst: '_doc/' + name,
+					overwrite: true,
+					quality: 50
+				}, function(zip) {
+					size += zip.size
+					console.log("filesize:" + zip.size + ",totalsize:" + size);
+					if(size > (10 * 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					 //加号
+						placeholder.classList.remove('space');
+						weibo.addFile(zip.target);
+						weibo.newPlaceholder();
+					
+					up.classList.remove('image-up');
+					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+				});
+		}
 		placeholder.appendChild(closeButton);
 		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
-		feedback.imageList.appendChild(placeholder);
+		weibo.imageList.appendChild(placeholder);
+		console.log("placeholder-------:" );
 	};
-	feedback.newPlaceholder();
-	feedback.submitBtn.addEventListener('tap', function(event) {
-		if(feedback.question.value == '' ||
-			(feedback.contact.value != '' &&
-				feedback.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
+	//weibo.newPlaceholder();
+	
+	//提交
+	weibo.submitBtn.addEventListener('tap', function(event) {
+		if(weibo.question.value == '' ||
+			(weibo.contact.value != '' &&
+				weibo.contact.value.search(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|([1-9]\d{4,9})$/) != 0)) {
 			return mui.toast('信息填写不符合规范');
 		}
-		if(feedback.question.value.length > 200 || feedback.contact.value.length > 200) {
+		if(weibo.question.value.length > 200 || weibo.contact.value.length > 200) {
 			return mui.toast('信息超长,请重新填写~')
 		}
 		//判断网络连接
 		if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
 			return mui.toast("连接网络失败，请稍后再试");
 		}
-		feedback.send(mui.extend({}, feedback.deviceInfo, {
-			content: feedback.question.value,
-			contact: feedback.contact.value,
-			images: feedback.files,
+		weibo.send(mui.extend({}, weibo.deviceInfo, {
+			content: weibo.question.value,
+			contact: weibo.contact.value,
+			images: weibo.files,
 			score: '' + starIndex
 		}))
 	}, false)
-	feedback.send = function(content) {
-		feedback.uploader = plus.uploader.createUpload(url, {
+	weibo.send = function(content) {
+		weibo.uploader = plus.uploader.createUpload(url, {
 			method: 'POST'
 		}, function(upload, status) {
 			//			plus.nativeUI.closeWaiting()
@@ -182,7 +209,7 @@
 				if(data.ret === 0 && data.desc === 'Success') {
 					//					mui.toast('反馈成功~')
 					console.log("upload success");
-					//					feedback.clearForm();
+					//					weibo.clearForm();
 				}
 			} else {
 				console.log("upload fail");
@@ -194,21 +221,21 @@
 			if(index !== 'images') {
 				console.log("addData:" + index + "," + element);
 				//				console.log(index);
-				feedback.uploader.addData(index, element)
+				weibo.uploader.addData(index, element)
 			}
 		});
 		//添加上传文件
-		mui.each(feedback.files, function(index, element) {
-			var f = feedback.files[index];
+		mui.each(weibo.files, function(index, element) {
+			var f = weibo.files[index];
 			console.log("addFile:" + JSON.stringify(f));
-			feedback.uploader.addFile(f.path, {
+			weibo.uploader.addFile(f.path, {
 				key: f.name
 			});
 		});
 		//开始上传任务
-		feedback.uploader.start();
+		weibo.uploader.start();
 		mui.alert("感谢反馈，点击确定关闭", "问题反馈", "确定", function() {
-			feedback.clearForm();
+			weibo.clearForm();
 			mui.back();
 		});
 		//		plus.nativeUI.showWaiting();
