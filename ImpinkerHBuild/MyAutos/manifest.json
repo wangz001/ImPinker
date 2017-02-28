@@ -258,7 +258,8 @@
 					"js/weibo/weibo_add.js",
 					"images/logo.png",
 					"images/iconfont-tianjia.png",
-					"js/feedback.js"
+					"js/feedback.js",
+					"images/cbd.jpg"
 				],
 				"refer": [],
 				"priority": 0

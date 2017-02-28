@@ -129,12 +129,10 @@
 						case 1:
 							//拍照
 							captureImage();
-
 							function captureImage() {
 								var cmr = plus.camera.getCamera();
 								var res = cmr.supportedImageResolutions[0];
 								var fmt = cmr.supportedImageFormats[0];
-								console.log("Resolution: " + res + ", Format: " + fmt);
 								cmr.captureImage(function(path) {
 										toNewWeiBo(path);
 									},
@@ -146,14 +144,11 @@
 									}
 								);
 							}
-
 							break;
 						case 2:
 							//摄像
 							var cmr = null;
-							// 摄像
 							videoCapture();
-
 							function videoCapture() {
 								cmr = plus.camera.getCamera();
 								var res = cmr.supportedVideoResolutions[0];
@@ -195,7 +190,7 @@
 								for(var i in e.files) {
 									console.log(e.files[i]);
 								}
-								toNewWeiBo(e.files[0]);
+								toNewWeiBo(e.files);
 							}, function(e) {
 								console.log("取消选择图片");
 							}, {
@@ -207,12 +202,12 @@
 				});
 			});
 
-			function toNewWeiBo(path) {
+			function toNewWeiBo(patharr) {
 				mui.openWindow({
 					url: "view/weibo/weibo_new.html",
 					id: "newweibo",
 					extras: {
-						path: path //扩展参数
+						path: patharr //扩展参数
 					},
 					show: {
 						aniShow: 'slide-in-right',

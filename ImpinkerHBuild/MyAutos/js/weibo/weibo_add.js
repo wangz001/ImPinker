@@ -14,7 +14,8 @@
 		question: document.getElementById('question'),
 		contact: document.getElementById('contact'),
 		imageList: document.getElementById('image-list'),
-		submitBtn: document.getElementById('submit')
+		submitBtn: document.getElementById('submit'),
+		locationBtn: document.getElementById('geoLocation')
 	};
 	var url = 'https://service.dcloud.net.cn/weibo';
 	weibo.files = [];
@@ -33,15 +34,13 @@
 				os: mui.os.version,
 				net: '' + plus.networkinfo.getCurrentType()
 			}
-		//获取参数
+			//获取参数
 		var self = plus.webview.currentWebview();
-		var path = self.path;
-		weibo.addFile(path);
-		console.log(path);
-		var name = path.substr(path.lastIndexOf('/') + 1);
-		console.log("name-------:" + name);
-		weibo.addFile(path);
-		weibo.newPlaceholder(path);
+		var pathArr = self.path;
+		//weibo.addFile(pathArr);
+		console.log(pathArr);
+		weibo.initImages(pathArr);
+		weibo.newPlaceholder();
 	});
 	/**
 	 *提交成功之后，恢复表单项 
@@ -77,7 +76,7 @@
 	/**
 	 * 初始化图片域占位
 	 */
-	weibo.newPlaceholder = function(path) {
+	weibo.newPlaceholder = function(pathArr) {
 		var fileInputArray = weibo.getFileInputArray();
 		if(fileInputArray &&
 			fileInputArray.length > 0 &&
@@ -96,6 +95,7 @@
 		//小X的点击事件
 		closeButton.addEventListener('tap', function(event) {
 			setTimeout(function() {
+				console.log(placeholder.attribute('id'));
 				weibo.imageList.removeChild(placeholder);
 			}, 0);
 			return false;
@@ -125,7 +125,7 @@
 					if(size > (10 * 1024 * 1024)) {
 						return mui.toast('文件超大,请重新选择~');
 					}
-					if(!self.parentNode.classList.contains('space')) { //已有图片
+					if(!self.parentNode.classList.contains('space')) { //已有加号图片
 						weibo.files.splice(index - 1, 1, {
 							name: "images" + index,
 							path: e
@@ -144,38 +144,61 @@
 				mui.toast(e.message);
 			}, {});
 		}, false);
-		if(path!=null){
-			var name = path.substr(path.lastIndexOf('/') + 1);
-				console.log("name:" + name);
-
-				plus.zip.compressImage({
-					src: path,
-					dst: '_doc/' + name,
-					overwrite: true,
-					quality: 50
-				}, function(zip) {
-					size += zip.size
-					console.log("filesize:" + zip.size + ",totalsize:" + size);
-					if(size > (10 * 1024 * 1024)) {
-						return mui.toast('文件超大,请重新选择~');
-					}
-					 //加号
-						placeholder.classList.remove('space');
-						weibo.addFile(zip.target);
-						weibo.newPlaceholder();
-					
-					up.classList.remove('image-up');
-					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
-				});
-		}
 		placeholder.appendChild(closeButton);
 		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
 		weibo.imageList.appendChild(placeholder);
-		console.log("placeholder-------:" );
+		console.log("placeholder-------:");
 	};
-	//weibo.newPlaceholder();
-	
+
+	//接受页面跳转传递过来的图片，并显示
+	weibo.initImages = function(pathArr) {
+		if(pathArr == null || pathArr.length == 0) {
+			weibo.newPlaceholder();
+			return;
+		}
+		for(var i = 0; i < pathArr.length; i++) {
+			imageIndexIdNum = i + 1;
+			var placehold = document.createElement('div');
+			placehold.setAttribute('class', 'image-item');
+			placehold.setAttribute('id', 'image-' + imageIndexIdNum);
+			//删除图片
+			var closeButton = document.createElement('div');
+			closeButton.setAttribute('class', 'image-close');
+			closeButton.innerHTML = 'X';
+			//小X的点击事件
+			closeButton.addEventListener('tap', function(event) {
+				setTimeout(function() {
+					weibo.imageList.removeChild(placehold);
+					weibo.newPlaceholder();
+				}, 0);
+				return false;
+			}, false);
+			var path = pathArr[i];
+			var name = path.substr(path.lastIndexOf('/') + 1);
+			console.log("name:" + name);
+			weibo.addFile(path);
+			placehold.style.backgroundImage = 'url(' + path + ')';
+			console.log("backgroundImage-------:" + path);
+
+			placehold.appendChild(closeButton);
+			weibo.imageList.appendChild(placehold);
+		}
+		weibo.newPlaceholder();
+	}
+
+	//获取地理位置
+	weibo.locationBtn.addEventListener('tap', function(event) {
+		plus.geolocation.getCurrentPosition(function(p) {
+			alert("Geolocation\nLatitude:" + p.coords.latitude + "\nLongitude:" +
+				p.coords.longitude + "\nAltitude:" + p.addresses);
+				document.getElementById('locationtxt').appendChild(p.addresses);
+		}, function(e) {
+			alert("Geolocation error: " + e.message);
+		});
+		
+	});
+
 	//提交
 	weibo.submitBtn.addEventListener('tap', function(event) {
 		if(weibo.question.value == '' ||
