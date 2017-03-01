@@ -111,6 +111,17 @@
 			//新建微博页面
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
+//暂时直接跳转到新微博页面
+mui.openWindow({
+					url: "view/weibo/weibo_new.html",
+					id: "newweibo",
+					
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+return;
 
 				var btnArray = [{
 					title: '拍照'
@@ -129,12 +140,19 @@
 						case 1:
 							//拍照
 							captureImage();
+
 							function captureImage() {
 								var cmr = plus.camera.getCamera();
 								var res = cmr.supportedImageResolutions[0];
 								var fmt = cmr.supportedImageFormats[0];
 								cmr.captureImage(function(path) {
-										toNewWeiBo(path);
+										plus.io.resolveLocalFileSystemURL(path, function(entry) {
+											console.log("真实路径：" + entry.fullPath);
+											var arr = new Array([entry.fullPath]);
+											toNewWeiBo(arr);
+										}, function(e) {
+											alert(e.message);
+										});
 									},
 									function(error) {
 										alert("Capture image failed: " + error.message);
@@ -149,6 +167,7 @@
 							//摄像
 							var cmr = null;
 							videoCapture();
+
 							function videoCapture() {
 								cmr = plus.camera.getCamera();
 								var res = cmr.supportedVideoResolutions[0];

@@ -329,7 +329,11 @@
 			"view/weibo/weibo_new_video.html": {
 				"resources": [
 					"js/weibo/weibo_add.js",
-					"css/weibo/weibo_add.css"
+					"css/weibo/weibo_add.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/weibo/weibo_add_video.js"
 				],
 				"refer": [],
 				"priority": 0
