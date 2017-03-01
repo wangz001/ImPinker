@@ -433,6 +433,26 @@ namespace ImDal
                 return null;
             }
 	    }
+
+	    public Users GetModelByUserName(string username)
+	    {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
+            strSql.Append(" where UserName=@UserName");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserName", SqlDbType.VarChar){Value = username}
+			};
+            Users model = new Users();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+	    }
 	}
 }
 

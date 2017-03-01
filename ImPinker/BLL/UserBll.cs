@@ -227,6 +227,20 @@ namespace ImBLL
             var user = dal.GetModelByPhoneNum(phoneNum);
             return user;
 	    }
+        /// <summary>
+        /// 根据用户名获取用户（登录用）
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+	    public Users GetModelByUserName(string username)
+	    {
+            if (string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+            var user = dal.GetModelByUserName(username);
+            return user;
+	    }
 	}
 }
 
