@@ -172,11 +172,13 @@
     <Compile Include="Common\TokenHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />
+    <Compile Include="Filters\TokenCheckFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ImBLL;
@@ -9,18 +10,15 @@ using ImpinkerApi.Models;
 
 namespace ImpinkerApi.Controllers
 {
-    public class WeiBoController : Controller
+    public class WeiBoController : BaseApiController
     {
-        WeiBoBll _weiBoBll=new WeiBoBll();
-        //
-        // GET: /WeiBo/
-
-        public ActionResult Index()
-        {
-            return null;
-        }
-
-        public ActionResult Add(NewWeiBoViewModel vm)
+        readonly WeiBoBll _weiBoBll=new WeiBoBll();
+        /// <summary>
+        /// 创建微博
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Add(NewWeiBoViewModel vm)
         {
             if (vm!=null&&(!string.IsNullOrEmpty(vm.Description)||!string.IsNullOrEmpty(vm.ContentValue)))
             {
@@ -41,7 +39,7 @@ namespace ImpinkerApi.Controllers
                 long weiboId=_weiBoBll.AddWeiBo(model);
                 if (weiboId>0)
                 {
-                    return Json(new JsonResultViewModel
+                    return GetJson(new JsonResultViewModel
                     {
                         Data = weiboId,
                         IsSuccess = 1,
@@ -50,7 +48,7 @@ namespace ImpinkerApi.Controllers
                 }
             }
 
-            return Json(new JsonResultViewModel
+            return GetJson(new JsonResultViewModel
             {
                 Data = "",
                 IsSuccess = 10,

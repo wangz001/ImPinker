@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ImpinkerApi.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : BaseApiController
     {
         //
         // GET: /Search/

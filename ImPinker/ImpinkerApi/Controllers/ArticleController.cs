@@ -1,14 +1,16 @@
-﻿using ImBLL;
+﻿using System.Net.Http;
+using ImBLL;
 using ImModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ImpinkerApi.Models;
 
 namespace ImpinkerApi.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseApiController
     {
 
         private static readonly ArticleBll ArticleBll = new ArticleBll();
@@ -27,7 +29,7 @@ namespace ImpinkerApi.Controllers
         /// <param name="pageCount"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonResult GetByPage(int pageNum, int pageSize)
+        public HttpResponseMessage GetByPage(int pageNum, int pageSize)
         {
             var list = GetListsByPage(pageNum, pageSize);
             if (list != null && list.Count > 0)
@@ -37,7 +39,12 @@ namespace ImpinkerApi.Controllers
                     item.CoverImage = ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(item.CoverImage, 0);
                 }
             }
-            return Json(new { success = true, data = list },JsonRequestBehavior.AllowGet); 
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = list,
+                Description = "ok"
+            }); 
         }
 
         private List<ArticleViewModel> GetListsByPage(int pageNum, int pageCount)
