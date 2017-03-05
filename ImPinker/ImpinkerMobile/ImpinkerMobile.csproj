@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +237,7 @@
     <Content Include="Views\Home\_Index_Article.cshtml" />
     <Content Include="Views\Search\_Index_Article.cshtml" />
     <Content Include="Views\Search\_Search_HotKey.cshtml" />
+    <Content Include="Views\TestApi\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,7 +277,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>27505</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

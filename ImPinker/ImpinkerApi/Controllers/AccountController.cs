@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using ImBLL;
 using ImpinkerApi.Common;
@@ -22,6 +21,8 @@ namespace ImpinkerApi.Controllers
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
         public HttpResponseMessage Login(string username, string password)
         {
             var isSuccess = false;

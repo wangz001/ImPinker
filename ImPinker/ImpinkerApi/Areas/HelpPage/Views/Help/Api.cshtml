@@ -6,7 +6,7 @@
     var description = Model.ApiDescription;
     ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
 }
-
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
 <div id="body">
     <section class="featured">
         <div class="content-wrapper">
@@ -16,10 +16,12 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        @Html.DisplayFor(m => Model)
+       @Html.DisplayForModel()
     </section>
 </div>
 
+@Html.DisplayForModel("TestClientDialogs")
 @section Scripts {
+    @Html.DisplayForModel("TestClientReferences")
     <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
 }

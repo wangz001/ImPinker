@@ -11,7 +11,6 @@ namespace ImpinkerApi.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        [TokenCheck]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

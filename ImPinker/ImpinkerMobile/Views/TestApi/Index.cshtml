@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        测试api接口
+    </div>
+        <div style="text-align:center;">
+            <div>用户名：<input type="text" id="txt_username" /></div>
+            <div>密  码：<input type="password" id="txt_password" /></div>
+            <div><input type="button" value="登录" id="btn_login" class="btn-default" /></div>
+        </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btn_login").click(function () {
+            $.ajax({
+                type: "post",
+                dataType: 'JSONP',//here
+                //url: "http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30",
+                url: "http://api.impinker.com/api/account/login",
+                data: { username: $("#txt_username").val(), password: $("#txt_password").val() },
+                success: function (data, status) {
+                    if (status == "success") {
+                        if (!data.bRes) {
+                            alert("登录失败");
+                            return;
+                        }
+                        alert("登录成功");
+                        //登录成功之后将用户名和用户票据带到主界面
+                        window.location = "/Home/Index?UserName=" + data.UserName + "&Ticket=" + data.Ticket;
+                    }
+                },
+                error: function (e) {
+                    alert(e);
+                },
+                complete: function () {
+
+                }
+
+            });
+        });
+    });
+</script>
