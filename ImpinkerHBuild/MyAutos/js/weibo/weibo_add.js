@@ -11,8 +11,8 @@
 	var imageIndexIdNum = 0;
 	var starIndex = 0;
 	var weibo = {
-		question: document.getElementById('question'),
-		contact: document.getElementById('contact'),
+		description: document.getElementById('description'),
+		locationtxt: document.getElementById('locationtxt'),
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit'),
 		locationBtn: document.getElementById('geoLocation')
@@ -48,8 +48,8 @@
 	 *提交成功之后，恢复表单项 
 	 */
 	weibo.clearForm = function() {
-		weibo.question.value = '';
-		weibo.contact.value = '';
+		weibo.description.value = '';
+		weibo.locationtxt.value = '';
 		weibo.imageList.innerHTML = '';
 		weibo.newPlaceholder();
 		weibo.files = [];
@@ -202,19 +202,20 @@
 
 	//提交
 	weibo.submitBtn.addEventListener('tap', function(event) {
-		if(weibo.question.value == '' || weibo.files.length==0) {
+		if(weibo.description.value == '' || weibo.files.length==0) {
 			return mui.toast('信息填写不符合规范');
 		}
-		if(weibo.question.value.length > 200 || weibo.contact.value.length > 200) {
+		if(weibo.description.value.length > 200 || weibo.locationtxt.value.length > 200) {
 			return mui.toast('信息超长,请重新填写~')
 		}
 		//判断网络连接
 		if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
 			return mui.toast("连接网络失败，请稍后再试");
 		}
+		//mui.extend(0)  合并参数
 		weibo.send(mui.extend({}, weibo.deviceInfo, {
-			content: weibo.question.value,
-			contact: weibo.contact.value,
+			content: weibo.description.value,
+			locationtxt: weibo.locationtxt.value,
 			images: weibo.files,
 			score: '' + starIndex
 		}))
