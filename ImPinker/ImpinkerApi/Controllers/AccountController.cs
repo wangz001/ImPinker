@@ -21,7 +21,7 @@ namespace ImpinkerApi.Controllers
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public HttpResponseMessage Login(string username, string password)
         {

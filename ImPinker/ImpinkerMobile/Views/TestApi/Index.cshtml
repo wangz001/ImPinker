@@ -24,12 +24,15 @@
 <script type="text/javascript">
     $(function () {
         $("#btn_login").click(function () {
+            var username = $("#txt_username").val();
+            var pass = $("#txt_password").val();
             $.ajax({
-                type: "post",
-                dataType: 'JSONP',//here
-                //url: "http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30",
-                url: "http://api.impinker.com/api/account/login",
-                data: { username: $("#txt_username").val(), password: $("#txt_password").val() },
+                //url: 不能这么玩，要用app客户端，发送post请求。必要的时候对用户名和密码加密,
+                url: "http://localhost:27521/api/account/login",
+                data: {username: username, password: pass},
+                dataType: 'jsonp',
+                jsonp: 'callback',
+                jsonpCallback: "colorHtmlCallback",
                 success: function (data, status) {
                     if (status == "success") {
                         if (!data.bRes) {
