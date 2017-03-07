@@ -1,64 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using ImpinkerApi.Models;
 using System.Threading.Tasks;
-using System.Collections;
 using System.Net;
 
 namespace ImpinkerApi.Controllers
 {
     public class UploadController : BaseApiController
     {
-        //
-        // GET: /Upload/
-
-        public ActionResult Index()
-        {
-            return null;
-        }
-        //
-        // GET: /Upload/
-        /// <summary>
-        /// 上传图片
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public HttpResponseMessage Upload(HttpPostedFileBase imgFile, int? resizeWidth, int? resizeHeight)
-        {
-            string msg = string.Empty;
-            string error = string.Empty;
-            string imgurl = string.Empty;
-            if (imgFile != null && imgFile.ContentLength != 0)
-            {
-                if (!Directory.Exists(System.Web.Hosting.HostingEnvironment.MapPath("/imgtemp/")))//如果不存在就创建file文件夹
-                {
-                    Directory.CreateDirectory(System.Web.Hosting.HostingEnvironment.MapPath("/imgtemp/"));
-                }
-                imgurl = string.Format("/imgtemp/{0}_{1}", DateTime.Now.ToString("yyyyMMddHHmmss"),
-                    Path.GetFileName(imgFile.FileName));
-                imgFile.SaveAs(System.Web.Hosting.HostingEnvironment.MapPath("/") + imgurl);
-                msg = " 成功! 文件大小为:" + imgFile.ContentLength;
-                string res = "{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + imgurl + "'}";
-                return GetJson(new JsonResultViewModel
-                {
-                    IsSuccess = 1,
-                    Data = imgurl,
-                    Description = msg
-                });
-            }
-            return GetJson(new JsonResultViewModel
-            {
-                IsSuccess = 0,
-                Data = "",
-                Description = "上传失败"
-            });
-        }
         /// <summary>
         /// 百度webupload 上传图片
         /// </summary>
@@ -110,14 +64,19 @@ namespace ImpinkerApi.Controllers
         {
             // 检查是否是 multipart/form-data 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
-                throw new System.Web.Http.HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-           
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "数据格式错误",
+                    Data = HttpStatusCode.UnsupportedMediaType
+                });
+            }
             // Prepare CustomMultipartFormDataStreamProvider in which our multipart form  
             // data will be loaded.  
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/App_Data");
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload");
             var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
             List<string> files = new List<string>();
-
             try
             {
                 // Read all contents of multipart message into CustomMultipartFormDataStreamProvider.  
@@ -139,7 +98,7 @@ namespace ImpinkerApi.Controllers
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
-            }  
+            }
         }
         /// <summary>
         /// 创建一个 Provider 用于重命名接收到的文件 
@@ -147,11 +106,10 @@ namespace ImpinkerApi.Controllers
         public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
         {
             public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
-
             public override string GetLocalFileName(HttpContentHeaders headers)
             {
                 return headers.ContentDisposition.FileName.Replace("\"", string.Empty);
             }
-        }  
+        }
     }
 }

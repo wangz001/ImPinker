@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web.Http;
 using ImBLL;
 using ImpinkerApi.Common;
@@ -11,7 +8,7 @@ namespace ImpinkerApi.Controllers
 {
     public class AccountController : BaseApiController
     {
-        readonly UserBll _userBll=new UserBll();
+        readonly UserBll _userBll = new UserBll();
 
         /// <summary>
         /// 登录验证。登录成功，返回token
@@ -27,11 +24,11 @@ namespace ImpinkerApi.Controllers
             var isSuccess = false;
             var description = string.Empty;
             var token = string.Empty;
-            if (!string.IsNullOrEmpty(username)&&!string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
                 //username  用户名或者电话号码
                 var users = _userBll.GetModelByUserName(username);
-                if (users==null)
+                if (users == null)
                 {
                     description = "用户不存在";
                 }
@@ -39,7 +36,7 @@ namespace ImpinkerApi.Controllers
                 {
                     description = "密码错误";
                 }
-                if (users!=null&&users.PassWord==password)
+                if (users != null && users.PassWord == password)
                 {
                     isSuccess = true;
                     description = "登录成功";
