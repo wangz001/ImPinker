@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using ImpinkerApi.Models;
@@ -105,61 +106,52 @@ namespace ImpinkerApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public Task<Hashtable> ImgUpload()
+        public async Task<HttpResponseMessage> ImgUpload()
         {
             // 检查是否是 multipart/form-data 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
                 throw new System.Web.Http.HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            //文件保存目录路径 
-            string SaveTempPath = "~/SayPlaces/" + "/SayPic/SayPicTemp/";
-            String dirTempPath = HttpContext.Current.Server.MapPath(SaveTempPath);
-            // 设置上传目录 
-            var provider = new MultipartFormDataStreamProvider(dirTempPath);
-            //var queryp = Request.GetQueryNameValuePairs();//获得查询字符串的键值集合 
-            var task = Request.Content.ReadAsMultipartAsync(provider).
-                ContinueWith<Hashtable>(o =>
+           
+            // Prepare CustomMultipartFormDataStreamProvider in which our multipart form  
+            // data will be loaded.  
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+            List<string> files = new List<string>();
+
+            try
+            {
+                // Read all contents of multipart message into CustomMultipartFormDataStreamProvider.  
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                foreach (MultipartFileData file in provider.FileData)
                 {
-                    Hashtable hash = new Hashtable();
-                    hash["error"] = 1;
-                    hash["errmsg"] = "上传出错";
-                    var file = provider.FileData[0];//provider.FormData 
-                    string orfilename = file.Headers.ContentDisposition.FileName.TrimStart('"').TrimEnd('"');
-                    FileInfo fileinfo = new FileInfo(file.LocalFileName);
-                    //最大文件大小 
-                    int maxSize = 10000000;
-                    if (fileinfo.Length <= 0)
-                    {
-                        hash["error"] = 1;
-                        hash["errmsg"] = "请选择上传文件。";
-                    }
-                    else if (fileinfo.Length > maxSize)
-                    {
-                        hash["error"] = 1;
-                        hash["errmsg"] = "上传文件大小超过限制。";
-                    }
-                    else
-                    {
-                        string fileExt = orfilename.Substring(orfilename.LastIndexOf('.'));
-                        //定义允许上传的文件扩展名 
-                        String fileTypes = "gif,jpg,jpeg,png,bmp";
-                        if (String.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
-                        {
-                            hash["error"] = 1;
-                            hash["errmsg"] = "上传文件扩展名是不允许的扩展名。";
-                        }
-                        else
-                        {
-                            String ymd = DateTime.Now.ToString("yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-                            String newFileName = DateTime.Now.ToString("yyyyMMddHHmmss_ffff", System.Globalization.DateTimeFormatInfo.InvariantInfo);
-                            fileinfo.CopyTo(Path.Combine(dirTempPath, newFileName + fileExt), true);
-                            fileinfo.Delete();
-                            hash["error"] = 0;
-                            hash["errmsg"] = "上传成功";
-                        }
-                    }
-                    return hash;
+                    files.Add(Path.GetFileName(file.LocalFileName));
+                }
+
+                // Send OK Response along with saved file names to the client.  
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "ok",
+                    Data = files
                 });
-            return task;
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }  
         }
+        /// <summary>
+        /// 创建一个 Provider 用于重命名接收到的文件 
+        /// </summary>
+        public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
+        {
+            public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
+
+            public override string GetLocalFileName(HttpContentHeaders headers)
+            {
+                return headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+            }
+        }  
     }
 }

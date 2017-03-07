@@ -24,8 +24,9 @@ namespace ImpinkerApi.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public string Post([FromBody]string value)
         {
+            return "valuepost";
         }
 
         // PUT api/values/5

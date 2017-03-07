@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using ImBLL;
 using ImpinkerApi.Common;
 using ImpinkerApi.Models;
-using Newtonsoft.Json;
 
 namespace ImpinkerApi.Controllers
 {
     public class AccountController : BaseApiController
     {
         readonly UserBll _userBll=new UserBll();
-        
+
         /// <summary>
         /// 登录验证。登录成功，返回token
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="loginViewModel"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage Login(string username, string password)
+        public HttpResponseMessage Login(UserLoginViewModel loginViewModel)
         {
+            var username = loginViewModel.Username;
+            var password = loginViewModel.Password;
             var isSuccess = false;
             var description = string.Empty;
             var token = string.Empty;
