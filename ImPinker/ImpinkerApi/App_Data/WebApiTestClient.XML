@@ -433,12 +433,11 @@
             <param name="username"></param>
             <returns></returns>
         </member>
-        <member name="M:ImpinkerApi.Controllers.AccountController.Login(System.String,System.String)">
+        <member name="M:ImpinkerApi.Controllers.AccountController.Login(ImpinkerApi.Models.UserLoginViewModel)">
             <summary>
             登录验证。登录成功，返回token
             </summary>
-            <param name="username"></param>
-            <param name="password"></param>
+            <param name="loginViewModel"></param>
             <returns></returns>
         </member>
         <member name="M:ImpinkerApi.Controllers.ArticleController.GetByPage(System.Int32,System.Int32)">
@@ -449,18 +448,23 @@
             <param name="pageCount"></param>
             <returns></returns>
         </member>
-        <member name="M:ImpinkerApi.Controllers.UploadController.Upload(System.Web.HttpPostedFileBase,System.Nullable{System.Int32},System.Nullable{System.Int32})">
-            <summary>
-            上传图片
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:ImpinkerApi.Controllers.UploadController.BaiduUpload(System.Web.HttpPostedFileBase)">
             <summary>
             百度webupload 上传图片
             </summary>
             <param name="file"></param>
             <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.UploadController.ImgUpload">
+            <summary>
+            mui 多图上传
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ImpinkerApi.Controllers.UploadController.CustomMultipartFormDataStreamProvider">
+            <summary>
+            创建一个 Provider 用于重命名接收到的文件 
+            </summary>
         </member>
         <member name="M:ImpinkerApi.Controllers.WeiBoController.Add(ImpinkerApi.Models.NewWeiBoViewModel)">
             <summary>
@@ -489,6 +493,21 @@
         <member name="P:ImpinkerApi.Models.JsonResultViewModel.Data">
             <summary>
             业务数据
+            </summary>
+        </member>
+        <member name="T:ImpinkerApi.Models.UserLoginViewModel">
+            <summary>
+            用户登录模型
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserLoginViewModel.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserLoginViewModel.Password">
+            <summary>
+            密码
             </summary>
         </member>
         <member name="P:ImpinkerApi.Models.NewWeiBoViewModel.HardWareType">

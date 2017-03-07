@@ -140,7 +140,8 @@
 		var pageNum = 1;
 
 		function pullupRefresh() {
-			mui.ajax('http://api.myautos.cn/Article/GetByPage', {
+			//http://api.myautos.cn/Article/GetByPage
+			mui.ajax('http://api.myautos.cn/api/Article/GetByPage', {
 				data: {
 					pageNum: pageNum,
 					pageSize: 10
@@ -148,7 +149,8 @@
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				success: function(data) {
-					var list = data.data;
+					console.log(data.IsSuccess);
+					var list = data.Data;
 					for(var i = 0; i < list.length; i++) {
 						var item = list[i];
 						var table = document.body.querySelector('.mui-table-view');

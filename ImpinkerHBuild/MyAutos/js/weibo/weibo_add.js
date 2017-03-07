@@ -17,7 +17,7 @@
 		submitBtn: document.getElementById('submit'),
 		locationBtn: document.getElementById('geoLocation')
 	};
-	var url = 'https://service.dcloud.net.cn/weibo';
+	var url = 'http://api.myautos.cn/api/Upload/ImgUpload';
 	weibo.files = [];
 	weibo.uploader = null;
 	weibo.deviceInfo = null;
@@ -181,7 +181,6 @@
 			weibo.addFile(path);
 			placehold.style.backgroundImage = 'url(' + path + ')';
 			console.log("backgroundImage-------:" + path);
-
 			placehold.appendChild(closeButton);
 			weibo.imageList.appendChild(placehold);
 		}
@@ -205,7 +204,7 @@
 		if(weibo.description.value == '' || weibo.files.length==0) {
 			return mui.toast('信息填写不符合规范');
 		}
-		if(weibo.description.value.length > 200 || weibo.locationtxt.value.length > 200) {
+		if(weibo.description.value.length > 200 ) {
 			return mui.toast('信息超长,请重新填写~')
 		}
 		//判断网络连接
