@@ -329,6 +329,10 @@
       <Project>{235a6684-bca8-41d3-98d6-586577f53fb2}</Project>
       <Name>ImBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6f74233e-4fd6-4ccd-a8aa-fb5e45b9b123}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\ImModel.csproj">
       <Project>{93bde6d6-9e84-41c6-8a91-d32a921fb402}</Project>
       <Name>ImModel</Name>
