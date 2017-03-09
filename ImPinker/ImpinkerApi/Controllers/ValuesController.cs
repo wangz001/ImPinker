@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 
 namespace ImpinkerApi.Controllers
@@ -20,7 +21,8 @@ namespace ImpinkerApi.Controllers
         [TokenCheck]
         public string Get(int id)
         {
-            return "value";
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            return "usrname:" + userinfo.UserName+"---"+userinfo.PassWord;
         }
 
         // POST api/values

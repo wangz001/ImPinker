@@ -17,7 +17,7 @@ namespace ImpinkerApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage Login(UserLoginViewModel loginViewModel)
+        public HttpResponseMessage Login([FromBody]UserLoginViewModel loginViewModel)
         {
             var username = loginViewModel.Username;
             var password = loginViewModel.Password;

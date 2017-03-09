@@ -16,7 +16,7 @@ namespace ImDal
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public long AddWeiBo(ImModel.WeiBo model)
+        public bool AddWeiBo(ImModel.WeiBo model)
         {
             var sql = @"
 INSERT INTO [dbo].[WeiBo]
@@ -49,20 +49,28 @@ INSERT INTO [dbo].[WeiBo]
            ,@UpdateTime)
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value = model.UserId},
 					new SqlParameter("@UserId", SqlDbType.Int){Value = model.UserId},
-					new SqlParameter("@State", SqlDbType.TinyInt,1){Value = (int)model.State},
+                    new SqlParameter("@DESCRIPTION",SqlDbType.VarChar){Value = model.Description}, 
+                    new SqlParameter("@ContentValue",SqlDbType.VarChar){Value = model.ContentValue}, 
+                    new SqlParameter("@ContentType",SqlDbType.TinyInt){Value =(int) model.ContentType}, 
+                    new SqlParameter("@Longitude",SqlDbType.Decimal){Value = model.Longitude}, 
+                    new SqlParameter("@Latitude",SqlDbType.Decimal){Value = model.Lantitude}, 
+                    new SqlParameter("@Height",SqlDbType.Decimal){Value = model.Height}, 
+                    new SqlParameter("@LocationText",SqlDbType.VarChar){Value = model.LocationText}, 
+					new SqlParameter("@IsRePost", SqlDbType.Bit){Value = model.IsRePost},
+					new SqlParameter("@State", SqlDbType.TinyInt){Value = (int)model.State},
+                    new SqlParameter("@HardWareType",SqlDbType.VarChar){Value = model.HardWareType}, 
 					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}};
 
             int rows = DbHelperSQL.ExecuteSql(sql, parameters);
             if (rows > 0)
             {
-                return 111;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }

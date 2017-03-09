@@ -11,10 +11,10 @@ namespace ImBLL
     {
         private WeiBoDal weiBoDal = new WeiBoDal();
 
-        public long AddWeiBo(ImModel.WeiBo model)
+        public bool AddWeiBo(ImModel.WeiBo model)
         {
-            long id=weiBoDal.AddWeiBo(model);
-            return id;
+            var flag=weiBoDal.AddWeiBo(model);
+            return flag;
         }
     }
 }

@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using ImBLL;
 using ImModel;
+using ImpinkerApi.Common;
+using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
 using System.Threading.Tasks;
 using System.Net;
@@ -20,55 +22,15 @@ namespace ImpinkerApi.Controllers
     public class WeiBoController : BaseApiController
     {
         readonly WeiBoBll _weiBoBll=new WeiBoBll();
-        /// <summary>
-        /// 创建微博
-        /// </summary>
-        /// <param name="vm"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public HttpResponseMessage Add(NewWeiBoViewModel vm)
-        {
-            if (vm!=null&&(!string.IsNullOrEmpty(vm.Description)||!string.IsNullOrEmpty(vm.ContentValue)))
-            {
-                var model = new WeiBo
-                {
-                    UserId = vm.UserId,
-                    Description = vm.Description,
-                    ContentValue = vm.ContentValue,
-                    ContentType = vm.ContentType,
-                    Longitude = vm.Longitude,
-                    Lantitude = vm.Lantitude,
-                    Height = vm.Height,
-                    LocationText = vm.LocationText,
-                    HardWareType = vm.HardWareType,
-                    IsRePost = false,
-                    CreateTime = DateTime.Now
-                };
-                long weiboId=_weiBoBll.AddWeiBo(model);
-                if (weiboId>0)
-                {
-                    return GetJson(new JsonResultViewModel
-                    {
-                        Data = weiboId,
-                        IsSuccess = 1,
-                        Description = "ok"
-                    });
-                }
-            }
+        const string BuckeyName = "myautos";
 
-            return GetJson(new JsonResultViewModel
-            {
-                Data = "",
-                IsSuccess = 10,
-                Description = "error"
-            });
-        }
-
+        #region 新建微博(图文)
         /// <summary>
-        /// mui 多图上传
+        /// mui 多图上传.创建微博
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [TokenCheck]
         public async Task<HttpResponseMessage> NewWeibo()
         {
             // 检查是否是 multipart/form-data 
@@ -88,42 +50,54 @@ namespace ImpinkerApi.Controllers
             }
             var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
 
-            string buckeyName = "myautos";
             try
             {
-                var rootPath = HttpContext.Current.Server.MapPath("~/ImageUpload");
                 // Read all contents of multipart message into CustomMultipartFormDataStreamProvider.  
                 await Request.Content.ReadAsMultipartAsync(provider);
 
                 //封装数据
-                var weiboVm = InitWeiBoData(provider);
-                List<string> files = new List<string>();
+                var weiboModel = InitWeiBoData(provider);
+                var files = new List<string>();
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    string ImgUrlformat = "weiboimage/{0}/{1}_{2}.jpg";
-                    var imgUrl = string.Format(ImgUrlformat, DateTime.Now.ToString("yyyyMMdd"), weiboVm.UserId, DateTime.Now.Ticks);
+                    const string imgUrlformat = "weiboimage/{0}/{1}_{2}.jpg";
+                    var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), weiboModel.UserId, DateTime.Now.Ticks);
                     //上传到oss
-                    var ossSucess = ObjectOperate.UploadImage(buckeyName, file.LocalFileName, imgUrl);
+                    var ossSucess = ObjectOperate.UploadImage(BuckeyName, file.LocalFileName, imgUrl);
                     if (ossSucess)
                     {
                         files.Add(imgUrl);
                     }
                 }
-                weiboVm.ContentValue = string.Join(",", files);
-                //数据库操作
-
-                // Send OK Response along with saved file names to the client.  
-                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                if (files.Count>0)
                 {
-                    IsSuccess = 1,
-                    Description = "ok",
-                    Data = weiboVm
-                });
+                    weiboModel.ContentValue = string.Join(",", files);
+                }
+                
+                //数据库操作
+                var flag = _weiBoBll.AddWeiBo(weiboModel);
+                if (flag)
+                {
+                    // Send OK Response along with saved file names to the client.  
+                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                    {
+                        IsSuccess = 1,
+                        Description = "ok",
+                        Data = weiboModel
+                    });
+                }
+                //记录日志
             }
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+            return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Description = "上传失败",
+                Data = ""
+            });
         }
         /// <summary>
         /// 创建一个 Provider 用于重命名接收到的文件 
@@ -142,9 +116,15 @@ namespace ImpinkerApi.Controllers
             }
         }
 
-        private NewWeiBoViewModel InitWeiBoData(CustomMultipartFormDataStreamProvider provider)
+        private WeiBo InitWeiBoData(CustomMultipartFormDataStreamProvider provider)
         {
-            var vm = new NewWeiBoViewModel();
+            var vm = new WeiBo();
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            if (userinfo == null)
+            {
+                return null;
+            }
+            vm.UserId = userinfo.Id;
             var formData = provider.FormData;
             if (formData.HasKeys())
             {
@@ -187,9 +167,32 @@ namespace ImpinkerApi.Controllers
                 vm.IsRePost = false;
                 vm.ContentType = WeiBoContentTypeEnum.Image;
                 vm.State = WeiBoStateEnum.Normal;
+                vm.CreateTime = DateTime.Now;
+                vm.UpdateTime = DateTime.Now;
             }
             return vm;
         }
-    
+        #endregion
+
+        #region 获取微博列表
+        /// <summary>
+        /// 获取微博列表
+        /// </summary>
+        /// <param name="pageindex">页码</param>
+        /// <param name="pagesize">数量</param>
+        /// <returns></returns>
+        public HttpResponseMessage GetWeiBoList(int pageindex,int pagesize)
+        {
+
+
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Description = "ok",
+                Data = ""
+            });
+        }
+
+        #endregion
     }
 }
