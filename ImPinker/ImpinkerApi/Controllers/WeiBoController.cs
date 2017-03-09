@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ImBLL;
 using ImModel;
 using ImpinkerApi.Common;
+using ImPinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace ImpinkerApi.Controllers
 {
     public class WeiBoController : BaseApiController
     {
-        readonly WeiBoBll _weiBoBll=new WeiBoBll();
+        readonly WeiBoBll _weiBoBll = new WeiBoBll();
+        readonly UserBll _userBll = new UserBll();
         const string BuckeyName = "myautos";
 
         #region 新建微博(图文)
@@ -43,7 +45,7 @@ namespace ImpinkerApi.Controllers
                     Data = HttpStatusCode.UnsupportedMediaType
                 });
             }
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/"+DateTime.Now.ToString("yyyyMMdd"));
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/" + DateTime.Now.ToString("yyyyMMdd"));
             if (!Directory.Exists(fileSaveLocation))
             {
                 Directory.CreateDirectory(fileSaveLocation);
@@ -69,11 +71,11 @@ namespace ImpinkerApi.Controllers
                         files.Add(imgUrl);
                     }
                 }
-                if (files.Count>0)
+                if (files.Count > 0)
                 {
                     weiboModel.ContentValue = string.Join(",", files);
                 }
-                
+
                 //数据库操作
                 var flag = _weiBoBll.AddWeiBo(weiboModel);
                 if (flag)
@@ -108,8 +110,8 @@ namespace ImpinkerApi.Controllers
             public override string GetLocalFileName(HttpContentHeaders headers)
             {
                 //var fileName = "weiboimage/" + DateTime.Now.ToString("yyyyMMdd") + "/" + headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-                var type =Path.GetExtension(headers.ContentDisposition.FileName.Replace("\"", string.Empty));
-                var sb = new StringBuilder(( DateTime.Now.Ticks.ToString()).Replace("\"", "").Trim().Replace(" ", "_")+type);
+                var type = Path.GetExtension(headers.ContentDisposition.FileName.Replace("\"", string.Empty));
+                var sb = new StringBuilder((DateTime.Now.Ticks.ToString()).Replace("\"", "").Trim().Replace(" ", "_") + type);
                 Array.ForEach(Path.GetInvalidFileNameChars(), invalidChar => sb.Replace(invalidChar, '-'));
                 return sb.ToString();
 
@@ -129,7 +131,7 @@ namespace ImpinkerApi.Controllers
             if (formData.HasKeys())
             {
                 //从header获取
-                if (formData.AllKeys.Contains("userid")&&!string.IsNullOrEmpty(formData.Get("userid")))
+                if (formData.AllKeys.Contains("userid") && !string.IsNullOrEmpty(formData.Get("userid")))
                 {
                     var aa = formData.Get("userid");
                     vm.UserId = Int32.Parse(aa);
@@ -181,15 +183,42 @@ namespace ImpinkerApi.Controllers
         /// <param name="pageindex">页码</param>
         /// <param name="pagesize">数量</param>
         /// <returns></returns>
-        public HttpResponseMessage GetWeiBoList(int pageindex,int pagesize)
+        public HttpResponseMessage GetWeiBoList(int pageindex, int pagesize)
         {
-
-
+            var list = _weiBoBll.GetListByPage(pageindex, pagesize);
+            if (list == null || list.Count == 0)
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "暂无更多数据",
+                    Data = null
+                });
+            }
+            var resultList = new List<WeiBoListViewModel>();
+            foreach (var weiBo in list)
+            {
+                var model = new WeiBoListViewModel
+                {
+                    UserId = weiBo.UserId,
+                    Description = weiBo.Description,
+                    ContentValue = weiBo.ContentValue,
+                    Longitude = weiBo.Longitude,
+                    Lantitude = weiBo.Lantitude,
+                    Height = weiBo.Height,
+                    LocationText = weiBo.LocationText,
+                    IsRePost = weiBo.IsRePost
+                };
+                var userinfo = _userBll.GetModelByCache(weiBo.UserId);
+                model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                model.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                resultList.Add(model);
+            }
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 1,
                 Description = "ok",
-                Data = ""
+                Data = resultList
             });
         }
 

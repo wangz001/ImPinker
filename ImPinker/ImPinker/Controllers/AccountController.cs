@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using FastJSON;
 using ImBLL;
 using ImModel;
-using ImPinker.Common;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -19,7 +14,7 @@ using Newtonsoft.Json;
 using Top.Api;
 using Top.Api.Request;
 using Top.Api.Response;
-using WebGrease;
+using CheckNumModel = ImBLL.CheckNumModel;
 
 namespace ImPinker.Controllers
 {

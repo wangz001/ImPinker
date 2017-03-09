@@ -51,6 +51,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TopSdk">
+      <HintPath>..\Lib\TopSdk.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleBll.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="ArticleSnapsBll.cs" />
     <Compile Include="ArticleTagBll.cs" />
     <Compile Include="ArticleVoteBll.cs" />
+    <Compile Include="PhoneCheckNumBll.cs" />
     <Compile Include="SolrNetSearchBll.cs" />
     <Compile Include="SolrSearchBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

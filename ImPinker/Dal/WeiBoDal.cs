@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBUtility;
+using ImModel;
 
 namespace ImDal
 {
@@ -72,6 +73,41 @@ INSERT INTO [dbo].[WeiBo]
             {
                 return false;
             }
+        }
+
+        public DataSet GetListByPage(int pageNum, int pagesize)
+        {
+            var sql = @"
+SELECT  *
+FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
+                    [Id] ,
+                    [UserId] ,
+                    [Description] ,
+                    [ContentValue] ,
+                    [ContentType] ,
+                    [Longitude] ,
+                    [Latitude] ,
+                    [Height] ,
+                    [LocationText] ,
+                    [State] ,
+                    [HardWareType] ,
+                    [IsRePost] ,
+                    [CreateTime] ,
+                    [UpdateTime]
+          FROM      [MyAutosTest].[dbo].[WeiBo]
+          WHERE     State = 1
+        ) T
+WHERE   T.row BETWEEN @startIndex AND @endIndex 
+";
+            var startIndex = (pageNum - 1) * pagesize + 1;
+            var endIndex = pageNum * pagesize;
+            SqlParameter[] parameters = {
+					new SqlParameter("@startIndex", SqlDbType.Int){Value = startIndex},
+                   
+					new SqlParameter("@endIndex", SqlDbType.Int){Value = endIndex}};
+
+            var  ds = DbHelperSQL.Query(sql, parameters);
+            return ds;
         }
     }
 }
