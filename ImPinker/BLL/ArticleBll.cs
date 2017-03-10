@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using Common.DateTimeUtil;
 using ImDal;
 using ImModel;
 using ImModel.ViewModel;
@@ -15,16 +13,16 @@ namespace ImBLL
     /// </summary>
     public class ArticleBll
     {
-        private readonly ArticleDal dal = new ArticleDal();
-        private readonly ArticleSnapsBll articleSnapsBll = new ArticleSnapsBll();
+        private readonly ArticleDal _dal = new ArticleDal();
+        private readonly ArticleSnapsBll _articleSnapsBll = new ArticleSnapsBll();
 
         #region  BasicMethod
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(long Id)
+        public bool Exists(long id)
         {
-            return dal.Exists(Id);
+            return _dal.Exists(id);
         }
 
         /// <summary>
@@ -32,7 +30,7 @@ namespace ImBLL
         /// </summary>
         public bool Add(Article model)
         {
-            return dal.Add(model);
+            return _dal.Add(model);
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace ImBLL
         /// </summary>
         public bool Update(Article model)
         {
-            return dal.Update(model);
+            return _dal.Update(model);
         }
 
         /// <summary>
@@ -48,7 +46,7 @@ namespace ImBLL
         /// </summary>
         public bool Delete(long Id)
         {
-            return dal.Delete(Id);
+            return _dal.Delete(Id);
         }
         /// <summary>
         /// 用户删除帖子
@@ -58,14 +56,14 @@ namespace ImBLL
         /// <returns></returns>
         public bool DeleteThread(int userid, long Id)
         {
-            return dal.DeleteThread(userid, Id);
+            return _dal.DeleteThread(userid, Id);
         }
         /// <summary>
         /// 删除一条数据
         /// </summary>
         public bool DeleteList(string Idlist)
         {
-            return dal.DeleteList(Idlist);
+            return _dal.DeleteList(Idlist);
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace ImBLL
         /// </summary>
         public Article GetModel(long Id)
         {
-            return dal.GetModel(Id);
+            return _dal.GetModel(Id);
         }
 
         /// <summary>
@@ -87,7 +85,7 @@ namespace ImBLL
             {
                 try
                 {
-                    objModel = dal.GetModel(Id);
+                    objModel = _dal.GetModel(Id);
                     if (objModel != null)
                     {
                         int ModelCache = ConfigHelper.GetConfigInt("ModelCache");
@@ -104,7 +102,7 @@ namespace ImBLL
         /// </summary>
         public DataSet GetList(string strWhere)
         {
-            return dal.GetList(strWhere);
+            return _dal.GetList(strWhere);
         }
 
         /// <summary>
@@ -112,7 +110,7 @@ namespace ImBLL
         /// </summary>
         public List<Article> GetModelList(string strWhere)
         {
-            DataSet ds = dal.GetList(strWhere);
+            DataSet ds = _dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
         /// <summary>
@@ -126,7 +124,7 @@ namespace ImBLL
             {
                 for (int n = 0; n < rowsCount; n++)
                 {
-                    Article model = dal.DataRowToModel(dt.Rows[n]);
+                    Article model = _dal.DataRowToModel(dt.Rows[n]);
                     if (model != null)
                     {
                         modelList.Add(model);
@@ -142,7 +140,7 @@ namespace ImBLL
         /// </summary>
         public int GetRecordCount(string strWhere)
         {
-            return dal.GetRecordCount(strWhere);
+            return _dal.GetRecordCount(strWhere);
         }
         /// <summary>
         /// 分页获取用户数据列表,包括已发布的,待审核,审核未通过d 
@@ -150,7 +148,7 @@ namespace ImBLL
         public List<Article> GetMyListByPage(int userid, int pageNum, int count, out int totalaCount)
         {
             totalaCount = 0;
-            var ds = dal.GetMyListByPage(userid, pageNum, count);
+            var ds = _dal.GetMyListByPage(userid, pageNum, count);
             var list = new List<Article>();
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -170,7 +168,7 @@ namespace ImBLL
         {
             var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
-            var ds = dal.GetIndexListByPage(pageNum, count);
+            var ds = _dal.GetIndexListByPage(pageNum, count);
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
@@ -245,7 +243,7 @@ namespace ImBLL
             {
                 article.CoverImage = newUrl;
                 article.UpdateTime = DateTime.Now;
-                return dal.Update(article);
+                return _dal.Update(article);
             }
             return false;
         }
@@ -267,8 +265,8 @@ namespace ImBLL
         /// <returns></returns>
         public ArticleViewModel GetModelWithContent(long id)
         {
-            var article = dal.GetModel(id);
-            var snap = articleSnapsBll.GetModel(id);
+            var article = _dal.GetModel(id);
+            var snap = _articleSnapsBll.GetModel(id);
             
             var vm = new ArticleViewModel()
             {
@@ -292,23 +290,44 @@ namespace ImBLL
         /// <returns></returns>
         public bool AddThread(CreateThreadVm vm)
         {
-            return dal.AddThread(vm);
+            return _dal.AddThread(vm);
         }
 
         public bool UpdateThread(CreateThreadVm vm)
         {
-            return dal.UpdateThread(vm);
+            return _dal.UpdateThread(vm);
         }
-    
+
         /// <summary>
         /// 修改文章状态
         /// </summary>
-        /// <param name="articleStateEnum"></param>
         public bool UpdateState(long articleId,ArticleStateEnum articleState)
         {
             var article = this.GetModelByCache(articleId);
             article.State = (int)articleState;
             return Update(article);
+        }
+
+        /// <summary>
+        /// 获取首页文章列表
+        /// </summary>
+        /// <param name="pageNum"></param>
+        /// <param name="pageCount"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public List<ArticleViewModel> GetListByPage(int pageNum, int pageCount, int? userid)
+        {
+            //如果是新用户，则推荐热门文章；老用户，则根据用户兴趣标签，智能推荐
+            var list = new List<ArticleViewModel>();
+            if (userid > 0)
+            {
+                //根据用户兴趣标签，智能推荐
+            }
+            else
+            {
+                list = GetIndexListByPage(pageNum, pageCount);
+            }
+            return list;
         }
     }
 }

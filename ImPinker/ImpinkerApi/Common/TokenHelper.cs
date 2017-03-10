@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
-using System.Web;
-using System.Web.Providers.Entities;
 using System.Web.Security;
 using ImBLL;
 using ImModel;
-using ImpinkerApi.Models;
 
 namespace ImpinkerApi.Common
 {
     public class TokenHelper
     {
         static Dictionary<string, string> _userTokenDic = new Dictionary<string, string>();
-        static UserBll _userBll=new UserBll();
+        static readonly UserBll _userBll=new UserBll();
         /// <summary>
         /// 添加或更新token，用户登录的时候返回token
         /// </summary>

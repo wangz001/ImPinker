@@ -49,7 +49,7 @@ namespace ImpinkerApi.Controllers
                 return GetJson(new JsonResultViewModel
                 {
                     IsSuccess = 0,
-                    Data = "",
+                    Data = e,
                     Description = "上传出错"
                 });
             }

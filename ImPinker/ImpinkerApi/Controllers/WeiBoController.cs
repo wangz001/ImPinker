@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -111,7 +112,7 @@ namespace ImpinkerApi.Controllers
             {
                 //var fileName = "weiboimage/" + DateTime.Now.ToString("yyyyMMdd") + "/" + headers.ContentDisposition.FileName.Replace("\"", string.Empty);
                 var type = Path.GetExtension(headers.ContentDisposition.FileName.Replace("\"", string.Empty));
-                var sb = new StringBuilder((DateTime.Now.Ticks.ToString()).Replace("\"", "").Trim().Replace(" ", "_") + type);
+                var sb = new StringBuilder((DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture)).Replace("\"", "").Trim().Replace(" ", "_") + type);
                 Array.ForEach(Path.GetInvalidFileNameChars(), invalidChar => sb.Replace(invalidChar, '-'));
                 return sb.ToString();
 
