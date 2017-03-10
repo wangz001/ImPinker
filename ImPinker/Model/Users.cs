@@ -18,7 +18,7 @@ namespace ImModel
 		private bool _sex;
 		private string _phonenum;
 		private string _email;
-		private int? _age;
+		private int _age;
 		private string _imgurl;
 		private bool _isenable;
 		private DateTime _createtime;
@@ -92,7 +92,7 @@ namespace ImModel
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? Age
+		public int Age
 		{
 			set{ _age=value;}
 			get{return _age;}

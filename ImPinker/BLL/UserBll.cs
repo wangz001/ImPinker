@@ -38,6 +38,13 @@ namespace ImBLL
 		/// </summary>
 		public int  Add(Users model)
 		{
+		    if (string.IsNullOrEmpty(model.AspNetId))
+		    {
+                //api 手机验证码登录
+		        model.AspNetId = "";
+		    }
+		    model.CreateTime = DateTime.Now;
+		    model.UpdateTime = DateTime.Now;
 			return dal.Add(model);
 		}
 

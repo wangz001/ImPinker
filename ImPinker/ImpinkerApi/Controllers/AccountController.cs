@@ -17,8 +17,8 @@ namespace ImpinkerApi.Controllers
         /// </summary>
         /// <param name="loginViewModel"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         public HttpResponseMessage Login([FromBody]UserLoginViewModel loginViewModel)
         {
             var username = loginViewModel.Username;
@@ -62,8 +62,8 @@ namespace ImpinkerApi.Controllers
         /// 用手机+验证码登录（如未注册，则添加新用户）
         /// </summary>
         /// <returns>登录成功，返回token</returns>
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         public HttpResponseMessage LoginByPhone([FromBody]LoginByPhoneViewModel vm)
         {
             var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.LoginByPhone);
@@ -76,22 +76,24 @@ namespace ImpinkerApi.Controllers
                     var user = new Users
                     {
                         PhoneNum = vm.PhoneNum,
-                        PassWord = vm.PhoneNum,
                         UserName = vm.PhoneNum
                     };
-                    _userBll.Add(user);
+                    var userid=_userBll.Add(user);
+                    if (userid>0)
+                    {
+                        return GetJson(new JsonResultViewModel
+                        {
+                            IsSuccess = 1,
+                            Description = "登录成功",
+                            Data = ""
+                        });
+                    }
                 }
-                return GetJson(new JsonResultViewModel
-                {
-                    IsSuccess = 1,
-                    Description = "登录成功",
-                    Data = ""
-                });
             }
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 0,
-                Description = "验证错误",
+                Description = "登录失败",
                 Data = ""
             });
 
@@ -101,11 +103,11 @@ namespace ImpinkerApi.Controllers
         /// 注册用户
         /// </summary>
         /// <returns></returns>
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         public HttpResponseMessage Regist([FromBody]UserRegistViewModel vm)
         {
-            var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.LoginByPhone);
+            var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.Regist);
             if (flag)
             {
                 if (vm.Password.Equals(vm.Password2))
@@ -141,8 +143,8 @@ namespace ImpinkerApi.Controllers
         /// 找回密码
         /// </summary>
         /// <returns></returns>
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         public HttpResponseMessage FindPassword([FromBody]FindPasswordViewModel vm)
         {
             var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.FindPassword);
@@ -185,8 +187,8 @@ namespace ImpinkerApi.Controllers
         /// <param name="phoneNum"></param>
         /// <param name="operatrateEnum"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.AllowAnonymous]
+        [HttpGet]
+        [AllowAnonymous]
         public HttpResponseMessage SendCheckNum(string phoneNum, int operatrateEnum)
         {
             switch ((SendCheckNumOperateEnum)operatrateEnum)
