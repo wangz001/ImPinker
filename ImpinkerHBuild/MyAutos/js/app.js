@@ -12,12 +12,12 @@
 		loginInfo = loginInfo || {};
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
-//		if(loginInfo.account.length < 5) {
-//			return callback('账号最短为 5 个字符');
-//		}
-//		if(loginInfo.password.length < 6) {
-//			return callback('密码最短为 6 个字符');
-//		}
+		if(loginInfo.account.length < 5) {
+			return callback('账号最短为 5 个字符');
+		}
+		if(loginInfo.password.length < 6) {
+			return callback('密码最短为 6 个字符');
+		}
 		//登录验证
 		mui.ajax('http://api.myautos.cn/Account/Login', {
 			data: {
@@ -32,7 +32,8 @@
 			},
 			success: function(data) {
 				if(data.IsSuccess==1){
-					console.log("开始登录。。。"+data.Description);
+					var token=data.Data;
+					console.log("返回的token。。。"+token);
 					return owner.createState(loginInfo.account, callback);
 				}
 				else {
@@ -102,9 +103,9 @@
 	owner.setState = function(state) {
 		state = state || {};
 		localStorage.setItem('$state', JSON.stringify(state));
-		//var settings = owner.getSettings();
-		//settings.gestures = '';
-		//owner.setSettings(settings);
+		var settings = owner.getSettings();
+		settings.gestures = '';
+		owner.setSettings(settings);
 	};
 
 	var checkEmail = function(email) {

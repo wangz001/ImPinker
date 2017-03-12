@@ -1,7 +1,17 @@
 .mui-card .mui-card-content{
 	margin: inherit;
 }
+.mui-card .mui-card-content .bigimage{
+	width:90%;
+}
+
+.mui-card .mui-card-content .smallimage{
+	width:30%;
+
+}
 
 .mui-pull-bottom-pocket, .mui-pull-top-pocket{
 	height: 60px;
 }
+
+

@@ -426,11 +426,26 @@
             <param name="username"></param>
             <returns></returns>
         </member>
+        <member name="M:ImpinkerApi.Common.TokenHelper.CheckUserToken(System.String,System.String)">
+            <summary>
+            验证token是否有效
+            </summary>
+            <param name="username"></param>
+            <param name="tokenstr"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImpinkerApi.Common.TokenHelper.GenerateToken(System.String)">
             <summary>
             生成token
             </summary>
             <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Common.TokenHelper.GetUserInfoByHeader(System.Net.Http.Headers.HttpRequestHeaders)">
+            <summary>
+            根据header信息。获取用户信息。该方法的调用必须先进行权限验证
+            </summary>
+            <param name="headers"></param>
             <returns></returns>
         </member>
         <member name="M:ImpinkerApi.Controllers.AccountController.Login(ImpinkerApi.Models.UserLoginViewModel)">
@@ -440,12 +455,38 @@
             <param name="loginViewModel"></param>
             <returns></returns>
         </member>
+        <member name="M:ImpinkerApi.Controllers.AccountController.LoginByPhone(ImpinkerApi.Models.LoginByPhoneViewModel)">
+            <summary>
+            用手机+验证码登录（如未注册，则添加新用户）
+            </summary>
+            <returns>登录成功，返回token</returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.AccountController.Regist(ImpinkerApi.Models.UserRegistViewModel)">
+            <summary>
+            注册用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.AccountController.FindPassword(ImpinkerApi.Models.FindPasswordViewModel)">
+            <summary>
+            找回密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.AccountController.SendCheckNum(System.String,System.Int32)">
+            <summary>
+            发送手机验证码
+            </summary>
+            <param name="phoneNum"></param>
+            <param name="operatrateEnum"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImpinkerApi.Controllers.ArticleController.GetByPage(System.Int32,System.Int32)">
             <summary>
             分页获取数据
             </summary>
             <param name="pageNum"></param>
-            <param name="pageCount"></param>
+            <param name="pageSize"></param>
             <returns></returns>
         </member>
         <member name="M:ImpinkerApi.Controllers.UploadController.BaiduUpload(System.Web.HttpPostedFileBase)">
@@ -466,19 +507,30 @@
             创建一个 Provider 用于重命名接收到的文件 
             </summary>
         </member>
-        <member name="M:ImpinkerApi.Controllers.WeiBoController.Add(ImpinkerApi.Models.NewWeiBoViewModel)">
+        <member name="M:ImpinkerApi.Controllers.WeiBoController.NewWeibo">
             <summary>
-            创建微博
+            mui 多图上传.创建微博
             </summary>
-            <param name="vm"></param>
             <returns></returns>
         </member>
-        <member name="M:ImpinkerApi.Filters.TokenCheckAttribute.ValidateTicket(System.String)">
+        <member name="M:ImpinkerApi.Controllers.WeiBoController.GetWeiBoList(System.Int32,System.Int32)">
             <summary>
-            这里主要是授权验证的逻辑处理，返回true的则是通过授权，返回了false则不是。
+            获取微博列表
             </summary>
-            <param name="ticket"></param>
+            <param name="pageindex">页码</param>
+            <param name="pagesize">数量</param>
             <returns></returns>
+        </member>
+        <member name="T:ImpinkerApi.Controllers.WeiBoController.CustomMultipartFormDataStreamProvider">
+            <summary>
+            创建一个 Provider 用于重命名接收到的文件 
+            </summary>
+        </member>
+        <member name="M:ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            token验证
+            </summary>
+            <param name="actionContext"></param>
         </member>
         <member name="P:ImpinkerApi.Models.JsonResultViewModel.IsSuccess">
             <summary>
@@ -497,7 +549,7 @@
         </member>
         <member name="T:ImpinkerApi.Models.UserLoginViewModel">
             <summary>
-            用户登录模型
+            用户登录、注册、找回密码、验证码模型
             </summary>
         </member>
         <member name="P:ImpinkerApi.Models.UserLoginViewModel.Username">
@@ -510,12 +562,92 @@
             密码
             </summary>
         </member>
+        <member name="P:ImpinkerApi.Models.UserRegistViewModel.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserRegistViewModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserRegistViewModel.Password2">
+            <summary>
+            密码2
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserRegistViewModel.PhoneNum">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.UserRegistViewModel.CheckNum">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.FindPasswordViewModel.PhoneNum">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.FindPasswordViewModel.CheckNum">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.FindPasswordViewModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.FindPasswordViewModel.Password2">
+            <summary>
+            密码2
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.LoginByPhoneViewModel.PhoneNum">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.LoginByPhoneViewModel.CheckNum">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.SendCheckNumViewModel.PhoneNum">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.SendCheckNumViewModel.CheckNum">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.SendCheckNumViewModel.OpreateType">
+            <summary>
+            操作类型
+            </summary>
+        </member>
         <member name="P:ImpinkerApi.Models.NewWeiBoViewModel.HardWareType">
             <summary>
             硬件版本号（ios Android  等）
             </summary>
         </member>
         <member name="P:ImpinkerApi.Models.NewWeiBoViewModel.IsRePost">
+            <summary>
+            是否转发
+            </summary>
+        </member>
+        <member name="T:ImpinkerApi.Models.WeiBoListViewModel">
+            <summary>
+            微博列表模型
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.WeiBoListViewModel.IsRePost">
             <summary>
             是否转发
             </summary>
