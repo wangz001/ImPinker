@@ -19,7 +19,7 @@
 			return callback('密码最短为 6 个字符');
 		}
 		//登录验证
-		mui.ajax('http://api.myautos.cn/Account/Login', {
+		mui.ajax('http://api.myautos.cn/api/Account/Login', {
 			data: {
 				username: loginInfo.account,
 				password: loginInfo.password
@@ -34,21 +34,12 @@
 				if(data.IsSuccess==1){
 					var token=data.Data;
 					console.log("返回的token。。。"+token);
-					return owner.createState(loginInfo.account, callback);
+					return owner.createState(loginInfo,token, callback);
 				}
 				else {
 					console.log("开始登录。。。"+data.Description);
 					return callback(data.Description);
 				}
-//				var users = JSON.parse(localStorage.getItem('$users') || '[]');
-//				var authed = users.some(function(user) {
-//					return loginInfo.account == user.account && loginInfo.password == user.password;
-//				});
-//				if(authed) {
-//					return owner.createState(loginInfo.account, callback);
-//				} else {
-//					return callback('用户名或密码错误');
-//				}
 			},
 			error: function(xhr, type, errorThrown) {
 				//异常处理；
@@ -57,11 +48,12 @@
 		});
 
 	};
-
-	owner.createState = function(name, callback) {
+	
+	owner.createState = function(loginInfo,token, callback) {
 		var state = owner.getState();
-		state.account = name;
-		state.token = "token123456789";
+		state.account = loginInfo.account;
+		state.password=loginInfo.password;
+		state.token = token;
 		owner.setState(state);
 		return callback();
 	};

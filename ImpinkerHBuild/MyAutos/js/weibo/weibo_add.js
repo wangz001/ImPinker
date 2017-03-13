@@ -15,9 +15,9 @@
 		locationtxt: document.getElementById('locationtxt'),
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit'),
-		locationBtn: document.getElementById('geoLocation')
+		locationBtn: document.getElementById('mySwitch')
 	};
-	var url = 'http://api.myautos.cn/api/Upload/ImgUpload';
+	var url = 'http://api.myautos.cn/api/weibo/newweibo';
 	weibo.files = [];
 	weibo.uploader = null;
 	weibo.deviceInfo = null;
@@ -28,16 +28,23 @@
 				imei: plus.device.imei, //设备标识
 				images: weibo.files, //图片文件
 				p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
-				md: plus.device.model, //设备型号
+				HardWareType: plus.device.model, //设备型号
 				app_version: plus.runtime.version,
 				plus_version: plus.runtime.innerVersion, //基座版本号
 				os: mui.os.version,
 				net: '' + plus.networkinfo.getCurrentType()
 			}
+			//地理位置信息
+		weibo.gisinfo = {
+				LocationText: "",
+				Longitude: 0.0,
+				Latitude: 0.0,
+				Height: 0.0
+			}
 			//获取参数
 		var self = plus.webview.currentWebview();
 		var pathArr = self.path;
-		if(pathArr !=undefined &&pathArr != null) {
+		if(pathArr != undefined && pathArr != null) {
 			console.log(pathArr);
 			weibo.initImages(pathArr);
 		}
@@ -155,56 +162,70 @@
 
 	//接受页面跳转传递过来的图片，并显示
 	weibo.initImages = function(pathArr) {
-		if(pathArr == null || pathArr.length == 0) {
+			if(pathArr == null || pathArr.length == 0) {
+				weibo.newPlaceholder();
+				return;
+			}
+			for(var i = 0; i < pathArr.length; i++) {
+				imageIndexIdNum = i + 1;
+				var placehold = document.createElement('div');
+				placehold.setAttribute('class', 'image-item');
+				placehold.setAttribute('id', 'image-' + imageIndexIdNum);
+				//删除图片
+				var closeButton = document.createElement('div');
+				closeButton.setAttribute('class', 'image-close');
+				closeButton.innerHTML = 'X';
+				//小X的点击事件
+				closeButton.addEventListener('tap', function(event) {
+					setTimeout(function() {
+						weibo.imageList.removeChild(placehold);
+						weibo.newPlaceholder();
+					}, 0);
+					return false;
+				}, false);
+				var path = pathArr[i];
+				console.log("path1111:" + path);
+				weibo.addFile(path);
+				placehold.style.backgroundImage = 'url(' + path + ')';
+				console.log("backgroundImage-------:" + path);
+				placehold.appendChild(closeButton);
+				weibo.imageList.appendChild(placehold);
+			}
 			weibo.newPlaceholder();
-			return;
 		}
-		for(var i = 0; i < pathArr.length; i++) {
-			imageIndexIdNum = i + 1;
-			var placehold = document.createElement('div');
-			placehold.setAttribute('class', 'image-item');
-			placehold.setAttribute('id', 'image-' + imageIndexIdNum);
-			//删除图片
-			var closeButton = document.createElement('div');
-			closeButton.setAttribute('class', 'image-close');
-			closeButton.innerHTML = 'X';
-			//小X的点击事件
-			closeButton.addEventListener('tap', function(event) {
-				setTimeout(function() {
-					weibo.imageList.removeChild(placehold);
-					weibo.newPlaceholder();
-				}, 0);
-				return false;
-			}, false);
-			var path = pathArr[i];
-			console.log("path1111:" + path);
-			weibo.addFile(path);
-			placehold.style.backgroundImage = 'url(' + path + ')';
-			console.log("backgroundImage-------:" + path);
-			placehold.appendChild(closeButton);
-			weibo.imageList.appendChild(placehold);
+		//获取地理位置
+	weibo.locationBtn.addEventListener("toggle", function(event) {
+		if(event.detail.isActive) {
+			plus.geolocation.getCurrentPosition(function(p) {
+				weibo.gisinfo.LocationText = p.addresses;
+				weibo.gisinfo.Longitude = p.coords.longitude;
+				weibo.gisinfo.Latitude = p.coords.latitude;
+				weibo.gisinfo.Height = p.coords.altitude;
+				console.log(weibo.gisinfo.Latitude);
+				document.getElementById('locationtxt').innerHTML = p.addresses;
+			}, function(e) {
+				alert("Geolocation error: " + e.message);
+			});
+		} else {
+			weibo.gisinfo.LocationText = "";
+			weibo.gisinfo.Longitude = 0.0;
+			weibo.gisinfo.Latitude = 0.0;
+			weibo.gisinfo.Height = 0.0;
+			console.log(weibo.gisinfo.Latitude);
 		}
-		weibo.newPlaceholder();
-	}
+	});
 
-	//获取地理位置
 	weibo.locationBtn.addEventListener('tap', function(event) {
-		plus.geolocation.getCurrentPosition(function(p) {
-			//			alert("Geolocation\nLatitude:" + p.coords.latitude + "\nLongitude:" +
-			//				p.coords.longitude + "\nAltitude:" + p.addresses);
-			document.getElementById('locationtxt').innerHTML = p.addresses;
-		}, function(e) {
-			alert("Geolocation error: " + e.message);
-		});
 
 	});
 
 	//提交
+	var userstate = app.getState();
 	weibo.submitBtn.addEventListener('tap', function(event) {
-		if(weibo.description.value == '' || weibo.files.length==0) {
+		if(weibo.description.value == '' || weibo.files.length == 0) {
 			return mui.toast('信息填写不符合规范');
 		}
-		if(weibo.description.value.length > 200 ) {
+		if(weibo.description.value.length > 200) {
 			return mui.toast('信息超长,请重新填写~')
 		}
 		//判断网络连接
@@ -212,9 +233,10 @@
 			return mui.toast("连接网络失败，请稍后再试");
 		}
 		//mui.extend(0)  合并参数
-		weibo.send(mui.extend({}, weibo.deviceInfo, {
-			content: weibo.description.value,
-			locationtxt: weibo.locationtxt.value,
+		var token = userstate.token;
+		console.log("send......token:" + token);
+		weibo.send(mui.extend({}, weibo.deviceInfo, weibo.gisinfo, {
+			Description: weibo.description.value,
 			images: weibo.files,
 			score: '' + starIndex
 		}))
@@ -229,20 +251,20 @@
 				var data = JSON.parse(upload.responseText);
 				//上传成功，重置表单
 				if(data.ret === 0 && data.desc === 'Success') {
-					//					mui.toast('反馈成功~')
 					console.log("upload success");
 					//					weibo.clearForm();
 				}
 			} else {
 				console.log("upload fail");
 			}
-
 		});
+		//设置头信息
+		weibo.uploader.setRequestHeader("username", userstate.account);
+		weibo.uploader.setRequestHeader("usertoken", userstate.token);
 		//添加上传数据
 		mui.each(content, function(index, element) {
 			if(index !== 'images') {
 				console.log("addData:" + index + "," + element);
-				//				console.log(index);
 				weibo.uploader.addData(index, element)
 			}
 		});
@@ -255,6 +277,7 @@
 			});
 		});
 		//开始上传任务
+		console.log("开始上传 token ：" + weibo.uploader.getResponseHeader("usertoken"));
 		weibo.uploader.start();
 		mui.alert("感谢反馈，点击确定关闭", "问题反馈", "确定", function() {
 			weibo.clearForm();
