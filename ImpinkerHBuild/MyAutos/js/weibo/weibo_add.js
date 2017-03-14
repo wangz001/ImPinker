@@ -21,6 +21,7 @@
 	weibo.files = [];
 	weibo.uploader = null;
 	weibo.deviceInfo = null;
+	weibo.gisinfo=null;
 	mui.plusReady(function() {
 		//设备信息，无需修改
 		weibo.deviceInfo = {
@@ -37,9 +38,9 @@
 			//地理位置信息
 		weibo.gisinfo = {
 				LocationText: "",
-				Longitude: 0.0,
-				Latitude: 0.0,
-				Height: 0.0
+				Longitude: "",
+				Latitude: "",
+				Height: ""
 			}
 			//获取参数
 		var self = plus.webview.currentWebview();
@@ -157,7 +158,6 @@
 		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
 		weibo.imageList.appendChild(placeholder);
-		console.log("placeholder-------:");
 	};
 
 	//接受页面跳转传递过来的图片，并显示
@@ -198,10 +198,9 @@
 		if(event.detail.isActive) {
 			plus.geolocation.getCurrentPosition(function(p) {
 				weibo.gisinfo.LocationText = p.addresses;
-				weibo.gisinfo.Longitude = p.coords.longitude;
-				weibo.gisinfo.Latitude = p.coords.latitude;
-				weibo.gisinfo.Height = p.coords.altitude;
-				console.log(weibo.gisinfo.Latitude);
+				weibo.gisinfo.Longitude = p.coords.longitude.toString();
+				weibo.gisinfo.Latitude = p.coords.latitude.toString();
+				weibo.gisinfo.Height = p.coords.altitude.toString();
 				document.getElementById('locationtxt').innerHTML = p.addresses;
 			}, function(e) {
 				alert("Geolocation error: " + e.message);
@@ -211,12 +210,8 @@
 			weibo.gisinfo.Longitude = 0.0;
 			weibo.gisinfo.Latitude = 0.0;
 			weibo.gisinfo.Height = 0.0;
-			console.log(weibo.gisinfo.Latitude);
+			document.getElementById('locationtxt').innerHTML = "";
 		}
-	});
-
-	weibo.locationBtn.addEventListener('tap', function(event) {
-
 	});
 
 	//提交

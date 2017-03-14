@@ -50,7 +50,8 @@
 			"images/yuantiao.jpg",
 			"images/logo.png",
 			"fonts/mui.ttf",
-			"css/weibo.css"
+			"css/weibo.css",
+			"images/qrcode.png"
 		],
 		"refer": []
 	},
