@@ -85,13 +85,10 @@ namespace ImpinkerApi.Models
         /// </summary>
         public string PhoneNum { get; set; }
         /// <summary>
-        /// 验证码
-        /// </summary>
-        public string CheckNum { get; set; }
-        /// <summary>
         /// 操作类型
         /// </summary>
         public int OpreateType { get; set; }
     }
+
     
 }

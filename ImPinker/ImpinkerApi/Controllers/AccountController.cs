@@ -184,17 +184,17 @@ namespace ImpinkerApi.Controllers
         /// <summary>
         /// 发送手机验证码
         /// </summary>
-        /// <param name="phoneNum"></param>
-        /// <param name="operatrateEnum"></param>
+        /// <param name="PhoneNum"></param>
+        /// <param name="OpreateType"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
-        public HttpResponseMessage SendCheckNum(string phoneNum, int operatrateEnum)
+        public HttpResponseMessage SendCheckNum([FromBody]SendCheckNumViewModel vm)
         {
-            switch ((SendCheckNumOperateEnum)operatrateEnum)
+            switch ((SendCheckNumOperateEnum)vm.OpreateType)
             {
                 case SendCheckNumOperateEnum.Regist:
-                    var user = _userBll.GetModelByPhoneNum(phoneNum);
+                    var user = _userBll.GetModelByPhoneNum(vm.PhoneNum);
                     if (user!=null)
                     {
                         return GetJson(new JsonResultViewModel
@@ -206,7 +206,7 @@ namespace ImpinkerApi.Controllers
                     }
                     break;
                 case SendCheckNumOperateEnum.FindPassword:
-                    var userfp = _userBll.GetModelByPhoneNum(phoneNum);
+                    var userfp = _userBll.GetModelByPhoneNum(vm.PhoneNum);
                     if (userfp != null)
                     {
                         return GetJson(new JsonResultViewModel
@@ -218,8 +218,8 @@ namespace ImpinkerApi.Controllers
                     }
                     break;
             }
-            var operateEnum = (SendCheckNumOperateEnum)operatrateEnum;
-            var flag = PhoneCheckNumBll.Send(phoneNum, operateEnum);
+            var operateEnum = (SendCheckNumOperateEnum)vm.OpreateType;
+            var flag = PhoneCheckNumBll.Send(vm.PhoneNum, operateEnum);
             if (flag)
             {
                 return GetJson(new JsonResultViewModel

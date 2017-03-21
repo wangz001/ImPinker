@@ -41,7 +41,7 @@ namespace ImBLL
 		    if (string.IsNullOrEmpty(model.AspNetId))
 		    {
                 //api 手机验证码登录
-		        model.AspNetId = "";
+		        model.AspNetId = model.PhoneNum;
 		    }
 		    model.CreateTime = DateTime.Now;
 		    model.UpdateTime = DateTime.Now;

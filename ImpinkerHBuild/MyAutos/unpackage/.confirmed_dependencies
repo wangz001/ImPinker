@@ -85,7 +85,8 @@
 			"fonts/mui.ttf",
 			"js/app.js",
 			"js/mui.enterfocus.js",
-			"js/login.js"
+			"js/login.js",
+			"css/login.css"
 		],
 		"refer": [
 			"reg.html",
@@ -98,7 +99,14 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/app.js",
-			"js/mui.min.js"
+			"js/mui.min.js",
+			"css/reg.css",
+			"reg.html",
+			"js/reg.js"
+		],
+		"refer": [
+			"reg.html",
+			"login.html"
 		]
 	},
 	"forget_password.html": {

@@ -5,6 +5,39 @@
  **/
 (function($, owner) {
 	/**
+	 * 发送手机验证码
+	 * @param {Object} phonenum
+	 * @param {Object} callback
+	 */
+	owner.sendCheckNum = function(phonenum, callback) {
+		if(!checkPhone(phonenum)) {
+			return callback('手机号码不正确');
+		}
+		mui.ajax('http://api.myautos.cn/api/account/SendCheckNum', {
+			data: {
+				phonenum: phonenum,
+				opreatetype: 1
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post',
+			timeout: 10000, //超时时间设置为10秒；
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			success: function(data) {
+				if(data.IsSuccess == 1) {
+					return callback(data.Description);
+				} else {
+					console.log(data.Description);
+					return callback(data.Description);
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				console.log(type + xhr + errorThrown);
+			}
+		});
+	};
+	/**
 	 * 用户登录
 	 **/
 	owner.login = function(loginInfo, callback) {
@@ -31,13 +64,12 @@
 				'Content-Type': 'application/json'
 			},
 			success: function(data) {
-				if(data.IsSuccess==1){
-					var token=data.Data;
-					console.log("返回的token。。。"+token);
-					return owner.createState(loginInfo,token, callback);
-				}
-				else {
-					console.log("开始登录。。。"+data.Description);
+				if(data.IsSuccess == 1) {
+					var token = data.Data;
+					console.log("返回的token。。。" + token);
+					return owner.createState(loginInfo, token, callback);
+				} else {
+					console.log("开始登录。。。" + data.Description);
 					return callback(data.Description);
 				}
 			},
@@ -48,11 +80,11 @@
 		});
 
 	};
-	
-	owner.createState = function(loginInfo,token, callback) {
+
+	owner.createState = function(loginInfo, token, callback) {
 		var state = owner.getState();
 		state.account = loginInfo.account;
-		state.password=loginInfo.password;
+		state.password = loginInfo.password;
 		state.token = token;
 		owner.setState(state);
 		return callback();
@@ -66,19 +98,45 @@
 		regInfo = regInfo || {};
 		regInfo.account = regInfo.account || '';
 		regInfo.password = regInfo.password || '';
-		if(regInfo.account.length < 5) {
-			return callback('用户名最短需要 5 个字符');
+		if(!checkPhone(regInfo.account)) {
+			return callback('手机号不合法');
 		}
 		if(regInfo.password.length < 6) {
 			return callback('密码最短需要 6 个字符');
 		}
-		if(!checkEmail(regInfo.email)) {
-			return callback('邮箱地址不合法');
+		if(regInfo.checknum.length != 6) {
+			return callback('请输入正确的验证码');
 		}
-		var users = JSON.parse(localStorage.getItem('$users') || '[]');
-		users.push(regInfo);
-		localStorage.setItem('$users', JSON.stringify(users));
-		return callback();
+		mui.ajax('http://api.myautos.cn/api/account/Regist', {
+			data: {
+				Username: regInfo.account,
+				PhoneNum: regInfo.account,
+				Password: regInfo.password,
+				Password2: regInfo.password,
+				CheckNum: regInfo.checknum,
+				opreatetype: 1
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post',
+			timeout: 10000, //超时时间设置为10秒；
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			success: function(data) {
+				if(data.IsSuccess == 1) {
+					var users = JSON.parse(localStorage.getItem('$users') || '[]');
+					users.push(regInfo);
+					localStorage.setItem('$users', JSON.stringify(users));
+					return callback();
+				} else {
+					console.log(data.Description);
+					return callback(data.Description);
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				console.log(type + xhr + errorThrown);
+			}
+		});
 	};
 
 	/**
@@ -104,6 +162,14 @@
 		email = email || '';
 		return(email.length > 3 && email.indexOf('@') > -1);
 	};
+
+	var checkPhone = function(phonenum) {
+		phonenum = phonenum || '';
+		if(!(/^1[34578]\d{9}$/.test(phonenum))) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * 找回密码
@@ -166,4 +232,5 @@
 			}
 		}
 	}
+
 }(mui, window.app = {}));

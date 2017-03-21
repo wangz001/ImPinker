@@ -66,7 +66,7 @@ namespace ImDal
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
 					new SqlParameter("@AspNetId", SqlDbType.NVarChar,128){Value = model.AspNetId}};
 			
-			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
+			object obj = DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (obj == null)
 			{
 				return 0;
