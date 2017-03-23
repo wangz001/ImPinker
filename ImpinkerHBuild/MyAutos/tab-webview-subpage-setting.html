@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="css/mui.min.css">
 		<style>
-			html,body {
+			html,
+			body {
 				background-color: #efeff4;
 			}
-			.title{
+			
+			.title {
 				margin: 20px 15px 10px;
 				color: #6d6d72;
 				font-size: 15px;
@@ -22,23 +22,16 @@
 	</head>
 
 	<body>
-		<!--<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">设置</h1>
-		</header>-->
 		<div class="mui-content">
-			<div class="title">
-				这是webview模式选项卡中的第4个子页面，该页面展示一个常见的设置示例
-			</div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
-						新消息通知
+						我的收藏
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">
-						隐私
+						通讯录
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -49,8 +42,8 @@
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
 				<li class="mui-table-view-cell">
-					<a id="about" class="mui-navigate-right">
-						关于mui
+					<a id="setting" class="mui-navigate-right">
+						账号设置
 					</a>
 				</li>
 			</ul>
@@ -67,13 +60,23 @@
 	<script src="js/mui.min.js"></script>
 	<script>
 		mui.init({
-			swipeBack:true //启用右滑关闭功能
+			swipeBack: true //启用右滑关闭功能
 		});
-		document.getElementById("about").addEventListener('tap',function () {
+		document.getElementById("setting").addEventListener('tap', function() {
 			//获得主页面的webview
-			var main = plus.webview.currentWebview().parent();
+			//var main = plus.webview.currentWebview().parent();
 			//触发主页面的gohome事件
-			mui.fire(main,'gohome');
+			//mui.fire(main, 'gohome');
+			mui.openWindow({
+					url: "view/setting/setting.html",
+					id: "setting",
+					
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
 		});
 	</script>
+
 </html>

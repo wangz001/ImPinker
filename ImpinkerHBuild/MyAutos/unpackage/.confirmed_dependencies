@@ -120,7 +120,9 @@
 	"tab-webview-subpage-setting.html": {
 		"resources": [
 			"css/mui.min.css",
-			"view/setting/setting.html"
+			"view/setting/setting.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"view/setting/setting.html"
@@ -131,7 +133,8 @@
 			"js/mui.js",
 			"js/feedback.js",
 			"css/mui.css",
-			"js/mui.view.js"
+			"js/mui.view.js",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/weibo/weibo_new_video.html": {
