@@ -134,7 +134,11 @@
 			"js/feedback.js",
 			"css/mui.css",
 			"js/mui.view.js",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"css/setting/setting.css"
+		],
+		"refer": [
+			"view/setting/setting-account.html"
 		]
 	},
 	"view/weibo/weibo_new_video.html": {
@@ -145,6 +149,12 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/weibo/weibo_add_video.js"
+		]
+	},
+	"view/setting/setting-account.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
 		]
 	}
 }

@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "view/setting/setting.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -333,9 +333,12 @@
 					"js/feedback.js",
 					"css/mui.css",
 					"js/mui.view.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/setting/setting.css"
 				],
-				"refer": [],
+				"refer": [
+					"view/setting/setting-account.html"
+				],
 				"priority": 0
 			},
 			"view/weibo/weibo_new_video.html": {
@@ -346,6 +349,14 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/weibo/weibo_add_video.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/setting/setting-account.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
