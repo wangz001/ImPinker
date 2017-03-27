@@ -12,13 +12,13 @@
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link href="../../js/cropper/cropper.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style>
 			#imgcontent {
 				max-width: 400px;
 				max-height: 600px;
 				margin: 0px auto;
 			}
-			
 			img {
 				max-width: 100%;
 			}
@@ -33,12 +33,14 @@
 		</header>
 		<div class="mui-content">
 			<div id="imgcontent">
-				<img id="image" src="../../js/cropper/picture.jpg" />
+				<img id="image" data-preview-src="" data-preview-group="1" src="../../js/cropper/picture.jpg" />
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/cropper/cropper.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js" ></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			//缩略图
 			function showImage(path) {
@@ -47,6 +49,7 @@
 				Clipe.imgLocalPath = path;
 				initCropper();
 			}
+			mui.previewImage();
 
 			function subform() {
 				//对图片进行裁剪

@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/setting/setting.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 	</head>
 
 	<body>
@@ -19,8 +20,8 @@
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
 						<span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img" src=""/>
-								</span>
+				<img class="head-img" data-preview-src="" data-preview-group="1" id="head-img"/>
+						</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -45,13 +46,16 @@
 		</div>
 
 		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			document.getElementById("head-img").addEventListener('tap', function(e) {
 				console.log("pppppp");
+				mui.previewImage();
 				e.stopPropagation();
-
 			});
+			
 
 			setTimeout(function() {
 				defaultImg();

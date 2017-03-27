@@ -156,7 +156,10 @@
 			"js/mui.min.js",
 			"css/mui.min.css",
 			"fonts/mui.ttf",
-			"css/setting/setting.css"
+			"css/setting/setting.css",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css"
 		],
 		"refer": [
 			"view/setting/setting-imgcut.html"
