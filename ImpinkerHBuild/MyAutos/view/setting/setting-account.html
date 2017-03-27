@@ -19,7 +19,7 @@
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
 						<span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img1" src=""/>
+									<img class="head-img mui-action-preview" id="head-img" src=""/>
 								</span>
 					</a>
 				</li>
@@ -47,14 +47,14 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init();
-			document.getElementById("head-img1").addEventListener('tap', function(e) {
+			document.getElementById("head-img").addEventListener('tap', function(e) {
+				console.log("pppppp");
 				e.stopPropagation();
 
 			});
 
 			setTimeout(function() {
 				defaultImg();
-
 			}, 500);
 
 			function defaultImg() {
@@ -62,14 +62,11 @@
 					plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
 						var s = entry.fullPath + "?version=" + new Date().getTime();;
 						document.getElementById("head-img").src = s;
-						document.getElementById("head-img1").src = s;
 					}, function(e) {
 						document.getElementById("head-img").src = '../../images/logo.png';
-						document.getElementById("head-img1").src = '../../images/logo.png';
 					})
 				} else {
-					document.getElementById("head-img").src = '../images/logo.png';
-					document.getElementById("head-img1").src = '../images/logo.png';
+					document.getElementById("head-img").src = '../../images/logo.png';
 				}
 
 			}
@@ -101,7 +98,6 @@
 						}
 					})
 				}
-
 			});
 
 			function getImage() {
@@ -110,11 +106,11 @@
 					plus.io.resolveLocalFileSystemURL(e, function(entry) {
 						var s = entry.toLocalURL() + "?version=" + new Date().getTime();
 						console.log(s);
-						document.getElementById("head-img").src = s;
-						document.getElementById("head-img1").src = s;
+						//document.getElementById("head-img").src = s;
+						toCutImg(s);
 						//变更大图预览的src
 						//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-						document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
+						//document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();;;
 					}, function(e) {
 						console.log("读取拍照文件错误：" + e.message);
 					});
@@ -126,6 +122,7 @@
 			}
 
 			function galleryImg() {
+
 				plus.gallery.pick(function(a) {
 					plus.io.resolveLocalFileSystemURL(a, function(entry) {
 						plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
@@ -136,10 +133,10 @@
 									entry.copyTo(root, 'head.jpg', function(e) {
 											var e = e.fullPath + "?version=" + new Date().getTime();
 											document.getElementById("head-img").src = e;
-											document.getElementById("head-img1").src = e;
+											toCutImg(e);
 											//变更大图预览的src
 											//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-											document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
+											//document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
 										},
 										function(e) {
 											console.log('copy image fail:' + e.message);
@@ -151,11 +148,11 @@
 								//文件不存在
 								entry.copyTo(root, 'head.jpg', function(e) {
 										var path = e.fullPath + "?version=" + new Date().getTime();
-										document.getElementById("head-img").src = path;
-										document.getElementById("head-img1").src = path;
+										//document.getElementById("head-img").src = path;
+										toCutImg(path);
 										//变更大图预览的src
 										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
+										//document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
 									},
 									function(e) {
 										console.log('copy image fail:' + e.message);
@@ -172,21 +169,18 @@
 				})
 			};
 
-			function defaultImg() {
-				if(mui.os.plus) {
-					plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
-						var s = entry.fullPath + "?version=" + new Date().getTime();;
-						document.getElementById("head-img").src = s;
-						document.getElementById("head-img1").src = s;
-					}, function(e) {
-						document.getElementById("head-img").src = '../images/logo.png';
-						document.getElementById("head-img1").src = '../images/logo.png';
-					})
-				} else {
-					document.getElementById("head-img").src = '../images/logo.png';
-					document.getElementById("head-img1").src = '../images/logo.png';
-				}
-
+			function toCutImg(path) {
+				mui.openWindow({
+					url: "setting-imgcut.html",
+					id: "setting-imgcut",
+					extras: {
+						path: path //扩展参数
+					},
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
 			}
 		</script>
 	</body>

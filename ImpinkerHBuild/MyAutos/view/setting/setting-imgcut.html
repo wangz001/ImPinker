@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>裁剪图片</title>
+
+		<!--cropper插件裁剪-->
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../js/cropper/cropper.css" rel="stylesheet" />
+		<style>
+			#imgcontent {
+				max-width: 400px;
+				max-height: 600px;
+				margin: 0px auto;
+			}
+			
+			img {
+				max-width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">头像修改</h1>
+			<button id="btngo" class="mui-btn mui-btn-success mui-pull-right">使用</button>
+		</header>
+		<div class="mui-content">
+			<div id="imgcontent">
+				<img id="image" src="../../js/cropper/picture.jpg" />
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/cropper/cropper.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			//缩略图
+			function showImage(path) {
+				var localimghtml = '<img id="image" src="' + path + '" >';
+				$("#imgcontent").html(localimghtml);
+				Clipe.imgLocalPath = path;
+				initCropper();
+			}
+
+			function subform() {
+				//对图片进行裁剪
+				if("" == Clipe.imgLocalPath) {
+					alert("图片路径为空,重新选择图片");
+					return;
+				}
+				plus.zip.compressImage({
+						src: Clipe.imgLocalPath,
+						dst: '_doc/logocuttemp.jpg',
+						overwrite: true,
+						clip: {
+							top: Clipe.startTop + "px",
+							left: Clipe.startLeft + "px",
+							width: Clipe.newwidth + "px",
+							height: Clipe.newheight + "px"
+						}
+					},
+					function(e) {
+						var newpath = e.target;
+						plus.io.resolveLocalFileSystemURL(newpath, function(entry) {
+							plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+								root.getFile("head.jpg", {}, function(file) {
+									//文件已存在
+									file.remove(function() {
+										console.log("cutimg success");
+										entry.copyTo(root, 'head.jpg', function(e) {
+												var e = e.fullPath + "?version=" + new Date().getTime();
+												mui.back();
+											},
+											function(e) {
+												console.log('copy image fail:' + e.message);
+											});
+									}, function() {
+										console.log("delete image fail:" + e.message);
+									});
+								}, function() {
+									//文件不存在
+									entry.copyTo(root, 'head.jpg', function(e) {
+											var path = e.fullPath + "?version=" + new Date().getTime();
+											mui.back();
+										},
+										function(e) {
+											console.log('copy image fail:' + e.message);
+										});
+								});
+							}, function(e) {
+								console.log("get _www folder fail");
+							})
+						}, function(e) {
+							console.log("读取拍照文件错误：" + e.message);
+						});
+					},
+					function(error) {
+						alert("Compress error!" + JSON.stringify(error));
+					}
+				);
+			}
+		</script>
+
+		<script>
+			mui.init({});
+			mui.plusReady(function() {
+
+				document.getElementById('btngo').addEventListener('tap', function() {
+					subform();
+				});
+				//获取参数
+				var self = plus.webview.currentWebview();
+				var path = self.path;
+				if(path != undefined && path != null) {
+					console.log(path);
+					showImage(path);
+				}
+			});
+
+			function initCropper() {
+				$('#image').cropper({
+					aspectRatio: 1 / 1,
+					viewMode: 1,
+					dragMode: 'move',
+					autoCropArea: 0.65,
+					restore: false,
+					guides: false,
+					highlight: false,
+					cropBoxMovable: false,
+					cropBoxResizable: false,
+					dragCrop: false,
+					movable: false,
+					crop: updateCoords,
+				});
+			}
+			//切图的对象
+			var Clipe = {
+				imgLocalPath: "",
+				startTop: 0,
+				startLeft: 0,
+				newwidth: 0,
+				newheight: 0
+			}
+
+			function updateCoords(c) {
+				var img = document.getElementById("image");
+				Clipe.startLeft = c.x;
+				Clipe.startTop = c.y;
+				Clipe.newwidth = c.width;
+				Clipe.newheight = c.height;
+			}
+		</script>
+	</body>
+
+</html>

@@ -356,6 +356,23 @@
 			"view/setting/setting-account.html": {
 				"resources": [
 					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/setting/setting.css"
+				],
+				"refer": [
+					"view/setting/setting-imgcut.html"
+				],
+				"priority": 0
+			},
+			"view/setting/setting-imgcut.html": {
+				"resources": [
+					"js/cropper/cropper.css",
+					"js/cropper/cropper.js",
+					"js/cropper/picture.jpg",
+					"js/jquery.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
 				"refer": [],

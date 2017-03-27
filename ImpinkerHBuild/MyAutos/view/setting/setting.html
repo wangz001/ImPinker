@@ -385,24 +385,11 @@
 		//分享操作
 		var shares = {};
 
-		mui.plusReady(function() {
-			plus.share.getServices(function(s) {
-				if(s && s.length > 0) {
-					for(var i = 0; i < s.length; i++) {
-						var t = s[i];
-						shares[t.id] = t;
-					}
-				}
-			}, function() {
-				console.log("获取分享服务列表失败");
-			});
-		});
+		
 
 		setTimeout(function() {
 			defaultImg();
-			setTimeout(function() {
-				initImgPreview();
-			}, 300);
+			
 		}, 500);
 
 		//分享链接点击事件
