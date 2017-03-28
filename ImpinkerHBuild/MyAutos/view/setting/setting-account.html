@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/setting/setting.css" />
-		<link rel="stylesheet" href="../../css/imageviewer.css" />
 	</head>
 
 	<body>
@@ -20,7 +19,7 @@
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
 						<span class="mui-pull-right head">
-				<img class="head-img" data-preview-src="" data-preview-group="1" id="head-img"/>
+				<img class="head-img mui-action-preview" src="" id="head-img"/>
 						</span>
 					</a>
 				</li>
@@ -47,18 +46,17 @@
 
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			document.getElementById("head-img").addEventListener('tap', function(e) {
-				console.log("pppppp");
-				mui.previewImage();
 				e.stopPropagation();
 			});
-			
 
 			setTimeout(function() {
 				defaultImg();
+				setTimeout(function() {
+					initImgPreview();
+				}, 300);
 			}, 500);
 
 			function defaultImg() {
@@ -66,13 +64,54 @@
 					plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
 						var s = entry.fullPath + "?version=" + new Date().getTime();;
 						document.getElementById("head-img").src = s;
+						document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s;
 					}, function(e) {
 						document.getElementById("head-img").src = '../../images/logo.png';
 					})
 				} else {
 					document.getElementById("head-img").src = '../../images/logo.png';
+					document.querySelector("#__mui-imageview__group .mui-slider-item img").src = '../../images/logo.png';
 				}
-
+			}
+			//头像预览
+			function initImgPreview() {
+				var imgs = document.querySelectorAll("img.mui-action-preview");
+				imgs = mui.slice.call(imgs);
+				if(imgs && imgs.length > 0) {
+					var slider = document.createElement("div");
+					slider.setAttribute("id", "__mui-imageview__");
+					slider.classList.add("mui-slider");
+					slider.classList.add("mui-fullscreen");
+					slider.style.display = "none";
+					slider.addEventListener("tap", function() {
+						slider.style.display = "none";
+					});
+					slider.addEventListener("touchmove", function(event) {
+						event.preventDefault();
+					})
+					var slider_group = document.createElement("div");
+					slider_group.setAttribute("id", "__mui-imageview__group");
+					slider_group.classList.add("mui-slider-group");
+					imgs.forEach(function(value, index, array) {
+						//给图片添加点击事件，触发预览显示；
+						value.addEventListener('tap', function() {
+							slider.style.display = "block";
+							_slider.refresh();
+							_slider.gotoItem(index, 0);
+						})
+						var item = document.createElement("div");
+						item.classList.add("mui-slider-item");
+						var a = document.createElement("a");
+						var img = document.createElement("img");
+						img.setAttribute("src", value.src);
+						a.appendChild(img)
+						item.appendChild(a);
+						slider_group.appendChild(item);
+					});
+					slider.appendChild(slider_group);
+					document.body.appendChild(slider);
+					var _slider = mui(slider).slider();
+				}
 			}
 
 			//更换头像
