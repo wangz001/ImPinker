@@ -55,7 +55,13 @@
 			"images/cbd.jpg",
 			"images/muwu.jpg",
 			"css/mui.css",
-			"images/login-1.png"
+			"images/login-1.png",
+			"images/shuijiao.jpg",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css",
+			"js/mui.zoom.js",
+			"css/icons-extra.css",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": []
 	},

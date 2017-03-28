@@ -1,16 +1,53 @@
-.mui-card .mui-card-content{
+.mui-card .mui-card-content {
 	margin: inherit;
 }
-.mui-card .mui-card-content .bigimage{
-	width:90%;
+
+.mui-card .mui-card-content .bigimage {
+	width: 90%;
+	max-height: 13.5rem;
 }
 
-.mui-card .mui-card-content .smallimage{
-	width:30%;
-}
 
-.mui-pull-bottom-pocket, .mui-pull-top-pocket{
+.mui-pull-bottom-pocket,
+.mui-pull-top-pocket {
 	height: 60px;
+}
+
+
+.media-pic {
+    text-align: left;
+    margin: .3125rem 0 0 0;
+    max-width: 90%;
+    max-height: 13.5rem;
+    overflow: hidden;
+}
+.media-pic-list {
+    overflow: hidden;
+    width: 18.5rem;
+    margin-top: .4375rem;
+    
+}
+
+.media-pic-list ul {
+    margin-top: -.3125rem;
+    list-style: none;
+	display: inline-block;
+	margin-right: -4px;
+	padding: 5px 5px 0 10px;
+}
+
+.media-pic-list li {
+    float: left;
+    width: 7.75rem;
+    height: 5.75rem;
+    margin: .3125rem .3125rem 0 0;
+        
+}
+
+.media-pic-list li img {
+    height: 5.75rem;
+    width: 7.75rem;
+    vertical-align: text-bottom;
 }
 
 
