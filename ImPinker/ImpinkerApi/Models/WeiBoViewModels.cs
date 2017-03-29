@@ -42,6 +42,7 @@ namespace ImpinkerApi.Models
     /// </summary>
     public class WeiBoListViewModel
     {
+        public long Id { get; set; }
         public int UserId { get; set; }
 
         public string UserName { get; set; }

@@ -143,7 +143,6 @@
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 					},
 					error: function(xhr, type, errorThrown) {
-						console.log(e);
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 					}
 				});
@@ -174,13 +173,13 @@
 					var imgHtmlStr = "";
 					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
 					for(var i = 0; i < imgs.length; i++) {
-						imgHtmlStr += '<li><img src="http://img.myautos.cn/' + imgs[i] + '" data-preview-src="" data-preview-group="' + item.id + '"></li>';
+						imgHtmlStr += '<li><img src="http://img.myautos.cn/' + imgs[i] + '" data-preview-src="" data-preview-group="' + item.Id + '"></li>';
 					}
 					ul.innerHTML = imgHtmlStr;
 					imgdiv.appendChild(ul);
 				} else {
 					imgdiv.className = "mui-card-content";
-					var imgHtmlStr = '<img src="http://img.myautos.cn/' + imgs[0] + '" class="bigimage" data-preview-src="" data-preview-group="' + item.id + '">';
+					var imgHtmlStr = '<img src="http://img.myautos.cn/' + imgs[0] + '" class="bigimage" data-preview-src="" data-preview-group="' + item.Id + '">';
 					imgdiv.innerHTML = imgHtmlStr;
 				}
 

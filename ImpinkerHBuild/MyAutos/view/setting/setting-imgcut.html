@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>裁剪图片</title>
-
 		<!--cropper插件裁剪-->
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,7 +10,6 @@
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link href="../../js/cropper/cropper.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style>
 			#imgcontent {
 				max-width: 400px;
@@ -39,8 +36,6 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/cropper/cropper.js"></script>
-		<script type="text/javascript" src="../../js/mui.zoom.js" ></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js" ></script>
 		<script type="text/javascript" charset="utf-8">
 			//缩略图
 			function showImage(path) {
@@ -49,7 +44,6 @@
 				Clipe.imgLocalPath = path;
 				initCropper();
 			}
-			mui.previewImage();
 
 			function subform() {
 				//对图片进行裁剪
@@ -78,6 +72,7 @@
 										console.log("cutimg success");
 										entry.copyTo(root, 'head.jpg', function(e) {
 												var e = e.fullPath + "?version=" + new Date().getTime();
+												uploadImage(e);
 												mui.back();
 											},
 											function(e) {
@@ -90,6 +85,7 @@
 									//文件不存在
 									entry.copyTo(root, 'head.jpg', function(e) {
 											var path = e.fullPath + "?version=" + new Date().getTime();
+											uploadImage(path);
 											mui.back();
 										},
 										function(e) {
@@ -108,12 +104,43 @@
 					}
 				);
 			}
+			
+			
+			var url = "http://api.myautos.cn/api/Upload/ImgUpload";
+			// 创建上传任务
+			function uploadImage(file) {
+				plus.nativeUI.showWaiting("正在上传...");
+				var task = plus.uploader.createUpload(url, {
+						method: "POST",
+						blocksize: 204800,
+						priority: 100
+					},
+					function(t, status) {
+						// 上传完成
+						if(status == 200) {
+							mui.toast("上传成功");
+							plus.nativeUI.closeWaiting();
+							mui.back();
+						} else {
+							mui.toast("上传失败:" + status);
+						}
+						plus.nativeUI.closeWaiting();
+					},function(e){
+						alert(e);
+						plus.nativeUI.closeWaiting();
+					}
+				);
+				task.addFile(file, {
+					key: "logocut"
+				});
+				task.start();
+			}
+
 		</script>
 
 		<script>
 			mui.init({});
 			mui.plusReady(function() {
-
 				document.getElementById('btngo').addEventListener('tap', function() {
 					subform();
 				});

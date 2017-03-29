@@ -201,6 +201,7 @@ namespace ImpinkerApi.Controllers
             {
                 var model = new WeiBoListViewModel
                 {
+                    Id=weiBo.Id,
                     UserId = weiBo.UserId,
                     Description = weiBo.Description,
                     ContentValue = weiBo.ContentValue,
