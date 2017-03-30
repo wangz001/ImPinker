@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>裁剪图片</title>
@@ -16,6 +17,7 @@
 				max-height: 600px;
 				margin: 0px auto;
 			}
+			
 			img {
 				max-width: 100%;
 			}
@@ -30,21 +32,34 @@
 		</header>
 		<div class="mui-content">
 			<div id="imgcontent">
-				<img id="image" data-preview-src="" data-preview-group="1" src="../../js/cropper/picture.jpg" />
 			</div>
 		</div>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/app.js" ></script>
 		<script type="text/javascript" src="../../js/cropper/cropper.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			//缩略图
+			mui.init({});
+			mui.plusReady(function() {
+				document.getElementById('btngo').addEventListener('tap', function() {
+					subform();
+				});
+				//获取参数
+				var self = plus.webview.currentWebview();
+				var path = self.path;
+				if(path != undefined && path != null) {
+					console.log(path);
+					showImage(path);
+				}
+			});
+			//显示图片
 			function showImage(path) {
 				var localimghtml = '<img id="image" src="' + path + '" >';
 				$("#imgcontent").html(localimghtml);
 				Clipe.imgLocalPath = path;
 				initCropper();
 			}
-
+			//裁剪
 			function subform() {
 				//对图片进行裁剪
 				if("" == Clipe.imgLocalPath) {
@@ -64,95 +79,107 @@
 					},
 					function(e) {
 						var newpath = e.target;
-						plus.io.resolveLocalFileSystemURL(newpath, function(entry) {
-							plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
-								root.getFile("head.jpg", {}, function(file) {
-									//文件已存在
-									file.remove(function() {
-										console.log("cutimg success");
-										entry.copyTo(root, 'head.jpg', function(e) {
-												var e = e.fullPath + "?version=" + new Date().getTime();
-												uploadImage(e);
-												mui.back();
-											},
-											function(e) {
-												console.log('copy image fail:' + e.message);
-											});
-									}, function() {
-										console.log("delete image fail:" + e.message);
-									});
-								}, function() {
-									//文件不存在
-									entry.copyTo(root, 'head.jpg', function(e) {
-											var path = e.fullPath + "?version=" + new Date().getTime();
-											uploadImage(path);
-											mui.back();
-										},
-										function(e) {
-											console.log('copy image fail:' + e.message);
-										});
-								});
-							}, function(e) {
-								console.log("get _www folder fail");
-							})
-						}, function(e) {
-							console.log("读取拍照文件错误：" + e.message);
-						});
+						uploadImage(newpath);
 					},
 					function(error) {
 						alert("Compress error!" + JSON.stringify(error));
 					}
 				);
 			}
-			
-			
-			var url = "http://api.myautos.cn/api/Upload/ImgUpload";
+			var userstate = app.getState();
+			var url = "http://api.myautos.cn/api/Upload/UserHeadimgUpload";
 			// 创建上传任务
 			function uploadImage(file) {
 				plus.nativeUI.showWaiting("正在上传...");
-				var task = plus.uploader.createUpload(url, {
-						method: "POST",
-						blocksize: 204800,
-						priority: 100
+				//压缩图片
+				plus.zip.compressImage({
+						src: file,
+						dst: "_doc/alogocut.jpg",
+						overwrite: true,
+						quality: 100,
+						width: 180,
+						height: 180
 					},
-					function(t, status) {
-						// 上传完成
-						if(status == 200) {
-							mui.toast("上传成功");
-							plus.nativeUI.closeWaiting();
-							mui.back();
-						} else {
-							mui.toast("上传失败:" + status);
-						}
+					function(e) {
+						loclaHeadImagePath = e.target;
+						var task = plus.uploader.createUpload(url, {
+								method: "POST",
+								blocksize: 204800,
+								priority: 100
+							},
+							function(t, status) {
+								console.log("ttttt:" + t.url);
+								// 上传完成
+								if(status == 200) {
+									updateLocal();
+									mui.toast("上传成功");
+									plus.nativeUI.closeWaiting();
+									plus.webview.getWebviewById('setting-account').reload();
+									mui.back();
+								} else {
+									mui.toast("上传失败:" + status);
+								}
+								plus.nativeUI.closeWaiting();
+							},
+							function(e) {
+								alert(e);
+								plus.nativeUI.closeWaiting();
+							}
+						);
+						//设置头信息
+						task.setRequestHeader("username", userstate.account);
+						task.setRequestHeader("usertoken", userstate.token);
+						task.addFile(e.target, {
+							key: "logocut"
+						});
+						task.start();
+					},
+					function(error) {
+						alert("压缩图片失败!");
 						plus.nativeUI.closeWaiting();
-					},function(e){
-						alert(e);
-						plus.nativeUI.closeWaiting();
-					}
-				);
-				task.addFile(file, {
-					key: "logocut"
-				});
-				task.start();
-			}
+					});
 
+			}
+			var loclaHeadImagePath = "";
+
+			function updateLocal() {
+				plus.io.resolveLocalFileSystemURL(loclaHeadImagePath, function(entry) {
+					plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+						root.getFile("head.jpg", {}, function(file) {
+							//文件已存在
+							file.remove(function() {
+								console.log("cutimg success");
+								entry.copyTo(root, 'head.jpg', function(e) {
+										var e = e.fullPath + "?version=" + new Date().getTime();
+										mui.back();
+									},
+									function(e) {
+										console.log('copy image fail:' + e.message);
+									});
+							}, function() {
+								console.log("delete image fail:" + e.message);
+							});
+						}, function() {
+							//文件不存在
+							entry.copyTo(root, 'head.jpg', function(e) {
+									var path = e.fullPath + "?version=" + new Date().getTime();
+									mui.back();
+								},
+								function(e) {
+									console.log('copy image fail:' + e.message);
+								});
+						});
+					}, function(e) {
+						console.log("get _www folder fail");
+					})
+				}, function(e) {
+					console.log("读取拍照文件错误：" + e.message);
+				});
+
+			}
 		</script>
 
 		<script>
-			mui.init({});
-			mui.plusReady(function() {
-				document.getElementById('btngo').addEventListener('tap', function() {
-					subform();
-				});
-				//获取参数
-				var self = plus.webview.currentWebview();
-				var path = self.path;
-				if(path != undefined && path != null) {
-					console.log(path);
-					showImage(path);
-				}
-			});
-
 			function initCropper() {
 				$('#image').cropper({
 					aspectRatio: 1 / 1,

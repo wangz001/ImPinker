@@ -4,6 +4,10 @@ using System.Data;
 using ImDal;
 using ImModel;
 using Maticsoft.Common;
+using System.Configuration;
+using Common.AlyOssUtil;
+using Common.Utils;
+using System.Drawing.Imaging;
 
 namespace ImBLL
 {
@@ -248,6 +252,48 @@ namespace ImBLL
             var user = dal.GetModelByUserName(username);
             return user;
 	    }
+
+        /// <summary>
+        /// 上传用户头像到oss，并修改数据库
+        /// </summary>
+        /// <param name="localPath"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool UpdateHeadImage(string localPath, int userId)
+        {
+            string buckeyName = "myautos";
+            //headimg/limit/{0}/{1}_{2}.jpg
+            var headImageLimit = ConfigurationManager.AppSettings["HeadImageLimit"];
+            //保存到数据库中的路径和oss的路径
+            var limitimgUrl = string.Format(headImageLimit, DateTime.Now.ToString("yyyyMMdd"), userId, DateTime.Now.ToString("yyyyMMddHHmmss"));
+            //上传到oss
+            var ossSucess = ObjectOperate.UploadImage(buckeyName, localPath, limitimgUrl);
+            if (ossSucess)
+            {
+                //缩放、保存为3种格式
+                int[] imgSize = { 180, 100, 40 };
+                //本地路径
+                var limitPath = AppDomain.CurrentDomain.BaseDirectory + limitimgUrl;
+                foreach (var size in imgSize)
+                {
+                    var saveimgUrl = limitimgUrl.Replace("headimg/limit", "headimg/" + size);
+                    var tempimgPath = limitPath.Replace("headimg/limit", "headimg/" + size);
+                    ImageUtils.ThumbnailImage(localPath, tempimgPath, size, size, ImageFormat.Jpeg);
+                    var flag = ObjectOperate.UploadImage(buckeyName, tempimgPath, saveimgUrl); ;
+                    if (!flag)
+                    {
+                        return false;
+                    }
+                    //删除本地文件
+                    System.IO.File.Delete(tempimgPath);
+                }
+                //更新数据库
+                var issuccess=UpdateHeadImg(userId, limitimgUrl);
+                return issuccess;
+            }
+            return false;
+        }
+
 	}
 }
 

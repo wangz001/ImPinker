@@ -8,11 +8,86 @@ using System.Web.Mvc;
 using ImpinkerApi.Models;
 using System.Threading.Tasks;
 using System.Net;
+using ImpinkerApi.Filters;
+using ImpinkerApi.Common;
+using Common.AlyOssUtil;
+using System.Configuration;
+using Common.Utils;
+using ImBLL;
+using System.Drawing.Imaging;
 
 namespace ImpinkerApi.Controllers
 {
     public class UploadController : BaseApiController
     {
+        private static readonly UserBll UserBll = new UserBll();
+        /// <summary>
+        /// 头像上传
+        /// </summary>
+        /// <returns></returns>
+        [TokenCheck]
+        [HttpPost]
+        public async Task<HttpResponseMessage> UserHeadimgUpload()
+        {
+            // 检查是否是 multipart/form-data 
+            if (!Request.Content.IsMimeMultipartContent("form-data"))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "数据格式错误",
+                    Data = HttpStatusCode.UnsupportedMediaType
+                });
+            }
+
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload");
+            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+            List<string> files = new List<string>();
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+                if (userinfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = "身份验证失败",
+                        Data = ""
+                    });
+                }
+                var userid = userinfo.Id;
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    files.Add(Path.GetFileName(file.LocalFileName));
+                    var flag = UserBll.UpdateHeadImage(file.LocalFileName, userid);
+                    if (flag)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                        {
+                            IsSuccess = 0,
+                            Description = "上传图片失败",
+                            Data = ""
+                        });
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "ok",
+                    Data = files
+                });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
         /// <summary>
         /// 百度webupload 上传图片
         /// </summary>
