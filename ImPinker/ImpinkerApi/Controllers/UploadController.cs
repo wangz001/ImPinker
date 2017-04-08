@@ -175,16 +175,6 @@ namespace ImpinkerApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-        /// <summary>
-        /// 创建一个 Provider 用于重命名接收到的文件 
-        /// </summary>
-        public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
-        {
-            public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
-            public override string GetLocalFileName(HttpContentHeaders headers)
-            {
-                return headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-            }
-        }
+        
     }
 }

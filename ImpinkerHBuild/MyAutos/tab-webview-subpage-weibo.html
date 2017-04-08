@@ -24,7 +24,11 @@
 							<p>发表于 2016-06-30 15:30</p>
 						</div>
 					</div>
+					<div class="mui-card-content">
+
+					</div>
 					<div class="media-pic-list">
+
 						<ul>
 							<li>
 								<img src="images/login-1.png" data-preview-src="" data-preview-group="1">
@@ -153,6 +157,7 @@
 			 * @param {Object} item
 			 */
 			function initWeiBoItem(table, item) {
+				var imgPath = 'http://img.myautos.cn/';
 				console.log(JSON.stringify(item));
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
@@ -163,6 +168,7 @@
 				headdiv.className = 'mui-card-header mui-card-media';
 				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
 					item.UserName + '<p>发表于 ' + item.CreateTime + '</p></div>';
+				
 				var imgdiv = document.createElement("div");
 
 				var imgs = item.ContentValue.split(',');
@@ -173,13 +179,13 @@
 					var imgHtmlStr = "";
 					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
 					for(var i = 0; i < imgs.length; i++) {
-						imgHtmlStr += '<li><img src="http://img.myautos.cn/' + imgs[i] + '" data-preview-src="" data-preview-group="' + item.Id + '"></li>';
+						imgHtmlStr += '<li><img src="' + imgPath + imgs[i].replace(".jpg", "_s.jpg") + '" data-preview-src="' + imgPath + imgs[i] + '" data-preview-group="' + item.Id + '"></li>';
 					}
 					ul.innerHTML = imgHtmlStr;
 					imgdiv.appendChild(ul);
 				} else {
 					imgdiv.className = "mui-card-content";
-					var imgHtmlStr = '<img src="http://img.myautos.cn/' + imgs[0] + '" class="bigimage" data-preview-src="" data-preview-group="' + item.Id + '">';
+					var imgHtmlStr = '<img src="' + imgPath + imgs[0].replace(".jpg", "_s.jpg") + '" class="bigimage" data-preview-src="' + imgPath + imgs[0] + '" data-preview-group="' + item.Id + '">';
 					imgdiv.innerHTML = imgHtmlStr;
 				}
 
@@ -189,6 +195,12 @@
 					'<span class="mui-icon mui-icon-compose"></span>' +
 					'<span class="mui-icon mui-icon-location"></span>';
 				li.appendChild(headdiv);
+				if(item.Description != null && item.Description.length > 0) {
+					var contentdiv = document.createElement("div");
+					contentdiv.className = 'mui-card-content';
+					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
+					li.appendChild(contentdiv);
+				}
 				li.appendChild(imgdiv);
 				li.appendChild(footdiv);
 				table.appendChild(li);

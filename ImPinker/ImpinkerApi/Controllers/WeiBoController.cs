@@ -18,6 +18,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using ImModel.Enum;
 using Common.AlyOssUtil;
+using Common.Utils;
+using System.Drawing.Imaging;
 
 namespace ImpinkerApi.Controllers
 {
@@ -67,7 +69,13 @@ namespace ImpinkerApi.Controllers
                     var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), weiboModel.UserId, DateTime.Now.Ticks);
                     //上传到oss
                     var ossSucess = ObjectOperate.UploadImage(BuckeyName, file.LocalFileName, imgUrl);
-                    if (ossSucess)
+                    //生成缩略图
+                    var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
+                    var extention = Path.GetExtension(file.LocalFileName);
+                    var sLocalPath = file.LocalFileName.Replace("." + extention, "_s.jpg");
+                    ImageUtils.ThumbnailImage(file.LocalFileName, sLocalPath, 240, 160, ImageFormat.Jpeg);
+                    var flag2=ObjectOperate.UploadImage(BuckeyName, sLocalPath, sImgUrl);
+                    if (ossSucess&&flag2)
                     {
                         files.Add(imgUrl);
                     }
@@ -102,22 +110,8 @@ namespace ImpinkerApi.Controllers
                 Data = ""
             });
         }
-        /// <summary>
-        /// 创建一个 Provider 用于重命名接收到的文件 
-        /// </summary>
-        public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
-        {
-            public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
-            public override string GetLocalFileName(HttpContentHeaders headers)
-            {
-                //var fileName = "weiboimage/" + DateTime.Now.ToString("yyyyMMdd") + "/" + headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-                var type = Path.GetExtension(headers.ContentDisposition.FileName.Replace("\"", string.Empty));
-                var sb = new StringBuilder((DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture)).Replace("\"", "").Trim().Replace(" ", "_") + type);
-                Array.ForEach(Path.GetInvalidFileNameChars(), invalidChar => sb.Replace(invalidChar, '-'));
-                return sb.ToString();
-
-            }
-        }
+        
+        
 
         private WeiBo InitWeiBoData(CustomMultipartFormDataStreamProvider provider)
         {

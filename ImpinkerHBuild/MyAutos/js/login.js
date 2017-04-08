@@ -18,7 +18,7 @@
 			//使用定时器的原因：
 			//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
 			var id = setInterval(function() {
-				if(main_loaded_flag) {
+				if(true) {
 					clearInterval(id);
 					$.fire(mainPage, 'show', null);
 					mainPage.show("pop-in");
@@ -31,19 +31,20 @@
 			
 		}
 		//检查 "登录状态/锁屏状态" 开始
-		if(settings.autoLogin && state.token && settings.gestures) {
-			$.openWindow({
-				//手势登录
-				url: 'unlock.html',
-				id: 'unlock',
-				show: {
-					aniShow: 'pop-in'
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		} else if(settings.autoLogin && state.token) {
+//		if(state.token && settings.gestures) {
+//			$.openWindow({
+//				//手势登录
+//				url: 'unlock.html',
+//				id: 'unlock',
+//				show: {
+//					aniShow: 'pop-in'
+//				},
+//				waiting: {
+//					autoShow: false
+//				}
+//			});
+//		} else 
+		if(state.token) {
 			//toMain();
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(err) {
