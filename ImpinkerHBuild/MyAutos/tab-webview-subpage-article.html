@@ -133,7 +133,6 @@
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				success: function(data) {
-					console.log('下拉刷新成功');
 					var list = data.Data;
 					var table = document.body.querySelector('.mui-table-view');
 					table.innerHTML='';
