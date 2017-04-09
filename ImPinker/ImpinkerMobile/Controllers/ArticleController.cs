@@ -26,12 +26,15 @@ namespace ImpinkerMobile.Controllers
                 idStr = "travels_" + id;
             }
             long.TryParse(idStr.Replace("travels_", ""), out idInt);
-            var article = SolrNetSearchBll.GetArticleById(idStr);
-            if (article != null && article.Content != null && article.Content.Count > 0)
+            try
             {
-                vm = article;
+                vm = SolrNetSearchBll.GetArticleById(idStr);
             }
-            else
+            catch (Exception e)
+            {
+                //记录日志
+            }
+            if (vm == null || vm.Content == null || vm.Content.Count == 0)
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }

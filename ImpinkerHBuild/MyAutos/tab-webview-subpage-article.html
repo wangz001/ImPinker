@@ -84,7 +84,7 @@
 				</ul>
 			</div>
 		</div>
-	<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a href="#">拍照或录像</a>
@@ -116,54 +116,74 @@
 				}
 			}
 		});
+
+		var pageNum = 1;
+		var pageSize = 30;
+		var apiPath = "http://api.myautos.cn/api/Article/GetByPage";
 		/**
 		 * 下拉刷新具体业务实现
 		 */
 		function pulldownRefresh() {
-			setTimeout(function() {
-				var table = document.body.querySelector('.mui-table-view');
-				var cells = document.body.querySelectorAll('.mui-table-view-cell');
-				for(var i = cells.length, len = i + 3; i < len; i++) {
-					var li = document.createElement('li');
-					li.className = 'mui-table-view-cell';
-					li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
-					//下拉刷新，新纪录插到最前面；
-					table.insertBefore(li, table.firstChild);
-				}
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-			}, 1000);
-		}
-		var count = 0;
-		/**
-		 * 上拉加载具体业务实现
-		 */
-		var pageNum = 1;
-
-		function pullupRefresh() {
-			//http://api.myautos.cn/Article/GetByPage
-			mui.ajax('http://api.myautos.cn/api/Article/GetByPage', {
+			pageNum = 1;
+			mui.ajax(apiPath, {
 				data: {
 					pageNum: pageNum,
-					pageSize: 10
+					pageSize: pageSize
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				success: function(data) {
+					console.log('下拉刷新成功');
+					var list = data.Data;
+					var table = document.body.querySelector('.mui-table-view');
+					table.innerHTML='';
+					for(var i = 0; i < list.length; i++) {
+						var item = list[i];
+						initItem(table, item, true);
+					}
+					pageNum++;
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				}
+			});
+		}
+		/**
+		 * 上拉加载具体业务实现。设置时间戳。只加载最新更新的文章
+		 */
+
+		function pullupRefresh() {
+			mui.ajax(apiPath, {
+				data: {
+					pageNum: pageNum,
+					pageSize: pageSize
 				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				success: function(data) {
 					var list = data.Data;
+					var table = document.body.querySelector('.mui-table-view');
 					for(var i = 0; i < list.length; i++) {
 						var item = list[i];
-						var table = document.body.querySelector('.mui-table-view');
-						var li = document.createElement('li');
-						li.className = 'mui-table-view-cell mui-media';
-						li.innerHTML = '<a href="view/article/preview.html" articleid="' + item.Id + '">' +
-							'<img class="mui-media-object mui-pull-left" src="' + item.CoverImage + '"><div class="mui-media-body">' +
-							item.ArticleName + '<p class="mui-ellipsis">' + item.Company + '</p></div></a>';
-						table.appendChild(li);
+						initItem(table, item, false);
 					}
 					pageNum++;
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				}
 			});
+		}
+
+		function initItem(table, item, isPullDown) {
+			var li = document.createElement('li');
+			li.className = 'mui-table-view-cell mui-media';
+			li.innerHTML = '<a href="view/article/preview.html" articleid="' + item.Id + '">' +
+				'<img class="mui-media-object mui-pull-left" src="' + item.CoverImage + '"><div class="mui-media-body">' +
+				item.ArticleName + '<p class="mui-ellipsis">' + item.Company + '</p></div></a>';
+
+			if(isPullDown) {
+				//下拉刷新，新纪录插到最前面；
+				table.insertBefore(li, table.firstChild);
+			} else {
+				table.appendChild(li);
+			}
 		}
 
 		/*
@@ -179,7 +199,7 @@
 			if(type == "common") {
 				var webview_style = {
 					popGesture: "close",
-					
+
 				};
 				//侧滑菜单需动态控制一下zindex值；
 				if(~id.indexOf('offcanvas-')) {
@@ -201,7 +221,7 @@
 						autoShow: false
 					},
 					extras: {
-						articleid: "http://m.myautos.cn/Article/Index?id="+articleid //扩展参数
+						articleid: "http://m.myautos.cn/Article/Index?id=" + articleid //扩展参数
 					}
 				});
 			} else if(id && ~id.indexOf('.html')) {
