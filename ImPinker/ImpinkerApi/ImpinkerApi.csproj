@@ -190,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArticleVoteViewModel.cs" />
     <Compile Include="Models\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="Models\JsonResultViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
