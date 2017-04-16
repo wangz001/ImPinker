@@ -111,17 +111,17 @@
 			//新建微博页面
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
-//暂时直接跳转到新微博页面
-mui.openWindow({
+				//暂时直接跳转到新微博页面
+				mui.openWindow({
 					url: "view/weibo/weibo_new.html",
 					id: "newweibo",
-					
+
 					show: {
 						aniShow: 'slide-in-right',
 						duration: 200
 					}
 				});
-return;
+				return;
 
 				var btnArray = [{
 					title: '拍照'

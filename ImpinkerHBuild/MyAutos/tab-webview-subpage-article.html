@@ -220,7 +220,8 @@
 						autoShow: false
 					},
 					extras: {
-						articleid: "http://m.myautos.cn/Article/Index?id=" + articleid //扩展参数
+						articleUrl:"http://m.myautos.cn/Article/Index?id=" + articleid ,
+						articleid: articleid //扩展参数
 					}
 				});
 			} else if(id && ~id.indexOf('.html')) {

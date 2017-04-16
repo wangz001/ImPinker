@@ -40,7 +40,9 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"images/yuantiao.jpg",
-			"js/jquery.js"
+			"js/jquery.js",
+			"js/article/article_preview.js",
+			"js/app.js"
 		],
 		"refer": []
 	},
@@ -62,7 +64,9 @@
 			"css/imageviewer.css",
 			"js/mui.zoom.js",
 			"css/icons-extra.css",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"js/weibo/weibo_index.js",
+			"js/jquery.js"
 		],
 		"refer": []
 	},
