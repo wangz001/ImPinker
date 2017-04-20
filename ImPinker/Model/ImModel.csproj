@@ -65,6 +65,8 @@
     <Compile Include="ViewModel\FacetItemVm.cs" />
     <Compile Include="ViewModel\SearchResultVm.cs" />
     <Compile Include="WeiBo.cs" />
+    <Compile Include="WeiBoComment.cs" />
+    <Compile Include="WeiBoVote.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

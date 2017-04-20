@@ -186,6 +186,7 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />
+    <Compile Include="Controllers\WeiBoVoteController.cs" />
     <Compile Include="Filters\TokenCheckFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -194,7 +195,9 @@
     <Compile Include="Models\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="Models\JsonResultViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\WeiBoCommentViewModel.cs" />
     <Compile Include="Models\WeiBoViewModels.cs" />
+    <Compile Include="Models\WeiBoVoteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

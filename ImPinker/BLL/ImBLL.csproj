@@ -71,6 +71,8 @@
     <Compile Include="UserBll.cs" />
     <Compile Include="UserRelationBll.cs" />
     <Compile Include="WeiBoBll.cs" />
+    <Compile Include="WeiBoCommentBll.cs" />
+    <Compile Include="WeiBoVoteBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
