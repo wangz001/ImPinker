@@ -20,6 +20,8 @@ using ImModel.Enum;
 using Common.AlyOssUtil;
 using Common.Utils;
 using System.Drawing.Imaging;
+using System.Drawing;
+using Common.DateTimeUtil;
 
 namespace ImpinkerApi.Controllers
 {
@@ -69,11 +71,22 @@ namespace ImpinkerApi.Controllers
                     var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), weiboModel.UserId, DateTime.Now.Ticks);
                     //上传到oss
                     var ossSucess = ObjectOperate.UploadImage(BuckeyName, file.LocalFileName, imgUrl);
-                    //生成缩略图
-                    var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
+                    //裁剪
                     var extention = Path.GetExtension(file.LocalFileName);
-                    var sLocalPath = file.LocalFileName.Replace("." + extention, "_s.jpg");
-                    ImageUtils.ThumbnailImage(file.LocalFileName, sLocalPath, 240, 160, ImageFormat.Jpeg);
+                    var sLocalPath = file.LocalFileName.Replace(extention, "_s.jpg");
+                    var image = Image.FromFile(file.LocalFileName);
+                    if (image.Width < image.Height)
+                    {
+                        ImageUtils.ImgReduceCutOut(0, 0, image.Width, image.Width * 2 / 3, file.LocalFileName, sLocalPath);
+                        //生成缩略图
+                        ImageUtils.ThumbnailImage(sLocalPath, sLocalPath, 300, 200, ImageFormat.Jpeg);
+                    }
+                    else
+                    {
+                        //生成缩略图
+                        ImageUtils.ThumbnailImage(file.LocalFileName, sLocalPath, 300, 200, ImageFormat.Jpeg);
+                    }
+                    var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
                     var flag2=ObjectOperate.UploadImage(BuckeyName, sLocalPath, sImgUrl);
                     if (ossSucess&&flag2)
                     {
@@ -203,6 +216,7 @@ namespace ImpinkerApi.Controllers
                     Lantitude = weiBo.Lantitude,
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
+                    PublishTime=TUtil.DateFormatToString(weiBo.CreateTime),
                     IsRePost = weiBo.IsRePost
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);

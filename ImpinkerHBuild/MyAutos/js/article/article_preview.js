@@ -41,9 +41,7 @@ function SendComposs(txtStr) {
 		},
 		success: function(data) {
 			if(data.IsSuccess == 1) {
-				console.log("提交评论");
 				mui.toast("评论成功！");
-				console.log("评论成功oken。。。");
 			} else {
 				console.log("评论失败。" + data.Description);
 			}

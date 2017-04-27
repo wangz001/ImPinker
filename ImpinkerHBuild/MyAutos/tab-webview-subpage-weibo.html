@@ -16,7 +16,7 @@
 	<body>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 			<div class="mui-scroll mui-table-view">
-				<div class="mui-card">
+				<!--<div class="mui-card">
 					<div class="mui-card-header mui-card-media">
 						<img src="images/logo.png">
 						<div class="mui-media-body">
@@ -60,7 +60,7 @@
 						<span class="mui-icon mui-icon-compose"></span>
 						<span class="mui-icon mui-icon-map"></span>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
@@ -109,6 +109,7 @@
 								var item = list[i];
 								initWeiBoItem(table, item);
 							}
+							bindVote();
 						}
 						pageNum++;
 						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
@@ -139,6 +140,7 @@
 								var item = list[i];
 								initWeiBoItem(table, item);
 							}
+							bindVote();
 						} else {
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 							return;
@@ -166,7 +168,7 @@
 				var headdiv = document.createElement("div");
 				headdiv.className = 'mui-card-header mui-card-media';
 				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
-					item.UserName + '<p>发表于 ' + item.CreateTime + '</p></div>';
+					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
 				
 				var imgdiv = document.createElement("div");
 

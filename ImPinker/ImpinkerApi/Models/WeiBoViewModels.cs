@@ -60,6 +60,10 @@ namespace ImpinkerApi.Models
         public decimal Height { get; set; }
 
         public string LocationText { get; set; }
+        /// <summary>
+        /// 发布时间
+        /// </summary>
+        public string PublishTime { get; set; }
 
         /// <summary>
         /// 是否转发
