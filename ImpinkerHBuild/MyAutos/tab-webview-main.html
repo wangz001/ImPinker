@@ -43,6 +43,8 @@
 		</nav>
 
 		<script src="js/mui.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init();
@@ -68,6 +70,24 @@
 					}
 					self.append(sub);
 				}
+				//更新token
+				app.updateToken(function(err) {
+					if(err) {
+						console.log('更新token失败' + flag);
+						//				$.openWindow({
+						//				//手势登录
+						//				url: 'login.html',
+						//				id: 'login',
+						//				show: {
+						//					aniShow: 'pop-in'
+						//				},
+						//				waiting: {
+						//					autoShow: false
+						//				}
+						//});
+					}
+					console.log('更新token成功');
+				});
 			});
 			//当前激活选项
 			var activeTab = subpages[0];

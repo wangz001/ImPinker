@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "tab-webview-main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -198,7 +198,9 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"tab-webview-subpage-article.html"
+					"tab-webview-subpage-article.html",
+					"js/app.js",
+					"js/jquery.js"
 				],
 				"refer": [
 					"tab-webview-subpage-setting.html",
@@ -276,9 +278,13 @@
 					"images/iconfont-tianjia.png",
 					"js/feedback.js",
 					"images/cbd.jpg",
-					"js/app.js"
+					"js/app.js",
+					"js/jquery.js"
 				],
-				"refer": [],
+				"refer": [
+					"login.html",
+					"view/article/youji_new.html"
+				],
 				"priority": 0
 			},
 			"view/search/search.html": {
@@ -298,7 +304,8 @@
 					"js/app.js",
 					"js/mui.enterfocus.js",
 					"js/login.js",
-					"css/login.css"
+					"css/login.css",
+					"js/jquery.js"
 				],
 				"refer": [
 					"reg.html",
@@ -397,6 +404,32 @@
 					"js/mui.previewimage.js",
 					"css/imageviewer.css",
 					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/article/youji_new.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"fonts/mui-icons-extra.ttf",
+					"css/icons-extra.css",
+					"css/mui.min.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"view/article/youji_new_selectweibo.html"
+				],
+				"priority": 0
+			},
+			"view/article/youji_new_selectweibo.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"css/weibo.css",
+					"images/cbd.jpg",
+					"js/mui.min.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0

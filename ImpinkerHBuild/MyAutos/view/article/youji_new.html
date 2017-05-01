@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">写游记</h1>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" placeholder="帖子标题">
+				</div>
+			</div>
+			<div class="row mui-input-row">
+				<textarea id='description' class="mui-input-clear" 
+					placeholder="试试添加微博内容，秒速发游记...">
+
+				</textarea>
+				<img src="../../images/cbd.jpg">
+				<textarea id='description' class="mui-input-clear" 
+					placeholder="试试添加微博内容，秒速发游记...">
+
+				</textarea>
+			</div>
+		</div>
+		<footer class="mui-bar mui-bar-footer">
+			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
+			<a><span class="mui-icon mui-icon-image"></span></a>
+			<a id="share"><span class="mui-icon mui-icon-paperplane"></span></a>
+		</footer>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			
+		</script>
+		<script type="application/javascript">
+			mui.init();
+			document.getElementById('selectWeibo').addEventListener('tap', function() {
+				mui.openWindow({
+					url: "youji_new_selectweibo.html",
+					id: "youji_new_selectweibo",
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

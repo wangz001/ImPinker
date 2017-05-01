@@ -69,7 +69,6 @@
 					console.log("返回的token。。。" + token);
 					return owner.createState(loginInfo, token, callback);
 				} else {
-					console.log("开始登录。。。" + data.Description);
 					return callback(data.Description);
 				}
 			},
@@ -78,8 +77,24 @@
 				console.log(type);
 			}
 		});
-
 	};
+	//更新token
+	owner.updateToken=function(callback){
+		var state = owner.getState();//用户信息
+		if(state.account&&state.password) {
+			//toMain();
+			//每次打开应用。重新登录，获取token
+			app.login(state, function(err) {
+				if(err) {
+					plus.nativeUI.toast(err);
+					return callback(err);
+				}
+				return callback();
+			});
+		}else{
+			return callback();
+		}
+	}
 
 	owner.createState = function(loginInfo, token, callback) {
 		var state = owner.getState();

@@ -25,11 +25,6 @@
 				}
 			}, 20);
 		};
-		var updatatoken=function(){
-			var account=state.account;
-			var password=state.password;
-			
-		}
 		//检查 "登录状态/锁屏状态" 开始
 //		if(state.token && settings.gestures) {
 //			$.openWindow({
@@ -45,7 +40,6 @@
 //			});
 //		} else 
 		if(state.token) {
-			//toMain();
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(err) {
 				if(err) {

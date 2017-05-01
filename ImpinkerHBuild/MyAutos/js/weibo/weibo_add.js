@@ -229,7 +229,6 @@
 		}
 		//mui.extend(0)  合并参数
 		var token = userstate.token;
-		console.log("send......token:" + token);
 		weibo.send(mui.extend({}, weibo.deviceInfo, weibo.gisinfo, {
 			Description: weibo.description.value,
 			images: weibo.files,
@@ -251,7 +250,18 @@
 					}, 500);
 				}
 			} else {
-				console.log("upload fail");
+				mui.toast("您未登陆，请重新登陆！");
+				mui.openWindow({
+					//手势登录
+					url: "../../login.html",
+					id: 'login',
+					show: {
+						aniShow: 'pop-in'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
 			}
 		});
 		//设置头信息
@@ -260,7 +270,7 @@
 		//添加上传数据
 		mui.each(content, function(index, element) {
 			if(index !== 'images') {
-				console.log("addData:" + index + "," + element);
+				//console.log("addData:" + index + "," + element);
 				weibo.uploader.addData(index, element)
 			}
 		});
