@@ -465,6 +465,32 @@ namespace DBUtility
             }
         }
 
+        /// <summary>
+        /// 执行SQL语句，返回影响的记录数
+        /// </summary>
+        /// <param name="SQLString">SQL语句</param>
+        /// <returns>影响的记录数</returns>
+        public static object ExecuteScalar(string SQLString, params SqlParameter[] cmdParms)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                        object obj = cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                        return obj;
+                    }
+                    catch (SqlException e)
+                    {
+                        throw e;
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。

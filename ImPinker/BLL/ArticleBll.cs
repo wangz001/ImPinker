@@ -28,7 +28,7 @@ namespace ImBLL
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public bool Add(Article model)
+        public int Add(Article model)
         {
             return _dal.Add(model);
         }

@@ -233,5 +233,52 @@ namespace ImpinkerApi.Controllers
         }
 
         #endregion
+
+        #region 获取我的微博
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage GetMyWeiBoList(int pageindex, int pagesize)
+        {
+            var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
+            var list = _weiBoBll.GetListByPage(userid,pageindex, pagesize);
+            if (list == null || list.Count == 0)
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "暂无更多数据",
+                    Data = null
+                });
+            }
+            var resultList = new List<WeiBoListViewModel>();
+            foreach (var weiBo in list)
+            {
+                var model = new WeiBoListViewModel
+                {
+                    Id = weiBo.Id,
+                    UserId = weiBo.UserId,
+                    Description = weiBo.Description,
+                    ContentValue = weiBo.ContentValue,
+                    Longitude = weiBo.Longitude,
+                    Lantitude = weiBo.Lantitude,
+                    Height = weiBo.Height,
+                    LocationText = weiBo.LocationText,
+                    PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
+                    IsRePost = weiBo.IsRePost
+                };
+                var userinfo = _userBll.GetModelByCache(weiBo.UserId);
+                model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                model.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                resultList.Add(model);
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Description = "ok",
+                Data = resultList
+            });
+        }
+
+        #endregion
     }
 }

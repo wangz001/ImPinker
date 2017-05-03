@@ -34,15 +34,16 @@ namespace ImDal
 
 
         /// <summary>
-        /// 增加一条数据
+        /// 增加一条数据,返回自增id
         /// </summary>
-        public bool Add(Article model)
+        public int Add(Article model)
         {
             var strSql = new StringBuilder();
             strSql.Append("insert into Article(");
             strSql.Append("ArticleName,Url,CoverImage,UserId,KeyWords,Description,State,CreateTime,UpdateTime,PublishTime,Company)");
             strSql.Append(" values (");
-            strSql.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime,@Company)");
+            strSql.Append("@ArticleName,@Url,@CoverImage,@UserId,@KeyWords,@Description,@State,@CreateTime,@UpdateTime,@PublishTime,@Company)");
+            strSql.Append(" select IDENT_CURRENT('Article')");
             SqlParameter[] parameters =
 			{
 				new SqlParameter("@ArticleName", SqlDbType.NVarChar, 100){Value =model.ArticleName },
@@ -57,16 +58,8 @@ namespace ImDal
 				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value = model.PublishTime},
                 new SqlParameter("@Company",SqlDbType.Char){Value = model.Company}, 
 			};
-
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            object  obj = DbHelperSQL.ExecuteScalar(strSql.ToString(), parameters);
+            return Convert.ToInt32(obj);
         }
 
         /// <summary>
@@ -83,6 +76,7 @@ namespace ImDal
             strSql.Append("KeyWords=@KeyWords,");
             strSql.Append("Description=@Description,");
             strSql.Append("State=@State,");
+            strSql.Append("PublishTime=@PublishTime,");
             strSql.Append("UpdateTime=@UpdateTime");
             strSql.Append(" where Id=@Id ");
             SqlParameter[] parameters =
@@ -94,6 +88,7 @@ namespace ImDal
 				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =model.KeyWords },
 				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
 				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
+				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value =model.PublishTime },
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime },
 				new SqlParameter("@Id", SqlDbType.BigInt, 8){Value =model.Id }
 			};

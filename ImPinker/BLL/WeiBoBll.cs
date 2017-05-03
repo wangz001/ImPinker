@@ -37,6 +37,24 @@ namespace ImBLL
         }
 
         /// <summary>
+        /// 分页获取数据,获取用户微博列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public List<WeiBo> GetListByPage(int userid,int pageindex, int pagesize)
+        {
+            var resultList = new List<WeiBo>();
+            var ds = weiBoDal.GetListByPage(userid,pageindex, pagesize);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                resultList.AddRange(from DataRow dataRow in ds.Tables[0].Rows select DataRowToModel(dataRow));
+            }
+            return resultList;
+        }
+
+        /// <summary>
         /// 得到一个对象实体
         /// </summary>
         public WeiBo DataRowToModel(DataRow row)

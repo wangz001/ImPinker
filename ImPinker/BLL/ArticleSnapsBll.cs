@@ -12,11 +12,31 @@ namespace ImBLL
 	public class ArticleSnapsBll
 	{
 		private readonly ImDal.ArticleSnaps dal=new ImDal.ArticleSnaps();
-		
+
+        /// <summary>
+        /// 添加草稿（发帖子用）
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+	    public bool AddDraft(ArticleSnaps model)
+	    {
+            if (Exists(model.ArticleId))
+            {
+                var snap = GetModel(model.ArticleId);
+                snap.Content = model.Content;
+                snap.UpdateTime = DateTime.Now;
+                return dal.Update(model);
+            }
+            else
+            {
+                return dal.Add(model);
+            }
+	    }
+
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(int Id)
+		public bool Exists(long Id)
 		{
 			return dal.Exists(Id);
 		}

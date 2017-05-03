@@ -15,15 +15,12 @@ namespace ImDal
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(int Id)
+		public bool Exists(long Id)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) from ArticleSnaps");
-			strSql.Append(" where Id=@Id ");
-			SqlParameter[] parameters = {
-					new SqlParameter("@Id", SqlDbType.Int,4)			};
-			parameters[0].Value = Id;
-
+            strSql.Append(" where ArticleId=@ArticleId ");
+			SqlParameter[] parameters = {new SqlParameter("@ArticleId", SqlDbType.Int){Value = Id}};
 			return DbHelperSQL.Exists(strSql.ToString(),parameters);
 		}
 
@@ -35,7 +32,7 @@ namespace ImDal
 		{
 			
 			var strSql=new StringBuilder();
-			strSql.Append("select top 1 ArticleId,FirstImageUrl,KeyWords,Description,ConTent,CreateTime from ArticleSnaps ");
+            strSql.Append("select top 1 ArticleId,FirstImageUrl,KeyWords,Description,ConTent,CreateTime,UpdateTime from ArticleSnaps ");
             strSql.Append(" where ArticleId=@ArticleId ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ArticleId",SqlDbType.BigInt){Value = Id}	};
@@ -88,6 +85,10 @@ namespace ImDal
                 {
                     model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
                 }
+                if (row["UpdateTime"] != null && row["UpdateTime"].ToString() != "")
+                {
+                    model.UpdateTime = DateTime.Parse(row["UpdateTime"].ToString());
+                }
 			}
 			return model;
 		}
@@ -133,7 +134,60 @@ namespace ImDal
 			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
 			return DbHelperSQL.Query(strSql.ToString());
 		}
+        /// <summary>
+        /// 添加数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+	    public bool Add(ImModel.ArticleSnaps model)
+	    {
+            var strSql = new StringBuilder();
+            strSql.Append("INSERT INTO [ArticleSnaps]  (");
+            strSql.Append("[ArticleId],[FirstImageUrl],[KeyWords],[Description],[ConTent],[CreateTime],[UpdateTime])");
+            strSql.Append(" values (");
+            strSql.Append("@ArticleId,@FirstImageUrl,@KeyWords,@Description,@ConTent,@CreateTime,@UpdateTime)");
+            strSql.Append(" select IDENT_CURRENT('ArticleSnaps')");
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@ArticleId", SqlDbType.NVarChar, 100){Value =model.ArticleId },
+				new SqlParameter("@FirstImageUrl", SqlDbType.VarChar, 200){Value =model.FirstImageUrl },
+				new SqlParameter("@KeyWords", SqlDbType.VarChar, 100){Value =model.KeyWords },
+				new SqlParameter("@Description", SqlDbType.VarChar){Value = model.Description},
+				new SqlParameter("@ConTent", SqlDbType.Text){Value =model.Content },
+				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.CreateTime },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}
+			};
+            int obj = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            return obj>0;
+	    }
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+	    public bool Update(ImModel.ArticleSnaps model)
+	    {
+            var strSql = new StringBuilder();
+            strSql.Append("UPDATE ArticleSnaps set ");
+            strSql.Append("FirstImageUrl=@FirstImageUrl,");
+            strSql.Append("KeyWords=@KeyWords,");
+            strSql.Append("Description=@Description,");
+            strSql.Append("ConTent=@ConTent,");
+            strSql.Append("UpdateTime=@UpdateTime");
+            strSql.Append(" where ArticleId=@ArticleId ");
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@FirstImageUrl", SqlDbType.NVarChar, 100){Value =model.FirstImageUrl },
+				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =model.KeyWords },
+				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =model.Description },
+                new SqlParameter("@ConTent", SqlDbType.Text){Value =model.Content },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime },
+				new SqlParameter("@ArticleId", SqlDbType.BigInt, 8){Value =model.ArticleId }
+			};
 
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            return rows > 0;
+	    }
 	}
 }
 

@@ -58,6 +58,12 @@ namespace ImModel
             set;
             get;
         }
+
+        public DateTime UpdateTime
+        {
+            set;
+            get;
+        }
         #endregion Model
 
     }

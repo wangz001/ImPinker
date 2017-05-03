@@ -12,7 +12,9 @@ namespace ImModel{
 		[Display(Name = "待审核")]
 		BeCheck=2,
 		[Display(Name = "审核未通过")]
-		CheckFalse=3
+		CheckFalse=3,
+        [Display(Name = "草稿")]
+        Draft=4
 
 	}
 	/// <summary>
@@ -102,7 +104,7 @@ namespace ImModel{
 		}
        
 		/// <summary>
-		///  状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过
+		///  状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过  4:草稿，写游记是用到
 		/// </summary>
 		public int State
 		{

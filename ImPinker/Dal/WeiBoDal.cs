@@ -109,5 +109,39 @@ WHERE   T.row BETWEEN @startIndex AND @endIndex
             var  ds = DbHelperSQL.Query(sql, parameters);
             return ds;
         }
+
+        public DataSet GetListByPage(int userid,int pageNum, int pagesize)
+        {
+            const string sql = @"
+SELECT  *
+FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
+                    [Id] ,
+                    [UserId] ,
+                    [Description] ,
+                    [ContentValue] ,
+                    [ContentType] ,
+                    [Longitude] ,
+                    [Latitude] ,
+                    [Height] ,
+                    [LocationText] ,
+                    [State] ,
+                    [HardWareType] ,
+                    [IsRePost] ,
+                    [CreateTime] ,
+                    [UpdateTime]
+          FROM      [MyAutosTest].[dbo].[WeiBo]
+          WHERE     UserId=@UserId AND State = 1
+        ) T
+WHERE   T.row BETWEEN @startIndex AND @endIndex 
+";
+            var startIndex = (pageNum - 1) * pagesize + 1;
+            var endIndex = pageNum * pagesize;
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
+					new SqlParameter("@startIndex", SqlDbType.Int){Value = startIndex},
+					new SqlParameter("@endIndex", SqlDbType.Int){Value = endIndex}};
+            var ds = DbHelperSQL.Query(sql, parameters);
+            return ds;
+        }
     }
 }
