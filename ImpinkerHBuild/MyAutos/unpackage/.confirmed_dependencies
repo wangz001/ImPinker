@@ -226,7 +226,12 @@
 			"css/weibo.css",
 			"images/cbd.jpg",
 			"js/mui.min.js",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/app.js",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"js/jquery.js",
+			"css/imageviewer.css"
 		]
 	}
 }
