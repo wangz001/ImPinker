@@ -20,7 +20,7 @@
 
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 			<div class="mui-scroll">
-				<div class="mui-card">
+				<!--<div class="mui-card">
 					<div class="mui-input-row mui-checkbox">
 						<label>选择：1</label>
 						<input name="checkbox1" value="Item 4" type="checkbox" checked="">
@@ -39,7 +39,7 @@
 						<p>Posted on January 18, 2016</p>
 						<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 			<script src="../../js/mui.min.js"></script>
@@ -98,6 +98,7 @@
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 						},
 						error: function(xhr, type, errorThrown) {
+							console.log(JSON.stringify(errorThrown));
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						}
 					});
