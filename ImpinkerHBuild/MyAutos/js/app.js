@@ -84,7 +84,7 @@
 		if(state.account&&state.password) {
 			//toMain();
 			//每次打开应用。重新登录，获取token
-			app.login(state, function(err) {
+			owner.login(state, function(err) {
 				if(err) {
 					plus.nativeUI.toast(err);
 					return callback(err);

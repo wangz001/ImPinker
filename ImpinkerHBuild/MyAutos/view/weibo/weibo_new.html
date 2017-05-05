@@ -35,10 +35,9 @@
 		</div>
 		<div id="geoLocation" class="mui-table-view-cell">
 			<span>显示地理位置</span>
-			<div id="mySwitch" class="mui-switch mui-switch-mini mui-active " data-switch="3">
+			<div id="mySwitch" class="mui-switch">
 				<div class="mui-switch-handle"></div>
 			</div>
-			<p id="locationtxt"></p>
 		</div>
 		<p id="locationtxt"></p>
 		<div id='newyouji' class="mui-btn mui-btn-primary">
@@ -46,17 +45,17 @@
 		</div>
 		<br />
 		</div>
-
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
 		<script type="application/javascript">
+			mui.init();
 			document.getElementById('newyouji').addEventListener('tap', function() {
 				mui.openWindow({
 					url: "../article/youji_new.html",
 					id: "youji_new",
-					
+
 					show: {
 						aniShow: 'slide-in-right',
 						duration: 200
@@ -64,6 +63,7 @@
 				});
 			});
 		</script>
+
 	</body>
 
 </html>

@@ -196,6 +196,7 @@
 	//获取地理位置
 	weibo.locationBtn.addEventListener("toggle", function(event) {
 		if(event.detail.isActive) {
+			console.log("你启动了开关");
 			plus.geolocation.getCurrentPosition(function(p) {
 				weibo.gisinfo.LocationText = p.addresses;
 				weibo.gisinfo.Longitude = p.coords.longitude.toString();

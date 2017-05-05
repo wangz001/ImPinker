@@ -15,7 +15,7 @@
 
 	<body>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
-			<div class="mui-scroll mui-table-view">
+			<div class="mui-scroll">
 				<!--<div class="mui-card">
 					<div class="mui-card-header mui-card-media">
 						<img src="images/logo.png">
@@ -102,7 +102,7 @@
 					success: function(data) {
 						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 							var list = data.Data;
-							var table = document.body.querySelector('.mui-table-view');
+							var table = document.body.querySelector('.mui-scroll');
 							//清空老数据
 							table.innerHTML = "";
 							for(var i = 0; i < list.length; i++) {
@@ -135,7 +135,7 @@
 					success: function(data) {
 						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 							var list = data.Data;
-							var table = document.body.querySelector('.mui-table-view');
+							var table = document.body.querySelector('.mui-scroll');
 							for(var i = 0; i < list.length; i++) {
 								var item = list[i];
 								initWeiBoItem(table, item);
