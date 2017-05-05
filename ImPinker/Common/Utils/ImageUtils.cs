@@ -15,6 +15,153 @@ namespace Common.Utils
         }
 
         /// <summary>
+        /// 按模版比例最大范围的裁剪图片（从中心采取）并缩放至模版尺寸
+        /// </summary>
+        /// <param name="newWidth"></param>
+        /// <param name="newHeight"></param>
+        /// <param name="inputImgUrl"></param>
+        /// <param name="outImgUrl"></param>
+        /// <param name="quality">质量（范围0-100）</param>
+        public static void GetReduceImgFromCenter(int newWidth, int newHeight, string inputImgUrl, string outImgUrl, long quality)
+        {
+            //通过连接创建Image对象
+            Image oldimage = Image.FromFile(inputImgUrl);
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempcutnew.jpg";
+            oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
+            oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
+            var initImage = new Bitmap(tempjpg);
+            //原图宽高均小于模版，不作处理，直接保存
+            if (initImage.Width <= newWidth && initImage.Height <= newHeight)
+            {
+                initImage.Save(outImgUrl, ImageFormat.Jpeg);
+            }
+            else
+            {
+                //模版的宽高比例
+                double templateRate = (double)newWidth / newHeight;
+                //原图片的宽高比例
+                double initRate = (double)initImage.Width / initImage.Height;
+                //原图与模版比例相等，直接缩放
+                if (templateRate == initRate)
+                {
+                    //按模版大小生成最终图片
+                    Image templateImage = new Bitmap(newWidth, newHeight);
+                    Graphics templateG = Graphics.FromImage(templateImage);
+                    templateG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+                    templateG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    templateG.Clear(Color.White);
+                    templateG.DrawImage(initImage, new Rectangle(0, 0, newWidth, newHeight), new Rectangle(0, 0, initImage.Width, initImage.Height), GraphicsUnit.Pixel);
+                    templateImage.Save(outImgUrl, ImageFormat.Jpeg);
+                }
+                //原图与模版比例不等，裁剪后缩放
+                else
+                {
+                    //裁剪对象
+                    Image pickedImage = null;
+                    Graphics pickedG = null;
+
+                    //定位
+                    Rectangle fromR = new Rectangle(0, 0, 0, 0);//原图裁剪定位
+                    Rectangle toR = new Rectangle(0, 0, 0, 0);//目标定位
+
+                    //宽为标准进行裁剪
+                    if (templateRate > initRate)
+                    {
+                        //裁剪对象实例化
+                        pickedImage = new Bitmap(initImage.Width, (int)System.Math.Floor(initImage.Width / templateRate));
+                        pickedG = Graphics.FromImage(pickedImage);
+
+                        //裁剪源定位
+                        fromR.X = 0;
+                        fromR.Y = (int)Math.Floor((initImage.Height - initImage.Width / templateRate) / 2);
+                        fromR.Width = initImage.Width;
+                        fromR.Height = (int)Math.Floor(initImage.Width / templateRate);
+
+                        //裁剪目标定位
+                        toR.X = 0;
+                        toR.Y = 0;
+                        toR.Width = initImage.Width;
+                        toR.Height = (int)Math.Floor(initImage.Width / templateRate);
+                    }
+                    //高为标准进行裁剪
+                    else
+                    {
+                        pickedImage = new Bitmap((int)Math.Floor(initImage.Height * templateRate), initImage.Height);
+                        pickedG = Graphics.FromImage(pickedImage);
+
+                        fromR.X = (int)Math.Floor((initImage.Width - initImage.Height * templateRate) / 2);
+                        fromR.Y = 0;
+                        fromR.Width = (int)Math.Floor(initImage.Height * templateRate);
+                        fromR.Height = initImage.Height;
+
+                        toR.X = 0;
+                        toR.Y = 0;
+                        toR.Width = (int)Math.Floor(initImage.Height * templateRate);
+                        toR.Height = initImage.Height;
+                    }
+
+                    //设置质量
+                    pickedG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    pickedG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                    //裁剪
+                    pickedG.DrawImage(initImage, toR, fromR, GraphicsUnit.Pixel);
+
+                    //按模版大小生成最终图片
+                    Image templateImage = new Bitmap(newWidth, newHeight);
+                    Graphics templateG = Graphics.FromImage(templateImage);
+                    //设置 System.Drawing.Graphics对象的SmoothingMode属性为HighQuality
+                    templateG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+                    //下面这个也设成高质量
+                    templateG.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    //下面这个设成High
+                    templateG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+                    templateG.Clear(Color.White);
+                    templateG.DrawImage(pickedImage, new Rectangle(0, 0, newWidth, newHeight),
+                        new Rectangle(0, 0, pickedImage.Width, pickedImage.Height), GraphicsUnit.Pixel);
+                    //参考  http://blog.csdn.net/jixiaomeng821/article/details/46756093  
+                    SaveImage(templateImage, quality, outImgUrl);
+                    //释放资源
+                    templateG.Dispose();
+                    templateImage.Dispose();
+                    pickedG.Dispose();
+                    pickedImage.Dispose();
+                }
+            }
+            initImage.Dispose();
+        }
+
+        private static void SaveImage(Image myBitmap, long quality,string savePath)
+        {
+            try
+            {
+                ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
+                Encoder myEncoder = Encoder.Quality;
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, quality);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                myBitmap.Save(savePath, myImageCodecInfo, myEncoderParameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 图片裁剪方法
         /// </summary>
         /// <param name="startX"></param>
@@ -77,7 +224,7 @@ namespace Common.Utils
         {
             if (System.IO.File.Exists(oldImagePath))
             {
-                
+
                 //通过连接创建Image对象
                 Image oldimage = Image.FromFile(oldImagePath);
                 var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempthumb.jpg";
@@ -113,6 +260,6 @@ namespace Common.Utils
                 image.Dispose();
             }
         }
-      
+
     }
 }

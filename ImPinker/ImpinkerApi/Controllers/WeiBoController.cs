@@ -74,18 +74,7 @@ namespace ImpinkerApi.Controllers
                     //裁剪
                     var extention = Path.GetExtension(file.LocalFileName);
                     var sLocalPath = file.LocalFileName.Replace(extention, "_s.jpg");
-                    var image = Image.FromFile(file.LocalFileName);
-                    if (image.Width < image.Height)
-                    {
-                        ImageUtils.ImgReduceCutOut(0, 0, image.Width, image.Width * 2 / 3, file.LocalFileName, sLocalPath);
-                        //生成缩略图
-                        ImageUtils.ThumbnailImage(sLocalPath, sLocalPath, 300, 200, ImageFormat.Jpeg);
-                    }
-                    else
-                    {
-                        //生成缩略图
-                        ImageUtils.ThumbnailImage(file.LocalFileName, sLocalPath, 300, 200, ImageFormat.Jpeg);
-                    }
+                    ImageUtils.GetReduceImgFromCenter(300, 200, file.LocalFileName, sLocalPath, 75);
                     var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
                     var flag2=ObjectOperate.UploadImage(BuckeyName, sLocalPath, sImgUrl);
                     if (ossSucess&&flag2)
