@@ -415,7 +415,9 @@
 					"css/icons-extra.css",
 					"css/mui.min.css",
 					"js/mui.min.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/article/youji_new.js",
+					"js/jquery.js"
 				],
 				"refer": [
 					"view/article/youji_new_selectweibo.html"
@@ -436,7 +438,9 @@
 					"js/jquery.js",
 					"css/imageviewer.css"
 				],
-				"refer": [],
+				"refer": [
+					"view/article/youji_new.html"
+				],
 				"priority": 0
 			}
 		},

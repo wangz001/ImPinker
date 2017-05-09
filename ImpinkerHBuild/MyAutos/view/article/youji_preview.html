@@ -16,21 +16,12 @@
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
 		</header>
 		<div class="mui-content">
-			<div class="mui-input-group">
-				<div class="mui-input-row">
-					<input type="text" placeholder="帖子标题">
-				</div>
-			</div>
-			<textarea id='description' class="" placeholder="试试添加微博内容，秒速发游记...">
-
-				</textarea>
+			<h3>土耳其游记</h3>
+			<p>试试添加微博内容，秒速发游记...</p>
 			<img src="../../images/cbd.jpg">
-			<textarea id='description' class="mui-input-clear" placeholder="试试添加微博内容，秒速发游记...">
-				</textarea>
+			<p>试试添加微博内容，秒速发游记...</p>
 			<img src="../../images/cbd.jpg">
-			<div id="youji_content" class="mui-input-row">
-
-			</div>
+			<p>试试添加微博内容，秒速发游记...</p>
 		</div>
 		<footer class="mui-bar mui-bar-footer">
 			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
@@ -44,35 +35,6 @@
 		</script>
 		<script type="application/javascript">
 			mui.init();
-			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
-				var selectedWeibos = self.items;
-				if(selectedWeibos != null) {
-					console.log("26262626");
-					//在页面上展示
-					showWeiBoItems(selectedWeibos);
-				}
-			});
-
-			function showWeiBoItems(items) {
-				var imgPath = 'http://img.myautos.cn/';
-				for(var i = 0; i < items.length; i++) {
-					var item = items[i];
-					if(item.ContentValue.length > 0) {
-						var imgs = item.ContentValue.split(',');
-						var imgHtmlStr = "";
-						for(var j = 0; j < imgs.length; j++) {
-							imgHtmlStr += '<img src="' + imgPath + imgs[j] + '">';
-						}
-						$(".mui-content").append(imgHtmlStr);
-					}
-					if(item.Description.length > 0) {
-						var textareaStr = '<textarea class="mui-input-clear" value="' + item.Description + '"></textarea>'
-						$(".mui-content").append(textareaStr);
-					}
-				}
-			}
-
 			document.getElementById('selectWeibo').addEventListener('tap', function() {
 				mui.openWindow({
 					url: "youji_new_selectweibo.html",
