@@ -7,44 +7,56 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<style>
+			
+			img {
+				width: 100%;
+			}
+			
+		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">写游记</h1>
-			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
 		</header>
 		<div class="mui-content">
-			<h3>土耳其游记</h3>
-			<p>试试添加微博内容，秒速发游记...</p>
-			<img src="../../images/cbd.jpg">
-			<p>试试添加微博内容，秒速发游记...</p>
-			<img src="../../images/cbd.jpg">
-			<p>试试添加微博内容，秒速发游记...</p>
+			
+			<div class="mui-content-padded">
+				<h3>土耳其游记</h3>
+			</div>
 		</div>
-		<footer class="mui-bar mui-bar-footer">
-			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
-			<a><span class="mui-icon mui-icon-image"></span></a>
-			<a id="share"><span class="mui-icon mui-icon-paperplane"></span></a>
-		</footer>
+		
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
 		</script>
 		<script type="application/javascript">
 			mui.init();
-			document.getElementById('selectWeibo').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "youji_new_selectweibo.html",
-					id: "youji_new_selectweibo",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var contentLists = self.contentLists;
+				if(contentLists != null) {
+					console.log(JSON.stringify(contentLists));
+					//在页面上展示
+					for (var i = 0; i < contentLists.length; i++) {
+						var item=contentLists[i];
+						if(item.dateType=="text"){
+							var str='<p>'+item.dateValue+'</p>';
+							$(".mui-content-padded").append(str);
+						}
+						if(item.dateType=="img"){
+							var str='<p><img src="' + item.dateValue + '" data-preview-src="' + item.dateValue + '" data-preview-group=1></p>';
+							$(".mui-content-padded").append(str);
+						}
 					}
-				});
+				}
 			});
+			mui.previewImage();
 		</script>
 	</body>
 

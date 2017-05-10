@@ -7,6 +7,26 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<style>
+			textarea {
+				border: 0;
+				background-color: transparent;
+				/*scrollbar-arrow-color:yellow;  
+    scrollbar-base-color:lightsalmon;  
+    overflow: hidden;*/
+				grid-auto-rows: inherit;
+				color: #666464;
+				height: auto;
+			}
+			
+			img {
+				width: 100%;
+			}
+			
+			.mui-content-padded {
+				background-color: white;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -21,57 +41,39 @@
 					<input type="text" placeholder="帖子标题">
 				</div>
 			</div>
-			<textarea id='description' class="" placeholder="试试添加微博内容，秒速发游记...">
-
+			<div class="mui-content-padded">
+				<p><img src="../../images/cbd.jpg"></p>
+				<textarea id='description' placeholder="试试添加微博内容，秒速发游记...">
 				</textarea>
-			<img src="../../images/cbd.jpg">
-			<textarea id='description' class="mui-input-clear" placeholder="试试添加微博内容，秒速发游记...">
-				</textarea>
-			<img src="../../images/cbd.jpg">
-			<div id="youji_content" class="mui-input-row">
+				<img src="../../images/cbd.jpg">
+				<div id="youji_content" class="mui-input-row">
 
+				</div>
 			</div>
 		</div>
 		<footer class="mui-bar mui-bar-footer">
 			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
 			<a><span class="mui-icon mui-icon-image"></span></a>
 			<a id="share"><span class="mui-icon mui-icon-paperplane"></span></a>
+			<a id="preview_btn"><span class="mui-icon mui-icon-search">预览</span></a>
+			<a><span class="mui-icon mui-icon-arrowright">排序</span></a>
 		</footer>
-		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
-		<script type="text/javascript">
-		</script>
+
 		<script type="application/javascript">
-			mui.init();
+			mui.init({});
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var selectedWeibos = self.items;
 				if(selectedWeibos != null) {
 					console.log("26262626");
 					//在页面上展示
-					showWeiBoItems(selectedWeibos);
+					edityoujiUtil.showWeiBoItems(contentLists, selectedWeibos);
 				}
 			});
-
-			function showWeiBoItems(items) {
-				var imgPath = 'http://img.myautos.cn/';
-				for(var i = 0; i < items.length; i++) {
-					var item = items[i];
-					if(item.ContentValue.length > 0) {
-						var imgs = item.ContentValue.split(',');
-						var imgHtmlStr = "";
-						for(var j = 0; j < imgs.length; j++) {
-							imgHtmlStr += '<img src="' + imgPath + imgs[j] + '">';
-						}
-						$(".mui-content").append(imgHtmlStr);
-					}
-					if(item.Description.length > 0) {
-						var textareaStr = '<textarea class="mui-input-clear" value="' + item.Description + '"></textarea>'
-						$(".mui-content").append(textareaStr);
-					}
-				}
-			}
+			var contentLists = new Array();
 
 			document.getElementById('selectWeibo').addEventListener('tap', function() {
 				mui.openWindow({
@@ -81,6 +83,20 @@
 						aniShow: 'slide-in-right',
 						duration: 200
 					}
+				});
+			});
+			//预览
+			document.getElementById('preview_btn').addEventListener('tap', function() {
+				mui.openWindow({
+					url: "youji_preview.html",
+					id: "youji_preview",
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					},
+					extras: {
+						contentLists: contentLists
+					},
 				});
 			});
 		</script>

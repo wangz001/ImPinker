@@ -215,10 +215,12 @@
 			"js/mui.min.js",
 			"fonts/mui.ttf",
 			"js/article/youji_new.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"js/mui.js"
 		],
 		"refer": [
-			"view/article/youji_new_selectweibo.html"
+			"view/article/youji_new_selectweibo.html",
+			"view/article/youji_preview.html"
 		]
 	},
 	"view/article/youji_new_selectweibo.html": {
@@ -237,6 +239,17 @@
 		],
 		"refer": [
 			"view/article/youji_new.html"
+		]
+	},
+	"view/article/youji_preview.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"js/jquery.js",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css"
 		]
 	}
 }
