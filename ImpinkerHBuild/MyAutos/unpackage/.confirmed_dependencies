@@ -216,7 +216,8 @@
 			"fonts/mui.ttf",
 			"js/article/youji_new.js",
 			"js/jquery.js",
-			"js/mui.js"
+			"js/mui.js",
+			"js/app.js"
 		],
 		"refer": [
 			"view/article/youji_new_selectweibo.html",
@@ -235,7 +236,8 @@
 			"js/mui.zoom.js",
 			"js/mui.previewimage.js",
 			"js/jquery.js",
-			"css/imageviewer.css"
+			"css/imageviewer.css",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"view/article/youji_new.html"
@@ -249,7 +251,8 @@
 			"js/jquery.js",
 			"js/mui.zoom.js",
 			"js/mui.previewimage.js",
-			"css/imageviewer.css"
+			"css/imageviewer.css",
+			"fonts/mui.ttf"
 		]
 	}
 }

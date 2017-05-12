@@ -22,8 +22,8 @@
 			<div class="mui-scroll">
 				<!--<div class="mui-card">
 					<div class="mui-input-row mui-checkbox">
-						<label>选择：1</label>
 						<input name="checkbox1" value="Item 4" type="checkbox" checked="">
+						<label>序号：2</label>
 					</div>
 					<div class="media-pic-list">
 						<ul>
@@ -61,16 +61,15 @@
 
 				});
 
-				var selectedItems = new Array();
-				var allItems = new Array();
+				var selectedItems = new Array(); // 选中的对象集合
+				var allItems = new Array(); //全部微博对象
 				document.getElementById('submit').addEventListener('tap', function() {
-					getVals();
 					if(selectedItems.length > 0) {
 						mui.openWindow({
 							url: "youji_new.html",
 							id: "youji_new",
 							extras: {
-								items:selectedItems
+								items: selectedItems
 							},
 							createNew: true, //是否重复创建同样id的webview
 							show: {
@@ -80,7 +79,30 @@
 						});
 					}
 				});
-
+				// 绑定复选框点击事件
+				function bindCheckBoxTab() {
+					$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
+						var weiboid = $(this).val();
+						var isChecked = $(this).is(':checked');
+						console.log(isChecked);
+						if(isChecked) {
+							//往selectedItems 数组添加数据，并改变编号显示
+							for(var i = 0; i < allItems.length; i++) {
+								var item = allItems[i];
+								if(item.Id.toString()==weiboid) {
+									selectedItems.push(item);
+									break;
+								}
+							}
+							$(this).next('label').html("已选择："+(selectedItems.length));
+						} else {
+							//从selectedItems 数组移除数据，并改变编号显示
+							selectedItems.splice(jQuery.inArray(item,selectedItems),1);
+							$(this).next('label').html("");
+						}
+					});
+				}
+/**
 				function getVals() {
 					var res = getCheckBoxRes('checkbox1');
 					if(res.length < 1) {
@@ -111,7 +133,7 @@
 					}
 					return checkVal;
 				}
-
+**/
 				mui.previewImage();
 				var pageNum = 1;
 				var pageSize = 10;
@@ -137,12 +159,13 @@
 							if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 								var list = data.Data;
 								allItems = allItems.concat(list);
-								console.log("我的微博ok：" + JSON.stringify(list));
+								//console.log("我的微博ok：" + JSON.stringify(list));
 								var table = document.body.querySelector('.mui-scroll');
 								for(var i = 0; i < list.length; i++) {
 									var item = list[i];
 									initWeiBoItem(table, item);
 								}
+								bindCheckBoxTab();
 							} else {
 								mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 								return;
@@ -170,7 +193,7 @@
 					li.className = 'mui-card';
 					var headdiv = document.createElement("div");
 					headdiv.className = 'mui-input-row mui-checkbox';
-					headdiv.innerHTML = '<label>选择：1</label><input name="checkbox1" value="' + item.Id + '" type="checkbox" checked="">';
+					headdiv.innerHTML = '<input name="checkbox1" value="' + item.Id + '" type="checkbox"><label>选择：1</label>';
 
 					var imgdiv = document.createElement("div");
 

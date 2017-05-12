@@ -39,22 +39,8 @@
 			mui.init();
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				var contentLists = self.contentLists;
-				if(contentLists != null) {
-					console.log(JSON.stringify(contentLists));
-					//在页面上展示
-					for (var i = 0; i < contentLists.length; i++) {
-						var item=contentLists[i];
-						if(item.dateType=="text"){
-							var str='<p>'+item.dateValue+'</p>';
-							$(".mui-content-padded").append(str);
-						}
-						if(item.dateType=="img"){
-							var str='<p><img src="' + item.dateValue + '" data-preview-src="' + item.dateValue + '" data-preview-group=1></p>';
-							$(".mui-content-padded").append(str);
-						}
-					}
-				}
+				var contentStr = self.contentStr;
+				$(".mui-content-padded").append(contentStr);
 			});
 			mui.previewImage();
 		</script>
