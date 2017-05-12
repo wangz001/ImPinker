@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using ImBLL;
@@ -14,6 +20,7 @@ namespace ImpinkerApi.Controllers
     {
 
         private readonly ArticleBll _articleBll = new ArticleBll();
+        readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
 
         /// <summary>
         /// 分页获取数据
@@ -26,7 +33,7 @@ namespace ImpinkerApi.Controllers
         {
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
             var userid = 0;
-            if (userinfo!=null&&userinfo.Id>0)
+            if (userinfo != null && userinfo.Id > 0)
             {
                 userid = userinfo.Id;
             }
@@ -75,12 +82,12 @@ namespace ImpinkerApi.Controllers
             {
                 ArticleName = article.ArticleName,
                 UserId = userinfo.Id,
-                Url="",
+                Url = "",
                 Description = "",
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now,
                 PublishTime = DateTime.Now,
-                State = (int) ArticleStateEnum.Draft
+                State = (int)ArticleStateEnum.Draft
             };
             int articleId = _articleBll.Add(model);
             model.Id = articleId;
@@ -148,12 +155,12 @@ namespace ImpinkerApi.Controllers
                 UpdateTime = DateTime.Now
             };
             var flagSnap = new ArticleSnapsBll().AddDraft(articleSnap);
-            var model = _articleBll.GetModel(article.Id);
+            var model = _articleBll.GetModelByCache(article.Id);
             model.State = (int)ArticleStateEnum.Normal;
             model.PublishTime = DateTime.Now;
             model.UpdateTime = DateTime.Now;
             var flagArticle = _articleBll.Update(model);
-            if (flagArticle&&flagSnap)
+            if (flagArticle && flagSnap)
             {
                 return GetJson(new JsonResultViewModel
                 {
@@ -170,7 +177,83 @@ namespace ImpinkerApi.Controllers
             });
         }
 
-        #endregion 
+        /// <summary>
+        /// 上传游记图片，可多张上传
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [TokenCheck]
+        public async Task<HttpResponseMessage> UploadArticleImage()
+        {
+            // 检查是否是 multipart/form-data 
+            if (!Request.Content.IsMimeMultipartContent("form-data"))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "数据格式错误",
+                    Data = HttpStatusCode.UnsupportedMediaType
+                });
+            }
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/articleimage/" + DateTime.Now.ToString("yyyyMMdd"));
+            if (!Directory.Exists(fileSaveLocation))
+            {
+                Directory.CreateDirectory(fileSaveLocation);
+            }
+            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                //封装数据
+                var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+                int articleid;
+                //取articleid
+                var formData = provider.FormData;
+                if (formData.HasKeys()
+                    && formData.AllKeys.Contains("articleid")
+                    && !string.IsNullOrEmpty(formData.Get("articleid")))
+                {
+                    Int32.TryParse(formData.Get("articleid"),out articleid);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = "获取文章id失败",
+                        Data = ""
+                    });
+                }
+                var files = new List<string>();
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    //上传原图到oss
+                    string imgUrl = _articleBll.UploadArticleImgToOss(_buckeyName, userinfo.Id, articleid, file.LocalFileName);
+                    if (string.IsNullOrEmpty(imgUrl))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                        {
+                            IsSuccess = 0,
+                            Description = "上传图片到oss失败",
+                            Data = file.LocalFileName
+                        });
+                    }
+                    files.Add(imgUrl);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "ok",
+                    Data = string.Join(",", files)
+                });
+                //记录日志
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        #endregion
 
     }
 }

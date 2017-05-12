@@ -211,7 +211,7 @@ namespace ImPinker.Controllers
                 //缩放
                 ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
                 string buckeyName = "myautos";
-                var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage);
+                var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage,1024);
                 if (ossSucess)
                 {
                     var vm = new CreateThreadVm
@@ -286,7 +286,7 @@ namespace ImPinker.Controllers
                     //缩放
                     ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
                     string buckeyName = "myautos";
-                    var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage);
+                    var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage,200);
                 }
                 var article = ArticleBll.GetModelByCache(model.ArticleId);
                 var vm = new CreateThreadVm

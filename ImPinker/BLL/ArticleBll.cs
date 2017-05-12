@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Globalization;
+using Common.AlyOssUtil;
 using ImDal;
 using ImModel;
 using ImModel.ViewModel;
@@ -42,57 +45,31 @@ namespace ImBLL
         }
 
         /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        public bool Delete(long Id)
-        {
-            return _dal.Delete(Id);
-        }
-        /// <summary>
         /// 用户删除帖子
         /// </summary>
         /// <param name="userid"></param>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public bool DeleteThread(int userid, long Id)
+        public bool DeleteThread(int userid, long id)
         {
-            return _dal.DeleteThread(userid, Id);
-        }
-        /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        public bool DeleteList(string Idlist)
-        {
-            return _dal.DeleteList(Idlist);
-        }
-
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public Article GetModel(long Id)
-        {
-            return _dal.GetModel(Id);
+            return _dal.DeleteThread(userid, id);
         }
 
         /// <summary>
         /// 得到一个对象实体，从缓存中
         /// </summary>
-        public Article GetModelByCache(long Id)
+        public Article GetModelByCache(long id)
         {
-            string CacheKey = "ArticleModel-" + Id;
-            object objModel = DataCache.GetCache(CacheKey);
+            string cacheKey = "ArticleModel-" + id;
+            object objModel = DataCache.GetCache(cacheKey);
             if (objModel == null)
             {
-                try
+                objModel = _dal.GetModel(id);
+                if (objModel != null)
                 {
-                    objModel = _dal.GetModel(Id);
-                    if (objModel != null)
-                    {
-                        int ModelCache = ConfigHelper.GetConfigInt("ModelCache");
-                        DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
-                    }
+                    int modelCache = ConfigHelper.GetConfigInt("ModelCache");
+                    DataCache.SetCache(cacheKey, objModel, DateTime.Now.AddMinutes(modelCache), TimeSpan.Zero);
                 }
-                catch { }
             }
             return (Article)objModel;
         }
@@ -166,7 +143,6 @@ namespace ImBLL
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
-            var articleNameLists = new List<string>();
             var listResult = new List<ArticleViewModel>();
             var ds = _dal.GetIndexListByPage(pageNum, count);
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
@@ -267,26 +243,26 @@ namespace ImBLL
         {
             var article = _dal.GetModel(id);
             var snap = _articleSnapsBll.GetModel(id);
-            
-            var vm = new ArticleViewModel()
+
+            var vm = new ArticleViewModel
             {
-                Id = id.ToString(),
+                Id = id.ToString(CultureInfo.InvariantCulture),
                 ArticleName = article.ArticleName,
                 Url = article.Url,
-                Userid = article.UserId.ToString(),
+                Userid = article.UserId.ToString(CultureInfo.InvariantCulture),
                 CoverImage = article.CoverImage,
                 KeyWords = article.KeyWords,
                 Description = article.Description,
                 Company = article.Company,
                 CreateTime = article.CreateTime,
-                Content =snap==null? null: new List<Object>() { snap.Content }
+                Content = snap == null ? null : new List<Object> { snap.Content }
             };
             return vm;
         }
+
         /// <summary>
         /// 发布新帖子。操作article和articlesnap表，使用事务
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
         public bool AddThread(CreateThreadVm vm)
         {
@@ -301,9 +277,9 @@ namespace ImBLL
         /// <summary>
         /// 修改文章状态
         /// </summary>
-        public bool UpdateState(long articleId,ArticleStateEnum articleState)
+        public bool UpdateState(long articleId, ArticleStateEnum articleState)
         {
-            var article = this.GetModelByCache(articleId);
+            var article = GetModelByCache(articleId);
             article.State = (int)articleState;
             return Update(article);
         }
@@ -328,6 +304,39 @@ namespace ImBLL
                 list = GetIndexListByPage(pageNum, pageCount);
             }
             return list;
+        }
+
+        /// <summary>
+        /// 编写游记时，上传图片，保存到oss。返回图片路径插入到文章中
+        /// </summary>
+        /// <param name="buckeyName"></param>
+        /// <param name="userid"></param>
+        /// <param name="localFileName"></param>
+        /// <returns></returns>
+        public string UploadArticleImgToOss(string buckeyName, int userid, string localFileName)
+        {
+            return UploadArticleImgToOss(buckeyName, userid, 0, localFileName);
+        }
+
+        /// <summary>
+        /// 编写游记时，上传图片，保存到oss。返回图片路径插入到文章中
+        /// </summary>
+        /// <param name="buckeyName"></param>
+        /// <param name="userid">用户id</param>
+        /// <param name="articleid">文章id</param>
+        /// <param name="localFileName"></param>
+        /// <returns></returns>
+        public string UploadArticleImgToOss(string buckeyName, int userid, int articleid, string localFileName)
+        {
+            if (string.IsNullOrEmpty(buckeyName) || userid == 0 || articleid == 0)
+            {
+                return "";
+            }
+            string imgUrlformat = ConfigurationManager.AppSettings["ArticleImage"];
+            var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
+            //上传到oss
+            var flag1 = ObjectOperate.UploadImage(buckeyName, localFileName, imgUrl,1024);
+            return flag1 ? imgUrl : "";
         }
     }
 }

@@ -77,7 +77,7 @@ public class UploadHandler : Handler
             Result.State = UploadState.Success;
             //上传到oss，页面读取的时候，取oss的图片
             string buckeyName = "myautos";
-            ObjectOperate.UploadImage(buckeyName, localPath, savePath.Substring(1));
+            ObjectOperate.UploadImage(buckeyName, localPath, savePath.Substring(1),1024);
             //删除保存在本地的图片。
             File.Delete(localPath);
         }

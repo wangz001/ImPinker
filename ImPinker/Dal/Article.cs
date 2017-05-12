@@ -104,24 +104,7 @@ namespace ImDal
             }
         }
 
-        /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        public bool Delete(long Id)
-        {
-            var strSql = new StringBuilder();
-            strSql.Append("delete from Article ");
-            strSql.Append(" where Id=@Id ");
-            SqlParameter[] parameters =
-			{
-				new SqlParameter("@Id", SqlDbType.BigInt, 8)
-			};
-            parameters[0].Value = Id;
-
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            return rows > 0;
-        }
-
+        
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -139,26 +122,6 @@ namespace ImDal
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             return rows > 0;
         }
-
-        /// <summary>
-        /// 批量删除数据
-        /// </summary>
-        public bool DeleteList(string Idlist)
-        {
-            var strSql = new StringBuilder();
-            strSql.Append("delete from Article ");
-            strSql.Append(" where Id in (" + Idlist + ")  ");
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
 
         /// <summary>
         /// 得到一个对象实体

@@ -26,14 +26,15 @@ namespace Common.Utils
         {
             //通过连接创建Image对象
             Image oldimage = Image.FromFile(inputImgUrl);
-            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempcutnew.jpg";
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "ImageUpload\\tempcutnew.jpg";
             oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
             oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
             var initImage = new Bitmap(tempjpg);
             //原图宽高均小于模版，不作处理，直接保存
             if (initImage.Width <= newWidth && initImage.Height <= newHeight)
             {
-                initImage.Save(outImgUrl, ImageFormat.Jpeg);
+                SaveImage(initImage, quality, outImgUrl);
+                initImage.Dispose();
             }
             else
             {
@@ -51,7 +52,7 @@ namespace Common.Utils
                     templateG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     templateG.Clear(Color.White);
                     templateG.DrawImage(initImage, new Rectangle(0, 0, newWidth, newHeight), new Rectangle(0, 0, initImage.Width, initImage.Height), GraphicsUnit.Pixel);
-                    SaveImage(templateImage,quality,outImgUrl);
+                    SaveImage(templateImage, quality, outImgUrl);
                     templateG.Dispose();
                     templateImage.Dispose();
                 }
@@ -133,25 +134,18 @@ namespace Common.Utils
             initImage.Dispose();
         }
 
-        private static void SaveImage(Image myBitmap, long quality,string savePath)
+        private static void SaveImage(Image myBitmap, long quality, string savePath)
         {
-            try
+            if (!Directory.Exists(Path.GetDirectoryName(savePath)))//如果不存在就创建file文件夹
             {
-                if (!Directory.Exists(Path.GetDirectoryName(savePath)))//如果不存在就创建file文件夹
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-                }
-                ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
-                Encoder myEncoder = Encoder.Quality;
-                var myEncoderParameters = new EncoderParameters(1);
-                var myEncoderParameter = new EncoderParameter(myEncoder, quality);
-                myEncoderParameters.Param[0] = myEncoderParameter;
-                myBitmap.Save(savePath, myImageCodecInfo, myEncoderParameters);
+                Directory.CreateDirectory(Path.GetDirectoryName(savePath));
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
+            Encoder myEncoder = Encoder.Quality;
+            var myEncoderParameters = new EncoderParameters(1);
+            var myEncoderParameter = new EncoderParameter(myEncoder, quality);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            myBitmap.Save(savePath, myImageCodecInfo, myEncoderParameters);
         }
 
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
@@ -180,7 +174,7 @@ namespace Common.Utils
         {
             //通过连接创建Image对象
             Image oldimage = Image.FromFile(inputImgUrl);
-            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempcut.jpg";
+            var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "ImageUpload\\tempcut.jpg";
             oldimage.Save(tempjpg);//把原图Copy一份出来,然后在temp.jpg上进行裁剪,最后把裁剪后的图片覆盖原图
             oldimage.Dispose();//一定要释放临时图片,要不之后的在此图上的操作会报错,原因冲突
             var bm = new Bitmap(tempjpg);
@@ -233,7 +227,7 @@ namespace Common.Utils
 
                 //通过连接创建Image对象
                 Image oldimage = Image.FromFile(oldImagePath);
-                var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "Upload\\tempthumb.jpg";
+                var tempjpg = AppDomain.CurrentDomain.BaseDirectory + "ImageUpload\\tempthumb.jpg";
                 if (!Directory.Exists(Path.GetDirectoryName(newImagePath)))//如果不存在就创建file文件夹
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(newImagePath));

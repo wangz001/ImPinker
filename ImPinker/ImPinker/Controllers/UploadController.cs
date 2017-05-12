@@ -134,7 +134,7 @@ namespace ImPinker.Controllers
         private bool UploadToOss(string sourcePath,string newImgUrl)
         {
             string buckeyName = "myautos";
-            var flag = ObjectOperate.UploadImage(buckeyName, sourcePath, newImgUrl);
+            var flag = ObjectOperate.UploadImage(buckeyName, sourcePath, newImgUrl,1024);
             return flag;
         }
 

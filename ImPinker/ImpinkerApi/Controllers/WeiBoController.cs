@@ -44,7 +44,7 @@ namespace ImpinkerApi.Controllers
                     Data = HttpStatusCode.UnsupportedMediaType
                 });
             }
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/" + DateTime.Now.ToString("yyyyMMdd"));
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/weiboimage/" + DateTime.Now.ToString("yyyyMMdd"));
             if (!Directory.Exists(fileSaveLocation))
             {
                 Directory.CreateDirectory(fileSaveLocation);

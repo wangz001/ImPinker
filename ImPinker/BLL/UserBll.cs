@@ -223,25 +223,23 @@ namespace ImBLL
             //保存到数据库中的路径和oss的路径
             var limitimgUrl = string.Format(headImageLimit, DateTime.Now.ToString("yyyyMMdd"), userId, DateTime.Now.ToString("yyyyMMddHHmmss"));
             //上传到oss
-            var ossSucess = ObjectOperate.UploadImage(bucketName, localPath, limitimgUrl);
+            var ossSucess = ObjectOperate.UploadImage(bucketName, localPath, limitimgUrl,500);
             if (ossSucess)
             {
                 //缩放、保存为3种格式
                 int[] imgSize = { 180, 100, 40 };
                 //本地路径
-                var limitPath = AppDomain.CurrentDomain.BaseDirectory + limitimgUrl;
+                var limitPath = AppDomain.CurrentDomain.BaseDirectory + "ImageUpload\\headimage\\" + limitimgUrl;
                 foreach (var size in imgSize)
                 {
                     var saveimgUrl = limitimgUrl.Replace("headimg/limit", "headimg/" + size);
                     var tempimgPath = limitPath.Replace("headimg/limit", "headimg/" + size);
                     ImageUtils.GetReduceImgFromCenter(size, size, localPath, tempimgPath, 90);
-                    var flag = ObjectOperate.UploadImage(bucketName, tempimgPath, saveimgUrl);
+                    var flag = ObjectOperate.UploadImage(bucketName, tempimgPath, saveimgUrl,30);
                     if (!flag)
                     {
                         return false;
                     }
-                    //删除本地文件
-                    System.IO.File.Delete(tempimgPath);
                 }
                 //更新数据库
                 var issuccess = UpdateHeadImg(userId, limitimgUrl);

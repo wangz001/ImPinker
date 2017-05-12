@@ -25,7 +25,7 @@ namespace ImBLL
             string imgUrlformat = ConfigurationManager.AppSettings["WeiboImage"];
             var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, DateTime.Now.Ticks);
             //上传到oss
-            var flag1 = ObjectOperate.UploadImage(bucketName, localFileName, imgUrl);
+            var flag1 = ObjectOperate.UploadImage(bucketName, localFileName, imgUrl,1024);
             //上传缩略图到oss
             var extention = Path.GetExtension(localFileName);
             if (extention != null)
@@ -33,7 +33,7 @@ namespace ImBLL
                 var sLocalPath = localFileName.Replace(extention, "_s.jpg");
                 ImageUtils.GetReduceImgFromCenter(300, 200, localFileName, sLocalPath, 85);
                 var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
-                var flag2 = ObjectOperate.UploadImage(bucketName, sLocalPath, sImgUrl);
+                var flag2 = ObjectOperate.UploadImage(bucketName, sLocalPath, sImgUrl,100);
                 return (flag1 && flag2) ? imgUrl : "";
             }
             return "";

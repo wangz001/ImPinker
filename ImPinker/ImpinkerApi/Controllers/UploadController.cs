@@ -36,7 +36,11 @@ namespace ImpinkerApi.Controllers
                     Data = HttpStatusCode.UnsupportedMediaType
                 });
             }
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload");
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/headimage");
+            if (!Directory.Exists(fileSaveLocation))//如果不存在就创建file文件夹
+            {
+                Directory.CreateDirectory(fileSaveLocation);
+            }
             var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
             var files = new List<string>();
             try
