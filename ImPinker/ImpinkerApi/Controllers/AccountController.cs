@@ -184,8 +184,6 @@ namespace ImpinkerApi.Controllers
         /// <summary>
         /// 发送手机验证码
         /// </summary>
-        /// <param name="PhoneNum"></param>
-        /// <param name="OpreateType"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]

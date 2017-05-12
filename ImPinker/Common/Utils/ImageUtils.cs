@@ -51,7 +51,9 @@ namespace Common.Utils
                     templateG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     templateG.Clear(Color.White);
                     templateG.DrawImage(initImage, new Rectangle(0, 0, newWidth, newHeight), new Rectangle(0, 0, initImage.Width, initImage.Height), GraphicsUnit.Pixel);
-                    templateImage.Save(outImgUrl, ImageFormat.Jpeg);
+                    SaveImage(templateImage,quality,outImgUrl);
+                    templateG.Dispose();
+                    templateImage.Dispose();
                 }
                 //原图与模版比例不等，裁剪后缩放
                 else
@@ -135,10 +137,14 @@ namespace Common.Utils
         {
             try
             {
+                if (!Directory.Exists(Path.GetDirectoryName(savePath)))//如果不存在就创建file文件夹
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(savePath));
+                }
                 ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
                 Encoder myEncoder = Encoder.Quality;
-                EncoderParameters myEncoderParameters = new EncoderParameters(1);
-                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, quality);
+                var myEncoderParameters = new EncoderParameters(1);
+                var myEncoderParameter = new EncoderParameter(myEncoder, quality);
                 myEncoderParameters.Param[0] = myEncoderParameter;
                 myBitmap.Save(savePath, myImageCodecInfo, myEncoderParameters);
             }

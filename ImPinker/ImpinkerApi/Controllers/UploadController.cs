@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using ImpinkerApi.Models;
@@ -10,17 +9,15 @@ using System.Threading.Tasks;
 using System.Net;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Common;
-using Common.AlyOssUtil;
 using System.Configuration;
-using Common.Utils;
 using ImBLL;
-using System.Drawing.Imaging;
 
 namespace ImpinkerApi.Controllers
 {
     public class UploadController : BaseApiController
     {
         private static readonly UserBll UserBll = new UserBll();
+        readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
         /// <summary>
         /// 头像上传
         /// </summary>
@@ -39,41 +36,28 @@ namespace ImpinkerApi.Controllers
                     Data = HttpStatusCode.UnsupportedMediaType
                 });
             }
-
             string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload");
             var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
-            List<string> files = new List<string>();
+            var files = new List<string>();
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
                 var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-                if (userinfo == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
-                    {
-                        IsSuccess = 0,
-                        Description = "身份验证失败",
-                        Data = ""
-                    });
-                }
                 var userid = userinfo.Id;
                 foreach (MultipartFileData file in provider.FileData)
                 {
                     files.Add(Path.GetFileName(file.LocalFileName));
-                    var flag = UserBll.UpdateHeadImage(file.LocalFileName, userid);
+                    var flag = UserBll.UpdateHeadImage(_buckeyName,file.LocalFileName, userid);
                     if (flag)
                     {
                         break;
                     }
-                    else
+                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                     {
-                        return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
-                        {
-                            IsSuccess = 0,
-                            Description = "上传图片失败",
-                            Data = ""
-                        });
-                    }
+                        IsSuccess = 0,
+                        Description = "上传图片失败",
+                        Data = ""
+                    });
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                 {

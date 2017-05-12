@@ -133,50 +133,6 @@ namespace ImDal
 		}
 
 		/// <summary>
-		/// 删除一条数据
-		/// </summary>
-		public bool Delete(int Id)
-		{
-			
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from Users ");
-			strSql.Append(" where Id=@Id");
-			SqlParameter[] parameters = {
-					new SqlParameter("@Id", SqlDbType.Int,4)
-			};
-			parameters[0].Value = Id;
-
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		/// <summary>
-		/// 批量删除数据
-		/// </summary>
-		public bool DeleteList(string Idlist )
-		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from Users ");
-			strSql.Append(" where Id in ("+Idlist + ")  ");
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString());
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-
-		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
 		public Users GetModel(int Id)

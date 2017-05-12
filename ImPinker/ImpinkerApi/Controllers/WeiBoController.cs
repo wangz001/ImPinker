@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -14,13 +14,7 @@ using ImpinkerApi.Models;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
-using System.Net.Http.Headers;
-using System.Text;
 using ImModel.Enum;
-using Common.AlyOssUtil;
-using Common.Utils;
-using System.Drawing.Imaging;
-using System.Drawing;
 using Common.DateTimeUtil;
 
 namespace ImpinkerApi.Controllers
@@ -29,7 +23,7 @@ namespace ImpinkerApi.Controllers
     {
         readonly WeiBoBll _weiBoBll = new WeiBoBll();
         readonly UserBll _userBll = new UserBll();
-        const string BuckeyName = "myautos";
+        readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
 
         #region 新建微博(图文)
         /// <summary>
@@ -56,31 +50,27 @@ namespace ImpinkerApi.Controllers
                 Directory.CreateDirectory(fileSaveLocation);
             }
             var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
-
             try
             {
                 // Read all contents of multipart message into CustomMultipartFormDataStreamProvider.  
                 await Request.Content.ReadAsMultipartAsync(provider);
-
                 //封装数据
                 var weiboModel = InitWeiBoData(provider);
                 var files = new List<string>();
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    const string imgUrlformat = "weiboimage/{0}/{1}_{2}.jpg";
-                    var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), weiboModel.UserId, DateTime.Now.Ticks);
-                    //上传到oss
-                    var ossSucess = ObjectOperate.UploadImage(BuckeyName, file.LocalFileName, imgUrl);
-                    //裁剪
-                    var extention = Path.GetExtension(file.LocalFileName);
-                    var sLocalPath = file.LocalFileName.Replace(extention, "_s.jpg");
-                    ImageUtils.GetReduceImgFromCenter(300, 200, file.LocalFileName, sLocalPath, 75);
-                    var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
-                    var flag2=ObjectOperate.UploadImage(BuckeyName, sLocalPath, sImgUrl);
-                    if (ossSucess&&flag2)
+                    //上传原图和缩略图到oss
+                    string imgUrl = _weiBoBll.UploadWeiBoimgToOss(_buckeyName, weiboModel.UserId, file.LocalFileName);
+                    if (string.IsNullOrEmpty(imgUrl))
                     {
-                        files.Add(imgUrl);
+                        return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                        {
+                            IsSuccess = 0,
+                            Description = "上传图片到oss失败",
+                            Data = file.LocalFileName
+                        });
                     }
+                    files.Add(imgUrl);
                 }
                 if (files.Count > 0)
                 {
@@ -91,7 +81,6 @@ namespace ImpinkerApi.Controllers
                 var flag = _weiBoBll.AddWeiBo(weiboModel);
                 if (flag)
                 {
-                    // Send OK Response along with saved file names to the client.  
                     return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                     {
                         IsSuccess = 1,
@@ -112,8 +101,8 @@ namespace ImpinkerApi.Controllers
                 Data = ""
             });
         }
-        
-        
+
+
 
         private WeiBo InitWeiBoData(CustomMultipartFormDataStreamProvider provider)
         {
@@ -197,7 +186,7 @@ namespace ImpinkerApi.Controllers
             {
                 var model = new WeiBoListViewModel
                 {
-                    Id=weiBo.Id,
+                    Id = weiBo.Id,
                     UserId = weiBo.UserId,
                     Description = weiBo.Description,
                     ContentValue = weiBo.ContentValue,
@@ -205,7 +194,7 @@ namespace ImpinkerApi.Controllers
                     Lantitude = weiBo.Lantitude,
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
-                    PublishTime=TUtil.DateFormatToString(weiBo.CreateTime),
+                    PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
                     IsRePost = weiBo.IsRePost
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);
@@ -229,7 +218,7 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage GetMyWeiBoList(int pageindex, int pagesize)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            var list = _weiBoBll.GetListByPage(userid,pageindex, pagesize);
+            var list = _weiBoBll.GetListByPage(userid, pageindex, pagesize);
             if (list == null || list.Count == 0)
             {
                 return GetJson(new JsonResultViewModel

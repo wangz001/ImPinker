@@ -1,10 +1,12 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
+using System.IO;
+using Common.AlyOssUtil;
+using Common.Utils;
 using ImDal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ImModel;
 using ImModel.Enum;
 
@@ -12,11 +14,35 @@ namespace ImBLL
 {
     public class WeiBoBll
     {
-        private WeiBoDal weiBoDal = new WeiBoDal();
+        private readonly WeiBoDal _weiBoDal = new WeiBoDal();
 
-        public bool AddWeiBo(ImModel.WeiBo model)
+        /// <summary>
+        /// 上传微博图片到oss(大图和缩略图 _s.jpg),返回oss图片路径
+        /// </summary>
+        /// <returns></returns>
+        public string UploadWeiBoimgToOss(string bucketName, int userid, string localFileName)
         {
-            var flag=weiBoDal.AddWeiBo(model);
+            string imgUrlformat = ConfigurationManager.AppSettings["WeiboImage"];
+            var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, DateTime.Now.Ticks);
+            //上传到oss
+            var flag1 = ObjectOperate.UploadImage(bucketName, localFileName, imgUrl);
+            //上传缩略图到oss
+            var extention = Path.GetExtension(localFileName);
+            if (extention != null)
+            {
+                var sLocalPath = localFileName.Replace(extention, "_s.jpg");
+                ImageUtils.GetReduceImgFromCenter(300, 200, localFileName, sLocalPath, 85);
+                var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
+                var flag2 = ObjectOperate.UploadImage(bucketName, sLocalPath, sImgUrl);
+                return (flag1 && flag2) ? imgUrl : "";
+            }
+            return "";
+        }
+
+
+        public bool AddWeiBo(WeiBo model)
+        {
+            var flag = _weiBoDal.AddWeiBo(model);
             return flag;
         }
         /// <summary>
@@ -28,8 +54,8 @@ namespace ImBLL
         public List<WeiBo> GetListByPage(int pageindex, int pagesize)
         {
             var resultList = new List<WeiBo>();
-            var ds= weiBoDal.GetListByPage(pageindex, pagesize);
-            if (ds!=null&&ds.Tables[0].Rows.Count>0)
+            var ds = _weiBoDal.GetListByPage(pageindex, pagesize);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 resultList.AddRange(from DataRow dataRow in ds.Tables[0].Rows select DataRowToModel(dataRow));
             }
@@ -43,10 +69,10 @@ namespace ImBLL
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns></returns>
-        public List<WeiBo> GetListByPage(int userid,int pageindex, int pagesize)
+        public List<WeiBo> GetListByPage(int userid, int pageindex, int pagesize)
         {
             var resultList = new List<WeiBo>();
-            var ds = weiBoDal.GetListByPage(userid,pageindex, pagesize);
+            var ds = _weiBoDal.GetListByPage(userid, pageindex, pagesize);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 resultList.AddRange(from DataRow dataRow in ds.Tables[0].Rows select DataRowToModel(dataRow));
