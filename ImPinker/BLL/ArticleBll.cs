@@ -8,6 +8,8 @@ using ImDal;
 using ImModel;
 using ImModel.ViewModel;
 using Maticsoft.Common;
+using Common.Utils;
+using System.IO;
 
 namespace ImBLL
 {
@@ -307,15 +309,26 @@ namespace ImBLL
         }
 
         /// <summary>
-        /// 编写游记时，上传图片，保存到oss。返回图片路径插入到文章中
+        /// 上传游记封面图
         /// </summary>
         /// <param name="buckeyName"></param>
         /// <param name="userid"></param>
         /// <param name="localFileName"></param>
         /// <returns></returns>
-        public string UploadArticleImgToOss(string buckeyName, int userid, string localFileName)
+        public string UploadArticleCoverImgToOss(string buckeyName, int userid,int articleid, string localFileName)
         {
-            return UploadArticleImgToOss(buckeyName, userid, 0, localFileName);
+            var coverimageFormat = ConfigurationManager.AppSettings["ArticleFirstImage"];
+            var imgUrl = string.Format(coverimageFormat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
+            var extention = Path.GetExtension(localFileName);
+            var sLocalPath = localFileName.Replace(extention, "_s.jpg");
+            ImageUtils.GetReduceImgFromCenter(360, 240, localFileName, sLocalPath, 85);
+            var flag1 = ObjectOperate.UploadImage(buckeyName, sLocalPath, imgUrl, 1024);
+            if (flag1)
+            {
+                var flag2=UpdateCoverImage(articleid, imgUrl);
+                return (flag1&&flag2) ? imgUrl : "";
+            }
+            return "";
         }
 
         /// <summary>

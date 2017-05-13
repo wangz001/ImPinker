@@ -118,7 +118,7 @@ namespace ImpinkerApi.Controllers
             var articleSnap = new ArticleSnaps
             {
                 ArticleId = article.Id,
-                Content = HttpUtility.HtmlEncode(article.Content),
+                Content = article.Content,
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };
@@ -178,6 +178,84 @@ namespace ImpinkerApi.Controllers
         }
 
         /// <summary>
+        /// 设置游记封面图
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [TokenCheck]
+        public async Task<HttpResponseMessage> SetCoverImage()
+        {
+            // 检查是否是 multipart/form-data 
+            if (!Request.Content.IsMimeMultipartContent("form-data"))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "数据格式错误",
+                    Data = HttpStatusCode.UnsupportedMediaType
+                });
+            }
+            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/articlecoverimage/" + DateTime.Now.ToString("yyyyMMdd"));
+            if (!Directory.Exists(fileSaveLocation))
+            {
+                Directory.CreateDirectory(fileSaveLocation);
+            }
+            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                //封装数据
+                var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+                int articleid=0;
+                //取articleid
+                var formData = provider.FormData;
+                if (formData.HasKeys()
+                    && formData.AllKeys.Contains("articleid")
+                    && !string.IsNullOrEmpty(formData.Get("articleid")))
+                {
+                    Int32.TryParse(formData.Get("articleid"), out articleid);
+                }
+                if (articleid == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                    {
+                        IsSuccess = 0,
+                        Description = "获取文章id失败",
+                        Data = ""
+                    });
+                }
+                var files = new List<string>();
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    //上传原图到oss
+                    string imgUrl = _articleBll.UploadArticleCoverImgToOss(_buckeyName, userinfo.Id, articleid, file.LocalFileName);
+                    if (string.IsNullOrEmpty(imgUrl))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                        {
+                            IsSuccess = 0,
+                            Description = "上传封面图图片到oss失败",
+                            Data = file.LocalFileName
+                        });
+                    }
+                    files.Add(imgUrl);
+                    break;
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 1,
+                    Description = "ok",
+                    Data = string.Join(",", files)
+                });
+                //记录日志
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        /// <summary>
         /// 上传游记图片，可多张上传
         /// </summary>
         /// <returns></returns>
@@ -213,7 +291,7 @@ namespace ImpinkerApi.Controllers
                     && formData.AllKeys.Contains("articleid")
                     && !string.IsNullOrEmpty(formData.Get("articleid")))
                 {
-                    Int32.TryParse(formData.Get("articleid"),out articleid);
+                    Int32.TryParse(formData.Get("articleid"), out articleid);
                 }
                 else
                 {

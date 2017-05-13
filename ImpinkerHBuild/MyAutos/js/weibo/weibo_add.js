@@ -278,7 +278,7 @@
 		//添加上传文件
 		mui.each(weibo.files, function(index, element) {
 			var f = weibo.files[index];
-			console.log("addFile:" + JSON.stringify(f));
+			//console.log("addFile:" + JSON.stringify(f));
 			weibo.uploader.addFile(f.path, {
 				key: f.name
 			});
