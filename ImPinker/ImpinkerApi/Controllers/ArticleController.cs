@@ -21,6 +21,7 @@ namespace ImpinkerApi.Controllers
 
         private readonly ArticleBll _articleBll = new ArticleBll();
         readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
+        private string imgRootPath = ConfigurationManager.AppSettings["ImageDomain"];
 
         /// <summary>
         /// 分页获取数据
@@ -150,7 +151,7 @@ namespace ImpinkerApi.Controllers
             var articleSnap = new ArticleSnaps
             {
                 ArticleId = article.Id,
-                Content = HttpUtility.HtmlEncode(article.Content),
+                Content = article.Content,
                 CreateTime = DateTime.Now,
                 UpdateTime = DateTime.Now
             };
@@ -238,7 +239,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(imgUrl);
+                    files.Add(imgRootPath+imgUrl);
                     break;
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
@@ -316,7 +317,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(imgUrl);
+                    files.Add(imgRootPath+imgUrl);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                 {

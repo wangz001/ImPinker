@@ -2,10 +2,10 @@
  * 发帖子，图文排版
  **/
 (function(apputil, owner) {
-	var article={
-		
+	var article = {
+
 	}
-	
+
 	owner.showWeiBoItems = function(contentLists, items) {
 		var imgPath = 'http://img.myautos.cn/';
 		for(var i = 0; i < items.length; i++) {
@@ -45,7 +45,6 @@
 				//console.log('是文本2:'+$(htmlnode).val());
 				resultStr += '<p>' + $(htmlnode).val() + '</p>';
 			} else {
-				console.log('aa');
 				resultStr += '<p>' + htmlnode.innerHTML + '</p>'
 			}
 		}
@@ -53,59 +52,37 @@
 	}
 	owner.createYouji = function(titleStr, callback) {
 		callback = callback || $.noop;
-		var userstate = app.getState();
-		mui.ajax('http://api.myautos.cn/api/article/NewArticle', {
-			data: {
-				ArticleName: titleStr
-			},
-			headers: {
-				"username": userstate.account,
-				"usertoken": userstate.token
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			success: function(data) {
-				console.log(JSON.stringify(data));
-				console.log(data.IsSuccess);
-				if(data.IsSuccess == '1' && data.Data != null) {
-					console.log('2');
-					var articleinfo = data.Data;
-					return callback(articleinfo.Id);
-				} else {
-					return;
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
+		var url = 'http://api.myautos.cn/api/article/NewArticle';
+		var data = {
+			ArticleName: titleStr
+		};
+		commonUtil.sendRequestWithToken(url, data, true, function(data) {
+			console.log(JSON.stringify(data));
+			console.log(data.IsSuccess);
+			if(data.IsSuccess == '1' && data.Data != null) {
+				console.log('2');
+				var articleinfo = data.Data;
+				return callback(articleinfo.Id);
+			} else {
+				return;
 			}
 		});
 	}
 
 	owner.updateTitle = function(titleStr, callback) {
 		callback = callback || $.noop;
-		var userstate = app.getState();
-		mui.ajax('http://api.myautos.cn/api/article/UpdateArticle', {
-			data: {
-				ArticleName: titleStr
-			},
-			headers: {
-				"username": userstate.account,
-				"usertoken": userstate.token
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			success: function(data) {
-				console.log(JSON.stringify(data));
-				console.log('1');
-				if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-					var articleinfo = data.Data;
-					return callback(articleinfo.Id);
-				} else {
-					return;
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
+		var url = 'http://api.myautos.cn/api/article/UpdateArticle';
+		var data = {
+			ArticleName: titleStr
+		}
+		commonUtil.sendRequestWithToken(url, data, true, function(data) {
+			console.log(JSON.stringify(data));
+			console.log('1');
+			if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+				var articleinfo = data.Data;
+				return callback(articleinfo.Id);
+			} else {
+				return;
 			}
 		});
 	}
@@ -113,92 +90,134 @@
 	//保存草稿
 	owner.saveDraft = function(articleid, contentstr, callback) {
 		callback = callback || $.noop;
-		var userstate = app.getState();
-		mui.ajax('http://api.myautos.cn/api/article/SaveDraft', {
-			data: {
-				Id: articleid,
-				Content: contentstr
-			},
-			headers: {
-				"username": userstate.account,
-				"usertoken": userstate.token
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			success: function(data) {
-				console.log(JSON.stringify(data));
-				console.log('1');
-				if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-					var articleinfo = data.Data;
-					return callback(articleinfo.Id);
-				} else {
-					return;
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
+		var url = 'http://api.myautos.cn/api/article/SaveDraft';
+		var data = {
+			Id: articleid,
+			Content: contentstr
+		};
+		commonUtil.sendRequestWithToken(url, data, true, function(data) {
+			console.log(JSON.stringify(data));
+			if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+				var articleinfo = data.Data;
+				return callback(articleinfo.Id);
+			} else {
+				return;
 			}
 		});
 	}
-	//设置封面图
-	owner.setCoverimage = function(articleid, localimgpath, callback) {
+	
+	//插入图片
+	owner.addImage = function(articleid,callback) {
 		callback = callback || $.noop;
-		var userstate = app.getState();
-		var url = 'http://api.myautos.cn/api/article/SetCoverImage';
-		var uploader = plus.uploader.createUpload(url, {
-			method: 'POST'
-		}, function(upload, status) {
-			plus.nativeUI.closeWaiting()
-			if(status == 200 || status == "200") {
-				console.log(upload.responseText);
-				var data = JSON.parse(upload.responseText);
-				//上传成功，重置表单
-				if(data.IsSuccess === 1) {
-					return callback(data);
-				}
-			}
+		plus.gallery.pick(function(path) {
+			plus.io.resolveLocalFileSystemURL(path, function(entry) {
+				console.log("真实路径：" + entry.fullPath);
+				plus.zip.compressImage({
+					src: entry.fullPath,
+					dst: '_doc/articleimage.jpg',
+					overwrite: true,
+					quality: 90
+				}, function(zip) {
+					var size = zip.size
+					console.log("filesize:" + zip.size + ",totalsize:" + size);
+					if(size > (3 * 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					if(articleid > 0 && zip.target.length > 0) {
+						var url = 'http://api.myautos.cn/api/article/UploadArticleImage';
+						var files = [];
+						files.push({
+							name: "articleimages",
+							path: zip.target
+						});
+						var params = {
+							"articleid": articleid
+						};
+						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
+							console.log(JSON.stringify(data));
+							return callback(data);
+						});
+					}
+				}, function(zipe) {
+					mui.toast('压缩失败！')
+				});
+			}, function(e) {
+				alert(e.message);
+			});
+		}, function(e) {
+			console.log("取消选择图片");
 			return callback();
+		}, {
+			filter: "image",
+			multiple: false
 		});
-		//设置头信息
-		uploader.setRequestHeader("username", userstate.account);
-		uploader.setRequestHeader("usertoken", userstate.token);
-		//添加上传数据
-		uploader.addData("articleid", articleid.toString());
-		//添加上传文件
-		uploader.addFile(localimgpath, {
-			key: 'coverimage'
+	}
+	
+	
+	//设置封面图
+	owner.setCoverimage = function() {
+		plus.gallery.pick(function(path) {
+			plus.io.resolveLocalFileSystemURL(path, function(entry) {
+				console.log("真实路径：" + entry.fullPath);
+				plus.zip.compressImage({
+					src: entry.fullPath,
+					dst: '_doc/coverimage.jpg',
+					overwrite: true,
+					quality: 90
+				}, function(zip) {
+					var size = zip.size
+					console.log("filesize:" + zip.size + ",totalsize:" + size);
+					if(size > (3 * 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					if(articleid > 0 && zip.target.length > 0) {
+						var url = 'http://api.myautos.cn/api/article/SetCoverImage';
+						var files = [];
+						files.push({
+							name: "coverimageimages",
+							path: zip.target
+						});
+						var params = {
+							"articleid": articleid
+						};
+						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
+							console.log(JSON.stringify(data));
+							var url = data.Data;
+							$("#coverimage").attr('src', url);
+						});
+					}
+				}, function(zipe) {
+					mui.toast('压缩失败！')
+				});
+			}, function(e) {
+				alert(e.message);
+			});
+		}, function(e) {
+			console.log("取消选择图片");
+		}, {
+			filter: "image",
+			multiple: false
 		});
-		//开始上传任务
-		uploader.start();
-		plus.nativeUI.showWaiting('正在发布');
+
 	}
 	//发布
 	owner.publishYouji = function(articleid, contentstr, callback) {
 		callback = callback || $.noop;
-		var userstate = app.getState();
-		mui.ajax('http://api.myautos.cn/api/article/PublishArticle', {
-			data: {
-				Id: articleid,
-				Content: contentstr
-			},
-			headers: {
-				"username": userstate.account,
-				"usertoken": userstate.token
-			},
-			dataType: 'json', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			success: function(data) {
-				console.log(JSON.stringify(data));
-				if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-					var articleinfo = data.Data;
-					return callback(articleinfo.Id);
-				} else {
-					return;
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
+		var url = 'http://api.myautos.cn/api/article/PublishArticle';
+		var data = {
+			Id: articleid,
+			Content: contentstr
+		};
+		commonUtil.sendRequestWithToken(url, data, true, function(data) {
+			console.log(JSON.stringify(data));
+			if(data.IsSuccess == 1 && data.Data != null) {
+				var articleinfo = data.Data;
+				return callback(articleinfo.Id);
+			} else {
+				return;
 			}
 		});
+
+		
 	}
 }(mui, window.edityoujiUtil = {}));

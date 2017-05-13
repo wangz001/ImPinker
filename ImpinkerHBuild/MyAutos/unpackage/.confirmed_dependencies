@@ -217,7 +217,8 @@
 			"js/article/youji_new.js",
 			"js/jquery.js",
 			"js/mui.js",
-			"js/app.js"
+			"js/app.js",
+			"js/commonUtil.js"
 		],
 		"refer": [
 			"view/article/youji_new_selectweibo.html",

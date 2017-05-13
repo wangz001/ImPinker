@@ -40,10 +40,10 @@
 				<div class="mui-input-row">
 					<input id="youi_title" type="text" placeholder="帖子标题">
 				</div>
-
 			</div>
 			<div>
 				<a id='setcoverimage'>点击设置封面图</a>
+				<img id='coverimage' src='../../images/cbd.jpg'>
 			</div>
 			<div class="mui-content-padded">
 
@@ -54,7 +54,7 @@
 		</div>
 		<footer class="mui-bar mui-bar-footer">
 			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
-			<a><span class="mui-icon mui-icon-image"></span></a>
+			<a id='addimage'><span class="mui-icon mui-icon-image"></span></a>
 			<a id="share"><span class="mui-icon mui-icon-paperplane"></span></a>
 			<a id="preview_btn"><span class="mui-icon mui-icon-search">预览</span></a>
 			<a><span class="mui-icon mui-icon-arrowright">排序</span></a>
@@ -63,6 +63,7 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 
 		<script type="application/javascript">
 			mui.init({});
@@ -74,7 +75,7 @@
 					edityoujiUtil.showWeiBoItems(contentLists, selectedWeibos);
 				}
 			});
-			
+
 			var contentLists = new Array();
 			var articleid = 0;
 			$("#youi_title").blur(function() {
@@ -117,37 +118,7 @@
 			});
 			//设置封面图
 			document.getElementById('setcoverimage').addEventListener('tap', function() {
-				plus.gallery.pick(function(path) {
-					plus.io.resolveLocalFileSystemURL(path, function(entry) {
-						console.log("真实路径：" + entry.fullPath);
-						plus.zip.compressImage({
-							src: entry.fullPath,
-							dst: '_doc/coverimage.jpg',
-							overwrite: true,
-							quality: 90
-						}, function(zip) {
-							var size = zip.size
-							console.log("filesize:" + zip.size + ",totalsize:" + size);
-							if(size > (3 * 1024 * 1024)) {
-								return mui.toast('文件超大,请重新选择~');
-							}
-							if(articleid > 0 && zip.target.length > 0) {
-								edityoujiUtil.setCoverimage(articleid, zip.target, function(data) {
-									console.log(JSON.stringify(data));
-								});
-							}
-						}, function(zipe) {
-							mui.toast('压缩失败！')
-						});
-					}, function(e) {
-						alert(e.message);
-					});
-				}, function(e) {
-					console.log("取消选择图片");
-				}, {
-					filter: "image",
-					multiple: false
-				});
+				edityoujiUtil.setCoverimage();
 			});
 			//发布
 			document.getElementById('publishyouji').addEventListener('tap', function() {
@@ -158,10 +129,22 @@
 						console.log("发布！");
 						edityoujiUtil.publishYouji(articleid, resultStr, function(data) {
 							console.log("发布成功！" + data);
+							plus.webview.getLaunchWebview().reload();
+							setTimeout(function() {
+								mui.back();
+							}, 500);
 						});
 					}
-					console.log("不能发布，操作有误");
 				}, 500);
+			});
+			
+			//添加图片
+			document.getElementById('addimage').addEventListener('tap', function() {
+				edityoujiUtil.addImage(articleid,function(data){
+					var imgPath = 'http://img.myautos.cn/';
+					var imgHtmlStr='<p name="yjcontent"><img src="' + imgPath + data.Data + '"></p>';
+					$(".mui-content-padded").append(imgHtmlStr);
+				});
 			});
 			//添加微博
 			document.getElementById('selectWeibo').addEventListener('tap', function() {

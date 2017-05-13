@@ -153,7 +153,7 @@
 			}, function(e) {
 				mui.toast(e.message);
 			}, {});
-		}, false);
+		}, true);
 		placeholder.appendChild(closeButton);
 		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
