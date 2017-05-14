@@ -82,3 +82,11 @@
 	}
 
 }(mui, window.commonUtil = {}));
+
+//html模板替换方法
+String.prototype.temp = function (obj) {
+    return this.replace(/\$\w+\$/gi, function (matchs) {
+        var returns = obj[matchs.replace(/\$/g, "")];
+        return (returns + "") === "undefined" ? "" : returns;
+    });
+};

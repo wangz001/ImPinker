@@ -63,22 +63,42 @@
 
 				var selectedItems = new Array(); // 选中的对象集合
 				var allItems = new Array(); //全部微博对象
+				var youjiPage = null;
 				document.getElementById('submit').addEventListener('tap', function() {
 					if(selectedItems.length > 0) {
-						mui.openWindow({
-							url: "youji_new.html",
-							id: "youji_new",
-							extras: {
-								items: selectedItems
-							},
-							createNew: true, //是否重复创建同样id的webview
-							show: {
-								aniShow: 'slide-in-left',
-								duration: 200
-							}
+						//获得详情页面  
+						if(!youjiPage) {
+							youjiPage = plus.webview.getWebviewById('youji_new');
+						}
+						//触发详情页面的weiboitems事件  
+						mui.fire(youjiPage, 'weiboitems', {
+							items: selectedItems
 						});
+						//打开详情页面            
+						mui.openWindow({
+							id: 'youji_new'
+						});
+//						mui.openWindow({
+//							url: "youji_new.html",
+//							id: "youji_new",
+//							extras: {
+//								items: selectedItems
+//							},
+//							createNew: true, //是否重复创建同样id的webview
+//							show: {
+//								aniShow: 'slide-in-left',
+//								duration: 200
+//							}
+//						});
 					}
 				});
+
+				//添加列表项的点击事件  
+				mui('.mui-content').on('tap', 'a', function(e) {
+					var id = this.getAttribute('id');
+
+				});
+
 				// 绑定复选框点击事件
 				function bindCheckBoxTab() {
 					$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
@@ -89,51 +109,51 @@
 							//往selectedItems 数组添加数据，并改变编号显示
 							for(var i = 0; i < allItems.length; i++) {
 								var item = allItems[i];
-								if(item.Id.toString()==weiboid) {
+								if(item.Id.toString() == weiboid) {
 									selectedItems.push(item);
 									break;
 								}
 							}
-							$(this).next('label').html("已选择："+(selectedItems.length));
+							$(this).next('label').html("已选择：" + (selectedItems.length));
 						} else {
 							//从selectedItems 数组移除数据，并改变编号显示
-							selectedItems.splice(jQuery.inArray(item,selectedItems),1);
+							selectedItems.splice(jQuery.inArray(item, selectedItems), 1);
 							$(this).next('label').html("");
 						}
 					});
 				}
-/**
-				function getVals() {
-					var res = getCheckBoxRes('checkbox1');
-					if(res.length < 1) {
-						mui.toast('请选择');
-						return;
-					}
-					var m = 0;
-					mui.toast(res);
-					console.log(allItems.length);
-					for(var i = 0; i < allItems.length; i++) {
-						var item = allItems[i];
-						if($.inArray(item.Id.toString(), res) != -1) {
-							selectedItems[m] = item;
-							m++;
-						}
-					}
-				}
+				/**
+								function getVals() {
+									var res = getCheckBoxRes('checkbox1');
+									if(res.length < 1) {
+										mui.toast('请选择');
+										return;
+									}
+									var m = 0;
+									mui.toast(res);
+									console.log(allItems.length);
+									for(var i = 0; i < allItems.length; i++) {
+										var item = allItems[i];
+										if($.inArray(item.Id.toString(), res) != -1) {
+											selectedItems[m] = item;
+											m++;
+										}
+									}
+								}
 
-				function getCheckBoxRes(className) {
-					var rdsObj = document.getElementsByName(className);
-					var checkVal = new Array();
-					var k = 0;
-					for(i = 0; i < rdsObj.length; i++) {
-						if(rdsObj[i].checked) {
-							checkVal[k] = rdsObj[i].value;
-							k++;
-						}
-					}
-					return checkVal;
-				}
-**/
+								function getCheckBoxRes(className) {
+									var rdsObj = document.getElementsByName(className);
+									var checkVal = new Array();
+									var k = 0;
+									for(i = 0; i < rdsObj.length; i++) {
+										if(rdsObj[i].checked) {
+											checkVal[k] = rdsObj[i].value;
+											k++;
+										}
+									}
+									return checkVal;
+								}
+				**/
 				mui.previewImage();
 				var pageNum = 1;
 				var pageSize = 10;

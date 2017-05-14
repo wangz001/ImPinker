@@ -26,6 +26,25 @@
 			.mui-content-padded {
 				background-color: white;
 			}
+			
+			.post-img {
+				margin: 0 0 10px;
+				position: relative;
+			}
+			
+			.post-move {
+				bottom: 23px;
+				right: 5px;
+				position: absolute;
+			}
+			
+			a.move-up,
+			a.move-down,
+			a.del {
+				background-color: #AAAAAA;
+				background-size: 196px;
+				background-position: -4px -86px;
+			}
 		</style>
 	</head>
 
@@ -38,45 +57,67 @@
 		<div class="mui-content">
 			<div class="mui-input-group">
 				<div class="mui-input-row">
-					<input id="youi_title" type="text" placeholder="帖子标题">
+					<input id="youi_title" type="text" placeholder="标题">
 				</div>
 			</div>
 			<div>
 				<a id='setcoverimage'>点击设置封面图</a>
-				<img id='coverimage' src='../../images/cbd.jpg'>
+				<img id='coverimage'>
 			</div>
 			<div class="mui-content-padded">
-
-				<div id="youji_content" class="mui-input-row">
-					<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>
+				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>
+				<div class="post-img">
+					<div class="add-img">
+						<img src="http://img3.baa.bitautotech.com/img/V2img3.baa.bitautotech.com/usergroup/2017/5/14/7c836ed417184e0797e985450999b3e8_300_200_jpg.jpg" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
+					</div>
+					<div class="post-move" role="operator" style="">
+						<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
+						<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
+						<a class="del mui-icon mui-icon-trash" role="del"></a>
+					</div>
 				</div>
+				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>
 			</div>
 		</div>
-		<footer class="mui-bar mui-bar-footer">
-			<a id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
-			<a id='addimage'><span class="mui-icon mui-icon-image"></span></a>
-			<a id="share"><span class="mui-icon mui-icon-paperplane"></span></a>
-			<a id="preview_btn"><span class="mui-icon mui-icon-search">预览</span></a>
-			<a><span class="mui-icon mui-icon-arrowright">排序</span></a>
-		</footer>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
+			<a class="mui-tab-item" id='addimage'><span class="mui-icon mui-icon-image"></span></a>
+			<a class="mui-tab-item" id="share"><span class="mui-icon mui-icon-camera"></span></a>
+			<a class="mui-tab-item" id="preview_btn"><span class="mui-icon mui-icon-search"></span></a>
+		</nav>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-
+		<script type='text/template' id='postimg'>
+			<div class="post-img">
+				<div class="add-img" name='yjcontent'>
+					<img src="$src$" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
+				</div>
+				<div class="post-move" role="operator" style="">
+					<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
+					<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
+					<a class="del mui-icon mui-icon-trash" role="del"></a>
+				</div>
+			</div>
+		</script>
 		<script type="application/javascript">
 			mui.init({});
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				var selectedWeibos = self.items;
+
+			});
+			//自定义事件。接受选择微博页传回的数据
+			window.addEventListener('weiboitems', function(event) {
+				//获得事件参数  
+				var selectedWeibos = event.detail.items;
 				if(selectedWeibos != null) {
 					//在页面上展示
-					edityoujiUtil.showWeiBoItems(contentLists, selectedWeibos);
+					edityoujiUtil.showWeiBoItems(selectedWeibos);
 				}
 			});
 
-			var contentLists = new Array();
 			var articleid = 0;
 			$("#youi_title").blur(function() {
 				var content = $(this).val();
@@ -137,13 +178,12 @@
 					}
 				}, 500);
 			});
-			
+
 			//添加图片
 			document.getElementById('addimage').addEventListener('tap', function() {
-				edityoujiUtil.addImage(articleid,function(data){
+				edityoujiUtil.addImage(articleid, function(data) {
 					var imgPath = 'http://img.myautos.cn/';
-					var imgHtmlStr='<p name="yjcontent"><img src="' + imgPath + data.Data + '"></p>';
-					$(".mui-content-padded").append(imgHtmlStr);
+					edityoujiUtil.showImage(data.Data, '');
 				});
 			});
 			//添加微博

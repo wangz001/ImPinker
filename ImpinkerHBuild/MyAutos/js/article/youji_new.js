@@ -6,35 +6,34 @@
 
 	}
 
-	owner.showWeiBoItems = function(contentLists, items) {
-		var imgPath = 'http://img.myautos.cn/';
+	owner.showWeiBoItems = function(items) {
 		for(var i = 0; i < items.length; i++) {
 			var item = items[i];
 			if(item.ContentValue.length > 0) {
 				var imgs = item.ContentValue.split(',');
 				var imgHtmlStr = "";
 				for(var j = 0; j < imgs.length; j++) {
-					imgHtmlStr += '<p name="yjcontent"><img src="' + imgPath + imgs[j] + '"></p>';
-					imgHtmlStr += '<textarea name="yjcontent">' + item.Description + '</textarea>';
-					owner.InitDateObject(contentLists, "img", imgPath + imgs[j]);
-					owner.InitDateObject(contentLists, "text", item.Description);
+					owner.showImage(imgs[j], item.Description);
 				}
-				$(".mui-content-padded").append(imgHtmlStr);
-			}
-			if(item.Description.length > 0) {
-				var textareaStr = '<textarea name="yjcontent" value="' + item.Description + '"></textarea>'
-				$(".mui-content-padded").append(textareaStr);
-				owner.InitDateObject(contentLists, "text", item.Description);
 			}
 		}
 	}
+	owner.showImage = function(imgurl, contenttext) {
+		var imgPath = 'http://img.myautos.cn/';
+		if(imgurl.indexOf('http://') == -1) {
+			imgurl = imgPath + imgurl;
+		}
+		//获取模板上的HTML
+		var imgTemplate = $('script[id="postimg"]').html();
+		var imgHtmlStr = imgTemplate.temp({
+			"src": imgurl
+		});
+		var textareaStr = '<textarea name="yjcontent" value="' + contenttext + '"></textarea>';
+		$(".mui-content-padded").append(imgHtmlStr);
+		$(".mui-content-padded").append(textareaStr);
 
-	owner.InitDateObject = function(contentLists, dateType, dateValue) {
-		var obj = new Object;
-		obj.dateType = dateType;
-		obj.dateValue = dateValue;
-		contentLists.push(obj);
 	}
+
 	//根据标签 name属性，拼接出 content
 	owner.getcontenthtml = function(nodename) {
 		var resultStr = "";
@@ -50,6 +49,54 @@
 		}
 		return resultStr;
 	}
+
+	//插入图片
+	owner.addImage = function(articleid, callback) {
+		callback = callback || $.noop;
+		plus.gallery.pick(function(path) {
+			plus.io.resolveLocalFileSystemURL(path, function(entry) {
+				console.log("真实路径：" + entry.fullPath);
+				plus.zip.compressImage({
+					src: entry.fullPath,
+					dst: '_doc/articleimage.jpg',
+					overwrite: true,
+					quality: 90
+				}, function(zip) {
+					var size = zip.size
+					console.log("filesize:" + zip.size + ",totalsize:" + size);
+					if(size > (3 * 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					if(articleid > 0 && zip.target.length > 0) {
+						var url = 'http://api.myautos.cn/api/article/UploadArticleImage';
+						var files = [];
+						files.push({
+							name: "articleimages",
+							path: zip.target
+						});
+						var params = {
+							"articleid": articleid
+						};
+						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
+							console.log(JSON.stringify(data));
+							return callback(data);
+						});
+					}
+				}, function(zipe) {
+					mui.toast('压缩失败！')
+				});
+			}, function(e) {
+				alert(e.message);
+			});
+		}, function(e) {
+			console.log("取消选择图片");
+			return callback();
+		}, {
+			filter: "image",
+			multiple: false
+		});
+	}
+
 	owner.createYouji = function(titleStr, callback) {
 		callback = callback || $.noop;
 		var url = 'http://api.myautos.cn/api/article/NewArticle';
@@ -105,55 +152,7 @@
 			}
 		});
 	}
-	
-	//插入图片
-	owner.addImage = function(articleid,callback) {
-		callback = callback || $.noop;
-		plus.gallery.pick(function(path) {
-			plus.io.resolveLocalFileSystemURL(path, function(entry) {
-				console.log("真实路径：" + entry.fullPath);
-				plus.zip.compressImage({
-					src: entry.fullPath,
-					dst: '_doc/articleimage.jpg',
-					overwrite: true,
-					quality: 90
-				}, function(zip) {
-					var size = zip.size
-					console.log("filesize:" + zip.size + ",totalsize:" + size);
-					if(size > (3 * 1024 * 1024)) {
-						return mui.toast('文件超大,请重新选择~');
-					}
-					if(articleid > 0 && zip.target.length > 0) {
-						var url = 'http://api.myautos.cn/api/article/UploadArticleImage';
-						var files = [];
-						files.push({
-							name: "articleimages",
-							path: zip.target
-						});
-						var params = {
-							"articleid": articleid
-						};
-						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
-							console.log(JSON.stringify(data));
-							return callback(data);
-						});
-					}
-				}, function(zipe) {
-					mui.toast('压缩失败！')
-				});
-			}, function(e) {
-				alert(e.message);
-			});
-		}, function(e) {
-			console.log("取消选择图片");
-			return callback();
-		}, {
-			filter: "image",
-			multiple: false
-		});
-	}
-	
-	
+
 	//设置封面图
 	owner.setCoverimage = function() {
 		plus.gallery.pick(function(path) {
@@ -183,7 +182,7 @@
 						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
 							console.log(JSON.stringify(data));
 							var url = data.Data;
-							$("#coverimage").attr('src', url);
+							$("#coverimage").attr('src', 'http://img.myautos.cn/'+url);
 						});
 					}
 				}, function(zipe) {
@@ -217,7 +216,5 @@
 				return;
 			}
 		});
-
-		
 	}
 }(mui, window.edityoujiUtil = {}));
