@@ -283,6 +283,10 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientReferences.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientDialogs.cshtml" />
+    <Content Include="config\log4net.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\ImpinkerApi.pubxml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

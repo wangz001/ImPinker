@@ -17,7 +17,7 @@ namespace Common.Utils
         private static LogHelper _logger;
 
         private static readonly log4net.ILog _Logger4net =
-            log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+            log4net.LogManager.GetLogger("WebLogger");
 
         /// <summary>
         /// 无参私有构造函数

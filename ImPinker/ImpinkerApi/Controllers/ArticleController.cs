@@ -13,6 +13,7 @@ using ImModel;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
+using Common.Utils;
 
 namespace ImpinkerApi.Controllers
 {
@@ -32,6 +33,8 @@ namespace ImpinkerApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetByPage(int pageNum, int pageSize)
         {
+            LogHelper.Instance.Warn("测试记录日志");
+            LogHelper.Instance.Error("测试记录日志");
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
             var userid = 0;
             if (userinfo != null && userinfo.Id > 0)

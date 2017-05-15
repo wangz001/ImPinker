@@ -19,7 +19,6 @@ namespace ImPinker.Controllers
     {
         private static readonly ArticleBll ArticleBll = new ArticleBll();
         private static readonly UserBll UserBll = new UserBll();
-        private static readonly ILog MLogger = LogManager.GetLogger("WebLogger");
 
         /// <summary>
         /// 文章详情页。爬虫抓取到的文章,即userid=2的文章。用户收藏的文章直接跳转到原始页面
@@ -42,7 +41,7 @@ namespace ImPinker.Controllers
             }
             catch (Exception e)
             {
-                MLogger.Error("lalalla:"+e);
+                LogHelper.Instance.Error("lalalla:" + e);
                 //记录日志
             }
             if (vm == null || vm.Content == null || vm.Content.Count == 0)
@@ -70,7 +69,7 @@ namespace ImPinker.Controllers
                 }
                 catch (Exception e)
                 {
-                    MLogger.Warn("lalalla89898989989898------------:" + e);
+                    LogHelper.Instance.Warn("lalalla89898989989898------------:" + e);
                 }
                 
             }
