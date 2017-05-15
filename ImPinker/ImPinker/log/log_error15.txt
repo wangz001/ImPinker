@@ -1,0 +1,102 @@
+2017-05-15 18:04:44,168 [30] ERROR WebLogger [(null)] - lalalla:SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 166
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.GetArticleById(String travelId) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 677
+   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 46
+2017-05-15 18:04:46,975 [30] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=1060
+Referer:http://www.impinker.com/
+SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 166
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.QueryByViewTpye(String ViewType, String keyWord, Boolean IsHighLight, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 599
+   在 ImPinker.Controllers.ArticleController.RelativeArticle(ArticleViewModel articleViewModel) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 72
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+2017-05-15 18:04:46,983 [30] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=1060
+Referer:http://www.impinker.com/
+System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 166
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
+   在 ImBLL.SolrNetSearchBll.QueryByViewTpye(String ViewType, String keyWord, Boolean IsHighLight, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 599
+   在 ImPinker.Controllers.ArticleController.RelativeArticle(ArticleViewModel articleViewModel) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 72
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(IAsyncResult asyncResult, ProcessRequestState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   在 System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper htmlHelper, String actionName, String controllerName, Object routeValues)
+   在 ASP._Page_Views_Article_Index_cshtml.Execute() 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Views\Article\Index.cshtml:行号 86
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)

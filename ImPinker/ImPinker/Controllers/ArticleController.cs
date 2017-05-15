@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using Common.AlyOssUtil;
 using Common.Utils;
 using ImBLL;
@@ -14,6 +9,7 @@ using ImModel;
 using ImModel.ViewModel;
 using ImPinker.Filters;
 using ImPinker.Models;
+using log4net;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 
@@ -23,6 +19,7 @@ namespace ImPinker.Controllers
     {
         private static readonly ArticleBll ArticleBll = new ArticleBll();
         private static readonly UserBll UserBll = new UserBll();
+        private static readonly ILog MLogger = LogManager.GetLogger("WebLogger");
 
         /// <summary>
         /// 文章详情页。爬虫抓取到的文章,即userid=2的文章。用户收藏的文章直接跳转到原始页面
@@ -39,12 +36,16 @@ namespace ImPinker.Controllers
                 idStr = "travels_" + id;
             }
             long.TryParse(idStr.Replace("travels_", ""), out idInt);
-            var article = SolrNetSearchBll.GetArticleById(idStr);
-            if (article != null && article.Content != null && article.Content.Count > 0)
+            try
             {
-                vm = article;
+                vm = SolrNetSearchBll.GetArticleById(idStr);
             }
-            else
+            catch (Exception e)
+            {
+                MLogger.Error("lalalla:"+e);
+                //记录日志
+            }
+            if (vm == null || vm.Content == null || vm.Content.Count == 0)
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
@@ -63,7 +64,15 @@ namespace ImPinker.Controllers
             var list = new List<ArticleViewModel>();
             if (!string.IsNullOrEmpty(articleViewModel.KeyWords))
             {
-                list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle", articleViewModel.KeyWords, false, 1, 5).ArticleList;
+                try
+                {
+                    list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle", articleViewModel.KeyWords, false, 1, 5).ArticleList;
+                }
+                catch (Exception e)
+                {
+                    MLogger.Warn("lalalla89898989989898------------:" + e);
+                }
+                
             }
             ViewBag.RelativeArticle = list;
             return PartialView();

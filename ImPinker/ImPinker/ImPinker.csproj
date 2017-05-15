@@ -208,7 +208,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configs\HotTagConfig.xml" />
+    <Content Include="config\HotTagConfig.xml" />
     <Content Include="Content\about.css" />
     <Content Include="Content\image\arrow_next.png" />
     <Content Include="Content\image\arrow_pre.png" />
@@ -462,7 +462,7 @@
     <Content Include="Scripts\Article\myArticle.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Configs\log4net.config" />
+    <Content Include="config\log4net.config" />
     <Content Include="config.json" />
     <None Include="Properties\PublishProfiles\ImpinkerWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

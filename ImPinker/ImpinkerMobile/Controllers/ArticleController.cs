@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Common.Utils;
 using ImBLL;
 using ImModel.ViewModel;
 
@@ -32,7 +33,7 @@ namespace ImpinkerMobile.Controllers
             }
             catch (Exception e)
             {
-                //记录日志
+                LogHelper.Instance.Error(e.ToString());
             }
             if (vm == null || vm.Content == null || vm.Content.Count == 0)
             {

@@ -195,6 +195,10 @@ namespace ImBLL
                     {
                         model.Company = row["Company"].ToString();
                     }
+                    if (row.Table.Columns.Contains("UserId") && row["UserId"] != null && row["UserId"].ToString() != "")
+                    {
+                        model.Userid = row["UserId"].ToString();
+                    }
                     if (row.Table.Columns.Contains("voteCount") && row["voteCount"] != null && row["voteCount"].ToString() != "")
                     {
                         model.VoteCount = int.Parse(row["voteCount"].ToString());
