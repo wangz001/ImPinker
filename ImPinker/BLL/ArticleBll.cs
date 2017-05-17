@@ -317,6 +317,7 @@ namespace ImBLL
         /// </summary>
         /// <param name="buckeyName"></param>
         /// <param name="userid"></param>
+        /// <param name="articleid"></param>
         /// <param name="localFileName"></param>
         /// <returns></returns>
         public string UploadArticleCoverImgToOss(string buckeyName, int userid,int articleid, string localFileName)
@@ -324,13 +325,16 @@ namespace ImBLL
             var coverimageFormat = ConfigurationManager.AppSettings["ArticleFirstImage"];
             var imgUrl = string.Format(coverimageFormat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
             var extention = Path.GetExtension(localFileName);
-            var sLocalPath = localFileName.Replace(extention, "_s.jpg");
-            ImageUtils.GetReduceImgFromCenter(360, 240, localFileName, sLocalPath, 85);
-            var flag1 = ObjectOperate.UploadImage(buckeyName, sLocalPath, imgUrl, 1024);
-            if (flag1)
+            if (extention != null)
             {
-                var flag2=UpdateCoverImage(articleid, imgUrl);
-                return (flag1&&flag2) ? imgUrl : "";
+                var sLocalPath = localFileName.Replace(extention, "_s.jpg");
+                ImageUtils.GetReduceImgFromCenter(360, 240, localFileName, sLocalPath, 85);
+                var flag1 = ObjectOperate.UploadImage(buckeyName, sLocalPath, imgUrl, 1024);
+                if (flag1)
+                {
+                    var flag2=UpdateCoverImage(articleid, imgUrl);
+                    return flag2 ? imgUrl : "";
+                }
             }
             return "";
         }
@@ -341,9 +345,9 @@ namespace ImBLL
         /// <param name="buckeyName"></param>
         /// <param name="userid">用户id</param>
         /// <param name="articleid">文章id</param>
-        /// <param name="localFileName"></param>
+        /// <param name="sourcePath">本地文件路径</param>
         /// <returns></returns>
-        public string UploadArticleImgToOss(string buckeyName, int userid, int articleid, string localFileName)
+        public string UploadArticleImgToOss(string buckeyName, int userid, int articleid, string sourcePath)
         {
             if (string.IsNullOrEmpty(buckeyName) || userid == 0 || articleid == 0)
             {
@@ -351,8 +355,7 @@ namespace ImBLL
             }
             string imgUrlformat = ConfigurationManager.AppSettings["ArticleImage"];
             var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
-            //上传到oss
-            var flag1 = ObjectOperate.UploadImage(buckeyName, localFileName, imgUrl,1024);
+            var flag1 = ObjectOperate.UploadImage(buckeyName, sourcePath, imgUrl,1024);
             return flag1 ? imgUrl : "";
         }
     }

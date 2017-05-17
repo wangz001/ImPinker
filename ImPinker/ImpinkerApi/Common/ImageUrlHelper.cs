@@ -9,7 +9,7 @@ namespace ImPinkerApi.Common
 {
     public class ImageUrlHelper
     {
-        static string imgDomain = ConfigurationManager.AppSettings["ArtilceCoverImageDomain"];
+        readonly static string _imgDomain = ConfigurationManager.AppSettings["ImageDomain54"];
         /// <summary>
         /// 获取头像url地址
         /// </summary>
@@ -22,7 +22,7 @@ namespace ImPinkerApi.Common
             {
                 if (!url.StartsWith("http://"))
                 {
-                    return Path.Combine(imgDomain, size==0 ? url : url.Replace("headimg/limit", "headimg/"+size));
+                    return Path.Combine(_imgDomain, size==0 ? url : url.Replace("headimg/limit", "headimg/"+size));
                 }
                 else
                 {
@@ -46,7 +46,7 @@ namespace ImPinkerApi.Common
             {
                 if (!url.StartsWith("http://"))
                 {
-                    return Path.Combine(imgDomain, url);
+                    return Path.Combine(_imgDomain, url);
                 }
                 else
                 {

@@ -9,7 +9,7 @@ namespace Common.Exceptions
 	public class ExceptionHelper
 	{
 		private const string MUrlRewriterServerVar = "HTTP_X_ORIGINAL_URL";
-		private static readonly ILog Logger = LogManager.GetLogger("WebLogger");
+        private static readonly ILog Logger = LogManager.GetLogger("WebLogger");
 
 		public static void Error_Logger(Exception exception)
 		{

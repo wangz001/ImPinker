@@ -1,8 +1,7 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ImpinkerApi.Filters;
 
-namespace ImpinkerApi
+namespace ImpinkerApi.App_Start
 {
     public class FilterConfig
     {

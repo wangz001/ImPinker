@@ -8,21 +8,24 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Common.Utils;
 using ImBLL;
 using ImModel;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
-using Common.Utils;
 
 namespace ImpinkerApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ArticleController : BaseApiController
     {
 
         private readonly ArticleBll _articleBll = new ArticleBll();
         readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
-        private string imgRootPath = ConfigurationManager.AppSettings["ImageDomain"];
+        readonly string _imgDomain = ConfigurationManager.AppSettings["ImageDomain"];
 
         /// <summary>
         /// 分页获取数据
@@ -33,15 +36,13 @@ namespace ImpinkerApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetByPage(int pageNum, int pageSize)
         {
-            LogHelper.Instance.Warn("测试记录日志");
-            LogHelper.Instance.Error("测试记录日志");
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
             var userid = 0;
             if (userinfo != null && userinfo.Id > 0)
             {
                 userid = userinfo.Id;
             }
-            var list = _articleBll.GetListByPage(pageNum, pageSize, userid);
+            List<ImModel.ViewModel.ArticleViewModel> list = _articleBll.GetListByPage(pageNum, pageSize, userid);
             if (list != null && list.Count > 0)
             {
                 foreach (var item in list)
@@ -210,7 +211,7 @@ namespace ImpinkerApi.Controllers
                 await Request.Content.ReadAsMultipartAsync(provider);
                 //封装数据
                 var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-                int articleid=0;
+                int articleid = 0;
                 //取articleid
                 var formData = provider.FormData;
                 if (formData.HasKeys()
@@ -231,7 +232,7 @@ namespace ImpinkerApi.Controllers
                 var files = new List<string>();
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    //上传原图到oss
+                    //上传封面图到oss
                     string imgUrl = _articleBll.UploadArticleCoverImgToOss(_buckeyName, userinfo.Id, articleid, file.LocalFileName);
                     if (string.IsNullOrEmpty(imgUrl))
                     {
@@ -242,7 +243,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(imgRootPath+imgUrl);
+                    files.Add(_imgDomain + imgUrl);
                     break;
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
@@ -251,11 +252,16 @@ namespace ImpinkerApi.Controllers
                     Description = "ok",
                     Data = string.Join(",", files)
                 });
-                //记录日志
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                LogHelper.Instance.Error(e.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "error",
+                    Data = ""
+                });
             }
         }
 
@@ -309,7 +315,6 @@ namespace ImpinkerApi.Controllers
                 var files = new List<string>();
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    //上传原图到oss
                     string imgUrl = _articleBll.UploadArticleImgToOss(_buckeyName, userinfo.Id, articleid, file.LocalFileName);
                     if (string.IsNullOrEmpty(imgUrl))
                     {
@@ -320,7 +325,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(imgRootPath+imgUrl);
+                    files.Add(_imgDomain + imgUrl);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                 {
@@ -328,11 +333,16 @@ namespace ImpinkerApi.Controllers
                     Description = "ok",
                     Data = string.Join(",", files)
                 });
-                //记录日志
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                LogHelper.Instance.Error(e.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "上传游记图片出错",
+                    Data = ""
+                });
             }
         }
         #endregion

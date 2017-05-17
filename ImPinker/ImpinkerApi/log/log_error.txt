@@ -1,3 +1,47 @@
 [Header]
-2017-05-15 20:58:42,639 [30] ERROR WebLogger [(null)] - 测试记录日志
-2017-05-15 20:58:54,850 [8] ERROR WebLogger [(null)] - 测试记录日志
+2017-05-17 15:08:39,672 [95] ERROR WebLogger [(null)] - 测试记录日志
+2017-05-17 15:08:39,760 [95] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
+Referer:
+System.ArgumentNullException: 值不能为 null。
+参数名: path1
+   在 System.IO.Path.Combine(String path1, String path2)
+   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
+   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2017-05-17 15:13:12,780 [99] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
+Referer:
+System.ArgumentNullException: 值不能为 null。
+参数名: path1
+   在 System.IO.Path.Combine(String path1, String path2)
+   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
+   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 50
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2017-05-17 15:14:01,547 [99] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
+Referer:
+System.ArgumentNullException: 值不能为 null。
+参数名: path1
+   在 System.IO.Path.Combine(String path1, String path2)
+   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
+   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 50
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]

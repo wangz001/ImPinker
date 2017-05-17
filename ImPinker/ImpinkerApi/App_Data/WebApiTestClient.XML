@@ -473,13 +473,16 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ImpinkerApi.Controllers.AccountController.SendCheckNum(System.String,System.Int32)">
+        <member name="M:ImpinkerApi.Controllers.AccountController.SendCheckNum(ImpinkerApi.Models.SendCheckNumViewModel)">
             <summary>
             发送手机验证码
             </summary>
-            <param name="phoneNum"></param>
-            <param name="operatrateEnum"></param>
             <returns></returns>
+        </member>
+        <member name="T:ImpinkerApi.Controllers.ArticleController">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:ImpinkerApi.Controllers.ArticleController.GetByPage(System.Int32,System.Int32)">
             <summary>
@@ -487,6 +490,62 @@
             </summary>
             <param name="pageNum"></param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleController.NewArticle(ImpinkerApi.Models.ArticleViewModel)">
+            <summary>
+            新建游记
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleController.SaveDraft(ImpinkerApi.Models.ArticleViewModel)">
+            <summary>
+            保存草稿
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleController.PublishArticle(ImpinkerApi.Models.ArticleViewModel)">
+            <summary>
+            发布游记
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleController.SetCoverImage">
+            <summary>
+            设置游记封面图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleController.UploadArticleImage">
+            <summary>
+            上传游记图片，可多张上传
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleVoteController.NewArticleComment(ImpinkerApi.Models.NewArticleCommentVm)">
+            <summary>
+            评论
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleVoteController.NewArticleCollect(System.Int64)">
+            <summary>
+            用户收藏文章
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.ArticleVoteController.CancelArticleCollect(System.Int64)">
+            <summary>
+            取消收藏文章
+            </summary>
+            <param name="articleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.UploadController.UserHeadimgUpload">
+            <summary>
+            头像上传
+            </summary>
             <returns></returns>
         </member>
         <member name="M:ImpinkerApi.Controllers.UploadController.BaiduUpload(System.Web.HttpPostedFileBase)">
@@ -502,11 +561,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:ImpinkerApi.Controllers.UploadController.CustomMultipartFormDataStreamProvider">
-            <summary>
-            创建一个 Provider 用于重命名接收到的文件 
-            </summary>
-        </member>
         <member name="M:ImpinkerApi.Controllers.WeiBoController.NewWeibo">
             <summary>
             mui 多图上传.创建微博
@@ -521,16 +575,85 @@
             <param name="pagesize">数量</param>
             <returns></returns>
         </member>
-        <member name="T:ImpinkerApi.Controllers.WeiBoController.CustomMultipartFormDataStreamProvider">
+        <member name="M:ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(ImpinkerApi.Models.WeiBoVoteViewModel)">
             <summary>
-            创建一个 Provider 用于重命名接收到的文件 
+            点赞
             </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImpinkerApi.Controllers.WeiBoVoteController.CancelWeiBoVote(ImpinkerApi.Models.WeiBoVoteViewModel)">
+            <summary>
+            取消赞
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
         </member>
         <member name="M:ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
             <summary>
             token验证
             </summary>
             <param name="actionContext"></param>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.ArticleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.CoverImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.UserId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.Company">
+            <summary>
+            所属网站。易车、之家、e族等
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.State">
+            <summary>
+             状态:      0:删除    1:正常可显示   2: 待审核   3:审核不通过  4:草稿，写游记用到
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.CreateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.ArticleViewModel.UpdateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ImpinkerApi.Models.NewArticleCommentVm">
+            <summary>
+            用户文章评论实体
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.NewArticleCommentVm.ToCommentId">
+            <summary>
+            不为0表示 是评论某条评论
+            </summary>
+        </member>
+        <member name="T:ImpinkerApi.Models.CustomMultipartFormDataStreamProvider">
+            <summary>
+            创建一个 Provider 用于重命名接收到的文件 
+            </summary>
         </member>
         <member name="P:ImpinkerApi.Models.JsonResultViewModel.IsSuccess">
             <summary>
@@ -622,14 +745,14 @@
             手机号码
             </summary>
         </member>
-        <member name="P:ImpinkerApi.Models.SendCheckNumViewModel.CheckNum">
-            <summary>
-            验证码
-            </summary>
-        </member>
         <member name="P:ImpinkerApi.Models.SendCheckNumViewModel.OpreateType">
             <summary>
             操作类型
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.WeiBoCommentViewModel.ToCommentId">
+            <summary>
+            不为0表示 是评论某条评论
             </summary>
         </member>
         <member name="P:ImpinkerApi.Models.NewWeiBoViewModel.HardWareType">
@@ -645,6 +768,11 @@
         <member name="T:ImpinkerApi.Models.WeiBoListViewModel">
             <summary>
             微博列表模型
+            </summary>
+        </member>
+        <member name="P:ImpinkerApi.Models.WeiBoListViewModel.PublishTime">
+            <summary>
+            发布时间
             </summary>
         </member>
         <member name="P:ImpinkerApi.Models.WeiBoListViewModel.IsRePost">

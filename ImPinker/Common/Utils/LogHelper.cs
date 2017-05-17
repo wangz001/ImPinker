@@ -3,11 +3,6 @@ using System.Reflection;
 
 namespace Common.Utils
 {
-    /// <summary>
-    /// Author     : yenange
-    /// Date       : 2014-02-21
-    /// Description: 日志辅助类
-    /// </summary>
     public sealed class LogHelper
     {
         private static readonly object objlock = new object();

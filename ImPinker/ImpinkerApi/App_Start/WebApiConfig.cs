@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Cors;
+using ImpinkerApi.Filters;
 
 namespace ImpinkerApi
 {
@@ -10,6 +11,8 @@ namespace ImpinkerApi
     {
         public static void Register(HttpConfiguration config)
         {
+            //异常过滤器（Mvc的就直接在FilterConfig类的RegisterGlobalFilters方法中添加，Web Api的过滤器没有单独一个配置类，可以写在WebApiConfig类的Register中）
+            config.Filters.Add(new ExceptionContextFilter());
             //跨域配置
             //config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 

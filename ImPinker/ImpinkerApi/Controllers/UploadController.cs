@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Common.Utils;
 using ImpinkerApi.Models;
 using System.Threading.Tasks;
 using System.Net;
@@ -72,7 +73,13 @@ namespace ImpinkerApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                LogHelper.Instance.Error(e.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "上传游记图片出错",
+                    Data = ""
+                });
             }
         }
 
@@ -160,7 +167,13 @@ namespace ImpinkerApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                LogHelper.Instance.Error(e.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "上传图片出错",
+                    Data = ""
+                });
             }
         }
         

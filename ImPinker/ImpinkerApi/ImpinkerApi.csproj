@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />
     <Compile Include="Controllers\WeiBoVoteController.cs" />
+    <Compile Include="Filters\ExceptionContextFilter.cs" />
     <Compile Include="Filters\TokenCheckFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

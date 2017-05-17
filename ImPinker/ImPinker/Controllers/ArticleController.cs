@@ -41,8 +41,7 @@ namespace ImPinker.Controllers
             }
             catch (Exception e)
             {
-                LogHelper.Instance.Error("lalalla:" + e);
-                //记录日志
+                LogHelper.Instance.Error("solr服务未启动:" + e);
             }
             if (vm == null || vm.Content == null || vm.Content.Count == 0)
             {

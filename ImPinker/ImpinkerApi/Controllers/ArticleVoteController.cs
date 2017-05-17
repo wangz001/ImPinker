@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Web.Http;
 using ImBLL;
 using ImModel;
-using ImModel.Enum;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
@@ -12,7 +11,7 @@ namespace ImpinkerApi.Controllers
 {
     public class ArticleVoteController : BaseApiController
     {
-        ArticleCommentBll _articleCommentBll =new ArticleCommentBll();
+        readonly ArticleCommentBll _articleCommentBll =new ArticleCommentBll();
         
 
         #region 文章评论
