@@ -47,7 +47,7 @@ namespace ImpinkerApi.Controllers
             {
                 foreach (var item in list)
                 {
-                    item.CoverImage = ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(item.CoverImage, 0);
+                    item.CoverImage = ImPinkerApi.Common.ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
                 }
                 return GetJson(new JsonResultViewModel
                 {

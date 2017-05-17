@@ -63,6 +63,7 @@
     <Compile Include="ViewModel\ArticleViewModel.cs" />
     <Compile Include="ViewModel\CreateThreadVm.cs" />
     <Compile Include="ViewModel\FacetItemVm.cs" />
+    <Compile Include="ViewModel\ImageFormatConfig.cs" />
     <Compile Include="ViewModel\SearchResultVm.cs" />
     <Compile Include="WeiBo.cs" />
     <Compile Include="WeiBoComment.cs" />

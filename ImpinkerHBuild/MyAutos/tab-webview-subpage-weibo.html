@@ -159,7 +159,9 @@
 			 * @param {Object} item
 			 */
 			function initWeiBoItem(table, item) {
-				var imgPath = 'http://img.myautos.cn/';
+				var img_1200style = 'style/weibo_1200';
+				var img_600style = 'style/weibo_600';
+				var img_24style='style/weibo_24_16';
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
@@ -180,13 +182,13 @@
 					var imgHtmlStr = "";
 					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
 					for(var i = 0; i < imgs.length; i++) {
-						imgHtmlStr += '<li><img src="' + imgPath + imgs[i].replace(".jpg", "_s.jpg") + '" data-preview-src="' + imgPath + imgs[i] + '" data-preview-group="' + item.Id + '"></li>';
+						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 					}
 					ul.innerHTML = imgHtmlStr;
 					imgdiv.appendChild(ul);
 				} else {
 					imgdiv.className = "mui-card-content";
-					var imgHtmlStr = '<img src="' + imgPath + imgs[0].replace(".jpg", "_s.jpg") + '" class="bigimage" data-preview-src="' + imgPath + imgs[0] + '" data-preview-group="' + item.Id + '">';
+					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 					imgdiv.innerHTML = imgHtmlStr;
 				}
 

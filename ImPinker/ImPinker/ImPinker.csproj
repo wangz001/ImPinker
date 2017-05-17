@@ -462,7 +462,9 @@
     <Content Include="Scripts\Article\myArticle.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="config\log4net.config" />
+    <Content Include="config\log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config.json" />
     <None Include="Properties\PublishProfiles\ImpinkerWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

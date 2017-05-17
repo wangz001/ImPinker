@@ -238,3 +238,7 @@ SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net
    在 ImBLL.SolrNetSearchBll.GetArticleById(String travelId)
    在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 40
 [Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

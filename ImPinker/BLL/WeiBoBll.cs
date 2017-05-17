@@ -25,18 +25,23 @@ namespace ImBLL
             string imgUrlformat = ConfigurationManager.AppSettings["WeiboImage"];
             var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, DateTime.Now.Ticks);
             //上传到oss
-            var flag1 = ObjectOperate.UploadImage(bucketName, localFileName, imgUrl,1024);
-            //上传缩略图到oss
-            var extention = Path.GetExtension(localFileName);
-            if (extention != null)
-            {
-                var sLocalPath = localFileName.Replace(extention, "_s.jpg");
-                ImageUtils.GetReduceImgFromCenter(300, 200, localFileName, sLocalPath, 85);
-                var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
-                var flag2 = ObjectOperate.UploadImage(bucketName, sLocalPath, sImgUrl,100);
-                return (flag1 && flag2) ? imgUrl : "";
-            }
-            return "";
+            var flag1 = ObjectOperate.UploadImage(bucketName, localFileName, imgUrl, 1024);
+            return flag1 ? imgUrl : "";
+
+            /*
+             * 不再上传缩略图。由阿里云oss动态生成缩略图。
+             //上传缩略图到oss
+           var extention = Path.GetExtension(localFileName);
+           if (extention != null)
+           {
+               var sLocalPath = localFileName.Replace(extention, "_s.jpg");
+               ImageUtils.GetReduceImgFromCenter(300, 200, localFileName, sLocalPath, 85);
+               var sImgUrl = imgUrl.Replace(".jpg", "_s.jpg");
+               var flag2 = ObjectOperate.UploadImage(bucketName, sLocalPath, sImgUrl,100);
+               return (flag1 && flag2) ? imgUrl : "";
+           }
+           return "";
+             */
         }
 
 
