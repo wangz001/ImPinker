@@ -2,9 +2,16 @@
  * 发帖子，图文排版
  **/
 (function(apputil, owner) {
-	var article = {
-
+	owner.article = {
+		articleid: 0,
+		articlename: "",
+		coverimage: "",
+		content: ""
 	}
+	var weiboimg_1200style = '?x-oss-process=style/weibo_1200';
+	var weiboimg_24style='?x-oss-process=style/weibo_24_16';
+	
+	var article_900='?x-oss-process=style/article_900';
 
 	owner.showWeiBoItems = function(items) {
 		for(var i = 0; i < items.length; i++) {
@@ -23,10 +30,16 @@
 		if(imgurl.indexOf('http://') == -1) {
 			imgurl = imgPath + imgurl;
 		}
+		console.log(imgurl);
+		console.log(imgurl.indexOf('.jpg'));
+		//显示尺寸为900的图片
+		var imgurl_900=imgurl.substring(0,imgurl.indexOf('.jpg')+4);
+		console.log(imgurl_900);
+		imgurl_900=imgurl_900+article_900;
 		//获取模板上的HTML
 		var imgTemplate = $('script[id="postimg"]').html();
 		var imgHtmlStr = imgTemplate.temp({
-			"src": imgurl
+			"src": imgurl_900
 		});
 		var textareaStr = '<textarea name="yjcontent" value="' + contenttext + '"></textarea>';
 		$(".mui-content-padded").append(imgHtmlStr);
@@ -51,7 +64,7 @@
 	}
 
 	//插入图片
-	owner.addImage = function(articleid, callback) {
+	owner.addImage = function(callback) {
 		callback = callback || $.noop;
 		plus.gallery.pick(function(path) {
 			plus.io.resolveLocalFileSystemURL(path, function(entry) {
@@ -60,6 +73,7 @@
 					src: entry.fullPath,
 					dst: '_doc/articleimage.jpg',
 					overwrite: true,
+					width: "1200px",
 					quality: 90
 				}, function(zip) {
 					var size = zip.size
@@ -67,7 +81,7 @@
 					if(size > (3 * 1024 * 1024)) {
 						return mui.toast('文件超大,请重新选择~');
 					}
-					if(articleid > 0 && zip.target.length > 0) {
+					if(owner.article.articleid > 0 && zip.target.length > 0) {
 						var url = 'http://api.myautos.cn/api/article/UploadArticleImage';
 						var files = [];
 						files.push({
@@ -75,7 +89,7 @@
 							path: zip.target
 						});
 						var params = {
-							"articleid": articleid
+							"articleid": owner.article.articleid
 						};
 						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
 							console.log(JSON.stringify(data));
@@ -103,12 +117,12 @@
 		var data = {
 			ArticleName: titleStr
 		};
+		owner.article.articlename = titleStr;
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
 			console.log(JSON.stringify(data));
-			console.log(data.IsSuccess);
 			if(data.IsSuccess == '1' && data.Data != null) {
-				console.log('2');
 				var articleinfo = data.Data;
+				owner.article.articleid = articleinfo.Id;
 				return callback(articleinfo.Id);
 			} else {
 				return;
@@ -117,11 +131,13 @@
 	}
 
 	owner.updateTitle = function(titleStr, callback) {
+		console.log(owner.article.articleid);
 		callback = callback || $.noop;
 		var url = 'http://api.myautos.cn/api/article/UpdateArticle';
 		var data = {
 			ArticleName: titleStr
 		}
+		owner.article.articlename = titleStr;
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
 			console.log(JSON.stringify(data));
 			console.log('1');
@@ -135,13 +151,19 @@
 	}
 
 	//保存草稿
-	owner.saveDraft = function(articleid, contentstr, callback) {
+	owner.saveDraft = function(callback) {
+		if(owner.article.articleid == 0) {
+			alert("请输入标题");
+			return;
+		}
 		callback = callback || $.noop;
+		var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
 		var url = 'http://api.myautos.cn/api/article/SaveDraft';
 		var data = {
-			Id: articleid,
-			Content: contentstr
+			Id: owner.article.articleid,
+			Content: resultStr
 		};
+		owner.article.content = resultStr;
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
 			console.log(JSON.stringify(data));
 			if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
@@ -161,6 +183,7 @@
 				plus.zip.compressImage({
 					src: entry.fullPath,
 					dst: '_doc/coverimage.jpg',
+					width: "1200px",
 					overwrite: true,
 					quality: 90
 				}, function(zip) {
@@ -177,12 +200,13 @@
 							path: zip.target
 						});
 						var params = {
-							"articleid": articleid
+							"articleid": owner.article.articleid
 						};
 						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
 							console.log(JSON.stringify(data));
 							var url = data.Data;
-							$("#coverimage").attr('src', 'http://img.myautos.cn/'+url);
+							owner.article.coverimage = url+article_900;
+							$("#coverimage").attr('src', url+article_900);
 						});
 					}
 				}, function(zipe) {
@@ -200,12 +224,25 @@
 
 	}
 	//发布
-	owner.publishYouji = function(articleid, contentstr, callback) {
+	owner.publishYouji = function(callback) {
+		if(owner.article.coverimage == "") {
+			alert('请设置封面图');
+			return;
+		}
+		if(owner.article.articleid == 0) {
+			alert('articleid不能为0啊');
+			return;
+		}
+		var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
+		if(resultStr == "") {
+			alert('resultStr不能为kong啊');
+			return;
+		}
 		callback = callback || $.noop;
 		var url = 'http://api.myautos.cn/api/article/PublishArticle';
 		var data = {
 			Id: articleid,
-			Content: contentstr
+			Content: resultStr
 		};
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
 			console.log(JSON.stringify(data));

@@ -420,7 +420,8 @@
 					"js/jquery.js",
 					"js/mui.js",
 					"js/app.js",
-					"js/commonUtil.js"
+					"js/commonUtil.js",
+					"view/article/youji_new.html"
 				],
 				"refer": [
 					"view/article/youji_new_selectweibo.html",

@@ -66,7 +66,7 @@
 			</div>
 			<div class="mui-content-padded">
 				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>
-				<div class="post-img">
+				<!--<div class="post-img">
 					<div class="add-img">
 						<img src="http://img3.baa.bitautotech.com/img/V2img3.baa.bitautotech.com/usergroup/2017/5/14/7c836ed417184e0797e985450999b3e8_300_200_jpg.jpg" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
 					</div>
@@ -76,7 +76,7 @@
 						<a class="del mui-icon mui-icon-trash" role="del"></a>
 					</div>
 				</div>
-				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>
+				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>-->
 			</div>
 		</div>
 		<nav class="mui-bar mui-bar-tab">
@@ -118,14 +118,13 @@
 				}
 			});
 
-			var articleid = 0;
 			$("#youi_title").blur(function() {
 				var content = $(this).val();
 				console.log(content);
 				if(content == "") return;
 				//创建文章或更新标题
 				setTimeout(function() {
-					if(articleid == 0) {
+					if(edityoujiUtil.article.articleid == 0) {
 						edityoujiUtil.createYouji(content, function(id) {
 							if(id != null && id > 0) {
 								console.log(id);
@@ -133,25 +132,23 @@
 							}
 						});
 					} else {
-						edityoujiUtil.updateTitle(content);
+						edityoujiUtil.updateTitle(content, function(data) {
+
+						});
 					}
 				}, 500);
 			});
 			//保存草稿
 			$("#youji_content textarea").change(function() {
 				setTimeout(function() {
-					if(articleid > 0) {
-						var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
-						console.log("保存草稿！" + resultStr);
-						edityoujiUtil.saveDraft(articleid, resultStr, function(data) {
+					if(edityoujiUtil.article.articleid > 0) {
+						edityoujiUtil.saveDraft(function(data) {
 							console.log("保存草稿成功！");
 						});
 					} else {
 						edityoujiUtil.createYouji("草稿" + (new Date().toLocaleString()), function(id) {
 							if(id != null && id > 0) {
 								console.log(id);
-								articleid = id;
-								console.log(articleid);
 							}
 						});
 					}
@@ -164,25 +161,19 @@
 			//发布
 			document.getElementById('publishyouji').addEventListener('tap', function() {
 				setTimeout(function() {
-					if(articleid > 0) {
-						var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
-						if(resultStr == "") return;
-						console.log("发布！");
-						edityoujiUtil.publishYouji(articleid, resultStr, function(data) {
-							console.log("发布成功！" + data);
-							plus.webview.getLaunchWebview().reload();
-							setTimeout(function() {
-								mui.back();
-							}, 500);
-						});
-					}
+					edityoujiUtil.publishYouji(function(data) {
+						console.log("发布成功！" + data);
+						plus.webview.getLaunchWebview().reload();
+						setTimeout(function() {
+							mui.back();
+						}, 500);
+					});
 				}, 500);
 			});
 
 			//添加图片
 			document.getElementById('addimage').addEventListener('tap', function() {
-				edityoujiUtil.addImage(articleid, function(data) {
-					var imgPath = 'http://img.myautos.cn/';
+				edityoujiUtil.addImage(function(data) {
 					edityoujiUtil.showImage(data.Data, '');
 				});
 			});
