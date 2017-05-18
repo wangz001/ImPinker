@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using ImModel;
-using Maticsoft.Common;
 
 namespace ImBLL
 {
@@ -11,7 +10,7 @@ namespace ImBLL
 	/// </summary>
 	public class ArticleSnapsBll
 	{
-		private readonly ImDal.ArticleSnaps dal=new ImDal.ArticleSnaps();
+		private readonly ImDal.ArticleSnaps _dal=new ImDal.ArticleSnaps();
 
         /// <summary>
         /// 添加草稿（发帖子用）
@@ -19,34 +18,31 @@ namespace ImBLL
         /// <param name="model"></param>
         /// <returns></returns>
 	    public bool AddDraft(ArticleSnaps model)
-	    {
+        {
             if (Exists(model.ArticleId))
             {
                 var snap = GetModel(model.ArticleId);
                 snap.Content = model.Content;
                 snap.UpdateTime = DateTime.Now;
-                return dal.Update(model);
+                return _dal.Update(model);
             }
-            else
-            {
-                return dal.Add(model);
-            }
-	    }
+            return _dal.Add(model);
+        }
 
-		/// <summary>
+	    /// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(long Id)
+		public bool Exists(long id)
 		{
-			return dal.Exists(Id);
+			return _dal.Exists(id);
 		}
 
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public ArticleSnaps GetModel(long Id)
+		public ArticleSnaps GetModel(long id)
 		{
-			return dal.GetModel(Id);
+			return _dal.GetModel(id);
 		}
 
 		/// <summary>
@@ -54,7 +50,7 @@ namespace ImBLL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			return dal.GetList(strWhere);
+			return _dal.GetList(strWhere);
 		}
 		
 		/// <summary>
@@ -62,7 +58,7 @@ namespace ImBLL
 		/// </summary>
 		public List<ArticleSnaps> GetModelList(string strWhere)
 		{
-			DataSet ds = dal.GetList(strWhere);
+			DataSet ds = _dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
 		}
 		/// <summary>
@@ -77,7 +73,7 @@ namespace ImBLL
 				ArticleSnaps model;
 				for (int n = 0; n < rowsCount; n++)
 				{
-					model = dal.DataRowToModel(dt.Rows[n]);
+					model = _dal.DataRowToModel(dt.Rows[n]);
 					if (model != null)
 					{
 						modelList.Add(model);
@@ -93,7 +89,7 @@ namespace ImBLL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			return dal.GetListByPage( strWhere,  orderby,  startIndex,  endIndex);
+			return _dal.GetListByPage( strWhere,  orderby,  startIndex,  endIndex);
 		}
 		
 	}

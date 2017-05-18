@@ -1,16 +1,12 @@
 ﻿using ImModel.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Web;
 
 namespace ImPinkerApi.Common
 {
     public class ImageUrlHelper
     {
-        readonly static string _imgDomain = ConfigurationManager.AppSettings["ImageDomain"];
+        static readonly string ImgDomain = ConfigurationManager.AppSettings["ImageDomain"];
         /// <summary>
         /// 获取头像url地址
         /// </summary>
@@ -31,20 +27,15 @@ namespace ImPinkerApi.Common
                 url=url+sizeStyle;
                 if (!url.StartsWith("http://"))
                 {
-                    return _imgDomain+ url;
+                    return ImgDomain+ url;
                 }
-                else
-                {
-                    return url;
-                }
+                return url;
             }
-            else
-            {
-                return ""; //默认的图片
-            }
+            return ""; //默认的图片
         }
+
         /// <summary>
-        /// 获取文章的封面图(900;360*240;240*160)
+        /// 获取文章封面图或内容图片(900;360*240;240*160)
         /// </summary>
         /// <param name="url"></param>
         /// <param name="size"></param>
@@ -63,23 +54,18 @@ namespace ImPinkerApi.Common
                 url = url + sizeStyle;
                 if (!url.StartsWith("http://"))
                 {
-                    return _imgDomain + url;
+                    return ImgDomain + url;
                 }
-                else
-                {
-                    return url;
-                }
+                return url;
             }
-            else
-            {
-                return ""; //默认的图片
-            }
+            return ""; //默认的图片
         }
+
         /// <summary>
         /// 获取微博图片
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="size"></param>
+        /// <param name="imagesStr">weibo content</param>
+        /// <param name="size">1200/900/600/240</param>
         /// <returns></returns>
         public static string GetWeiboFullImageUrl(string imagesStr,int size)
         {
@@ -98,7 +84,7 @@ namespace ImPinkerApi.Common
                 var imagepath = image + sizeStyle;
                 if (!imagepath.StartsWith("http://"))
                 {
-                    imagepath = _imgDomain + imagepath;
+                    imagepath = ImgDomain + imagepath;
                 }
                 contentValue.Add(imagepath);
             }

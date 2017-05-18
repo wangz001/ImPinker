@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aliyun.OSS;
 using Aliyun.OSS.Common;
+using Common.Utils;
 
 namespace Common.AlyOssUtil
 {
@@ -43,28 +44,24 @@ namespace Common.AlyOssUtil
             {
                 using (var content = File.Open(sourcePath, FileMode.Open))
                 {
-                    
                     var meta = new ObjectMetadata
                     {
                         ContentLength = content.Length, 
                         ContentType = "image/jpeg"
                     };
-
                     var result=Client.PutObject(bucketName, imgUrl, content, meta);
                     Console.WriteLine("Put object:{0} succeeded", imgUrl);
                     return true;
                 }
-
             }
             catch (OssException ex)
             {
-                Console.WriteLine("Failed with error code: {0}; Error info: {1}. \nRequestID:{2}\tHostID:{3}",
-                    ex.ErrorCode, ex.Message, ex.RequestId, ex.HostId);
+                LogHelper.Instance.Error(ex.ToString());
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed with error info: {0}", ex.Message);
+                LogHelper.Instance.Error(string.Format("Failed with error info: {0}", ex.Message));
                 return false;
             }
         }

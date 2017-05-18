@@ -139,6 +139,30 @@ namespace ImBLL
             }
             return list;
         }
+        /// <summary>
+        /// 根据文章状态获取列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="count"></param>
+        /// <param name="stateEnum"></param>
+        /// <param name="totalaCount"></param>
+        /// <returns></returns>
+        public List<Article> GetMyListByState(int userid, int pageNum, int count,ArticleStateEnum stateEnum, out int totalaCount)
+        {
+            totalaCount = 0;
+            var ds = _dal.GetMyListByState(userid, pageNum, count,stateEnum);
+            var list = new List<Article>();
+            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+            {
+                list = DataTableToList(ds.Tables[0]);
+            }
+            if (ds != null && ds.Tables[1] != null)
+            {
+                int.TryParse(ds.Tables[1].Rows[0][0].ToString(), out totalaCount);
+            }
+            return list;
+        }
 
         /// <summary>
         /// 分页获取首页数据列表,coverimage 不为空
@@ -328,7 +352,7 @@ namespace ImBLL
             if (extention != null)
             {
                 var sLocalPath = localFileName.Replace(extention, "_s.jpg");
-                ImageUtils.GetReduceImgFromCenter(360, 240, localFileName, sLocalPath, 85);
+                ImageUtils.GetReduceImgFromCenter(900, 600, localFileName, sLocalPath, 85);
                 var flag1 = ObjectOperate.UploadImage(buckeyName, sLocalPath, imgUrl, 1024);
                 if (flag1)
                 {

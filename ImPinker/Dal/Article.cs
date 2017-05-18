@@ -273,6 +273,36 @@ namespace ImDal
 		    };
             return DbHelperSQL.Query(strSql.ToString(), paras);
         }
+        /// <summary>
+        /// 根据状态获取文章列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="count"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public DataSet GetMyListByState(int userid, int pageNum, int count,ArticleStateEnum state)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM ( ");
+            strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            strSql.Append("order by T.CreateTime desc");
+            strSql.Append(")AS Row, T.*  from Article T ");
+            strSql.Append(" WHERE UserId=@UserId and state=@state");
+            strSql.Append(" ) TT");
+            strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex ;");
+            strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state=@state");
+            var startIndex = (pageNum - 1) * count + 1;
+            var endIndex = pageNum * count;
+            var paras = new[]
+		    {
+                new SqlParameter("@UserId",SqlDbType.Int){Value = userid},
+                new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+                new SqlParameter("@state",SqlDbType.Int){Value = (int)state},
+		    };
+            return DbHelperSQL.Query(strSql.ToString(), paras);
+        }
 
         /// <summary>
         /// 获取首页的文章

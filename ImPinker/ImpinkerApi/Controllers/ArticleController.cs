@@ -12,6 +12,7 @@ using Common.Utils;
 using ImBLL;
 using ImModel;
 using ImpinkerApi.Common;
+using ImPinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
 
@@ -25,8 +26,7 @@ namespace ImpinkerApi.Controllers
 
         private readonly ArticleBll _articleBll = new ArticleBll();
         readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
-        readonly string _imgDomain = ConfigurationManager.AppSettings["ImageDomain"];
-
+        #region 获取首页文章列表
         /// <summary>
         /// 分页获取数据
         /// </summary>
@@ -47,7 +47,7 @@ namespace ImpinkerApi.Controllers
             {
                 foreach (var item in list)
                 {
-                    item.CoverImage = ImPinkerApi.Common.ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
+                    item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
                 }
                 return GetJson(new JsonResultViewModel
                 {
@@ -63,6 +63,8 @@ namespace ImpinkerApi.Controllers
                 Description = "没有更多数据"
             });
         }
+
+        #endregion
 
         #region 发布游记
         /// <summary>
@@ -104,6 +106,48 @@ namespace ImpinkerApi.Controllers
             });
         }
         /// <summary>
+        /// 修改文章名称
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [TokenCheck]
+        public HttpResponseMessage UpdateArticleTitle([FromBody]ArticleViewModel article)
+        {
+            if (string.IsNullOrEmpty(article.ArticleName))
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Data = null,
+                    Description = "名称不能为空"
+                });
+            }
+            var entity = _articleBll.GetModelByCache(article.Id);
+            if (entity!=null)
+            {
+                entity.ArticleName = article.ArticleName;
+                entity.UpdateTime = DateTime.Now;
+                var flag=_articleBll.Update(entity);
+                if (flag)
+                {
+                    return GetJson(new JsonResultViewModel
+                    {
+                        IsSuccess = 1,
+                        Data = article.ArticleName,
+                        Description = "自动保存成功"
+                    });
+                }
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Data = null,
+                Description = "保存出错"
+            });
+        }
+
+        /// <summary>
         /// 保存草稿
         /// </summary>
         /// <returns></returns>
@@ -144,6 +188,9 @@ namespace ImpinkerApi.Controllers
                 Description = "保存出错"
             });
         }
+
+        
+        
         /// <summary>
         /// 发布游记
         /// </summary>
@@ -243,7 +290,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(_imgDomain + imgUrl);
+                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl,360));
                     break;
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
@@ -325,7 +372,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(_imgDomain + imgUrl);
+                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl,900));
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                 {
@@ -347,5 +394,62 @@ namespace ImpinkerApi.Controllers
         }
         #endregion
 
+        #region 获取草稿列表
+
+        [HttpPost]
+        [TokenCheck]
+        public HttpResponseMessage GetMyDraft()
+        {
+            const int pageNum = 1;
+            const int pageSize = 30;
+            int totalCount;
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Draft,
+                out totalCount);
+            foreach (var item in articles)
+            {
+                item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = articles,
+                Description = "获取草稿成功"
+            });
+        }
+
+        #endregion
+
+        #region 删除文章
+
+        [HttpPost]
+        [TokenCheck]
+        public HttpResponseMessage DeleteArticle([FromBody]ArticleViewModel article)
+        {
+            var entity = _articleBll.GetModelByCache(article.Id);
+            if (entity != null)
+            {
+                entity.State = (int)ArticleStateEnum.Deleted;
+                entity.UpdateTime = DateTime.Now;
+                var flag = _articleBll.Update(entity);
+                if (flag)
+                {
+                    return GetJson(new JsonResultViewModel
+                    {
+                        IsSuccess = 1,
+                        Data = article.Id,
+                        Description = "文章已删除"
+                    });
+                }
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Data = null,
+                Description = "删除失败"
+            });
+        }
+
+        #endregion
     }
 }
