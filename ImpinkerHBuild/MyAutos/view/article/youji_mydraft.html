@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -12,7 +13,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 id="title" class="mui-title">选择微博</h1>
+			<h1 id="title" class="mui-title">草稿</h1>
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
 		</header>
 
@@ -20,13 +21,18 @@
 			<div class="mui-scroll">
 				<ul class="mui-table-view" id="draftlist">
 					<li class="mui-table-view-cell mui-media">
-						<a href="view/article/preview.html">
-							<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
-							<div class="mui-media-body">
-								幸福
-								<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-							</div>
-						</a>
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<a href="view/article/preview.html">
+								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
+								<div class="mui-media-body">
+									幸福
+									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+								</div>
+							</a>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -38,13 +44,18 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type='text/template' id='draftlistitem'>
 			<li class="mui-table-view-cell mui-media">
-				<a href="view/article/preview.html">
-					<img class="mui-media-object mui-pull-left" src="$CoverImage$">
-					<div class="mui-media-body">
-						$ArticleName$
-						<p class="mui-ellipsis">$Description$</p>
-					</div>
-				</a>
+				<div class="mui-slider-right mui-disabled">
+					<a articleid="$Id$" class="mui-btn mui-btn-red">删除</a>
+				</div>
+				<div class="mui-slider-handle">
+					<a articleid="$Id$" href="youji_new.html">
+						<img class="mui-media-object mui-pull-left" src="$CoverImage$">
+						<div class="mui-media-body">
+							$ArticleName$
+							<p class="mui-ellipsis">$Description$</p>
+						</div>
+					</a>
+				</div>
 			</li>
 		</script>
 		<script>
@@ -62,11 +73,56 @@
 
 				});
 			});
+			(function(mm) {
+				var btnArray = ['确认', '取消'];
+				$('#draftlist').on('tap', '.mui-btn', function(event) {
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
+						if(e.index == 0) {
+							var articleId = $(elem).attr("articleid");
+							console.log(articleId);
+							deleteArticle(articleId,function(err){
+								console.log(err);
+							})
+							li.parentNode.removeChild(li);
+						} else {
+							setTimeout(function() {
+								mm.swipeoutClose(li);
+							}, 0);
+						}
+					});
+				});
+			})(mui);
 
+			var deleteArticle = function(articleid, callback) {
+				callback = callback || $.noop;
+				var url = 'http://api.myautos.cn/api/article/DeleteArticle';
+				var data = {
+					Id: articleid
+				}
+				commonUtil.sendRequestWithToken(url, data, true, function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						return callback();
+					} else {
+						return callback(data.Description);
+					}
+				});
+			}
 			//添加列表项的点击事件  
-			mui('.mui-content').on('tap', 'a', function(e) {
-				var id = this.getAttribute('id');
-
+			mui('.mui-scroll').on('tap', 'a', function(e) {
+				var articleid = $(this).attr("articleid");
+				mui.openWindow({
+					id: 'youji_new',
+					url: 'youji_new.html',
+					show: {
+						aniShow: "pop-in"
+					},
+					extras: {
+						articleid: articleid //扩展参数
+					}
+				});
 			});
 			var pageNum = 1;
 			var pageSize = 10;
@@ -95,7 +151,6 @@
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
-			
 		</script>
 
 	</body>

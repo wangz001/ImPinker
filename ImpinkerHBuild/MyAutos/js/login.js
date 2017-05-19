@@ -24,6 +24,7 @@
 					mainPage.show("pop-in");
 				}
 			}, 20);
+			
 		};
 		//检查 "登录状态/锁屏状态" 开始
 //		if(state.token && settings.gestures) {

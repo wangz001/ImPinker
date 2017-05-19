@@ -128,7 +128,8 @@
 					src: e,
 					dst: '_doc/' + name,
 					overwrite: true,
-					quality: 70
+					width: "1200px",
+					quality: 90
 				}, function(zip) {
 					size += zip.size
 					console.log("filesize:" + zip.size + ",totalsize:" + size);
@@ -245,7 +246,7 @@
 				var data = JSON.parse(upload.responseText);
 				//上传成功，重置表单
 				if(data.IsSuccess === 1) {
-					plus.webview.getLaunchWebview().reload();
+					plus.webview.getWebviewById("tab-webview-subpage-weibo.html").reload();
 					setTimeout(function() {
 						mui.back();
 					}, 500);

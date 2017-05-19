@@ -58,6 +58,7 @@
 
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+				//关闭login页
 				var self = plus.webview.currentWebview();
 				for(var i = 0; i < 4; i++) {
 					var temp = {};
@@ -71,11 +72,11 @@
 					self.append(sub);
 				}
 				//更新token
-				app.updateToken(function(err) {
-					if(err) {
-						console.log('更新token失败' + err);
-					}
-				});
+//				app.updateToken(function(err) {
+//					if(err) {
+//						console.log('更新token失败' + err);
+//					}
+//				});
 			});
 			//当前激活选项
 			var activeTab = subpages[0];

@@ -106,7 +106,9 @@
 			mui.init({});
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-
+				//从草稿页跳转
+				var articleid = self.articleid;
+				console.log(articleid);
 			});
 			//自定义事件。接受选择微博页传回的数据
 			window.addEventListener('weiboitems', function(event) {
@@ -163,11 +165,9 @@
 				setTimeout(function() {
 					edityoujiUtil.publishYouji(function(data) {
 						console.log("发布成功！" + data);
-						plus.webview.getLaunchWebview().reload();
-						setTimeout(function() {
-							mui.back();
-						}, 500);
+						plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
 					});
+					mui.back();
 				}, 500);
 			});
 

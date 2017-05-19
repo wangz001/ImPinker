@@ -31,7 +31,6 @@
 			imgurl = imgPath + imgurl;
 		}
 		console.log(imgurl);
-		console.log(imgurl.indexOf('.jpg'));
 		//显示尺寸为900的图片
 		var imgurl_900=imgurl.substring(0,imgurl.indexOf('.jpg')+4);
 		console.log(imgurl_900);
@@ -149,6 +148,7 @@
 			}
 		});
 	}
+	
 
 	//保存草稿
 	owner.saveDraft = function(callback) {
@@ -205,8 +205,8 @@
 						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
 							console.log(JSON.stringify(data));
 							var url = data.Data;
-							owner.article.coverimage = url+article_900;
-							$("#coverimage").attr('src', url+article_900);
+							owner.article.coverimage = url;
+							$("#coverimage").attr('src', url);
 						});
 					}
 				}, function(zipe) {
