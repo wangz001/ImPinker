@@ -73,9 +73,8 @@
 				//更新token
 				app.updateToken(function(err) {
 					if(err) {
-						console.log('更新token失败' + flag);
+						console.log('更新token失败' + err);
 					}
-					console.log('更新token成功');
 				});
 			});
 			//当前激活选项

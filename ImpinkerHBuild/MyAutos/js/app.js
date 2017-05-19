@@ -81,10 +81,12 @@
 	//更新token
 	owner.updateToken=function(callback){
 		var state = owner.getState();//用户信息
+		console.log("aaa:"+state.account+";;"+state.password)
 		if(state.account&&state.password) {
 			//toMain();
 			//每次打开应用。重新登录，获取token
 			owner.login(state, function(err) {
+				console.log("adad"+err);
 				if(err) {
 					plus.nativeUI.toast(err);
 					return callback(err);

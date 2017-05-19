@@ -1,138 +1,5 @@
 [Header]
-2017-05-17 15:08:39,672 [95] ERROR WebLogger [(null)] - 测试记录日志
-2017-05-17 15:08:39,760 [95] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
-Referer:
-System.ArgumentNullException: 值不能为 null。
-参数名: path1
-   在 System.IO.Path.Combine(String path1, String path2)
-   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
-   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 51
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-[Footer]
-[Header]
-2017-05-17 15:13:12,780 [99] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
-Referer:
-System.ArgumentNullException: 值不能为 null。
-参数名: path1
-   在 System.IO.Path.Combine(String path1, String path2)
-   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
-   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 50
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-2017-05-17 15:14:01,547 [99] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/article/getbypage?pagenum=1&pagesize=30
-Referer:
-System.ArgumentNullException: 值不能为 null。
-参数名: path1
-   在 System.IO.Path.Combine(String path1, String path2)
-   在 ImPinkerApi.Common.ImageUrlHelper.GetArticleCoverImage(String url, Int32 size) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 49
-   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 50
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-[Footer]
-[Header]
-2017-05-17 21:29:40,160 [10] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/weibo/GetWeiBoList?pageindex=1&pagesize=30
-Referer:
-System.ArgumentException: 路径中具有非法字符。
-   在 System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
-   在 System.IO.Path.Combine(String path1, String path2)
-   在 ImPinkerApi.Common.ImageUrlHelper.GetHeadImageUrl(String url, Int32 size) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Common\ImageUrlHelper.cs:行号 34
-   在 ImpinkerApi.Controllers.WeiBoController.GetWeiBoList(Int32 pageindex, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 209
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-[Footer]
-[Header]
-2017-05-17 21:31:21,917 [12] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/weibo/GetWeiBoList?pageindex=1&pagesize=30
-Referer:
-System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 找不到网络路径。
-   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
-   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
-   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
-   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
-   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
-   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
-   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
-   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
-   在 System.Data.SqlClient.SqlConnection.Open()
-   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
-   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
-   在 ImDal.WeiBoDal.GetListByPage(Int32 pageNum, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 109
-   在 ImBLL.WeiBoBll.GetListByPage(Int32 pageindex, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 62
-   在 ImpinkerApi.Controllers.WeiBoController.GetWeiBoList(Int32 pageindex, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 181
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-ClientConnectionId:00000000-0000-0000-0000-000000000000
-Error Number:53,State:0,Class:20
-2017-05-17 21:31:26,458 [10] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/weibo/GetWeiBoList?pageindex=1&pagesize=30
-Referer:
-System.Data.SqlClient.SqlException (0x80131904): 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: Named Pipes Provider, error: 40 - 无法打开到 SQL Server 的连接) ---> System.ComponentModel.Win32Exception (0x80004005): 找不到网络路径。
-   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
-   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
-   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
-   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
-   在 System.Data.SqlClient.SqlConnection.Open()
-   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
-   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
-   在 ImDal.WeiBoDal.GetListByPage(Int32 pageNum, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 109
-   在 ImBLL.WeiBoBll.GetListByPage(Int32 pageindex, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 62
-   在 ImpinkerApi.Controllers.WeiBoController.GetWeiBoList(Int32 pageindex, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 181
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-ClientConnectionId:00000000-0000-0000-0000-000000000000
-Error Number:53,State:0,Class:20
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-2017-05-18 16:31:15,918 [14] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/article/PublishArticle
-Referer:
-System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
-   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
-   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
-   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
-   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
-   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
-   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
-2017-05-18 16:33:39,581 [13] ERROR WebLogger [(null)] - 
+2017-05-19 16:47:35,483 [10] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
 Url:http://api.impinker.com/api/article/GetMyDraft
 Referer:
@@ -143,11 +10,20 @@ System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 
    在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
    在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
    在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
-[Footer]
-[Header]
-2017-05-18 16:44:07,507 [10] ERROR WebLogger [(null)] - 
+2017-05-19 16:47:45,835 [12] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://api.impinker.com/api/article/DeleteArticle
+Url:http://api.impinker.com/api/article/GetMyDraft
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+2017-05-19 16:47:53,830 [15] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/article/GetMyDraft
 Referer:
 System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
    在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53

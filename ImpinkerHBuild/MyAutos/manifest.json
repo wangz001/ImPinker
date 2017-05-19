@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "tab-webview-main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -283,7 +283,8 @@
 				],
 				"refer": [
 					"login.html",
-					"view/article/youji_new.html"
+					"view/article/youji_new.html",
+					"view/article/youji_mydraft.html"
 				],
 				"priority": 0
 			},
@@ -459,6 +460,19 @@
 					"js/mui.previewimage.js",
 					"css/imageviewer.css",
 					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/article/youji_mydraft.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/icons-extra.css",
+					"js/commonUtil.js",
+					"css/weibo.css",
+					"js/app.js",
+					"js/mui.min.js",
+					"js/jquery.js"
 				],
 				"refer": [],
 				"priority": 0

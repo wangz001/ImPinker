@@ -43,6 +43,9 @@
 		<div id='newyouji' class="mui-btn mui-btn-primary">
 			写游记
 		</div>
+		<div id='youjidraft' class="mui-btn mui-btn-primary">
+			游记草稿
+		</div>
 		<br />
 		</div>
 		<script src="../../js/mui.min.js"></script>
@@ -56,6 +59,17 @@
 					url: "../article/youji_new.html",
 					id: "youji_new",
 
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+			});
+			
+			document.getElementById('youjidraft').addEventListener('tap', function() {
+				mui.openWindow({
+					url: "../article/youji_mydraft.html",
+					id: "youji_mydraft",
 					show: {
 						aniShow: 'slide-in-right',
 						duration: 200

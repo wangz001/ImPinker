@@ -88,7 +88,8 @@
 		],
 		"refer": [
 			"login.html",
-			"view/article/youji_new.html"
+			"view/article/youji_new.html",
+			"view/article/youji_mydraft.html"
 		]
 	},
 	"view/search/search.html": {
@@ -255,6 +256,17 @@
 			"js/mui.previewimage.js",
 			"css/imageviewer.css",
 			"fonts/mui.ttf"
+		]
+	},
+	"view/article/youji_mydraft.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"js/commonUtil.js",
+			"css/weibo.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/jquery.js"
 		]
 	}
 }
