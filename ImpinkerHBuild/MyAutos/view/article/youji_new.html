@@ -54,6 +54,7 @@
 			<h1 id="title" class="mui-title">写游记</h1>
 			<button id="publishyouji" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
 		</header>
+		<div id="hideContent" style="display: none;"></div>
 		<div class="mui-content">
 			<div class="mui-input-group">
 				<div class="mui-input-row">
@@ -108,7 +109,18 @@
 				var self = plus.webview.currentWebview();
 				//从草稿页跳转
 				var articleid = self.articleid;
-				console.log(articleid);
+				var articlename=self.articlename;
+				var coverimage=self.coverimage;
+				if(articleid!=null&&articleid>0){
+					edityoujiUtil.article.articleid=articleid;
+					edityoujiUtil.article.articlename=articlename;
+					edityoujiUtil.article.coverimage=coverimage;
+					$("#youi_title").val(articlename);
+					$("#coverimage").attr('src', coverimage);
+					edityoujiUtil.getandShowContent(articleid,function(){
+						
+					});
+				}
 			});
 			//自定义事件。接受选择微博页传回的数据
 			window.addEventListener('weiboitems', function(event) {
@@ -119,6 +131,7 @@
 					edityoujiUtil.showWeiBoItems(selectedWeibos);
 				}
 			});
+			
 
 			$("#youi_title").blur(function() {
 				var content = $(this).val();
@@ -163,18 +176,22 @@
 			//发布
 			document.getElementById('publishyouji').addEventListener('tap', function() {
 				setTimeout(function() {
-					edityoujiUtil.publishYouji(function(data) {
-						console.log("发布成功！" + data);
-						plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
+					edityoujiUtil.publishYouji(function(err) {
+						if(err){
+							alert(err);
+						}else{
+							plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
+							mui.back();
+						}
 					});
-					mui.back();
 				}, 500);
 			});
 
 			//添加图片
 			document.getElementById('addimage').addEventListener('tap', function() {
 				edityoujiUtil.addImage(function(data) {
-					edityoujiUtil.showImage(data.Data, '');
+					edityoujiUtil.showImage(data.Data);
+					owner.showTextAreaStr("");
 				});
 			});
 			//添加微博

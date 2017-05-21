@@ -93,10 +93,13 @@
 
 				// 绑定复选框点击事件
 				function bindCheckBoxTab() {
+					$("#pullrefresh [name = checkbox1]:checkbox").unbind("click",function(){
+						//防止重复绑定
+					});
 					$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
 						var weiboid = $(this).val();
 						var isChecked = $(this).is(':checked');
-						console.log(isChecked);
+						console.log(isChecked+"id:"+weiboid);
 						if(isChecked) {
 							//往selectedItems 数组添加数据，并改变编号显示
 							for(var i = 0; i < allItems.length; i++) {

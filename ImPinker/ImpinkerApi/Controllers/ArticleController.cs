@@ -66,6 +66,20 @@ namespace ImpinkerApi.Controllers
 
         #endregion
 
+        #region 获取文章详情
+        [HttpGet]
+        public HttpResponseMessage GetArticleWithContent(int articleid)
+        {
+            var article = _articleBll.GetModelWithContent(articleid);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = article,
+                Description = "获取成功"
+            });
+        }
+        #endregion
+
         #region 发布游记
         /// <summary>
         /// 新建游记
@@ -451,5 +465,7 @@ namespace ImpinkerApi.Controllers
         }
 
         #endregion
+
+        
     }
 }

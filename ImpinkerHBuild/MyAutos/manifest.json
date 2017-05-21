@@ -422,7 +422,8 @@
 					"js/mui.js",
 					"js/app.js",
 					"js/commonUtil.js",
-					"view/article/youji_new.html"
+					"view/article/youji_new.html",
+					"view/article/youji_mydraft.html"
 				],
 				"refer": [
 					"view/article/youji_new_selectweibo.html",
@@ -474,11 +475,10 @@
 					"js/mui.min.js",
 					"js/jquery.js",
 					"fonts/mui-icons-extra.ttf",
-					"fonts/mui.ttf"
-				],
-				"refer": [
+					"fonts/mui.ttf",
 					"view/article/youji_new.html"
 				],
+				"refer": [],
 				"priority": 0
 			}
 		},
