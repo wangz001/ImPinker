@@ -48,7 +48,7 @@
 					<a articleid="$Id$" class="mui-btn mui-btn-red">删除</a>
 				</div>
 				<div class="mui-slider-handle">
-					<a articleid="$Id$" href="youji_new.html">
+					<a articleid="$Id$" class='draftitem' href="youji_new.html">
 						<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 						<div class="mui-media-body">
 							$ArticleName$
@@ -73,6 +73,31 @@
 
 				});
 			});
+			//添加列表项的点击事件  
+			mui('.mui-scroll').on('tap', '.draftitem', function(e) {
+				var articleid = $(this).attr("articleid");
+				console.log(articleid)
+				var selectedItem = {};
+				for(var i = 0; i < allDraftList.length; i++) {
+					var item = allDraftList[i];
+					if(item.Id.toString() == articleid) {
+						selectedItem = item;
+						break;
+					}
+				}
+				mui.openWindow({
+					id: 'youji_new',
+					url: 'youji_new.html',
+					show: {
+						aniShow: "pop-in"
+					},
+					extras: {
+						articleid: articleid,
+						articlename:selectedItem.ArticleName,
+						coverimage:selectedItem.CoverImage
+					}
+				});
+			});
 			(function(mm) {
 				var btnArray = ['确认', '取消'];
 				$('#draftlist').on('tap', '.mui-btn', function(event) {
@@ -82,7 +107,7 @@
 						if(e.index == 0) {
 							var articleId = $(elem).attr("articleid");
 							console.log(articleId);
-							deleteArticle(articleId,function(err){
+							deleteArticle(articleId, function(err) {
 								console.log(err);
 							})
 							li.parentNode.removeChild(li);
@@ -94,7 +119,7 @@
 					});
 				});
 			})(mui);
-
+			//删除草稿
 			var deleteArticle = function(articleid, callback) {
 				callback = callback || $.noop;
 				var url = 'http://api.myautos.cn/api/article/DeleteArticle';
@@ -110,32 +135,17 @@
 					}
 				});
 			}
-			//添加列表项的点击事件  
-			mui('.mui-scroll').on('tap', 'a', function(e) {
-				var articleid = $(this).attr("articleid");
-				mui.openWindow({
-					id: 'youji_new',
-					url: 'youji_new.html',
-					show: {
-						aniShow: "pop-in"
-					},
-					extras: {
-						articleid: articleid //扩展参数
-					}
-				});
-			});
-			var pageNum = 1;
-			var pageSize = 10;
-			var count = 0;
+
+			var allDraftList = new Array();
 			/**
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() {
 				var url = 'http://api.myautos.cn/api/article/GetMyDraft';
 				commonUtil.sendRequestWithToken(url, {}, true, function(data) {
-					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
+						allDraftList = list;
 						var ul = $('#draftlist');
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
@@ -147,7 +157,6 @@
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;
 					}
-					pageNum++;
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
