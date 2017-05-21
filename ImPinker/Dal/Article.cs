@@ -305,7 +305,7 @@ namespace ImDal
         }
 
         /// <summary>
-        /// 获取首页的文章
+        /// 获取首页的文章(按publishtime 倒叙排序)
         /// </summary>
         /// <param name="pageNum"></param>
         /// <param name="count"></param>
@@ -314,7 +314,7 @@ namespace ImDal
         {
             const string strSql = @"
 SELECT  TT.Id,TT.ArticleName,TT.Url,TT.CoverImage,TT.UserId,TT.ComPany,TT.KeyWords,TT.CreateTime,COUNT(av.ArticleId) as voteCount 
- FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS Row ,
+ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.publishtime DESC ) AS Row ,
                     T.*
           FROM      Article T WHERE T.STATE=1 AND  T.CoverImage IS NOT NULL AND DATALENGTH(T.CoverImage)>0
         ) TT left join ArticleVote AV on TT.Id=AV.ArticleId 

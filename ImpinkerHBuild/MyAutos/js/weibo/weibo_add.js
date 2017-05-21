@@ -247,9 +247,11 @@
 				//上传成功，重置表单
 				if(data.IsSuccess === 1) {
 					plus.webview.getWebviewById("tab-webview-subpage-weibo.html").reload();
-					setTimeout(function() {
-						mui.back();
-					}, 500);
+					//获得主页面的webview
+					var main = plus.webview.currentWebview().parent();
+					//触发主页面的gohome事件
+					mui.fire(main, 'gohome');
+					mui.back();
 				}
 			} else {
 				mui.toast("您未登陆，请重新登陆！");

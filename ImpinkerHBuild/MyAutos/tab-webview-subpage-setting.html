@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
@@ -23,44 +24,53 @@
 
 	<body>
 		<div class="mui-content">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						我的游记
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a id='my_youji' href="#">
+						<span class="mui-icon mui-icon-home"></span>
+						<div class="mui-media-body">我的游记</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						我的微博
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
+						<div class="mui-media-body">我的微博</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						我的收藏
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-chatbubble"></span>
+						<div class="mui-media-body">收藏</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						通讯录
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-location"></span>
+						<div class="mui-media-body">联系人</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						通用
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-search"></span>
+						<div class="mui-media-body">通用</div>
 					</a>
 				</li>
-			</ul>
-			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
-					<a id="setting" class="mui-navigate-right">
-						账号设置
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-phone"></span>
+						<div class="mui-media-body">Phone</div>
 					</a>
 				</li>
-			</ul>
-			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
-					<a style="text-align: center;color: #FF3B30;">
-						退出登录
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a id="setting" href="#">
+						<span class="mui-icon mui-icon-gear"></span>
+						<div class="mui-media-body">设置</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-info"></span>
+						<div class="mui-media-body">about</div>
 					</a>
 				</li>
 			</ul>
@@ -78,14 +88,29 @@
 			//触发主页面的gohome事件
 			//mui.fire(main, 'gohome');
 			mui.openWindow({
-					url: "view/setting/setting.html",
-					id: "setting",
-					
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
+				url: "view/setting/setting.html",
+				id: "setting",
+
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
+		});
+		
+		document.getElementById("my_youji").addEventListener('tap', function() {
+			//获得主页面的webview
+			//var main = plus.webview.currentWebview().parent();
+			//触发主页面的gohome事件
+			//mui.fire(main, 'gohome');
+			mui.openWindow({
+				url: "view/article/youji_my.html",
+				id: "youji_my",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
 		});
 	</script>
 
