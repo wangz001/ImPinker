@@ -222,11 +222,12 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"images/yuantiao.jpg",
-					"/images/yuantiao.jpg"
-				],
-				"refer": [
+					"/images/yuantiao.jpg",
+					"js/commonUtil.js",
+					"js/jquery.js",
 					"view/article/preview.html"
 				],
+				"refer": [],
 				"priority": 0
 			},
 			"view/article/preview.html": {
@@ -488,6 +489,29 @@
 					"js/app.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
+					"css/icons-extra.css",
+					"js/commonUtil.js",
+					"js/jquery.js",
+					"css/weibo.css",
+					"fonts/mui.ttf",
+					"fonts/mui-icons-extra.ttf"
+				],
+				"refer": [
+					"view/article/youji_new.html",
+					"view/article/preview.html"
+				],
+				"priority": 0
+			},
+			"view/weibo/weibo_my.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"js/app.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"css/imageviewer.css",
 					"css/icons-extra.css",
 					"js/commonUtil.js",
 					"js/jquery.js",

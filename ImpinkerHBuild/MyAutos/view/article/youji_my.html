@@ -8,6 +8,12 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
+		<style type="text/css">
+			.mui-card-content-inner {
+				position: relative;
+				padding: 10px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,22 +23,7 @@
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 			<div class="mui-scroll">
-				<ul class="mui-table-view" id="draftlist">
-					<li class="mui-table-view-cell mui-media">
-						<div class="mui-slider-right mui-disabled">
-							<a class="mui-btn mui-btn-red">删除</a>
-						</div>
-						<div class="mui-slider-handle">
-							<a href="view/article/preview.html">
-								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
-								<div class="mui-media-body">
-									幸福
-									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-								</div>
-							</a>
-						</div>
-					</li>
-				</ul>
+
 			</div>
 		</div>
 
@@ -40,21 +31,17 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type='text/template' id='draftlistitem'>
-			<li class="mui-table-view-cell mui-media">
-				<div class="mui-slider-right mui-disabled">
-					<a articleid="$Id$" class="mui-btn mui-btn-red">删除</a>
+		<script type='text/template' id='articlelistitem'>
+			<div articleid='$Id$' class="mui-card">
+				<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url($CoverImage$)"></div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<p>Posted on $CreateTime$</p>
+						<p style="color: #333;">$ArticleName$</p>
+					</div>
 				</div>
-				<div class="mui-slider-handle">
-					<a articleid="$Id$" class='draftitem' href="youji_new.html">
-						<img class="mui-media-object mui-pull-left" src="$CoverImage$">
-						<div class="mui-media-body">
-							$ArticleName$
-							<p class="mui-ellipsis">$Description$</p>
-						</div>
-					</a>
-				</div>
-			</li>
+			</div>
+
 		</script>
 		<script>
 			mui.plusReady(function() {
@@ -72,7 +59,7 @@
 				});
 			});
 			//添加列表项的点击事件  
-			mui('.mui-scroll').on('tap', '.draftitem', function(e) {
+			mui('.mui-scroll').on('tap', '.mui-card', function(e) {
 				var articleid = $(this).attr("articleid");
 				console.log(articleid)
 				var selectedItem = {};
@@ -84,40 +71,26 @@
 					}
 				}
 				mui.openWindow({
-					id: 'youji_new',
-					url: 'youji_new.html',
+					id: 'preview',
+					url: 'preview.html',
+					styles: {
+						popGesture: "close",
+
+					},
 					show: {
 						aniShow: "pop-in"
 					},
+					waiting: {
+						autoShow: false
+					},
 					extras: {
-						articleid: articleid,
-						articlename:selectedItem.ArticleName,
-						coverimage:selectedItem.CoverImage
+						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
+						articleid: articleid //扩展参数
 					}
 				});
 			});
-			(function(mm) {
-				var btnArray = ['确认', '取消'];
-				$('#draftlist').on('tap', '.mui-btn', function(event) {
-					var elem = this;
-					var li = elem.parentNode.parentNode;
-					mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
-						if(e.index == 0) {
-							var articleId = $(elem).attr("articleid");
-							console.log(articleId);
-							deleteArticle(articleId, function(err) {
-								console.log(err);
-							})
-							li.parentNode.removeChild(li);
-						} else {
-							setTimeout(function() {
-								mm.swipeoutClose(li);
-							}, 0);
-						}
-					});
-				});
-			})(mui);
-			//删除草稿
+
+			//删文章
 			var deleteArticle = function(articleid, callback) {
 				callback = callback || $.noop;
 				var url = 'http://api.myautos.cn/api/article/DeleteArticle';
@@ -134,23 +107,28 @@
 				});
 			}
 
-			var allDraftList = new Array();
+			var pageNum = 1;
+			var pageSize = 30;
 			/**
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() {
-				var url = 'http://api.myautos.cn/api/article/GetMyDraft';
-				commonUtil.sendRequestWithToken(url, {}, true, function(data) {
+				var url = 'http://api.myautos.cn/api/article/GetMyArticle';
+				var data = {
+					pageNum: pageNum,
+					pageSize: pageSize
+				};
+				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
 						allDraftList = list;
-						var ul = $('#draftlist');
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
-							var imgTemplate = $('script[id="draftlistitem"]').html();
+							var imgTemplate = $('script[id="articlelistitem"]').html();
 							var imgHtmlStr = imgTemplate.temp(item);
-							ul.append(imgHtmlStr);
+							$("#pullrefresh .mui-scroll").append(imgHtmlStr);
 						}
+						pageNum++;
 					} else {
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;

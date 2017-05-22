@@ -3,7 +3,7 @@
  **/
 (function(apputil, owner) {
 	//发请求，不用身份验证
-	owner.sendRequestGet = function(url, data, isPost, callback) {
+	owner.sendRequestGet = function(url, data, callback) {
 		callback = callback || $.noop;
 		mui.ajax(url, {
 			data: data,

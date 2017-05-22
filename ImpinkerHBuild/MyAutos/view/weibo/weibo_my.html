@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">我的微博</h1>
+		</header>
+
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
+			<div class="mui-scroll">
+				<!--<div class="mui-card">
+					<div class="mui-card-content">
+						<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+						<p>Posted on January 18, 2016</p>
+					</div>
+					<div class="media-pic-list">
+						<ul>
+							<li>
+								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+							</li>
+							<li>
+								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+							</li>
+						</ul>
+					</div>
+
+				</div>-->
+			</div>
+
+			<script src="../../js/mui.min.js"></script>
+			<script type="text/javascript" src="../../js/app.js"></script>
+			<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+			<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+			<script type="text/javascript" src="../../js/jquery.js"></script>
+			<script type="text/javascript" src="../../js/commonUtil.js"></script>
+			<script type="text/template" id='weiboitem'>
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<p style="color: #333;">$Description$</p>
+						<p>Posted on $PublishTime$</p>
+					</div>
+					<div class="media-pic-list">
+						<ul>
+							<li>
+								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+							</li>
+							<li>
+								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</script>
+			<script>
+				mui.init({
+					swipeBack: false,
+					pullRefresh: {
+						container: '#pullrefresh',
+						up: {
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: '正在加载...',
+							callback: pullupRefresh
+						}
+					}
+
+				});
+
+				//添加列表项的点击事件  
+				mui('.mui-content').on('tap', 'a', function(e) {
+					var id = this.getAttribute('id');
+				});
+				mui.previewImage();
+				var pageNum = 1;
+				var pageSize = 30;
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				function pullupRefresh() {
+					var data = {
+						pageindex: pageNum,
+						pageSize: pageSize
+					}
+					commonUtil.sendRequestWithToken('http://api.myautos.cn/api/weibo/GetMyWeiBoList', data, false, function(data) {
+						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+							var list = data.Data;
+							var table = document.body.querySelector('.mui-scroll');
+							for(var i = 0; i < list.length; i++) {
+								var item = list[i];
+								initWeiBoItem(table, item);
+							}
+						} else {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+							return;
+						}
+						pageNum++;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+					});
+				}
+				/**
+				 * 添加数据
+				 * @param {Object} table
+				 * @param {Object} item
+				 */
+				function initWeiBoItem(table, item) {
+					var img_1200style = 'style/weibo_1200';
+					var img_600style = 'style/weibo_600';
+					var img_24style = 'style/weibo_24_16';
+					if(item.ContentValue == null || item.ContentValue == '') {
+						return;
+					}
+
+					var li = document.createElement('div');
+					li.className = 'mui-card';
+					var imgdiv = document.createElement("div");
+
+					var imgs = item.ContentValue.split(',');
+					if(imgs.length > 1) {
+						//多图
+						imgdiv.className = 'media-pic-list';
+						var ul = document.createElement("ul");
+						var imgHtmlStr = "";
+						var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
+						for(var i = 0; i < imgs.length; i++) {
+							imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+						}
+						ul.innerHTML = imgHtmlStr;
+						imgdiv.appendChild(ul);
+					} else {
+						imgdiv.className = "mui-card-content";
+						var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+						imgdiv.innerHTML = imgHtmlStr;
+					}
+					var footdiv = document.createElement('div');
+					footdiv.className = 'mui-card-content';
+					footdiv.innerHTML = '<p style="color: #333;">' + item.Description + '...</p><p>Posted on ' + item.PublishTime + '</p>';
+					li.appendChild(footdiv);
+					li.appendChild(imgdiv);
+					table.appendChild(li);
+				}
+			</script>
+
+	</body>
+
+</html>

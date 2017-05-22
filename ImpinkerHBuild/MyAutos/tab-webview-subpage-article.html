@@ -19,6 +19,12 @@
 				color: #6d6d72;
 				font-size: 15px;
 			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 52px;
+				max-width: 60px;
+				height: 52px;
+			}
 		</style>
 	</head>
 
@@ -71,8 +77,8 @@
 				</div>
 			</div>
 			<div class="mui-scroll">
-				<ul class="mui-table-view" id="list">
-					<!--<li class="mui-table-view-cell mui-media">
+				<ul class="mui-table-view" id="articlelist">
+					<li class="mui-table-view-cell mui-media">
 						<a href="view/article/preview.html">
 							<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
 							<div class="mui-media-body">
@@ -80,7 +86,7 @@
 								<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
 							</div>
 						</a>
-					</li>-->
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -101,6 +107,19 @@
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/commonUtil.js"></script>
+	<script type="text/template" id='article_item'>
+		<li class="mui-table-view-cell mui-media">
+			<a href="view/article/preview.html">
+				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
+				<div class="mui-media-body">
+					$ArticleName$
+					<p class="mui-ellipsis">$Description$</p>
+				</div>
+			</a>
+		</li>
+	</script>
 	<script>
 		mui.init({
 			swipeBack: false,
@@ -125,24 +144,19 @@
 		 */
 		function pulldownRefresh() {
 			pageNum = 1;
-			mui.ajax(apiPath, {
-				data: {
-					pageNum: pageNum,
-					pageSize: pageSize
-				},
-				dataType: 'json', //服务器返回json格式数据
-				type: 'get', //HTTP请求类型
-				success: function(data) {
-					var list = data.Data;
-					var table = document.body.querySelector('.mui-table-view');
-					table.innerHTML='';
-					for(var i = 0; i < list.length; i++) {
-						var item = list[i];
-						initItem(table, item, true);
-					}
-					pageNum++;
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			var data = {
+				pageNum: pageNum,
+				pageSize: pageSize
+			}
+			commonUtil.sendRequestGet(apiPath, data, function(data) {
+				$("#articlelist").html("");
+				var list = data.Data;
+				for(var i = 0; i < list.length; i++) {
+					var item = list[i];
+					initItem(item, true);
 				}
+				pageNum++;
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
 			});
 		}
 		/**
@@ -150,38 +164,29 @@
 		 */
 
 		function pullupRefresh() {
-			mui.ajax(apiPath, {
-				data: {
-					pageNum: pageNum,
-					pageSize: pageSize
-				},
-				dataType: 'json', //服务器返回json格式数据
-				type: 'get', //HTTP请求类型
-				success: function(data) {
-					var list = data.Data;
-					var table = document.body.querySelector('.mui-table-view');
-					for(var i = 0; i < list.length; i++) {
-						var item = list[i];
-						initItem(table, item, false);
-					}
-					pageNum++;
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+			var data = {
+				pageNum: pageNum,
+				pageSize: pageSize
+			}
+			commonUtil.sendRequestGet(apiPath, data, function(data) {
+				var list = data.Data;
+				for(var i = 0; i < list.length; i++) {
+					var item = list[i];
+					initItem(item, false);
 				}
+				pageNum++;
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 			});
 		}
 
-		function initItem(table, item, isPullDown) {
-			var li = document.createElement('li');
-			li.className = 'mui-table-view-cell mui-media';
-			li.innerHTML = '<a href="view/article/preview.html" articleid="' + item.Id + '">' +
-				'<img class="mui-media-object mui-pull-left" src="' + item.CoverImage + '"><div class="mui-media-body">' +
-				item.ArticleName + '<p class="mui-ellipsis">' + item.Company + '</p></div></a>';
-
+		function initItem(item, isPullDown) {
+			var template = $('script[id="article_item"]').html();
+			var articleHtmlStr = template.temp(item);
 			if(isPullDown) {
 				//下拉刷新，新纪录插到最前面；
-				table.insertBefore(li, table.firstChild);
+				$("#articlelist").append(articleHtmlStr);
 			} else {
-				table.appendChild(li);
+				$("#articlelist").append(articleHtmlStr);
 			}
 		}
 
@@ -220,7 +225,7 @@
 						autoShow: false
 					},
 					extras: {
-						articleUrl:"http://m.myautos.cn/Article/Index?id=" + articleid ,
+						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
 						articleid: articleid //扩展参数
 					}
 				});

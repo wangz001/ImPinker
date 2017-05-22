@@ -32,7 +32,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a id='my_weibo' href="#">
 						<span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
 						<div class="mui-media-body">我的微博</div>
 					</a>
@@ -106,6 +106,16 @@
 			mui.openWindow({
 				url: "view/article/youji_my.html",
 				id: "youji_my",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
+		});
+		document.getElementById("my_weibo").addEventListener('tap', function() {
+			mui.openWindow({
+				url: "view/weibo/weibo_my.html",
+				id: "weibo_my",
 				show: {
 					aniShow: 'slide-in-right',
 					duration: 200
