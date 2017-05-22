@@ -434,6 +434,29 @@ namespace ImpinkerApi.Controllers
 
         #endregion
 
+        #region 我的文章列表
+
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage GetMyArticle(int pageNum, int pageSize)
+        {
+            int totalCount;
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Normal,out totalCount);
+            foreach (var item in articles)
+            {
+                item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = articles,
+                Description = "获取草稿成功"
+            });
+        }
+
+        #endregion
+
         #region 删除文章
 
         [HttpPost]

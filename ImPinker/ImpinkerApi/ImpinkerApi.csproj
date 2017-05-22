@@ -182,6 +182,7 @@
     <Compile Include="Common\ImageUrlHelper.cs" />
     <Compile Include="Common\TokenHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleCollectionController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
