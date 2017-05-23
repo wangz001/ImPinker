@@ -111,7 +111,7 @@
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/template" id='article_item'>
 		<li class="mui-table-view-cell mui-media">
-			<a href="view/article/preview.html">
+			<a href="view/article/preview.html" articleid="$Id$">
 				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 				<div class="mui-media-body">
 					$ArticleName$
@@ -194,7 +194,7 @@
 		 * 列表点击事件
 		 * */
 		var aniShow = "pop-in";
-		mui('#list').on('tap', 'a', function() {
+		mui('#articlelist').on('tap', 'a', function() {
 			var id = this.getAttribute('href');
 			var href = this.href;
 			var type = "common"; // this.getAttribute("open-type");

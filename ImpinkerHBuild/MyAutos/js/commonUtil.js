@@ -80,13 +80,76 @@
 		uploader.start();
 		plus.nativeUI.showWaiting('正在上传图片');
 	}
+	//拍照
+	owner.captureImage = function(callback) {
+		var cmr = plus.camera.getCamera();
+		var res = cmr.supportedImageResolutions[0];
+		var fmt = cmr.supportedImageFormats[0];
+		cmr.captureImage(function(path) {
+				plus.io.resolveLocalFileSystemURL(path, function(entry) {
+					console.log("真实路径：" + entry.fullPath);
+					return callback(entry.fullPath);
+				}, function(e) {
+					mui.toast(e.message);
+				});
+			},
+			function(error) {
+				alert("Capture image failed: " + error.message);
+			}, {
+				resolution: res,
+				format: fmt
+			}
+		);
+	}
+
+	//摄像
+	owner.videoCapture = function(time, callback) {
+		var cmr = plus.camera.getCamera();
+		var res = cmr.supportedVideoResolutions[0];
+		var fmt = cmr.supportedVideoFormats[0];
+		console.log("Resolution: " + res + ", Format: " + fmt);
+		cmr.startVideoCapture(function(path) {
+				return callback(path);
+			},
+			function(error) {
+				console.log("Capture video failed: " + error.message);
+			}, {
+				resolution: res,
+				format: fmt
+			}
+		);
+		// 拍摄10s后自动完成 。android 暂不支持
+		setTimeout(stopCapture, time);
+		// 停止摄像
+		function stopCapture() {
+			console.log("stopCapture");
+			cmr.stopVideoCapture();
+		}
+	}
+
+	//压缩图片
+	owner.compressImage = function(imgpath, callback) {
+		callback = callback || $.noop;
+		var name = imgpath.substr(imgpath.lastIndexOf('/') + 1);
+		plus.zip.compressImage({
+			src: imgpath,
+			dst: '_doc/' + name,
+			overwrite: true,
+			width: "1200px",
+			quality: 90
+		}, function(zip) {
+			return callback(zip);
+		}, function(zipe) {
+			mui.toast('压缩失败！' + JSON.stringify(zipe))
+		});
+	}
 
 }(mui, window.commonUtil = {}));
 
 //html模板替换方法
-String.prototype.temp = function (obj) {
-    return this.replace(/\$\w+\$/gi, function (matchs) {
-        var returns = obj[matchs.replace(/\$/g, "")];
-        return (returns + "") === "undefined" ? "" : returns;
-    });
+String.prototype.temp = function(obj) {
+	return this.replace(/\$\w+\$/gi, function(matchs) {
+		var returns = obj[matchs.replace(/\$/g, "")];
+		return(returns + "") === "undefined" ? "" : returns;
+	});
 };

@@ -45,6 +45,7 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init();
@@ -120,26 +121,17 @@
 			//新建微博页面
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
-				//暂时直接跳转到新微博页面
-//				mui.openWindow({
-//					url: "view/weibo/weibo_new.html",
-//					id: "newweibo",
-//					show: {
-//						aniShow: 'slide-in-right',
-//						duration: 200
-//					}
-//				});
-//				return;
-
 				var btnArray = [{
 					title: '拍照'
 				}, {
 					title: '摄像'
 				}, {
 					title: '从相册选择'
+				}, {
+					title: '发布游记'
 				}];
 				plus.nativeUI.actionSheet({
-					title: "title",
+					title: "选择文件",
 					cancel: '取消',
 					buttons: btnArray
 				}, function(e) {
@@ -147,76 +139,32 @@
 					switch(index) {
 						case 1:
 							//拍照
-							captureImage();
-
-							function captureImage() {
-								var cmr = plus.camera.getCamera();
-								var res = cmr.supportedImageResolutions[0];
-								var fmt = cmr.supportedImageFormats[0];
-								cmr.captureImage(function(path) {
-										plus.io.resolveLocalFileSystemURL(path, function(entry) {
-											console.log("真实路径：" + entry.fullPath);
-											var arr = new Array([entry.fullPath]);
-											toNewWeiBo(arr);
-										}, function(e) {
-											alert(e.message);
-										});
-									},
-									function(error) {
-										alert("Capture image failed: " + error.message);
-									}, {
-										resolution: res,
-										format: fmt
-									}
-								);
-							}
+							commonUtil.captureImage(function(path) {
+								var arr = new Array();
+								arr.push(path);
+								toNewWeiBo(arr);
+							});
 							break;
 						case 2:
 							//摄像
-							var cmr = null;
-							videoCapture();
-
-							function videoCapture() {
-								cmr = plus.camera.getCamera();
-								var res = cmr.supportedVideoResolutions[0];
-								var fmt = cmr.supportedVideoFormats[0];
-								console.log("Resolution: " + res + ", Format: " + fmt);
-								cmr.startVideoCapture(function(path) {
-										console.log("Capture video success: " + path);
-										mui.openWindow({
-											url: "view/weibo/weibo_new_video.html",
-											id: "newweibovideo",
-											extras: {
-												path: path //扩展参数
-											},
-											show: {
-												aniShow: 'slide-in-right',
-												duration: 200
-											}
-										});
+							commonUtil.videoCapture(10000, function(path) {
+								console.log("Capture video success: " + path);
+								mui.openWindow({
+									url: "view/weibo/weibo_new_video.html",
+									id: "newweibovideo",
+									extras: {
+										path: path //扩展参数
 									},
-									function(error) {
-										console.log("Capture video failed: " + error.message);
-									}, {
-										resolution: res,
-										format: fmt
+									show: {
+										aniShow: 'slide-in-right',
+										duration: 200
 									}
-								);
-								// 拍摄10s后自动完成 
-								setTimeout(stopCapture, 10000);
-							}
-							// 停止摄像
-							function stopCapture() {
-								console.log("stopCapture");
-								cmr.stopVideoCapture();
-							}
+								});
+							});
 							break;
 						case 3:
 							//从相册选择图片
 							plus.gallery.pick(function(e) {
-								for(var i in e.files) {
-									
-								}
 								console.log(JSON.stringify(e.files));
 								toNewWeiBo(e.files);
 							}, function(e) {
@@ -224,10 +172,20 @@
 							}, {
 								filter: "image",
 								multiple: true,
-								maximum:6,
+								maximum: 6,
 								system: false,
 								onmaxed: function() {
 									plus.nativeUI.alert('最多只能选择3张图片');
+								}
+							});
+							break;
+						case 4:
+							mui.openWindow({
+								url: "view/article/youji_new.html",
+								id: "youji_new",
+								show: {
+									aniShow: 'slide-in-right',
+									duration: 100
 								}
 							});
 							break;
@@ -235,18 +193,28 @@
 				});
 			});
 
-			function toNewWeiBo(patharr) {
-				mui.openWindow({
-					url: "view/weibo/weibo_new.html",
-					id: "newweibo",
-					extras: {
-						path: patharr.join(",") //扩展参数
-					},
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
+			function toNewWeiBo(filesArr) {
+				var newarr = new Array();
+				for(var i in filesArr) {
+					var imgpath = filesArr[i];
+					commonUtil.compressImage(imgpath, function(zip) {
+						newarr.push(zip.target);
+						if(newarr.length == filesArr.length) {
+							//所有图片都压缩完成
+							mui.openWindow({
+								url: "view/weibo/weibo_new.html",
+								id: "newweibo",
+								extras: {
+									path: newarr.join(",") //扩展参数
+								},
+								show: {
+									aniShow: 'slide-in-right',
+									duration: 200
+								}
+							});
+						}
+					});
+				}
 			}
 			//搜索页跳转；
 			document.getElementById('search').addEventListener('tap', function() {

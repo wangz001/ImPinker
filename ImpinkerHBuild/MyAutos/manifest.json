@@ -200,7 +200,8 @@
 					"css/mui.min.css",
 					"tab-webview-subpage-article.html",
 					"js/app.js",
-					"js/jquery.js"
+					"js/jquery.js",
+					"js/commonUtil.js"
 				],
 				"refer": [
 					"tab-webview-subpage-setting.html",
@@ -209,7 +210,8 @@
 					"tab-webview-subpage-weibo.html",
 					"view/weibo/weibo_new.html",
 					"view/search/search.html",
-					"view/weibo/weibo_new_video.html"
+					"view/weibo/weibo_new_video.html",
+					"view/article/youji_new.html"
 				],
 				"priority": 0
 			},
@@ -280,7 +282,8 @@
 					"js/feedback.js",
 					"images/cbd.jpg",
 					"js/app.js",
-					"js/jquery.js"
+					"js/jquery.js",
+					"js/commonUtil.js"
 				],
 				"refer": [
 					"login.html",
@@ -349,7 +352,8 @@
 					"fonts/mui.ttf"
 				],
 				"refer": [
-					"view/article/youji_my.html"
+					"view/article/youji_my.html",
+					"view/weibo/weibo_my.html"
 				],
 				"priority": 0
 			},
@@ -426,7 +430,8 @@
 					"js/app.js",
 					"js/commonUtil.js",
 					"view/article/youji_new.html",
-					"view/article/youji_mydraft.html"
+					"view/article/youji_mydraft.html",
+					"css/feedback.css"
 				],
 				"refer": [
 					"view/article/youji_new_selectweibo.html",
