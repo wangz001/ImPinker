@@ -181,7 +181,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\ImageUrlHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -238,9 +237,11 @@
     <Content Include="Views\Search\_Index_Article.cshtml" />
     <Content Include="Views\Search\_Search_HotKey.cshtml" />
     <Content Include="Views\TestApi\Index.cshtml" />
+    <Content Include="Views\Article\Index_original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

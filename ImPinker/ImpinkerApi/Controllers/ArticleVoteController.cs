@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 using ImBLL;
@@ -11,7 +12,8 @@ namespace ImpinkerApi.Controllers
 {
     public class ArticleVoteController : BaseApiController
     {
-        readonly ArticleCommentBll _articleCommentBll =new ArticleCommentBll();
+        readonly ArticleCommentBll _articleCommentBll = new ArticleCommentBll();
+        readonly UserBll _userBll = new UserBll();
         
 
         #region 文章评论
@@ -62,61 +64,25 @@ namespace ImpinkerApi.Controllers
 
         #endregion
 
-        #region 文章收藏
-        /// <summary>
-        /// 用户收藏文章
-        /// </summary>
-        /// <returns></returns>
+        #region 获取文章评论
         [HttpGet]
-        [TokenCheck]
-        public HttpResponseMessage NewArticleCollect(long articleId)
+        public HttpResponseMessage GetArticleComments(long articleid,int pagenum,int pagesize)
         {
-            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var flag = new ArticleCollectionBll().AddCollect(articleId, userinfo.Id);
-            if (flag)
-            {
-                return GetJson(new JsonResultViewModel
-                {
-                    IsSuccess = 1,
-                    Data = null,
-                    Description = "收藏成功"
-                });
+            int totalCount;
+            var commentLists = _articleCommentBll.GetCommentsWithToComments(articleid, pagenum, pagesize, out totalCount);
+            foreach (var articleCommentVm in commentLists)
+            {//头像规格。100
+                articleCommentVm.HeadImage = ImageUrlHelper.GetHeadImageUrl(articleCommentVm.HeadImage, 100);
             }
             return GetJson(new JsonResultViewModel
             {
-                IsSuccess = 0,
-                Data = null,
-                Description = "没有更多数据"
-            });
-        }
-        /// <summary>
-        /// 取消收藏文章
-        /// </summary>
-        /// <param name="articleId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [TokenCheck]
-        public HttpResponseMessage CancelArticleCollect(long articleId)
-        {
-            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var flag = new ArticleCollectionBll().RemoveCollect(articleId, userinfo.Id);
-            if (flag)
-            {
-                return GetJson(new JsonResultViewModel
-                {
-                    IsSuccess = 1,
-                    Data = null,
-                    Description = "取消收藏成功"
-                });
-            }
-            return GetJson(new JsonResultViewModel
-            {
-                IsSuccess = 0,
-                Data = null,
-                Description = "没有更多数据"
+                IsSuccess = 1,
+                Data = commentLists,
+                Description = "获取评论成功"
             });
         }
 
         #endregion
+
     }
 }

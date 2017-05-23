@@ -1,8 +1,8 @@
-﻿using ImModel.ViewModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
+using ImModel.ViewModel;
 
-namespace ImPinkerApi.Common
+namespace ImBLL
 {
     public class ImageUrlHelper
     {

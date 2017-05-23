@@ -39,9 +39,20 @@ namespace ImpinkerMobile.Controllers
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
-            vm.Id = idInt.ToString();
-            ViewBag.Article = vm;
-            return View("Index");
+            if (string.IsNullOrEmpty(vm.Company))
+            {//原创文章
+                vm.Id = idInt.ToString();
+                ViewBag.Article = vm;
+                var user = UserBll.GetModelByCache(Int32.Parse(vm.Userid));
+                ViewBag.UserInfo = user;
+                return View("Index_original");
+            }
+            else
+            {//网络爬的文章
+                vm.Id = idInt.ToString();
+                ViewBag.Article = vm;
+                return View("Index");
+            }
         }
 
     }
