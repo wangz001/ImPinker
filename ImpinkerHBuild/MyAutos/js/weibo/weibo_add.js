@@ -25,29 +25,30 @@
 	mui.plusReady(function() {
 		//设备信息，无需修改
 		weibo.deviceInfo = {
-			appid: plus.runtime.appid,
-			imei: plus.device.imei, //设备标识
-			images: weibo.files, //图片文件
-			p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
-			HardWareType: plus.device.model, //设备型号
-			app_version: plus.runtime.version,
-			plus_version: plus.runtime.innerVersion, //基座版本号
-			os: mui.os.version,
-			net: '' + plus.networkinfo.getCurrentType()
-		}
-		//地理位置信息
+				appid: plus.runtime.appid,
+				imei: plus.device.imei, //设备标识
+				images: weibo.files, //图片文件
+				p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
+				HardWareType: plus.device.model, //设备型号
+				app_version: plus.runtime.version,
+				plus_version: plus.runtime.innerVersion, //基座版本号
+				os: mui.os.version,
+				net: '' + plus.networkinfo.getCurrentType()
+			}
+			//地理位置信息
 		weibo.gisinfo = {
-			LocationText: "",
-			Longitude: "",
-			Latitude: "",
-			Height: ""
-		}
-		//获取参数
+				LocationText: "",
+				Longitude: "",
+				Latitude: "",
+				Height: ""
+			}
+			//获取参数
 		var self = plus.webview.currentWebview();
-		var pathArr = self.path;
+		var pathArr = self.path; //只能接受字符串类型的参数。不能接受数组
 		if(pathArr != undefined && pathArr != null) {
 			console.log(pathArr);
-			weibo.initImages(pathArr);
+			var arr = pathArr.split(",");
+			weibo.initImages(arr);
 		}
 
 		weibo.newPlaceholder();
@@ -86,7 +87,7 @@
 	/**
 	 * 初始化图片域占位
 	 */
-	weibo.newPlaceholder = function(pathArr) {
+	weibo.newPlaceholder = function() {
 		var fileInputArray = weibo.getFileInputArray();
 		if(fileInputArray &&
 			fileInputArray.length > 0 &&
@@ -98,7 +99,7 @@
 		placeholder.setAttribute('class', 'image-item space');
 		var up = document.createElement("div");
 		up.setAttribute('class', 'image-up')
-		//删除图片
+			//删除图片
 		var closeButton = document.createElement('div');
 		closeButton.setAttribute('class', 'image-close');
 		closeButton.innerHTML = 'X';
@@ -118,7 +119,6 @@
 		fileInput.addEventListener('tap', function(event) {
 			var self = this;
 			var index = (this.id).substr(-1);
-
 			plus.gallery.pick(function(e) {
 				//				console.log("event:"+e);
 				var name = e.substr(e.lastIndexOf('/') + 1);
@@ -128,15 +128,14 @@
 					src: e,
 					dst: '_doc/' + name,
 					overwrite: true,
-					width: "1200px",
-					quality: 90
+					quality: 50
 				}, function(zip) {
 					size += zip.size
 					console.log("filesize:" + zip.size + ",totalsize:" + size);
 					if(size > (10 * 1024 * 1024)) {
 						return mui.toast('文件超大,请重新选择~');
 					}
-					if(!self.parentNode.classList.contains('space')) { //已有加号图片
+					if(!self.parentNode.classList.contains('space')) { //已有图片
 						weibo.files.splice(index - 1, 1, {
 							name: "images" + index,
 							path: e
@@ -151,10 +150,11 @@
 				}, function(zipe) {
 					mui.toast('压缩失败！')
 				});
+
 			}, function(e) {
 				mui.toast(e.message);
 			}, {});
-		}, true);
+		});
 		placeholder.appendChild(closeButton);
 		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
@@ -163,38 +163,71 @@
 
 	//接受页面跳转传递过来的图片，并显示
 	weibo.initImages = function(pathArr) {
-		if(pathArr == null || pathArr.length == 0) {
+			if(pathArr == null || pathArr.length == 0) {
+				weibo.newPlaceholder();
+				return;
+			}
+			for(var i = 0; i < pathArr.length; i++) {
+				imageIndexIdNum = i + 1;
+				var placehold = document.createElement('div');
+				placehold.setAttribute('class', 'image-item');
+				placehold.setAttribute('id', 'image-' + imageIndexIdNum);
+				var path = pathArr[i];
+				//压缩
+				var name = path.substr(path.lastIndexOf('/') + 1);
+				console.log(name);
+				plus.zip.compressImage({
+					src: path,
+					dst: '_doc/' + name,
+					overwrite: true,
+					width: "1200px",
+					quality: 90
+				}, function(zip) {
+					size += zip.size
+					if(size > (10 * 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					//					if(!self.parentNode.classList.contains('space')) { //已有加号图片
+					//						weibo.files.splice(index - 1, 1, {
+					//							name: "images" + index,
+					//							path: e
+					//						});
+					//					} else { //加号
+					//						placeholder.classList.remove('space');
+					//						weibo.addFile(zip.target);
+					//						weibo.newPlaceholder();
+					//					}
+					//					up.classList.remove('image-up');
+					//					console.log(zip.target);
+					//					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+					//					
+					//					
+
+					//删除图片
+					var closeButton = document.createElement('div');
+					closeButton.setAttribute('class', 'image-close');
+					closeButton.innerHTML = 'X';
+					//小X的点击事件
+					closeButton.addEventListener('tap', function(event) {
+						setTimeout(function() {
+							weibo.imageList.removeChild(placehold);
+							weibo.newPlaceholder();
+						}, 0);
+						return false;
+					}, false);
+					weibo.addFile(zip.target);
+					placehold.style.backgroundImage = 'url(' + zip.target + ')';
+					console.log("backgroundImage-------:" + zip.target);
+					placehold.appendChild(closeButton);
+					weibo.imageList.appendChild(placehold);
+				}, function(zipe) {
+					mui.toast('压缩失败！')
+				});
+
+			}
 			weibo.newPlaceholder();
-			return;
 		}
-		for(var i = 0; i < pathArr.length; i++) {
-			imageIndexIdNum = i + 1;
-			var placehold = document.createElement('div');
-			placehold.setAttribute('class', 'image-item');
-			placehold.setAttribute('id', 'image-' + imageIndexIdNum);
-			//删除图片
-			var closeButton = document.createElement('div');
-			closeButton.setAttribute('class', 'image-close');
-			closeButton.innerHTML = 'X';
-			//小X的点击事件
-			closeButton.addEventListener('tap', function(event) {
-				setTimeout(function() {
-					weibo.imageList.removeChild(placehold);
-					weibo.newPlaceholder();
-				}, 0);
-				return false;
-			}, false);
-			var path = pathArr[i];
-			console.log("path1111:" + path);
-			weibo.addFile(path);
-			placehold.style.backgroundImage = 'url(' + path + ')';
-			console.log("backgroundImage-------:" + path);
-			placehold.appendChild(closeButton);
-			weibo.imageList.appendChild(placehold);
-		}
-		weibo.newPlaceholder();
-	}
-	//获取地理位置
+		//获取地理位置
 	weibo.locationBtn.addEventListener("toggle", function(event) {
 		if(event.detail.isActive) {
 			console.log("你启动了开关");

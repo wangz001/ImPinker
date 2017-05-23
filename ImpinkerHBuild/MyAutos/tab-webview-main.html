@@ -121,15 +121,15 @@
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
 				//暂时直接跳转到新微博页面
-				mui.openWindow({
-					url: "view/weibo/weibo_new.html",
-					id: "newweibo",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
-				return;
+//				mui.openWindow({
+//					url: "view/weibo/weibo_new.html",
+//					id: "newweibo",
+//					show: {
+//						aniShow: 'slide-in-right',
+//						duration: 200
+//					}
+//				});
+//				return;
 
 				var btnArray = [{
 					title: '拍照'
@@ -215,14 +215,20 @@
 							//从相册选择图片
 							plus.gallery.pick(function(e) {
 								for(var i in e.files) {
-									console.log(e.files[i]);
+									
 								}
+								console.log(JSON.stringify(e.files));
 								toNewWeiBo(e.files);
 							}, function(e) {
 								console.log("取消选择图片");
 							}, {
 								filter: "image",
-								multiple: true
+								multiple: true,
+								maximum:6,
+								system: false,
+								onmaxed: function() {
+									plus.nativeUI.alert('最多只能选择3张图片');
+								}
 							});
 							break;
 					}
@@ -234,7 +240,7 @@
 					url: "view/weibo/weibo_new.html",
 					id: "newweibo",
 					extras: {
-						path: patharr //扩展参数
+						path: patharr.join(",") //扩展参数
 					},
 					show: {
 						aniShow: 'slide-in-right',
