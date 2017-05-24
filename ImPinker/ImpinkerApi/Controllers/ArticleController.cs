@@ -212,6 +212,7 @@ namespace ImpinkerApi.Controllers
         [TokenCheck]
         public HttpResponseMessage PublishArticle([FromBody]ArticleViewModel article)
         {
+            //保存content
             var articleSnap = new ArticleSnaps
             {
                 ArticleId = article.Id,
@@ -220,8 +221,11 @@ namespace ImpinkerApi.Controllers
                 UpdateTime = DateTime.Now
             };
             var flagSnap = new ArticleSnapsBll().AddDraft(articleSnap);
+            //保存article 基本信息
             var model = _articleBll.GetModelByCache(article.Id);
             model.State = (int)ArticleStateEnum.Normal;
+            model.ArticleName = article.ArticleName;
+            model.Description = article.Description;
             model.PublishTime = DateTime.Now;
             model.UpdateTime = DateTime.Now;
             var flagArticle = _articleBll.Update(model);

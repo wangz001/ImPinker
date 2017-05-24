@@ -230,7 +230,8 @@
 			"js/commonUtil.js",
 			"view/article/youji_new.html",
 			"view/article/youji_mydraft.html",
-			"css/feedback.css"
+			"css/feedback.css",
+			"images/iconfont-tianjia.png"
 		],
 		"refer": [
 			"view/article/youji_new_selectweibo.html",

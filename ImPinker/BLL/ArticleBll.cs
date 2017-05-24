@@ -184,6 +184,10 @@ namespace ImBLL
                     {
                         model.ArticleName = row["ArticleName"].ToString();
                     }
+                    if (row.Table.Columns.Contains("Description") && row["Description"] != null)
+                    {
+                        model.Description = row["Description"].ToString();
+                    }
                     if (model.ArticleName.Length > 25)
                     {
                         model.ArticleName = model.ArticleName.Substring(0, 25) + "……";

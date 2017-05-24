@@ -6,8 +6,9 @@
 		articleid: 0,
 		articlename: "",
 		coverimage: "",
+		description:"",
 		content: "",
-		lastTextArea:""
+		currentNode:null   //文章中间插入内容的标记
 	}
 	var weiboimg_1200style = '?x-oss-process=style/weibo_1200';
 	var weiboimg_24style = '?x-oss-process=style/weibo_24_16';
@@ -25,23 +26,34 @@
 				var imgHtmlStr = "";
 				for(var j = 0; j < imgs.length; j++) {
 					owner.showImage(imgs[j]);
-					owner.showTextAreaStr("");
 				}
 			}
 		}
 	}
 	//显示文字
 	owner.showTextAreaStr = function(textStr) {
-		owner.article.lastTextArea=textStr.trim();
-		if(textStr.trim()!=""){
-			//避免插入多行textarea
-			var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
-			$(".mui-content-padded").append(textareaStr);
+		if(owner.article.currentNode==null){
+			//初始化时，第一个文本框是默认
+			owner.article.currentNode=$(".mui-content-padded").children().last();
 		}
-		
+		//图片之间只能有一个textarea。多了的内容合并
+		if($(owner.article.currentNode).is("textarea")){
+			var inner=$(owner.article.currentNode).val();
+			inner=inner.trim()==""? textStr:inner+"\r\n"+textStr;
+			$(owner.article.currentNode).val(inner);
+		}else{
+			var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
+			$(owner.article.currentNode).after(textareaStr);
+			owner.article.currentNode=$(owner.article.currentNode).next();
+		}
 	}
-	//显示图片
+	//显示图片(可在文章中间插入图片)
 	owner.showImage = function(imgurl) {
+		if(owner.article.currentNode==null){
+			console.log("111");
+			//初始化时，第一个文本框是默认
+			owner.article.currentNode=$(".mui-content-padded").children().last();
+		}
 		var imgPath = 'http://img.myautos.cn/';
 		if(imgurl.indexOf('http://') == -1) {
 			imgurl = imgPath + imgurl;
@@ -54,9 +66,11 @@
 		var imgHtmlStr = imgTemplate.temp({
 			"src": imgurl_900
 		});
-		var textareaStr = '<textarea name="yjcontent" value=""></textarea>';
-		$(".mui-content-padded").append(imgHtmlStr);
-		$(".mui-content-padded").append(textareaStr);
+		//$(".mui-content-padded").append(imgHtmlStr);
+		$(owner.article.currentNode).after(imgHtmlStr);
+		owner.article.currentNode=$(owner.article.currentNode).next();
+		owner.showTextAreaStr("");
+		
 	}
 
 	//根据标签 name属性，拼接出 content
@@ -180,7 +194,8 @@
 			console.log(JSON.stringify(data));
 			if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 				var articleinfo = data.Data;
-				return callback(articleinfo.Id);
+				console.log("aaa");
+				return callback(data.Data);
 			} else {
 				return;
 			}
@@ -219,7 +234,7 @@
 							console.log(JSON.stringify(data));
 							var url = data.Data;
 							owner.article.coverimage = url;
-							$("#coverimage").attr('src', url);
+							$("#setcoverimage").attr('src', url);
 						});
 					}
 				}, function(zipe) {
@@ -244,6 +259,12 @@
 		if(owner.article.articleid == 0) {
 			return callback('articleid不能为0啊');
 		}
+		if(owner.article.articlename == "") {
+			return callback('名称不能为空啊');
+		}
+		if(owner.article.description == "") {
+			return callback('简介不能为空啊');
+		}
 		var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
 		if(resultStr == "") {
 			return callback('resultStr不能为kong啊');
@@ -252,6 +273,8 @@
 		var url = 'http://api.myautos.cn/api/article/PublishArticle';
 		var data = {
 			Id: owner.article.articleid,
+			ArticleName:owner.article.articlename,
+			Description:owner.article.description,
 			Content: resultStr
 		};
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
@@ -271,7 +294,7 @@
 		var data = {
 			articleid: articleid,
 		};
-		commonUtil.sendRequestGet(url, data, false, function(data) {
+		commonUtil.sendRequestGet(url, data, function(data) {
 			if(data.IsSuccess == 1 && data.Data != null) {
 				var articleinfo = data.Data;
 				var contentStr = articleinfo.Content;
@@ -294,8 +317,6 @@
 				var src = $(img[0]).attr('src');
 				owner.showImage(src);
 			} else {
-				console.log($(pitem).text());
-				//文字内容
 				var text = $(pitem).text();
 				owner.showTextAreaStr(text);
 			}

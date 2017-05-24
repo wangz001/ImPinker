@@ -15,6 +15,7 @@
 			}
 			
 			textarea {
+				
 				border: 0;
 				background-color: transparent;
 				/*scrollbar-arrow-color:yellow;  
@@ -30,6 +31,7 @@
 			}
 			
 			.mui-content-padded {
+				
 				background-color: white;
 			}
 			
@@ -69,12 +71,13 @@
 			</div>
 			<div class="mui-inline"></div>
 			<div class="row mui-input-row description">
-				<textarea id='description' class="mui-input-clear question" placeholder="游记简介，100字以内..."></textarea>
+				<textarea  id='description' class="mui-input-clear question" placeholder="游记简介，100字以内..."></textarea>
 			</div>
 			<p>设置封面图</p>
-			<div class="row image-list">
-				<div class="image-item space">
-					<img style="max-height: 200px;" id='setcoverimage' src="../../images/iconfont-tianjia.png">
+			<div id='image-list' class="row image-list">
+				<div class="">
+					<img style="max-height: 200px;" id='coverimage' src="../../images/cbd.jpg">
+					
 				</div>
 			</div>
 			<p>正文</p>
@@ -110,40 +113,26 @@
 					<img src="$src$" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
 				</div>
 				<div class="post-move" role="operator" style="">
+					<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
+					<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
 					<a class="del mui-icon mui-icon-trash" role="del"></a>
 				</div>
 			</div>
 		</script>
 		<script type="application/javascript">
-			mui.init({
-				beforeback: function() {
-					//保存草稿
-					if(edityoujiUtil.article.articleid>0){
-						edityoujiUtil.saveDraft(function(data) {
-							mui.toast("修改已保存到草稿！");
-							return true;
-						});
-					}
-				}
-			});
+			mui.init({});
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				//从草稿页跳转
 				var articleid = self.articleid;
 				var articlename = self.articlename;
 				var coverimage = self.coverimage;
-				var description=self.description;
-				console.log(description);
-				var content=self.content;
 				if(articleid != null && articleid > 0) {
 					edityoujiUtil.article.articleid = articleid;
 					edityoujiUtil.article.articlename = articlename;
 					edityoujiUtil.article.coverimage = coverimage;
-					edityoujiUtil.article.description = description;
-					edityoujiUtil.article.content = content;
 					$("#youi_title").val(articlename);
 					$("#coverimage").attr('src', coverimage);
-					$("#description").val(description);
 					edityoujiUtil.getandShowContent(articleid, function() {
 
 					});
@@ -173,32 +162,11 @@
 							}
 						});
 					} else {
-						edityoujiUtil.article.articlename = content;
+						edityoujiUtil.updateTitle(content, function(data) {
+
+						});
 					}
 				}, 500);
-			});
-			//简介
-			$("#description").change(function() {
-				var textDescription = $(this).val();
-				setTimeout(function() {
-					console.log(textDescription);
-					edityoujiUtil.article.description = textDescription;
-				}, 200);
-			});
-			//图片删除图片事件绑定  mui-icon-trash
-			mui('.mui-content-padded').on('tap', '.del', function() {
-				console.log("aaa");
-				var imgitem = $(this).parents('.post-img');
-				var nextTextarea = $(imgitem).next();
-				var preTextarea = $(imgitem).prev();
-				$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
-				$(imgitem).remove(); //删除图片和图片的上一个textarea
-				$(preTextarea).remove();
-			});
-			//标记当前文本框
-			mui('.mui-content-padded').on('tap', 'textarea', function() {
-				console.log("kkk");
-				edityoujiUtil.article.currentNode = this;
 			});
 			//保存草稿
 			$("#youji_content textarea").change(function() {
@@ -238,6 +206,7 @@
 			document.getElementById('addimage').addEventListener('tap', function() {
 				edityoujiUtil.addImage(function(data) {
 					edityoujiUtil.showImage(data.Data);
+					owner.showTextAreaStr("");
 				});
 			});
 			//添加微博
