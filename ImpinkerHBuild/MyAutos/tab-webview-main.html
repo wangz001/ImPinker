@@ -21,24 +21,28 @@
 		<header class="mui-bar mui-bar-nav">
 			<a id="search" class="mui-icon mui-icon-search mui-pull-left" style="color: #999;"></a>
 			<h1 id="title" class="mui-title">首页</h1>
-			<a id="newweibo" class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
+			<a  class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-article.html">
 				<span class="mui-icon mui-icon-home"></span>
-				<span class="mui-tab-label">首页</span>
+				<span class="mui-tab-label">文章</span>
 			</a>
 			<a class="mui-tab-item" href="tab-webview-subpage-weibo.html">
-				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
-				<span class="mui-tab-label">微博</span>
+				<span class="mui-icon mui-icon-pengyouquan"></span>
+				<span class="mui-tab-label">途迹</span>
 			</a>
-			<!--<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
-				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">通讯录</span>
-			</a>-->
+			<a id="newweibo" class="mui-tab-item" >
+				<span class="mui-icon mui-icon-plusempty"></span>
+				<span class="mui-tab-label">添加</span>
+			</a>
+			<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
+				<span class="mui-icon mui-icon-chat"></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
 			<a class="mui-tab-item" href="tab-webview-subpage-setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">设置</span>
+				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
 
@@ -122,14 +126,16 @@
 			//处理右上角关于图标的点击事件；
 			document.getElementById('newweibo').addEventListener('tap', function() {
 				var btnArray = [{
-					title: '拍照'
-				}, {
-					title: '摄像'
-				}, {
-					title: '从相册选择'
-				}, {
-					title: '发布游记'
-				}];
+						title: '拍照'
+					}, {
+						title: '从相册选择'
+					}, {
+						title: '发布游记'
+					}
+					//				{
+					//					title: '摄像'
+					//				}
+				];
 				plus.nativeUI.actionSheet({
 					title: "选择文件",
 					cancel: '取消',
@@ -146,23 +152,6 @@
 							});
 							break;
 						case 2:
-							//摄像
-							commonUtil.videoCapture(10000, function(path) {
-								console.log("Capture video success: " + path);
-								mui.openWindow({
-									url: "view/weibo/weibo_new_video.html",
-									id: "newweibovideo",
-									extras: {
-										path: path //扩展参数
-									},
-									show: {
-										aniShow: 'slide-in-right',
-										duration: 200
-									}
-								});
-							});
-							break;
-						case 3:
 							//从相册选择图片
 							plus.gallery.pick(function(e) {
 								console.log(JSON.stringify(e.files));
@@ -179,7 +168,7 @@
 								}
 							});
 							break;
-						case 4:
+						case 3:
 							mui.openWindow({
 								url: "view/article/youji_new.html",
 								id: "youji_new",
@@ -187,6 +176,23 @@
 									aniShow: 'slide-in-right',
 									duration: 100
 								}
+							});
+							break;
+						case 4:
+							//摄像
+							commonUtil.videoCapture(10000, function(path) {
+								console.log("Capture video success: " + path);
+								mui.openWindow({
+									url: "view/weibo/weibo_new_video.html",
+									id: "newweibovideo",
+									extras: {
+										path: path //扩展参数
+									},
+									show: {
+										aniShow: 'slide-in-right',
+										duration: 200
+									}
+								});
 							});
 							break;
 					}

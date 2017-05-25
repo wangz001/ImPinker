@@ -1,5 +1,6 @@
 .mui-card .mui-card-content {
 	margin: inherit;
+	margin-bottom: initial;
 }
 
 .mui-card .mui-card-content .bigimage {

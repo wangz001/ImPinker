@@ -41,11 +41,20 @@
 			var inner=$(owner.article.currentNode).val();
 			inner=inner.trim()==""? textStr:inner+"\r\n"+textStr;
 			$(owner.article.currentNode).val(inner);
+			autosize(owner.article.currentNode);
+			autosize.update(owner.article.currentNode);
 		}else{
-			var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
-			$(owner.article.currentNode).after(textareaStr);
+			var textareaDom=document.createElement("textarea");
+			$(textareaDom).attr("name","yjcontent");
+			$(textareaDom).val(textStr);
+			textareaDom.innerHTML=textStr;
+			//var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
+			$(owner.article.currentNode).after(textareaDom);
 			owner.article.currentNode=$(owner.article.currentNode).next();
+			autosize(textareaDom);
+			autosize.update(textareaDom);
 		}
+		
 	}
 	//显示图片(可在文章中间插入图片)
 	owner.showImage = function(imgurl) {
@@ -191,13 +200,12 @@
 		};
 		owner.article.content = resultStr;
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {
-			console.log(JSON.stringify(data));
-			if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+			if(data.IsSuccess == 1 && data.Data) {
 				var articleinfo = data.Data;
 				console.log("aaa");
-				return callback(data.Data);
+				return callback(articleinfo);
 			} else {
-				return;
+				return callback();
 			}
 		});
 	}
@@ -299,7 +307,7 @@
 				var articleinfo = data.Data;
 				var contentStr = articleinfo.Content;
 				owner.showContentEdit(contentStr);
-				return callback(articleinfo);
+				return callback();
 			} else {
 				return callback();
 			}

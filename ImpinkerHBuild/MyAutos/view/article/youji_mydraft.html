@@ -76,7 +76,6 @@
 			//添加列表项的点击事件  
 			mui('.mui-scroll').on('tap', '.draftitem', function(e) {
 				var articleid = $(this).attr("articleid");
-				console.log(articleid)
 				var selectedItem = {};
 				for(var i = 0; i < allDraftList.length; i++) {
 					var item = allDraftList[i];

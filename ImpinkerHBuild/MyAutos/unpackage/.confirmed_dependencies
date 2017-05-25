@@ -231,7 +231,8 @@
 			"view/article/youji_new.html",
 			"view/article/youji_mydraft.html",
 			"css/feedback.css",
-			"images/iconfont-tianjia.png"
+			"images/iconfont-tianjia.png",
+			"js/autosize.js"
 		],
 		"refer": [
 			"view/article/youji_new_selectweibo.html",
@@ -297,7 +298,8 @@
 			"js/jquery.js",
 			"css/weibo.css",
 			"fonts/mui.ttf",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"images/cbd.jpg"
 		],
 		"refer": [
 			"view/article/youji_new.html",

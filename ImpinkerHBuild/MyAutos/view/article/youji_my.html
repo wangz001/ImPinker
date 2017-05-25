@@ -11,7 +11,14 @@
 		<style type="text/css">
 			.mui-card-content-inner {
 				position: relative;
-				padding: 10px;
+				padding: 5px;
+			}
+			.mui-card-content-inner p{
+				margin-bottom: 5px;
+			}
+			.mui-card-content-inner .articlename{
+				font-size: 17px;
+				color: #333;
 			}
 		</style>
 	</head>
@@ -23,7 +30,15 @@
 		</header>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 			<div class="mui-scroll">
-
+				<div articleid='12' class="mui-card">
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							<p class="articlename" style="color: #333;font-size: 16;">名称</p>
+							<p>Posted on 2017</p>
+						</div>
+					</div>
+					<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url(../../images/cbd.jpg)"></div>
+				</div>
 			</div>
 		</div>
 
@@ -33,13 +48,13 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type='text/template' id='articlelistitem'>
 			<div articleid='$Id$' class="mui-card">
-				<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url($CoverImage$)"></div>
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<p>Posted on $CreateTime$</p>
-						<p style="color: #333;">$ArticleName$</p>
+						<p class="articlename" >$ArticleName$</p>
+						<p>发表于 $CreateTime$</p>
 					</div>
 				</div>
+				<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url($CoverImage$)"></div>
 			</div>
 
 		</script>
