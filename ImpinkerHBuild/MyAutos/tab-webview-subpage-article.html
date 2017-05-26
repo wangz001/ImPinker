@@ -15,16 +15,19 @@
 			}
 			
 			.title {
-				margin: 20px 15px 10px;
+				margin: 3px 11px 15px 2px;
 				color: #6d6d72;
-				font-size: 15px;
+				font-size: 17px;
 			}
-			
+			.mui-table-view-cell {
+				padding: 10px;
+			}
 			.mui-table-view .mui-media-object {
 				line-height: 52px;
 				max-width: 60px;
 				height: 52px;
 			}
+			
 		</style>
 	</head>
 
@@ -78,19 +81,19 @@
 			</div>
 			<div class="mui-scroll">
 				<ul class="mui-table-view" id="articlelist">
-					<li class="mui-table-view-cell mui-media">
+					<!--<li class="mui-table-view-cell mui-media">
 						<a href="view/article/preview.html">
 							<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
 							<div class="mui-media-body">
-								幸福
+								<P class="title">幸福</P>
 								<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
 							</div>
 						</a>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 		</div>
-		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: block;">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a href="#">拍照或录像</a>
@@ -114,8 +117,9 @@
 			<a href="view/article/preview.html" articleid="$Id$">
 				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 				<div class="mui-media-body">
-					$ArticleName$
+					<P class="title">$ArticleName$</P>
 					<p class="mui-ellipsis">$Description$</p>
+					
 				</div>
 			</a>
 		</li>

@@ -58,7 +58,9 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">写游记</h1>
-			<button id="publishyouji" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
+			<button id="publishyouji" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+					发布
+			</button>
 		</header>
 		<div id="hideContent" style="display: none;"></div>
 		<div class="mui-content feedback">
@@ -104,7 +106,7 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type="text/javascript" src="../../js/autosize.js" ></script>
+		<script type="text/javascript" src="../../js/autosize.js"></script>
 		<script type='text/template' id='postimg'>
 			<div class="post-img">
 				<div class="add-img" name='yjcontent'>
@@ -118,16 +120,15 @@
 		<script type="application/javascript">
 			mui.init({
 				beforeback: function() {
-					
-					if(edityoujiUtil.article.articleid>0){
+					if(edityoujiUtil.article.articleid > 0) {
 						plus.nativeUI.showWaiting('正在发布保存到草稿');
 						edityoujiUtil.saveDraft(function(data) {
 							plus.nativeUI.closeWaiting();
 							mui.toast("修改已保存到草稿！");
-							setTimeout(function(){
+							setTimeout(function() {
 								var self = plus.webview.currentWebview();
 								self.close();
-							},1000);
+							}, 1000);
 						});
 						return false;
 					}
@@ -140,8 +141,8 @@
 				var articleid = self.articleid;
 				var articlename = self.articlename;
 				var coverimage = self.coverimage;
-				var description=self.description;
-				var content=self.content;
+				var description = self.description;
+				var content = self.content;
 				if(articleid != null && articleid > 0) {
 					edityoujiUtil.article.articleid = articleid;
 					edityoujiUtil.article.articlename = articlename;
@@ -151,8 +152,7 @@
 					$("#youi_title").val(articlename);
 					$("#coverimage").attr('src', coverimage);
 					$("#description").val(description);
-					edityoujiUtil.getandShowContent(articleid, function() {
-					});
+					edityoujiUtil.getandShowContent(articleid, function() {});
 				}
 				autosize($(".mui-content-padded textarea"));
 			});
