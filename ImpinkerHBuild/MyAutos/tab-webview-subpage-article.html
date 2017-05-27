@@ -19,78 +19,71 @@
 				color: #6d6d72;
 				font-size: 17px;
 			}
+			
 			.mui-table-view-cell {
 				padding: 10px;
 			}
+			
 			.mui-table-view .mui-media-object {
 				line-height: 52px;
 				max-width: 60px;
 				height: 52px;
 			}
 			
+			.mui-table-view .mui-card {
+				font-size: 14px;
+				position: relative;
+				overflow: hidden;
+				margin: 0px;
+			}
+			
+			.mui-card .mui-card-content-inner {
+				position: relative;
+				padding: 7px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div id="slider" class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
-					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-					<div class="mui-slider-item mui-slider-item-duplicate">
-						<a href="#">
-							<img src="images/shuijiao.jpg">
-						</a>
-					</div>
-					<!-- 第一张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/shuijiao.jpg">
-						</a>
-					</div>
-					<!-- 第二张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/muwu.jpg">
-						</a>
-					</div>
-					<!-- 第三张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/cbd.jpg">
-						</a>
-					</div>
-					<!-- 第四张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/yuantiao.jpg">
-						</a>
-					</div>
-					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
-					<div class="mui-slider-item mui-slider-item-duplicate">
-						<a href="#">
-							<img src="images/shuijiao.jpg">
-						</a>
-					</div>
-				</div>
-				<div class="mui-slider-indicator">
-					<div class="mui-indicator mui-active"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
-				</div>
-			</div>
-			<div class="mui-scroll">
-				<ul class="mui-table-view" id="articlelist">
-					<!--<li class="mui-table-view-cell mui-media">
-						<a href="view/article/preview.html">
-							<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
-							<div class="mui-media-body">
-								<P class="title">幸福</P>
-								<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+		<div class="mui-content">
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="articlelist">
+						<li class="mui-table-view-cell mui-media">
+							<a href="view/article/preview.html">
+								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
+								<div class="mui-media-body">
+									<P class="title">幸福</P>
+									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<div class="mui-card">
+								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(images/cbd.jpg)"></div>
+								<div class="mui-card-content">
+									<div class="mui-card-content-inner">
+										<p>Posted on January 18, 2016</p>
+										<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+									</div>
+								</div>
+								<div class="mui-card-footer">
+									<a class="mui-card-link">Like</a>
+									<a class="mui-card-link">Read more</a>
+								</div>
 							</div>
-						</a>
-					</li>-->
-				</ul>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a href="view/article/preview.html">
+								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
+								<div class="mui-media-body">
+									<P class="title">幸福</P>
+									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: block;">
@@ -119,8 +112,34 @@
 				<div class="mui-media-body">
 					<P class="title">$ArticleName$</P>
 					<p class="mui-ellipsis">$Description$</p>
-					
+
 				</div>
+			</a>
+		</li>
+	</script>
+	<script type="text/template" id="article_item_right">
+		<li href="view/article/preview.html" articleid="$Id$">
+			<a href="view/article/preview.html">
+				<img class="mui-media-object mui-pull-right" src="$CoverImage$">
+				<div class="mui-media-body">
+					$ArticleName$
+					<p class="mui-ellipsis">$Description$</p>
+				</div>
+			</a>
+		</li>
+	</script>
+	<script type="text/template" id="article_item_card">
+		<li>
+			<a href="view/article/preview.html" articleid="$Id$">
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<p>Posted on January 18, 2016</p>
+						<p style="color: #333;">$ArticleName$</p>
+					</div>
+				</div>
+			</div>
 			</a>
 		</li>
 	</script>
@@ -141,6 +160,7 @@
 		});
 
 		var pageNum = 1;
+		var allCount = 0;
 		var pageSize = 30;
 		var apiPath = "http://api.myautos.cn/api/Article/GetByPage";
 		/**
@@ -185,13 +205,22 @@
 
 		function initItem(item, isPullDown) {
 			var template = $('script[id="article_item"]').html();
-			var articleHtmlStr = template.temp(item);
+			var templateCard = $('script[id="article_item_card"]').html();
+			var templateRight = $('script[id="article_item_right"]').html();
+
+			var articleHtmlStr
+			if(allCount % 10 == 5) {
+				articleHtmlStr = templateCard.temp(item);
+			} else {
+				articleHtmlStr = template.temp(item);
+			}
 			if(isPullDown) {
 				//下拉刷新，新纪录插到最前面；
 				$("#articlelist").append(articleHtmlStr);
 			} else {
 				$("#articlelist").append(articleHtmlStr);
 			}
+			allCount++;
 		}
 
 		/*

@@ -32,7 +32,9 @@
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: typeStr, //HTTP请求类型
-			success: function(data) {
+			success: function(data,status) {
+				console.log(status==200);
+				console.log(JSON.stringify(status));
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
@@ -55,8 +57,20 @@
 				if(data.IsSuccess === 1) {
 					return callback(data);
 				}
+			} else {
+				mui.toast("您未登陆，请重新登陆！");
+				mui.openWindow({
+					//手势登录
+					url: "../login.html",
+					id: 'login',
+					show: {
+						aniShow: 'pop-in'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
 			}
-			return callback();
 		});
 		//设置头信息
 		uploader.setRequestHeader("username", userstate.account);

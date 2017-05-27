@@ -454,7 +454,8 @@
 					"js/mui.previewimage.js",
 					"js/jquery.js",
 					"css/imageviewer.css",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"js/commonUtil.js"
 				],
 				"refer": [
 					"view/article/youji_new.html"
