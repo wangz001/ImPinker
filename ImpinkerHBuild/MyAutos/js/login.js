@@ -42,14 +42,14 @@
 //		} else 
 		if(state.token) {
 			//每次打开应用。重新登录，获取token
-			app.login(state, function(err) {
-				if(err) {
-					plus.nativeUI.toast(err);
-					return;
-				}
-				console.log("自动登录。。。tomain");
-				toMain();
-			});
+//			app.login(state, function(err) {
+//				if(err) {
+//					plus.nativeUI.toast(err);
+//					return;
+//				}
+//				console.log("自动登录。。。tomain");
+//				toMain();
+//			});
 		} 
 		// close splash
 		setTimeout(function() {
