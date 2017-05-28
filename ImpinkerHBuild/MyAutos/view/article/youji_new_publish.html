@@ -9,49 +9,50 @@
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/feedback.css" />
 		<style>
-			.description {
-				width: 100%;
-				background-color: #fff;
+			/*.mui-table-view li {
+				{
+					border-bottom: 1px solid #F5F5F5;
+					overflow: hidden;
+					padding: 15px 0;
+				}
 			}
 			
-			textarea {
-				
-				border: 0;
-				background-color: transparent;
-				/*scrollbar-arrow-color:yellow;  
-    scrollbar-base-color:lightsalmon;  
-    overflow: hidden;*/
-				grid-auto-rows: inherit;
-				color: #666464;
-				height: auto;
+			.mui-table-view img {
+				width: 30%;
+				display: table-cell;
+				vertical-align: top;
+				padding-right: 4px;
 			}
 			
-			img {
-				width: 100%;
-			}
-			
-			.mui-content-padded {
-				
-				background-color: white;
-			}
-			
-			.post-img {
-				margin: 0 0 10px;
+			.mui-media-body {
+				display: table-cell;
 				position: relative;
+				width: 70%;
+			}
+			*/
+			
+			.mui-table-view .mui-media-object {
+				line-height: 50px;
+				max-width: 30%;
+				height: 71px;
 			}
 			
-			.post-move {
-				bottom: 23px;
-				right: 5px;
-				position: absolute;
+			.title {
+				font-size: 1.4rem;
+				height: 45px;
+				line-height: 22px;
+				white-space: normal
 			}
 			
-			a.move-up,
-			a.move-down,
-			a.del {
-				background-color: #AAAAAA;
-				background-size: 196px;
-				background-position: -4px -86px;
+			.mui-media-body em {
+				position: relative;
+				bottom: 0;
+				left: 0;
+				color: #999;
+				width: 100%;
+				box-sizing: border-box;
+				padding-left: 6px;
+				font-size: 1.0rem;
 			}
 		</style>
 	</head>
@@ -62,182 +63,31 @@
 			<h1 id="title" class="mui-title">写游记</h1>
 			<button id="publishyouji" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发布</button>
 		</header>
-		<div id="hideContent" style="display: none;"></div>
-		<div class="mui-content feedback">
-			<div class="mui-input-group">
-				<div class="mui-input-row">
-					<input id="youi_title" type="text" placeholder="请输入标题，6-12字最佳">
-				</div>
-			</div>
-			<div class="mui-inline"></div>
-			<div class="row mui-input-row description">
-				<textarea  id='description' class="mui-input-clear question" placeholder="游记简介，100字以内..."></textarea>
-			</div>
-			<p>设置封面图</p>
-			<div id='image-list' class="row image-list">
-				<div class="">
-					<img style="max-height: 200px;" id='coverimage' src="../../images/cbd.jpg">
-					
-				</div>
-			</div>
-			<p>正文</p>
-			<div class="mui-content-padded" style="margin: 0px">
-				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
-				<!--<div class="post-img">
-					<div class="add-img">
-						<img src="http://img3.baa.bitautotech.com/img/V2img3.baa.bitautotech.com/usergroup/2017/5/14/7c836ed417184e0797e985450999b3e8_300_200_jpg.jpg" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
-					</div>
-					<div class="post-move" role="operator" style="">
-						<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
-						<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
-						<a class="del mui-icon mui-icon-trash" role="del"></a>
-					</div>
-				</div>
-				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>-->
-			</div>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="articlelist">
+				<li class="mui-table-view-cell mui-media">
+					<a href="view/article/preview.html">
+						<img class="mui-media-object mui-pull-left" src="../../images/cbd.jpg">
+						<div class="mui-media-body">
+							<span class="title">幸福幸福幸福幸福幸福幸福</span>
+							<p>
+								<em><span>05-27</span> 
+								<span>焦龙</span> 
+								</em>
+							</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+
 		</div>
-		<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item" id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
-			<a class="mui-tab-item" id='addimage'><span class="mui-icon mui-icon-image"></span></a>
-			<a class="mui-tab-item" id="share"><span class="mui-icon mui-icon-camera"></span></a>
-			<a class="mui-tab-item" id="preview_btn"><span class="mui-icon mui-icon-search"></span></a>
-		</nav>
+
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type='text/template' id='postimg'>
-			<div class="post-img">
-				<div class="add-img" name='yjcontent'>
-					<img src="$src$" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
-				</div>
-				<div class="post-move" role="operator" style="">
-					<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
-					<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
-					<a class="del mui-icon mui-icon-trash" role="del"></a>
-				</div>
-			</div>
-		</script>
-		<script type="application/javascript">
-			mui.init({});
-			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
-				//从草稿页跳转
-				var articleid = self.articleid;
-				var articlename = self.articlename;
-				var coverimage = self.coverimage;
-				if(articleid != null && articleid > 0) {
-					edityoujiUtil.article.articleid = articleid;
-					edityoujiUtil.article.articlename = articlename;
-					edityoujiUtil.article.coverimage = coverimage;
-					$("#youi_title").val(articlename);
-					$("#coverimage").attr('src', coverimage);
-					edityoujiUtil.getandShowContent(articleid, function() {
 
-					});
-				}
-			});
-			//自定义事件。接受选择微博页传回的数据
-			window.addEventListener('weiboitems', function(event) {
-				//获得事件参数  
-				var selectedWeibos = event.detail.items;
-				if(selectedWeibos != null) {
-					//在页面上展示
-					edityoujiUtil.showWeiBoItems(selectedWeibos);
-				}
-			});
-
-			$("#youi_title").blur(function() {
-				var content = $(this).val();
-				console.log(content);
-				if(content == "") return;
-				//创建文章或更新标题
-				setTimeout(function() {
-					if(edityoujiUtil.article.articleid == 0) {
-						edityoujiUtil.createYouji(content, function(id) {
-							if(id != null && id > 0) {
-								console.log(id);
-								articleid = id;
-							}
-						});
-					} else {
-						edityoujiUtil.updateTitle(content, function(data) {
-
-						});
-					}
-				}, 500);
-			});
-			//保存草稿
-			$("#youji_content textarea").change(function() {
-				setTimeout(function() {
-					if(edityoujiUtil.article.articleid > 0) {
-						edityoujiUtil.saveDraft(function(data) {
-							console.log("保存草稿成功！");
-						});
-					} else {
-						edityoujiUtil.createYouji("草稿" + (new Date().toLocaleString()), function(id) {
-							if(id != null && id > 0) {
-								console.log(id);
-							}
-						});
-					}
-				}, 2000);
-			});
-			//设置封面图
-			document.getElementById('setcoverimage').addEventListener('tap', function() {
-				edityoujiUtil.setCoverimage();
-			});
-			//发布
-			document.getElementById('publishyouji').addEventListener('tap', function() {
-				setTimeout(function() {
-					edityoujiUtil.publishYouji(function(err) {
-						if(err) {
-							alert(err);
-						} else {
-							plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
-							mui.back();
-						}
-					});
-				}, 500);
-			});
-
-			//添加图片
-			document.getElementById('addimage').addEventListener('tap', function() {
-				edityoujiUtil.addImage(function(data) {
-					edityoujiUtil.showImage(data.Data);
-					owner.showTextAreaStr("");
-				});
-			});
-			//添加微博
-			document.getElementById('selectWeibo').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "youji_new_selectweibo.html",
-					id: "youji_new_selectweibo",
-					createNew: true,
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
-			});
-			//预览
-			document.getElementById('preview_btn').addEventListener('tap', function() {
-				var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
-				mui.openWindow({
-					url: "youji_preview.html",
-					id: "youji_preview",
-					createNew: true,
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					},
-					extras: {
-						contentStr: resultStr
-					},
-				});
-			});
-		</script>
 	</body>
 
 </html>
