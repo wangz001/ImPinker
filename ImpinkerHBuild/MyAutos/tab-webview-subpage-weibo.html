@@ -168,6 +168,7 @@
 				var img_1200style = 'style/weibo_1200';
 				var img_600style = 'style/weibo_600';
 				var img_24style='style/weibo_24_16';
+				var img_36style='style/weibo_36_24';
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
@@ -194,7 +195,7 @@
 					imgdiv.appendChild(ul);
 				} else {
 					imgdiv.className = "mui-card-content";
-					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 					imgdiv.innerHTML = imgHtmlStr;
 				}
 

@@ -1,73 +1,10 @@
 [Header]
 [Footer]
 [Header]
-2017-05-15 20:33:57,035 [15] WARN  WebLogger [(null)] - lalalla89898989989898------------:SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
-   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.Net.HttpWebRequest.GetResponse()
-   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
-   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request)
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
-   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)
-   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)
-   在 ImBLL.SolrNetSearchBll.QueryByViewTpye(String ViewType, String keyWord, Boolean IsHighLight, Int32 pageNum, Int32 pageCount)
-   在 ImPinker.Controllers.ArticleController.RelativeArticle(ArticleViewModel articleViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 68
 [Footer]
 [Header]
 [Footer]
 [Header]
-2017-05-15 20:57:32,612 [9] WARN  WebLogger [(null)] - lalalla89898989989898------------:SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
-   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.Net.HttpWebRequest.GetResponse()
-   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
-   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request)
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
-   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)
-   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)
-   在 ImBLL.SolrNetSearchBll.QueryByViewTpye(String ViewType, String keyWord, Boolean IsHighLight, Int32 pageNum, Int32 pageCount)
-   在 ImPinker.Controllers.ArticleController.RelativeArticle(ArticleViewModel articleViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 68
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-[Footer]
-[Header]
-2017-05-17 15:14:14,803 [26] WARN  WebLogger [(null)] - lalalla89898989989898------------:SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 101.200.175.157:8080
-   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.Net.HttpWebRequest.GetResponse()
-   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
-   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 193
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 149
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrConnection.cs:行号 166
-   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 672
-   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
-   在 ImBLL.SolrNetSearchBll.QueryByViewTpye(String ViewType, String keyWord, Boolean IsHighLight, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 599
-   在 ImPinker.Controllers.ArticleController.RelativeArticle(ArticleViewModel articleViewModel) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 67
 [Footer]
 [Header]
 [Footer]

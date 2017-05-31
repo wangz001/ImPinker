@@ -233,9 +233,11 @@
 					//触发主页面的gohome事件
 					mui.fire(main, 'gohome');
 					mui.back();
+				}else{
+					alert(upload.responseText);
 				}
 			} else {
-				mui.toast("您未登陆，请重新登陆！");
+				mui.toast("身份验证失败，请重新登陆！");
 				mui.openWindow({
 					//手势登录
 					url: "../../login.html",

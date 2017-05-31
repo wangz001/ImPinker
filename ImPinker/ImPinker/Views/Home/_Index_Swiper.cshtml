@@ -1,5 +1,5 @@
 ﻿@using ImModel.ViewModel
-@using ImPinker.Common
+@using ImageUrlHelper = ImBLL.ImageUrlHelper
 @{
     var list = (List<ArticleViewModel>)Model;
 }
@@ -17,7 +17,7 @@
                     var vm = list[i * 3 + j];
                     <div class="swiper-slide img-box">
                         <a class="img-box" href="/Article/Index?id=@vm.Id" target="_blank">
-                            <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" />
+                            <img src="@ImageUrlHelper.GetArticleImage(vm.CoverImage, 360)" />
                         </a>
                         <div class="title-box">
                                 <label>@vm.ArticleName</label>

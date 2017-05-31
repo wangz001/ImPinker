@@ -1,7 +1,6 @@
 ﻿@using Common.DateTimeUtil
 @using ImBLL
 @using ImModel.ViewModel
-@using ImPinker.Common
 @{
     var list = (List<ArticleViewModel>)Model;
     if (list != null && list.Count > 0)
@@ -10,7 +9,7 @@
         {
             <li threadid="108832">
                 <a href="/Article/Index?id=@vm.Id" target="_blank" class="img-box">
-                    <img src="@ImageUrlHelper.GetArticleCoverImage(vm.CoverImage, 0)" alt="@vm.ArticleName">
+                    <img src="@ImageUrlHelper.GetArticleImage(vm.CoverImage, 360)" alt="@vm.ArticleName">
                 </a>
                 <span class="topic-info-box">
                     <a href="/Search/Index?key=@vm.KeyWords" target="_blank" class="topic-lab"
