@@ -64,6 +64,7 @@
     <Compile Include="ArticleSnapsBll.cs" />
     <Compile Include="ArticleTagBll.cs" />
     <Compile Include="ArticleVoteBll.cs" />
+    <Compile Include="FeedbackBll.cs" />
     <Compile Include="ImageUrlHelper.cs" />
     <Compile Include="PhoneCheckNumBll.cs" />
     <Compile Include="SolrNetSearchBll.cs" />

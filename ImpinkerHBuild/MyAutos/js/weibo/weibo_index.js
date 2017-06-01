@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	bindVote();
-	//评论
-	$(".mui-card-footer .mui-icon-compose").bind("click", function() {
+	//评论  
+	mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
 		mui.toast("评论");
 	});
 });
@@ -12,7 +12,7 @@ function bindVote() {
 	for(var i = 0; i < footers.length; i++) {
 		var footer = footers[i];
 		var span = $(footer).find("span:eq(0)");
-		$(span).unbind("click");//加载多页的时候防止重复绑定
+		$(span).unbind("click"); //加载多页的时候防止重复绑定
 		$(span).bind("click", function() {
 			var heartType = $(this).attr("class");
 			if(heartType.indexOf("mui-icon-extra-heart-filled") != -1) {

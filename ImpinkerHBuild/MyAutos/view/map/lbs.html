@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#map {
+				width: 100%;
+				position: fixed;
+				top: 10px;
+				bottom: 200px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="map">地图加载中...</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript">
+			var em = null,
+				map = null;
+			// H5 plus事件处理
+			function plusReady() {
+				// 确保DOM解析完成
+				if(!em || !window.plus || map) {
+					return
+				};
+				var point=new plus.maps.Point(116.347496, 39.970191);
+				map = new plus.maps.Map("map");
+				map.centerAndZoom(point, 12);
+
+				//设置点
+				var marker = new plus.maps.Marker(point);
+				marker.setIcon("../../images/logo.png");
+				marker.setLabel("点点");
+				var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
+				marker.setBubble(bubble);
+				map.addOverlay(marker);
+			}
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			// DOMContentloaded事件处理
+			document.addEventListener("DOMContentLoaded", function() {
+				em = document.getElementById("map");
+				plusReady();
+			}, false);
+			// 设置地图的中心点
+			function setCenter() {
+				var center = new plus.maps.Point(118.123, 35.456);
+				map.setCenter(center);
+			}
+		</script>
+	</body>
+
+</html>

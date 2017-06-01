@@ -56,9 +56,9 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
-						<span class="mui-icon mui-icon-phone"></span>
-						<div class="mui-media-body">Phone</div>
+					<a id='feedback' href="#">
+						<span class="mui-icon mui-icon-paperplane"></span>
+						<div class="mui-media-body">问题反馈</div>
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -116,6 +116,17 @@
 			mui.openWindow({
 				url: "view/weibo/weibo_my.html",
 				id: "weibo_my",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
+		});
+		//
+		document.getElementById("feedback").addEventListener('tap', function() {
+			mui.openWindow({
+				url: "view/setting/feedback.html",
+				id: "feedback",
 				show: {
 					aniShow: 'slide-in-right',
 					duration: 200

@@ -187,6 +187,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />

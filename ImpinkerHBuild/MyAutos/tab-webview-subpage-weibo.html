@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="css/weibo.css" />
 		<link rel="stylesheet" href="css/imageviewer.css" />
 		<style type="text/css">
-			.mui-icon-extra-heart{
+			.mui-icon-extra-heart {
 				position: relative;
 				float: right;
 			}
@@ -72,8 +72,8 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/mui.zoom.js"></script>
 		<script type="text/javascript" src="js/mui.previewimage.js"></script>
-		<script type="text/javascript" src="js/jquery.js" ></script>
-		<script type="text/javascript" src="js/weibo/weibo_index.js"></script> 
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
 		<script>
 			mui.init({
 				swipeBack: false,
@@ -167,8 +167,8 @@
 			function initWeiBoItem(table, item) {
 				var img_1200style = 'style/weibo_1200';
 				var img_600style = 'style/weibo_600';
-				var img_24style='style/weibo_24_16';
-				var img_36style='style/weibo_36_24';
+				var img_24style = 'style/weibo_24_16';
+				var img_36style = 'style/weibo_36_24';
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
@@ -178,7 +178,7 @@
 				headdiv.className = 'mui-card-header mui-card-media';
 				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
 					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
-				
+
 				var imgdiv = document.createElement("div");
 
 				var imgs = item.ContentValue.split(',');
@@ -215,6 +215,18 @@
 				li.appendChild(footdiv);
 				table.appendChild(li);
 			}
+
+			//地图点击事件
+			mui('.mui-scroll').on('tap', '.mui-icon-map', function() {
+				mui.openWindow({
+					url: "view/map/lbs.html",
+					id: "lbs",
+					show: {
+						aniShow: 'slide-in-left',
+						duration: 200
+					}
+				});
+			});
 		</script>
 	</body>
 
