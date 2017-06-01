@@ -19,22 +19,26 @@
 			<a id="sendComposs" style="color: #999;display: none;">发送</a>
 		</footer>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
 		<script type="text/javascript">
 			//plusReady事件后，在里面接收参数
-			var article={
-				Id:0,
-				Url:""
+			var article = {
+				Id: 0,
+				Url: "",
+				Articlename: ""
 			};
-			
+			var shares = null,
+				sharewx = null;
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				var articleUrl=self.articleUrl;
+				var articleUrl = self.articleUrl;
 				var articleid = self.articleid;
-				article.Id=articleid;
-				article.Url=articleUrl;
+				var articlename = self.articlename;
+				article.Id = articleid;
+				article.Url = articleUrl;
+				article.Articlename = articlename;
 				mui.init({
 					subpages: [{
 						url: articleUrl,
@@ -44,6 +48,17 @@
 							bottom: '50px' //默认为0px，可不定义；
 						}
 					}]
+				});
+				// 扩展API加载完毕，现在可以正常调用扩展API
+				plus.share.getServices(function(s) {
+					shares = s;
+					for(var i in s) {
+						if('weixin' == s[i].id) {
+							sharewx = s[i];
+						}
+					}
+				}, function(e) {
+					alert("获取分享服务列表失败：" + e.message);
 				});
 			});
 
@@ -61,12 +76,34 @@
 					buttons: btnArray
 				}, function(e) {
 					var index = e.index; // 
+					console.log(img);
+					msg.thumbs = [img];
 					switch(index) {
 						case 1:
-							//写自己的逻辑
-
+							sharewx.send({
+								content: article.Articlename,
+								href: article.Url,
+								extra: {
+									scene: "WXSceneSession"
+								}
+							}, function() {
+								alert("分享成功！");
+							}, function(e) {
+								alert("分享失败：" + e.message);
+							});
 							break;
 						case 2:
+							sharewx.send({
+								content: article.Articlename,
+								href: article.Url,
+								extra: {
+									scene: "WXSceneTimeline"
+								}
+							}, function() {
+								alert("分享成功！");
+							}, function(e) {
+								alert("分享失败：" + e.message);
+							});
 							break;
 					}
 				});

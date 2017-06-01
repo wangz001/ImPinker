@@ -144,7 +144,7 @@
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/template" id='article_item'>
 		<li class="mui-table-view-cell mui-media">
-			<a href="view/article/preview.html" articleid="$Id$">
+			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 				<div class="mui-media-body">
 					<P class="title">$ArticleName$</P>
@@ -155,7 +155,7 @@
 		</li>
 	</script>
 	<script type="text/template" id="article_item_right">
-		<li href="view/article/preview.html" articleid="$Id$">
+		<li href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 			<a href="view/article/preview.html">
 				<img class="mui-media-object mui-pull-right" src="$CoverImage$">
 				<div class="mui-media-body">
@@ -167,7 +167,7 @@
 	</script>
 	<script type="text/template" id="article_item_card">
 		<li>
-			<a href="view/article/preview.html" articleid="$Id$">
+			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
 				<div class="mui-card-content">
@@ -269,6 +269,7 @@
 			var href = this.href;
 			var type = "common"; // this.getAttribute("open-type");
 			var articleid = this.getAttribute('articleid');
+			var articlename=this.getAttribute('articlename');
 			//不使用父子模板方案的页面
 			if(type == "common") {
 				var webview_style = {
@@ -296,7 +297,8 @@
 					},
 					extras: {
 						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
-						articleid: articleid //扩展参数
+						articleid: articleid ,//扩展参数
+						articlename:articlename
 					}
 				});
 			} else if(id && ~id.indexOf('.html')) {
