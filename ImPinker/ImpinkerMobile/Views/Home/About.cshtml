@@ -4,39 +4,35 @@
 <div class="page-group">
     <div id="page-infinite-scroll-bottom" class="page">
 
-        <div class="content infinite-scroll" data-distance="100">
-            <div class="list-block">
-                <ul class="list-container">
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
+        <dl class="about-main">
+            <dt>
+                关于车酷
+            </dt>
+            <dd class="article">
+                <p>
+                    车酷——爱车人的梦想车库。
+                </p>
+                <p>
+                    车酷致力于打造最人性化的、和谐的汽车生活社区。在这里您可以浏览优质的汽车相关的信息，包括用车、自驾游、改装等等。同时，您可以分享您的用车心得，自驾游经历等等。
+                </p>
+                <p>
+                    车酷搜索基于大数据算法，遴选网络上优质的汽车类资讯，提供一种优质、简洁、舒适的全新阅读方式，为您推荐最为优质的汽车类资讯，自驾游记录，生活记录等等。总之，一切与汽车相关的，车酷都会提供给您。
+                </p>
+                <p>
+                    无论您是老司机还是马露莎，无论您是越野老炮还是秋名山车神，只要您爱车懂车，都可以在这里找到组织。优质的汽车生活，从车酷开始。
+                </p>
+               
+            </dd>
 
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                    <li class="item-content"><div class="item-inner"><div class="item-title">条目</div></div></li>
-                </ul>
-            </div>
-            <!-- 加载提示符 -->
-            <div class="infinite-scroll-preloader">
-                <div class="preloader">
-                </div>
-            </div>
-        </div>
+
+            <dt>联系我们</dt>
+            <dd class="article">
+                <p>QQ：	1127942005</p>
+                <p>电话：	18211101215</p>
+                <p>客服邮箱：	myautos@sina.cn</p>
+            </dd>
+
+        </dl>
     </div>
 
 </div>
@@ -45,48 +41,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            'use strict';
-            //无限滚动
-            $(document).on("pageInit", "#page-infinite-scroll-bottom", function (e, id, page) {
-                var loading = false;
-                // 每次加载添加多少条目
-                var itemsPerLoad = 30;
-                // 最多可加载的条目
-                var maxItems = 100;
-                var lastIndex = $('.list-container li').length;
-                function addItems(number, lastIndex) {
-                    // 生成新条目的HTML
-                    var html = '';
-                    for (var i = lastIndex + 1; i <= lastIndex + number; i++) {
-                        html += '<li class="item-content"><div class="item-inner"><div class="item-title">新条目</div></div></li>';
-                    }
-                    // 添加新条目
-                    $('.infinite-scroll .list-container').append(html);
-                }
-                $(page).on('infinite', function () {
-                    // 如果正在加载，则退出
-                    if (loading) return;
-                    // 设置flag
-                    loading = true;
-                    // 模拟1s的加载过程
-                    setTimeout(function () {
-                        // 重置加载flag
-                        loading = false;
-                        if (lastIndex >= maxItems) {
-                            // 加载完毕，则注销无限加载事件，以防不必要的加载
-                            $.detachInfiniteScroll($('.infinite-scroll'));
-                            // 删除加载提示符
-                            $('.infinite-scroll-preloader').remove();
-                            return;
-                        }
-                        addItems(itemsPerLoad, lastIndex);
-                        // 更新最后加载的序号
-                        lastIndex = $('.list-container li').length;
-                        $.refreshScroller();
-                    }, 1000);
-                });
-            });
-            $.init();
+         
         });
     </script>
 }
