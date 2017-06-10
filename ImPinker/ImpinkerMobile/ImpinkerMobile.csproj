@@ -197,6 +197,7 @@
   <ItemGroup>
     <Content Include="Content\image\logo_100.png" />
     <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
+    <Content Include="Content\mui.min.css" />
     <Content Include="Content\thread.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -238,6 +239,7 @@
     <Content Include="Views\Search\_Search_HotKey.cshtml" />
     <Content Include="Views\TestApi\Index.cshtml" />
     <Content Include="Views\Article\Index_original.cshtml" />
+    <Content Include="Views\Home\Contact1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,47 +1,54 @@
 ﻿@{
-    ViewBag.Title = "底部无限滚动";
+    Layout = null;
+    ViewBag.Title = "关于车酷";
+    <link href="~/Content/mui.min.css" rel="stylesheet" />
 }
-<div class="page-group">
-    <div id="page-infinite-scroll-bottom" class="page">
 
-        <dl class="about-main">
-            <dt>
-                关于车酷
-            </dt>
-            <dd class="article">
-                <p>
-                    车酷——爱车人的梦想车库。
-                </p>
-                <p>
-                    车酷致力于打造最人性化的、和谐的汽车生活社区。在这里您可以浏览优质的汽车相关的信息，包括用车、自驾游、改装等等。同时，您可以分享您的用车心得，自驾游经历等等。
-                </p>
-                <p>
-                    车酷搜索基于大数据算法，遴选网络上优质的汽车类资讯，提供一种优质、简洁、舒适的全新阅读方式，为您推荐最为优质的汽车类资讯，自驾游记录，生活记录等等。总之，一切与汽车相关的，车酷都会提供给您。
-                </p>
-                <p>
-                    无论您是老司机还是马露莎，无论您是越野老炮还是秋名山车神，只要您爱车懂车，都可以在这里找到组织。优质的汽车生活，从车酷开始。
-                </p>
-               
-            </dd>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>关于车酷</title>
+</head>
+<body>
+    <div class="mui-content-padded">
+        <h3>关于我们</h3>
+
+        <p>
+            车酷——爱车人的自留地。
+        </p>
+        <p>
+            车酷致力于打造最人性化的、和谐的汽车生活社区。在这里您可以浏览优质的汽车资讯。
+        </p>
+        <p>
+            随时记录旅行的美好瞬间，一键生成游记，美好经历永久珍藏。
+        </p>
+        <p>
+            车酷搜索基于大数据算法，为您推荐最为优质的汽车类资讯，自驾游记录，用车经验。
+        </p>
+        <p>
+            随时随地，分享交友，旅行途中，朋友遍天下。
+        </p>
+        <p>
+            无论您是老司机还是马露莎，无论您是越野老炮还是秋名山车神，只要您爱车懂车，都可以在这里找到组织。
+        </p>
+        <p>
+            优质的汽车生活，从车酷开始。
+        </p>
+
+        <img src="/content/image/qrcode_for_gh_7f5be927b079_258.jpg">
+        <p>请关注车酷公众号</p>
 
 
-            <dt>联系我们</dt>
-            <dd class="article">
-                <p>QQ：	1127942005</p>
-                <p>电话：	18211101215</p>
-                <p>客服邮箱：	myautos@sina.cn</p>
-            </dd>
-
-        </dl>
+        <h3>联系我们</h3>
+        @*<p>公司名称：	北京斯帕克科技有限公司</p>
+            <p>公司地址：	北京市海淀区北坞村路甲25号静芯园L座北楼三层</p>*@
+        <p>QQ：	1127942005</p>
+        <p>电话：	18211101215</p>
+        <p>客服邮箱：	myautos@sina.cn</p>
     </div>
 
-</div>
-@section scripts
-{
+</body>
+</html>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-         
-        });
-    </script>
-}
