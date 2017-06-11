@@ -23,32 +23,10 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
 		<script type="text/javascript">
-			//plusReady事件后，在里面接收参数
-			var article = {
-				Id: 0,
-				Url: "",
-				Articlename: ""
-			};
+			var articleItem = null;
 			var shares = null,
 				sharewx = null;
 			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
-				var articleUrl = self.articleUrl;
-				var articleid = self.articleid;
-				var articlename = self.articlename;
-				article.Id = articleid;
-				article.Url = articleUrl;
-				article.Articlename = articlename;
-				mui.init({
-					subpages: [{
-						url: articleUrl,
-						id: articleid,
-						styles: {
-							top: '0px', //mui标题栏默认高度为45px；
-							bottom: '50px' //默认为0px，可不定义；
-						}
-					}]
-				});
 				// 扩展API加载完毕，现在可以正常调用扩展API
 				plus.share.getServices(function(s) {
 					shares = s;
@@ -60,6 +38,32 @@
 				}, function(e) {
 					alert("获取分享服务列表失败：" + e.message);
 				});
+				//刷新父页面
+				var old_back = mui.back;
+				mui.back = function() {
+					var wobj = plus.webview.getWebviewById("preview.html"); //注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，  
+					wobj.reload(true);
+					old_back()
+				}
+			});
+
+			//自定义事件。接受列表页的数据
+			window.addEventListener('previewarticle', function(event) {
+				//获得事件参数  
+				var articleitem = event.detail.articleItem;
+				articleItem = articleitem;
+				if(articleitem != null) {
+					mui.init({
+						subpages: [{
+							url: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+							id: articleItem.Id,
+							styles: {
+								top: '0px', //mui标题栏默认高度为45px；
+								bottom: '50px' //默认为0px，可不定义；
+							}
+						}]
+					});
+				}
 			});
 
 			document.getElementById('share').addEventListener('tap', function() {
@@ -79,28 +83,37 @@
 					switch(index) {
 						case 1:
 							sharewx.send({
-								content: article.Articlename,
-								href: article.Url,
+								title: articleItem.ArticleName,
+								content: articleItem.Description,
+								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+								thumbs: [
+									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+								],
 								extra: {
 									scene: "WXSceneSession"
 								}
 							}, function() {
-								alert("分享成功！");
+								mui.toast("分享给好友成功");
 							}, function(e) {
 								alert("分享失败：" + e.message);
+								mui.toast("取消分享");
 							});
 							break;
 						case 2:
 							sharewx.send({
-								content: article.Articlename,
-								href: article.Url,
+								title: articleItem.ArticleName,
+								content: articleItem.Description,
+								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+								thumbs: [
+									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+								],
 								extra: {
 									scene: "WXSceneTimeline"
 								}
 							}, function() {
-								alert("分享成功！");
+								mui.toast("分享成功");
 							}, function(e) {
-								alert("分享失败：" + e.message);
+								mui.toast("取消分享");
 							});
 							break;
 					}

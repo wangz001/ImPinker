@@ -30,6 +30,7 @@
 				height: 52px;
 			}
 			/*card 样式*/
+			
 			.mui-table-view .mui-card {
 				font-size: 14px;
 				position: relative;
@@ -168,15 +169,15 @@
 	<script type="text/template" id="article_item_card">
 		<li>
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-			<div class="mui-card">
-				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
-				<div class="mui-card-content">
-					<div class="mui-card-content-inner">
-						<p>Posted on January 18, 2016</p>
-						<p style="color: #333;">$ArticleName$</p>
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							<p>Posted on January 18, 2016</p>
+							<p style="color: #333;">$ArticleName$</p>
+						</div>
 					</div>
 				</div>
-			</div>
 			</a>
 		</li>
 	</script>
@@ -193,9 +194,14 @@
 					contentrefresh: '正在加载...',
 					callback: pullupRefresh
 				}
-			}
+			},
+			preloadPages: [{   //预加载文章预览页
+				id: 'preview.html',
+				url: 'view/article/preview.html'
+			}]
 		});
-
+		
+		var allArticles = new Array();
 		var pageNum = 1;
 		var allCount = 0;
 		var pageSize = 30;
@@ -204,6 +210,7 @@
 		 * 下拉刷新具体业务实现
 		 */
 		function pulldownRefresh() {
+			allArticles = [];
 			pageNum = 1;
 			var data = {
 				pageNum: pageNum,
@@ -241,6 +248,7 @@
 		}
 
 		function initItem(item, isPullDown) {
+			allArticles.push(item);
 			var template = $('script[id="article_item"]').html();
 			var templateCard = $('script[id="article_item_card"]').html();
 			var templateRight = $('script[id="article_item_right"]').html();
@@ -264,17 +272,25 @@
 		 * 列表点击事件
 		 * */
 		var aniShow = "pop-in";
+		var previewPage = null;
 		mui('#articlelist').on('tap', 'a', function() {
 			var id = this.getAttribute('href');
 			var href = this.href;
 			var type = "common"; // this.getAttribute("open-type");
 			var articleid = this.getAttribute('articleid');
-			var articlename=this.getAttribute('articlename');
+			var articlename = this.getAttribute('articlename');
+			var articleItem;
+			for(var i = 0; i < allArticles.length; i++) {
+				var item = allArticles[i];
+				if(articleid == item.Id) {
+					articleItem = item;
+					break;
+				}
+			}
 			//不使用父子模板方案的页面
 			if(type == "common") {
 				var webview_style = {
 					popGesture: "close",
-
 				};
 				//侧滑菜单需动态控制一下zindex值；
 				if(~id.indexOf('offcanvas-')) {
@@ -285,21 +301,18 @@
 				if(~id.indexOf('icons.html')) {
 					webview_style.hardwareAccelerated = true;
 				}
+
+				//获得详情页面  
+				if(!previewPage) {
+					previewPage = plus.webview.getWebviewById('preview.html');
+				}
+				//触发详情页面的weiboitems事件  
+				mui.fire(previewPage, 'previewarticle', {
+					articleItem: articleItem
+				});
+				//打开详情页面            
 				mui.openWindow({
-					id: id,
-					url: this.href,
-					styles: webview_style,
-					show: {
-						aniShow: aniShow
-					},
-					waiting: {
-						autoShow: false
-					},
-					extras: {
-						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
-						articleid: articleid ,//扩展参数
-						articlename:articlename
-					}
+					id: 'preview.html'
 				});
 			} else if(id && ~id.indexOf('.html')) {
 				if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {
