@@ -28,7 +28,7 @@ function SendComposs(txtStr) {
 	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleComment";
 	mui.ajax(url, {
 		data: {
-			ArticleId: article.Id,
+			ArticleId: articleItem.Id,
 			CommentStr: txtStr
 		},
 		dataType: 'json', //服务器返回json格式数据

@@ -42,13 +42,11 @@
             </div>
             <div class="articlecontent">
                 @Html.Raw(article.Content == null ? "" : article.Content[0])
-                <hr/>
-                <a> 分享到微信</a>
+                <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
             </div>
             <div class="article-footer">
-                
                 <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
-                <p>欢迎关注车酷公众账号</p>
+                <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
             </div>
         </div>
 
