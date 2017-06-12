@@ -78,6 +78,54 @@
 			}
 		});
 	};
+	///第三方登录  
+	owner.loginOAuth=function(loginInfo, callback){
+		callback = callback || $.noop;
+		loginInfo = loginInfo || {};
+		loginInfo.openid = loginInfo.openid || '';
+		loginInfo.oauthtype = loginInfo.oauthtype || '';
+		loginInfo.showname=loginInfo.showname ||'';
+		loginInfo.headimage=loginInfo.headimage||'';
+		//
+		loginInfo.account=loginInfo.account || '';
+		loginInfo.password=loginInfo.password || '';
+		if(loginInfo.account.openid < 5) {
+			return callback('账号最短为 5 个字符');
+		}
+		if(loginInfo.password.oauthtype < 2) {
+			return callback('类型不对');
+		}
+		//登录验证
+		mui.ajax('http://api.myautos.cn/api/Account/LoginOAoth', {
+			data: {
+				OpenId: loginInfo.OpenId,
+				OauthType: loginInfo.OauthType,
+				ShowName:loginInfo.ShowName,
+				HeadImage:loginInfo.HeadImage
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			success: function(data) {
+				if(data.IsSuccess == 1) {
+					var token = data.Data;
+					console.log("返回的token。。。" + token);
+					return owner.createState(loginInfo, token, callback);
+				} else {
+					return callback(data.Description);
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+	}
+	
+	
 	//更新token
 	owner.updateToken=function(callback){
 		var state = owner.getState();//用户信息
@@ -106,7 +154,7 @@
 		owner.setState(state);
 		return callback();
 	};
-
+	
 	/**
 	 * 新用户注册
 	 **/

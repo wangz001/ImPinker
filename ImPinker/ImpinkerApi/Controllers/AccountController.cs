@@ -58,6 +58,46 @@ namespace ImpinkerApi.Controllers
             });
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public HttpResponseMessage LoginOAoth([FromBody]LoginOauthViewModel loginViewModel)
+        {
+            var isSuccess = false;
+            var description = string.Empty;
+            var token = string.Empty;
+            if (!string.IsNullOrEmpty(loginViewModel.OpenId) && !string.IsNullOrEmpty(loginViewModel.OauthType))
+            {
+                var users = _userBll.GetModelByUserName(loginViewModel.OpenId);
+                if (users == null||!loginViewModel.OauthType.Equals(users.OAuthType))
+                {//不存在， 创建用户
+                    var model = new Users
+                    {
+                        UserName=loginViewModel.OpenId,
+                        PassWord = loginViewModel.OauthType,
+                        OAuthType=loginViewModel.OauthType,
+                        ShowName=loginViewModel.ShowName,
+                        ImgUrl=loginViewModel.HeadImage,
+                        IsEnable=true
+                    };
+                    var userid = _userBll.Add(model);
+                    users = _userBll.GetModelByCache(userid);
+                }
+                var tokenStr = TokenHelper.AddOrUpdateToken(users.UserName);
+                token = tokenStr;
+                isSuccess = true;
+            }
+            else
+            {
+                description = "数据不完整";
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = isSuccess ? 1 : 0,
+                Data = token,
+                Description = description
+            });
+        }
+
         /// <summary>
         /// 用手机+验证码登录（如未注册，则添加新用户）
         /// </summary>

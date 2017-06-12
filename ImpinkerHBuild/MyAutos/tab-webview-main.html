@@ -48,8 +48,13 @@
 		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
-			mui.init();
-			
+			mui.init({
+				preloadPages: [{   //预加载文章预览页
+				id: 'preview.html',
+				url: 'view/article/preview.html'
+			}]
+			});
+
 			var subpages = ['tab-webview-subpage-article.html', 'tab-webview-subpage-weibo.html', 'tab-webview-subpage-setting.html'];
 			var subpage_style = {
 				top: '45px',
@@ -74,11 +79,26 @@
 					self.append(sub);
 				}
 				//更新token
-				app.updateToken(function(err) {
-					if(err) {
-						console.log('更新token失败' + err);
+				//				app.updateToken(function(err) {
+				//					if(err) {
+				//						console.log('更新token失败' + err);
+				//					}
+				//				});
+				//--双击退出
+				mui.oldBack = mui.back;
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
 					}
-				});
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
 			});
 			//当前激活选项
 			var activeTab = subpages[0];

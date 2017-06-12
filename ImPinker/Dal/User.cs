@@ -48,9 +48,9 @@ namespace ImDal
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Users(");
-			strSql.Append("UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId)");
+            strSql.Append("UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId,OAuthType)");
 			strSql.Append(" values (");
-			strSql.Append("@UserName,@ShowName,@PassWord,@Sex,@PhoneNum,@Email,@Age,@ImgUrl,@IsEnable,@CreateTime,@UpdateTime,@AspNetId)");
+            strSql.Append("@UserName,@ShowName,@PassWord,@Sex,@PhoneNum,@Email,@Age,@ImgUrl,@IsEnable,@CreateTime,@UpdateTime,@AspNetId,@OAuthType)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@UserName", SqlDbType.VarChar,100){Value = model.UserName},
@@ -64,7 +64,9 @@ namespace ImDal
 					new SqlParameter("@IsEnable", SqlDbType.Bit,1){Value = model.IsEnable},
 					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
-					new SqlParameter("@AspNetId", SqlDbType.NVarChar,128){Value = model.AspNetId}};
+					new SqlParameter("@AspNetId", SqlDbType.NVarChar,128){Value = model.AspNetId},
+					new SqlParameter("@OAuthType", SqlDbType.VarChar){Value = model.OAuthType}
+                                        };
 			
 			object obj = DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (obj == null)
@@ -139,7 +141,7 @@ namespace ImDal
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
+            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId,OAuthType from Users ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)
@@ -233,6 +235,11 @@ namespace ImDal
                 {
                     model.AspNetId = row["AspNetId"].ToString();
                 }
+                if (row["OAuthType"] != null)
+                {
+                    model.OAuthType = row["OAuthType"].ToString();
+                }
+                
 			}
 			return model;
 		}
@@ -393,7 +400,7 @@ namespace ImDal
 	    public Users GetModelByUserName(string username)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
+            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId,OAuthType from Users ");
             strSql.Append(" where UserName=@UserName");
             SqlParameter[] parameters = {
 					new SqlParameter("@UserName", SqlDbType.VarChar){Value = username}

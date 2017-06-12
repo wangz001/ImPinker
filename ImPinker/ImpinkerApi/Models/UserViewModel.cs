@@ -21,6 +21,25 @@ namespace ImpinkerApi.Models
         public string Password { get; set; }
         
     }
+    /// <summary>
+    /// 第三方登录viewmodel
+    /// </summary>
+    public class LoginOauthViewModel
+    {
+        /// <summary>
+        /// 第三方登录类型
+        /// </summary>
+        public string OauthType { get; set; }
+        /// <summary>
+        /// 第三方登录id，在user表中存在username字段
+        /// </summary>
+        public string OpenId { get; set; }
+
+        public string ShowName { get; set; }
+
+        public string HeadImage { get; set; }
+
+    }
 
     public class UserRegistViewModel
     {

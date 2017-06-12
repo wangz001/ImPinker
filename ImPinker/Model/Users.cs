@@ -24,6 +24,7 @@ namespace ImModel
 		private DateTime _createtime;
 		private DateTime _updatetime;
 		private string _aspnetid;
+        private string _oauthtype;//
 
         /// <summary>
         /// 系统生成的唯一id，md5格式，只在登录验证的时候用。业务处理里都用 int类型的id
@@ -129,6 +130,15 @@ namespace ImModel
 			set{ _updatetime=value;}
 			get{return _updatetime;}
 		}
+        /// <summary>
+        /// 第三方登录类型（qq\ weixin\  weibo）
+        /// </summary>
+        public string OAuthType
+        {
+            set { _oauthtype = value; }
+            get { return _oauthtype; }
+        }
+
 		#endregion Model
 
 	}
