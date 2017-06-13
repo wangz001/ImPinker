@@ -20,7 +20,8 @@
       "view/search/search.html",
       "tab-webview-subpage-article.html",
       "view/weibo/weibo_new_video.html",
-      "view/article/youji_new.html"
+      "view/article/youji_new.html",
+      "view/article/preview.html"
     ]
   },
   "tab-webview-subpage-article.html": {
@@ -357,6 +358,7 @@
     "resources": [
       "js/mui.min.js",
       "css/mui.min.css"
-    ]
+    ],
+    "refer": []
   }
 }

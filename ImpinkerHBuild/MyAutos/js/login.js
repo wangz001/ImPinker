@@ -17,17 +17,18 @@
 		var toMain = function() {
 			//使用定时器的原因：
 			//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
-			var id = setInterval(function() {
-				if(true) {
-					clearInterval(id);
-					$.fire(mainPage, 'show', null);
-					mainPage.show("pop-in");
-				}
-			}, 20);
-
+			//			var id = setInterval(function() {
+			//				if(true) {
+			//					clearInterval(id);
+			//					$.fire(mainPage, 'show', null);
+			//					mainPage.show("pop-in");
+			//				}
+			//			}, 20);
+			console.log("to main");
+			mui.back();
 		};
 
-		if(state.token&&1==8) {
+		if(state.token && 1 == 8) {
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(err) {
 				if(err) {
@@ -179,19 +180,5 @@
 				}
 			});
 		}, false);
-
-		var backButtonPress = 0;
-		$.back = function(event) {
-			backButtonPress++;
-			if(backButtonPress > 1) {
-				plus.runtime.quit();
-			} else {
-				plus.nativeUI.toast('再按一次退出应用');
-			}
-			setTimeout(function() {
-				backButtonPress = 0;
-			}, 1000);
-			return false;
-		};
 	});
 }(mui, document));

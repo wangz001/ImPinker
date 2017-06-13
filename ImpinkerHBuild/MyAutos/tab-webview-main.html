@@ -49,10 +49,10 @@
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init({
-				preloadPages: [{   //预加载文章预览页
-				id: 'preview.html',
-				url: 'view/article/preview.html'
-			}]
+				preloadPages: [{ //预加载文章预览页
+					id: 'preview.html',
+					url: 'view/article/preview.html'
+				}]
 			});
 
 			var subpages = ['tab-webview-subpage-article.html', 'tab-webview-subpage-weibo.html', 'tab-webview-subpage-setting.html'];
@@ -62,7 +62,18 @@
 			};
 
 			var aniShow = {};
-
+			//登录页跳转过来的事件
+			window.addEventListener('show', function() {
+				var defaultTab = document.getElementById("defaultTab");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			}, false);
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				//关闭login页

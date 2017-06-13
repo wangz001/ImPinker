@@ -25,7 +25,8 @@
 		<script type="text/javascript">
 			var articleItem = null;
 			var shares = null,
-				sharewx = null;
+				sharewx = null,
+				shareweibo=null;
 			mui.plusReady(function() {
 				// 扩展API加载完毕，现在可以正常调用扩展API
 				plus.share.getServices(function(s) {
@@ -33,6 +34,8 @@
 					for(var i in s) {
 						if('weixin' == s[i].id) {
 							sharewx = s[i];
+						}if('sinaweibo'==s[i].id){
+							shareweibo=s[i];
 						}
 					}
 				}, function(e) {
@@ -110,6 +113,20 @@
 								extra: {
 									scene: "WXSceneTimeline"
 								}
+							}, function() {
+								mui.toast("分享成功");
+							}, function(e) {
+								mui.toast("取消分享");
+							});
+							break;
+						case 3:
+							shareweibo.send({
+								title: articleItem.ArticleName,
+								content: articleItem.Description,
+								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+								thumbs: [
+									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+								]
 							}, function() {
 								mui.toast("分享成功");
 							}, function(e) {
