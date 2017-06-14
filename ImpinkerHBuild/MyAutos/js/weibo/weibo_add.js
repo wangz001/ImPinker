@@ -219,13 +219,8 @@
 		}))
 	}, false)
 	weibo.send = function(content) {
-		weibo.uploader = plus.uploader.createUpload(url, {
-			method: 'POST'
-		}, function(upload, status) {
-			plus.nativeUI.closeWaiting()
-			if(status == 200 || status == "200") {
-				var data = JSON.parse(upload.responseText);
-				//上传成功，重置表单
+		commonUtil.uploadImageWithFomedata(url,weibo.files,content,function(data){
+			//上传成功，重置表单
 				if(data.IsSuccess === 1) {
 					plus.webview.getWebviewById("tab-webview-subpage-weibo.html").reload();
 					//获得主页面的webview
@@ -236,42 +231,9 @@
 				}else{
 					alert(upload.responseText);
 				}
-			} else {
-				mui.toast("身份验证失败，请重新登陆！");
-				mui.openWindow({
-					//手势登录
-					url: "../../login.html",
-					id: 'login',
-					show: {
-						aniShow: 'pop-in'
-					},
-					waiting: {
-						autoShow: false
-					}
-				});
-			}
-		});
-		//设置头信息
-		weibo.uploader.setRequestHeader("username", userstate.account);
-		weibo.uploader.setRequestHeader("usertoken", userstate.token);
-		//添加上传数据
-		mui.each(content, function(index, element) {
-			if(index !== 'images') {
-				//console.log("addData:" + index + "," + element);
-				weibo.uploader.addData(index, element)
-			}
-		});
-		//添加上传文件
-		mui.each(weibo.files, function(index, element) {
-			var f = weibo.files[index];
-			//console.log("addFile:" + JSON.stringify(f));
-			weibo.uploader.addFile(f.path, {
-				key: f.name
-			});
-		});
-		//开始上传任务
-		weibo.uploader.start();
-		plus.nativeUI.showWaiting('正在发布');
+		})
+		
+		
 	};
 
 })();

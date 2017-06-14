@@ -48,7 +48,7 @@
 		if(loginInfo.account.length < 5) {
 			return callback('账号最短为 5 个字符');
 		}
-		if(loginInfo.password.length < 6) {
+		if(loginInfo.password.length < 2) {
 			return callback('密码最短为 6 个字符');
 		}
 		//登录验证

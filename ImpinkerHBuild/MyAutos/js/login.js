@@ -14,6 +14,10 @@
 		mainPage.addEventListener("loaded", function() {
 			main_loaded_flag = true;
 		});
+		//获取上一个页面的id
+		var self = plus.webview.currentWebview();
+		var lastViewid=self.lastviewid;
+		console.log(lastViewid);
 		var toMain = function() {
 			//使用定时器的原因：
 			//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
@@ -24,8 +28,13 @@
 			//					mainPage.show("pop-in");
 			//				}
 			//			}, 20);
+			var topView=plus.webview.getWebviewById(lastViewid);
+			console.log(topView.id);
+			topView.reload();
 			console.log("to main");
-			mui.back();
+			setTimeout(function(){
+				mui.back();
+			},200);
 		};
 
 		if(state.token && 1 == 8) {

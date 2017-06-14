@@ -32,14 +32,33 @@
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: typeStr, //HTTP请求类型
-			success: function(data,status) {
-				console.log(status==200);
-				console.log(JSON.stringify(status));
+			success: function(data, status) {
+				console.log(status == 200);
+				console.log(JSON.stringify(data));
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
 				console.log(JSON.stringify(errorThrown));
-				return callback();
+				if("Unauthorized" == errorThrown) {
+					//无权限，重新登录
+					mui.toast("身份验证失败，请重新登陆！");
+					var currentview = plus.webview.currentWebview().id;
+					mui.openWindow({
+						//手势登录
+						url: "/login.html",
+						id: 'login',
+						show: {
+							aniShow: 'pop-in'
+						},
+						extras: {
+							lastviewid: currentview
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}
+				//return callback();
 			}
 		});
 	}
@@ -59,12 +78,16 @@
 				}
 			} else {
 				mui.toast("您未登陆，请重新登陆！");
+				var currentview = plus.webview.currentWebview().id;
 				mui.openWindow({
 					//手势登录
-					url: "../login.html",
+					url: "/login.html",
 					id: 'login',
 					show: {
 						aniShow: 'pop-in'
+					},
+					extras: {
+						lastviewid: currentview
 					},
 					waiting: {
 						autoShow: false
