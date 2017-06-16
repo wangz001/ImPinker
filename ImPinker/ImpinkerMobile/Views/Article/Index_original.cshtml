@@ -1,63 +1,64 @@
-﻿@using ImBLL
-@using ImModel
-@using ImModel.ViewModel
+﻿@{
+    Layout = null;
+    var article = (ImModel.ViewModel.ArticleViewModel)ViewBag.Article;
+    var userinfo = (ImModel.Users)ViewBag.UserInfo;
+    <link href="~/Content/mui.min.css" rel="stylesheet" />
+}
 
-@{
-    var article = (ArticleViewModel)ViewBag.Article;
-    var userinfo = (Users)ViewBag.UserInfo;
-    ViewBag.Title = article.ArticleName;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@article.ArticleName</title>
     <link href="~/Content/thread.css" rel="stylesheet" />
     <style type="text/css">
-        #thread-container .thread-info .userinfo .headpic {
-            display: inline-flex;
+        #thread-container .thread-info .userinfo img {
             width: 35px;
             height: 35px;
-            border-radius: 15px;
+            border-radius: 8px;
             vertical-align: middle;
             overflow: hidden;
             margin-right: 2px;
         }
+
+        .thread-info {
+            margin: 10px 10px;
+        }
+
+            .thread-info .userinfo .username {
+                font-size: 16px;
+            }
     </style>
-}
-<div id="page-preloader" class="page">
-    <div class="content content-padded">
-        <!-- 文章主体 -->
-        <div class="article" id="thread-container">
-            <input type="hidden" id="articleId" value="@article.Id">
-            <div class="header">
-                <h1>
-                    <!-- 是否精华 -->
-                    <i class="essence-mark"></i>
-                    @article.ArticleName
-                </h1>
-                <div class="thread-info">
-                    <span class="userinfo">
-                        <i class="headpic">
-                            <img src="@ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)" />
-                        </i>
-                        <em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em>
-                    </span>
-                    <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
-                </div>
-            </div>
-            <div class="articlecontent">
-                @Html.Raw(article.Content == null ? "" : article.Content[0])
-                <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
-            </div>
-            <div class="article-footer">
-                <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
-                <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+</head>
+<body>
+    <!-- 文章主体 -->
+    <div class="article" id="thread-container">
+        <input type="hidden" id="articleId" value="@article.Id">
+        <div class="header">
+            <h1>
+                <!-- 是否精华 -->
+                <i class="essence-mark"></i>
+                @article.ArticleName
+            </h1>
+            <div class="thread-info">
+                <span class="userinfo">
+                    <img src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)" />
+                    <em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em>
+                </span>
+                <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
         </div>
-
-
+        <div class="articlecontent">
+            @Html.Raw(article.Content == null ? "" : article.Content[0])
+            <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
+        </div>
+        0<div class="article-footer">
+            <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
+            <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+        </div>
     </div>
-</div>
 
 
-@section scripts
-{
-    <script type="text/javascript">
-
-    </script>
-}
+</body>
+</html>

@@ -73,6 +73,7 @@
 
 				});
 			});
+			var previewPage = null;
 			//添加列表项的点击事件  
 			mui('.mui-scroll').on('tap', '.mui-card', function(e) {
 				var articleid = $(this).attr("articleid");
@@ -85,23 +86,17 @@
 						break;
 					}
 				}
+				//获得详情页面  
+				if(!previewPage) {
+					previewPage = plus.webview.getWebviewById('preview.html');
+				}
+				//触发详情页面的weiboitems事件  
+				mui.fire(previewPage, 'previewarticle', {
+					articleItem: selectedItem
+				});
+				//打开详情页面            
 				mui.openWindow({
-					id: 'preview',
-					url: 'preview.html',
-					styles: {
-						popGesture: "close",
-
-					},
-					show: {
-						aniShow: "pop-in"
-					},
-					waiting: {
-						autoShow: false
-					},
-					extras: {
-						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
-						articleid: articleid //扩展参数
-					}
+					id: 'preview.html'
 				});
 			});
 
