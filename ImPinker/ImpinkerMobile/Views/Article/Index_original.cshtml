@@ -3,6 +3,7 @@
     var article = (ImModel.ViewModel.ArticleViewModel)ViewBag.Article;
     var userinfo = (ImModel.Users)ViewBag.UserInfo;
     <link href="~/Content/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/thread.css" rel="stylesheet" />
 }
 
 <!DOCTYPE html>
@@ -11,9 +12,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@article.ArticleName</title>
-    <link href="~/Content/thread.css" rel="stylesheet" />
+    
     <style type="text/css">
-        #thread-container .thread-info .userinfo img {
+        .thread-info .userinfo img {
             width: 35px;
             height: 35px;
             border-radius: 8px;
@@ -29,18 +30,21 @@
             .thread-info .userinfo .username {
                 font-size: 16px;
             }
+        .mui-content-padded p img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
 </head>
 <body>
-    <!-- 文章主体 -->
-    <div class="article" id="thread-container">
+    <div class="mui-content">
         <input type="hidden" id="articleId" value="@article.Id">
         <div class="header">
-            <h1>
-                <!-- 是否精华 -->
-                <i class="essence-mark"></i>
+            <h2>
                 @article.ArticleName
-            </h1>
+            </h2>
             <div class="thread-info">
                 <span class="userinfo">
                     <img src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)" />
@@ -49,16 +53,23 @@
                 <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
         </div>
-        <div class="articlecontent">
+        <!-- 文章主体 -->
+        <div class="mui-content-padded">
             @Html.Raw(article.Content == null ? "" : article.Content[0])
             <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
-        </div>
-        0<div class="article-footer">
-            <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
-            <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+            <div class="article-footer">
+                <img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
+                <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+            </div>
         </div>
     </div>
 
 
 </body>
 </html>
+<script type="text/javascript">
+    mui.previewImage();
+</script>
+<script src="~/Scripts/mui.min.js"></script>
+<script src="~/Scripts/mui.previewimage.js"></script>
+<script src="~/Scripts/mui.zoom.js"></script>
