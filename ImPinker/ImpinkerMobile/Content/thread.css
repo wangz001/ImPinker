@@ -1,749 +1,345 @@
-html,body{
-	background: #fff;
-	color: #666;
-	margin: 0;
-	padding: 0; 
-	/*transition:all 0.2s linear;*/
-}
-body,input,textarea,button{
-	font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-	outline: none;
-	color: #666;
-	resize: none;
+#thread-container .header {
+    padding: 10px 0px;
+    border-bottom: 1px solid #dfdfdf;
+    border-bottom: .5px solid #dfdfdf;
+    -webkit-border-bottom: 1px solid #dfdfdf;
 }
 
-a{
-	color: #2175d0;
-	text-decoration: none;
+    #thread-container .header h1 {
+        font-size: 22px;
+        padding: 10px 0px;
+    }
+
+    #thread-container .header .thread-info {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #ccc;
+    }
+
+        #thread-container .header .thread-info .userinfo {
+        }
+
+            #thread-container .header .thread-info .userinfo .headpic {
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                border-radius: 15px;
+                vertical-align: middle;
+                overflow: hidden;
+                margin-right: 2px;
+            }
+
+                #thread-container .header .thread-info .userinfo .headpic img {
+                    width: 15px;
+                    height: 15px;
+                }
+
+            #thread-container .header .thread-info .userinfo .username {
+                vertical-align: middle;
+            }
+
+        #thread-container .header .thread-info .comment-count {
+            display: inline-block;
+            float: right;
+            vertical-align: middle;
+            margin-top: 1px;
+        }
+
+            #thread-container .header .thread-info .comment-count i {
+                display: inline-block;
+                vertical-align: middle;
+                width: 10px;
+                height: 11px;
+                background: url(/images/thread.png) no-repeat -37px 0px;
+                background-size: 146px 47px;
+                margin-right: 2px;
+            }
+
+#thread-container article {
+    margin-top: 10px;
 }
-h1,h2,h3,h4,h5,h6{
-	font-weight: normal;
-	margin: 0;
-	word-break: break-all;
-	word-break: break-word;
-	word-wrap: break-word;
+
+    #thread-container article p {
+        font-size: 17px;
+        line-height: 1.5em;
+        color: #888;
+    }
+
+#comment-container {
+    margin: 0px 10px;
 }
-ul,li,dl,dd,dt,p{
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-p{
-	word-break: break-all;
-	word-break: break-word;
-	word-wrap: break-word;
-}
-em,i,b{
-	font-style: normal;
-	font-weight: normal;
-}
-.emoji{
-	height: 1.2em;
-	width: auto;
-	vertical-align: text-bottom;
-}
-.gototop-box{
-	position: fixed;
-	z-index: 1003;
-	right: 10px;
-	bottom: 40px;
-	transition:opacity 0.2s linear;
-}
-.gototop{
-	display: block;
-	width: 44px;
-	height: 0px;
-	border-radius: 44px;
-	opacity: 1;
-	background-size:44px 44px;
-	background-image:url(/images/top_change.png);
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	transition:all 0.2s ease-out;
-}
-.gototop-show{
-	height: 44px;
-}
-.homepage{
-	display: block;
-	width: 44px;
-	height: 44px;
-	border-radius: 44px;
-	opacity: 1;
-	background-size:44px 44px;
-	background-image:url(/images/homepage_change.png);
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	margin-bottom: 5px;
-	transition:all 0.2s ease-out;
-}
-aside{
-    padding: 0px;
+
+    #comment-container h3 {
+        font-size: 14px;
+        color: #666;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dfdfdf;
+        border-bottom: .5px solid #dfdfdf;
+    }
+
+        #comment-container h3 i {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 11px;
+            background: url(/images/thread.png) no-repeat -37px -15px;
+            background-size: 146px 47px;
+            margin-right: 5px;
+        }
+
+    #comment-container .comment {
+    }
+
+        #comment-container .comment .no-comment {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            line-height: 110px;
+        }
+
+        #comment-container .comment .comment-list {
+            padding: 10px 0px;
+            border-top: 1px solid #f3f3f3;
+            border-top: .5px solid #f3f3f3;
+        }
+
+            #comment-container .comment .comment-list:first-child {
+                border-top: none;
+            }
+
+            #comment-container .comment .comment-list dt .headpic {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 20px;
+                vertical-align: middle;
+                overflow: hidden;
+            }
+
+                #comment-container .comment .comment-list dt .headpic img {
+                    width: 20px;
+                    height: 20px;
+                }
+
+            #comment-container .comment .comment-list dt .userinfo {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 12px;
+                color: #ccc;
+            }
+
+        #comment-container .comment .hot .up {
+            display: inline-block;
+            float: right;
+        }
+
+            #comment-container .comment .hot .up i {
+                display: inline-block;
+                width: 53px;
+                height: 12px;
+                background: url(/images/thread.png) no-repeat -53px 0px;
+                background-size: 146px 47px;
+                vertical-align: middle;
+            }
+
+            #comment-container .comment .hot .up em {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 12px;
+                color: #ea5454;
+            }
+
+        #comment-container .comment .comment-list dd {
+            margin-top: 10px;
+        }
+
+            #comment-container .comment .comment-list dd p {
+                font-size: 15px;
+                color: #888;
+                line-height: 1.5em;
+            }
+
+            #comment-container .comment .comment-list dd .comment-img-box {
+                width: 55px;
+                height: 60px;
+                margin-top: 5px;
+                overflow: hidden;
+                text-align: center;
+                line-height: 0;
+            }
+
+                #comment-container .comment .comment-list dd .comment-img-box img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                #comment-container .comment .comment-list dd .comment-img-box span {
+                    display: inline-block;
+                    background: url(/images/thread.png) no-repeat -92px -20px;
+                    background-size: 146px 47px;
+                    width: 55px;
+                    height: 10px;
+                    margin-top: 5px;
+                }
+
+        #comment-container .comment .comment-list .quote {
+            padding: 10px;
+            background: #fafafc;
+            border: 1px solid #f8f8fb;
+            border: .5px solid #f8f8fb;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+            #comment-container .comment .comment-list .quote dd p {
+                font-size: 14px;
+                color: #999;
+            }
+
+        #comment-container .comment .comment-app-btn {
+            display: block;
+            line-height: 38px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            background-color: #2175d0;
+            border-radius: 5px;
+            background-size: cover;
+            background-image: url(/images/thread-comment-btn-bg.png);
+        }
+/*----App自定义的css---*/
+.mui-preview-image.mui-fullscreen {
     position: fixed;
-    top: 0px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    z-index: 20;
+    background-color: #000;
+}
+
+.mui-preview-header,
+.mui-preview-footer {
+    position: absolute;
     width: 100%;
-    background: rgba(255,255,255,0.95);
-    z-index: 1000;
+    left: 0;
+    z-index: 10;
 }
-aside a{
-	margin: 0px 10px;
-    border-bottom: 1px solid #dfdfdf;
+
+.mui-preview-header {
+    height: 44px;
+    top: 0;
+}
+
+.mui-preview-footer {
+    height: 50px;
+    bottom: 0px;
+}
+
+.mui-preview-header .mui-preview-indicator {
     display: block;
-    text-decoration: none;
-    padding: 10px 0px;
-}
-aside .app-logo{
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	border-radius: 5px;
-	background: url(/images/thread.png) no-repeat 0px 0px;
-	background-size: 145px 47px;
-	vertical-align: middle;
-	margin-right: 5px;
-}
-aside .adv-words{
-	display: inline-block;
-	width: 147px;
-	height: 11px;
-	vertical-align: middle;
-	background: url(/images/thread.png) no-repeat 0px -36px;
-	background-size: 145px 47px;
-}
-aside .button{
-	display: inline-block;
-	float: right;
-	width: 73px;
-	height: 23px;
-	line-height: 23px;
-	font-size: 12px;
-	color: #2175d0;
-	border: 1px solid #2175d0;
-	border: .5px solid #2175d0;
-	-webkit-border: 1px solid #2175d0;
-	border-radius: 5px;
-	margin-top: 3px;
-	text-align: center;
-}
-.line{
-	clear: both;
-	height: 10px;
-	background:#ececf1;
-	width: 100%;
-	margin: 10px 0px;
-}
-.open-layer{
-	position: fixed;
-	z-index: 1003;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,0.8);
-	display: none;
-}
-.open-layer .title{
-	position: absolute;
-	right: 20px;
-	width: 250px;
-	height: 50px;
-}
-.open-layer .title img{
-	width: 250px;
-	height: 50px;
-}
-.open-layer .body{
-	position: absolute;
-	width: 100%;
-	text-align: center;
-	top: 80px;
-}
-.open-layer .body img{
-	width: 250px;
-	height: auto;
-}
-.xxxxx-face{
-	display: inline-block;
-	width: auto;
-	height: 1.5em;
-	vertical-align: text-bottom;
-}
-#thread-container{
-	padding-top: 50px;
-	margin: 0px 10px;
-	height: auto;
-	overflow: auto;
-}
-#thread-container header{
-	padding: 10px 0px;
-	border-bottom: 1px solid #dfdfdf;
-	border-bottom: .5px solid #dfdfdf;
-	-webkit-border-bottom: 1px solid #dfdfdf;
-}
-#thread-container header h1{
-	font-size: 22px;
-}
-#thread-container header .thread-info{
-	margin-top: 5px;
-	font-size: 12px;
-	color: #ccc;
-}
-#thread-container header .thread-info .userinfo{}
-#thread-container header .thread-info .userinfo .headpic{
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	border-radius: 15px;
-	vertical-align: middle;
-	overflow: hidden;
-	margin-right: 2px;
-}
-#thread-container header .thread-info .userinfo .headpic img{
-	width: 15px;
-	height: 15px;
-}
-#thread-container header .thread-info .userinfo .username{
-	vertical-align: middle;
-}
-#thread-container header .thread-info .comment-count{
-	display: inline-block;
-	float: right;
-	vertical-align: middle;
-	margin-top: 1px;
-}
-#thread-container header .thread-info .comment-count i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 10px;
-	height: 11px;
-	background:url(/images/thread.png) no-repeat -37px 0px; 
-	background-size: 146px 47px;
-	margin-right: 2px;
-}
-#thread-container article{
-	margin-top: 10px;
-}
-#thread-container article p{
-	font-size: 17px;
-	line-height: 1.5em;
-	color: #888;
-}
-#thread-container article figure{
-	width: 100%;
-	margin: 15px 0px;
-	padding: 0;
-	overflow: hidden;
-}
-#thread-container article figure .img-box{
-	text-align: center;
-	line-height: 0;
-}
-#thread-container article figure .img-box img{
-	width: 100%;
-	height: auto;
-}
-#thread-container article figure .img-box video{
-	width: 100%;
-	height: auto;
-}
-#thread-container article figure figcaption{
-	background-color: #323436;
-	line-height: 1.5em;
-	color:#fff;
-}
-#thread-container article figure figcaption p{
-	font-size: 14px;
-	color: #fff;
-	margin: 0;
-	padding: 10px;
-}
-#thread-container article figure .youku-box{
-	width: 100%;
-	position: relative;
-}
-#thread-container article figure .youku-box img{
-	width: 100%;
-	height:auto;
-    -webkit-filter: blur(2px); /* Chrome, Opera */
-       -moz-filter: blur(2px);
-        -ms-filter: blur(2px);    
-            filter: blur(2px);
-}
-#thread-container article figure .youku-box .masker{
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background:rgba(0,0,0,0.5);
-}
-#thread-container article figure .youku-box .masker div{
-	display: block;
-	position: relative;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	vertical-align: middle;
-}
-#thread-container article figure .youku-box .masker div span{	
-	display: inline-block;
-	width: 90%;
-	white-space:nowrap; 
-	text-overflow:ellipsis;
-	overflow: hidden;
-	margin-top: 30%;
-	text-align: center;
-	color: #fff;
-	font-size: 13px;
-}
-#thread-container article figure .youku-box  .goYouku{
-	display: inline-block;
-	position: absolute;
-	line-height: 18px;
-	width: 100px;
-	border-radius: 3px;
-	text-align: center;
-	right: 10px;
-	bottom: 10px;
-	color: #fff;
-	font-size: 12px;
-	background:#2175d0;
-	padding: 3px 10px;
-}
-#thread-container .product{
-	position: relative;
-	border: 1px solid #dfdfdf;
-	border: .5px solid #dfdfdf;
-	border-radius: 5px;
-	margin-top: 10px;
-}
-#thread-container .product h3{
-	display: inline-block;
-	font-size: 14px;
-	background:#fff;
-	padding: 0px 10px;
-	position: absolute;
-	top: -10px;
-	left: 10px;
-}
-#thread-container .product ul{
-	margin-top: 15px;
-}
-#thread-container .product ul li{
-	margin: 0px 10px 10px;
-	height: 55px;
-	padding-top: 15px;
-	border-top: 1px solid #dfdfdf;
-	border-top: .5px solid #dfdfdf;
-}
-#thread-container .product ul li:first-child{
-	border-top: none;
-	margin-top: 0px;
-	padding-top: 0px;
-}
-#thread-container .product ul li .product-img{
-	width: 50px;
-	height: 50px;
-	float: left;
-}
-#thread-container .product ul li .product-img img{
-	width: 50px;
-	height: 50px;
-}
-#thread-container .product ul li .product-info{
-	margin-left: 60px;
-	height: 50px;
-	overflow: hidden;
-}
-#thread-container .product ul li .product-info h5{
-	font-size: 12px;
-	color: #888;
-	line-height: 14px;
-	height: 30px;
-	overflow: hidden;
-	display: table-cell;
-	vertical-align: middle;
-}
-#thread-container .product ul li .product-info .buy{
-	height: 25px;
-	overflow: hidden;
-}
-#thread-container .product ul li .product-info .buy .price{
-	font-size: 12px;
-	color: #2175d0;
-}
-#thread-container .product ul li .product-info .buy .price em{
-	font-size: 16px;
-}
-#thread-container .product ul li .product-info .buy .button{
-	display: inline-block;
-	line-height: 12px;
-	padding: 3px 0px;
-	background-color: #2175d0;
-	width: 50px;
-	border-radius: 3px;
-	color: #fff;
-	float: right;
-	font-size: 12px;
-	text-align: center;
-}
-#comment-container{
-	margin: 0px 10px;
-}
-#comment-container h3{
-	font-size: 14px;
-	color: #666;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #dfdfdf;
-	border-bottom: .5px solid #dfdfdf;
-}
-#comment-container h3 i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 10px;
-	height: 11px;
-	background:url(/images/thread.png) no-repeat -37px -15px; 
-	background-size: 146px 47px;
-	margin-right: 5px;
-}
-#comment-container .comment{}
-#comment-container .comment .no-comment{
-	font-size: 13px;
-	color: #888;
-	text-align: center;
-	line-height: 110px;
-}
-#comment-container .comment .comment-list{
-	padding: 10px 0px;
-	border-top: 1px solid #f3f3f3;
-	border-top: .5px solid #f3f3f3;
-}
-#comment-container .comment .comment-list:first-child{
-	border-top: none;
-}
-#comment-container .comment .comment-list dt .headpic{
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	border-radius: 20px;
-	vertical-align: middle;
-	overflow: hidden;
-}
-#comment-container .comment .comment-list dt .headpic img{
-	width: 20px;
-	height: 20px;
-}
-#comment-container .comment .comment-list dt .userinfo{
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 12px;
-	color: #ccc;
-}
-#comment-container .comment .hot .up{
-	display: inline-block;
-	float: right;
-}
-#comment-container .comment .hot .up i{
-	display: inline-block;
-	width: 53px;
-	height: 12px;
-	background:url(/images/thread.png) no-repeat -53px 0px; 
-	background-size: 146px 47px;	
-	vertical-align: middle;
-}
-#comment-container .comment .hot .up em{
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 12px;
-	color: #ea5454;
-}
-#comment-container .comment .comment-list dd{
-	margin-top: 10px;
-}
-#comment-container .comment .comment-list dd p{
-	font-size: 15px;
-	color: #888;
-	line-height: 1.5em;
-}
-#comment-container .comment .comment-list dd .comment-img-box{
-	width: 55px;
-	height: 60px;
-	margin-top: 5px;
-	overflow: hidden;
-	text-align: center;
-	line-height: 0;
-}
-#comment-container .comment .comment-list dd .comment-img-box img{
-	width: 50px;
-	height: 50px;
-}
-#comment-container .comment .comment-list dd .comment-img-box span{
-	display: inline-block;
-	background:url(/images/thread.png) no-repeat -92px -20px; 
-	background-size: 146px 47px;
-	width: 55px;
-	height: 10px;
-	margin-top: 5px;
-}
-#comment-container .comment .comment-list .quote{
-	padding: 10px;
-	background: #fafafc;
-	border: 1px solid #f8f8fb;
-	border: .5px solid #f8f8fb;
-	border-radius: 5px;
-	margin-top: 10px;
-}
-#comment-container .comment .comment-list .quote dd p{
-	font-size: 14px;
-	color: #999;
-}
-#comment-container .comment .comment-app-btn{
-	display: block;
-	line-height: 38px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-color:#2175d0;
-	border-radius: 5px;
-	background-size: cover;
-	background-image: url(/images/thread-comment-btn-bg.png); 
-}
-/*更多帖子*/
-#other-threads{
-	margin: 0px 10px;
-}
-#other-threads h3{
-	font-size: 14px;
-	color: #666;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #dfdfdf;
-	border-bottom: .5px solid #dfdfdf;
-}
-#other-threads h3 i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 17px;
-	height: 18px;
-	background:url(/images/thread.png) no-repeat -58px -17px; 
-	background-size: 146px 47px;
-	margin-right: 5px;
-}
-#other-threads .thread-list li{
-	width: 100%;
-	height: 65px;
-	padding: 10px 0px;
-	border-top: 1px solid #f3f3f3;
-	border-top: .5px solid #f3f3f3;
-}
-#other-threads .thread-list li a{
-	display: block;
-	width: 100%;
-	height: 65px;
-}
-#other-threads .thread-list li:first-child{
-	border-top: none;
-}
-#other-threads .thread-list li .img-box{
-	float: left;
-	width: 98px;
-	height: 65px;
-	overflow: hidden;
-	vertical-align: middle;
-	background-color: #f4f4f4;
-}
-#other-threads .thread-list li .img-box img{
-	width: 98px;
-	height: 65px;
-}
-#other-threads .thread-list li .thread-info{
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    margin: 15px auto 4;
+    width: 70px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.mui-preview-image {
+    display: none;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+    .mui-preview-image.mui-preview-in {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+
+    .mui-preview-image.mui-preview-out {
+        background: none;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+    }
+
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+
+.mui-zoom-scroller {
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-backface-visibility: hidden;
+}
+
+.mui-zoom {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.mui-slider .mui-slider-group .mui-slider-item img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+    width: 100%;
+}
+
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+    display: inline-table;
+}
+
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+    display: table-cell;
     vertical-align: middle;
-    padding-left: 108px;
-    height: 65px;
 }
-#other-threads .thread-list li .thread-info h5{
-	display: table-cell;
-	vertical-align: middle;
-	height: 36px;
-	font-size: 13px;
-	color: #666;
+
+.mui-preview-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
 }
-#other-threads .thread-list li .thread-info .info{
-	margin-top: 5px;
+
+    .mui-preview-loading.mui-active {
+        display: block;
+    }
+
+    .mui-preview-loading .mui-spinner-white {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        height: 50px;
+        width: 50px;
+    }
+
+.mui-preview-image img.mui-transitioning {
+    -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
-#other-threads .thread-list li .thread-info .info .userinfo{
-	display: inline-block;
-}
-#other-threads .thread-list li .thread-info .info .userinfo i{
-	display: inline-block;
-	height: 15px;
-	width: 15px;
-	border-radius: 15px;
-	vertical-align: middle;
-}
-#other-threads .thread-list li .thread-info .info .userinfo i img{
-	width: 15px;
-	height: 15px;
-	border-radius: 15px;
-}
-#other-threads .thread-list li .thread-info .info .userinfo em{
-	font-size: 12px;
-	color: #ccc;
-	vertical-align: middle;
-}
-#other-threads .thread-list li .thread-info .info .comment{
-	display: inline-block;
-	float: right;
-	vertical-align: middle;
-	font-size: 12px;
-	color: #ccc;
-	margin-top: 3px;
-}
-#other-threads .thread-list li .thread-info .info .comment i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 10px;
-	height: 11px;
-	background:url(/images/thread.png) no-repeat -37px 0px; 
-	background-size: 146px 47px;
-	margin-right: 2px;	
-}
-#other-threads .beauty{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-top: 1px solid #f3f3f3;
-    border-top: .5px solid #f3f3f3;
-    margin-bottom: 10px;
-    border-bottom: .5px solid #f3f3f3;
-}
-#other-threads .beauty .img-box{
-	position: relative;
-	line-height: 0;
-	margin-bottom: 10px;
-}
-#other-threads .beauty .img-box img{
-	width: 100%;
-	height: auto;
-}
-#other-threads .beauty .img-box span{
-	display: inline-block;
-	width: 129px;
-	height: 13px;
-	background: url(/images/beauty-label.png) no-repeat;
-	background-size: 129px 13px;
-	position: absolute;
-	left: 5px;
-	bottom: 10px;
-}
-#other-threads .beauty .thread-info h5{
-	font-size: 13px;
-	color: #666;
-}
-#other-threads .beauty .thread-info .info{
-	margin-top: 10px;
-}
-#other-threads .beauty .thread-info .info .userinfo{
-	display: inline-block;
-}
-#other-threads .beauty .thread-info .info .userinfo i{
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	border-radius: 15px;
-	vertical-align: middle;
-}
-#other-threads .beauty .thread-info .info .userinfo i img{
-	width: 15px;
-	height: 15px;
-	border-radius: 15px;
-}
-#other-threads .beauty .thread-info .info .userinfo em{
-	display: inline-block;
-	color: #ccc;
-	font-size: 12px;
-}
-#other-threads .beauty .thread-info .info .comment{
-	display: inline-block;
-	float: right;
-	font-size: 12px;
-	color: #ccc;
-}
-#other-threads .beauty .thread-info .info .comment i{
-	display: inline-block;
-	vertical-align: middle;
-	width: 10px;
-	height: 11px;
-	background:url(/images/thread.png) no-repeat -37px 0px; 
-	background-size: 146px 47px;
-	margin-right: 2px;	
-}
-#other-threads .more-beauty{
-	display: block;
-	font-size: 12px;
-	color: #999;
-	line-height: 30px;
-	border: 1px solid #dfdfdf;
-	border: .5px solid #dfdfdf;
-	border-left: none;
-	border-right: none;
-	text-align: center;
-	width: 100%;
-	margin-bottom: 10px;
-}
-.footer{
-	background:#323436;
-	text-align: center;
-}
-.footer .row-1{
-	text-align: center;
-	line-height: 45px;
-}
-.footer .row-1 a,
-.footer .row-1 em{
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 13px;
-	color: #fff;
-	position: relative;
-}
-.footer .row-1 a i,
-.footer .row-1 a b{
-	display: inline-block;
-	vertical-align: text-bottom;
-	background-image: url(../images/xxxxxbbs.png);
-	background-repeat: no-repeat;
-	background-size: 211px 29px;
-	margin-right: 8px;
-}
-.footer .row-1 .pc-btn i{
-	width: 15px;
-	height: 14px;
-	background-position: -108px -16px;
-}
-.footer .row-1 .app-btn i{
-	width: 10px;
-	height: 16px;
-	background-position: -129px -14px;
-}
-.footer .row-1 .app-btn b{
-	position: absolute;
-	width: 17px;
-	height: 10px;
-	background-position: -147px -20px;
-	right: -26px;
-	top: 6px;
-}
-.footer .row-1 em{
-	width: 1px;
-	vertical-align: middle;
-	background-color: #61666b;
-	margin: 0px 20px;
-	height: 12px;
-}
-.footer .row-2{
-	text-align: center;
-	color: #959595;
-	font-size: 12px;
-	padding-bottom: 15px;
-}
+
+

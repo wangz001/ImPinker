@@ -205,6 +205,9 @@
     <Content Include="Scripts\commonUtil.js" />
     <Content Include="Scripts\Home\index.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\mui.min.js" />
+    <Content Include="Scripts\mui.previewimage.js" />
+    <Content Include="Scripts\mui.zoom.js" />
     <Content Include="Scripts\Search\search.js" />
     <Content Include="Scripts\SUI\sm.css" />
     <Content Include="Web.config" />
