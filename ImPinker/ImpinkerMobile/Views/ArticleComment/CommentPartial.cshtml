@@ -1,0 +1,53 @@
+﻿@using Common.DateTimeUtil
+@using ImBLL
+@using ImModel
+@using ImModel.ViewModel
+@{
+    var commentLists = (List<ArticleCommentVm>)ViewBag.CommentLists;
+    var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
+    var totalcount = (int)ViewBag.TotalCount;
+    
+<link href="~/Content/icons-extra.css" rel="stylesheet" />
+}
+<div id="comment-container">
+    <h3><i></i>评论 <span>( @totalcount 条 )</span></h3>
+    @{
+        if (commentLists.Count > 0)
+        {
+            <div class="comment" id="commentContent">
+                @{
+            foreach (var comment in commentLists)
+            {
+                var userid = comment.UserId;
+                var user = usersDic[userid];
+
+                <dl class="comment-list hot" commentid="@comment.Id">
+                    <dt>
+                        <i class="headpic">
+                            <img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40)">
+                        </i>
+                        <em class="userinfo">
+                            @user.ShowName
+                            @TUtil.DateFormatToString(comment.CreateTime)
+                        </em>
+                        <em class="commentvote">
+                            <a id="icon-star"><span class="mui-icon-extra mui-icon-extra-heart"></span></a>
+                            <span class="mui-icon mui-icon-compose"></span>
+                        </em>
+                    </dt>
+                    <dd>
+                        <p>
+                            @comment.Content&nbsp;
+                        </p>
+
+                    </dd>
+                </dl>
+            }
+
+                }
+            </div>
+        }
+    }
+</div>
+
+

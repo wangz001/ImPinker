@@ -64,12 +64,15 @@
         </div>
     </div>
 
-
+    @{
+        Html.RenderAction("CommentPartial", "ArticleComment", article);
+    }
 </body>
 </html>
-<script type="text/javascript">
-    mui.previewImage();
-</script>
+
 <script src="~/Scripts/mui.min.js"></script>
 <script src="~/Scripts/mui.previewimage.js"></script>
 <script src="~/Scripts/mui.zoom.js"></script>
+<script type="text/javascript">
+    mui.previewImage();
+</script>
