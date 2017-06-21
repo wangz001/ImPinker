@@ -194,11 +194,7 @@
 					contentrefresh: '正在加载...',
 					callback: pullupRefresh
 				}
-			},
-			preloadPages: [{   //预加载文章预览页
-				id: 'preview.html',
-				url: 'view/article/preview.html'
-			}]
+			}
 		});
 		
 		var allArticles = new Array();
@@ -312,7 +308,20 @@
 				});
 				//打开详情页面            
 				mui.openWindow({
-					id: 'preview.html'
+					id: id,
+					url: this.href,
+					styles: webview_style,
+					show: {
+						aniShow: aniShow
+					},
+					waiting: {
+						autoShow: false
+					},
+					extras: {
+						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
+						articleid: articleid ,//扩展参数
+						articlename:articlename
+					}
 				});
 			} else if(id && ~id.indexOf('.html')) {
 				if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {

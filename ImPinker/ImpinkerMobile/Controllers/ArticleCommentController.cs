@@ -18,7 +18,7 @@ namespace ImpinkerMobile.Controllers
         //
         // GET: /ArticleComment/
         [ChildActionOnly]
-        public ActionResult CommentPartial(ArticleViewModel articleViewModel)
+        public ActionResult ArticleComment(ArticleViewModel articleViewModel)
         {
             int totalCount = 0;
             var articleId = long.Parse(articleViewModel.Id);

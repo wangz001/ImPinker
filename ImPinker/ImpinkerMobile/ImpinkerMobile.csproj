@@ -196,12 +196,15 @@
     <Compile Include="Startup1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\icons-extra.css" />
     <Content Include="Content\image\logo_100.png" />
     <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
     <Content Include="Content\mui.min.css" />
     <Content Include="Content\thread.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\mui-icons-extra.ttf" />
+    <Content Include="fonts\mui.ttf" />
     <None Include="Properties\PublishProfiles\impinkerMobile.pubxml" />
     <Content Include="Scripts\commonUtil.js" />
     <Content Include="Scripts\Home\index.js" />
