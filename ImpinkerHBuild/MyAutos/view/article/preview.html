@@ -6,13 +6,63 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.thread-info .userinfo img {
+				width: 35px;
+				height: 35px;
+				border-radius: 8px;
+				vertical-align: middle;
+				overflow: hidden;
+				margin-right: 2px;
+			}
+			
+			.thread-info {
+				margin: 10px 10px;
+			}
+			
+			.thread-info .userinfo .username {
+				font-size: 16px;
+			}
+			
+			.mui-content-padded p img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div id="content" class="mui-content">
-		</div>
-		<footer class="mui-bar mui-bar-footer">
+		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title"></h1>
+		</header>
+		<div id="content" class="mui-content">
+			<input type="hidden" id="articleId" value="@article.Id">
+			<div class="header">
+				<h2 id='articlename'>
+                
+            </h2>
+				<div class="thread-info">
+					<span class="userinfo">
+                    <img src="" />
+                    <em class="username">用户名</em>
+                </span>
+					<span class="publish-time"></span>
+				</div>
+			</div>
+			<!-- 文章主体 -->
+			<div class="mui-content-padded" id='articlecontent'>
+
+			</div>
+			<div class="article-footer">
+				<img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
+				<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+			</div>
+		</div>
+		<div id='comment'></div>
+		<footer class="mui-bar mui-bar-footer">
 			<a class="mui-icon mui-icon-compose"><span style="font-size: 12px;">1655</span></a>
 			<input id="composeText" type="text" placeholder="请输入评论" style="width: 60%;" />
 			<a id="share" class="mui-icon mui-icon-paperplane " style="color: #999;"></a>
@@ -21,53 +71,52 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
 		<script type="text/javascript">
 			var articleItem = null;
 			var shares = null,
 				sharewx = null,
-				shareweibo=null;
+				shareweibo = null;
 			mui.plusReady(function() {
+				//获取参数
+				var self = plus.webview.currentWebview();
+				var articleid = self.articleid;
+				var articlename = self.articlename;
+				$("#title").html(articlename);
+				console.log(articleid + articlename);
+				getArticle(articleid);
 				// 扩展API加载完毕，现在可以正常调用扩展API
 				plus.share.getServices(function(s) {
 					shares = s;
 					for(var i in s) {
 						if('weixin' == s[i].id) {
 							sharewx = s[i];
-						}if('sinaweibo'==s[i].id){
-							shareweibo=s[i];
+						}
+						if('sinaweibo' == s[i].id) {
+							shareweibo = s[i];
 						}
 					}
 				}, function(e) {
 					alert("获取分享服务列表失败：" + e.message);
 				});
-				//刷新父页面
-				var old_back = mui.back;
-				mui.back = function() {
-					var wobj = plus.webview.getWebviewById("preview.html"); //注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，  
-					wobj.reload(true);
-					old_back()
-				}
 			});
 
-			//自定义事件。接受列表页的数据
-			window.addEventListener('previewarticle', function(event) {
-				//获得事件参数  
-				var articleitem = event.detail.articleItem;
-				articleItem = articleitem;
-				if(articleitem != null) {
-					mui.init({
-						subpages: [{
-							url: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
-							id: articleItem.Id,
-							styles: {
-								top: '0px', //mui标题栏默认高度为45px；
-								bottom: '50px' //默认为0px，可不定义；
-							}
-						}]
-					});
-				}
-			});
+			function getArticle(articleid) {
+				var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
+				var data = {
+					articleid: articleid,
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var articleinfo = data.Data;
+						articleItem = articleinfo;
+						var contentStr = articleinfo.Content;
+						$("#articlename").html(articleinfo.ArticleName);
+						$("#articlecontent").html(contentStr);
+					}
+				});
+			}
 
 			document.getElementById('share').addEventListener('tap', function() {
 				var btnArray = [{
