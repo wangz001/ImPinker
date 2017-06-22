@@ -29,7 +29,8 @@ function SendComposs(txtStr) {
 	mui.ajax(url, {
 		data: {
 			ArticleId: articleItem.Id,
-			CommentStr: txtStr
+			CommentStr: txtStr,
+			ToCommentId:30
 		},
 		dataType: 'json', //服务器返回json格式数据
 		type: 'post', //HTTP请求类型
@@ -41,6 +42,7 @@ function SendComposs(txtStr) {
 		},
 		success: function(data) {
 			if(data.IsSuccess == 1) {
+				getArticleComment(articleItem.Id);
 				mui.toast("评论成功！");
 			} else {
 				console.log("评论失败。" + data.Description);
@@ -51,4 +53,50 @@ function SendComposs(txtStr) {
 			console.log(type);
 		}
 	});
+}
+
+function getArticle(articleid) {
+	var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
+	var data = {
+		articleid: articleid,
+	};
+	plus.nativeUI.showWaiting('正在加载');
+	commonUtil.sendRequestGet(url, data, function(data) {
+		plus.nativeUI.closeWaiting();
+		if(data.IsSuccess == 1 && data.Data != null) {
+			var articleinfo = data.Data;
+			articleItem = articleinfo;
+			var contentStr = articleinfo.Content;
+			$("#articlename").html(articleinfo.ArticleName);
+			$("#articlecontent").html(contentStr);
+			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
+			$("#user_name").html(articleItem.UserName);
+			$(".thread-info .publish-time").html(articleItem.CreateTime);
+		}
+	});
+}
+
+function getArticleComment(articleid) {
+	var url = 'http://api.myautos.cn/api/ArticleVote/GetArticleComments';
+	var data = {
+		articleid: articleid,
+		pagesize: 10,
+		pagenum: 1
+	};
+	commonUtil.sendRequestGet(url, data, function(data) {
+		if(data.IsSuccess == 1 && data.Data != null) {
+			$("#comment").html("");
+			var list = data.Data;
+			for(var i = 0; i < list.length; i++) {
+				var item = list[i];
+				initComment(item);
+			}
+		}
+	});
+}
+
+function initComment(item) {
+	var template = $('script[id="comment_item"]').html();
+	var articleHtmlStr = template.temp(item);
+	$("#comment").append(articleHtmlStr);
 }

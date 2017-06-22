@@ -41,7 +41,7 @@ namespace ImpinkerApi.Controllers
                 ArticleId = vm.ArticleId,
                 Content = vm.CommentStr,
                 UserId = userinfo.Id,
-                ToCommentId = 0,
+                ToCommentId =0,// (int)vm.ToCommentId,
                 CreateTime = DateTime.Now
             };
             var flag = _articleCommentBll.Add(model);

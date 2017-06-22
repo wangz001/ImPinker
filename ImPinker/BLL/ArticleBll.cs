@@ -20,6 +20,7 @@ namespace ImBLL
     {
         private readonly ArticleDal _dal = new ArticleDal();
         private readonly ArticleSnapsBll _articleSnapsBll = new ArticleSnapsBll();
+        private readonly UserBll _userBll = new UserBll();
 
         #region  BasicMethod
         /// <summary>
@@ -277,6 +278,7 @@ namespace ImBLL
         {
             var article = _dal.GetModel(id);
             var snap = _articleSnapsBll.GetModel(id);
+            var userinfo = _userBll.GetModelByCache(article.UserId);
 
             var vm = new ArticleViewModel
             {
@@ -289,7 +291,9 @@ namespace ImBLL
                 Description = article.Description,
                 Company = article.Company,
                 CreateTime = article.CreateTime,
-                Content = snap == null ? null : new List<Object> { snap.Content }
+                Content = snap == null ? null : new List<Object> { snap.Content },
+                UserName=string.IsNullOrEmpty(userinfo.ShowName)? userinfo.UserName:userinfo.ShowName,
+                UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100)
             };
             return vm;
         }

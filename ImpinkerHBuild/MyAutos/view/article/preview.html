@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<style type="text/css">
 			.thread-info .userinfo img {
 				width: 35px;
@@ -17,7 +18,7 @@
 			}
 			
 			.thread-info {
-				margin: 10px 10px;
+				margin: 10px 10px 10px 0px;
 			}
 			
 			.thread-info .userinfo .username {
@@ -30,38 +31,68 @@
 				max-width: 100%;
 				max-height: 100%;
 			}
+			
+			.comment-list dt .headpic {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				border-radius: 5px;
+				vertical-align: middle;
+				overflow: hidden;
+			}
+			
+			.comment-list dt .userinfo {
+				display: inline-block;
+				vertical-align: middle;
+				font-size: 12px;
+				color: #5b4646;
+			}
+			
+			.comment-list dt .commentvote {
+				float: right;
+			}
+			
+			.comment-list dd p {
+				font-size: 15px;
+				color: #888;
+				line-height: 1.5em;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 id="title" class="mui-title"></h1>
+			<h2 id="title" class="mui-title"></h2>
 		</header>
 		<div id="content" class="mui-content">
-			<input type="hidden" id="articleId" value="@article.Id">
-			<div class="header">
-				<h2 id='articlename'>
-                
-            </h2>
+			<div class="mui-content-padded">
+				<h3 id='articlename'>
+					 109～珍珠湖骑行小记       
+            		</h3>
 				<div class="thread-info">
 					<span class="userinfo">
-                    <img src="" />
-                    <em class="username">用户名</em>
-                </span>
+                    <img src="" id='user_headimg'/>
+                    <em class="username" id="user_name">用户名</em>
+                	</span>
 					<span class="publish-time"></span>
 				</div>
-			</div>
-			<!-- 文章主体 -->
-			<div class="mui-content-padded" id='articlecontent'>
+				<!-- 文章主体 -->
+				<div class="" id='articlecontent'>
+				</div>
+				<div class="article-footer">
+					<img src="../../images/logo.png" />
+					<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+				</div>
+				<div class="mui-clearfix"></div>
+				<div id='comment'>
 
-			</div>
-			<div class="article-footer">
-				<img src="/Content/image/qrcode_for_gh_7f5be927b079_258.jpg" />
-				<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+				</div>
 			</div>
 		</div>
-		<div id='comment'></div>
+
+		<br>
+		<br>
 		<footer class="mui-bar mui-bar-footer">
 			<a class="mui-icon mui-icon-compose"><span style="font-size: 12px;">1655</span></a>
 			<input id="composeText" type="text" placeholder="请输入评论" style="width: 60%;" />
@@ -73,6 +104,40 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
+		<script type="text/template" id='comment_item'>
+			<dl class="comment-list hot" commentid="@comment.Id">
+				<dt>
+                        <i class="headpic">
+                            <img src="$HeadImage$">
+                        </i>
+                        <em class="userinfo">
+                            $UserName$
+                            $CreateTime$
+                        </em>
+                        <em class="commentvote">
+                            <a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>
+                            <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
+                        </em>
+                    </dt>
+				<dd>
+					<p>
+						$Content$
+					</p>
+
+				</dd>
+			</dl>
+		</script>
+		<script type="text/template" id="comment_item_to">
+			<li href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+				<a href="view/article/preview.html">
+					<img class="mui-media-object mui-pull-right" src="$CoverImage$">
+					<div class="mui-media-body">
+						$ArticleName$
+						<p class="mui-ellipsis">$Description$</p>
+					</div>
+				</a>
+			</li>
+		</script>
 		<script type="text/javascript">
 			var articleItem = null;
 			var shares = null,
@@ -84,8 +149,8 @@
 				var articleid = self.articleid;
 				var articlename = self.articlename;
 				$("#title").html(articlename);
-				console.log(articleid + articlename);
 				getArticle(articleid);
+				getArticleComment(articleid);
 				// 扩展API加载完毕，现在可以正常调用扩展API
 				plus.share.getServices(function(s) {
 					shares = s;
@@ -101,22 +166,6 @@
 					alert("获取分享服务列表失败：" + e.message);
 				});
 			});
-
-			function getArticle(articleid) {
-				var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
-				var data = {
-					articleid: articleid,
-				};
-				commonUtil.sendRequestGet(url, data, function(data) {
-					if(data.IsSuccess == 1 && data.Data != null) {
-						var articleinfo = data.Data;
-						articleItem = articleinfo;
-						var contentStr = articleinfo.Content;
-						$("#articlename").html(articleinfo.ArticleName);
-						$("#articlecontent").html(contentStr);
-					}
-				});
-			}
 
 			document.getElementById('share').addEventListener('tap', function() {
 				var btnArray = [{

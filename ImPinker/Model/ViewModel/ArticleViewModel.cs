@@ -44,5 +44,13 @@ namespace ImModel.ViewModel
         /// 文章被赞的总数
         /// </summary>
         public int VoteCount { get; set; }
+        /// <summary>
+        /// 用户名（显示名优先）
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
+        /// 头像地址
+        /// </summary>
+        public string UserHeadUrl{get;set;}
     }
 }
