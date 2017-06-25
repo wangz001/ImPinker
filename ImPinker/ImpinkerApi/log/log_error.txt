@@ -1,35 +1,22 @@
 [Header]
-2017-06-12 22:43:15,186 [10] ERROR WebLogger [(null)] - 
+2017-06-24 18:45:49,745 [12] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://api.impinker.com/api/Account/LoginOAoth
+Url:http://api.impinker.com/api/ArticleVote/NewArticleComment
 Referer:
-System.Data.SqlClient.SqlException (0x80131904): 不能将值 NULL 插入列 'AspNetId'，表 'MyAutosTest.dbo.Users'；列不允许有 Null 值。INSERT 失败。
-语句已终止。
-   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
-   在 ImDal.User.Add(Users model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 71
-   在 ImBLL.UserBll.Add(Users model) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 49
-   在 ImpinkerApi.Controllers.AccountController.LoginOAoth(LoginOauthViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 80
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
-ClientConnectionId:716c0817-6d16-4231-8b81-959834767c92
-Error Number:515,State:2,Class:16
+System.InvalidOperationException: 没有可用的 MediaTypeFormatter，无法从媒体类型为“multipart/form-data”的内容中读取类型为“NewArticleCommentVm”的对象。
+   在 System.Net.Http.HttpContentExtensions.ReadAsAsync[T](HttpContent content, Type type, IEnumerable`1 formatters, IFormatterLogger formatterLogger)
+   在 System.Web.Http.ModelBinding.FormatterParameterBinding.ReadContentAsync(HttpRequestMessage request, Type type, IEnumerable`1 formatters, IFormatterLogger formatterLogger)
+   在 System.Web.Http.ModelBinding.FormatterParameterBinding.ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEndAsync(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Func`1 execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.FormatterParameterBindingTracer.ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+   在 System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   在 System.Threading.Tasks.TaskHelpers.IterateImpl(IEnumerator`1 enumerator, CancellationToken cancellationToken)
 [Footer]
 [Header]
-2017-06-12 22:44:05,395 [12] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/Account/LoginOAoth
-Referer:
-System.ArgumentException: 列“OAuthType”不属于表 ds。
-   在 System.Data.DataRow.GetDataColumn(String columnName)
-   在 System.Data.DataRow.get_Item(String columnName)
-   在 ImDal.User.DataRowToModel(DataRow row) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 238
-   在 ImDal.User.GetModel(Int32 Id) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 155
-   在 ImBLL.UserBll.GetModelByCache(Int32 id) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 69
-   在 ImpinkerApi.Controllers.AccountController.LoginOAoth(LoginOauthViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 81
-   在 lambda_method(Closure , Object , Object[] )
-   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
-   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]
+[Header]
 [Footer]
 [Header]
 [Footer]

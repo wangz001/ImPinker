@@ -6,8 +6,8 @@
     var commentLists = (List<ArticleCommentVm>)ViewBag.CommentLists;
     var usersDic = (Dictionary<int, Users>)ViewBag.UsersDic;
     var totalcount = (int)ViewBag.TotalCount;
-    
-<link href="~/Content/icons-extra.css" rel="stylesheet" />
+
+    <link href="~/Content/icons-extra.css" rel="stylesheet" />
 }
 <div id="comment-container">
     <h3><i></i>评论 <span>( @totalcount 条 )</span></h3>
@@ -27,7 +27,7 @@
                             <img src="@ImageUrlHelper.GetHeadImageUrl(user.ImgUrl, 40)">
                         </i>
                         <em class="userinfo">
-                            @user.ShowName
+                            @(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
                             @TUtil.DateFormatToString(comment.CreateTime)
                         </em>
                         <em class="commentvote">
@@ -41,6 +41,30 @@
                         </p>
 
                     </dd>
+
+                    @{
+                if (comment.ToCommentId>0&&comment.ListToComment.Count > 0)
+                {
+                    var item = comment.ListToComment[0];
+                    <dl class="quote">
+                        <dt>
+                            <i class="headpic">
+                                <img src="@item.HeadImage">
+                            </i>
+                            <em class="userinfo">
+                                @string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName
+                                @TUtil.DateFormatToString(item.CreateTime)
+                            </em>
+                        </dt>
+                        <dd>
+                            <p>
+                                @item.Content&nbsp;
+                            </p>
+                        </dd>
+                    </dl>
+                }
+                    }
+
                 </dl>
             }
 

@@ -1,0 +1,35 @@
+[Header]
+2017-06-12 22:43:15,186 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/LoginOAoth
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不能将值 NULL 插入列 'AspNetId'，表 'MyAutosTest.dbo.Users'；列不允许有 Null 值。INSERT 失败。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.User.Add(Users model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 71
+   在 ImBLL.UserBll.Add(Users model) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 49
+   在 ImpinkerApi.Controllers.AccountController.LoginOAoth(LoginOauthViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 80
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:716c0817-6d16-4231-8b81-959834767c92
+Error Number:515,State:2,Class:16
+[Footer]
+[Header]
+2017-06-12 22:44:05,395 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/LoginOAoth
+Referer:
+System.ArgumentException: 列“OAuthType”不属于表 ds。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 ImDal.User.DataRowToModel(DataRow row) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 238
+   在 ImDal.User.GetModel(Int32 Id) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 155
+   在 ImBLL.UserBll.GetModelByCache(Int32 id) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 69
+   在 ImpinkerApi.Controllers.AccountController.LoginOAoth(LoginOauthViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 81
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]

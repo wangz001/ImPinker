@@ -12,7 +12,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@article.ArticleName</title>
-    
+
     <style type="text/css">
         .thread-info .userinfo img {
             width: 35px;
@@ -30,6 +30,7 @@
             .thread-info .userinfo .username {
                 font-size: 16px;
             }
+
         .mui-content-padded p img {
             width: auto;
             height: auto;
@@ -65,7 +66,7 @@
     </div>
 
     @{
-        Html.RenderAction("CommentPartial", "ArticleComment", article);
+        Html.RenderAction("ArticleComment", "ArticleComment", article);
     }
 </body>
 </html>

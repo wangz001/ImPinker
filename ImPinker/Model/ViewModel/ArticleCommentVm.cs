@@ -19,6 +19,6 @@ namespace ImModel.ViewModel
         /// <summary>
         /// 引用的评论
         /// </summary>
-        public List<ArticleComment> ListToComment { get; set; }
+        public List<ArticleCommentVm> ListToComment { get; set; }
     }
 }

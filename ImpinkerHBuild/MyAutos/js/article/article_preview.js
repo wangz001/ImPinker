@@ -1,9 +1,10 @@
 //评论
-document.getElementById('composeText').addEventListener('focus', function() {
+$('#composeText').bind('focus', function() {
 	$(".mui-bar-footer a").hide();
 	$('#sendComposs').show();
 });
-document.getElementById('composeText').addEventListener('focusout', function() {
+$('#composeText').bind('focusout', function() {
+	toCommentId = 0;
 	var txt = $("#composeText").val();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
@@ -24,36 +25,31 @@ $(document).ready(function() {
 });
 
 function SendComposs(txtStr) {
-	var userstate = app.getState();
 	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleComment";
-	mui.ajax(url, {
-		data: {
-			ArticleId: articleItem.Id,
-			CommentStr: txtStr,
-			ToCommentId:30
-		},
-		dataType: 'json', //服务器返回json格式数据
-		type: 'post', //HTTP请求类型
-		timeout: 10000, //超时时间设置为10秒；
-		headers: {
-			'Content-Type': 'application/json',
-			'username': userstate.account,
-			'usertoken': userstate.token
-		},
-		success: function(data) {
-			if(data.IsSuccess == 1) {
-				getArticleComment(articleItem.Id);
-				mui.toast("评论成功！");
-			} else {
-				console.log("评论失败。" + data.Description);
-			}
-		},
-		error: function(xhr, type, errorThrown) {
-			//异常处理；
-			console.log(type);
+	var data = {
+		ArticleId: articleItem.Id,
+		CommentStr: txtStr,
+		ToCommentId: toCommentId
+	};
+	console.log(toCommentId);
+	commonUtil.sendRequestWithToken(url, data, true, function(data) {
+		if(data.IsSuccess == 1) {
+			getArticleComment(articleItem.Id);
+			mui.toast("评论成功！");
+		} else {
+			console.log("评论失败。" + data.Description);
 		}
 	});
 }
+
+var toCommentId=0;
+//评论 回复  comment_to
+mui('#comment ').on('tap', '.comment_to', function() {
+	var tocommentId = this.getAttribute('commentid');
+	toCommentId = tocommentId;
+	console.log(toCommentId);
+	$('#composeText').focus();
+});
 
 function getArticle(articleid) {
 	var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
@@ -98,5 +94,10 @@ function getArticleComment(articleid) {
 function initComment(item) {
 	var template = $('script[id="comment_item"]').html();
 	var articleHtmlStr = template.temp(item);
+	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
+		var toTemplate = $('script[id="comment_item_to"]').html();
+		var htmlTo = toTemplate.temp(item.ListToComment[0]);
+		articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
+	}
 	$("#comment").append(articleHtmlStr);
 }

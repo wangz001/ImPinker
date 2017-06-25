@@ -154,6 +154,7 @@
 
         #comment-container .comment .comment-list dd {
             margin-top: 10px;
+            margin-left:10px;
         }
 
             #comment-container .comment .comment-list dd p {

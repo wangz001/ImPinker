@@ -32,6 +32,20 @@
 				max-height: 100%;
 			}
 			
+			#comment {
+				background-color: ghostwhite;
+				padding: 0px 10px 10px 10px;
+			}
+			
+			.comment-list {
+				padding: 10px 10px 0px 10px;
+				border-top: .5px solid #ece4e4;
+			}
+			
+			.comment-list:first-child {
+				border-top: none;
+			}
+			
 			.comment-list dt .headpic {
 				display: inline-block;
 				width: 30px;
@@ -52,19 +66,29 @@
 				float: right;
 			}
 			
+			.comment-list dd {
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			
 			.comment-list dd p {
 				font-size: 15px;
 				color: #888;
 				line-height: 1.5em;
 			}
+			
+			.comment-list .quote {
+				padding: 10px;
+				background: #d3d3e7;
+				border: 1px solid #f8f8fb;
+				border: .5px solid #f8f8fb;
+				border-radius: 5px;
+				margin-top: 10px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h2 id="title" class="mui-title"></h2>
-		</header>
 		<div id="content" class="mui-content">
 			<div class="mui-content-padded">
 				<h3 id='articlename'>
@@ -85,15 +109,18 @@
 					<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
 				</div>
 				<div class="mui-clearfix"></div>
-				<div id='comment'>
 
-				</div>
+			</div>
+			<span>评论</span>
+			<div id='comment'>
+
 			</div>
 		</div>
 
 		<br>
 		<br>
 		<footer class="mui-bar mui-bar-footer">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<a class="mui-icon mui-icon-compose"><span style="font-size: 12px;">1655</span></a>
 			<input id="composeText" type="text" placeholder="请输入评论" style="width: 60%;" />
 			<a id="share" class="mui-icon mui-icon-paperplane " style="color: #999;"></a>
@@ -115,7 +142,7 @@
                             $CreateTime$
                         </em>
                         <em class="commentvote">
-                            <a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>
+                            <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
                     </dt>
@@ -123,20 +150,26 @@
 					<p>
 						$Content$
 					</p>
-
 				</dd>
 			</dl>
 		</script>
 		<script type="text/template" id="comment_item_to">
-			<li href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-				<a href="view/article/preview.html">
-					<img class="mui-media-object mui-pull-right" src="$CoverImage$">
-					<div class="mui-media-body">
-						$ArticleName$
-						<p class="mui-ellipsis">$Description$</p>
-					</div>
-				</a>
-			</li>
+			<dl class="quote">
+				<dt>
+                            <i class="headpic">
+                                <img src="$HeadImage$">
+                            </i>
+                            <em class="userinfo">
+                                $UserName$
+                            $CreateTime$
+                            </em>
+                        </dt>
+				<dd>
+					<p>
+						$Content$
+					</p>
+				</dd>
+			</dl>
 		</script>
 		<script type="text/javascript">
 			var articleItem = null;
@@ -166,6 +199,8 @@
 					alert("获取分享服务列表失败：" + e.message);
 				});
 			});
+
+			
 
 			document.getElementById('share').addEventListener('tap', function() {
 				var btnArray = [{

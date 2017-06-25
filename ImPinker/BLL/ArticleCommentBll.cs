@@ -46,49 +46,45 @@ namespace ImBLL
         {
             var returnList = new List<ArticleCommentVm>();
             var ds = _dal.GetListsByArticleId(articleId, pageNum, count,out totalCount);
-            var listToComment = new List<ArticleComment>();
+            var listToCommentVm = new List<ArticleCommentVm>();
             if (ds != null && ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
             {
-                listToComment = _dal.DtToList(ds.Tables[1]);
+                List<ArticleComment>  listToComment = _dal.DtToList(ds.Tables[1]);
+                foreach (ArticleComment comment in listToComment)
+                {
+                    var userinfo = _userBll.GetModelByCache(comment.UserId);
+                    var vm = new ArticleCommentVm
+                    {
+                        Id = comment.Id,
+                        ArticleId = comment.ArticleId,
+                        UserId = comment.UserId,
+                        ToCommentId = comment.ToCommentId,
+                        Content = comment.Content,
+                        CreateTime = comment.CreateTime,
+                        UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
+                        HeadImage = userinfo.ImgUrl
+                    };
+                    listToCommentVm.Add(vm);
+                }
             }
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
+                var list = _dal.DtToList(ds.Tables[0]);
+                foreach (ArticleComment comment in list)
                 {
-                    var model = new ArticleCommentVm();
-
-                    if (row["Id"] != null && row["Id"].ToString() != "")
+                    var userinfo = _userBll.GetModelByCache(comment.UserId);
+                    var model = new ArticleCommentVm
                     {
-                        model.Id = long.Parse(row["Id"].ToString());
-                    }
-                    if (row["ArticleId"] != null)
-                    {
-                        model.ArticleId = long.Parse(row["ArticleId"].ToString());
-                    }
-                    if (row["UserId"] != null)
-                    {
-                        model.UserId = int.Parse(row["UserId"].ToString());
-                    }
-                    if (row["Content"] != null)
-                    {
-                        model.Content = row["Content"].ToString();
-                    }
-                    if (row["ToCommentId"] != null && row["ToCommentId"].ToString() != "")
-                    {
-                        model.ToCommentId = int.Parse(row["ToCommentId"].ToString());
-                    }
-                    if (row["CreateTime"] != null && row["CreateTime"].ToString() != "")
-                    {
-                        model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
-                    }
-                    if (row["CommentVoteCount"] != null && row["CommentVoteCount"].ToString() != "")
-                    {
-                        model.ArticleCommentVoteCount = int.Parse(row["CommentVoteCount"].ToString());
-                    }
-                    var userinfo = _userBll.GetModelByCache(model.UserId);
-                    model.UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName;
-                    model.HeadImage = userinfo.ImgUrl;
-                    model.ListToComment = new List<ArticleComment> { listToComment.FirstOrDefault(m => m.Id == model.ToCommentId) };
+                        Id = comment.Id,
+                        ArticleId = comment.ArticleId,
+                        UserId = comment.UserId,
+                        ToCommentId = comment.ToCommentId,
+                        Content = comment.Content,
+                        CreateTime = comment.CreateTime,
+                        UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
+                        HeadImage = userinfo.ImgUrl
+                    };
+                    model.ListToComment = new List<ArticleCommentVm> { listToCommentVm.FirstOrDefault(m => m.Id == model.ToCommentId) };
                     returnList.Add(model);
                 }
             }
