@@ -105,18 +105,18 @@
 				<div class="" id='articlecontent'>
 				</div>
 				<div class="article-footer">
-					<img src="../../images/logo.png" />
+					<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
 					<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
 				</div>
 				<div class="mui-clearfix"></div>
-
 			</div>
-			<span>评论</span>
-			<div id='comment'>
+			<div class="mui-card">
+				<div class="mui-card-header"><span>评论</span></div>
+				<div id='comment' class="mui-card-content">
 
+				</div>
 			</div>
 		</div>
-
 		<br>
 		<br>
 		<footer class="mui-bar mui-bar-footer">
@@ -199,8 +199,6 @@
 					alert("获取分享服务列表失败：" + e.message);
 				});
 			});
-
-			
 
 			document.getElementById('share').addEventListener('tap', function() {
 				var btnArray = [{

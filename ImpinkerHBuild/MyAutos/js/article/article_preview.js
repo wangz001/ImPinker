@@ -4,13 +4,17 @@ $('#composeText').bind('focus', function() {
 	$('#sendComposs').show();
 });
 $('#composeText').bind('focusout', function() {
-	toCommentId = 0;
 	var txt = $("#composeText").val();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
 		$(".mui-bar-footer a").show();
 		$('#sendComposs').hide();
 	}
+	setTimeout(function() {
+		//防止和提交按钮冲突
+		toCommentId = 0;
+		console.log('aaa');
+	}, 200);
 });
 $(document).ready(function() {
 	$("#sendComposs").bind('click', function() {
@@ -42,11 +46,11 @@ function SendComposs(txtStr) {
 	});
 }
 
-var toCommentId=0;
+var toCommentId = 0;
 //评论 回复  comment_to
 mui('#comment ').on('tap', '.comment_to', function() {
-	var tocommentId = this.getAttribute('commentid');
-	toCommentId = tocommentId;
+	var Id = this.getAttribute('commentid');
+	toCommentId = Id;
 	console.log(toCommentId);
 	$('#composeText').focus();
 });

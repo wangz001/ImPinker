@@ -3,6 +3,14 @@ $(document).ready(function() {
 	//评论  
 	mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
 		mui.toast("评论");
+		mui.openWindow({
+				url: "view/weibo/weibo_comment.html",
+				id: "weibo_comment",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
 	});
 });
 
