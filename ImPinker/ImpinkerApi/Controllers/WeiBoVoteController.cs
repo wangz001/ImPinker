@@ -73,12 +73,36 @@ namespace ImpinkerApi.Controllers
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1 : 0,
-                Data = null,
+                Data = vm,
                 Description = ""
             });
         }
 
 
         #endregion 
+
+        #region 获取评论列表
+        [HttpGet]
+        public HttpResponseMessage GetWeiboCommentList(int weiboid)
+        {
+            if (weiboid > 0)
+            {
+                var list = _weiboCommentBll.GetList(weiboid);
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = list.Count > 0 ? 1 : 0,
+                    Data = list,
+                    Description = "获取评论成功"
+                });
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess =  0,
+                Data = null,
+                Description = "获取评论成功"
+            });
+        }
+
+        #endregion
     }
 }

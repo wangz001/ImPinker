@@ -1,0 +1,22 @@
+[Header]
+2017-06-24 18:45:49,745 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/ArticleVote/NewArticleComment
+Referer:
+System.InvalidOperationException: 没有可用的 MediaTypeFormatter，无法从媒体类型为“multipart/form-data”的内容中读取类型为“NewArticleCommentVm”的对象。
+   在 System.Net.Http.HttpContentExtensions.ReadAsAsync[T](HttpContent content, Type type, IEnumerable`1 formatters, IFormatterLogger formatterLogger)
+   在 System.Web.Http.ModelBinding.FormatterParameterBinding.ReadContentAsync(HttpRequestMessage request, Type type, IEnumerable`1 formatters, IFormatterLogger formatterLogger)
+   在 System.Web.Http.ModelBinding.FormatterParameterBinding.ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEndAsync(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Func`1 execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.FormatterParameterBindingTracer.ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+   在 System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   在 System.Threading.Tasks.TaskHelpers.IterateImpl(IEnumerator`1 enumerator, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

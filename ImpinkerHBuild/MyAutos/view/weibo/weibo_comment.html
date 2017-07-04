@@ -19,8 +19,12 @@
 				<div class="mui-inline">评论内容</div>
 			</div>
 			<div class="row mui-input-row">
-				<textarea id='question' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+				<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+					发布
+			</button>
 			</div>
+
 			<div class="mui-content-padded">
 				<div class="mui-inline">评论列表</div>
 			</div>
@@ -29,8 +33,37 @@
 		</div>
 
 		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			var cweiboid = 0;
+			mui.plusReady(function() {
+				//获取参数
+				var self = plus.webview.currentWebview();
+				var weiboid = self.weiboid;
+				cweiboid = weiboid;
+
+			});
+			document.getElementById('comment_submit').addEventListener('tap', function() {
+				console.log(cweiboid);
+				var textStr = $("#comment_text").val();
+				var url = 'http://api.myautos.cn/api/weibovote/NewWeiBoComment';
+				var data = {
+					WeiBoId: cweiboid,
+					CommentStr: textStr,
+					ToCommentId: 0
+				}
+				commonUtil.sendRequestWithToken(url, data, true, function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						mui.toast("评论成功");
+					} else {
+						mui.toast("评论失败");
+					}
+				});
+			});
 		</script>
 	</body>
 

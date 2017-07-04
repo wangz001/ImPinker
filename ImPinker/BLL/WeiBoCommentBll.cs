@@ -33,5 +33,10 @@ namespace ImBLL
             var falg = _weiboCommentDal.AddComment(model);
             return falg;
         }
+
+        public List<WeiBoComment> GetList(int weiboid)
+        {
+            return _weiboCommentDal.GetList(weiboid);
+        }
     }
 }

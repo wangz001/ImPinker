@@ -202,7 +202,7 @@
 				var footdiv = document.createElement('div');
 				footdiv.className = 'mui-card-footer';
 				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"></span>' +
-					'<span class="mui-icon mui-icon-compose"></span>' +
+					'<span class="mui-icon mui-icon-compose" weiboid='+item.Id+'></span>' +
 					'<span class="mui-icon mui-icon-map"></span>';
 				li.appendChild(headdiv);
 				if(item.Description != null && item.Description.length > 0) {
