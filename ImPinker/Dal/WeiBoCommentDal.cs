@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImModel.ViewModel;
 
 namespace ImDal
 {
@@ -50,7 +51,7 @@ VALUES
             }
         }
 
-        public List<WeiBoComment> GetList(int weiboid)
+        public List<WeiboCommentVm> GetList(int weiboid,int page,int pageSize)
         {
             var sql = @"
 select * from WeiBoComment where WeiBoId=@WeiBoId order by CreateTime desc
@@ -62,14 +63,14 @@ select * from WeiBoComment where WeiBoId=@WeiBoId order by CreateTime desc
             return DtToList(ds.Tables[0]);
         }
 
-        public List<WeiBoComment> DtToList(DataTable dt)
+        public List<WeiboCommentVm> DtToList(DataTable dt)
         {
-            var list = new List<WeiBoComment>();
+            var list = new List<WeiboCommentVm>();
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    var model = new WeiBoComment();
+                    var model = new WeiboCommentVm();
 
                     if (row["Id"] != null && row["Id"].ToString() != "")
                     {

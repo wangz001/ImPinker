@@ -87,7 +87,7 @@ namespace ImpinkerApi.Controllers
         {
             if (weiboid > 0)
             {
-                var list = _weiboCommentBll.GetList(weiboid);
+                var list = _weiboCommentBll.GetList(weiboid,1,10);
                 return GetJson(new JsonResultViewModel
                 {
                     IsSuccess = list.Count > 0 ? 1 : 0,

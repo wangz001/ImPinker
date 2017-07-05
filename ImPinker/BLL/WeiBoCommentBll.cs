@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImModel.ViewModel;
 
 namespace ImBLL
 {
@@ -33,10 +34,16 @@ namespace ImBLL
             var falg = _weiboCommentDal.AddComment(model);
             return falg;
         }
-
-        public List<WeiBoComment> GetList(int weiboid)
+        /// <summary>
+        /// 获取微博评论列表
+        /// </summary>
+        /// <param name="weiboid"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public List<WeiboCommentVm> GetList(int weiboid,int page,int pageSize)
         {
-            return _weiboCommentDal.GetList(weiboid);
+            return _weiboCommentDal.GetList(weiboid,page,pageSize);
         }
     }
 }
