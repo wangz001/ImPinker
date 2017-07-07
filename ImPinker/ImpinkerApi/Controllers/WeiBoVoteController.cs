@@ -83,11 +83,13 @@ namespace ImpinkerApi.Controllers
 
         #region 获取评论列表
         [HttpGet]
-        public HttpResponseMessage GetWeiboCommentList(int weiboid)
+        public HttpResponseMessage GetWeiboCommentList(int weiboid,int page,int pageSize)
         {
             if (weiboid > 0)
             {
-                var list = _weiboCommentBll.GetList(weiboid,1,10);
+                page = page > 0 ? page : 1;
+                pageSize = pageSize > 0 ? pageSize : 10;
+                var list = _weiboCommentBll.GetList(weiboid, page, pageSize);
                 return GetJson(new JsonResultViewModel
                 {
                     IsSuccess = list.Count > 0 ? 1 : 0,

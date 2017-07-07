@@ -51,26 +51,36 @@ VALUES
             }
         }
 
-        public List<WeiboCommentVm> GetList(int weiboid,int page,int pageSize)
+        public List<WeiBoComment> GetList(int weiboid, int page, int pageSize)
         {
             var sql = @"
-select * from WeiBoComment where WeiBoId=@WeiBoId order by CreateTime desc
+SELECT  *
+FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS row ,
+                    T.*
+          FROM      dbo.WeiBoComment T
+          WHERE     T.WeiBoId = @WeiBoId
+        ) TT
+WHERE   TT.row BETWEEN @start AND @end;
 ";
+            var start = (page - 1) * pageSize + 1;
+            var end = (page * pageSize);
             SqlParameter[] parameters = {
 					new SqlParameter("@WeiBoId", SqlDbType.NVarChar){Value = weiboid},
+					new SqlParameter("@start", SqlDbType.NVarChar){Value = start},
+					new SqlParameter("@end", SqlDbType.NVarChar){Value = end}
 					};
             var ds = DbHelperSQL.Query(sql, parameters);
             return DtToList(ds.Tables[0]);
         }
 
-        public List<WeiboCommentVm> DtToList(DataTable dt)
+        public List<WeiBoComment> DtToList(DataTable dt)
         {
-            var list = new List<WeiboCommentVm>();
+            var list = new List<WeiBoComment>();
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    var model = new WeiboCommentVm();
+                    var model = new WeiBoComment();
 
                     if (row["Id"] != null && row["Id"].ToString() != "")
                     {
@@ -101,6 +111,27 @@ select * from WeiBoComment where WeiBoId=@WeiBoId order by CreateTime desc
 
             }
             return list;
+        }
+        /// <summary>
+        /// 根据id的集合获取评论列表
+        /// </summary>
+        /// <param name="commentIds"></param>
+        /// <returns></returns>
+        public List<WeiBoComment> GetList(List<long> commentIds)
+        {
+            var sql = @"
+SELECT  T.*
+FROM    dbo.WeiBoComment T
+WHERE   T.Id IN ( {0} );
+";
+            if (commentIds.Any())
+            {
+                var str = string.Join(",", commentIds);
+                sql = string.Format(sql, str);
+                var ds = DbHelperSQL.Query(sql);
+                return DtToList(ds.Tables[0]);
+            }
+            return null;
         }
     }
 }

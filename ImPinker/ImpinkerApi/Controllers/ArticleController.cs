@@ -27,6 +27,34 @@ namespace ImpinkerApi.Controllers
         readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
         #region 获取首页文章列表
         /// <summary>
+        /// 获取首页轮播图文章（暂时获取最新的）
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public HttpResponseMessage GetSlideArticle()
+        {
+            var list = _articleBll.GetIndexListByPage(1, 3);
+            if (list != null && list.Count > 0)
+            {
+                foreach (var item in list)
+                {
+                    item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
+                }
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 1,
+                    Data = list,
+                    Description = "ok"
+                });
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Data = null,
+                Description = "没有更多数据"
+            });
+        }
+        /// <summary>
         /// 分页获取数据
         /// </summary>
         /// <param name="pageNum"></param>

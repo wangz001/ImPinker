@@ -1,0 +1,14 @@
+[Header]
+2017-07-04 22:06:38,229 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/NewWeiBoComment
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 44
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+[Footer]

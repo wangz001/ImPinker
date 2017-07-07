@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 using ImBLL;
@@ -13,8 +12,6 @@ namespace ImpinkerApi.Controllers
     public class ArticleVoteController : BaseApiController
     {
         readonly ArticleCommentBll _articleCommentBll = new ArticleCommentBll();
-        readonly UserBll _userBll = new UserBll();
-        
 
         #region 文章评论
         /// <summary>
@@ -70,10 +67,6 @@ namespace ImpinkerApi.Controllers
         {
             int totalCount;
             var commentLists = _articleCommentBll.GetCommentsWithToComments(articleid, pagenum, pagesize, out totalCount);
-            foreach (var articleCommentVm in commentLists)
-            {//头像规格。100
-                articleCommentVm.HeadImage = ImageUrlHelper.GetHeadImageUrl(articleCommentVm.HeadImage, 100);
-            }
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 1,
@@ -81,7 +74,6 @@ namespace ImpinkerApi.Controllers
                 Description = "获取评论成功"
             });
         }
-
         #endregion
 
     }

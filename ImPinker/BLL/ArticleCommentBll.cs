@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ImDal;
 using ImModel;
 using ImModel.ViewModel;
-using System.Data;
 
 namespace ImBLL
 {
     public class ArticleCommentBll
     {
         private readonly ArticleCommentDal _dal=new ArticleCommentDal();
-        private  UserBll _userBll=new UserBll();
+        private readonly UserBll _userBll=new UserBll();
         public bool Add(ArticleComment model)
         {
             return _dal.Add(model);
@@ -62,7 +60,7 @@ namespace ImBLL
                         Content = comment.Content,
                         CreateTime = comment.CreateTime,
                         UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
-                        HeadImage = userinfo.ImgUrl
+                        HeadImage =ImageUrlHelper.GetHeadImageUrl( userinfo.ImgUrl, 100)
                     };
                     listToCommentVm.Add(vm);
                 }
@@ -82,7 +80,7 @@ namespace ImBLL
                         Content = comment.Content,
                         CreateTime = comment.CreateTime,
                         UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
-                        HeadImage = userinfo.ImgUrl
+                        HeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100)
                     };
                     model.ListToComment = new List<ArticleCommentVm> { listToCommentVm.FirstOrDefault(m => m.Id == model.ToCommentId) };
                     returnList.Add(model);
