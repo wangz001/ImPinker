@@ -49,10 +49,7 @@
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init({
-				preloadPages: [{ //预加载文章预览页
-					id: 'preview.html',
-					url: 'view/article/preview.html'
-				}]
+
 			});
 
 			var subpages = ['tab-webview-subpage-article.html', 'tab-webview-subpage-weibo.html', 'tab-webview-subpage-setting.html'];
@@ -232,7 +229,16 @@
 				for(var i in filesArr) {
 					var imgpath = filesArr[i];
 					commonUtil.compressImage(imgpath, function(zip) {
-						newarr.push(zip.target);
+						if((zip.size/1024)>1024){
+							//如果大于1M，继续压缩
+							console.log('sssss---'+zip.size);
+							commonUtil.compressImage(zip.target, function(zip2) {
+								console.log('sssss222---'+zip2.size);
+							});
+						}else{
+							newarr.push(zip.target);
+						}
+						console.log('fdfd---'+zip.size);
 						if(newarr.length == filesArr.length) {
 							//所有图片都压缩完成
 							mui.openWindow({

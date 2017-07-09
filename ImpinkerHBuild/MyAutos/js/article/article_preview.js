@@ -1,21 +1,31 @@
 //评论
-$('#composeText').bind('focus', function() {
-	$(".mui-bar-footer a").hide();
-	$('#sendComposs').show();
+$('.mui-icon-compose').bind('click',function(){
+	showComment();
 });
-$('#composeText').bind('focusout', function() {
+function showComment(){
+	$(".mui-bar-footer a").hide();
+	$('#composeText').show();
+	$('#composeText').focus();
+	$('#sendComposs').show();
+}
+function hideComment(){
 	var txt = $("#composeText").val();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
 		$(".mui-bar-footer a").show();
 		$('#sendComposs').hide();
+		$('#composeText').hide();
 	}
 	setTimeout(function() {
 		//防止和提交按钮冲突
 		toCommentId = 0;
 		console.log('aaa');
 	}, 200);
+}
+$('#composeText').bind('focusout', function() {
+	hideComment();
 });
+
 $(document).ready(function() {
 	$("#sendComposs").bind('click', function() {
 		var txt = $("#composeText").val();
@@ -35,11 +45,11 @@ function SendComposs(txtStr) {
 		CommentStr: txtStr,
 		ToCommentId: toCommentId
 	};
-	console.log(toCommentId);
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
 		if(data.IsSuccess == 1) {
 			getArticleComment(articleItem.Id);
 			mui.toast("评论成功！");
+			$("html,body").animate({scrollTop: $("#comment").offset().top}, 100);
 		} else {
 			console.log("评论失败。" + data.Description);
 		}
@@ -52,7 +62,7 @@ mui('#comment ').on('tap', '.comment_to', function() {
 	var Id = this.getAttribute('commentid');
 	toCommentId = Id;
 	console.log(toCommentId);
-	$('#composeText').focus();
+	showComment();
 });
 
 function getArticle(articleid) {

@@ -17,7 +17,6 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-content-padded">
-				<div class="mui-inline">评论内容</div>
 			</div>
 			<div class="row mui-input-row">
 				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
@@ -25,12 +24,12 @@
 					发布
 			</button>
 			</div>
-
-			<div class="mui-card">
-				<div class="mui-card-header"><span>评论</span></div>
-				<div id='comment' class="mui-card-content">
-
-				</div>
+			<hr>
+			<div class="mui-content-padded">
+				<div class="mui-inline">评论列表</div>
+			</div>
+			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
+				<p>暂无评论</p>
 			</div>
 		</div>
 
@@ -82,6 +81,7 @@
 		<script type="text/javascript">
 			mui.init();
 			var cweiboid = 0;
+			var toCommentId = 0; //会否某人的评论
 			mui.plusReady(function() {
 				//获取参数
 				var self = plus.webview.currentWebview();
@@ -96,12 +96,13 @@
 				var data = {
 					WeiBoId: cweiboid,
 					CommentStr: textStr,
-					ToCommentId: 0
+					ToCommentId: toCommentId
 				}
 				commonUtil.sendRequestWithToken(url, data, true, function(data) {
 					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null) {
 						mui.toast("评论成功");
+						$("#comment_text").val("");
 						getCommentLists(cweiboid);
 					} else {
 						mui.toast("评论失败");
@@ -132,13 +133,21 @@
 			function initComment(item) {
 				var template = $('script[id="comment_item"]').html();
 				var articleHtmlStr = template.temp(item);
-				if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
+				if(item.ToCommentId > 0 && item.ToCommentItemVm != null) {
 					var toTemplate = $('script[id="comment_item_to"]').html();
-					var htmlTo = toTemplate.temp(item.ListToComment[0]);
+					var htmlTo = toTemplate.temp(item.ToCommentItemVm);
 					articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
 				}
 				$("#comment").append(articleHtmlStr);
 			}
+
+			//评论 回复  comment_to
+			mui('#comment ').on('tap', '.comment_to', function() {
+				var Id = this.getAttribute('commentid');
+				toCommentId = Id;
+				console.log(toCommentId);
+				$('#comment_text').focus();
+			});
 		</script>
 	</body>
 

@@ -47,54 +47,18 @@
 
 	<body>
 		<div class="mui-content">
-			<div id="slider" class="mui-slider">
-				<div class="mui-slider-group mui-slider-loop">
-					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-					<div class="mui-slider-item mui-slider-item-duplicate">
-						<a href="#">
-							<img src="images/food.png">
-						</a>
-					</div>
-					<!-- 第一张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/suzuki.png">
-						</a>
-					</div>
-					<!-- 第二张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/datong.png">
-						</a>
-					</div>
-					<!-- 第三张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/jeep.png">
-						</a>
-					</div>
-					<!-- 第四张 -->
-					<div class="mui-slider-item">
-						<a href="#">
-							<img src="images/food.png">
-						</a>
-					</div>
-					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
-					<div class="mui-slider-item mui-slider-item-duplicate">
-						<a href="#">
-							<img src="images/suzuki.png">
-						</a>
-					</div>
-				</div>
-				<div class="mui-slider-indicator">
-					<div class="mui-indicator mui-active"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
-					<div class="mui-indicator"></div>
-				</div>
-			</div>
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
+					<div class="mui-slider">
+						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
+							
+						</div>
+						<div class="mui-slider-indicator">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+						</div>
+					</div>
 					<ul class="mui-table-view" id="articlelist">
 						<!--<li class="mui-table-view-cell mui-media">
 							<a href="view/article/preview.html">
@@ -123,7 +87,9 @@
 					</ul>
 				</div>
 			</div>
+
 		</div>
+
 		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom" style="display: block;">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
@@ -166,6 +132,20 @@
 			</a>
 		</li>
 	</script>
+	<script type="text/template" id="slide_item_a">
+		<div class="mui-slider-item mui-slider-item-duplicate">
+			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+				<img src="$CoverImage$">
+			</a>
+		</div>
+	</script>
+	<script type="text/template" id="slide_item_b">
+		<div class="mui-slider-item">
+			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+				<img src="$CoverImage$">
+			</a>
+		</div>
+	</script>
 	<script type="text/template" id="article_item_card">
 		<li>
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -196,7 +176,10 @@
 				}
 			}
 		});
-		
+		mui.plusReady(function() {
+			//填充轮播图内容
+			initSlide();
+		});
 		var allArticles = new Array();
 		var pageNum = 1;
 		var allCount = 0;
@@ -264,25 +247,43 @@
 			allCount++;
 		}
 
+		//显示轮播图内容
+		function initSlide() {
+			var slidePath = 'http://api.myautos.cn/api/Article/GetSlideArticle';
+			var para = {};
+			commonUtil.sendRequestGet(slidePath, para, function(data) {
+				var list = data.Data;
+				var template_a = $('script[id="slide_item_a"]').html();
+				var template_b = $('script[id="slide_item_b"]').html();
+				var aTopStr = template_a.temp(list[list.length - 1]);
+				$("#sliderContent").append(aTopStr);
+				for(var i = 0; i < list.length; i++) {
+					var item = list[i];
+					var tempStr = template_b.temp(item);
+					$("#sliderContent").append(tempStr);
+				}
+				var aBottomStr = template_a.temp(list[0]);
+				$("#sliderContent").append(aBottomStr);
+				//获得slider插件对象
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+			});
+		}
+
 		/*
 		 * 列表点击事件
 		 * */
 		var aniShow = "pop-in";
 		var previewPage = null;
-		mui('#articlelist').on('tap', 'a', function() {
+		mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 			var id = this.getAttribute('href');
 			var href = this.href;
 			var type = "common"; // this.getAttribute("open-type");
 			var articleid = this.getAttribute('articleid');
 			var articlename = this.getAttribute('articlename');
-			var articleItem;
-			for(var i = 0; i < allArticles.length; i++) {
-				var item = allArticles[i];
-				if(articleid == item.Id) {
-					articleItem = item;
-					break;
-				}
-			}
+
 			//不使用父子模板方案的页面
 			if(type == "common") {
 				var webview_style = {
@@ -297,15 +298,6 @@
 				if(~id.indexOf('icons.html')) {
 					webview_style.hardwareAccelerated = true;
 				}
-
-				//获得详情页面  
-				if(!previewPage) {
-					previewPage = plus.webview.getWebviewById('preview.html');
-				}
-				//触发详情页面的weiboitems事件  
-				mui.fire(previewPage, 'previewarticle', {
-					articleItem: articleItem
-				});
 				//打开详情页面            
 				mui.openWindow({
 					id: id,
@@ -319,8 +311,8 @@
 					},
 					extras: {
 						articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
-						articleid: articleid ,//扩展参数
-						articlename:articlename
+						articleid: articleid, //扩展参数
+						articlename: articlename
 					}
 				});
 			} else if(id && ~id.indexOf('.html')) {

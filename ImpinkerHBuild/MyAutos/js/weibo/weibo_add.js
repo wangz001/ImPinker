@@ -229,7 +229,8 @@
 					mui.fire(main, 'gohome');
 					mui.back();
 				}else{
-					alert(upload.responseText);
+					console.log(JSON.stringify(data));
+					alert(data.Description);
 				}
 		})
 		

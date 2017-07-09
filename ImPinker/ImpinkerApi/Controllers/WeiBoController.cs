@@ -66,7 +66,7 @@ namespace ImpinkerApi.Controllers
                         return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                         {
                             IsSuccess = 0,
-                            Description = "上传图片到oss失败",
+                            Description = "上传图片到oss失败，图片大小" ,
                             Data = file.LocalFileName
                         });
                     }

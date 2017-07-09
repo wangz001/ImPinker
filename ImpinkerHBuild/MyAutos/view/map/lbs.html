@@ -10,7 +10,7 @@
 			#map {
 				width: 100%;
 				position: fixed;
-				top: 10px;
+				top: 50px;
 				bottom: 200px;
 				line-height: 200px;
 				text-align: center;
@@ -20,7 +20,13 @@
 	</head>
 
 	<body>
-		<div id="map">地图加载中...</div>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">地理位置</h1>
+		</header>
+		<div class="mui-content">
+			<div id="map">地图加载中...</div>
+		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
@@ -34,7 +40,7 @@
 				if(!em || !window.plus || map) {
 					return
 				};
-				var point=new plus.maps.Point(116.347496, 39.970191);
+				var point = new plus.maps.Point(116.347496, 39.970191);
 				map = new plus.maps.Map("map");
 				map.centerAndZoom(point, 12);
 

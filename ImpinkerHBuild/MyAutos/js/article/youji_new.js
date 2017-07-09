@@ -6,9 +6,9 @@
 		articleid: 0,
 		articlename: "",
 		coverimage: "",
-		description:"",
+		description: "",
 		content: "",
-		currentNode:null   //文章中间插入内容的标记
+		currentNode: null //文章中间插入内容的标记
 	}
 	var weiboimg_1200style = '?x-oss-process=style/weibo_1200';
 	var weiboimg_24style = '?x-oss-process=style/weibo_24_16';
@@ -32,36 +32,36 @@
 	}
 	//显示文字
 	owner.showTextAreaStr = function(textStr) {
-		if(owner.article.currentNode==null){
+		if(owner.article.currentNode == null) {
 			//初始化时，第一个文本框是默认
-			owner.article.currentNode=$(".mui-content-padded").children().last();
+			owner.article.currentNode = $(".mui-content-padded").children().last();
 		}
 		//图片之间只能有一个textarea。多了的内容合并
-		if($(owner.article.currentNode).is("textarea")){
-			var inner=$(owner.article.currentNode).val();
-			inner=inner.trim()==""? textStr:inner+"\r\n"+textStr;
+		if($(owner.article.currentNode).is("textarea")) {
+			var inner = $(owner.article.currentNode).val();
+			inner = inner.trim() == "" ? textStr : inner + "\r\n" + textStr;
 			$(owner.article.currentNode).val(inner);
 			autosize(owner.article.currentNode);
 			autosize.update(owner.article.currentNode);
-		}else{
-			var textareaDom=document.createElement("textarea");
-			$(textareaDom).attr("name","yjcontent");
+		} else {
+			var textareaDom = document.createElement("textarea");
+			$(textareaDom).attr("name", "yjcontent");
 			$(textareaDom).val(textStr);
-			textareaDom.innerHTML=textStr;
+			textareaDom.innerHTML = textStr;
 			//var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
 			$(owner.article.currentNode).after(textareaDom);
-			owner.article.currentNode=$(owner.article.currentNode).next();
+			owner.article.currentNode = $(owner.article.currentNode).next();
 			autosize(textareaDom);
 			autosize.update(textareaDom);
 		}
-		
+
 	}
 	//显示图片(可在文章中间插入图片)
 	owner.showImage = function(imgurl) {
-		if(owner.article.currentNode==null){
+		if(owner.article.currentNode == null) {
 			console.log("111");
 			//初始化时，第一个文本框是默认
-			owner.article.currentNode=$(".mui-content-padded").children().last();
+			owner.article.currentNode = $(".mui-content-padded").children().last();
 		}
 		var imgPath = 'http://img.myautos.cn/';
 		if(imgurl.indexOf('http://') == -1) {
@@ -77,9 +77,9 @@
 		});
 		//$(".mui-content-padded").append(imgHtmlStr);
 		$(owner.article.currentNode).after(imgHtmlStr);
-		owner.article.currentNode=$(owner.article.currentNode).next();
+		owner.article.currentNode = $(owner.article.currentNode).next();
 		owner.showTextAreaStr("");
-		
+
 	}
 
 	//根据标签 name属性，拼接出 content
@@ -170,7 +170,7 @@
 		callback = callback || $.noop;
 		var url = 'http://api.myautos.cn/api/article/UpdateArticleTitle';
 		var data = {
-			Id:owner.article.articleid,
+			Id: owner.article.articleid,
 			ArticleName: titleStr
 		}
 		owner.article.articlename = titleStr;
@@ -213,43 +213,30 @@
 	//设置封面图
 	owner.setCoverimage = function() {
 		plus.gallery.pick(function(path) {
-			plus.io.resolveLocalFileSystemURL(path, function(entry) {
-				console.log("真实路径：" + entry.fullPath);
-				plus.zip.compressImage({
-					src: entry.fullPath,
-					dst: '_doc/coverimage.jpg',
-					width: "1200px",
-					overwrite: true,
-					quality: 90
-				}, function(zip) {
-					var size = zip.size
-					console.log("filesize:" + zip.size + ",totalsize:" + size);
-					if(size > (3 * 1024 * 1024)) {
-						return mui.toast('文件超大,请重新选择~');
-					}
-					if(owner.article.articleid > 0 && zip.target.length > 0) {
-						var url = 'http://api.myautos.cn/api/article/SetCoverImage';
-						var files = [];
-						files.push({
-							name: "coverimageimages",
-							path: zip.target
-						});
-						console.log(owner.article.articleid);
-						var params = {
-							"articleid": owner.article.articleid
-						};
-						commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
-							console.log(JSON.stringify(data));
-							var url = data.Data;
-							owner.article.coverimage = url;
-							$("#setcoverimage").attr('src', url);
-						});
-					}
-				}, function(zipe) {
-					mui.toast('压缩失败！')
-				});
-			}, function(e) {
-				alert(e.message);
+			commonUtil.compressImage(path, function(zip) {
+				var size = zip.size
+				console.log("filesize:" + zip.size + ",totalsize:" + size);
+				if(size > (3 * 1024 * 1024)) {
+					return mui.toast('文件超大,请重新选择~');
+				}
+				if(owner.article.articleid > 0 && zip.target.length > 0) {
+					var url = 'http://api.myautos.cn/api/article/SetCoverImage';
+					var files = [];
+					files.push({
+						name: "coverimageimages",
+						path: zip.target
+					});
+					console.log(owner.article.articleid);
+					var params = {
+						"articleid": owner.article.articleid
+					};
+					commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
+						console.log(JSON.stringify(data));
+						var url = data.Data;
+						owner.article.coverimage = url;
+						$("#setcoverimage").attr('src', url);
+					});
+				}
 			});
 		}, function(e) {
 			console.log("取消选择图片");
@@ -257,7 +244,6 @@
 			filter: "image",
 			multiple: false
 		});
-
 	}
 	//发布
 	owner.publishYouji = function(callback) {
@@ -281,8 +267,8 @@
 		var url = 'http://api.myautos.cn/api/article/PublishArticle';
 		var data = {
 			Id: owner.article.articleid,
-			ArticleName:owner.article.articlename,
-			Description:owner.article.description,
+			ArticleName: owner.article.articlename,
+			Description: owner.article.description,
 			Content: resultStr
 		};
 		commonUtil.sendRequestWithToken(url, data, true, function(data) {

@@ -33,8 +33,7 @@
 			dataType: 'json', //服务器返回json格式数据
 			type: typeStr, //HTTP请求类型
 			success: function(data, status) {
-				console.log(status == 200);
-				console.log(JSON.stringify(data));
+				console.log(status);
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
@@ -73,9 +72,8 @@
 			plus.nativeUI.closeWaiting();
 			if(status == 200 || status == "200") {
 				var data = JSON.parse(upload.responseText);
-				if(data.IsSuccess === 1) {
-					return callback(data);
-				}
+				console.log(JSON.stringify(data));
+				return callback(data);
 			} else {
 				mui.toast("您未登陆，请重新登陆！");
 				var currentview = plus.webview.currentWebview().id;
@@ -101,14 +99,14 @@
 		//添加上传数据
 		mui.each(params, function(index, element) {
 			if(index !== 'images') {
-				console.log("addData:" + index + "," + element);
+				//console.log("addData:" + index + "," + element);
 				uploader.addData(index, element.toString());
 			}
 		});
 		//添加上传文件
 		mui.each(imgFiles, function(index, element) {
 			var f = imgFiles[index];
-			console.log("addFile:" + JSON.stringify(f));
+			//console.log("addFile:" + JSON.stringify(f));
 			uploader.addFile(f.path, {
 				key: f.name
 			});
@@ -124,8 +122,9 @@
 		var fmt = cmr.supportedImageFormats[0];
 		cmr.captureImage(function(path) {
 				plus.io.resolveLocalFileSystemURL(path, function(entry) {
-					console.log("真实路径：" + entry.fullPath);
-					return callback(entry.fullPath);
+					var localPath = "file://" + entry.fullPath;
+					console.log("真实路径：" + localPath);
+					return callback(localPath);
 				}, function(e) {
 					mui.toast(e.message);
 				});
@@ -168,6 +167,7 @@
 	owner.compressImage = function(imgpath, callback) {
 		callback = callback || $.noop;
 		var name = imgpath.substr(imgpath.lastIndexOf('/') + 1);
+		console.log("name-------:"+name);
 		plus.zip.compressImage({
 			src: imgpath,
 			dst: '_doc/' + name,

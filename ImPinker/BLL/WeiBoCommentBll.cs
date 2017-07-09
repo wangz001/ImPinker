@@ -63,9 +63,9 @@ namespace ImBLL
                 if (vm.ToCommentId>0)
                 {
                     var tocomment = listToComment.FirstOrDefault(m => m.Id == vm.ToCommentId);
-                    var touserinfo = _userBll.GetModelByCache(comment.UserId);
                     if (tocomment != null)
                     {
+                        var touserinfo = _userBll.GetModelByCache(tocomment.UserId);
                         var tocommentVm = new WeiboCommentVm
                         {
                             Id = tocomment.Id,

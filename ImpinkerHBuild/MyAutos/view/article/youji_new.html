@@ -17,9 +17,6 @@
 			textarea {
 				border: 0;
 				background-color: transparent;
-				/*scrollbar-arrow-color:yellow;  
-    scrollbar-base-color:lightsalmon;  
-    overflow: hidden;*/
 				grid-auto-rows: inherit;
 				color: #666464;
 				height: auto;
@@ -50,6 +47,24 @@
 				background-color: #AAAAAA;
 				background-size: 196px;
 				background-position: -4px -86px;
+			}
+			html,
+			.mui-content {
+				height: 100%;
+				overflow: auto;
+				padding-bottom: 50px;
+			}
+			footer {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				min-height: 50px;
+				border-top: solid 1px #bbb;
+				left: 0px;
+				bottom: 0px;
+				overflow: hidden;
+				padding: 0px 50px;
+				background-color: #fafafa;
 			}
 		</style>
 	</head>
@@ -82,25 +97,14 @@
 			<p>正文</p>
 			<div class="mui-content-padded" style="margin: 0px">
 				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
-				<!--<div class="post-img">
-					<div class="add-img">
-						<img src="http://img3.baa.bitautotech.com/img/V2img3.baa.bitautotech.com/usergroup/2017/5/14/7c836ed417184e0797e985450999b3e8_300_200_jpg.jpg" type="upload" fileprogressid="63fcdb1e-7dd5-4102-821b-1067bdeb3f12">
-					</div>
-					<div class="post-move" role="operator" style="">
-						<a class="move-up mui-icon mui-icon-arrowup" role="up"></a>
-						<a class="move-down mui-icon mui-icon-arrowdown" role="down"></a>
-						<a class="del mui-icon mui-icon-trash" role="del"></a>
-					</div>
-				</div>
-				<textarea name='yjcontent' placeholder="试试添加微博内容，秒速发游记..."></textarea>-->
 			</div>
 		</div>
-		<nav class="mui-bar mui-bar-tab">
+		<footer class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item" id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
 			<a class="mui-tab-item" id='addimage'><span class="mui-icon mui-icon-image"></span></a>
 			<a class="mui-tab-item" id="share"><span class="mui-icon mui-icon-camera"></span></a>
 			<a class="mui-tab-item" id="preview_btn"><span class="mui-icon mui-icon-search"></span></a>
-		</nav>
+		</footer>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
