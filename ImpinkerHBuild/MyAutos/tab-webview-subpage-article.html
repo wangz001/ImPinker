@@ -42,6 +42,22 @@
 				position: relative;
 				padding: 7px;
 			}
+			
+			.mui-slider-title {
+				height: 45px;
+				line-height: 45px;
+				opacity: 0.5;
+				font-size: 18px;
+			}
+			
+			.mui-slider-indicator {
+				position: absolute;
+				bottom: 12px;
+				right: 10px;
+				width: 100%;
+				text-align: center;
+				background: 0 0;
+			}
 		</style>
 	</head>
 
@@ -51,9 +67,41 @@
 				<div class="mui-scroll">
 					<div class="mui-slider">
 						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
-							
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<!--<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="images/food.png">
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="images/suzuki.png">
+									<p class="mui-slider-title">吉姆尼行走滇藏线</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="images/datong.png">
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="images/jeep.png">
+									<p class="mui-slider-title">吉姆尼行走滇藏线</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="images/food.png">
+								</a>
+							</div>
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="images/suzuki.png">
+								</a>
+							</div>-->
 						</div>
-						<div class="mui-slider-indicator">
+						<div class="mui-slider-indicator mui-text-right">
 							<div class="mui-indicator mui-active"></div>
 							<div class="mui-indicator"></div>
 							<div class="mui-indicator"></div>
@@ -136,6 +184,7 @@
 		<div class="mui-slider-item mui-slider-item-duplicate">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img src="$CoverImage$">
+				<p class="mui-slider-title">$ArticleName$</p>
 			</a>
 		</div>
 	</script>
@@ -143,6 +192,7 @@
 		<div class="mui-slider-item">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img src="$CoverImage$">
+				<p class="mui-slider-title">$ArticleName$</p>
 			</a>
 		</div>
 	</script>

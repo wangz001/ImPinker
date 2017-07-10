@@ -239,7 +239,7 @@
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina35": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": ""
 					},
 					"ipad": {
@@ -250,7 +250,7 @@
 						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
 						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
 						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
+						"landscape-retina7": "C:/Users/wangzheng/Desktop/车酷/31bcd6299f9f0c0be6624f7806a7ce1f.png"
 					}
 				},
 				"android": {
@@ -258,7 +258,7 @@
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
 					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
 					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"xxhdpi": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png"
 				}
 			}
 		}
@@ -320,7 +320,10 @@
 					"images/yuantiao.jpg",
 					"js/jquery.js",
 					"js/article/article_preview.js",
-					"js/app.js"
+					"js/app.js",
+					"css/weibo/comment.css",
+					"css/icons-extra.css",
+					"js/commonUtil.js"
 				],
 				"refer": [],
 				"priority": 0
