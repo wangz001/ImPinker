@@ -45,6 +45,10 @@ namespace ImModel.ViewModel
         /// </summary>
         public int VoteCount { get; set; }
         /// <summary>
+        /// 浏览次数
+        /// </summary>
+        public int ViewCount { get; set; }
+        /// <summary>
         /// 用户名（显示名优先）
         /// </summary>
         public string UserName { get; set; }

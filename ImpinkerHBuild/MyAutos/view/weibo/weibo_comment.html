@@ -118,7 +118,6 @@
 					page: 1
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
-					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null) {
 						$("#comment").html("");
 						var list = data.Data;

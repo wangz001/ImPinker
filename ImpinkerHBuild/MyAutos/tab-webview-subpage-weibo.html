@@ -16,6 +16,10 @@
 				position: relative;
 				float: right;
 			}
+			
+			.mui-card-footer em {
+				font-size: 15px;
+			}
 		</style>
 	</head>
 
@@ -24,50 +28,50 @@
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
 					<!--<div class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="images/logo.png">
-						<div class="mui-media-body">
-							小Mf
-							<p>发表于 2016-06-30 15:30</p>
+						<div class="mui-card-header mui-card-media">
+							<img src="images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+
+						</div>
+						<div class="media-pic-list">
+
+							<ul>
+								<li>
+									<img src="images/login-1.png" data-preview-src="" data-preview-group="1">
+								</li>
+								<li>
+									<img src="images/muwu.jpg" data-preview-src="" data-preview-group="1">
+								</li>
+							</ul>
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon mui-icon-location"><em>20</em></span>
+							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+							<span class="mui-icon mui-icon-compose"></span>
 						</div>
 					</div>
-					<div class="mui-card-content">
-
-					</div>
-					<div class="media-pic-list">
-
-						<ul>
-							<li>
-								<img src="images/login-1.png" data-preview-src="" data-preview-group="1">
-							</li>
-							<li>
-								<img src="images/muwu.jpg" data-preview-src="" data-preview-group="1">
-							</li>
-						</ul>
-					</div>
-					<div class="mui-card-footer">
-						<span class="mui-icon mui-icon-location"></span>
-						<span class="mui-icon-extra mui-icon-extra-heart"></span>
-						<span class="mui-icon mui-icon-compose"></span>
-					</div>
-				</div>
-				<div class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="images/logo.png">
-						<div class="mui-media-body">
-							小Mf
-							<p>发表于 2016-06-30 15:30</p>
+					<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img src="images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
 						</div>
-					</div>
-					<div class="mui-card-content">
-						<img class="bigimage" src="images/yuantiao.jpg">
-					</div>
-					<div class="mui-card-footer">
-						<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
-						<span class="mui-icon mui-icon-compose"></span>
-						<span class="mui-icon mui-icon-map"></span>
-					</div>
-				</div>-->
+						<div class="mui-card-content">
+							<img class="bigimage" src="images/yuantiao.jpg">
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
+							<span class="mui-icon mui-icon-compose"></span>
+							<span class="mui-icon mui-icon-map"></span>
+						</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -203,8 +207,8 @@
 
 				var footdiv = document.createElement('div');
 				footdiv.className = 'mui-card-footer';
-				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"></span>' +
-					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '></span>' +
+				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"><em>' + item.VoteCount + '</em></span>' +
+					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '><em>' + item.CommentCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-map"></span>';
 				li.appendChild(headdiv);
 				if(item.Description != null && item.Description.length > 0) {

@@ -69,5 +69,13 @@ namespace ImpinkerApi.Models
         /// 是否转发
         /// </summary>
         public bool IsRePost { get; set; }
+        /// <summary>
+        /// 点赞数
+        /// </summary>
+        public int VoteCount { get; set; }
+        /// <summary>
+        /// 评论数
+        /// </summary>
+        public int CommentCount { get; set; }
     }
 }

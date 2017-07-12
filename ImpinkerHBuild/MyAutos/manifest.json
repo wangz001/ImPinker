@@ -307,7 +307,8 @@
 					"images/jeep.png",
 					"images/datong.png",
 					"images/food.png",
-					null
+					null,
+					"css/icons-extra.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -351,7 +352,8 @@
 					"js/jquery.js"
 				],
 				"refer": [
-					"view/map/lbs.html"
+					"view/map/lbs.html",
+					"view/weibo/weibo_comment.html"
 				],
 				"priority": 0
 			},
@@ -641,6 +643,19 @@
 				"resources": [
 					"js/mui.min.js",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/weibo/weibo_comment.html": {
+				"resources": [
+					"js/app.js",
+					"css/feedback.css",
+					"css/weibo/comment.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/commonUtil.js",
+					"js/jquery.js"
 				],
 				"refer": [],
 				"priority": 0

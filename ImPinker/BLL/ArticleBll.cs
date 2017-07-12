@@ -174,6 +174,7 @@ namespace ImBLL
             var ds = _dal.GetIndexListByPage(pageNum, count);
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
+                var random = new Random();
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     var model = new ArticleViewModel();
@@ -227,11 +228,17 @@ namespace ImBLL
                     if (row.Table.Columns.Contains("UserId") && row["UserId"] != null && row["UserId"].ToString() != "")
                     {
                         model.Userid = row["UserId"].ToString();
+                        var useritem = _userBll.GetModelByCache(int.Parse(model.Userid));
+                        model.UserName = string.IsNullOrEmpty(useritem.ShowName) ? useritem.UserName : useritem.ShowName;
                     }
                     if (row.Table.Columns.Contains("voteCount") && row["voteCount"] != null && row["voteCount"].ToString() != "")
                     {
                         model.VoteCount = int.Parse(row["voteCount"].ToString());
                     }
+                    //点赞数和浏览数------暂时处理
+                    model.VoteCount = random.Next(10, 100);
+                    model.ViewCount = random.Next(100, 1000);
+
                     listResult.Add(model);
                 }
             }

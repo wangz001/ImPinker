@@ -1,74 +1,100 @@
 {
-  "tab-webview-subpage-weibo.html": {
-    "resources": [
-      "fonts/mui-icons-extra.ttf",
-      "js/mui.zoom.js",
-      "js/weibo/weibo_index.js",
-      "js/mui.previewimage.js",
-      "css/imageviewer.css",
-      "css/mui.css",
-      "css/icons-extra.css",
-      "css/weibo.css"
-    ]
-  },
-  "tab-webview-main.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "tab-webview-subpage-article.html",
-      "js/commonUtil.js",
-      "js/jquery.js"
-    ],
-    "refer": [
-      "tab-webview-subpage-weibo.html",
-      "tab-webview-subpage-setting.html",
-      "tab-webview-subpage-article.html"
-    ]
-  },
-  "tab-webview-subpage-article.html": {
-    "resources": [
-      "css/mui.min.css"
-    ],
-    "refer": [
-      "view/article/preview.html"
-    ]
-  },
-  "tab-webview-subpage-setting.html": {
-    "refer": [
-      "view/article/youji_my.html",
-      "view/weibo/weibo_my.html"
-    ]
-  },
-  "view/article/youji_my.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/icons-extra.css",
-      "js/commonUtil.js",
-      "js/jquery.js",
-      "css/weibo.css"
-    ]
-  },
-  "view/article/preview.html": {
-    "resources": [
-      "js/app.js",
-      "js/article/article_preview.js",
-      "css/weibo/comment.css",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/icons-extra.css",
-      "js/commonUtil.js",
-      "js/jquery.js"
-    ]
-  },
-  "view/weibo/weibo_my.html": {
-    "resources": [
-      "js/mui.zoom.js",
-      "js/mui.previewimage.js",
-      "css/imageviewer.css"
-    ]
-  }
+	"tab-webview-subpage-weibo.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"js/mui.zoom.js",
+			"js/weibo/weibo_index.js",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css",
+			"css/mui.css",
+			"css/icons-extra.css",
+			"css/weibo.css",
+			"images/yuantiao.jpg",
+			"images/muwu.jpg",
+			"images/logo.png",
+			"js/mui.min.js",
+			"images/login-1.png",
+			"js/jquery.js"
+		],
+		"refer": [
+			"view/weibo/weibo_comment.html"
+		]
+	},
+	"tab-webview-main.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"tab-webview-subpage-article.html",
+			"js/commonUtil.js",
+			"js/jquery.js"
+		],
+		"refer": [
+			"tab-webview-subpage-weibo.html",
+			"tab-webview-subpage-setting.html",
+			"tab-webview-subpage-article.html"
+		]
+	},
+	"tab-webview-subpage-article.html": {
+		"resources": [
+			"css/mui.min.css",
+			"images/cbd.jpg",
+			"images/shuijiao.jpg",
+			"js/mui.min.js",
+			"js/commonUtil.js",
+			"js/jquery.js",
+			"css/icons-extra.css"
+		],
+		"refer": [
+			"view/article/preview.html"
+		]
+	},
+	"tab-webview-subpage-setting.html": {
+		"refer": [
+			"view/article/youji_my.html",
+			"view/weibo/weibo_my.html"
+		]
+	},
+	"view/article/youji_my.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"js/commonUtil.js",
+			"js/jquery.js",
+			"css/weibo.css"
+		]
+	},
+	"view/article/preview.html": {
+		"resources": [
+			"js/app.js",
+			"js/article/article_preview.js",
+			"css/weibo/comment.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/icons-extra.css",
+			"js/commonUtil.js",
+			"js/jquery.js"
+		]
+	},
+	"view/weibo/weibo_my.html": {
+		"resources": [
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css"
+		]
+	},
+	"view/weibo/weibo_comment.html": {
+		"resources": [
+			"js/app.js",
+			"css/feedback.css",
+			"css/weibo/comment.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/commonUtil.js",
+			"js/jquery.js"
+		]
+	}
 }

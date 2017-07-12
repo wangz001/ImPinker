@@ -8,6 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/icons-extra.css" />
 		<style>
 			html,
 			body {
@@ -25,9 +26,9 @@
 			}
 			
 			.mui-table-view .mui-media-object {
-				line-height: 52px;
-				max-width: 60px;
-				height: 52px;
+				line-height: 64px;
+				max-width: 74px;
+				height: 61px;
 			}
 			/*card 样式*/
 			
@@ -36,6 +37,22 @@
 				position: relative;
 				overflow: hidden;
 				margin: 0px;
+			}
+			
+			.mui-media-body .username {
+				font-size: 12px;
+				margin-top: 0;
+				margin-bottom: 10px;
+				margin-right: 20px;
+				color: #8f8f94;
+			}
+			
+			.mui-media-body .viewcount {
+				float: right;
+			}
+			
+			.mui-media-body .viewcount .mui-icon,.mui-media-body .viewcount .mui-icon-extra{
+				font-size: 13px;
 			}
 			
 			.mui-card .mui-card-content-inner {
@@ -114,6 +131,12 @@
 								<div class="mui-media-body">
 									<P class="title">幸福</P>
 									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+									<p><span class="username">bwlang  </span>
+										<span class="viewcount">
+										<em class="mui-icon-extra mui-icon-extra-like">10</em>
+										<em class="mui-icon mui-icon-eye">23</em>
+									</span>
+									</p>
 								</div>
 							</a>
 						</li>
@@ -164,18 +187,11 @@
 				<div class="mui-media-body">
 					<P class="title">$ArticleName$</P>
 					<p class="mui-ellipsis">$Description$</p>
-
-				</div>
-			</a>
-		</li>
-	</script>
-	<script type="text/template" id="article_item_right">
-		<li href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-			<a href="view/article/preview.html">
-				<img class="mui-media-object mui-pull-right" src="$CoverImage$">
-				<div class="mui-media-body">
-					$ArticleName$
-					<p class="mui-ellipsis">$Description$</p>
+					<p><span class="username">$UserName$</span>
+						<span class="viewcount">
+						<em class="mui-icon-extra mui-icon-extra-like">$VoteCount$</em>
+						<em class="mui-icon mui-icon-eye">$ViewCount$</em>
+					</span>
 				</div>
 			</a>
 		</li>
@@ -280,8 +296,6 @@
 			allArticles.push(item);
 			var template = $('script[id="article_item"]').html();
 			var templateCard = $('script[id="article_item_card"]').html();
-			var templateRight = $('script[id="article_item_right"]').html();
-
 			var articleHtmlStr
 			if(allCount % 10 == 5) {
 				articleHtmlStr = templateCard.temp(item);
