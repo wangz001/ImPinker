@@ -44,7 +44,8 @@
 			"js/mui.min.js",
 			"js/commonUtil.js",
 			"js/jquery.js",
-			"css/icons-extra.css"
+			"css/icons-extra.css",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"view/article/preview.html"
@@ -65,6 +66,9 @@
 			"js/commonUtil.js",
 			"js/jquery.js",
 			"css/weibo.css"
+		],
+		"refer": [
+			"login.html"
 		]
 	},
 	"view/article/preview.html": {
@@ -83,7 +87,9 @@
 		"resources": [
 			"js/mui.zoom.js",
 			"js/mui.previewimage.js",
-			"css/imageviewer.css"
+			"css/imageviewer.css",
+			"css/mui.min.css",
+			"css/weibo.css"
 		]
 	},
 	"view/weibo/weibo_comment.html": {
@@ -95,6 +101,19 @@
 			"css/mui.min.css",
 			"js/commonUtil.js",
 			"js/jquery.js"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"css/login.css",
+			"images/sinaweibo.png",
+			"js/login.js",
+			"images/weixin.png",
+			"images/qq.png",
+			"js/mui.enterfocus.js"
+		],
+		"refer": [
+			"tab-webview-main.html"
 		]
 	}
 }

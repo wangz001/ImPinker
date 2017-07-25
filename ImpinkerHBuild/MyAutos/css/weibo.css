@@ -32,9 +32,7 @@
 .media-pic-list ul {
     margin-top: -.3125rem;
     list-style: none;
-	display: inline-block;
-	margin-right: -4px;
-	padding: 5px 5px 0 10px;
+	padding: 2px 5px 0 0px;
 }
 
 .media-pic-list li {

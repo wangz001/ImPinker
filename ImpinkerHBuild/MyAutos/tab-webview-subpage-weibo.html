@@ -20,6 +20,17 @@
 			.mui-card-footer em {
 				font-size: 15px;
 			}
+			
+			.mui-scroll .mui-card {
+				margin: 0 0 10px 0;
+			}
+			
+			.mui-card .mui-card-content {
+				padding: 5px 5px 5px 10px
+			}
+			.mui-card .mui-card-content p{
+				margin-bottom: 0px;
+			}
 		</style>
 	</head>
 
@@ -36,19 +47,19 @@
 							</div>
 						</div>
 						<div class="mui-card-content">
-
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<ul>
+									<li>
+										<img src="images/login-1.png" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+								</ul>
+							</div>
 						</div>
-						<div class="media-pic-list">
 
-							<ul>
-								<li>
-									<img src="images/login-1.png" data-preview-src="" data-preview-group="1">
-								</li>
-								<li>
-									<img src="images/muwu.jpg" data-preview-src="" data-preview-group="1">
-								</li>
-							</ul>
-						</div>
 						<div class="mui-card-footer">
 							<span class="mui-icon mui-icon-location"><em>20</em></span>
 							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
@@ -64,7 +75,10 @@
 							</div>
 						</div>
 						<div class="mui-card-content">
-							<img class="bigimage" src="images/yuantiao.jpg">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<img class="bigimage" src="images/yuantiao.jpg">
+							</div>
 						</div>
 						<div class="mui-card-footer">
 							<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
@@ -184,13 +198,16 @@
 				headdiv.className = 'mui-card-header mui-card-media';
 				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
 					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
-
-				var imgdiv = document.createElement("div");
-
+				var contentdiv = document.createElement("div");
+				contentdiv.className = 'mui-card-content';
+				if(item.Description != null && item.Description.length > 0) {
+					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
+				}
 				var imgs = item.ContentValue.split(',');
+				var imgdiv = document.createElement("div");
+				imgdiv.className = 'media-pic-list';
 				if(imgs.length > 1) {
 					//多图
-					imgdiv.className = 'media-pic-list';
 					var ul = document.createElement("ul");
 					var imgHtmlStr = "";
 					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
@@ -200,24 +217,17 @@
 					ul.innerHTML = imgHtmlStr;
 					imgdiv.appendChild(ul);
 				} else {
-					imgdiv.className = "mui-card-content";
 					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 					imgdiv.innerHTML = imgHtmlStr;
 				}
-
+				contentdiv.appendChild(imgdiv);
 				var footdiv = document.createElement('div');
 				footdiv.className = 'mui-card-footer';
 				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"><em>' + item.VoteCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '><em>' + item.CommentCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-map"></span>';
 				li.appendChild(headdiv);
-				if(item.Description != null && item.Description.length > 0) {
-					var contentdiv = document.createElement("div");
-					contentdiv.className = 'mui-card-content';
-					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
-					li.appendChild(contentdiv);
-				}
-				li.appendChild(imgdiv);
+				li.appendChild(contentdiv);
 				li.appendChild(footdiv);
 				table.appendChild(li);
 			}

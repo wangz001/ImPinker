@@ -308,7 +308,8 @@
 					"images/datong.png",
 					"images/food.png",
 					null,
-					"css/icons-extra.css"
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -599,7 +600,8 @@
 				],
 				"refer": [
 					"view/article/youji_new.html",
-					"view/article/preview.html"
+					"view/article/preview.html",
+					"login.html"
 				],
 				"priority": 0
 			},
