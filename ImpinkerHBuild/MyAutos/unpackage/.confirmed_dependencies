@@ -17,7 +17,8 @@
 			"js/jquery.js"
 		],
 		"refer": [
-			"view/weibo/weibo_comment.html"
+			"view/weibo/weibo_comment.html",
+			"view/map/lbs.html"
 		]
 	},
 	"tab-webview-main.html": {
@@ -114,6 +115,12 @@
 		],
 		"refer": [
 			"tab-webview-main.html"
+		]
+	},
+	"view/map/lbs.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
 		]
 	}
 }

@@ -30,12 +30,18 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				var weiboid = self.weiboid;
+				console.log(weiboid);
+			});
 		</script>
 		<script type="text/javascript">
 			var em = null,
 				map = null;
 			// H5 plus事件处理
 			function plusReady() {
+				
 				// 确保DOM解析完成
 				if(!em || !window.plus || map) {
 					return

@@ -225,7 +225,7 @@
 				footdiv.className = 'mui-card-footer';
 				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"><em>' + item.VoteCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '><em>' + item.CommentCount + '</em></span>' +
-					'<span class="mui-icon mui-icon-map"></span>';
+					'<span class="mui-icon mui-icon-map" weiboid=' + item.Id + '></span>';
 				li.appendChild(headdiv);
 				li.appendChild(contentdiv);
 				li.appendChild(footdiv);
@@ -234,12 +234,16 @@
 
 			//地图点击事件
 			mui('.mui-scroll').on('tap', '.mui-icon-map', function() {
+				var weiboid=this.getAttribute('weiboid');
 				mui.openWindow({
 					url: "view/map/lbs.html",
 					id: "lbs",
 					show: {
 						aniShow: 'slide-in-left',
 						duration: 200
+					},
+					extras:{
+						weiboid:weiboid
 					}
 				});
 			});
