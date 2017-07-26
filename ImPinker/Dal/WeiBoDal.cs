@@ -143,5 +143,32 @@ WHERE   T.row BETWEEN @startIndex AND @endIndex
             var ds = DbHelperSQL.Query(sql, parameters);
             return ds;
         }
+
+        public DataSet GetById(long weiboid)
+        {
+            var sql = @"
+SELECT              [Id] ,
+                    [UserId] ,
+                    [Description] ,
+                    [ContentValue] ,
+                    [ContentType] ,
+                    [Longitude] ,
+                    [Latitude] ,
+                    [Height] ,
+                    [LocationText] ,
+                    [State] ,
+                    [HardWareType] ,
+                    [IsRePost] ,
+                    [CreateTime] ,
+                    [UpdateTime]
+          FROM      [MyAutosTest].[dbo].[WeiBo]
+          WHERE     Id = @Id
+";
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int){Value = weiboid}};
+
+            var ds = DbHelperSQL.Query(sql, parameters);
+            return ds;
+        }
     }
 }

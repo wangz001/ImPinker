@@ -67,6 +67,7 @@
     <Compile Include="ViewModel\FacetItemVm.cs" />
     <Compile Include="ViewModel\ImageFormatConfig.cs" />
     <Compile Include="ViewModel\SearchResultVm.cs" />
+    <Compile Include="ViewModel\WeiboVm.cs" />
     <Compile Include="WeiBo.cs" />
     <Compile Include="WeiBoComment.cs" />
     <Compile Include="WeiBoVote.cs" />

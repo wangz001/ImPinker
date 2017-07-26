@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.IO;
+using Aliyun.Api;
 using Common.AlyOssUtil;
 using Common.Utils;
 using ImDal;
@@ -153,5 +154,20 @@ namespace ImBLL
             return model;
         }
 
+        /// <summary>
+        /// 根据weiboid 获取实体
+        /// </summary>
+        /// <param name="weiboid"></param>
+        /// <returns></returns>
+        public WeiBo GetById(long weiboid)
+        {
+            var ds = _weiBoDal.GetById(weiboid);
+            if (ds!=null&&ds.Tables[0].Rows.Count>0)
+            {
+                var item = DataRowToModel(ds.Tables[0].Rows[0]);
+                return item;
+            }
+            return null;
+        }
     }
 }

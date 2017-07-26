@@ -268,5 +268,21 @@ namespace ImpinkerApi.Controllers
         }
 
         #endregion
+
+        #region 获取微博信息
+        [HttpGet]
+        public HttpResponseMessage GetWeiBoById(int weiboid)
+        {
+            var item = _weiBoBll.GetById(weiboid);
+
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = item!=null? 1:0,
+                Description = "ok",
+                Data = item
+            });
+        }
+
+        #endregion
     }
 }
