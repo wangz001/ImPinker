@@ -626,7 +626,18 @@
 			"view/map/lbs.html": {
 				"resources": [
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/commonUtil.js",
+					"css/weibo.css",
+					"images/muwu.jpg",
+					"images/logo.png",
+					"images/login-1.png",
+					"images/yuantiao.jpg",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/jquery.js",
+					"css/icons-extra.css",
+					"css/imageviewer.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -659,7 +670,9 @@
 					"js/commonUtil.js",
 					"js/jquery.js"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			}
 		},

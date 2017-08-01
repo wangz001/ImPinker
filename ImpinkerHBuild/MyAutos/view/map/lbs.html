@@ -6,15 +6,39 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 			#map {
 				width: 100%;
 				position: fixed;
 				top: 50px;
-				bottom: 200px;
-				line-height: 200px;
+				height: 200px;
 				text-align: center;
 				background: #FFFFFF;
+			}
+		</style>
+		<style type="text/css">
+			.mui-icon-extra-heart {
+				position: relative;
+				float: right;
+			}
+			
+			.mui-card-footer em {
+				font-size: 15px;
+			}
+			
+			.mui-scroll .mui-card {
+				margin: 0 0 10px 0;
+			}
+			
+			.mui-card .mui-card-content {
+				padding: 5px 5px 5px 10px
+			}
+			
+			.mui-card .mui-card-content p {
+				margin-bottom: 0px;
 			}
 		</style>
 	</head>
@@ -24,29 +48,198 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">地理位置</h1>
 		</header>
+
 		<div class="mui-content">
-			<div id="map">地图加载中...</div>
+			<div id="pullrefresh" class="mui-scroll-wrapper ">
+				<div class="mui-scroll">
+					<div class="mui-media-body" id="map">地图加载中...</div>
+					<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img src="../../images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<ul>
+									<li>
+										<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon mui-icon-location"><em>桂林黄果树</em></span>
+						</div>
+					</div>
+					<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img src="../../images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<img class="bigimage" src="../../images/yuantiao.jpg">
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon mui-icon-map"><em>桂林黄果树</em></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript">
-			mui.init()
-			mui.plusReady(function(){
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						auto: true, //可选,默认false.自动上拉加载一次
+						callback: pullupRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			mui.previewImage();
+			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var weiboid = self.weiboid;
 				console.log(weiboid);
+				getweibo(weiboid);
 			});
+			var pageNum = 1;
+			var allCount = 0;
+			var pageSize = 30;
+
+			function pullupRefresh() {
+				mui.ajax('http://api.myautos.cn/api/WeiBo/GetWeiBoList', {
+					data: {
+						pageindex: pageNum,
+						pageSize: pageSize
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					success: function(data) {
+						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+							var list = data.Data;
+							var table = document.body.querySelector('.mui-scroll');
+							for(var i = 0; i < list.length; i++) {
+								var item = list[i];
+								initWeiBoItem(table, item);
+							}
+						} else {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+							return;
+						}
+						pageNum++;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+					},
+					error: function(xhr, type, errorThrown) {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					}
+				});
+			}
+			/**
+			 * 添加数据
+			 * @param {Object} table
+			 * @param {Object} item
+			 */
+			function initWeiBoItem(table, item) {
+				var img_1200style = 'style/weibo_1200';
+				var img_600style = 'style/weibo_600';
+				var img_24style = 'style/weibo_24_16';
+				var img_36style = 'style/weibo_36_24';
+				if(item.ContentValue == null || item.ContentValue == '') {
+					return;
+				}
+				var li = document.createElement('div');
+				li.className = 'mui-card';
+				var headdiv = document.createElement("div");
+				headdiv.className = 'mui-card-header mui-card-media';
+				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
+					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
+				var contentdiv = document.createElement("div");
+				contentdiv.className = 'mui-card-content';
+				if(item.Description != null && item.Description.length > 0) {
+					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
+				}
+				var imgs = item.ContentValue.split(',');
+				var imgdiv = document.createElement("div");
+				imgdiv.className = 'media-pic-list';
+				if(imgs.length > 1) {
+					//多图
+					var ul = document.createElement("ul");
+					var imgHtmlStr = "";
+					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
+					for(var i = 0; i < imgs.length; i++) {
+						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					}
+					ul.innerHTML = imgHtmlStr;
+					imgdiv.appendChild(ul);
+				} else {
+					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+					imgdiv.innerHTML = imgHtmlStr;
+				}
+				contentdiv.appendChild(imgdiv);
+				var footdiv = document.createElement('div');
+				footdiv.className = 'mui-card-footer';
+				footdiv.innerHTML = '' +
+					'<span class="mui-icon mui-icon-map" ><em>桂林黄果树</em></span>';
+				li.appendChild(headdiv);
+				li.appendChild(contentdiv);
+				li.appendChild(footdiv);
+				table.appendChild(li);
+			}
 		</script>
 		<script type="text/javascript">
+			function getweibo(weiboid) {
+				var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
+				var data = {
+					weiboid: weiboid,
+				};
+				plus.nativeUI.showWaiting('正在加载');
+				commonUtil.sendRequestGet(url, data, function(data) {
+					plus.nativeUI.closeWaiting();
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var weiboitem = data.Data;
+						console.log(JSON.stringify(weiboitem));
+						setPoint(weiboitem.Longitude, weiboitem.Lantitude);
+					}
+				});
+			}
 			var em = null,
 				map = null;
+
+			function resetPoint(lon, lan) {
+
+			}
 			// H5 plus事件处理
-			function plusReady() {
-				
+			function setPoint(lon, lan) {
 				// 确保DOM解析完成
 				if(!em || !window.plus || map) {
 					return
 				};
-				var point = new plus.maps.Point(116.347496, 39.970191);
+				var point = new plus.maps.Point(lon, lan);
 				map = new plus.maps.Map("map");
 				map.centerAndZoom(point, 12);
 
@@ -57,22 +250,33 @@
 				var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
 				marker.setBubble(bubble);
 				map.addOverlay(marker);
+				map.onstatuschanged = function(event) {
+					marker.setBubble(bubble);
+					var target = event.target; // 状态变化的地图对象(plus.maps.Map)
+					var bounds = event.bounds; // 地图的可视地理区域(plus.maps.Bounds)
+					var center = event.center; // 地图的中心点坐标(plus.maps.Point)
+					var zoom = event.zoom; // 地图的缩放级别(Number)
+					console.log(JSON.stringify(event));
+				}
 			}
-			if(window.plus) {
-				plusReady();
-			} else {
-				document.addEventListener("plusready", plusReady, false);
-			}
-			// DOMContentloaded事件处理
+			//			if(window.plus) {
+			//				plusReady();
+			//			} else {
+			//				document.addEventListener("plusready", plusReady, false);
+			//			}
+			//			// DOMContentloaded事件处理
 			document.addEventListener("DOMContentLoaded", function() {
 				em = document.getElementById("map");
-				plusReady();
 			}, false);
 			// 设置地图的中心点
 			function setCenter() {
 				var center = new plus.maps.Point(118.123, 35.456);
 				map.setCenter(center);
 			}
+
+			///----------------------
+		</script>
+		<script type="text/javascript">
 		</script>
 	</body>
 
