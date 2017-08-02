@@ -8,5 +8,14 @@ namespace ImModel.ViewModel
 {
     public class WeiboVm:WeiBo
     {
+        /// <summary>
+        /// 点赞总数
+        /// </summary>
+        public int VoteCount { get; set; }
+
+        /// <summary>
+        /// 评论总数
+        /// </summary>
+        public int CommentCount { get; set; }
     }
 }

@@ -231,14 +231,16 @@ namespace ImBLL
                         var useritem = _userBll.GetModelByCache(int.Parse(model.Userid));
                         model.UserName = string.IsNullOrEmpty(useritem.ShowName) ? useritem.UserName : useritem.ShowName;
                     }
-                    if (row.Table.Columns.Contains("voteCount") && row["voteCount"] != null && row["voteCount"].ToString() != "")
+                    if (row.Table.Columns.Contains("VoteCount") && row["VoteCount"] != null && row["VoteCount"].ToString() != "")
                     {
-                        model.VoteCount = int.Parse(row["voteCount"].ToString());
+                        model.VoteCount = int.Parse(row["VoteCount"].ToString());
                     }
-                    //点赞数和浏览数------暂时处理
-                    model.VoteCount = random.Next(10, 100);
-                    model.ViewCount = random.Next(100, 1000);
-
+                    if (row.Table.Columns.Contains("CommentCount") && row["CommentCount"] != null && row["CommentCount"].ToString() != "")
+                    {
+                        model.CommentCount = int.Parse(row["CommentCount"].ToString());
+                    }
+                    //点赞数和浏览数------暂时处理。后期改为不从db中直接查询
+                    
                     listResult.Add(model);
                 }
             }

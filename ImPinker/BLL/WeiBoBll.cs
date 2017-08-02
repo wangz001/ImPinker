@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ImModel;
 using ImModel.Enum;
+using ImModel.ViewModel;
 
 namespace ImBLL
 {
@@ -57,9 +58,9 @@ namespace ImBLL
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns></returns>
-        public List<WeiBo> GetListByPage(int pageindex, int pagesize)
+        public List<WeiboVm> GetListByPage(int pageindex, int pagesize)
         {
-            var resultList = new List<WeiBo>();
+            var resultList = new List<WeiboVm>();
             var ds = _weiBoDal.GetListByPage(pageindex, pagesize);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -75,9 +76,9 @@ namespace ImBLL
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns></returns>
-        public List<WeiBo> GetListByPage(int userid, int pageindex, int pagesize)
+        public List<WeiboVm> GetListByPage(int userid, int pageindex, int pagesize)
         {
-            var resultList = new List<WeiBo>();
+            var resultList = new List<WeiboVm>();
             var ds = _weiBoDal.GetListByPage(userid, pageindex, pagesize);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -89,9 +90,9 @@ namespace ImBLL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public WeiBo DataRowToModel(DataRow row)
+        public WeiboVm DataRowToModel(DataRow row)
         {
-            var model = new WeiBo();
+            var model = new WeiboVm();
             if (row != null)
             {
                 if (row.Table.Columns.Contains("Id") && row["Id"] != null && row["Id"].ToString() != "")
@@ -149,6 +150,14 @@ namespace ImBLL
                 if (row.Table.Columns.Contains("UpdateTime") && row["UpdateTime"] != null && row["UpdateTime"].ToString() != "")
                 {
                     model.UpdateTime = DateTime.Parse(row["UpdateTime"].ToString());
+                }
+                if (row.Table.Columns.Contains("VoteCount") && row["VoteCount"] != null && row["VoteCount"].ToString() != "")
+                {
+                    model.VoteCount = Int32.Parse(row["VoteCount"].ToString());
+                }
+                if (row.Table.Columns.Contains("CommentCount") && row["CommentCount"] != null && row["CommentCount"].ToString() != "")
+                {
+                    model.CommentCount = Int32.Parse(row["CommentCount"].ToString());
                 }
             }
             return model;

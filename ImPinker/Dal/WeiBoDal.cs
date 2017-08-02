@@ -78,9 +78,10 @@ INSERT INTO [dbo].[WeiBo]
         public DataSet GetListByPage(int pageNum, int pagesize)
         {
             var sql = @"
-SELECT  *
-FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
-                    [Id] ,
+SELECT  T2.* ,
+        COUNT(WV.WeiBoId) AS VoteCount ,
+        COUNT(WC.WeiBoId) AS CommentCount
+FROM    ( SELECT    [Id] ,
                     [UserId] ,
                     [Description] ,
                     [ContentValue] ,
@@ -94,10 +95,30 @@ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
                     [IsRePost] ,
                     [CreateTime] ,
                     [UpdateTime]
-          FROM      [MyAutosTest].[dbo].[WeiBo]
-          WHERE     State = 1
-        ) T
-WHERE   T.row BETWEEN @startIndex AND @endIndex 
+          FROM      ( SELECT    ROW_NUMBER() OVER ( ORDER BY Id DESC ) AS row ,
+                                [WeiBo].*
+                      FROM      [MyAutosTest].[dbo].[WeiBo]
+                      WHERE     State = 1
+                    ) T
+          WHERE     T.row BETWEEN @startIndex AND @endIndex
+        ) AS T2
+        LEFT JOIN dbo.WeiBoVote WV ON T2.Id = WV.WeiBoId
+        LEFT JOIN dbo.WeiBoComment WC ON T2.Id = WC.WeiBoId
+GROUP BY T2.[Id] ,
+        T2.[UserId] ,
+        T2.[Description] ,
+        T2.[ContentValue] ,
+        T2.[ContentType] ,
+        T2.[Longitude] ,
+        T2.[Latitude] ,
+        T2.[Height] ,
+        T2.[LocationText] ,
+        T2.[State] ,
+        T2.[HardWareType] ,
+        T2.[IsRePost] ,
+        T2.[CreateTime] ,
+        T2.[UpdateTime]
+ORDER BY T2.Id DESC;
 ";
             var startIndex = (pageNum - 1) * pagesize + 1;
             var endIndex = pageNum * pagesize;

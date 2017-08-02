@@ -313,13 +313,39 @@ namespace ImDal
         public DataSet GetIndexListByPage(int pageNum, int count)
         {
             const string strSql = @"
-SELECT  TT.Id,TT.ArticleName,TT.Description,TT.Url,TT.CoverImage,TT.UserId,TT.ComPany,TT.KeyWords,TT.CreateTime,COUNT(av.ArticleId) as voteCount 
- FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.publishtime DESC ) AS Row ,
-                    T.*
-          FROM      Article T WHERE T.STATE=1 AND  T.CoverImage IS NOT NULL AND DATALENGTH(T.CoverImage)>0
-        ) TT left join ArticleVote AV on TT.Id=AV.ArticleId 
-WHERE   TT.Row BETWEEN @startIndex AND @endIndex 
- group by TT.Id,TT.ArticleName,TT.Description,TT.Url,TT.CoverImage,TT.UserId,TT.ComPany,TT.KeyWords,TT.CreateTime;
+SELECT  T3.* ,
+        COUNT(AV.ArticleId) AS VoteCount ,
+        COUNT(ac.ArticleId) AS CommentCount
+FROM    ( SELECT    TT.Id ,
+                    TT.ArticleName ,
+                    TT.Description ,
+                    TT.Url ,
+                    TT.CoverImage ,
+                    TT.UserId ,
+                    TT.ComPany ,
+                    TT.KeyWords ,
+                    TT.CreateTime
+          FROM      ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.PublishTime DESC ) AS Row ,
+                                T.*
+                      FROM      Article T
+                      WHERE     T.State = 1
+                                AND T.CoverImage IS NOT NULL
+                                AND DATALENGTH(T.CoverImage) > 0
+                    ) TT
+          WHERE     TT.Row BETWEEN @startIndex AND @endIndex 
+        ) AS T3
+        LEFT JOIN ArticleVote AV ON T3.Id = AV.ArticleId
+        LEFT JOIN dbo.ArticleComment ac ON T3.Id = ac.ArticleId
+GROUP BY T3.Id ,
+        T3.ArticleName ,
+        T3.Description ,
+        T3.Url ,
+        T3.CoverImage ,
+        T3.UserId ,
+        T3.ComPany ,
+        T3.KeyWords ,
+        T3.CreateTime
+ORDER BY T3.Id DESC;
 ";
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;

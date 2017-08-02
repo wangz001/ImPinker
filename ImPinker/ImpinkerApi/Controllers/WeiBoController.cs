@@ -188,8 +188,6 @@ namespace ImpinkerApi.Controllers
                 });
             }
             var resultList = new List<WeiBoListViewModel>();
-            //---------------------------------暂时处理
-            var random = new Random();
             foreach (var weiBo in list)
             {
                 var model = new WeiBoListViewModel
@@ -204,8 +202,8 @@ namespace ImpinkerApi.Controllers
                     LocationText = weiBo.LocationText,
                     PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
                     IsRePost = weiBo.IsRePost,
-                    VoteCount=random.Next(100,10000),
-                    CommentCount=random.Next(10,100)
+                    VoteCount=weiBo.VoteCount,
+                    CommentCount=weiBo.CommentCount
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);
                 model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;

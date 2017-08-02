@@ -44,6 +44,11 @@ namespace ImModel.ViewModel
         /// 文章被赞的总数
         /// </summary>
         public int VoteCount { get; set; }
+
+        /// <summary>
+        /// 评论总数
+        /// </summary>
+        public int CommentCount { get; set; }
         /// <summary>
         /// 浏览次数
         /// </summary>
