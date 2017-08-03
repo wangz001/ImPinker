@@ -37,6 +37,9 @@
             max-width: 100%;
             max-height: 100%;
         }
+        .mui-content .header h2 {
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,10 +61,10 @@
         <div class="mui-content-padded">
             @Html.Raw(article.Content == null ? "" : article.Content[0])
             <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
-            <div class="article-footer">
+            @*<div class="article-footer">
                 <img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
                 <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
-            </div>
+            </div>*@
         </div>
     </div>
 
@@ -70,10 +73,6 @@
     }
 </body>
 </html>
-
 <script src="~/Scripts/mui.min.js"></script>
-<script src="~/Scripts/mui.previewimage.js"></script>
-<script src="~/Scripts/mui.zoom.js"></script>
 <script type="text/javascript">
-    mui.previewImage();
 </script>
