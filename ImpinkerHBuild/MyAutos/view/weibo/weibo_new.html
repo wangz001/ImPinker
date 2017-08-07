@@ -39,9 +39,6 @@
 			</div>
 		</div>
 		<p id="locationtxt"></p>
-		<div id='newyouji' class="mui-btn mui-btn-primary">
-			写游记
-		</div>
 		<div id='youjidraft' class="mui-btn mui-btn-primary">
 			游记草稿
 		</div>
@@ -54,17 +51,6 @@
 		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
 		<script type="application/javascript">
 			mui.init();
-			document.getElementById('newyouji').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "../article/youji_new.html",
-					id: "youji_new",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
-			});
-
 			document.getElementById('youjidraft').addEventListener('tap', function() {
 				mui.openWindow({
 					url: "../article/youji_mydraft.html",
@@ -76,7 +62,5 @@
 				});
 			});
 		</script>
-
 	</body>
-
 </html>

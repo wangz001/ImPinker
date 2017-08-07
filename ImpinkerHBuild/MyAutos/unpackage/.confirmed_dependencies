@@ -34,7 +34,8 @@
 		"refer": [
 			"tab-webview-subpage-weibo.html",
 			"tab-webview-subpage-setting.html",
-			"tab-webview-subpage-article.html"
+			"tab-webview-subpage-article.html",
+			"view/weibo/weibo_new.html"
 		]
 	},
 	"tab-webview-subpage-article.html": {
@@ -136,6 +137,17 @@
 			"js/jquery.js",
 			"css/icons-extra.css",
 			"css/imageviewer.css"
+		]
+	},
+	"view/weibo/weibo_new.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/weibo/weibo_add.js",
+			"js/commonUtil.js",
+			"js/jquery.js",
+			"css/weibo/weibo_add.css"
 		]
 	}
 }
