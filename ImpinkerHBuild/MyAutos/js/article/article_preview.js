@@ -70,7 +70,7 @@ function getArticle(articleid) {
 	var data = {
 		articleid: articleid,
 	};
-	plus.nativeUI.showWaiting('正在加载');
+	plus.nativeUI.showWaiting('正在加载...');
 	commonUtil.sendRequestGet(url, data, function(data) {
 		plus.nativeUI.closeWaiting();
 		if(data.IsSuccess == 1 && data.Data != null) {
@@ -82,6 +82,12 @@ function getArticle(articleid) {
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
 			$(".thread-info .publish-time").html(articleItem.CreateTime);
+			setTimeout(function(){
+				$(".zhezhaoDiv").hide();
+			$("#mui-progressbar").hide();
+			},500)
+			
+			
 		}
 	});
 }
