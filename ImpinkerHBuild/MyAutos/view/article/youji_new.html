@@ -238,7 +238,14 @@
 							alert(err);
 						} else {
 							plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
-							mui.back();
+							//关闭页面
+							var curr = plus.webview.currentWebview();
+							var youjiPage = plus.webview.getWebviewById('youji_new');
+							var selectPage=plus.webview.getWebviewById('youji_new_selectweibo');
+							plus.webview.close(youjiPage);
+							plus.webview.close(selectPage);
+							plus.webview.close(curr);
+							//mui.back();
 						}
 					});
 				}, 500);

@@ -19,7 +19,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a id="search" class="mui-icon mui-icon-search mui-pull-left" style="color: #999;"></a>
+			<a id="search" class="mui-icon mui-icon-search mui-pull-left" style="color: #999;display: none;"></a>
 			<h1 id="title" class="mui-title">首页</h1>
 			<a id="newweibo" class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
 		</header>
@@ -155,7 +155,7 @@
 					}, {
 						title: '从相册选择'
 					}, {
-						title: '发布游记'
+						title: '一键发布游记'
 					}
 					//				{
 					//					title: '摄像'
@@ -194,12 +194,22 @@
 							});
 							break;
 						case 3:
+//							mui.openWindow({
+//								url: "view/article/youji_new.html",
+//								id: "youji_new",
+//								show: {
+//									aniShow: 'slide-in-right',
+//									duration: 100
+//								}
+//							});
+
 							mui.openWindow({
-								url: "view/article/youji_new.html",
-								id: "youji_new",
+								url: "view/article/youji_new_selectweibo.html",
+								id: "youji_new_selectweibo",
+								createNew: true,
 								show: {
 									aniShow: 'slide-in-right',
-									duration: 100
+									duration: 200
 								}
 							});
 							break;
@@ -229,16 +239,16 @@
 				for(var i in filesArr) {
 					var imgpath = filesArr[i];
 					commonUtil.compressImage(imgpath, function(zip) {
-						if((zip.size/1024)>1024){
+						if((zip.size / 1024) > 1024) {
 							//如果大于1M，继续压缩
-							console.log('sssss---'+zip.size);
+							console.log('sssss---' + zip.size);
 							commonUtil.compressImage(zip.target, function(zip2) {
-								console.log('sssss222---'+zip2.size);
+								console.log('sssss222---' + zip2.size);
 							});
-						}else{
+						} else {
 							newarr.push(zip.target);
 						}
-						console.log('fdfd---'+zip.size);
+						console.log('fdfd---' + zip.size);
 						if(newarr.length == filesArr.length) {
 							//所有图片都压缩完成
 							mui.openWindow({

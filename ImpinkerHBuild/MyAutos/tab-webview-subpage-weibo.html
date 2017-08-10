@@ -94,6 +94,8 @@
 		<script type="text/javascript" src="js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript" src="js/commonUtil.js" ></script>
 		<script>
 			mui.init({
 				swipeBack: false,
@@ -223,7 +225,7 @@
 				contentdiv.appendChild(imgdiv);
 				var footdiv = document.createElement('div');
 				footdiv.className = 'mui-card-footer';
-				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart"><em>' + item.VoteCount + '</em></span>' +
+				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart" weiboid=' + item.Id + '><em>' + item.VoteCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '><em>' + item.CommentCount + '</em></span>' +
 					'<span class="mui-icon mui-icon-map" weiboid=' + item.Id + '></span>';
 				li.appendChild(headdiv);
@@ -239,7 +241,7 @@
 					url: "view/map/lbs.html",
 					id: "lbs",
 					show: {
-						aniShow: 'slide-in-left',
+						aniShow: 'slide-in-right',
 						duration: 200
 					},
 					extras:{

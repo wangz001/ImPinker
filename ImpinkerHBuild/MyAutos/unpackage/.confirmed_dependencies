@@ -14,7 +14,9 @@
 			"images/logo.png",
 			"js/mui.min.js",
 			"images/login-1.png",
-			"js/jquery.js"
+			"js/jquery.js",
+			"js/app.js",
+			"js/commonUtil.js"
 		],
 		"refer": [
 			"view/weibo/weibo_comment.html",
@@ -36,7 +38,9 @@
 			"tab-webview-subpage-setting.html",
 			"tab-webview-subpage-article.html",
 			"view/weibo/weibo_new.html",
-			"view/article/youji_new.html"
+			"view/article/youji_new.html",
+			"view/article/youji_new_selectweibo.html",
+			"view/search/search.html"
 		]
 	},
 	"tab-webview-subpage-article.html": {
@@ -57,7 +61,10 @@
 	"tab-webview-subpage-setting.html": {
 		"refer": [
 			"view/article/youji_my.html",
-			"view/weibo/weibo_my.html"
+			"view/weibo/weibo_my.html",
+			"view/setting/feedback.html",
+			"view/about.html",
+			"view/setting/setting.html"
 		]
 	},
 	"view/article/youji_my.html": {
@@ -186,7 +193,50 @@
 			"css/mui.min.css",
 			"js/mui.previewimage.js",
 			"css/imageviewer.css",
-			"css/weibo.css"
+			"css/weibo.css",
+			"js/app.js",
+			"js/commonUtil.js",
+			"js/jquery.js"
+		],
+		"refer": [
+			"view/article/youji_new.html"
+		]
+	},
+	"view/search/search.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"view/setting/feedback.html": {
+		"resources": [
+			"css/feedback.css",
+			"js/setting/feedback.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"view/setting/setting.html": {
+		"resources": [
+			"js/mui.js",
+			"css/setting/setting.css",
+			"css/mui.css",
+			"js/mui.view.js"
+		],
+		"refer": [
+			"view/setting/setting-account.html"
+		]
+	},
+	"view/about.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"view/setting/setting-account.html": {
+		"resources": [
+			"js/mui.zoom.js",
+			"css/mui.min.css"
 		]
 	}
 }

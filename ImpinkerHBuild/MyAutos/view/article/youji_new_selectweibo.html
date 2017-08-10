@@ -58,7 +58,12 @@
 							contentrefresh: '正在加载...',
 							callback: pullupRefresh
 						}
-					}
+					},
+					preloadPages: [{
+						url: "youji_new.html",
+						id: "youji_new"
+						
+					}],
 
 				});
 
@@ -80,9 +85,9 @@
 							id: 'youji_new',
 							url: "youji_new.html"
 						});
-						setTimeout(function() {
-							mui.back();
-						}, 500);
+//						setTimeout(function() {
+//							mui.back();
+//						}, 500);
 					}
 				});
 

@@ -285,7 +285,8 @@
 					"view/search/search.html",
 					"view/weibo/weibo_new_video.html",
 					"view/article/youji_new.html",
-					"view/article/preview.html"
+					"view/article/preview.html",
+					"view/article/youji_new_selectweibo.html"
 				],
 				"priority": 0
 			},
@@ -350,7 +351,9 @@
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
 					"js/weibo/weibo_index.js",
-					"js/jquery.js"
+					"js/jquery.js",
+					"js/app.js",
+					"js/commonUtil.js"
 				],
 				"refer": [
 					"view/map/lbs.html",

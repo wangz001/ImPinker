@@ -70,15 +70,16 @@ function getArticle(articleid) {
 	var data = {
 		articleid: articleid,
 	};
-	plus.nativeUI.showWaiting('正在加载...');
+	//plus.nativeUI.showWaiting('正在加载...');
 	commonUtil.sendRequestGet(url, data, function(data) {
-		plus.nativeUI.closeWaiting();
+		//plus.nativeUI.closeWaiting();
 		if(data.IsSuccess == 1 && data.Data != null) {
 			var articleinfo = data.Data;
 			articleItem = articleinfo;
 			var contentStr = articleinfo.Content;
 			$("#articlename").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
+			console.log(articleItem.UserHeadUrl);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
 			$(".thread-info .publish-time").html(articleItem.CreateTime);
@@ -112,6 +113,7 @@ function getArticleComment(articleid) {
 }
 
 function initComment(item) {
+	console.log(JSON.stringify(item));
 	var template = $('script[id="comment_item"]').html();
 	var articleHtmlStr = template.temp(item);
 	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
