@@ -66,6 +66,7 @@
     <Compile Include="ArticleVoteBll.cs" />
     <Compile Include="FeedbackBll.cs" />
     <Compile Include="ImageUrlHelper.cs" />
+    <Compile Include="NotifyBll.cs" />
     <Compile Include="PhoneCheckNumBll.cs" />
     <Compile Include="SolrNetSearchBll.cs" />
     <Compile Include="SolrSearchBll.cs" />
