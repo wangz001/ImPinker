@@ -1,17 +1,155 @@
 [Header]
+2017-08-12 15:21:54,905 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不允许从数据类型 datetime 到 bit 的隐式转换。请使用 CONVERT 函数来运行此查询。
+   在 DBUtility.DbHelperSQL.ExecuteScalar(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 488
+   在 ImDal.NotifyDal.Add(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 38
+   在 ImBLL.NotifyBll.NewNotify(NotifyTypeEnum notigyType, Int32 targetId, TargetTypeEnum targetType, ActionEnum action, Int32 senderId, String content) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 44
+   在 ImBLL.WeiBoVoteBll.AddWeiBoVote(Int64 weiboId, Int32 userId) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoVoteBll.cs:行号 42
+   在 ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(WeiBoVoteViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoVoteController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:e9f3c421-27e8-49b9-8dea-27f898fe4d3f
+Error Number:257,State:3,Class:16
 [Footer]
 [Header]
-2017-08-02 16:28:23,260 [101] ERROR WebLogger [(null)] - 
+2017-08-12 15:26:10,506 [10] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://api.impinker.com/api/weibo/GetMyWeiBoList?pageindex=1&pagesize=10
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不允许从数据类型 datetime 到 bit 的隐式转换。请使用 CONVERT 函数来运行此查询。
+   在 DBUtility.DbHelperSQL.ExecuteScalar(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 488
+   在 ImDal.NotifyDal.Add(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 38
+   在 ImBLL.NotifyBll.NewNotify(NotifyTypeEnum notigyType, Int32 targetId, TargetTypeEnum targetType, ActionEnum action, Int32 senderId, String content) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 44
+   在 ImBLL.WeiBoVoteBll.AddWeiBoVote(Int64 weiboId, Int32 userId) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoVoteBll.cs:行号 42
+   在 ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(WeiBoVoteViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoVoteController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:1697436b-be1b-4be4-8748-396c6b8b25b0
+Error Number:257,State:3,Class:16
+[Footer]
+[Header]
+2017-08-12 15:28:39,524 [18] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
 Referer:
 System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
-   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
-   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 44
-   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
    在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
    在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
    在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+2017-08-12 15:29:53,055 [6] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不允许从数据类型 datetime 到 bit 的隐式转换。请使用 CONVERT 函数来运行此查询。
+   在 DBUtility.DbHelperSQL.ExecuteScalar(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 488
+   在 ImDal.NotifyDal.Add(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 38
+   在 ImBLL.NotifyBll.NewNotify(NotifyTypeEnum notigyType, Int32 targetId, TargetTypeEnum targetType, ActionEnum action, Int32 senderId, String content) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 44
+   在 ImBLL.WeiBoVoteBll.AddWeiBoVote(Int64 weiboId, Int32 userId) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoVoteBll.cs:行号 42
+   在 ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(WeiBoVoteViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoVoteController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:1e9b29e5-cb0c-4c46-a12f-666518978834
+Error Number:257,State:3,Class:16
+[Footer]
+[Header]
+2017-08-12 15:30:28,153 [18] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不允许从数据类型 datetime 到 bit 的隐式转换。请使用 CONVERT 函数来运行此查询。
+   在 DBUtility.DbHelperSQL.ExecuteScalar(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 488
+   在 ImDal.NotifyDal.Add(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 38
+   在 ImBLL.NotifyBll.NewNotify(NotifyTypeEnum notigyType, Int32 targetId, TargetTypeEnum targetType, ActionEnum action, Int32 senderId, String content) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 44
+   在 ImBLL.WeiBoVoteBll.AddWeiBoVote(Int64 weiboId, Int32 userId) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoVoteBll.cs:行号 42
+   在 ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(WeiBoVoteViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoVoteController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:935fa946-ed2a-4cb0-a07c-56bbf115841b
+Error Number:257,State:3,Class:16
+[Footer]
+[Header]
+2017-08-12 15:32:59,692 [8] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 不允许从数据类型 datetime 到 bit 的隐式转换。请使用 CONVERT 函数来运行此查询。
+   在 DBUtility.DbHelperSQL.ExecuteScalar(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 488
+   在 ImDal.NotifyDal.Add(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 38
+   在 ImBLL.NotifyBll.NewNotify(NotifyTypeEnum notigyType, Int32 targetId, TargetTypeEnum targetType, ActionEnum action, Int32 senderId, String content) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 44
+   在 ImBLL.WeiBoVoteBll.AddWeiBoVote(Int64 weiboId, Int32 userId) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoVoteBll.cs:行号 42
+   在 ImpinkerApi.Controllers.WeiBoVoteController.NewWeiBoVote(WeiBoVoteViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoVoteController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:184ad6c0-170d-409c-abf4-8cfad6e0e137
+Error Number:257,State:3,Class:16
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+2017-08-12 21:07:07,080 [15] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/GetNewNotifyCount
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+2017-08-12 23:07:11,370 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibovote/newweibovote
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+2017-08-12 23:49:17,783 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/GetNewNotifyList
+Referer:
+System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ImDal.NotifyDal.DsToList(DataSet ds) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 138
+   在 ImDal.NotifyDal.GetNotifyList(Int32 userid, NotifyTypeEnum notifyType, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 92
+   在 ImBLL.NotifyBll.GetNotifyList(Int32 userid, NotifyTypeEnum notifyTypeEnum, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 68
+   在 ImpinkerApi.Controllers.NotifyController.GetNewNotifyList() 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\NotifyController.cs:行号 52
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2017-08-12 23:51:43,160 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/GetNewNotifyList
+Referer:
+System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 ImDal.NotifyDal.DsToList(DataSet ds) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 138
+   在 ImDal.NotifyDal.GetNotifyList(Int32 userid, NotifyTypeEnum notifyType, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 92
+   在 ImBLL.NotifyBll.GetNotifyList(Int32 userid, NotifyTypeEnum notifyTypeEnum, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 68
+   在 ImpinkerApi.Controllers.NotifyController.GetNewNotifyList() 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\NotifyController.cs:行号 52
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
 [Footer]
 [Header]
 [Footer]

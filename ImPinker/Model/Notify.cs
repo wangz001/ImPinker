@@ -5,7 +5,7 @@ namespace ImModel
 {
     public class Notify
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 消息的内容
         /// </summary>
@@ -41,11 +41,11 @@ namespace ImModel
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CrerateTime { get; set; }
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
-        public DateTime UpDateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
     /// <summary>
     /// 通知实体枚举

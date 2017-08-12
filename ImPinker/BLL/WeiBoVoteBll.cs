@@ -1,5 +1,6 @@
 ﻿using ImDal;
 using ImModel;
+using ImModel.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ImBLL
     public class WeiBoVoteBll
     {
         WeiBoVoteDal _weiboVoteDal = new WeiBoVoteDal();
+        NotifyBll _notifyBll = new NotifyBll();
         /// <summary>
         /// 添加赞记录
         /// </summary>
@@ -36,6 +38,8 @@ namespace ImBLL
             else
             {
                 flag = _weiboVoteDal.Add(model);
+                //添加通知
+                var notifyflag=_notifyBll.NewNotify(NotifyTypeEnum.Remind, (int)weiboId, TargetTypeEnum.Weibo, ActionEnum.Vote, userId, "赞了微博");
             }
             return flag;
         }
