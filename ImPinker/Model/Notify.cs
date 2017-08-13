@@ -1,5 +1,6 @@
 ﻿using System;
 using ImModel.Enum;
+using System.ComponentModel;
 
 namespace ImModel
 {
@@ -55,10 +56,12 @@ namespace ImModel
         /// <summary>
         /// 文章
         /// </summary>
+        [Description("文章")]
         Article = 1,
         /// <summary>
         /// 微博
         /// </summary>
+        [Description("微博")]
         Weibo = 2
     }
     /// <summary>
@@ -69,18 +72,22 @@ namespace ImModel
         /// <summary>
         /// 评论
         /// </summary>
+        [Description("评论")]
         Comment = 1,
         /// <summary>
         /// 点赞
         /// </summary>
+        [Description("点赞")]
         Vote = 2,
         /// <summary>
         /// 收藏
         /// </summary>
+        [Description("收藏")]
         Collect = 3,
         /// <summary>
         /// 回复评论
         /// </summary>
+        [Description("回复评论")]
         ReComment = 4
     }
 }

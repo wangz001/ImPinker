@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">微博</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="images/logo.png">
+					<div class="mui-media-body">
+						小Mf
+						<p>发表于 2016-06-30 15:30</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<p>的空间疯狂的健康</p>
+					<div class="media-pic-list">
+						<ul>
+							<li>
+								<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
+							</li>
+							<li>
+								<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="mui-card-footer">
+					<span class="mui-icon mui-icon-location"><em>20</em></span>
+					<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+					<span class="mui-icon mui-icon-compose"></span>
+				</div>
+			</div>
+			
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/template" id='comment_item'>
+			<dl class="comment-list hot" commentid="@comment.Id">
+				<dt>
+                        <i class="headpic">
+                            <img src="$HeadImage$">
+                        </i>
+                        <em class="userinfo">
+                            $UserName$
+                            $CreateTime$
+                        </em>
+                        <em class="commentvote">
+                            <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
+                            <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
+                        </em>
+                    </dt>
+				<dd>
+					<p>
+						$ContentText$
+					</p>
+				</dd>
+			</dl>
+		</script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var weiboid = self.weiboid;
+				getCommentLists(weiboid);
+			});
+
+			function getCommentLists(weiboId) {
+				var url = 'http://api.myautos.cn/api/WeiBoVote/GetWeiboCommentList';
+				console.log("11--" + weiboId)
+				var data = {
+					weiboid: weiboId,
+					pagesize: 10,
+					page: 1
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					console.log(JSON.stringify(data))
+					if(data.IsSuccess == 1 && data.Data != null) {
+
+						$("#comment").html("");
+						var list = data.Data;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initComment(item);
+						}
+					}
+				});
+			}
+
+			function initComment(item) {
+				var template = $('script[id="comment_item"]').html();
+				var articleHtmlStr = template.temp(item);
+				if(item.ToCommentId > 0 && item.ToCommentItemVm != null) {
+					var toTemplate = $('script[id="comment_item_to"]').html();
+					var htmlTo = toTemplate.temp(item.ToCommentItemVm);
+					articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
+				}
+				$("#comment").append(articleHtmlStr);
+			}
+		</script>
+	</body>
+
+</html>

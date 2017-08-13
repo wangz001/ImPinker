@@ -1,4 +1,5 @@
-﻿using ImDal;
+﻿using Common.Utils;
+using ImDal;
 using ImModel;
 using ImModel.Enum;
 using ImModel.ViewModel;
@@ -15,6 +16,7 @@ namespace ImBLL
         ArticleBll _articleBll = new ArticleBll();
         WeiBoBll _weiboBll = new WeiBoBll();
         NotifyDal _notifyDal = new NotifyDal();
+        UserBll _userBll = new UserBll();
 
         public bool NewNotify(NotifyTypeEnum notigyType, int targetId, TargetTypeEnum targetType, ActionEnum action,int senderId,string content)
         {
@@ -54,8 +56,7 @@ namespace ImBLL
         public int GetNewNotifyCount(int userid)
         {
             int count = _notifyDal.GetNotifyCount(userid, false);
-
-            return 0;
+            return count;
         }
         /// <summary>
         /// 获取用户通知列表
@@ -63,12 +64,49 @@ namespace ImBLL
         /// <param name="p1"></param>
         /// <param name="p2"></param>
         /// <returns></returns>
-        public List<Notify> GetNotifyList(int userid, NotifyTypeEnum notifyTypeEnum,bool isRead)
+        public List<NotifyVm> GetNotifyList(int userid, NotifyTypeEnum notifyTypeEnum,bool isRead)
         {
+            var vmList = new List<NotifyVm>();
             List<Notify> notifylist = _notifyDal.GetNotifyList(userid,notifyTypeEnum, isRead);
-
-
-            return notifylist;
+            if (notifylist != null && notifylist.Count > 0)
+            {
+                foreach (var notify in notifylist)
+                {
+                    var vm = new NotifyVm
+                    {
+                        Id = notify.Id,
+                        NotifyType = notify.NotifyType,
+                        ContentStr = notify.ContentStr,
+                        Target = notify.Target,
+                        TargetType = notify.TargetType,
+                        Action = notify.Action,
+                        Sender = notify.Sender,
+                        Receiver = notify.Receiver,
+                        IsRead = notify.IsRead,
+                        CreateTime = notify.CreateTime,
+                        UpdateTime = notify.UpdateTime
+                    };
+                    var sender = _userBll.GetModelByCache(vm.Sender);
+                    vm.SenderName = string.IsNullOrEmpty(sender.ShowName) ? sender.UserName : sender.ShowName;
+                    vm.ActionName = EnumHelper.GetDescriptionFromEnumValue(typeof(ActionEnum), vm.Action);
+                    vm.TargetTypeName = EnumHelper.GetDescriptionFromEnumValue(typeof(TargetTypeEnum), vm.TargetType);
+                    var targetName = "";
+                    switch (vm.TargetType)
+                    {
+                        case TargetTypeEnum.Article:
+                            var article = _articleBll.GetModelByCache(vm.Target);
+                            targetName = article.ArticleName;
+                            break;
+                        case TargetTypeEnum.Weibo:
+                            var weibo = _weiboBll.GetById(vm.Target);
+                            targetName = weibo.Description;
+                            break;
+                    }
+                    vm.TargetName = targetName;
+                    vmList.Add(vm);
+                }
+            }
+            return vmList;
         }
     }
 }

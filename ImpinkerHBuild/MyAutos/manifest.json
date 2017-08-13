@@ -443,13 +443,18 @@
 					"css/mui.min.css",
 					"view/setting/setting.html",
 					"js/mui.min.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/app.js",
+					"js/commonUtil.js",
+					"js/jquery.js"
 				],
 				"refer": [
 					"view/article/youji_my.html",
 					"view/weibo/weibo_my.html",
 					"view/setting/feedback.html",
-					"view/about.html"
+					"view/about.html",
+					"login.html",
+					"view/setting/setting-notify.html"
 				],
 				"priority": 0
 			},
@@ -676,6 +681,33 @@
 				"refer": [
 					"login.html"
 				],
+				"priority": 0
+			},
+			"view/setting/setting-notify.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/app.js",
+					"js/mui.min.js",
+					"js/jquery.js",
+					"js/commonUtil.js"
+				],
+				"refer": [
+					"login.html",
+					"view/weibo/weibo_preview.html"
+				],
+				"priority": 0
+			},
+			"view/weibo/weibo_preview.html": {
+				"resources": [
+					"css/mui.min.css",
+					"images/datong.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"images/login-1.png",
+					"js/jquery.js",
+					"js/commonUtil.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

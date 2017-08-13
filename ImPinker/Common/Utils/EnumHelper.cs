@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Common.Utils
 {
@@ -55,5 +56,30 @@ namespace Common.Utils
 
 			return false;
 		}
+        /// <summary>
+        /// 获取枚举的描述
+        /// </summary>
+        /// <param name="enumType"></param>
+        /// <param name="enumValue"></param>
+        /// <returns></returns>
+        public static string GetDescriptionFromEnumValue(Type enumType, object enumValue)
+        {
+            try
+            {
+                object o = Enum.Parse(enumType, enumValue.ToString());
+
+                string name = o.ToString();
+                DescriptionAttribute[] customAttributes = (DescriptionAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if ((customAttributes != null) && (customAttributes.Length == 1))
+                {
+                    return customAttributes[0].Description;
+                }
+                return name;
+            }
+            catch
+            {
+                return "未知";
+            }
+        }
 	}
 }
