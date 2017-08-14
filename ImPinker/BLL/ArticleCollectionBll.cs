@@ -3,15 +3,12 @@ using ImModel;
 using ImModel.Enum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImBLL
 {
     public class ArticleCollectionBll
     {
-        ArticleCollectionDal dal = new ArticleCollectionDal();
+        readonly ArticleCollectionDal _dal = new ArticleCollectionDal();
         /// <summary>
         /// 添加收藏
         /// </summary>
@@ -20,14 +17,14 @@ namespace ImBLL
         /// <returns></returns>
         public bool AddCollect(long articleId,int userid)
         {
-            var model = dal.GetModel(articleId, userid);
+            var model = _dal.GetModel(articleId, userid);
             if (model!=null)
             {//如果是取消收藏，重新修改状态为收藏
                 if (model.State == ArticleCollectionStateEnum.UnCollect)
                 {
                     model.State = ArticleCollectionStateEnum.Collect;
                     model.UpdateTime = DateTime.Now;
-                    bool flag = dal.UpdateCollect(model);
+                    bool flag = _dal.UpdateCollect(model);
                     return flag;
                 }
             }
@@ -41,7 +38,7 @@ namespace ImBLL
                     CreateTime = DateTime.Now,
                     UpdateTime = DateTime.Now
                 };
-                return dal.AddCollect(newModel);
+                return _dal.AddCollect(newModel);
             }
             return false;
         }
@@ -53,25 +50,29 @@ namespace ImBLL
         /// <returns></returns>
         public bool RemoveCollect(long articleId, int userid)
         {
-            var model = dal.GetModel(articleId, userid);
+            var model = _dal.GetModel(articleId, userid);
             if (model!=null)
             {
                 model.State = ArticleCollectionStateEnum.UnCollect;
                 model.UpdateTime = DateTime.Now;
-                bool flag = dal.UpdateCollect(model);
-                return true;
+                bool flag = _dal.UpdateCollect(model);
+                return flag;
             }
             return false;
         }
+
         /// <summary>
         /// 获取个人的收藏
         /// </summary>
-        /// <param name="userid"></param>
+        /// <param name="userId"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagecount"></param>
+        /// <param name="totalCount"></param>
         /// <returns></returns>
         public List<Article> GetMyListByPage(int userId,int  pageNum, int pagecount, out int totalCount)
         {
             var list = new List<Article>();//注，只返回article的部分字段
-            var dt = dal.GetMyCollectsByPage(userId,pageNum,pagecount,out totalCount);
+            var dt = _dal.GetMyCollectsByPage(userId,pageNum,pagecount,out totalCount);
             if (dt != null && dt.Rows.Count > 0)
             {
                 list = new ArticleBll().DataTableToList(dt);
