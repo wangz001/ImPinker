@@ -5,18 +5,15 @@ using ImModel.Enum;
 using ImModel.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImBLL
 {
     public class NotifyBll
     {
-        ArticleBll _articleBll = new ArticleBll();
-        WeiBoBll _weiboBll = new WeiBoBll();
-        NotifyDal _notifyDal = new NotifyDal();
-        UserBll _userBll = new UserBll();
+        readonly ArticleBll _articleBll = new ArticleBll();
+        readonly WeiBoBll _weiboBll = new WeiBoBll();
+        readonly NotifyDal _notifyDal = new NotifyDal();
+        readonly UserBll _userBll = new UserBll();
 
         public bool NewNotify(NotifyTypeEnum notigyType, int targetId, TargetTypeEnum targetType, ActionEnum action,int senderId,string content)
         {
@@ -58,11 +55,13 @@ namespace ImBLL
             int count = _notifyDal.GetNotifyCount(userid, false);
             return count;
         }
+
         /// <summary>
         /// 获取用户通知列表
         /// </summary>
-        /// <param name="p1"></param>
-        /// <param name="p2"></param>
+        /// <param name="userid"></param>
+        /// <param name="notifyTypeEnum"></param>
+        /// <param name="isRead"></param>
         /// <returns></returns>
         public List<NotifyVm> GetNotifyList(int userid, NotifyTypeEnum notifyTypeEnum,bool isRead)
         {

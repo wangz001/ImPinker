@@ -2,7 +2,9 @@
 using System.Linq;
 using ImDal;
 using ImModel;
+using ImModel.Enum;
 using ImModel.ViewModel;
+using SolrNet.Utils;
 
 namespace ImBLL
 {
@@ -10,9 +12,17 @@ namespace ImBLL
     {
         private readonly ArticleCommentDal _dal=new ArticleCommentDal();
         private readonly UserBll _userBll=new UserBll();
+        readonly NotifyBll _notifyBll = new NotifyBll();
         public bool Add(ArticleComment model)
         {
-            return _dal.Add(model);
+            var flag= _dal.Add(model);
+            if (!flag)
+            {
+                return false;
+            }
+            //添加通知
+            flag = _notifyBll.NewNotify(NotifyTypeEnum.Remind, (int)model.ArticleId, TargetTypeEnum.Article, ActionEnum.Comment, model.UserId, model.Content);
+            return flag;
         }
         /// <summary>
         /// 分页获取文章评论

@@ -12,6 +12,7 @@ namespace ImpinkerApi.Controllers
     public class ArticleVoteController : BaseApiController
     {
         readonly ArticleCommentBll _articleCommentBll = new ArticleCommentBll();
+        readonly ArticleVoteBll _articleVoteBll = new ArticleVoteBll();
 
         #region 文章评论
         /// <summary>
@@ -23,14 +24,14 @@ namespace ImpinkerApi.Controllers
         [TokenCheck]
         public HttpResponseMessage NewArticleComment([FromBody]NewArticleCommentVm vm)
         {
-            if (string.IsNullOrEmpty(vm.CommentStr)||vm.ArticleId==0)
+            if (string.IsNullOrEmpty(vm.CommentStr) || vm.ArticleId == 0)
             {
                 return GetJson(new JsonResultViewModel
                 {
                     IsSuccess = 0,
                     Data = null,
                     Description = "评论内容不能为空"
-                }); 
+                });
             }
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
             var model = new ArticleComment
@@ -63,7 +64,7 @@ namespace ImpinkerApi.Controllers
 
         #region 获取文章评论
         [HttpGet]
-        public HttpResponseMessage GetArticleComments(long articleid,int pagenum,int pagesize)
+        public HttpResponseMessage GetArticleComments(long articleid, int pagenum, int pagesize)
         {
             int totalCount;
             var commentLists = _articleCommentBll.GetCommentsWithToComments(articleid, pagenum, pagesize, out totalCount);
@@ -76,5 +77,26 @@ namespace ImpinkerApi.Controllers
         }
         #endregion
 
+        #region 文章点赞
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage NewArticleVote(int articleid)
+        {
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            var voteModel = new ArticleVote
+            {
+                ArticleId = articleid,
+                UserId = userinfo.Id
+            };
+            var flag = _articleVoteBll.AddVote(voteModel);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = flag? 1:0,
+                Data = null,
+                Description = "点赞"
+            });
+        }
+
+        #endregion
     }
 }

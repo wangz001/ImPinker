@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ImBLL;
 using ImpinkerApi.Common;
 using System.Net.Http;
@@ -14,7 +10,7 @@ namespace ImpinkerApi.Controllers
 {
     public class NotifyController : BaseApiController
     {
-        NotifyBll _notifyBll=new NotifyBll();
+        readonly NotifyBll _notifyBll=new NotifyBll();
         //
         // GET: /Notify/
 

@@ -3,6 +3,7 @@ using ImModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ImModel.Enum;
 using ImModel.ViewModel;
 
 namespace ImBLL
@@ -11,6 +12,7 @@ namespace ImBLL
     {
         readonly WeiBoCommentDal _weiboCommentDal = new WeiBoCommentDal();
         private readonly UserBll _userBll = new UserBll();
+        readonly NotifyBll _notifyBll = new NotifyBll();
         /// <summary>
         /// 添加评论
         /// </summary>
@@ -30,8 +32,14 @@ namespace ImBLL
                 State = 1,
                 CreateTime = DateTime.Now
             };
-            var falg = _weiboCommentDal.AddComment(model);
-            return falg;
+            var flag = _weiboCommentDal.AddComment(model);
+            if (!flag)
+            {
+                return false;
+            }
+            //添加通知
+            flag = _notifyBll.NewNotify(NotifyTypeEnum.Remind, (int)weiboId, TargetTypeEnum.Weibo, ActionEnum.Comment, userid, commentStr);
+            return flag;
         }
         /// <summary>
         /// 获取微博评论列表
