@@ -1,14 +1,16 @@
 //评论
-$('.mui-icon-compose').bind('click',function(){
+$('.mui-icon-compose').bind('click', function() {
 	showComment();
 });
-function showComment(){
+
+function showComment() {
 	$(".mui-bar-footer a").hide();
 	$('#composeText').show();
 	$('#composeText').focus();
 	$('#sendComposs').show();
 }
-function hideComment(){
+
+function hideComment() {
 	var txt = $("#composeText").val();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
@@ -49,7 +51,9 @@ function SendComposs(txtStr) {
 		if(data.IsSuccess == 1) {
 			getArticleComment(articleItem.Id);
 			mui.toast("评论成功！");
-			$("html,body").animate({scrollTop: $("#comment").offset().top}, 100);
+			$("html,body").animate({
+				scrollTop: $("#comment").offset().top
+			}, 100);
 		} else {
 			console.log("评论失败。" + data.Description);
 		}
@@ -83,12 +87,11 @@ function getArticle(articleid) {
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
 			$(".thread-info .publish-time").html(articleItem.CreateTime);
-			setTimeout(function(){
+			setTimeout(function() {
 				$(".zhezhaoDiv").hide();
-			$("#mui-progressbar").hide();
-			},500)
-			
-			
+				$("#mui-progressbar").hide();
+			}, 500)
+
 		}
 	});
 }
@@ -113,7 +116,7 @@ function getArticleComment(articleid) {
 }
 
 function initComment(item) {
-	console.log(JSON.stringify(item));
+	
 	var template = $('script[id="comment_item"]').html();
 	var articleHtmlStr = template.temp(item);
 	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
@@ -123,3 +126,19 @@ function initComment(item) {
 	}
 	$("#comment").append(articleHtmlStr);
 }
+
+///点赞
+$('#vote').bind('click', function() {
+	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleVote";
+	var data = {
+		articleid: articleItem.Id
+	}
+	commonUtil.sendRequestWithToken(url, data, true, function(data) {
+		console.log(JSON.stringify(data));
+		if(data.IsSuccess == 1 ) {
+			mui.toast("谢谢支持~");
+		}
+		$('#vote').removeClass("mui-icon-extra-heart");
+		$('#vote').addClass("mui-icon-extra-heart-filled");
+	});
+});

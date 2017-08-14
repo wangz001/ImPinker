@@ -261,7 +261,8 @@
 		],
 		"refer": [
 			"login.html",
-			"view/weibo/weibo_preview.html"
+			"view/weibo/weibo_preview.html",
+			"view/article/preview.html"
 		]
 	},
 	"view/weibo/weibo_preview.html": {
@@ -272,7 +273,11 @@
 			"js/mui.min.js",
 			"images/login-1.png",
 			"js/jquery.js",
-			"js/commonUtil.js"
+			"js/commonUtil.js",
+			"images/60x60.gif",
+			"css/imageviewer.css",
+			"css/weibo.css",
+			"css/weibo/comment.css"
 		]
 	}
 }

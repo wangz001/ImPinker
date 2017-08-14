@@ -6,6 +6,12 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/weibo/comment.css" />
+		<style type="text/css">
+
+		</style>
 	</head>
 
 	<body>
@@ -13,7 +19,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">微博</h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content" id="content">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
 					<img src="images/logo.png">
@@ -43,6 +49,9 @@
 				</div>
 			</div>
 			
+		</div>
+		<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
+				<p>暂无评论</p>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
@@ -75,8 +84,56 @@
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var weiboid = self.weiboid;
+				getWeibo(weiboid);
 				getCommentLists(weiboid);
 			});
+
+			function getWeibo(weiboid) {
+				var url = 'http://api.myautos.cn/api/WeiBo/GetWeiBoById';
+				console.log("11--" + weiboid)
+				var data = {
+					weiboid: weiboid
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					console.log(JSON.stringify(data))
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var img_1200style = 'style/weibo_1200';
+						var img_600style = 'style/weibo_600';
+						var img_24style = 'style/weibo_24_16';
+						var img_36style = 'style/weibo_36_24';
+						var table = document.body.querySelector('#content');
+						var item=data.Data;
+						var li = document.createElement('div');
+						li.className = 'mui-card';
+						var contentdiv = document.createElement("div");
+						contentdiv.className = 'mui-card-content';
+						if(item.Description != null && item.Description.length > 0) {
+							contentdiv.innerHTML = '<p>' + item.Description + '</p>';
+						}
+						var imgs = item.ContentValue.split(',');
+						var imgdiv = document.createElement("div");
+						imgdiv.className = 'media-pic-list';
+
+						var ul = document.createElement("ul");
+						var imgHtmlStr = "";
+						var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
+						for(var i = 0; i < imgs.length; i++) {
+							imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+						}
+						ul.innerHTML = imgHtmlStr;
+						imgdiv.appendChild(ul);
+
+						contentdiv.appendChild(imgdiv);
+						var footdiv = document.createElement('div');
+						footdiv.className = 'mui-card-footer';
+						footdiv.innerHTML = '' +
+							'<span class="mui-icon mui-icon-map" ><em>桂林黄果树</em></span>';
+						li.appendChild(contentdiv);
+						//li.appendChild(footdiv);
+						table.appendChild(li);
+					}
+				});
+			}
 
 			function getCommentLists(weiboId) {
 				var url = 'http://api.myautos.cn/api/WeiBoVote/GetWeiboCommentList';
@@ -89,7 +146,6 @@
 				commonUtil.sendRequestGet(url, data, function(data) {
 					console.log(JSON.stringify(data))
 					if(data.IsSuccess == 1 && data.Data != null) {
-
 						$("#comment").html("");
 						var list = data.Data;
 						for(var i = 0; i < list.length; i++) {

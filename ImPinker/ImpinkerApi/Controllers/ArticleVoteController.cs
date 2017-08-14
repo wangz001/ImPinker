@@ -78,14 +78,14 @@ namespace ImpinkerApi.Controllers
         #endregion
 
         #region 文章点赞
-        [HttpGet]
+        [HttpPost]
         [TokenCheck]
-        public HttpResponseMessage NewArticleVote(int articleid)
+        public HttpResponseMessage NewArticleVote([FromBody]NewArticleCommentVm vm)
         {
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
             var voteModel = new ArticleVote
             {
-                ArticleId = articleid,
+                ArticleId = vm.ArticleId,
                 UserId = userinfo.Id
             };
             var flag = _articleVoteBll.AddVote(voteModel);

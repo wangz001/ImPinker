@@ -60,7 +60,6 @@
 						var template_notifyitem = $('script[id="notifyitem"]').html();
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
-							console.log(JSON.stringify(item));
 							var tempStr = template_notifyitem.temp(item);
 							$("#notifylist").append(tempStr);
 						}
@@ -84,7 +83,7 @@
 						},
 						extras: {
 							articleid: targetid, //扩展参数
-							articlename: articlename
+							articlename: ""
 						}
 					});
 				}

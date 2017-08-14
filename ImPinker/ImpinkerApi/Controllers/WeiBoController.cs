@@ -271,13 +271,26 @@ namespace ImpinkerApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetWeiBoById(int weiboid)
         {
-            var item = _weiBoBll.GetById(weiboid);
+            var weiBo = _weiBoBll.GetById(weiboid);
 
+            var vm = new WeiBoListViewModel
+            {
+                Id = weiBo.Id,
+                UserId = weiBo.UserId,
+                Description = weiBo.Description,
+                ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue, 240),
+                Longitude = weiBo.Longitude,
+                Lantitude = weiBo.Lantitude,
+                Height = weiBo.Height,
+                LocationText = weiBo.LocationText,
+                PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
+                IsRePost = weiBo.IsRePost
+            };
             return GetJson(new JsonResultViewModel
             {
-                IsSuccess = item!=null? 1:0,
+                IsSuccess = vm != null ? 1 : 0,
                 Description = "ok",
-                Data = item
+                Data = vm
             });
         }
 

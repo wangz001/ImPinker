@@ -36,12 +36,12 @@ function bindVote() {
 					$(this).find("em").html(parseInt(count) - 1);
 				}
 				mui.toast("取消点赞");
-				sendVote(weiboid, false)
 			} else {
 				$(this).removeClass("mui-icon-extra-heart");
 				$(this).addClass("mui-icon-extra-heart-filled");
 				$(this).find("em").html(parseInt(count) + 1);
 				mui.toast("点赞成功！");
+				sendVote(weiboid, false)
 			}
 		});
 	}
