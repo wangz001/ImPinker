@@ -272,11 +272,13 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage GetWeiBoById(int weiboid)
         {
             var weiBo = _weiBoBll.GetById(weiboid);
-
+            var userinfo = _userBll.GetModelByCache(weiBo.UserId);
             var vm = new WeiBoListViewModel
             {
                 Id = weiBo.Id,
                 UserId = weiBo.UserId,
+                UserName=string.IsNullOrEmpty(userinfo.ShowName)? userinfo.UserName:userinfo.ShowName,
+                UserHeadImage=ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100),
                 Description = weiBo.Description,
                 ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue, 240),
                 Longitude = weiBo.Longitude,

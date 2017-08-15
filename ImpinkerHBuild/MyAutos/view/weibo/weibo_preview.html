@@ -6,11 +6,37 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<style type="text/css">
-
+			.mui-icon-extra-heart {
+				position: relative;
+				float: right;
+			}
+			
+			.mui-card-footer em {
+				font-size: 15px;
+			}
+			
+			.mui-cardlist .mui-card {
+				margin: 0 0 10px 0;
+			}
+			
+			.mui-card .mui-card-content {
+				padding: 5px 5px 5px 10px
+			}
+			
+			.mui-card .mui-card-content p {
+				margin-bottom: 0px;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 18px;
+			}
 		</style>
 	</head>
 
@@ -19,40 +45,41 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">微博</h1>
 		</header>
-		<div class="mui-content" id="content">
-			<div class="mui-card">
-				<div class="mui-card-header mui-card-media">
-					<img src="images/logo.png">
-					<div class="mui-media-body">
-						小Mf
-						<p>发表于 2016-06-30 15:30</p>
+		<div class="mui-content">
+			<div class="mui-cardlist" id="content">
+				<!--<div class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img src="images/logo.png">
+						<div class="mui-media-body">
+							小Mf
+							<p>发表于 2016-06-30 15:30</p>
+						</div>
 					</div>
-				</div>
-				<div class="mui-card-content">
-					<p>的空间疯狂的健康</p>
-					<div class="media-pic-list">
-						<ul>
-							<li>
-								<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
-							</li>
-							<li>
-								<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
-							</li>
-						</ul>
+					<div class="mui-card-content">
+						<p>的空间疯狂的健康</p>
+						<div class="media-pic-list">
+							<ul>
+								<li>
+									<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
+								</li>
+								<li>
+									<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-
-				<div class="mui-card-footer">
-					<span class="mui-icon mui-icon-location"><em>20</em></span>
-					<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-					<span class="mui-icon mui-icon-compose"></span>
-				</div>
+					<div class="mui-card-footer">
+						<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+						<span class="mui-icon mui-icon-compose"></span>
+					</div>
+				</div>-->
 			</div>
-			
-		</div>
-		<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
+			<div class="title">评论列表</div>
+			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
 				<p>暂无评论</p>
+			</div>
 		</div>
+
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
@@ -72,6 +99,24 @@
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
                     </dt>
+				<dd>
+					<p>
+						$ContentText$
+					</p>
+				</dd>
+			</dl>
+		</script>
+		<script type="text/template" id="comment_item_to">
+			<dl class="quote">
+				<dt>
+                            <i class="headpic">
+                                <img src="$HeadImage$">
+                            </i>
+                            <em class="userinfo">
+                                $UserName$
+                            $CreateTime$
+                            </em>
+                        </dt>
 				<dd>
 					<p>
 						$ContentText$
@@ -102,9 +147,13 @@
 						var img_24style = 'style/weibo_24_16';
 						var img_36style = 'style/weibo_36_24';
 						var table = document.body.querySelector('#content');
-						var item=data.Data;
+						var item = data.Data;
 						var li = document.createElement('div');
 						li.className = 'mui-card';
+						var headdiv = document.createElement("div");
+						headdiv.className = 'mui-card-header mui-card-media';
+						headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
+							item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
 						var contentdiv = document.createElement("div");
 						contentdiv.className = 'mui-card-content';
 						if(item.Description != null && item.Description.length > 0) {
@@ -126,10 +175,11 @@
 						contentdiv.appendChild(imgdiv);
 						var footdiv = document.createElement('div');
 						footdiv.className = 'mui-card-footer';
-						footdiv.innerHTML = '' +
-							'<span class="mui-icon mui-icon-map" ><em>桂林黄果树</em></span>';
+						footdiv.innerHTML = '<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>' +
+							'<span class="mui-icon mui-icon-compose"></span>';
+						li.appendChild(headdiv);
 						li.appendChild(contentdiv);
-						//li.appendChild(footdiv);
+						li.appendChild(footdiv);
 						table.appendChild(li);
 					}
 				});
