@@ -16,6 +16,7 @@ using System.Net;
 using System.IO;
 using ImModel.Enum;
 using Common.DateTimeUtil;
+using Common.Redis;
 
 namespace ImpinkerApi.Controllers
 {
@@ -288,6 +289,9 @@ namespace ImpinkerApi.Controllers
                 PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
                 IsRePost = weiBo.IsRePost
             };
+            //RedisHelper.Set<WeiBoListViewModel>("weibo_001", vm,new TimeSpan(10,10,10));
+
+            //var redisVm = RedisHelper.Get<WeiBoListViewModel>("weibo_001");
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = vm != null ? 1 : 0,
