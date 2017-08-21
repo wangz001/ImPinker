@@ -61,5 +61,9 @@ namespace ImModel.ViewModel
         /// 头像地址
         /// </summary>
         public string UserHeadUrl{get;set;}
+        /// <summary>
+        /// 时间显示
+        /// </summary>
+        public string CreateTimeStr { get; set; }
     }
 }

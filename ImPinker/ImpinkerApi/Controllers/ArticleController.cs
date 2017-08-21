@@ -14,6 +14,7 @@ using ImModel;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
+using Common.DateTimeUtil;
 
 namespace ImpinkerApi.Controllers
 {
@@ -74,6 +75,7 @@ namespace ImpinkerApi.Controllers
             {
                 foreach (var item in list)
                 {
+                    item.CreateTimeStr = TUtil.DateFormatToString(item.CreateTime);
                     item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
                 }
                 return GetJson(new JsonResultViewModel

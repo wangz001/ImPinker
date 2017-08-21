@@ -25,10 +25,17 @@
 				margin: 0 0 10px 0;
 			}
 			
+			.mui-card-header.mui-card-media img {
+				border-radius: 4px;
+			}
+			.mui-card-header .mui-media-body em {
+				font-size: 15px;
+			}
 			.mui-card .mui-card-content {
 				padding: 5px 5px 5px 10px
 			}
-			.mui-card .mui-card-content p{
+			
+			.mui-card .mui-card-content p {
 				margin-bottom: 0px;
 			}
 		</style>
@@ -38,11 +45,11 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<!--<div class="mui-card">
+					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img src="images/logo.png">
 							<div class="mui-media-body">
-								小Mf
+								<em class="mui-icon mui-icon-person">bwlang</em>
 								<p>发表于 2016-06-30 15:30</p>
 							</div>
 						</div>
@@ -85,7 +92,7 @@
 							<span class="mui-icon mui-icon-compose"></span>
 							<span class="mui-icon mui-icon-map"></span>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -94,8 +101,8 @@
 		<script type="text/javascript" src="js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
-		<script type="text/javascript" src="js/app.js" ></script>
-		<script type="text/javascript" src="js/commonUtil.js" ></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<script>
 			mui.init({
 				swipeBack: false,
@@ -198,8 +205,8 @@
 				li.className = 'mui-card';
 				var headdiv = document.createElement("div");
 				headdiv.className = 'mui-card-header mui-card-media';
-				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
-					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
+				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +'<em class="mui-icon mui-icon-person">'+
+					item.UserName + '</em><p>发表于 ' + item.PublishTime + '</p></div>';
 				var contentdiv = document.createElement("div");
 				contentdiv.className = 'mui-card-content';
 				if(item.Description != null && item.Description.length > 0) {
@@ -236,7 +243,7 @@
 
 			//地图点击事件
 			mui('.mui-scroll').on('tap', '.mui-icon-map', function() {
-				var weiboid=this.getAttribute('weiboid');
+				var weiboid = this.getAttribute('weiboid');
 				mui.openWindow({
 					url: "view/map/lbs.html",
 					id: "lbs",
@@ -244,8 +251,8 @@
 						aniShow: 'slide-in-right',
 						duration: 200
 					},
-					extras:{
-						weiboid:weiboid
+					extras: {
+						weiboid: weiboid
 					}
 				});
 			});

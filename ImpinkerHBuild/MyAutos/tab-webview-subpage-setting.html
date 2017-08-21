@@ -86,7 +86,10 @@
 			swipeBack: true //启用右滑关闭功能
 		});
 		mui.plusReady(function() {
-			getNotifyCunt();
+			setTimeout(function(){
+				//避免更新token的时候token过期
+				getNotifyCunt();
+			},10*1000);
 		});
 
 		function getNotifyCunt() {

@@ -1,0 +1,19 @@
+[Header]
+2017-08-19 17:15:04,533 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/WeiBo/GetWeiBoById?weiboid=130
+Referer:
+StackExchange.Redis.RedisServerException: ERR invalid expire time in setex
+   在 StackExchange.Redis.ConnectionMultiplexer.ExecuteSyncImpl[T](Message message, ResultProcessor`1 processor, ServerEndPoint server)
+   在 StackExchange.Redis.RedisBase.ExecuteSync[T](Message message, ResultProcessor`1 processor, ServerEndPoint server)
+   在 StackExchange.Redis.RedisDatabase.StringSet(RedisKey key, RedisValue value, Nullable`1 expiry, When when, CommandFlags flags)
+   在 Common.Redis.RedisHelper.Set[T](String key, T t, TimeSpan ts) 位置 d:\GitProject\ImPinker\ImPinker\Common\Redis\RedisHelper.cs:行号 102
+   在 ImpinkerApi.Controllers.WeiBoController.GetWeiBoById(Int32 weiboid) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 292
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

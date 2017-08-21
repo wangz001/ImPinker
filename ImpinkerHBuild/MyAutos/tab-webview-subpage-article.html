@@ -30,6 +30,12 @@
 				max-width: 74px;
 				height: 61px;
 			}
+			
+			.mui-card-header.mui-card-media {
+				display: block;
+				padding: 10px;
+				margin: 5px;
+			}
 			/*card 样式*/
 			
 			.mui-table-view .mui-card {
@@ -39,20 +45,18 @@
 				margin: 0px;
 			}
 			
-			.mui-media-body .username {
-				font-size: 12px;
-				margin-top: 0;
-				margin-bottom: 10px;
-				margin-right: 20px;
-				color: #8f8f94;
+			.userinfo em {
+				font-size: 13px;
 			}
 			
+			.mui-media-body .viewcount .mui-icon,
+			.mui-media-body .viewcount .mui-icon-extra {
+				font-size: 13px;
+			}
+			
+			.mui-card-content .viewcount,
 			.mui-media-body .viewcount {
 				float: right;
-			}
-			
-			.mui-media-body .viewcount .mui-icon,.mui-media-body .viewcount .mui-icon-extra{
-				font-size: 13px;
 			}
 			
 			.mui-card .mui-card-content-inner {
@@ -131,10 +135,12 @@
 								<div class="mui-media-body">
 									<P class="title">幸福</P>
 									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-									<p><span class="username">bwlang  </span>
+									<p class="userinfo">
+										<em class="mui-icon mui-icon-person">bwlang</em>
+										<em class="mui-icon-extra mui-icon-extra-phone">2017-07-09</em>
 										<span class="viewcount">
 										<em class="mui-icon-extra mui-icon-extra-like">10</em>
-										<em class="mui-icon mui-icon-eye">23</em>
+										<em class="mui-icon mui-icon-compose">23</em>
 									</span>
 									</p>
 								</div>
@@ -145,7 +151,13 @@
 								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(images/cbd.jpg)"></div>
 								<div class="mui-card-content">
 									<div class="mui-card-content-inner">
-										<p>Posted on January 18, 2016</p>
+										<p class="userinfo">Posted on January 18, 2016
+											<span class="viewcount">
+										<em class="mui-icon-extra mui-icon-extra-like">10</em>
+										<em class="mui-icon mui-icon-compose">23</em>
+									</span>
+										</p>
+
 										<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 									</div>
 								</div>
@@ -187,10 +199,11 @@
 				<div class="mui-media-body">
 					<P class="title">$ArticleName$</P>
 					<p class="mui-ellipsis">$Description$</p>
-					<p><span class="username">$UserName$</span>
+					<p class="userinfo"><em class="mui-icon mui-icon-person">$UserName$</em>
+						<em class="mui-icon-extra mui-icon-extra-phone">$CreateTimeStr$</em>
 						<span class="viewcount">
-						<em class="mui-icon-extra mui-icon-extra-like">$VoteCount$</em>
-						<em class="mui-icon-extra mui-icon-extra-comment">$CommentCount$</em>
+						<em class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
+						<em class="mui-icon mui-icon-compose">$CommentCount$</em>
 					</span>
 				</div>
 			</a>
@@ -219,7 +232,12 @@
 					<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
-							<p>Posted on January 18, 2016</p>
+							<p class="userinfo">
+								<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTimeStr$</em>
+								<span class="viewcount">
+									<em class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
+									<em class="mui-icon mui-icon-compose">$CommentCount$</em>
+								</span></p>
 							<p style="color: #333;">$ArticleName$</p>
 						</div>
 					</div>
@@ -293,11 +311,15 @@
 		}
 
 		function initItem(item, isPullDown) {
+			var img_600style = 'style/weibo_600';
+			var img_24style = 'style/articlecover_36_24';
 			allArticles.push(item);
 			var template = $('script[id="article_item"]').html();
 			var templateCard = $('script[id="article_item_card"]').html();
-			var articleHtmlStr
+			var articleHtmlStr;
 			if(allCount % 10 == 5) {
+				item.CoverImage = item.CoverImage.replace(img_24style, img_600style);
+				//console.log(JSON.stringify(item));
 				articleHtmlStr = templateCard.temp(item);
 			} else {
 				articleHtmlStr = template.temp(item);
