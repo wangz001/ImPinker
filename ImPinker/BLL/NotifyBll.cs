@@ -45,6 +45,17 @@ namespace ImBLL
             long id = _notifyDal.Add(notify);
             return id>0;
         }
+        /// <summary>
+        /// 根据id获取对象
+        /// </summary>
+        /// <param name="notifyId"></param>
+        /// <returns></returns>
+        public Notify GetById(int notifyId)
+        {
+            var model = _notifyDal.GetById(notifyId);
+            return model;
+        }
+
 
         /// <summary>
         /// 获取用户的提醒总数
@@ -106,6 +117,24 @@ namespace ImBLL
                 }
             }
             return vmList;
+        }
+
+        /// <summary>
+        /// 修改通知的状态
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateNotify(int notifyId,int receiverId,bool isRead)
+        {
+            var model=GetById(notifyId);
+            if (model.Receiver == receiverId)
+            {
+                model.IsRead = isRead;
+                model.UpdateTime = DateTime.Now;
+                var flag = _notifyDal.UpdateNotify(model);
+                return flag;
+            }
+            return false;
         }
     }
 }

@@ -14,27 +14,66 @@
 			<h1 id="title" class="mui-title">通知</h1>
 		</header>
 		<div class="mui-content">
-			<div class="mui-card">
-				<ul class="mui-table-view" id="notifylist">
-					<!--<li class="mui-table-view-cell">Item 1 <span class="mui-badge mui-badge-primary">14</span></li>
-					<li class="mui-table-view-cell">Item 2 <span class="mui-badge mui-badge-success">1</span></li>
-					<li class="mui-table-view-cell">Item 3 <span class="mui-badge">5</span></li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
-							<span class="mui-badge mui-badge-danger">15</span> Item 1
-						</a>
-					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
-							<span class="mui-badge mui-badge-purple">5</span> Item 2
-						</a>
-					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
-							<span class="mui-badge mui-badge-warning">5</span> Item 3
-						</a>
-					</li>-->
-				</ul>
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item" href="#item1">
+						新通知（8）
+					</a>
+					<a class="mui-control-item mui-active" href="#item2">
+						全部
+					</a>
+
+				</div>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content">
+					<ul class="mui-table-view" id="notifylist">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-warning">5</span> Item 3
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-danger">15</span> Item 1
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-purple">5</span> Item 2
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-warning">5</span> Item 3
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-warning">5</span> Item 3
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="item2" class="mui-control-content mui-active">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-danger">15</span> Item 1
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-purple">5</span> Item 2
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<span class="mui-badge mui-badge-warning">5</span> Item 3
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
@@ -53,7 +92,9 @@
 
 			function getNotify() {
 				var url = "http://api.myautos.cn/api/Notify/GetNewNotifyList";
-				var data = {};
+				var data = {
+					isread: 1
+				};
 				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var list = data.Data;
@@ -87,7 +128,7 @@
 						}
 					});
 				}
-				if(targettype==2){
+				if(targettype == 2) {
 					mui.openWindow({
 						id: targetid,
 						url: "../weibo/weibo_preview.html",

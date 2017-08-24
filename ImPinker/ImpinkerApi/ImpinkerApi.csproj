@@ -202,6 +202,7 @@
     <Compile Include="Models\ArticleVoteViewModel.cs" />
     <Compile Include="Models\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="Models\JsonResultViewModel.cs" />
+    <Compile Include="Models\NotifyViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\WeiBoCommentViewModel.cs" />
     <Compile Include="Models\WeiBoViewModels.cs" />

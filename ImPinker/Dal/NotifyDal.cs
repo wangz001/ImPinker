@@ -68,6 +68,16 @@ select Count(1) from  Notify where NotifyType in (1,2) and IsRead=@IsRead and Re
         /// <returns></returns>
         public List<Notify> GetNotifyList(int userid, ImModel.Enum.NotifyTypeEnum notifyType, bool isRead)
         {
+            List<int> isReadPara = new List<int>();
+            if (isRead)
+            {
+                isReadPara.Add(1);
+            }
+            else
+            {
+                isReadPara.Add(0);
+                isReadPara.Add(1);
+            }
             var sql = @"
 SELECT Id
       ,ContentStr
@@ -80,12 +90,12 @@ SELECT Id
       ,IsRead
       ,CreateTime
       ,UpdateTime
-  FROM Notify where IsRead=@IsRead and NotifyType=@NotifyType and Receiver=@Receiver
+  FROM Notify where IsRead in (@IsRead) and NotifyType=@NotifyType and Receiver=@Receiver order by CreateTime desc 
 ";
+            sql=sql.Replace("@IsRead",string.Join(",",isReadPara));
             SqlParameter[] parameters =
 			{
 				new SqlParameter("@Receiver", SqlDbType.Int){Value =userid },
-				new SqlParameter("@IsRead", SqlDbType.Bit,1){Value =isRead },
 				new SqlParameter("@NotifyType", SqlDbType.Int){Value =(int)notifyType }
 			};
             var ds = DbHelperSQL.Query(sql, parameters);
@@ -149,6 +159,59 @@ SELECT Id
                 }
             }
             return list;
+        }
+
+        public Notify GetById(int notifyId)
+        {
+            var sql = @"
+SELECT [Id]
+      ,[ContentStr]
+      ,[NotifyType]
+      ,[Target]
+      ,[TargetType]
+      ,[Action]
+      ,[Sender]
+      ,[Receiver]
+      ,[IsRead]
+      ,[CreateTime]
+      ,[UpdateTime]
+  FROM [dbo].[Notify] where Id=@Id
+";
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@Id", SqlDbType.Int){Value =notifyId }
+			};
+            var ds = DbHelperSQL.Query(sql, parameters);
+            var list = DsToList(ds);
+            if (list != null && list.Count > 0)
+            {
+                return list[0];
+            }
+            return null;
+        }
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateNotify(Notify model)
+        {
+            var sql = @"
+UPDATE [dbo].[Notify]
+   SET 
+      [IsRead] = @IsRead
+      ,[UpdateTime] =@UpdateTime
+ WHERE id=@id
+";
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@Id", SqlDbType.Int){Value =model.Id },
+				new SqlParameter("@IsRead", SqlDbType.Bit){Value =model.IsRead },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime }
+			};
+            var flag = DbHelperSQL.ExecuteSql(sql, parameters);
+
+            return flag>0;
         }
     }
 }
