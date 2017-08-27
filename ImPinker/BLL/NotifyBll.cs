@@ -127,7 +127,7 @@ namespace ImBLL
         public bool UpdateNotify(int notifyId,int receiverId,bool isRead)
         {
             var model=GetById(notifyId);
-            if (model.Receiver == receiverId)
+            if (model!=null&&model.Receiver == receiverId)
             {
                 model.IsRead = isRead;
                 model.UpdateTime = DateTime.Now;

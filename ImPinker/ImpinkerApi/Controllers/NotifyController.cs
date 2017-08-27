@@ -56,7 +56,7 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage UpdateNotifyState([FromBody]NotifyViewModel vm)
         {
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var flag = _notifyBll.UpdateNotify(vm.NotifyId,(int)userinfo.Id, vm.IsRead>0);
+            var flag = _notifyBll.UpdateNotify(vm.NotifyId, (int)userinfo.Id, vm.IsRead > 0);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1 : 0,

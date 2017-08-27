@@ -1,0 +1,48 @@
+[Header]
+2017-08-24 22:37:52,315 [5] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/UpdateNotifyState
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 变量名 '@IsRead' 已声明。变量名在查询批次或存储过程内部必须唯一。
+   在 DBUtility.DbHelperSQL.GetSingle(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 720
+   在 DBUtility.DbHelperSQL.Exists(String strSql, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 105
+   在 ImDal.NotifyDal.UpdateNotify(Notify model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 202
+   在 ImBLL.NotifyBll.UpdateNotify(Int32 notifyId, Int32 receiverId, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 134
+   在 ImpinkerApi.Controllers.NotifyController.UpdateNotifyState(NotifyViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\NotifyController.cs:行号 59
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:420b970d-581e-46db-a2df-2b6b9fa2b93f
+Error Number:134,State:1,Class:15
+[Footer]
+[Header]
+[Footer]
+[Header]
+2017-08-24 22:44:31,213 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/UpdateNotifyState
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+[Footer]
+[Header]
+2017-08-24 23:03:22,830 [21] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Notify/GetNewNotifyList?isread=1
+Referer:
+System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 ImDal.NotifyDal.GetNotifyList(Int32 userid, NotifyTypeEnum notifyType, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\Dal\NotifyDal.cs:行号 74
+   在 ImBLL.NotifyBll.GetNotifyList(Int32 userid, NotifyTypeEnum notifyTypeEnum, Boolean isRead) 位置 d:\GitProject\ImPinker\ImPinker\BLL\NotifyBll.cs:行号 80
+   在 ImpinkerApi.Controllers.NotifyController.GetNewNotifyList(Int32 isRead) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\NotifyController.cs:行号 41
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]
