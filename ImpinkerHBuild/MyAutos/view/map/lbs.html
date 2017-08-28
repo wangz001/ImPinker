@@ -13,18 +13,11 @@
 			#map {
 				width: 100%;
 				position: fixed;
-				z-index: 10;
-				top: 50px;
-				height: 200px;
+				top: 40px;
+				bottom: 0px;
 				line-height: 200px;
 				text-align: center;
 				background: #FFFFFF;
-			}
-			
-			.content {
-				padding-top: 2px;
-				position: relative;
-				top:250px;
 			}
 		</style>
 		<style type="text/css">
@@ -52,15 +45,18 @@
 	</head>
 
 	<body>
+
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">附近的足迹</h1>
 		</header>
-		<div id="map">
-			<p>地图加载中...</p>
-		</div>
 		<div class="content">
-			<div id="pullrefresh" class="mui-scroll-wrapper ">
+			<div id="map">
+				<p>地图加载中...</p>
+				<p>贵州省遵义市黄果树瀑布...</p>
+			</div>
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+
 				<div class="mui-scroll">
 					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
@@ -82,6 +78,22 @@
 										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
 									</li>
 								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img src="../../images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+
+						</div>
+						<div class="mui-card-content">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<img class="bigimage" src="../../images/yuantiao.jpg">
 							</div>
 						</div>
 					</div>
@@ -123,18 +135,51 @@
 						contentrefresh: '正在加载...',
 						callback: pullupRefresh
 					}
+				},
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: false, //默认为false，不监听
+					release: false //默认为false，不监听
 				}
 			});
 			mui.previewImage();
+
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var weiboid = self.weiboid;
 				console.log(weiboid);
 				getweibo(weiboid);
+
+				//var scroll = mui('.mui-scroll-wrapper').scroll();
+				//				document.querySelector('.mui-scroll-wrapper').addEventListener('scrollend', function(e) {
+				//					//console.log(scroll.y);
+				//					resizeMap(50);
+				//				});
+
 			});
 			var pageNum = 1;
 			var allCount = 0;
 			var pageSize = 30;
+
+			function getweibo(weiboid) {
+				var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
+				var data = {
+					weiboid: weiboid,
+				};
+				plus.nativeUI.showWaiting('正在加载');
+				commonUtil.sendRequestGet(url, data, function(data) {
+					plus.nativeUI.closeWaiting();
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var weiboitem = data.Data;
+						console.log(JSON.stringify(weiboitem));
+						setPoint(weiboitem.Longitude, weiboitem.Lantitude);
+					}
+				});
+			}
 
 			function pullupRefresh() {
 				mui.ajax('http://api.myautos.cn/api/WeiBo/GetWeiBoList', {
@@ -213,25 +258,20 @@
 			}
 		</script>
 		<script type="text/javascript">
-			function getweibo(weiboid) {
-				var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
-				var data = {
-					weiboid: weiboid,
-				};
-				plus.nativeUI.showWaiting('正在加载');
-				commonUtil.sendRequestGet(url, data, function(data) {
-					plus.nativeUI.closeWaiting();
-					if(data.IsSuccess == 1 && data.Data != null) {
-						var weiboitem = data.Data;
-						console.log(JSON.stringify(weiboitem));
-						setPoint(weiboitem.Longitude, weiboitem.Lantitude);
-					}
-				});
-			}
 			var em = null,
 				map = null;
+			var mapHeight = 0;
 
 			function resetPoint(lon, lan) {
+
+			}
+			// 改变地图大小
+			function resizeMap(height) {
+				if(height == 50) {
+					em.style.height = height + "%";
+					map.resize();
+					mapHeight = height;
+				}
 
 			}
 			// H5 plus事件处理
@@ -242,7 +282,9 @@
 					return
 				};
 				var point = new plus.maps.Point(lon, lan);
-				map = new plus.maps.Map("map");
+				map = new plus.maps.Map("map", {
+					position: "absolute"
+				});
 				map.centerAndZoom(point, 12);
 
 				//设置点
@@ -251,31 +293,27 @@
 				marker.setLabel("点点");
 				var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
 				marker.setBubble(bubble);
-				map.addOverlay(marker);
-				map.onstatuschanged = function(event) {
-					marker.setBubble(bubble);
-					var target = event.target; // 状态变化的地图对象(plus.maps.Map)
-					var bounds = event.bounds; // 地图的可视地理区域(plus.maps.Bounds)
-					var center = event.center; // 地图的中心点坐标(plus.maps.Point)
-					var zoom = event.zoom; // 地图的缩放级别(Number)
-					console.log(JSON.stringify(event));
-				}
+//				map.addOverlay(marker);
+//				map.onstatuschanged = function(event) {
+//					marker.setBubble(bubble);
+//					var target = event.target; // 状态变化的地图对象(plus.maps.Map)
+//					var bounds = event.bounds; // 地图的可视地理区域(plus.maps.Bounds)
+//					var center = event.center; // 地图的中心点坐标(plus.maps.Point)
+//					var zoom = event.zoom; // 地图的缩放级别(Number)
+//					//console.log(JSON.stringify(event));
+//				}
+				em.style.height = "30%";
+				map.resize();
 			}
+
 			//			if(window.plus) {
 			//				plusReady();
 			//			} else {
 			//				document.addEventListener("plusready", plusReady, false);
 			//			}
 			//			// DOMContentloaded事件处理
-			document.addEventListener("DOMContentLoaded", function() {
-				em = document.getElementById("map");
-			}, false);
-			// 设置地图的中心点
-			function setCenter() {
-				var center = new plus.maps.Point(118.123, 35.456);
-				map.setCenter(center);
-			}
-
+			
+			
 			///----------------------
 		</script>
 		<script type="text/javascript">
