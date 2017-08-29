@@ -11,10 +11,9 @@
 		<style type="text/css">
 			#map {
 				width: 100%;
-				height: 200px;
+				height: 300px;
 				position: fixed;
 				top: 40px;
-				bottom: 0px;
 				line-height: 200px;
 				text-align: center;
 				background: #FFFFFF;
@@ -30,7 +29,7 @@
 			}
 			
 			.mui-scroll {
-				margin-top: 250px;
+				margin-top: 300px;
 			}
 			
 			.mui-scroll .mui-card {
@@ -44,23 +43,27 @@
 			.mui-card .mui-card-content p {
 				margin-bottom: 0px;
 			}
+			
+			#mapSize {
+				margin-top: 5px;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">附近的足迹</h1>
-			<a id="mapSize" class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
+			<h1 class="mui-title">石景山游乐园</h1>
+			<div id="mapSize" class="mui-switch mui-switch-mini mui-active mui-pull-right">
+				<div class="mui-switch-handle"></div>
+			</div>
 		</header>
-		<div class="content">
+		<div class="mui-content">
 			<div id="map">
 				<p>地图加载中...</p>
-				<p>贵州省遵义市黄果树瀑布...</p>
 			</div>
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
-
 					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img src="../../images/logo.png">
@@ -84,23 +87,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="mui-card">
-						<div class="mui-card-header mui-card-media">
-							<img src="../../images/logo.png">
-							<div class="mui-media-body">
-								小Mf
-								<p>发表于 2016-06-30 15:30</p>
-							</div>
-
-						</div>
-						<div class="mui-card-content">
-							<p>的空间疯狂的健康</p>
-							<div class="media-pic-list">
-								<img class="bigimage" src="../../images/yuantiao.jpg">
-							</div>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>
@@ -109,15 +95,15 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript">
 			mui.init({
-				swipeBack: false,
+				swipeBack: true,
 				pullRefresh: {
 					container: '#pullrefresh',
 					down: {
-						auto: true, //可选,默认false.自动上拉加载一次
 						callback: pullupRefresh
 					},
 					up: {
 						contentrefresh: '正在加载...',
+						auto: true,
 						callback: pullupRefresh
 					}
 				}
@@ -242,23 +228,38 @@
 				map.centerAndZoom(point, 12);
 			}
 			// 改变地图大小
-			function resizeMap() {
-				if(mapHeight == 50) {
-					em.style.height = "400px";
-					mapHeight=30;
-					$(".mui-scroll").css("margin-top","450px");
-				} else {
-					em.style.height = "200px";
-					mapHeight=50;
-					$(".mui-scroll").css("margin-top","250px");
-				}
-				map.resize();
-			}
-			
+//			function resizeMap() {
+//				if(mapHeight == 50) {
+//					em.style.height = "400px";
+//					mapHeight = 30;
+//					$(".mui-scroll").css("margin-top", "450px");
+//				} else {
+//					em.style.height = "200px";
+//					mapHeight = 50;
+//					$(".mui-scroll").css("margin-top", "250px");
+//				}
+//				map.resize();
+//			}
 
-			document.getElementById("mapSize").addEventListener("tap", function() {
-				console.log("resize");
-				resizeMap(60);
+			document.getElementById("mapSize").addEventListener("toggle", function(event) {
+				if(event.detail.isActive) {
+					
+					if(em && map) {
+						console.log("你启动了开关");
+						//map.show();
+						em.style.height = "300px";
+						map.resize();
+						$(".mui-scroll").css("margin-top", "300px");
+					}
+				} else {
+					if(em && map) {
+						console.log("你关闭了开关");
+						//map.hide();
+						em.style.height = "100px";
+						map.resize();
+						$(".mui-scroll").css("margin-top", "100px");
+					}
+				}
 			});
 		</script>
 		<script type="text/javascript">
