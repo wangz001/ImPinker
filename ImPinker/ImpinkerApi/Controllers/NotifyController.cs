@@ -13,7 +13,7 @@ namespace ImpinkerApi.Controllers
         readonly NotifyBll _notifyBll=new NotifyBll();
        
         /// <summary>
-        /// 获取用户的新通知
+        /// 获取用户的新通知总数
         /// </summary>
         /// <returns></returns>
         [TokenCheck]
@@ -38,12 +38,31 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage GetNewNotifyList(int isRead)
         {
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var list = _notifyBll.GetNotifyList(userinfo.Id, NotifyTypeEnum.Remind, isRead>0);
+            var list = _notifyBll.GetNotifyList(userinfo.Id,NotifyTypeEnum.Remind,false);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = list.Count > 0 ? 1 : 0,
                 Data = list,
                 Description = "获取用户新通知列表"
+            });
+        }
+        /// <summary>
+        /// 获取所有通知
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        [TokenCheck]
+        [HttpGet]
+        public HttpResponseMessage GetAllNotifyList(int page,int pagesize)
+        {
+            var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
+            var list = _notifyBll.GetAllNotifyList(userinfo.Id, page, pagesize);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = list.Count > 0 ? 1 : 0,
+                Data = list,
+                Description = "获取所有通知列表"
             });
         }
         /// <summary>

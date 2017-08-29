@@ -66,19 +66,9 @@ select Count(1) from  Notify where NotifyType in (1,2) and IsRead=@IsRead and Re
         /// <param name="notifyType"></param>
         /// <param name="isRead"></param>
         /// <returns></returns>
-        public List<Notify> GetNotifyList(int userid, ImModel.Enum.NotifyTypeEnum notifyType, bool isRead)
+        public List<Notify> GetNotifyList(int userid, NotifyTypeEnum notifyType, bool isRead)
         {
-            List<int> isReadPara = new List<int>();
-            if (isRead)
-            {
-                isReadPara.Add(1);
-            }
-            else
-            {
-                isReadPara.Add(0);
-                isReadPara.Add(1);
-            }
-            var sql = @"
+            const string sql = @"
 SELECT Id
       ,ContentStr
       ,NotifyType
@@ -92,11 +82,49 @@ SELECT Id
       ,UpdateTime
   FROM Notify where IsRead in (@IsRead) and NotifyType=@NotifyType and Receiver=@Receiver order by CreateTime desc 
 ";
-            sql=sql.Replace("@IsRead",string.Join(",",isReadPara));
             SqlParameter[] parameters =
 			{
+				new SqlParameter("@IsRead", SqlDbType.Bit){Value =isRead },
 				new SqlParameter("@Receiver", SqlDbType.Int){Value =userid },
 				new SqlParameter("@NotifyType", SqlDbType.Int){Value =(int)notifyType }
+			};
+            var ds = DbHelperSQL.Query(sql, parameters);
+            var list = DsToList(ds);
+            return list;
+        }
+        /// <summary>
+        /// 分页获取所有通知
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public List<Notify> GetAllNotifyList(int userid,int page,int pagesize)
+        {
+            var sql = @"
+SELECT T.* FROM (
+SELECT ROW_NUMBER() OVER(ORDER BY id DESC) AS row,Id
+      ,ContentStr
+      ,NotifyType
+      ,Target
+      ,TargetType
+      ,Action
+      ,Sender
+      ,Receiver
+      ,IsRead
+      ,CreateTime
+      ,UpdateTime
+  FROM Notify where Receiver=@Receiver ) AS T WHERE T.row BETWEEN @start AND @end
+";
+            page = page > 0 ? page : 1;
+            pagesize = pagesize > 0 ? pagesize : 20;
+            var start = (page - 1)*pagesize + 1;
+            var end = page*pagesize;
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@start", SqlDbType.Int){Value =start },
+				new SqlParameter("@end", SqlDbType.Int){Value =end },
+				new SqlParameter("@Receiver", SqlDbType.Int){Value =userid }
 			};
             var ds = DbHelperSQL.Query(sql, parameters);
             var list = DsToList(ds);

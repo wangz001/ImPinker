@@ -118,7 +118,57 @@ namespace ImBLL
             }
             return vmList;
         }
-
+        /// <summary>
+        /// 分页获取所有通知
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public List<NotifyVm> GetAllNotifyList(int userid, int page, int pagesize)
+        {
+            var vmList = new List<NotifyVm>();
+            List<Notify> notifylist = _notifyDal.GetAllNotifyList(userid, page, pagesize);
+            if (notifylist != null && notifylist.Count > 0)
+            {
+                foreach (var notify in notifylist)
+                {
+                    var vm = new NotifyVm
+                    {
+                        Id = notify.Id,
+                        NotifyType = notify.NotifyType,
+                        ContentStr = notify.ContentStr,
+                        Target = notify.Target,
+                        TargetType = notify.TargetType,
+                        Action = notify.Action,
+                        Sender = notify.Sender,
+                        Receiver = notify.Receiver,
+                        IsRead = notify.IsRead,
+                        CreateTime = notify.CreateTime,
+                        UpdateTime = notify.UpdateTime
+                    };
+                    var sender = _userBll.GetModelByCache(vm.Sender);
+                    vm.SenderName = string.IsNullOrEmpty(sender.ShowName) ? sender.UserName : sender.ShowName;
+                    vm.ActionName = EnumHelper.GetDescriptionFromEnumValue(typeof(ActionEnum), vm.Action);
+                    vm.TargetTypeName = EnumHelper.GetDescriptionFromEnumValue(typeof(TargetTypeEnum), vm.TargetType);
+                    var targetName = "";
+                    switch (vm.TargetType)
+                    {
+                        case TargetTypeEnum.Article:
+                            var article = _articleBll.GetModelByCache(vm.Target);
+                            targetName = article.ArticleName;
+                            break;
+                        case TargetTypeEnum.Weibo:
+                            var weibo = _weiboBll.GetById(vm.Target);
+                            targetName = weibo.Description;
+                            break;
+                    }
+                    vm.TargetName = targetName;
+                    vmList.Add(vm);
+                }
+            }
+            return vmList;
+        } 
         /// <summary>
         /// 修改通知的状态
         /// </summary>
