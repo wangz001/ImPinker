@@ -8,10 +8,10 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
-		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 			#map {
 				width: 100%;
+				height: 200px;
 				position: fixed;
 				top: 40px;
 				bottom: 0px;
@@ -19,8 +19,7 @@
 				text-align: center;
 				background: #FFFFFF;
 			}
-		</style>
-		<style type="text/css">
+			
 			.mui-icon-extra-heart {
 				position: relative;
 				float: right;
@@ -28,6 +27,10 @@
 			
 			.mui-card-footer em {
 				font-size: 15px;
+			}
+			
+			.mui-scroll {
+				margin-top: 250px;
 			}
 			
 			.mui-scroll .mui-card {
@@ -45,10 +48,10 @@
 	</head>
 
 	<body>
-
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">附近的足迹</h1>
+			<a id="mapSize" class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
 		</header>
 		<div class="content">
 			<div id="map">
@@ -56,8 +59,8 @@
 				<p>贵州省遵义市黄果树瀑布...</p>
 			</div>
 			<div id="pullrefresh" class="mui-scroll-wrapper">
-
 				<div class="mui-scroll">
+
 					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img src="../../images/logo.png">
@@ -97,30 +100,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="mui-card">
-						<div class="mui-card-header mui-card-media">
-							<img src="../../images/logo.png">
-							<div class="mui-media-body">
-								小Mf
-								<p>发表于 2016-06-30 15:30</p>
-							</div>
 
-						</div>
-						<div class="mui-card-content">
-							<p>的空间疯狂的健康</p>
-							<div class="media-pic-list">
-								<img class="bigimage" src="../../images/yuantiao.jpg">
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
-
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript">
 			mui.init({
@@ -135,31 +120,13 @@
 						contentrefresh: '正在加载...',
 						callback: pullupRefresh
 					}
-				},
-				gestureConfig: {
-					tap: true, //默认为true
-					doubletap: true, //默认为false
-					longtap: true, //默认为false
-					swipe: true, //默认为true
-					drag: true, //默认为true
-					hold: false, //默认为false，不监听
-					release: false //默认为false，不监听
 				}
 			});
-			mui.previewImage();
-
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var weiboid = self.weiboid;
 				console.log(weiboid);
 				getweibo(weiboid);
-
-				//var scroll = mui('.mui-scroll-wrapper').scroll();
-				//				document.querySelector('.mui-scroll-wrapper').addEventListener('scrollend', function(e) {
-				//					//console.log(scroll.y);
-				//					resizeMap(50);
-				//				});
-
 			});
 			var pageNum = 1;
 			var allCount = 0;
@@ -261,20 +228,7 @@
 			var em = null,
 				map = null;
 			var mapHeight = 0;
-
-			function resetPoint(lon, lan) {
-
-			}
-			// 改变地图大小
-			function resizeMap(height) {
-				if(height == 50) {
-					em.style.height = height + "%";
-					map.resize();
-					mapHeight = height;
-				}
-
-			}
-			// H5 plus事件处理
+			// H5 初始化地图
 			function setPoint(lon, lan) {
 				em = document.getElementById("map");
 				// 确保DOM解析完成
@@ -286,35 +240,26 @@
 					position: "absolute"
 				});
 				map.centerAndZoom(point, 12);
-
-				//设置点
-				var marker = new plus.maps.Marker(point);
-				marker.setIcon("../../images/icon-location.png");
-				marker.setLabel("点点");
-				var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
-				marker.setBubble(bubble);
-//				map.addOverlay(marker);
-//				map.onstatuschanged = function(event) {
-//					marker.setBubble(bubble);
-//					var target = event.target; // 状态变化的地图对象(plus.maps.Map)
-//					var bounds = event.bounds; // 地图的可视地理区域(plus.maps.Bounds)
-//					var center = event.center; // 地图的中心点坐标(plus.maps.Point)
-//					var zoom = event.zoom; // 地图的缩放级别(Number)
-//					//console.log(JSON.stringify(event));
-//				}
-				em.style.height = "30%";
+			}
+			// 改变地图大小
+			function resizeMap() {
+				if(mapHeight == 50) {
+					em.style.height = "400px";
+					mapHeight=30;
+					$(".mui-scroll").css("margin-top","450px");
+				} else {
+					em.style.height = "200px";
+					mapHeight=50;
+					$(".mui-scroll").css("margin-top","250px");
+				}
 				map.resize();
 			}
+			
 
-			//			if(window.plus) {
-			//				plusReady();
-			//			} else {
-			//				document.addEventListener("plusready", plusReady, false);
-			//			}
-			//			// DOMContentloaded事件处理
-			
-			
-			///----------------------
+			document.getElementById("mapSize").addEventListener("tap", function() {
+				console.log("resize");
+				resizeMap(60);
+			});
 		</script>
 		<script type="text/javascript">
 		</script>

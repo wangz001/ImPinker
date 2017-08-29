@@ -357,7 +357,8 @@
 				],
 				"refer": [
 					"view/map/lbs.html",
-					"view/weibo/weibo_comment.html"
+					"view/weibo/weibo_comment.html",
+					"view/map/lbs2.html"
 				],
 				"priority": 0
 			},
@@ -711,6 +712,20 @@
 					"css/imageviewer.css",
 					"css/weibo.css",
 					"css/weibo/comment.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/map/lbs2.html": {
+				"resources": [
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/mui.previewimage.js",
+					"css/imageviewer.css",
+					"js/jquery.js",
+					"js/commonUtil.js",
+					"css/weibo.css"
 				],
 				"refer": [],
 				"priority": 0
