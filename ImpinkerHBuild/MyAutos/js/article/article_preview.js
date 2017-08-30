@@ -116,14 +116,14 @@ function getArticleComment(articleid) {
 }
 
 function initComment(item) {
-	
 	var template = $('script[id="comment_item"]').html();
-	var articleHtmlStr = template.temp(item);
+	var toTemplate = $('script[id="comment_item_to"]').html();
 	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
-		var toTemplate = $('script[id="comment_item_to"]').html();
 		var htmlTo = toTemplate.temp(item.ListToComment[0]);
-		articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
+		item.tocomment=htmlTo;
+		//articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
 	}
+	var articleHtmlStr = template.temp(item);
 	$("#comment").append(articleHtmlStr);
 }
 

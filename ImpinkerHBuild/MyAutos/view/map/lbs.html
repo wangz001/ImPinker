@@ -37,7 +37,26 @@
 			}
 			
 			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 10px
+				padding: 5px 5px 5px 55px;
+				overflow: visible;
+				width: 15rem;
+			}
+			
+			.media-pic-list {
+				overflow: hidden;
+				width: 20rem;
+				margin-top: .4375rem;
+			}
+			
+			.media-pic-list li {
+				width: 8.75rem;
+				height: 5.75rem;
+			}
+			
+			.media-pic-list li img {
+				height: 5.75rem;
+				width: 8.75rem;
+				vertical-align: text-bottom;
 			}
 			
 			.mui-card .mui-card-content p {
@@ -83,6 +102,16 @@
 									<li>
 										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
 									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+
 								</ul>
 							</div>
 						</div>
@@ -228,22 +257,22 @@
 				map.centerAndZoom(point, 12);
 			}
 			// 改变地图大小
-//			function resizeMap() {
-//				if(mapHeight == 50) {
-//					em.style.height = "400px";
-//					mapHeight = 30;
-//					$(".mui-scroll").css("margin-top", "450px");
-//				} else {
-//					em.style.height = "200px";
-//					mapHeight = 50;
-//					$(".mui-scroll").css("margin-top", "250px");
-//				}
-//				map.resize();
-//			}
+			//			function resizeMap() {
+			//				if(mapHeight == 50) {
+			//					em.style.height = "400px";
+			//					mapHeight = 30;
+			//					$(".mui-scroll").css("margin-top", "450px");
+			//				} else {
+			//					em.style.height = "200px";
+			//					mapHeight = 50;
+			//					$(".mui-scroll").css("margin-top", "250px");
+			//				}
+			//				map.resize();
+			//			}
 
 			document.getElementById("mapSize").addEventListener("toggle", function(event) {
 				if(event.detail.isActive) {
-					
+
 					if(em && map) {
 						console.log("你启动了开关");
 						//map.show();

@@ -17,26 +17,43 @@
 				float: right;
 			}
 			
-			.mui-card-footer em {
-				font-size: 15px;
+			.mui-scroll .mui-card {
+				margin: 0 0 5px 0;
 			}
 			
-			.mui-scroll .mui-card {
-				margin: 0 0 10px 0;
+			.mui-card-header.mui-card-media {
+				display: block;
+				padding: 6px 0 6px 10px;
 			}
 			
 			.mui-card-header.mui-card-media img {
 				border-radius: 4px;
 			}
+			
 			.mui-card-header .mui-media-body em {
 				font-size: 15px;
 			}
+			
+			.mui-card-header.mui-card-media .mui-media-body p {
+				font-size: 11px;
+				margin-top: 3px;
+			}
+			
 			.mui-card .mui-card-content {
 				padding: 5px 5px 5px 10px
 			}
 			
 			.mui-card .mui-card-content p {
 				margin-bottom: 0px;
+			}
+			
+			.mui-card .mui-card-footer {
+				padding: 4px 45px;
+				min-height: 30px;
+			}
+			
+			.mui-card-footer em {
+				font-size: 15px;
 			}
 		</style>
 	</head>
@@ -103,6 +120,31 @@
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
+		<script type="text/template" id="mui-card-item">
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="$UserHeadImage$">
+					<div class="mui-media-body">
+						<em class="mui-icon mui-icon-person">$UserName$</em>
+						<p>发表于 $PublishTime$</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<p>$Description$</p>
+					<div class="media-pic-list">
+						<ul>
+							$imglist$
+						</ul>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<span class="mui-icon-extra mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
+					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em>$CommentCount$</em></span>
+					<span class="mui-icon mui-icon-map" weiboid='$Id$'></span>
+				</div>
+			</div>
+		</script>
+
 		<script>
 			mui.init({
 				swipeBack: false,
@@ -142,7 +184,7 @@
 							table.innerHTML = "";
 							for(var i = 0; i < list.length; i++) {
 								var item = list[i];
-								initWeiBoItem(table, item);
+								initWeiBoItemTemplate(item);
 							}
 							bindVote();
 						}
@@ -170,10 +212,9 @@
 					success: function(data) {
 						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 							var list = data.Data;
-							var table = document.body.querySelector('.mui-scroll');
 							for(var i = 0; i < list.length; i++) {
 								var item = list[i];
-								initWeiBoItem(table, item);
+								initWeiBoItemTemplate(item);
 							}
 							bindVote();
 						} else {
@@ -188,12 +229,13 @@
 					}
 				});
 			}
+
 			/**
 			 * 添加数据
 			 * @param {Object} table
 			 * @param {Object} item
 			 */
-			function initWeiBoItem(table, item) {
+			function initWeiBoItemTemplate(item) {
 				var img_1200style = 'style/weibo_1200';
 				var img_600style = 'style/weibo_600';
 				var img_24style = 'style/weibo_24_16';
@@ -201,46 +243,21 @@
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
-				var li = document.createElement('div');
-				li.className = 'mui-card';
-				var headdiv = document.createElement("div");
-				headdiv.className = 'mui-card-header mui-card-media';
-				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +'<em class="mui-icon mui-icon-person">'+
-					item.UserName + '</em><p>发表于 ' + item.PublishTime + '</p></div>';
-				var contentdiv = document.createElement("div");
-				contentdiv.className = 'mui-card-content';
-				if(item.Description != null && item.Description.length > 0) {
-					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
-				}
+				var templateCard = $('script[id="mui-card-item"]').html();
+				var imgHtmlStr = "";
 				var imgs = item.ContentValue.split(',');
-				var imgdiv = document.createElement("div");
-				imgdiv.className = 'media-pic-list';
 				if(imgs.length > 1) {
 					//多图
-					var ul = document.createElement("ul");
-					var imgHtmlStr = "";
-					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
 					for(var i = 0; i < imgs.length; i++) {
 						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 					}
-					ul.innerHTML = imgHtmlStr;
-					imgdiv.appendChild(ul);
 				} else {
 					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-					imgdiv.innerHTML = imgHtmlStr;
 				}
-				contentdiv.appendChild(imgdiv);
-				var footdiv = document.createElement('div');
-				footdiv.className = 'mui-card-footer';
-				footdiv.innerHTML = '<span  class="mui-icon-extra mui-icon-extra-heart" weiboid=' + item.Id + '><em>' + item.VoteCount + '</em></span>' +
-					'<span class="mui-icon mui-icon-compose" weiboid=' + item.Id + '><em>' + item.CommentCount + '</em></span>' +
-					'<span class="mui-icon mui-icon-map" weiboid=' + item.Id + '></span>';
-				li.appendChild(headdiv);
-				li.appendChild(contentdiv);
-				li.appendChild(footdiv);
-				table.appendChild(li);
+				item.imglist = imgHtmlStr;
+				var cardStr = templateCard.temp(item);
+				$(".mui-scroll").append(cardStr);
 			}
-
 			//地图点击事件
 			mui('.mui-scroll').on('tap', '.mui-icon-map', function() {
 				var weiboid = this.getAttribute('weiboid');
@@ -258,5 +275,4 @@
 			});
 		</script>
 	</body>
-
 </html>

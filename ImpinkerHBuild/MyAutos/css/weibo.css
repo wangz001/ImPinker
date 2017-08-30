@@ -24,7 +24,7 @@
 }
 .media-pic-list {
     overflow: hidden;
-    width: 18.5rem;
+    width: 21.5rem;
     margin-top: .4375rem;
     
 }
@@ -37,7 +37,7 @@
 
 .media-pic-list li {
     float: left;
-    width: 7.75rem;
+    width: 6.75rem;
     height: 5.75rem;
     margin: .3125rem .3125rem 0 0;
         
@@ -45,7 +45,7 @@
 
 .media-pic-list li img {
     height: 5.75rem;
-    width: 7.75rem;
+    width: 6.75rem;
     vertical-align: text-bottom;
 }
 

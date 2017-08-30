@@ -45,7 +45,7 @@
                         </i>
                         <em class="userinfo">
                             $UserName$
-                            $CreateTime$
+                            <p>$CreateTime$</p>
                         </em>
                         <em class="commentvote">
                             <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
@@ -57,6 +57,7 @@
 						$ContentText$
 					</p>
 				</dd>
+				$tocomment$
 			</dl>
 		</script>
 		<script type="text/template" id="comment_item_to">
@@ -67,7 +68,7 @@
                             </i>
                             <em class="userinfo">
                                 $UserName$
-                            $CreateTime$
+                            <p>$CreateTime$</p>
                             </em>
                         </dt>
 				<dd>
@@ -131,12 +132,12 @@
 
 			function initComment(item) {
 				var template = $('script[id="comment_item"]').html();
-				var articleHtmlStr = template.temp(item);
+				var toTemplate = $('script[id="comment_item_to"]').html();
 				if(item.ToCommentId > 0 && item.ToCommentItemVm != null) {
-					var toTemplate = $('script[id="comment_item_to"]').html();
 					var htmlTo = toTemplate.temp(item.ToCommentItemVm);
-					articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
+					item.tocomment = htmlTo;
 				}
+				var articleHtmlStr = template.temp(item);
 				$("#comment").append(articleHtmlStr);
 			}
 

@@ -109,7 +109,11 @@
 			"js/mui.previewimage.js",
 			"css/imageviewer.css",
 			"css/mui.min.css",
-			"css/weibo.css"
+			"css/weibo.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/commonUtil.js",
+			"js/jquery.js"
 		]
 	},
 	"view/weibo/weibo_comment.html": {

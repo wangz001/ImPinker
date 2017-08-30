@@ -19,7 +19,12 @@
 				-webkit-user-select: none;
 			}
 			
-			.thread-info .userinfo img {
+			.mui-card-header.mui-card-media {
+				display: block;
+				padding: 0px;
+			}
+			
+			.thread-info img {
 				width: 35px;
 				height: 35px;
 				border-radius: 8px;
@@ -32,7 +37,7 @@
 				margin: 10px 10px 10px 0px;
 			}
 			
-			.thread-info .userinfo .username {
+			.thread-info .username {
 				font-size: 16px;
 			}
 			
@@ -76,7 +81,6 @@
 				background-color: #fafafa;
 			}
 		</style>
-
 	</head>
 
 	<body>
@@ -85,12 +89,12 @@
 		<div id="content" class="mui-content">
 			<div class="mui-content-padded">
 				<h3 id='articlename'></h3>
-				<div class="thread-info">
-					<span class="userinfo">
-                    <img src="" id='user_headimg'/>
-                    <em class="username" id="user_name"></em>
-                	</span>
-					<span class="publish-time"></span>
+				<div class="mui-card-header mui-card-media thread-info">
+					<img src="" id='user_headimg'>
+					<div class="mui-media-body">
+						<em class="mui-icon mui-icon-person username" id="user_name">bwlang</em>
+						<p class="publish-time">发表于 2016-06-30 15:30</p>
+					</div>
 				</div>
 				<!-- 文章主体 -->
 				<div class="" id='articlecontent'>
@@ -129,31 +133,33 @@
                         </i>
                         <em class="userinfo">
                             $UserName$
-                            $CreateTime$
+                            <p>$CreateTime$</p>
                         </em>
                         <em class="commentvote">
                             <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
-                    </dt>
+                </dt>
 				<dd>
 					<p>
 						$Content$
 					</p>
 				</dd>
+				$tocomment$
 			</dl>
+
 		</script>
 		<script type="text/template" id="comment_item_to">
 			<dl class="quote">
 				<dt>
-                            <i class="headpic">
-                                <img src="$HeadImage$">
-                            </i>
-                            <em class="userinfo">
-                                $UserName$
-                            $CreateTime$
-                            </em>
-                        </dt>
+                    <i class="headpic">
+                        <img src="$HeadImage$">
+                    </i>
+                    <em class="userinfo">
+                        $UserName$
+                        <p>$CreateTime$</p>
+                    </em>
+                </dt>
 				<dd>
 					<p>
 						$Content$
