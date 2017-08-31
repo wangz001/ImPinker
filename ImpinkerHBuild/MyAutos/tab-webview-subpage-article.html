@@ -31,10 +31,12 @@
 				height: 61px;
 			}
 			
-			.mui-card-header.mui-card-media {
+			
+			.mui-card-title p{
 				display: block;
-				padding: 10px;
-				margin: 5px;
+				color: #6d6d72;
+    			font-size: 17px;
+    			margin-bottom:5px;
 			}
 			/*card 样式*/
 			
@@ -43,8 +45,12 @@
 				position: relative;
 				overflow: hidden;
 				margin: 0px;
+				padding: 5px;
 			}
 			
+			.mui-card-content-inner .userinfo{
+				margin-bottom: 1px;
+			}
 			.userinfo em {
 				font-size: 13px;
 			}
@@ -61,7 +67,7 @@
 			
 			.mui-card .mui-card-content-inner {
 				position: relative;
-				padding: 7px;
+				padding: 3px;
 			}
 			
 			.mui-slider-title {
@@ -129,7 +135,7 @@
 						</div>
 					</div>
 					<ul class="mui-table-view" id="articlelist">
-						<!--<li class="mui-table-view-cell mui-media">
+						<li class="mui-table-view-cell mui-media">
 							<a href="view/article/preview.html">
 								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
 								<div class="mui-media-body">
@@ -148,25 +154,22 @@
 						</li>
 						<li>
 							<div class="mui-card">
+								<div class="mui-card-title">
+									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+								</div>
 								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(images/cbd.jpg)"></div>
 								<div class="mui-card-content">
 									<div class="mui-card-content-inner">
 										<p class="userinfo">Posted on January 18, 2016
 											<span class="viewcount">
-										<em class="mui-icon-extra mui-icon-extra-like">10</em>
-										<em class="mui-icon mui-icon-compose">23</em>
-									</span>
+											<em class="mui-icon-extra mui-icon-extra-like">10</em>
+											<em class="mui-icon mui-icon-compose">23</em>
+											</span>
 										</p>
-
-										<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 									</div>
 								</div>
-								<div class="mui-card-footer">
-									<a class="mui-card-link">Like</a>
-									<a class="mui-card-link">Read more</a>
-								</div>
 							</div>
-						</li>-->
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -229,6 +232,9 @@
 		<li>
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<div class="mui-card">
+					<div class="mui-card-title">
+						<p>$ArticleName$</p>
+					</div>
 					<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
 					<div class="mui-card-content">
 						<div class="mui-card-content-inner">
@@ -238,7 +244,6 @@
 									<em class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
 									<em class="mui-icon mui-icon-compose">$CommentCount$</em>
 								</span></p>
-							<p style="color: #333;">$ArticleName$</p>
 						</div>
 					</div>
 				</div>

@@ -6,15 +6,16 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/setting/notify.css" />
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 id="title" class="mui-title">通知</h1>
+			<h1 id="title" class="mui-title">消息</h1>
 		</header>
 		<div class="mui-content">
-			<div style="padding: 10px 10px;">
+			<div style="padding: 10px 10px;background-color: #fff;">
 				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 					<a class="mui-control-item mui-active" href="#item1">
 						新通知（8）
@@ -24,22 +25,100 @@
 					</a>
 				</div>
 			</div>
-			<div>
-				<div id="item1" class="mui-control-content">
-					<ul class="mui-table-view" id="newnotifylist">
-						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right">
-								<span class="mui-badge mui-badge-warning">5</span> Item 3
-							</a>
-						</li>
-					</ul>
+			<div style="background-color: #fff;">
+				<div id="item1" class="mui-control-content mui-active">
+					<div class="info-rows-2">
+						<div class="info-box-2">
+							<div class="img-box">
+								<img src="../../images/logo1.png">
+							</div>
+							<div class="content">
+								<div class="panel">
+									<div class="wrap">
+										<h6>直播小张<em class="icon-red">主播</em></h6>
+										<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+										<strong class="date">3分钟前</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="info-rows-2">
+						<div class="info-box-2">
+							<div class="img-box">
+								<img src="../../images/60x60.gif">
+							</div>
+							<div class="content">
+								<div class="panel">
+									<div class="wrap">
+										<h6>直播小张<em class="icon-red">主播</em></h6>
+										<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+										<strong class="date">3分钟前</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div id="item2" class="mui-control-content mui-active">
-					<ul class="mui-table-view" id="notifylist">
-					</ul>
+				<div id="item2" class="mui-control-content">
+					<div class="info-rows-2">
+						<div class="info-box-2">
+							<div class="img-box">
+								<img src="../../images/logo1.png">
+							</div>
+							<div class="content">
+								<div class="panel">
+									<div class="wrap">
+										<h6>直播小张<em class="icon-red">主播</em></h6>
+										<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+										<strong class="date">3分钟前</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="info-rows-2">
+						<div class="info-box-2">
+							<div class="img-box">
+								<img src="../../images/60x60.gif">
+							</div>
+							<div class="content">
+								<div class="panel">
+									<div class="wrap">
+										<h6>直播小张<em class="icon-red">主播</em></h6>
+										<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+										<strong class="date">3分钟前</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="info-rows-2">
+						<div class="info-box-2">
+							<div class="img-box">
+								<img src="../../images/60x60.gif">
+							</div>
+							<div class="content">
+								<div class="panel">
+									<div class="wrap">
+										<h6>直播小张<em class="icon-red">主播</em></h6>
+										<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+										<strong class="date">3分钟前</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
+
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
@@ -58,7 +137,7 @@
 			mui.init();
 
 			mui.plusReady(function() {
-				getNotify(0,function(data){
+				getNotify(0, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var list = data.Data;
 						var template_notifyitem = $('script[id="notifyitem"]').html();
@@ -68,23 +147,23 @@
 							$("#newnotifylist").append(tempStr);
 						}
 					}
-					getNotify(1,function(data){
-					if(data.IsSuccess == 1 && data.Data != null) {
-						var list = data.Data;
-						var template_notifyitem = $('script[id="notifyitem"]').html();
-						for(var i = 0; i < list.length; i++) {
-							var item = list[i];
-							var tempStr = template_notifyitem.temp(item);
-							$("#notifylist").append(tempStr);
+					getNotify(1, function(data) {
+						if(data.IsSuccess == 1 && data.Data != null) {
+							var list = data.Data;
+							var template_notifyitem = $('script[id="notifyitem"]').html();
+							for(var i = 0; i < list.length; i++) {
+								var item = list[i];
+								var tempStr = template_notifyitem.temp(item);
+								$("#notifylist").append(tempStr);
+							}
 						}
-					}
+					});
 				});
-				});
-				
+
 			});
 
 			///获取通知。 isnew=1时，表示获取新通知；isnew=0表示获取全部
-			function getNotify(isNew,callback) {
+			function getNotify(isNew, callback) {
 				var url = "http://api.myautos.cn/api/Notify/GetNewNotifyList";
 				var data = {
 					isread: isNew
@@ -97,7 +176,7 @@
 			mui('.mui-content .mui-table-view').on('tap', 'li', function() {
 				var targettype = this.getAttribute('targettype');
 				var targetid = this.getAttribute('targetid');
-				var notifyid=this.getAttribute('notifyid');
+				var notifyid = this.getAttribute('notifyid');
 				console.log(targettype);
 				//标记为已读
 				markRead(notifyid);
@@ -135,13 +214,13 @@
 				}
 			});
 			//标记为已读
-			function markRead(targetid){
-				var url="http://api.myautos.cn/api/Notify/UpdateNotifyState";
-				var data={
+			function markRead(targetid) {
+				var url = "http://api.myautos.cn/api/Notify/UpdateNotifyState";
+				var data = {
 					NotifyId: targetid,
-  					IsRead: 1
+					IsRead: 1
 				};
-				console.log("markread"+targetid);
+				console.log("markread" + targetid);
 				commonUtil.sendRequestWithToken(url, data, true, function(data) {
 					console.log(JSON.stringify(data));
 				});
