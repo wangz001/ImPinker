@@ -98,6 +98,7 @@ namespace ImBLL
                     };
                     var sender = _userBll.GetModelByCache(vm.Sender);
                     vm.SenderName = string.IsNullOrEmpty(sender.ShowName) ? sender.UserName : sender.ShowName;
+                    vm.SenderHeadUrl = ImageUrlHelper.GetHeadImageUrl(sender.ImgUrl, 100);
                     vm.ActionName = EnumHelper.GetDescriptionFromEnumValue(typeof(ActionEnum), vm.Action);
                     vm.TargetTypeName = EnumHelper.GetDescriptionFromEnumValue(typeof(TargetTypeEnum), vm.TargetType);
                     var targetName = "";
@@ -149,6 +150,7 @@ namespace ImBLL
                     };
                     var sender = _userBll.GetModelByCache(vm.Sender);
                     vm.SenderName = string.IsNullOrEmpty(sender.ShowName) ? sender.UserName : sender.ShowName;
+                    vm.SenderHeadUrl = ImageUrlHelper.GetHeadImageUrl(sender.ImgUrl, 100);
                     vm.ActionName = EnumHelper.GetDescriptionFromEnumValue(typeof(ActionEnum), vm.Action);
                     vm.TargetTypeName = EnumHelper.GetDescriptionFromEnumValue(typeof(TargetTypeEnum), vm.TargetType);
                     var targetName = "";

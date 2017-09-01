@@ -16,5 +16,7 @@ namespace ImModel.ViewModel
 
         public string TargetTypeName { get; set; }
 
+        public string SenderHeadUrl { get; set; }
+
     }
 }

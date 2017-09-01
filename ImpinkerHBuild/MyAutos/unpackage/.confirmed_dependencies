@@ -262,7 +262,11 @@
 			"js/app.js",
 			"js/mui.min.js",
 			"js/jquery.js",
-			"js/commonUtil.js"
+			"js/commonUtil.js",
+			"images/right-2x.png",
+			"images/logo1.png",
+			"images/60x60.gif",
+			"css/setting/notify.css"
 		],
 		"refer": [
 			"login.html",
