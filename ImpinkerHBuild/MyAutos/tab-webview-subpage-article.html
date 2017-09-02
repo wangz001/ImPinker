@@ -31,12 +31,11 @@
 				height: 61px;
 			}
 			
-			
-			.mui-card-title p{
+			.mui-card-title p {
 				display: block;
 				color: #6d6d72;
-    			font-size: 17px;
-    			margin-bottom:5px;
+				font-size: 17px;
+				margin-bottom: 5px;
 			}
 			/*card 样式*/
 			
@@ -48,9 +47,10 @@
 				padding: 5px;
 			}
 			
-			.mui-card-content-inner .userinfo{
+			.mui-card-content-inner .userinfo {
 				margin-bottom: 1px;
 			}
+			
 			.userinfo em {
 				font-size: 13px;
 			}
@@ -135,7 +135,7 @@
 						</div>
 					</div>
 					<ul class="mui-table-view" id="articlelist">
-						<li class="mui-table-view-cell mui-media">
+						<!--<li class="mui-table-view-cell mui-media">
 							<a href="view/article/preview.html">
 								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
 								<div class="mui-media-body">
@@ -169,7 +169,7 @@
 									</div>
 								</div>
 							</div>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>
@@ -286,12 +286,16 @@
 			}
 			commonUtil.sendRequestGet(apiPath, data, function(data) {
 				$("#articlelist").html("");
-				var list = data.Data;
-				for(var i = 0; i < list.length; i++) {
-					var item = list[i];
-					initItem(item, true);
+				if(data.IsSuccess == 1 && data.Data != null) {
+					var list = data.Data;
+					for(var i = 0; i < list.length; i++) {
+						var item = list[i];
+						initItem(item, true);
+					}
+					pageNum++;
+				} else {
+					mui.toast(data.Description);
 				}
-				pageNum++;
 				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
 			});
 		}
@@ -305,12 +309,16 @@
 				pageSize: pageSize
 			}
 			commonUtil.sendRequestGet(apiPath, data, function(data) {
-				var list = data.Data;
-				for(var i = 0; i < list.length; i++) {
-					var item = list[i];
-					initItem(item, false);
+				if(data.IsSuccess == 1 && data.Data != null) {
+					var list = data.Data;
+					for(var i = 0; i < list.length; i++) {
+						var item = list[i];
+						initItem(item, false);
+					}
+					pageNum++;
+				} else {
+					mui.toast(data.Description);
 				}
-				pageNum++;
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 			});
 		}
@@ -343,23 +351,27 @@
 			var slidePath = 'http://api.myautos.cn/api/Article/GetSlideArticle';
 			var para = {};
 			commonUtil.sendRequestGet(slidePath, para, function(data) {
-				var list = data.Data;
-				var template_a = $('script[id="slide_item_a"]').html();
-				var template_b = $('script[id="slide_item_b"]').html();
-				var aTopStr = template_a.temp(list[list.length - 1]);
-				$("#sliderContent").append(aTopStr);
-				for(var i = 0; i < list.length; i++) {
-					var item = list[i];
-					var tempStr = template_b.temp(item);
-					$("#sliderContent").append(tempStr);
+				if(data.IsSuccess == 1 && data.Data != null) {
+					var list = data.Data;
+					var template_a = $('script[id="slide_item_a"]').html();
+					var template_b = $('script[id="slide_item_b"]').html();
+					var aTopStr = template_a.temp(list[list.length - 1]);
+					$("#sliderContent").append(aTopStr);
+					for(var i = 0; i < list.length; i++) {
+						var item = list[i];
+						var tempStr = template_b.temp(item);
+						$("#sliderContent").append(tempStr);
+					}
+					var aBottomStr = template_a.temp(list[0]);
+					$("#sliderContent").append(aBottomStr);
+					//获得slider插件对象
+					var gallery = mui('.mui-slider');
+					gallery.slider({
+						interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+					});
+				}else{
+					console.log("111");
 				}
-				var aBottomStr = template_a.temp(list[0]);
-				$("#sliderContent").append(aBottomStr);
-				//获得slider插件对象
-				var gallery = mui('.mui-slider');
-				gallery.slider({
-					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
-				});
 			});
 		}
 

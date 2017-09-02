@@ -121,6 +121,9 @@ html {
 	box-sizing: border-box;
 	border-radius: 5px;
 }
+.info-box-2 .content.noread .panel {
+	background:#dbe6f6;
+}
 
 .info-box-2 .content .panel .wrap {
 	padding: 10px 10px 15px 10px;
@@ -149,14 +152,14 @@ html {
 }
 
 .info-box-2 .content .icon-red {
-	font-size: 1.3rem;
+	font-size: 1.4rem;
 	color: #DD2727;
 	border: 1px solid #DD2727;
 	width: 36px;
 	height: 15px;
 	border-radius: 2px;
 	padding: 0px 2px;
-	margin-left: 5px;
+	margin: 0 5px 5px 5px;
 }
 
 .info-box-2 .content p {
@@ -213,4 +216,9 @@ html {
 	font-size: 1.3rem;
 	color: #999;
 	line-height: 18px;
+}
+#item2 .loadmore{
+	align-content: center;
+	position: relative;
+	text-align: center;
 }

@@ -62,7 +62,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<div class="mui-card">
+					<!--<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img src="images/logo.png">
 							<div class="mui-media-body">
@@ -109,7 +109,7 @@
 							<span class="mui-icon mui-icon-compose"></span>
 							<span class="mui-icon mui-icon-map"></span>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -163,38 +163,33 @@
 			});
 			mui.previewImage();
 			var pageNum = 1;
-			var pageSize = 30;
+			var pageSize = 20;
+			var weiboApiPath = 'http://api.myautos.cn/api/WeiBo/GetWeiBoList';
 			/**
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
 				pageNum = 1;
-				mui.ajax('http://api.myautos.cn/api/WeiBo/GetWeiBoList', {
-					data: {
-						pageindex: pageNum,
-						pageSize: pageSize
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
-					success: function(data) {
-						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-							var list = data.Data;
-							var table = document.body.querySelector('.mui-scroll');
-							//清空老数据
-							table.innerHTML = "";
-							for(var i = 0; i < list.length; i++) {
-								var item = list[i];
-								initWeiBoItemTemplate(item);
-							}
-							bindVote();
+				var dataPara = {
+					pageindex: pageNum,
+					pageSize: pageSize
+				}
+				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						var table = document.body.querySelector('.mui-scroll');
+						//清空老数据
+						table.innerHTML = "";
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItemTemplate(item);
 						}
+						bindVote();
 						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
-					},
-					error: function(xhr, type, errorThrown) {
-						console.log(e);
-						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					} else {
+						mui.toast(data.Description);
 					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
 			var count = 0;
@@ -202,31 +197,23 @@
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() {
-				mui.ajax('http://api.myautos.cn/api/WeiBo/GetWeiBoList', {
-					data: {
-						pageindex: pageNum,
-						pageSize: pageSize
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
-					success: function(data) {
-						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-							var list = data.Data;
-							for(var i = 0; i < list.length; i++) {
-								var item = list[i];
-								initWeiBoItemTemplate(item);
-							}
-							bindVote();
-						} else {
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-							return;
+				var dataPara = {
+					pageindex: pageNum,
+					pageSize: pageSize
+				};
+				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var list = data.Data;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItemTemplate(item);
 						}
+						bindVote();
 						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
-					},
-					error: function(xhr, type, errorThrown) {
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					} else {
+						mui.toast(data.Description);
 					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
 
@@ -275,4 +262,5 @@
 			});
 		</script>
 	</body>
+
 </html>

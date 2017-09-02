@@ -9,12 +9,20 @@
 			data: data,
 			dataType: 'json', //服务器返回json格式数据
 			type: 'get', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
 			success: function(data) {
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
-				return callback();
+				//console.log(JSON.stringify(type));
+				if(type == 'timeout') {
+					mui.toast("网络不给力，请稍后再试~");
+				}
+				var errorData = {
+					IsSuccess: 0,
+					Description: type
+				}
+				return callback(errorData);
 			}
 		});
 	}
@@ -32,12 +40,14 @@
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: typeStr, //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
 			success: function(data, status) {
 				console.log(status);
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
-				console.log(JSON.stringify(errorThrown));
+				//console.log(JSON.stringify(type));
+				//console.log(JSON.stringify(errorThrown));
 				if("Unauthorized" == errorThrown) {
 					//无权限，重新登录
 					mui.toast("身份验证失败，请重新登陆！");
@@ -56,8 +66,12 @@
 							autoShow: false
 						}
 					});
+				} else {
+					return callback({
+						IsSuccess: 0,
+						Description: type
+					});
 				}
-				//return callback();
 			}
 		});
 	}
@@ -167,7 +181,7 @@
 	owner.compressImage = function(imgpath, callback) {
 		callback = callback || $.noop;
 		var name = imgpath.substr(imgpath.lastIndexOf('/') + 1);
-		console.log("name-------:"+name);
+		console.log("name-------:" + name);
 		plus.zip.compressImage({
 			src: imgpath,
 			dst: '_doc/' + name,
