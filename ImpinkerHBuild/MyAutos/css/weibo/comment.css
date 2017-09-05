@@ -3,6 +3,25 @@
 	padding: 10px 10px 10px 10px;
 }
 
+.mui-content .mui-inline {
+    vertical-align: bottom;
+    font-size: 14px;
+    color: #8f8f94;
+}
+
+.mui-content textarea {
+    height: 100px;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+.mui-content .emotion{
+	margin: 10px;
+}
+
+#comment_submit{
+	margin: 10px;
+}
+
 .comment-list {
 	padding: 10px 0px 0px 0px;
 	border-top: .5px solid #ece4e4;
