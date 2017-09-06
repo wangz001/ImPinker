@@ -21,7 +21,6 @@ function hideComment() {
 	setTimeout(function() {
 		//防止和提交按钮冲突
 		toCommentId = 0;
-		console.log('aaa');
 	}, 200);
 }
 $('#composeText').bind('focusout', function() {
@@ -83,7 +82,7 @@ function getArticle(articleid) {
 			var contentStr = articleinfo.Content;
 			$("#articlename").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
-			console.log(articleItem.UserHeadUrl);
+			//console.log(articleItem.UserHeadUrl);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
 			$(".thread-info .publish-time").html(articleItem.CreateTime);

@@ -100,7 +100,9 @@
 			"css/mui.min.css",
 			"css/icons-extra.css",
 			"js/commonUtil.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"js/qqFace/css/reset.css",
+			"js/qqFace/js/jquery.qqFace.js"
 		]
 	},
 	"view/weibo/weibo_my.html": {
@@ -200,7 +202,9 @@
 			"js/qqFace/arclist/55.gif",
 			"js/qqFace/arclist/17.gif",
 			"js/qqFace/arclist/27.gif",
-			"js/qqFace/arclist/30.gif"
+			"js/qqFace/arclist/30.gif",
+			"js/jquery.qqFace.js",
+			"js/qqFace/css/reset.css"
 		],
 		"refer": [
 			"login.html"
@@ -267,7 +271,8 @@
 			"images/iconfont-tianjia.png"
 		],
 		"refer": [
-			"view/article/youji_new_selectweibo.html"
+			"view/article/youji_new_selectweibo.html",
+			"view/article/youji_preview.html"
 		]
 	},
 	"view/article/youji_mydraft.html": {
@@ -314,7 +319,8 @@
 			"js/mui.js",
 			"css/setting/setting.css",
 			"css/mui.css",
-			"js/mui.view.js"
+			"js/mui.view.js",
+			"images/logo.png"
 		],
 		"refer": [
 			"view/setting/setting-account.html"
@@ -329,7 +335,12 @@
 	"view/setting/setting-account.html": {
 		"resources": [
 			"js/mui.zoom.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"css/setting/setting.css"
+		],
+		"refer": [
+			"view/setting/setting-imgcut.html"
 		]
 	},
 	"view/setting/setting-notify.html": {
@@ -375,6 +386,26 @@
 			"js/jquery.js",
 			"js/commonUtil.js",
 			"css/weibo.css"
+		]
+	},
+	"view/article/youji_preview.html": {
+		"resources": [
+			"js/mui.zoom.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css",
+			"js/jquery.js"
+		]
+	},
+	"view/setting/setting-imgcut.html": {
+		"resources": [
+			"js/cropper/cropper.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/cropper/cropper.js",
+			"css/mui.min.css",
+			"js/jquery.js"
 		]
 	}
 }

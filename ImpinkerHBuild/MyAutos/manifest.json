@@ -326,7 +326,9 @@
 					"js/app.js",
 					"css/weibo/comment.css",
 					"css/icons-extra.css",
-					"js/commonUtil.js"
+					"js/commonUtil.js",
+					"js/qqFace/css/reset.css",
+					"js/qqFace/js/jquery.qqFace.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -753,7 +755,9 @@
 					"js/qqFace/arclist/55.gif",
 					"js/qqFace/arclist/17.gif",
 					"js/qqFace/arclist/27.gif",
-					"js/qqFace/arclist/30.gif"
+					"js/qqFace/arclist/30.gif",
+					"js/jquery.qqFace.js",
+					"js/qqFace/css/reset.css"
 				],
 				"refer": [
 					"login.html"

@@ -8,28 +8,7 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
-		<style>
-			.qqFace {
-				margin-top: 4px;
-				background: #fff;
-				padding: 2px;
-				border: 1px #dfe6f6 solid;
-			}
-			
-			.qqFace table td {
-				padding: 0px;
-			}
-			
-			.qqFace table td img {
-				cursor: pointer;
-				border: 1px #fff solid;
-			}
-			
-			.qqFace table td img:hover {
-				border: 1px #0066cc solid;
-			}
-		</style>
-
+		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
 	</head>
 
 	<body>
@@ -42,13 +21,15 @@
 				<div class="mui-inline">评论</div>
 			</div>
 			<div class="row mui-input-row">
+
 				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+			</div>
+			<div class="mui-card-content">
 				<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
 				<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
 					发布
 			</button>
 			</div>
-			<hr>
 			<div class="mui-content-padded">
 				<div class="mui-inline">评论列表</div>
 			</div>
@@ -59,7 +40,8 @@
 
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" src="http://img.myautos.cn/UI_file/js/qqFace/js/jquery.qqFace.js"></script>
+		<!--<script type="text/javascript" src="http://img.myautos.cn/UI_file/js/qqFace/js/jquery.qqFace.js"></script>-->
+		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/template" id='comment_item'>
@@ -73,10 +55,9 @@
                             <p>$CreateTime$</p>
                         </em>
                         <em class="commentvote">
-                            <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
-                    </dt>
+                </dt>
 				<dd>
 					<p>
 						$ContentText$
@@ -88,14 +69,14 @@
 		<script type="text/template" id="comment_item_to">
 			<dl class="quote">
 				<dt>
-                            <i class="headpic">
-                                <img src="$HeadImage$">
-                            </i>
-                            <em class="userinfo">
+                    <i class="headpic">
+                        <img src="$HeadImage$">
+                    </i>
+                    <em class="userinfo">
                                 $UserName$
                             <p>$CreateTime$</p>
                             </em>
-                        </dt>
+                </dt>
 				<dd>
 					<p>
 						$ContentText$
@@ -120,24 +101,18 @@
 			$(function() {
 				$('.emotion').qqFace({
 					assign: 'comment_text',
-					path: 'http://img.myautos.cn/UI_file/js/qqFace/arclist/' //表情存放的路径
+					path: '../../js/qqFace/arclist/' //表情存放的路径
 				});
 			});
 
 			//查看结果
 
 			function replace_em(str) {
-
 				str = str.replace(/\</g, '&lt;');
-
 				str = str.replace(/\>/g, '&gt;');
-
 				str = str.replace(/\n/g, '<br/>');
-
-				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="http://img.myautos.cn/UI_file/js/qqFace/arclist/$1.gif" border="0" />');
-
+				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
 				return str;
-
 			}
 
 			document.getElementById('comment_submit').addEventListener('tap', function() {
