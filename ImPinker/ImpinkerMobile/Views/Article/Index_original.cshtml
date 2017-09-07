@@ -2,22 +2,28 @@
     Layout = null;
     var article = (ImModel.ViewModel.ArticleViewModel)ViewBag.Article;
     var userinfo = (ImModel.Users)ViewBag.UserInfo;
-    <link href="~/Content/mui.min.css" rel="stylesheet" />
-    <link href="~/Content/thread.css" rel="stylesheet" />
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+
+    <link href="~/Content/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/thread.css" rel="stylesheet" />
+
     <title>@article.ArticleName</title>
 
     <style type="text/css">
-        .thread-info .userinfo img {
+        .header .headimage {
             width: 35px;
             height: 35px;
-            border-radius: 8px;
+            border-radius: 5px;
             vertical-align: middle;
             overflow: hidden;
             margin-right: 2px;
@@ -31,12 +37,17 @@
                 font-size: 16px;
             }
 
+            .thread-info .userinfo .publish-time {
+                margin-bottom: 0px;
+            }
+
         .mui-content-padded p img {
             width: auto;
             height: auto;
             max-width: 100%;
             max-height: 100%;
         }
+
         .mui-content .header h2 {
             margin: 10px;
         }
@@ -49,12 +60,12 @@
             <h2>
                 @article.ArticleName
             </h2>
-            <div class="thread-info">
-                <span class="userinfo">
-                    <img src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)" />
-                    <em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em>
-                </span>
-                <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
+            <div class="mui-card-header mui-card-media">
+                <img class="headimage" src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)">
+                <div class="mui-media-body">
+                    @Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)
+                    <p>发表于 @article.CreateTime.ToString("yy-MM-dd HH:mm")</p>
+                </div>
             </div>
         </div>
         <!-- 文章主体 -->
@@ -62,9 +73,9 @@
             @Html.Raw(article.Content == null ? "" : article.Content[0])
             <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
             @*<div class="article-footer">
-                <img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
-                <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
-            </div>*@
+                    <img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
+                    <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+                </div>*@
         </div>
     </div>
 
@@ -74,5 +85,8 @@
 </body>
 </html>
 <script src="~/Scripts/mui.min.js"></script>
+<script src="~/Scripts/mui.previewimage.js"></script>
+<script src="~/Scripts/mui.zoom.js"></script>
 <script type="text/javascript">
+    mui.previewImage();
 </script>

@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 			html,
 			body {
@@ -81,6 +82,9 @@
 				height: 100%;
 				background-color: #fafafa;
 			}
+			
+			
+			
 		</style>
 	</head>
 
@@ -89,7 +93,7 @@
 		<p id="mui-progressbar" class="mui-progressbar mui-progressbar-infinite"></p>
 		<div id="content" class="mui-content">
 			<div class="mui-content-padded">
-				<h3 id='articlename'></h3>
+				<h3 id='articlename'>aaaa</h3>
 				<div class="mui-card-header mui-card-media thread-info">
 					<img src="" id='user_headimg'>
 					<div class="mui-media-body">
@@ -127,6 +131,8 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
 		<script type="text/template" id='comment_item'>
 			<dl class="comment-list hot" commentid="@comment.Id">
 				<dt>
@@ -197,7 +203,9 @@
 					alert("获取分享服务列表失败：" + e.message);
 				});
 			});
-			
+
+			mui.previewImage();
+
 			$(function() {
 				$('.emotion').qqFace({
 					assign: 'composeText',

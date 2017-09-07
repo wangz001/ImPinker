@@ -328,7 +328,10 @@
 					"css/icons-extra.css",
 					"js/commonUtil.js",
 					"js/qqFace/css/reset.css",
-					"js/qqFace/js/jquery.qqFace.js"
+					"js/qqFace/js/jquery.qqFace.js",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"css/imageviewer.css"
 				],
 				"refer": [],
 				"priority": 0
