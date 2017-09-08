@@ -28,12 +28,9 @@
                         </i>
                         <em class="userinfo">
                             @(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
-                            @TUtil.DateFormatToString(comment.CreateTime)
+                            <p>@(TUtil.DateFormatToString(comment.CreateTime))</p>
                         </em>
-                        <em class="commentvote">
-                            <a id="icon-star"><span class="mui-icon-extra mui-icon-extra-heart"></span></a>
-                            <span class="mui-icon mui-icon-compose"></span>
-                        </em>
+
                     </dt>
                     <dd>
                         <p>
@@ -43,7 +40,7 @@
                     </dd>
 
                     @{
-                if (comment.ToCommentId>0&&comment.ListToComment.Count > 0)
+                if (comment.ToCommentId > 0 && comment.ListToComment.Count > 0)
                 {
                     var item = comment.ListToComment[0];
                     <dl class="quote">
@@ -52,8 +49,8 @@
                                 <img src="@item.HeadImage">
                             </i>
                             <em class="userinfo">
-                                @string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName
-                                @TUtil.DateFormatToString(item.CreateTime)
+                                @(string.IsNullOrEmpty(user.ShowName) ? user.UserName : user.ShowName)
+                                <p>@(TUtil.DateFormatToString(comment.CreateTime))</p>
                             </em>
                         </dt>
                         <dd>
@@ -73,5 +70,3 @@
         }
     }
 </div>
-
-

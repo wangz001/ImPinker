@@ -110,22 +110,28 @@
 
             #comment-container .comment .comment-list dt .headpic {
                 display: inline-block;
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 border-radius: 3px;
                 vertical-align: middle;
                 overflow: hidden;
             }
 
                 #comment-container .comment .comment-list dt .headpic img {
-                    width: 20px;
-                    height: 20px;
+                    width: 30px;
+                    height: 30px;
                 }
 
             #comment-container .comment .comment-list dt .userinfo {
                 display: inline-block;
                 vertical-align: middle;
                 font-size: 12px;
+                color: #5b4646;
+                margin-top: 8px;
+            }
+            #comment-container .comment .comment-list dt .userinfo p{
+                vertical-align: middle;
+                font-size: 10px;
                 color: #5b4646;
             }
 
@@ -155,7 +161,7 @@
 
         #comment-container .comment .comment-list dd {
             margin-top: 10px;
-            margin-left: 10px;
+            margin-left: 30px;
         }
 
             #comment-container .comment .comment-list dd p {
@@ -193,6 +199,7 @@
             border: .5px solid #f8f8fb;
             border-radius: 5px;
             margin-top: 10px;
+            margin-left:25px;
         }
 
             #comment-container .comment .comment-list .quote dd p {
