@@ -295,7 +295,7 @@ namespace ImBLL
                 ArticleName = article.ArticleName,
                 Url = article.Url,
                 Userid = article.UserId.ToString(CultureInfo.InvariantCulture),
-                CoverImage = article.CoverImage,
+                CoverImage = ImageUrlHelper.GetArticleImage(article.CoverImage, 360),
                 KeyWords = article.KeyWords,
                 Description = article.Description,
                 Company = article.Company,

@@ -69,6 +69,23 @@
 				background-color: #fafafa;
 			}
 			
+			.mui-bar-footer {
+				display: flex;
+				-webkit-box-pack: justify;
+				-webkit-justify-content: space-between;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+			}
+			
+			.mui-bar-footer .mui-btn {
+				margin-bottom: 13px;
+			}
+			
+			#composeText {
+				margin-bottom: 5px;
+			}
+			
 			.mui-bar-footer .mui-icon,
 			.mui-bar-footer .mui-icon-extra {
 				padding-right: 30px;
@@ -82,9 +99,6 @@
 				height: 100%;
 				background-color: #fafafa;
 			}
-			
-			
-			
 		</style>
 	</head>
 
@@ -252,7 +266,6 @@
 							}, function() {
 								mui.toast("分享给好友成功");
 							}, function(e) {
-								alert("分享失败：" + e.message);
 								mui.toast("取消分享");
 							});
 							break;

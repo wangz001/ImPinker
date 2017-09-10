@@ -16,7 +16,7 @@
 		});
 		//获取上一个页面的id
 		var self = plus.webview.currentWebview();
-		var lastViewid=self.lastviewid;
+		var lastViewid = self.lastviewid;
 		console.log(lastViewid);
 		var toMain = function() {
 			//使用定时器的原因：
@@ -28,23 +28,22 @@
 			//					mainPage.show("pop-in");
 			//				}
 			//			}, 20);
-			var topView=plus.webview.getWebviewById(lastViewid);
+			var topView = plus.webview.getWebviewById(lastViewid);
 			console.log(topView.id);
 			topView.reload();
 			console.log("to main");
-			setTimeout(function(){
+			setTimeout(function() {
 				mui.back();
-			},200);
+			}, 200);
 		};
 
 		if(state.token && 1 == 8) {
 			//每次打开应用。重新登录，获取token
-			app.login(state, function(err) {
-				if(err) {
-					plus.nativeUI.toast(err);
+			app.login(state, function(data) {
+				if(data.IsSuccess == 0) {
+					plus.nativeUI.toast(data);
 					return;
 				}
-				console.log("自动登录。。。tomain");
 				toMain();
 			});
 		} else {
@@ -137,13 +136,14 @@
 			};
 
 			console.log(loginInfo.account + "------" + loginInfo.password)
-			app.login(loginInfo, function(err) {
-				if(err) {
-					plus.nativeUI.toast(err);
+			app.login(loginInfo, function(data) {
+				if(data.IsSuccess == 1) {
+					console.log("开始登录。。。tomain");
+					toMain();
+				} else {
+					plus.nativeUI.toast(data.Description);
 					return;
 				}
-				console.log("开始登录。。。tomain");
-				toMain();
 			});
 		});
 		$.enterfocus('#login-form input', function() {
