@@ -240,7 +240,7 @@
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"retina40": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina47":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina55":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina55l":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png"
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
@@ -248,7 +248,7 @@
 						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
 						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
 						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"portrait-retina7": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
 						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
 						"landscape-retina7": "C:/Users/wangzheng/Desktop/车酷/31bcd6299f9f0c0be6624f7806a7ce1f.png"
 					}

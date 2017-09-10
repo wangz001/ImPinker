@@ -46,10 +46,18 @@
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
 		if(loginInfo.account.length < 5) {
-			return callback('账号最短为 5 个字符');
+			return callback({
+				IsSuccess: 0,
+				Data: "",
+				Description: '账号最短为 5 个字符'
+			});
 		}
 		if(loginInfo.password.length < 2) {
-			return callback('密码最短为 6 个字符');
+			return callback({
+				IsSuccess: 0,
+				Data: "",
+				Description: '密码最短为 6 个字符'
+			});
 		}
 		//登录验证
 		mui.ajax('http://api.myautos.cn/api/Account/Login', {
@@ -69,26 +77,31 @@
 					console.log("返回的token。。。" + token);
 					return owner.createState(loginInfo, token, callback);
 				} else {
-					return callback(data.Description);
+					return callback(data);
 				}
 			},
 			error: function(xhr, type, errorThrown) {
 				//异常处理；
 				console.log(type);
+				return callback({
+					IsSuccess: 0,
+					Data: "",
+					Description: type
+				});
 			}
 		});
 	};
 	///第三方登录  
-	owner.loginOAuth=function(loginInfo, callback){
+	owner.loginOAuth = function(loginInfo, callback) {
 		callback = callback || $.noop;
 		loginInfo = loginInfo || {};
 		loginInfo.openid = loginInfo.openid || '';
 		loginInfo.oauthtype = loginInfo.oauthtype || '';
-		loginInfo.showname=loginInfo.showname ||'';
-		loginInfo.headimage=loginInfo.headimage||'';
+		loginInfo.showname = loginInfo.showname || '';
+		loginInfo.headimage = loginInfo.headimage || '';
 		//
-		loginInfo.account=loginInfo.account || '';
-		loginInfo.password=loginInfo.password || '';
+		loginInfo.account = loginInfo.account || '';
+		loginInfo.password = loginInfo.password || '';
 		if(loginInfo.account.openid < 5) {
 			return callback('账号最短为 5 个字符');
 		}
@@ -100,8 +113,8 @@
 			data: {
 				OpenId: loginInfo.OpenId,
 				OauthType: loginInfo.OauthType,
-				ShowName:loginInfo.ShowName,
-				HeadImage:loginInfo.HeadImage
+				ShowName: loginInfo.ShowName,
+				HeadImage: loginInfo.HeadImage
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
@@ -124,25 +137,33 @@
 			}
 		});
 	}
-	
-	
+
 	//更新token
-	owner.updateToken=function(callback){
-		var state = owner.getState();//用户信息
-		console.log("aaa:"+state.account+";;"+state.password)
-		if(state.account&&state.password) {
+	owner.updateToken = function(callback) {
+		var state = owner.getState(); //用户信息
+		console.log("aaa:" + state.account + ";;" + state.password);
+		var mydate = new Date();
+		var nowTime=mydate.toLocaleString(); //获取当前时间
+		console.log(nowTime);
+		console.log(state.lastUpdateTime);
+		//console.log(nowTime-state.lastUpdateTime);
+//		if(state.account && state.password&&state.lastUpdateTime&&true) {
+//			//判断最后一次更新时间，小于1小时，不更新
+//			
+//			//return
+//		}
+		if(state.account && state.password) {
 			//toMain();
 			//每次打开应用。重新登录，获取token
-			owner.login(state, function(err) {
-				console.log("adad"+err);
-				if(err) {
-					plus.nativeUI.toast(err);
-					return callback(err);
-				}
-				return callback();
+			owner.login(state, function(data) {
+				return callback(data);
 			});
-		}else{
-			return callback();
+		} else {
+			return callback({
+				IsSuccess: 0,
+				Data: "",
+				Description: "用户名和密码为空"
+			});
 		}
 	}
 
@@ -151,10 +172,15 @@
 		state.account = loginInfo.account;
 		state.password = loginInfo.password;
 		state.token = token;
+		state.lastUpdateTime=new Date().toLocaleString();
 		owner.setState(state);
-		return callback();
+		return callback({
+			IsSuccess: 1,
+			Data: token,
+			Description: "更新token成功"
+		});
 	};
-	
+
 	/**
 	 * 新用户注册
 	 **/
@@ -259,12 +285,12 @@
 	 * 设置应用本地配置
 	 **/
 	owner.getSettings = function() {
-			var settingsText = localStorage.getItem('$settings') || "{}";
-			return JSON.parse(settingsText);
-		}
-		/**
-		 * 获取本地是否安装客户端
-		 **/
+		var settingsText = localStorage.getItem('$settings') || "{}";
+		return JSON.parse(settingsText);
+	}
+	/**
+	 * 获取本地是否安装客户端
+	 **/
 	owner.isInstalled = function(id) {
 		if(id === 'qihoo' && mui.os.plus) {
 			return true;

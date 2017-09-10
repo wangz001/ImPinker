@@ -87,9 +87,12 @@
 					self.append(sub);
 				}
 				//更新token
-				app.updateToken(function(err) {
-					if(err) {
-						console.log('更新token失败' + err);
+				app.updateToken(function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1) {
+						console.log('更新token成功：' + data.Data);
+					} else {
+						console.log('更新token失败' + data.Description);
 					}
 				});
 				//--双击退出
@@ -194,14 +197,14 @@
 							});
 							break;
 						case 3:
-//							mui.openWindow({
-//								url: "view/article/youji_new.html",
-//								id: "youji_new",
-//								show: {
-//									aniShow: 'slide-in-right',
-//									duration: 100
-//								}
-//							});
+							//							mui.openWindow({
+							//								url: "view/article/youji_new.html",
+							//								id: "youji_new",
+							//								show: {
+							//									aniShow: 'slide-in-right',
+							//									duration: 100
+							//								}
+							//							});
 
 							mui.openWindow({
 								url: "view/article/youji_new_selectweibo.html",
