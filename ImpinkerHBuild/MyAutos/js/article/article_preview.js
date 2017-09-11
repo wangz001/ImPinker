@@ -4,6 +4,7 @@ $('.mui-icon-compose').bind('click', function() {
 });
 
 function showComment() {
+	location.hash="#comment"; 
 	$(".mui-bar-footer a").hide();
 	$('#composeText').show();
 	$('#composeText').focus();

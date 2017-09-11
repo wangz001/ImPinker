@@ -194,6 +194,37 @@
 			mui.toast('压缩失败！' + JSON.stringify(zipe))
 		});
 	}
+	
+	//根据宽高压缩图片(深度压缩，解决苹果手机拍照压缩过大问题)
+	owner.compressImageByHeightWeight = function(imgpath,width,height, callback) {
+		callback = callback || $.noop;
+		var name = imgpath.substr(imgpath.lastIndexOf('/') + 1);
+		var zipW=0;
+		var zipH=0;
+		if(width>height){
+			zipW=1200;
+			zipH=zipW*height/width;
+		}else{
+			zipH=900;
+			zipW=zipH*width/height;
+		}
+		//ios拍照压缩后尺寸太大。暂时处理
+		zipW=zipW/2;
+		zipH=zipH/2;
+		console.log("name-------:" + name);
+		plus.zip.compressImage({
+			src: imgpath,
+			dst: '_doc/small/' + name,
+			overwrite: true,
+			width: zipW+"px",
+			height:zipH+"px",
+			quality: 20
+		}, function(zip) {
+			return callback(zip);
+		}, function(zipe) {
+			mui.toast('压缩失败！' + JSON.stringify(zipe))
+		});
+	}
 
 }(mui, window.commonUtil = {}));
 

@@ -260,10 +260,16 @@
 					var imgpath = filesArr[i];
 					commonUtil.compressImage(imgpath, function(zip) {
 						if((zip.size / 1024) > 1024) {
-							//如果大于1M，继续压缩
+							//如果大于1M，继续压缩(ios拍照时会出现此问题)
 							console.log('sssss---' + zip.size);
-							commonUtil.compressImage(zip.target, function(zip2) {
+							commonUtil.compressImageByHeightWeight(zip.target,zip.width,zip.height, function(zip2) {
 								console.log('sssss222---' + zip2.size);
+								alert('sssss222---' + (zip2.size / 1024));
+								newarr.push(zip2.target);
+								if(newarr.length == filesArr.length) {
+									//所有图片都压缩完成
+									toWeiboNew(newarr);
+								}
 							});
 						} else {
 							newarr.push(zip.target);
@@ -271,22 +277,27 @@
 						console.log('fdfd---' + zip.size);
 						if(newarr.length == filesArr.length) {
 							//所有图片都压缩完成
-							mui.openWindow({
-								url: "view/weibo/weibo_new.html",
-								id: "newweibo",
-								extras: {
-									path: newarr.join(",") //扩展参数
-								},
-								createNew: true,
-								show: {
-									aniShow: 'slide-in-right',
-									duration: 200
-								}
-							});
+							toWeiboNew(newarr);
+						}
+					});
+				}
+				//跳转到发微博页
+				function toWeiboNew(imgArr) {
+					mui.openWindow({
+						url: "view/weibo/weibo_new.html",
+						id: "newweibo",
+						extras: {
+							path: imgArr.join(",") //扩展参数
+						},
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right',
+							duration: 200
 						}
 					});
 				}
 			}
+
 			//搜索页跳转；
 			document.getElementById('search').addEventListener('tap', function() {
 				mui.openWindow({
