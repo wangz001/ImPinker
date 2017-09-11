@@ -333,7 +333,9 @@
 					"js/mui.previewimage.js",
 					"css/imageviewer.css"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			},
 			"tab-webview-subpage-weibo.html": {

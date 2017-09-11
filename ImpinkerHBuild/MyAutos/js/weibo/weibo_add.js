@@ -219,22 +219,21 @@
 		}))
 	}, false)
 	weibo.send = function(content) {
-		commonUtil.uploadImageWithFomedata(url,weibo.files,content,function(data){
+		commonUtil.uploadImageWithFomedata(url, weibo.files, content, function(data) {
 			//上传成功，重置表单
-				if(data.IsSuccess === 1) {
-					plus.webview.getWebviewById("tab-webview-subpage-weibo.html").reload();
-					//获得主页面的webview
-					var main = plus.webview.currentWebview().parent();
-					//触发主页面的gohome事件
-					mui.fire(main, 'gohome');
-					mui.back();
-				}else{
-					console.log(JSON.stringify(data));
-					alert(data.Description);
-				}
+			if(data.IsSuccess === 1) {
+				plus.webview.getWebviewById("tab-webview-subpage-weibo.html").reload();
+				//获得主页面的webview
+				var main = plus.webview.currentWebview().parent();
+				//触发主页面的gohome事件
+				mui.fire(main, 'gohome');
+				mui.back();
+			} else {
+				console.log(JSON.stringify(data));
+				alert(data.Description);
+			}
 		})
-		
-		
+
 	};
 
 })();

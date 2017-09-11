@@ -31,8 +31,7 @@ $(document).ready(function() {
 	$("#sendComposs").bind('click', function() {
 		var txt = $("#composeText").val();
 		$("#composeText").val('');
-		$(".mui-bar-footer a").show();
-		$('#sendComposs').hide();
+		hideComment();
 		if(txt != null && txt.length > 0) {
 			SendComposs(txt);
 		}
@@ -108,6 +107,7 @@ function getArticleComment(articleid) {
 			var list = data.Data;
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
+				//console.log(JSON.stringify(item));
 				initComment(item);
 			}
 		}

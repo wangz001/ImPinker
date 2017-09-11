@@ -50,17 +50,19 @@
 		<script type="text/javascript" src="../../js/commonUtil.js" ></script>
 		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
 		<script type="application/javascript">
-			mui.init();
-			document.getElementById('youjidraft').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "../article/youji_mydraft.html",
-					id: "youji_mydraft",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
 			});
+//			document.getElementById('youjidraft').addEventListener('tap', function() {
+//				mui.openWindow({
+//					url: "../article/youji_mydraft.html",
+//					id: "youji_mydraft",
+//					show: {
+//						aniShow: 'slide-in-right',
+//						duration: 200
+//					}
+//				});
+//			});
 		</script>
 	</body>
 </html>
