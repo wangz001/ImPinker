@@ -138,6 +138,7 @@
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/storageUtil.js" ></script>
 		<script type="text/template" id='comment_item'>
 			<dl class="comment-list hot" commentid="@comment.Id">
 				<dt>
@@ -191,6 +192,12 @@
 				var articleid = self.articleid;
 				var articlename = self.articlename;
 				$("#title").html(articlename);
+				//判断是否赞过文章
+				var isVote=storageUtil.getArticleVote(articleid);
+				if(isVote){
+					$('#vote').removeClass("mui-icon-extra-heart");
+					$('#vote').addClass("mui-icon-extra-heart-filled");
+				}
 				getArticle(articleid);
 				getArticleComment(articleid);
 				// 扩展API加载完毕，现在可以正常调用扩展API

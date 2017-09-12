@@ -54,7 +54,6 @@ function sendVote(weiboid, isVote) {
 		"weiboid": weiboid
 	}
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
-		console.log(JSON.stringify(data));
 		if(data.IsSuccess == 1 ) {
 			storageUtil.setWeiboVote(weiboid);
 			console.log("aa");

@@ -4,7 +4,7 @@ $('.mui-icon-compose').bind('click', function() {
 });
 
 function showComment() {
-	location.hash="#comment"; 
+	location.hash = "#comment";
 	$(".mui-bar-footer a").hide();
 	$('#composeText').show();
 	$('#composeText').focus();
@@ -120,7 +120,7 @@ function initComment(item) {
 	var toTemplate = $('script[id="comment_item_to"]').html();
 	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
 		var htmlTo = toTemplate.temp(item.ListToComment[0]);
-		item.tocomment=htmlTo;
+		item.tocomment = htmlTo;
 		//articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
 	}
 	var articleHtmlStr = template.temp(item);
@@ -129,14 +129,19 @@ function initComment(item) {
 
 ///点赞
 $('#vote').bind('click', function() {
+	var heartType = $(this).attr("class");
+	if(heartType.indexOf("mui-icon-extra-heart-filled") != -1) {
+		mui.toast("您已赞过此文章~");
+		return;
+	}
 	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleVote";
 	var data = {
 		articleid: articleItem.Id
 	}
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
-		console.log(JSON.stringify(data));
-		if(data.IsSuccess == 1 ) {
+		if(data.IsSuccess == 1) {
 			mui.toast("谢谢支持~");
+			storageUtil.setArticleVote(articleItem.Id);
 		}
 		$('#vote').removeClass("mui-icon-extra-heart");
 		$('#vote').addClass("mui-icon-extra-heart-filled");

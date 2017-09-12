@@ -107,7 +107,8 @@
 			"js/qqFace/js/jquery.qqFace.js",
 			"js/mui.zoom.js",
 			"js/mui.previewimage.js",
-			"css/imageviewer.css"
+			"css/imageviewer.css",
+			"js/storageUtil.js"
 		],
 		"refer": [
 			"login.html"

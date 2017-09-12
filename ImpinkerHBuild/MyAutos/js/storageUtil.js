@@ -56,5 +56,27 @@
 		return false;
 	}
 	
+	
+	//保存我赞过的文章
+	owner.setArticleVote = function(articleid) {
+		var username='0';
+		if(userstate&&userstate.account){
+			username=userstate.account;
+		}
+		localStorage.setItem('$article_vote_'+username+"_"+articleid, "true"); //app本地存储（速度慢，但可跨域）
+	}
+	//获取我赞过的文章
+	owner.getArticleVote = function(articleid) {
+		var username='0';
+		if(userstate!=null){
+			username=userstate.account;
+		}
+		var isVote = localStorage.getItem('$article_vote_'+username+"_"+articleid);
+		if(isVote!=null&&isVote=="true"){
+			return true;
+		}
+		return false;
+	}
+	
 
 }(mui, window.storageUtil = {}));
