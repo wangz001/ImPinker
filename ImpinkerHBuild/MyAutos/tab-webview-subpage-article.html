@@ -195,6 +195,7 @@
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/commonUtil.js"></script>
+	<script type="text/javascript" src="js/storageUtil.js"></script>
 	<script type="text/template" id='article_item'>
 		<li class="mui-table-view-cell mui-media">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -256,10 +257,10 @@
 			pullRefresh: {
 				container: '#pullrefresh',
 				down: {
+					auto: true, //可选,默认false.自动上拉加载一次
 					callback: pulldownRefresh
 				},
 				up: {
-					auto: true, //可选,默认false.自动上拉加载一次
 					contentrefresh: '正在加载...',
 					callback: pullupRefresh
 				}
@@ -268,6 +269,15 @@
 		mui.plusReady(function() {
 			//填充轮播图内容
 			initSlide();
+			//显示文章缓存
+			var articleData = storageUtil.getFirstPageArticle();
+			if(articleData != null && articleData.length > 0) {
+				for (var i=0;i<articleData.length;i++) {
+					initItem(articleData[i],true);
+				}
+			}else{
+				mui.toast("网络暂时不给力奥~");
+			}
 		});
 		var allArticles = new Array();
 		var pageNum = 1;
@@ -285,13 +295,14 @@
 				pageSize: pageSize
 			}
 			commonUtil.sendRequestGet(apiPath, data, function(data) {
-				$("#articlelist").html("");
 				if(data.IsSuccess == 1 && data.Data != null) {
+					$("#articlelist").html("");
 					var list = data.Data;
 					for(var i = 0; i < list.length; i++) {
 						var item = list[i];
 						initItem(item, true);
 					}
+					storageUtil.setFirstPageArticle(list);
 					pageNum++;
 				} else {
 					mui.toast(data.Description);
@@ -302,7 +313,6 @@
 		/**
 		 * 上拉加载具体业务实现。设置时间戳。只加载最新更新的文章
 		 */
-
 		function pullupRefresh() {
 			var data = {
 				pageNum: pageNum,
@@ -348,31 +358,43 @@
 
 		//显示轮播图内容
 		function initSlide() {
+			//先显示本地缓存的数据
+			var sliderData = storageUtil.getSliderData();
+			if(sliderData != null && sliderData.length > 0) {
+				initHtml(sliderData);
+			}
+
+			//获取最新数据
 			var slidePath = 'http://api.myautos.cn/api/Article/GetSlideArticle';
 			var para = {};
 			commonUtil.sendRequestGet(slidePath, para, function(data) {
 				if(data.IsSuccess == 1 && data.Data != null) {
-					var list = data.Data;
-					var template_a = $('script[id="slide_item_a"]').html();
-					var template_b = $('script[id="slide_item_b"]').html();
-					var aTopStr = template_a.temp(list[list.length - 1]);
-					$("#sliderContent").append(aTopStr);
-					for(var i = 0; i < list.length; i++) {
-						var item = list[i];
-						var tempStr = template_b.temp(item);
-						$("#sliderContent").append(tempStr);
-					}
-					var aBottomStr = template_a.temp(list[0]);
-					$("#sliderContent").append(aBottomStr);
-					//获得slider插件对象
-					var gallery = mui('.mui-slider');
-					gallery.slider({
-						interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
-					});
-				}else{
-					console.log("111");
+					initHtml(data.Data);
+					//更新本地缓存数据
+					storageUtil.setSliderData(data.Data);
 				}
 			});
+
+			//显示轮播图
+			function initHtml(list) {
+				$("#sliderContent").html("");
+				var template_a = $('script[id="slide_item_a"]').html();
+				var template_b = $('script[id="slide_item_b"]').html();
+				var aTopStr = template_a.temp(list[list.length - 1]);
+				$("#sliderContent").append(aTopStr);
+				for(var i = 0; i < list.length; i++) {
+					var item = list[i];
+					var tempStr = template_b.temp(item);
+					$("#sliderContent").append(tempStr);
+				}
+				var aBottomStr = template_a.temp(list[0]);
+				$("#sliderContent").append(aBottomStr);
+				//获得slider插件对象
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+			}
 		}
 
 		/*

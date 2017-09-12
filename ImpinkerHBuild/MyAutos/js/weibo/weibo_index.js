@@ -30,17 +30,18 @@ function bindVote() {
 			var weiboid = this.getAttribute("weiboid");
 			console.log(count);
 			if(heartType.indexOf("mui-icon-extra-heart-filled") != -1) {
-				$(this).removeClass("mui-icon-extra-heart-filled");
-				$(this).addClass("mui-icon-extra-heart");
-				if(count > 0) {
-					$(this).find("em").html(parseInt(count) - 1);
-				}
-				mui.toast("取消点赞");
+//				$(this).removeClass("mui-icon-extra-heart-filled");
+//				$(this).addClass("mui-icon-extra-heart");
+//				if(count > 0) {
+//					$(this).find("em").html(parseInt(count) - 1);
+//				}
+				mui.toast("您已赞过此微博");
 			} else {
 				$(this).removeClass("mui-icon-extra-heart");
 				$(this).addClass("mui-icon-extra-heart-filled");
 				$(this).find("em").html(parseInt(count) + 1);
 				mui.toast("点赞成功！");
+				
 				sendVote(weiboid, false)
 			}
 		});
@@ -55,6 +56,7 @@ function sendVote(weiboid, isVote) {
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
 		console.log(JSON.stringify(data));
 		if(data.IsSuccess == 1 ) {
+			storageUtil.setWeiboVote(weiboid);
 			console.log("aa");
 		} else {
 			console.log("bb");

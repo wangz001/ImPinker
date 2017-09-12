@@ -42,7 +42,6 @@
 			type: typeStr, //HTTP请求类型
 			timeout: 10000, //超时时间设置为10秒；
 			success: function(data, status) {
-				console.log(status);
 				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {

@@ -310,7 +310,8 @@
 					"images/food.png",
 					null,
 					"css/icons-extra.css",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"js/storageUtil.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -360,7 +361,8 @@
 					"js/weibo/weibo_index.js",
 					"js/jquery.js",
 					"js/app.js",
-					"js/commonUtil.js"
+					"js/commonUtil.js",
+					"js/storageUtil.js"
 				],
 				"refer": [
 					"view/map/lbs.html",

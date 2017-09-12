@@ -120,6 +120,7 @@
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
+		<script type="text/javascript" src="js/storageUtil.js" ></script>
 		<script type="text/template" id="mui-card-item">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
@@ -138,7 +139,7 @@
 					</div>
 				</div>
 				<div class="mui-card-footer">
-					<span class="mui-icon-extra mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
+					<span class="mui-icon-extra $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
 					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em>$CommentCount$</em></span>
 					<span class="mui-icon mui-icon-map" weiboid='$Id$'></span>
 				</div>
@@ -162,6 +163,20 @@
 
 			});
 			mui.previewImage();
+
+			mui.plusReady(function() {
+				//显示微博缓存
+				var weiboData = storageUtil.getFirstPageWeibo();
+				if(weiboData != null && weiboData.length > 0) {
+					for(var i = 0; i < weiboData.length; i++) {
+						initWeiBoItemTemplate(weiboData[i]);
+					}
+					bindVote();
+				} else {
+					mui.toast("网络暂时不给力奥~");
+				}
+			});
+
 			var pageNum = 1;
 			var pageSize = 20;
 			var weiboApiPath = 'http://api.myautos.cn/api/WeiBo/GetWeiBoList';
@@ -184,6 +199,7 @@
 							var item = list[i];
 							initWeiBoItemTemplate(item);
 						}
+						storageUtil.setFirstPageWeibo(list);
 						bindVote();
 						pageNum++;
 					} else {
@@ -242,6 +258,9 @@
 					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 				}
 				item.imglist = imgHtmlStr;
+				//判断我是否赞过此微博
+				var isVote=storageUtil.getWeiboVote(item.Id);
+				item.isVote=isVote? "mui-icon-extra-heart-filled":"mui-icon-extra-heart";
 				var cardStr = templateCard.temp(item);
 				$(".mui-scroll").append(cardStr);
 			}

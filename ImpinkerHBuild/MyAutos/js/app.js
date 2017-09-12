@@ -159,6 +159,7 @@
 				return callback(data);
 			});
 		} else {
+			alert("用户名或密码为空");
 			return callback({
 				IsSuccess: 0,
 				Data: "",
@@ -235,6 +236,7 @@
 	 **/
 	owner.getState = function() {
 		var stateText = localStorage.getItem('$state') || "{}";
+		//var stateText = plus.storage.getItem('$state') || "{}";
 		return JSON.parse(stateText);
 	};
 
@@ -243,7 +245,8 @@
 	 **/
 	owner.setState = function(state) {
 		state = state || {};
-		localStorage.setItem('$state', JSON.stringify(state));
+		localStorage.setItem('$state', JSON.stringify(state));  //h5本地存储
+		//plus.storage.setItem('$state', JSON.stringify(state));  //app本地存储（速度慢，但可跨域）
 		var settings = owner.getSettings();
 		settings.gestures = '';
 		owner.setSettings(settings);

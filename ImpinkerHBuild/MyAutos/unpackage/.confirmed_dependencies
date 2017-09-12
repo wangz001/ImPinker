@@ -16,7 +16,8 @@
 			"images/login-1.png",
 			"js/jquery.js",
 			"js/app.js",
-			"js/commonUtil.js"
+			"js/commonUtil.js",
+			"js/storageUtil.js"
 		],
 		"refer": [
 			"view/weibo/weibo_comment.html",
@@ -53,7 +54,8 @@
 			"js/commonUtil.js",
 			"js/jquery.js",
 			"css/icons-extra.css",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"js/storageUtil.js"
 		],
 		"refer": [
 			"view/article/preview.html"
