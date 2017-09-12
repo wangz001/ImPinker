@@ -233,7 +233,8 @@
 			"js/jquery.js"
 		],
 		"refer": [
-			"tab-webview-main.html"
+			"tab-webview-main.html",
+			"reg.html"
 		]
 	},
 	"view/map/lbs.html": {
@@ -414,6 +415,16 @@
 			"js/mui.min.js",
 			"js/cropper/cropper.js",
 			"css/mui.min.css",
+			"js/jquery.js"
+		]
+	},
+	"reg.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/reg.css",
+			"css/mui.min.css",
+			"js/reg.js",
 			"js/jquery.js"
 		]
 	}

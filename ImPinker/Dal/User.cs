@@ -380,7 +380,7 @@ namespace ImDal
 	    public Users GetModelByPhoneNum(string phoneNum)
 	    {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId from Users ");
+            strSql.Append("select  top 1 Id,UserName,ShowName,PassWord,Sex,PhoneNum,Email,Age,ImgUrl,IsEnable,CreateTime,UpdateTime,AspNetId,OAuthType from Users ");
             strSql.Append(" where PhoneNum=@PhoneNum");
             SqlParameter[] parameters = {
 					new SqlParameter("@PhoneNum", SqlDbType.VarChar){Value = phoneNum}

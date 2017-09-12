@@ -10,9 +10,10 @@
 	 * @param {Object} callback
 	 */
 	owner.sendCheckNum = function(phonenum, callback) {
-		if(!checkPhone(phonenum)) {
+		if(!owner.checkPhone(phonenum)) {
 			return callback('手机号码不正确');
 		}
+		callback = callback || $.noop;
 		mui.ajax('http://api.myautos.cn/api/account/SendCheckNum', {
 			data: {
 				phonenum: phonenum,
@@ -25,15 +26,14 @@
 				'Content-Type': 'application/json'
 			},
 			success: function(data) {
-				if(data.IsSuccess == 1) {
-					return callback(data.Description);
-				} else {
-					console.log(data.Description);
-					return callback(data.Description);
-				}
+				return callback(data);
 			},
 			error: function(xhr, type, errorThrown) {
-				console.log(type + xhr + errorThrown);
+				return callback({
+					IsSuccess: 0,
+					Data: JSON.stringify(type) + "----" + JSON.stringify(errorThrown),
+					Description: JSON.stringify(errorThrown)
+				});
 			}
 		});
 	};
@@ -143,15 +143,15 @@
 		var state = owner.getState(); //用户信息
 		console.log("aaa:" + state.account + ";;" + state.password);
 		var mydate = new Date();
-		var nowTime=mydate.toLocaleString(); //获取当前时间
+		var nowTime = mydate.toLocaleString(); //获取当前时间
 		console.log(nowTime);
 		console.log(state.lastUpdateTime);
 		//console.log(nowTime-state.lastUpdateTime);
-//		if(state.account && state.password&&state.lastUpdateTime&&true) {
-//			//判断最后一次更新时间，小于1小时，不更新
-//			
-//			//return
-//		}
+		//		if(state.account && state.password&&state.lastUpdateTime&&true) {
+		//			//判断最后一次更新时间，小于1小时，不更新
+		//			
+		//			//return
+		//		}
 		if(state.account && state.password) {
 			//toMain();
 			//每次打开应用。重新登录，获取token
@@ -173,7 +173,7 @@
 		state.account = loginInfo.account;
 		state.password = loginInfo.password;
 		state.token = token;
-		state.lastUpdateTime=new Date().toLocaleString();
+		state.lastUpdateTime = new Date().toLocaleString();
 		owner.setState(state);
 		return callback({
 			IsSuccess: 1,
@@ -245,7 +245,7 @@
 	 **/
 	owner.setState = function(state) {
 		state = state || {};
-		localStorage.setItem('$state', JSON.stringify(state));  //h5本地存储
+		localStorage.setItem('$state', JSON.stringify(state)); //h5本地存储
 		//plus.storage.setItem('$state', JSON.stringify(state));  //app本地存储（速度慢，但可跨域）
 		var settings = owner.getSettings();
 		settings.gestures = '';
@@ -257,7 +257,7 @@
 		return(email.length > 3 && email.indexOf('@') > -1);
 	};
 
-	var checkPhone = function(phonenum) {
+	owner.checkPhone = function(phonenum) {
 		phonenum = phonenum || '';
 		if(!(/^1[34578]\d{9}$/.test(phonenum))) {
 			return false;

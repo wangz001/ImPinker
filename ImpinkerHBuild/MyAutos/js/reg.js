@@ -1,6 +1,6 @@
-(function($, doc) {
-	$.init();
-	$.plusReady(function() {
+(function(regUtil, doc) {
+	mui.init();
+	mui.plusReady(function() {
 		var settings = app.getSettings();
 		var regButton = doc.getElementById('reg');
 		var accountBox = doc.getElementById('account');
@@ -38,7 +38,7 @@
 					plus.webview.currentWebview().close("none");
 				});
 				//若启动页不是登录页，则需通过如下方式打开登录页
-				$.openWindow({
+				mui.openWindow({
 					url: 'login.html',
 					id: 'login',
 					show: {
@@ -47,17 +47,48 @@
 				});
 			});
 		});
+
+		var timecount = 50;
 		sendCheckButton.addEventListener('tap', function(event) {
-			var phonenum = accountBox.value;
-			console.log(phonenum);
-			app.sendCheckNum(phonenum, function(err) {
-				if(err) {
-					plus.nativeUI.toast(err);
+			console.log(timecount);
+			if(timecount == 50) {
+				var phonenum = accountBox.value;
+				console.log(phonenum);
+				if(!app.checkPhone(phonenum)) {
+					mui.toast("请填写正确的手机号");
 					return;
 				}
-				plus.nativeUI.toast('验证码发送成功');
-				return;
-			});
+				app.sendCheckNum(phonenum, function(data) {
+					if(data.IsSuccess == 1) {
+						plus.nativeUI.toast('验证码发送成功');
+						updateSenBtn();
+						return;
+					}
+					plus.nativeUI.toast(data.Description);
+					return;
+				});
+			} else {
+				mui.toast("请稍后再试");
+			}
+
+			function updateSenBtn() {
+				$("#btn_sendchecknum").html(timecount + "秒后重新发送");
+				console.log(timecount);
+				if(timecount > 1) {
+					//稍后重新发送
+					setTimeout(function() {
+						timecount--;
+						updateSenBtn();
+					}, 1000);
+				} else {
+					setTimeout(function() {
+						$("#btn_sendchecknum").html("发送验证码");
+						timecount = 50;
+					}, 1200);
+
+				}
+			}
+
 		});
 	});
 }(mui, document));

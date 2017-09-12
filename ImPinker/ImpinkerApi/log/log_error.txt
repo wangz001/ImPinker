@@ -10,3 +10,21 @@ System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 
    在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
    在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
 [Footer]
+[Header]
+2017-09-12 22:46:29,906 [7] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/account/SendCheckNum
+Referer:
+System.ArgumentException: 列“OAuthType”不属于表 ds。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 ImDal.User.DataRowToModel(DataRow row) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 238
+   在 ImDal.User.GetModelByPhoneNum(String phoneNum) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 392
+   在 ImBLL.UserBll.GetModelByPhoneNum(String phoneNum) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 194
+   在 ImpinkerApi.Controllers.AccountController.SendCheckNum(SendCheckNumViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 235
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]

@@ -37,7 +37,7 @@
 			}, 200);
 		};
 
-		if(state.token && 1 == 8) {
+		if(state.account && state.password) {
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(data) {
 				if(data.IsSuccess == 0) {
@@ -49,7 +49,8 @@
 		} else {
 			app.setState(null);
 			//第三方登录
-			var authBtns = ['weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
+			//var authBtns = ['weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
+			var authBtns = []; //配置业务支持的第三方登录
 			var auths = {};
 			var oauthArea = doc.querySelector('.oauth-area');
 			plus.oauth.getServices(function(services) {
