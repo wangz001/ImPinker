@@ -142,6 +142,9 @@ $('#vote').bind('click', function() {
 		if(data.IsSuccess == 1) {
 			mui.toast("谢谢支持~");
 			storageUtil.setArticleVote(articleItem.Id);
+		}else{
+			mui.toast("谢谢支持~");
+			storageUtil.setArticleVote(articleItem.Id);
 		}
 		$('#vote').removeClass("mui-icon-extra-heart");
 		$('#vote').addClass("mui-icon-extra-heart-filled");
