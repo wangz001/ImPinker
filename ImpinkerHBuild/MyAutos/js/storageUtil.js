@@ -37,6 +37,7 @@
 	var userstate = JSON.parse(localStorage.getItem('$state') || "{}");
 	//保存我赞过的weibo
 	owner.setWeiboVote = function(weiboid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
 		var username='0';
 		if(userstate&&userstate.account){
 			username=userstate.account;
@@ -45,6 +46,7 @@
 	}
 	//获取我赞过的weibo
 	owner.getWeiboVote = function(weiboid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
 		var username='0';
 		if(userstate!=null){
 			username=userstate.account;
@@ -59,6 +61,7 @@
 	
 	//保存我赞过的文章
 	owner.setArticleVote = function(articleid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
 		var username='0';
 		if(userstate&&userstate.account){
 			username=userstate.account;
@@ -67,6 +70,7 @@
 	}
 	//获取我赞过的文章
 	owner.getArticleVote = function(articleid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
 		var username='0';
 		if(userstate!=null){
 			username=userstate.account;

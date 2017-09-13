@@ -37,7 +37,7 @@
 			}, 200);
 		};
 
-		if(state.account && state.password) {
+		if(state.account && 1>2) {
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(data) {
 				if(data.IsSuccess == 0) {

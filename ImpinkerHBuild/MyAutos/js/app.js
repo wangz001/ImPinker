@@ -158,7 +158,7 @@
 				return callback(data);
 			});
 		} else {
-			alert("用户名或密码为空");
+			//alert("用户名或密码为空");
 			return callback({
 				IsSuccess: 0,
 				Data: "",

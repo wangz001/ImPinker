@@ -93,6 +93,16 @@
 						console.log('更新token成功：' + data.Data);
 					} else {
 						console.log('更新token失败' + data.Description);
+						mui.toast('更新token失败:' + data.Description);
+						//再次尝试
+						setTimeout(function() {
+							app.updateToken(function(data) {
+								console.log(JSON.stringify(data));
+								if(data.IsSuccess == 1) {
+									console.log('更新token成功：' + data.Data);
+								}
+							});
+						}, 1000 * 5);
 					}
 				});
 				//--双击退出
@@ -262,7 +272,7 @@
 						if((zip.size / 1024) > 1024) {
 							//如果大于1M，继续压缩(ios拍照时会出现此问题)
 							console.log('sssss---' + zip.size);
-							commonUtil.compressImageByHeightWeight(zip.target,zip.width,zip.height, function(zip2) {
+							commonUtil.compressImageByHeightWeight(zip.target, zip.width, zip.height, function(zip2) {
 								console.log('sssss222---' + zip2.size);
 								alert('sssss222---' + (zip2.size / 1024));
 								newarr.push(zip2.target);
