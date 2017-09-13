@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls.Expressions;
+using ImModel;
 
 namespace ImpinkerApi.Models
 {
@@ -109,5 +110,26 @@ namespace ImpinkerApi.Models
         public int OpreateType { get; set; }
     }
 
+
+    /// <summary>
+    /// 返回用户详细信息类
+    /// </summary>
+    public class UserReturnViewModel
+    {
+        /// <summary>
+        /// 登录成功后，生成的token
+        /// </summary>
+        public string Token { get; set; }
+
+        public int Id { get; set; }
+
+        public string UserName { get; set; }
+
+        public string ShowName { get; set; }
+        public string ImgUrl { get; set; }
+        public string PhoneNum { get; set; }
+        public string Email { get; set; }
+        public int Sex { get; set; }
+    }
     
 }

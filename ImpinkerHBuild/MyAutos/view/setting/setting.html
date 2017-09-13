@@ -42,14 +42,14 @@
 							<li class="mui-table-view-cell mui-media">
 								<a class="mui-navigate-right" id="account">
 									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
-									<div class="mui-media-body">
+									<div class="mui-media-body" id="username">
 										Hello MUI
 										<p class='mui-ellipsis'>账号:hellomui</p>
 									</div>
 								</a>
 							</li>
 						</ul>
-						
+
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
 								<a href="#notifications" class="mui-navigate-right">新消息通知</a>
@@ -362,8 +362,22 @@
 	</body>
 	<script src="../../js/mui.js"></script>
 	<script src="../../js/mui.view.js "></script>
+	<script type="text/javascript" src="../../js/jquery.js" ></script>
+	<script type="text/javascript" src="../../js/app.js" ></script>
 	<script>
 		mui.init();
+		mui.plusReady(function() {
+			var user = app.getState();
+			var showName = user.showname == "" ? user.account : user.showname;
+			var nameStr = showName + '<p class=\'mui-ellipsis\'>车酷号:' + user.account + '</p>'
+			$("#username").html(nameStr);
+			if(user.imgurl != "") {
+				$("#head-img").attr("src", user.imgurl);
+			}else {
+					defaultImg();
+			}
+		});
+
 		//初始化单页view
 		var viewApi = mui('#app').view({
 			defaultPage: '#setting'
@@ -373,24 +387,17 @@
 
 		document.getElementById("account").addEventListener('tap', function() {
 			mui.openWindow({
-					url: "setting-account.html",
-					id: "setting-account",
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
+				url: "setting-account.html",
+				id: "setting-account",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
 		});
 
 		//分享操作
 		var shares = {};
-
-		
-
-		setTimeout(function() {
-			defaultImg();
-			
-		}, 500);
 
 		//分享链接点击事件
 		document.getElementById("share").addEventListener('tap', function() {
@@ -533,7 +540,7 @@
 				//				console.log(e.detail.page.id + ' back');
 			});
 		})(mui);
-		
+
 		function defaultImg() {
 			if(mui.os.plus) {
 				plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
@@ -546,7 +553,7 @@
 				document.getElementById("head-img").src = '../../images/logo.png';
 			}
 		}
-		
+
 		document.getElementById("welcome").addEventListener('tap', function(e) {
 			//显示启动导航
 			mui.openWindow({
@@ -561,46 +568,6 @@
 				}
 			});
 		});
-
-		function initImgPreview() {
-			var imgs = document.querySelectorAll("img.mui-action-preview");
-			imgs = mui.slice.call(imgs);
-			if(imgs && imgs.length > 0) {
-				var slider = document.createElement("div");
-				slider.setAttribute("id", "__mui-imageview__");
-				slider.classList.add("mui-slider");
-				slider.classList.add("mui-fullscreen");
-				slider.style.display = "none";
-				slider.addEventListener("tap", function() {
-					slider.style.display = "none";
-				});
-				slider.addEventListener("touchmove", function(event) {
-					event.preventDefault();
-				})
-				var slider_group = document.createElement("div");
-				slider_group.setAttribute("id", "__mui-imageview__group");
-				slider_group.classList.add("mui-slider-group");
-				imgs.forEach(function(value, index, array) {
-					//给图片添加点击事件，触发预览显示；
-					value.addEventListener('tap', function() {
-						slider.style.display = "block";
-						_slider.refresh();
-						_slider.gotoItem(index, 0);
-					})
-					var item = document.createElement("div");
-					item.classList.add("mui-slider-item");
-					var a = document.createElement("a");
-					var img = document.createElement("img");
-					img.setAttribute("src", value.src);
-					a.appendChild(img)
-					item.appendChild(a);
-					slider_group.appendChild(item);
-				});
-				slider.appendChild(slider_group);
-				document.body.appendChild(slider);
-				var _slider = mui(slider).slider();
-			}
-		}
 
 		if(mui.os.stream) {
 			document.getElementById("check_update").display = "none";

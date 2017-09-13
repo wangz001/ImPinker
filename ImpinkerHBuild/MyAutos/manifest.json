@@ -478,7 +478,9 @@
 					"js/mui.view.js",
 					"fonts/mui.ttf",
 					"css/setting/setting.css",
-					"images/logo.png"
+					"images/logo.png",
+					"js/app.js",
+					"js/jquery.js"
 				],
 				"refer": [
 					"view/setting/setting-account.html"
@@ -506,7 +508,10 @@
 					"js/mui.zoom.js",
 					"js/mui.previewimage.js",
 					"css/imageviewer.css",
-					"images/logo.png"
+					"images/logo.png",
+					"js/app.js",
+					"js/storageUtil.js",
+					"js/jquery.js"
 				],
 				"refer": [
 					"view/setting/setting-imgcut.html"

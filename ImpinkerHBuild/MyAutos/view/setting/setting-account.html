@@ -24,21 +24,21 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a>姓名<span class="mui-pull-right">Hbuilder</span></a>
+					<a>姓名<span id="username" class="mui-pull-right">Hbuilder</span></a>
 				</li>
-				<li class="mui-table-view-cell">
+				<!--<li class="mui-table-view-cell">
 					<a>HBuilder账号<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
-				</li>
+				</li>-->
 			</ul>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a>QQ号<span class="mui-pull-right">88887777</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a>手机号<span class="mui-pull-right">18601234567</span></a>
+					<a>手机号<span id="phonenum" class="mui-pull-right">18601234567</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a>邮箱地址<span class="mui-pull-right">hbuilder@dcloud.io</span></a>
+					<a>邮箱地址<span id="emailstr" class="mui-pull-right">hbuilder@dcloud.io</span></a>
 				</li>
 			</ul>
 
@@ -46,6 +46,8 @@
 
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			document.getElementById("head-img").addEventListener('tap', function(e) {
@@ -54,11 +56,20 @@
 
 			mui.plusReady(function() {
 				setTimeout(function() {
+					initImgPreview();
+				}, 300);
+				//显示头像及用户名等
+				//username
+				var user = app.getState();
+				var showName = user.showname == "" ? user.account : user.showname;
+				$("#username").html(showName);
+				if(user.imgurl != "") {
+					$("#head-img").attr("src", user.imgurl);
+				} else {
 					defaultImg();
-					setTimeout(function() {
-						initImgPreview();
-					}, 300);
-				}, 500);
+				}
+				$("#phonenum").html(user.phonenum);
+				$("#emailstr").html(user.email);
 			});
 
 			function defaultImg() {

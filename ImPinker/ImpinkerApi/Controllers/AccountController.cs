@@ -25,7 +25,7 @@ namespace ImpinkerApi.Controllers
             var password = loginViewModel.Password;
             var isSuccess = false;
             var description = string.Empty;
-            var token = string.Empty;
+            var returnUserVm = new UserReturnViewModel();
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
                 //username  用户名或者电话号码
@@ -43,7 +43,15 @@ namespace ImpinkerApi.Controllers
                     isSuccess = true;
                     description = "登录成功";
                     var tokenStr = TokenHelper.AddOrUpdateToken(username);
-                    token = tokenStr;
+                    returnUserVm.Token = tokenStr;
+                    //返回用户详细信息
+                    returnUserVm.Id = users.Id;
+                    returnUserVm.UserName = users.UserName;
+                    returnUserVm.ShowName = users.ShowName;
+                    returnUserVm.ImgUrl = ImageUrlHelper.GetHeadImageUrl(users.ImgUrl, 180);
+                    returnUserVm.PhoneNum = users.PhoneNum;
+                    returnUserVm.Email = users.Email;
+                    returnUserVm.Sex = users.Sex? 1:0;
                 }
             }
             else
@@ -53,7 +61,7 @@ namespace ImpinkerApi.Controllers
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = isSuccess ? 1 : 0,
-                Data = token,
+                Data = returnUserVm,
                 Description = description
             });
         }
@@ -68,16 +76,16 @@ namespace ImpinkerApi.Controllers
             if (!string.IsNullOrEmpty(loginViewModel.OpenId) && !string.IsNullOrEmpty(loginViewModel.OauthType))
             {
                 var users = _userBll.GetModelByUserName(loginViewModel.OpenId);
-                if (users == null||!loginViewModel.OauthType.Equals(users.OAuthType))
+                if (users == null || !loginViewModel.OauthType.Equals(users.OAuthType))
                 {//不存在， 创建用户
                     var model = new Users
                     {
-                        UserName=loginViewModel.OpenId,
+                        UserName = loginViewModel.OpenId,
                         PassWord = loginViewModel.OauthType,
-                        OAuthType=loginViewModel.OauthType,
-                        ShowName=loginViewModel.ShowName,
-                        ImgUrl=loginViewModel.HeadImage,
-                        IsEnable=true
+                        OAuthType = loginViewModel.OauthType,
+                        ShowName = loginViewModel.ShowName,
+                        ImgUrl = loginViewModel.HeadImage,
+                        IsEnable = true
                     };
                     var userid = _userBll.Add(model);
                     users = _userBll.GetModelByCache(userid);
@@ -118,8 +126,8 @@ namespace ImpinkerApi.Controllers
                         PhoneNum = vm.PhoneNum,
                         UserName = vm.PhoneNum
                     };
-                    var userid=_userBll.Add(user);
-                    if (userid>0)
+                    var userid = _userBll.Add(user);
+                    if (userid > 0)
                     {
                         return GetJson(new JsonResultViewModel
                         {
@@ -190,12 +198,12 @@ namespace ImpinkerApi.Controllers
             var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.FindPassword);
             if (flag)
             {
-                if (!string.IsNullOrEmpty(vm.Password)&&vm.Password.Equals(vm.Password2))
+                if (!string.IsNullOrEmpty(vm.Password) && vm.Password.Equals(vm.Password2))
                 {
                     var user = _userBll.GetModelByPhoneNum(vm.PhoneNum);
                     user.PassWord = vm.Password;
                     user.UpdateTime = DateTime.Now;
-                   var flagupdate= _userBll.Update(user);
+                    var flagupdate = _userBll.Update(user);
                     if (flagupdate)
                     {
                         return GetJson(new JsonResultViewModel
@@ -233,7 +241,7 @@ namespace ImpinkerApi.Controllers
             {
                 case SendCheckNumOperateEnum.Regist:
                     var user = _userBll.GetModelByPhoneNum(vm.PhoneNum);
-                    if (user!=null)
+                    if (user != null)
                     {
                         return GetJson(new JsonResultViewModel
                         {

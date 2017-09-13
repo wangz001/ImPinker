@@ -74,8 +74,7 @@
 			success: function(data) {
 				if(data.IsSuccess == 1) {
 					var token = data.Data;
-					console.log("返回的token。。。" + token);
-					return owner.createState(loginInfo, token, callback);
+					return owner.createState(loginInfo, data, callback);
 				} else {
 					return callback(data);
 				}
@@ -125,7 +124,7 @@
 			success: function(data) {
 				if(data.IsSuccess == 1) {
 					var token = data.Data;
-					console.log("返回的token。。。" + token);
+					console.log("返回的token。。。" + token.Token);
 					return owner.createState(loginInfo, token, callback);
 				} else {
 					return callback(data.Description);
@@ -168,16 +167,22 @@
 		}
 	}
 
-	owner.createState = function(loginInfo, token, callback) {
+	owner.createState = function(loginInfo, data, callback) {
+		var userData=data.Data;
 		var state = owner.getState();
 		state.account = loginInfo.account;
 		state.password = loginInfo.password;
-		state.token = token;
+		state.token = userData.Token;
+		state.showname=userData.ShowName;
+		state.imgurl=userData.ImgUrl;
+		state.phonenum=userData.PhoneNum;
+		state.email=userData.Email;
+		state.sex=userData.Sex;
 		state.lastUpdateTime = new Date().toLocaleString();
 		owner.setState(state);
 		return callback({
 			IsSuccess: 1,
-			Data: token,
+			Data: state.token,
 			Description: "更新token成功"
 		});
 	};

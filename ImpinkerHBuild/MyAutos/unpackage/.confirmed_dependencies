@@ -330,7 +330,9 @@
 			"css/setting/setting.css",
 			"css/mui.css",
 			"js/mui.view.js",
-			"images/logo.png"
+			"images/logo.png",
+			"js/app.js",
+			"js/jquery.js"
 		],
 		"refer": [
 			"view/setting/setting-account.html"
@@ -347,7 +349,10 @@
 			"js/mui.zoom.js",
 			"css/mui.min.css",
 			"js/mui.min.js",
-			"css/setting/setting.css"
+			"css/setting/setting.css",
+			"js/app.js",
+			"js/storageUtil.js",
+			"js/jquery.js"
 		],
 		"refer": [
 			"view/setting/setting-imgcut.html"
