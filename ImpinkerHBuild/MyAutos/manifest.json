@@ -311,7 +311,9 @@
 					null,
 					"css/icons-extra.css",
 					"fonts/mui-icons-extra.ttf",
-					"js/storageUtil.js"
+					"js/storageUtil.js",
+					"js/mui.lazyload.js",
+					"js/mui.lazyload.img.js"
 				],
 				"refer": [],
 				"priority": 0
