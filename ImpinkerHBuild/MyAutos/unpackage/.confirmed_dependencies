@@ -22,7 +22,8 @@
 		"refer": [
 			"view/weibo/weibo_comment.html",
 			"view/map/lbs.html",
-			"view/map/lbs2.html"
+			"view/map/lbs2.html",
+			"login.html"
 		]
 	},
 	"tab-webview-main.html": {
@@ -89,10 +90,12 @@
 			"css/icons-extra.css",
 			"js/commonUtil.js",
 			"js/jquery.js",
-			"css/weibo.css"
+			"css/weibo.css",
+			"images/cbd.jpg"
 		],
 		"refer": [
-			"login.html"
+			"login.html",
+			"view/article/preview.html"
 		]
 	},
 	"view/article/preview.html": {
@@ -110,7 +113,9 @@
 			"js/mui.zoom.js",
 			"js/mui.previewimage.js",
 			"css/imageviewer.css",
-			"js/storageUtil.js"
+			"js/storageUtil.js",
+			"js/mui.lazyload.js",
+			"js/mui.lazyload.img.js"
 		],
 		"refer": [
 			"login.html"
@@ -126,7 +131,8 @@
 			"js/app.js",
 			"js/mui.min.js",
 			"js/commonUtil.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"css/icons-extra.css"
 		]
 	},
 	"view/weibo/weibo_comment.html": {

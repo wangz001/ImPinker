@@ -27,7 +27,7 @@
 			</div>
 			<div style="background-color: #fff;" class="mui-slider-group">
 				<div id="item1" class="mui-control-content mui-active">
-					<div class="info-rows-2">
+					<!--<div class="info-rows-2">
 						<div class="info-box-2">
 							<div class="img-box">
 								<img src="../../images/logo1.png">
@@ -60,7 +60,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="item2" class="mui-control-content">
 					<div id="item2-content">
@@ -169,7 +169,6 @@
 				};
 				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null) {
-						console.log("122");
 						var list = data.Data;
 						var template_notifyitem = $('script[id="notifyitem"]').html();
 						var template_notifyitem_noread = $('script[id="notifyitem-noread"]').html();

@@ -9,9 +9,13 @@
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<style type="text/css">
+			.mui-scroll .mui-card {
+				margin: 0 0 10px 0;
+			}
+			
 			.mui-card-content-inner {
 				position: relative;
-				padding: 5px;
+				padding: 5px 5px 5px 5px;
 			}
 			
 			.mui-card-content-inner p {
@@ -31,9 +35,26 @@
 			<h1 id="title" class="mui-title">我的游记</h1>
 		</header>
 		<div class="mui-content">
-			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
+			<div id="pullrefresh" class="mui-scroll-wrapper ">
 				<div class="mui-scroll">
-
+					<!--<div articleid='23' class="mui-card">
+						<div class="mui-card-content">
+							<div class="mui-card-content-inner">
+								<p class="articlename">奔驰Ml400</p>
+								<p>发表于 2017</p>
+							</div>
+						</div>
+						<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url(../../images/cbd.jpg)"></div>
+					</div>
+					<div articleid='23' class="mui-card">
+						<div class="mui-card-content">
+							<div class="mui-card-content-inner">
+								<p class="articlename">奔驰Ml400</p>
+								<p>发表于 2017</p>
+							</div>
+						</div>
+						<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url(../../images/cbd.jpg)"></div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -73,25 +94,20 @@
 			mui('.mui-scroll').on('tap', '.mui-card', function(e) {
 				var articleid = $(this).attr("articleid");
 				console.log(articleid)
-				var selectedItem = {};
-				for(var i = 0; i < allDraftList.length; i++) {
-					var item = allDraftList[i];
-					if(item.Id.toString() == articleid) {
-						selectedItem = item;
-						break;
-					}
-				}
 				//获得详情页面  
-				if(!previewPage) {
-					previewPage = plus.webview.getWebviewById('preview.html');
-				}
-				//触发详情页面的weiboitems事件  
-				mui.fire(previewPage, 'previewarticle', {
-					articleItem: selectedItem
-				});
-				//打开详情页面            
 				mui.openWindow({
-					id: 'preview.html'
+					id: "preview.html",
+					url: "preview.html",
+					show: {
+						aniShow: "pop-in"
+					},
+					waiting: {
+						autoShow: false
+					},
+					extras: {
+						articleid: articleid, //扩展参数
+						articlename: ''
+					}
 				});
 			});
 
@@ -126,9 +142,9 @@
 				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
-						allDraftList = list;
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
+							item.CoverImage = item.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
 							var imgTemplate = $('script[id="articlelistitem"]').html();
 							var imgHtmlStr = imgTemplate.temp(item);
 							$("#pullrefresh .mui-scroll").append(imgHtmlStr);

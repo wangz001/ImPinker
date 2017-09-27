@@ -335,7 +335,9 @@
 					"js/mui.zoom.js",
 					"js/mui.previewimage.js",
 					"css/imageviewer.css",
-					"js/storageUtil.js"
+					"js/storageUtil.js",
+					"js/mui.lazyload.js",
+					"js/mui.lazyload.img.js"
 				],
 				"refer": [
 					"login.html"
@@ -370,7 +372,8 @@
 				"refer": [
 					"view/map/lbs.html",
 					"view/weibo/weibo_comment.html",
-					"view/map/lbs2.html"
+					"view/map/lbs2.html",
+					"login.html"
 				],
 				"priority": 0
 			},

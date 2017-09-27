@@ -110,7 +110,7 @@
 				<div class="" id='articlecontent'>
 				</div>
 				<div class="article-footer">
-					<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
+					<!--<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />-->
 					<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
 				</div>
 				<div class="mui-clearfix"></div>
@@ -138,7 +138,7 @@
 		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/storageUtil.js" ></script>
+		<script type="text/javascript" src="../../js/storageUtil.js"></script>
 		<script type="text/template" id='comment_item'>
 			<dl class="comment-list hot" commentid="@comment.Id">
 				<dt>
@@ -193,8 +193,8 @@
 				var articlename = self.articlename;
 				$("#title").html(articlename);
 				//判断是否赞过文章
-				var isVote=storageUtil.getArticleVote(articleid);
-				if(isVote){
+				var isVote = storageUtil.getArticleVote(articleid);
+				if(isVote) {
 					$('#vote').removeClass("mui-icon-extra-heart");
 					$('#vote').addClass("mui-icon-extra-heart-filled");
 				}
@@ -217,7 +217,7 @@
 			});
 
 			mui.previewImage();
-
+			
 			$(function() {
 				$('.emotion').qqFace({
 					assign: 'composeText',
