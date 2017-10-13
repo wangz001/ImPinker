@@ -91,7 +91,8 @@
 			"js/commonUtil.js",
 			"js/jquery.js",
 			"css/weibo.css",
-			"images/cbd.jpg"
+			"images/cbd.jpg",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"login.html",
@@ -115,7 +116,9 @@
 			"css/imageviewer.css",
 			"js/storageUtil.js",
 			"js/mui.lazyload.js",
-			"js/mui.lazyload.img.js"
+			"js/mui.lazyload.img.js",
+			"fonts/mui.ttf",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"login.html"
@@ -132,7 +135,8 @@
 			"js/mui.min.js",
 			"js/commonUtil.js",
 			"js/jquery.js",
-			"css/icons-extra.css"
+			"css/icons-extra.css",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/weibo/weibo_comment.html": {
@@ -259,7 +263,8 @@
 			"js/mui.previewimage.js",
 			"js/jquery.js",
 			"css/icons-extra.css",
-			"css/imageviewer.css"
+			"css/imageviewer.css",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/weibo/weibo_new.html": {
@@ -270,7 +275,8 @@
 			"js/weibo/weibo_add.js",
 			"js/commonUtil.js",
 			"js/jquery.js",
-			"css/weibo/weibo_add.css"
+			"css/weibo/weibo_add.css",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"view/article/youji_mydraft.html"
@@ -329,7 +335,8 @@
 			"css/feedback.css",
 			"js/setting/feedback.js",
 			"js/mui.min.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/setting/setting.html": {
@@ -340,7 +347,8 @@
 			"js/mui.view.js",
 			"images/logo.png",
 			"js/app.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"view/setting/setting-account.html"
@@ -349,7 +357,8 @@
 	"view/about.html": {
 		"resources": [
 			"js/mui.min.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/setting/setting-account.html": {

@@ -337,7 +337,8 @@
 					"css/imageviewer.css",
 					"js/storageUtil.js",
 					"js/mui.lazyload.js",
-					"js/mui.lazyload.img.js"
+					"js/mui.lazyload.img.js",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
 					"login.html"
@@ -667,7 +668,8 @@
 					"js/mui.previewimage.js",
 					"js/jquery.js",
 					"css/icons-extra.css",
-					"css/imageviewer.css"
+					"css/imageviewer.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -677,7 +679,8 @@
 					"css/feedback.css",
 					"css/mui.min.css",
 					"js/setting/feedback.js",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -685,7 +688,8 @@
 			"view/about.html": {
 				"resources": [
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0

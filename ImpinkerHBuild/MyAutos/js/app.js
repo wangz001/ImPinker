@@ -75,9 +75,12 @@
 				if(data.IsSuccess == 1) {
 					var token = data.Data;
 					return owner.createState(loginInfo, data, callback);
-				} else {
-					return callback(data);
+				} else{
+					mui.toast("登录失败，请重新登录~");
 				}
+//				else {
+//					return callback(data);
+//				}
 			},
 			error: function(xhr, type, errorThrown) {
 				//异常处理；

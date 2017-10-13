@@ -72,7 +72,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">石景山游乐园</h1>
+			<h1 class="mui-title" id="lbs-title">石景山游乐园</h1>
 			<div id="mapSize" class="mui-switch mui-switch-mini mui-active mui-pull-right">
 				<div class="mui-switch-handle"></div>
 			</div>
@@ -158,6 +158,7 @@
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var weiboitem = data.Data;
 						console.log(JSON.stringify(weiboitem));
+						$("#lbs-title").html(weiboitem.LocationText);
 						setPoint(weiboitem.Longitude, weiboitem.Lantitude);
 					}
 				});
