@@ -88,22 +88,27 @@
 				console.log(JSON.stringify(data));
 				return callback(data);
 			} else {
-				mui.toast("您未登陆，请重新登陆！");
-				var currentview = plus.webview.currentWebview().id;
-				mui.openWindow({
-					//手势登录
-					url: "/login.html",
-					id: 'login',
-					show: {
-						aniShow: 'pop-in'
-					},
-					extras: {
-						lastviewid: currentview
-					},
-					waiting: {
-						autoShow: false
-					}
-				});
+				if(status == 401) {
+					mui.toast("您未登陆，请重新登陆！");
+					var currentview = plus.webview.currentWebview().id;
+					mui.openWindow({
+						//手势登录
+						url: "/login.html",
+						id: 'login',
+						show: {
+							aniShow: 'pop-in'
+						},
+						extras: {
+							lastviewid: currentview
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				} else {
+					//网络不好。。。
+					alert("Upload failed: " + status);
+				}
 			}
 		});
 		//设置头信息
@@ -193,30 +198,30 @@
 			mui.toast('压缩失败！' + JSON.stringify(zipe))
 		});
 	}
-	
+
 	//根据宽高压缩图片(深度压缩，解决苹果手机拍照压缩过大问题)
-	owner.compressImageByHeightWeight = function(imgpath,width,height, callback) {
+	owner.compressImageByHeightWeight = function(imgpath, width, height, callback) {
 		callback = callback || $.noop;
 		var name = imgpath.substr(imgpath.lastIndexOf('/') + 1);
-		var zipW=0;
-		var zipH=0;
-		if(width>height){
-			zipW=1200;
-			zipH=zipW*height/width;
-		}else{
-			zipH=900;
-			zipW=zipH*width/height;
+		var zipW = 0;
+		var zipH = 0;
+		if(width > height) {
+			zipW = 1200;
+			zipH = zipW * height / width;
+		} else {
+			zipH = 900;
+			zipW = zipH * width / height;
 		}
 		//ios拍照压缩后尺寸太大。暂时处理
-		zipW=zipW/2;
-		zipH=zipH/2;
+		zipW = zipW / 2;
+		zipH = zipH / 2;
 		console.log("name-------:" + name);
 		plus.zip.compressImage({
 			src: imgpath,
 			dst: '_doc/small/' + name,
 			overwrite: true,
-			width: zipW+"px",
-			height:zipH+"px",
+			width: zipW + "px",
+			height: zipH + "px",
 			quality: 20
 		}, function(zip) {
 			return callback(zip);

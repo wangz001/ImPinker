@@ -18,14 +18,14 @@
 	owner.showWeiBoItems = function(items) {
 		for(var i = 0; i < items.length; i++) {
 			var item = items[i];
-			if(item.Description != "") {
-				owner.showTextAreaStr(item.Description);
-			}
 			if(item.ContentValue.length > 0) {
 				var imgs = item.ContentValue.split(',');
 				var imgHtmlStr = "";
 				for(var j = 0; j < imgs.length; j++) {
 					owner.showImage(imgs[j]);
+					if(item.Description != "") {
+						owner.showTextAreaStr(item.Description);
+					}
 				}
 			}
 		}

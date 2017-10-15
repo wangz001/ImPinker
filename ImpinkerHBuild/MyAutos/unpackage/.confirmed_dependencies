@@ -79,7 +79,8 @@
 			"css/mui.min.css",
 			"js/app.js",
 			"js/commonUtil.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"fonts/mui.ttf"
 		]
 	},
 	"view/article/youji_my.html": {
@@ -92,7 +93,8 @@
 			"js/jquery.js",
 			"css/weibo.css",
 			"images/cbd.jpg",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"login.html",
@@ -137,6 +139,9 @@
 			"js/jquery.js",
 			"css/icons-extra.css",
 			"fonts/mui.ttf"
+		],
+		"refer": [
+			"login.html"
 		]
 	},
 	"view/weibo/weibo_comment.html": {
@@ -242,7 +247,8 @@
 			"css/mui.min.css",
 			"js/app.js",
 			"js/mui.min.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"tab-webview-main.html",
@@ -279,7 +285,8 @@
 			"fonts/mui.ttf"
 		],
 		"refer": [
-			"view/article/youji_mydraft.html"
+			"view/article/youji_mydraft.html",
+			"login.html"
 		]
 	},
 	"view/article/youji_new.html": {
@@ -318,7 +325,10 @@
 			"css/weibo.css",
 			"js/app.js",
 			"js/commonUtil.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"fonts/mui-icons-extra.ttf",
+			"fonts/mui.ttf",
+			"css/icons-extra.css"
 		],
 		"refer": [
 			"view/article/youji_new.html"
@@ -385,7 +395,8 @@
 			"images/right-2x.png",
 			"images/logo1.png",
 			"images/60x60.gif",
-			"css/setting/notify.css"
+			"css/setting/notify.css",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"login.html",

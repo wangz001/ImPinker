@@ -651,7 +651,9 @@
 					"js/jquery.js",
 					"css/weibo.css"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			},
 			"view/map/lbs.html": {
@@ -797,7 +799,8 @@
 					"images/right-2x.png",
 					"images/logo1.png",
 					"images/60x60.gif",
-					"css/setting/notify.css"
+					"css/setting/notify.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"login.html",
