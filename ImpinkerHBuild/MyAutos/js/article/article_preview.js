@@ -4,20 +4,23 @@ $('.mui-icon-compose').bind('click', function() {
 });
 
 function showComment() {
-	location.hash = "#comment";
-	$(".mui-bar-footer a").hide();
-	$('#composeText').show();
-	$('#composeText').focus();
-	$('#sendComposs').show();
+	location.hash = "#sendComposs";
+	//$(".mui-bar-footer a").hide();
+	//$('#composeText').show();
+	$('#comment_text').focus();
+	//$('#sendComposs').show();
+	//$('#mui-footer').hide();
+	
 }
 
 function hideComment() {
-	var txt = $("#composeText").val();
+	var txt = $("#comment_text").val();
+	//$('#mui-footer').show();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
-		$(".mui-bar-footer a").show();
-		$('#sendComposs').hide();
-		$('#composeText').hide();
+		//$(".mui-bar-footer a").show();
+		//$('#sendComposs').hide();
+		//$('#composeText').hide();
 	}
 	setTimeout(function() {
 		//防止和提交按钮冲突
@@ -30,8 +33,8 @@ $('#composeText').bind('focusout', function() {
 
 $(document).ready(function() {
 	$("#sendComposs").bind('click', function() {
-		var txt = $("#composeText").val();
-		$("#composeText").val('');
+		var txt = $("#comment_text").val();
+		$("#comment_text").val('');
 		hideComment();
 		if(txt != null && txt.length > 0) {
 			SendComposs(txt);
@@ -103,7 +106,8 @@ function getArticleComment(articleid) {
 		pagenum: 1
 	};
 	commonUtil.sendRequestGet(url, data, function(data) {
-		if(data.IsSuccess == 1 && data.Data != null) {
+		console.log(JSON.stringify(data));
+		if(data.IsSuccess == 1 && data.Data != null&& data.Data.length>0) {
 			$("#comment").html("");
 			var list = data.Data;
 			for(var i = 0; i < list.length; i++) {
