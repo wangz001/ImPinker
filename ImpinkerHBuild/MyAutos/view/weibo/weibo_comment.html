@@ -130,6 +130,11 @@
 						mui.toast("评论成功");
 						$("#comment_text").val("");
 						getCommentLists(cweiboid);
+						//触发自定义事件。评论数+1
+						var articlePage = plus.webview.getWebviewById('tab-webview-subpage-weibo.html');
+						mui.fire(articlePage, 'weiboComment', {
+							weiboid: cweiboid
+						});
 					} else {
 						mui.toast("评论失败");
 					}

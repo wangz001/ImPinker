@@ -5,29 +5,32 @@ $('.mui-icon-compose').bind('click', function() {
 
 function showComment() {
 	location.hash = "#sendComposs";
-	//$(".mui-bar-footer a").hide();
-	//$('#composeText').show();
 	$('#comment_text').focus();
-	//$('#sendComposs').show();
-	//$('#mui-footer').hide();
-	
+	$('#mui-footer').hide();
+	//-----------------
+
 }
 
 function hideComment() {
 	var txt = $("#comment_text").val();
-	//$('#mui-footer').show();
+	$('#mui-footer').show();
 	if(txt == null || txt.length == 0) {
 		//防止该事件和点击发送事件冲突
 		//$(".mui-bar-footer a").show();
 		//$('#sendComposs').hide();
 		//$('#composeText').hide();
+		setTimeout(function() {
+			//防止和提交按钮冲突
+			toCommentId = 0;
+		}, 200);
 	}
-	setTimeout(function() {
-		//防止和提交按钮冲突
-		toCommentId = 0;
-	}, 200);
+
 }
-$('#composeText').bind('focusout', function() {
+
+$('#comment_text').focus(function() {
+	$('#mui-footer').hide();
+});
+$('#comment_text').bind('focusout', function() {
 	hideComment();
 });
 
@@ -56,6 +59,11 @@ function SendComposs(txtStr) {
 			$("html,body").animate({
 				scrollTop: $("#comment").offset().top
 			}, 100);
+			//触发自定义事件。评论数+1
+			var articlePage = plus.webview.getWebviewById('tab-webview-subpage-article.html');
+			mui.fire(articlePage, 'articleComment', {
+				articleid: articleItem.Id
+			});
 		} else {
 			console.log("评论失败。" + data.Description);
 		}
@@ -107,7 +115,7 @@ function getArticleComment(articleid) {
 	};
 	commonUtil.sendRequestGet(url, data, function(data) {
 		console.log(JSON.stringify(data));
-		if(data.IsSuccess == 1 && data.Data != null&& data.Data.length>0) {
+		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			$("#comment").html("");
 			var list = data.Data;
 			for(var i = 0; i < list.length; i++) {
@@ -123,10 +131,14 @@ function initComment(item) {
 	var template = $('script[id="comment_item"]').html();
 	var toTemplate = $('script[id="comment_item_to"]').html();
 	if(item.ToCommentId > 0 && item.ListToComment.length > 0) {
-		var htmlTo = toTemplate.temp(item.ListToComment[0]);
+		var toItem = item.ListToComment[0];
+		toItem.Content = replace_em(toItem.Content);
+		var htmlTo = toTemplate.temp(toItem);
 		item.tocomment = htmlTo;
 		//articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
 	}
+	//显示qqFace
+	item.Content = replace_em(item.Content);
 	var articleHtmlStr = template.temp(item);
 	$("#comment").append(articleHtmlStr);
 }
@@ -146,7 +158,7 @@ $('#vote').bind('click', function() {
 		if(data.IsSuccess == 1) {
 			mui.toast("谢谢支持~");
 			storageUtil.setArticleVote(articleItem.Id);
-		}else{
+		} else {
 			mui.toast("谢谢支持~");
 			storageUtil.setArticleVote(articleItem.Id);
 		}

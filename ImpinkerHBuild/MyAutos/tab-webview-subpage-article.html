@@ -206,8 +206,8 @@
 					<p class="userinfo"><em class="mui-icon mui-icon-person">$UserName$</em>
 						<em class="mui-icon-extra mui-icon-extra-phone">$CreateTimeStr$</em>
 						<span class="viewcount">
-						<em class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
-						<em class="mui-icon mui-icon-compose">$CommentCount$</em>
+						<em Id="voteCount_$Id$" class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
+						<em Id="commentCount_$Id$" class="mui-icon mui-icon-compose">$CommentCount$</em>
 					</span>
 				</div>
 			</a>
@@ -272,14 +272,21 @@
 			//显示文章缓存
 			var articleData = storageUtil.getFirstPageArticle();
 			if(articleData != null && articleData.length > 0) {
-				for (var i=0;i<articleData.length;i++) {
-					initItem(articleData[i],true);
+				for(var i = 0; i < articleData.length; i++) {
+					initItem(articleData[i], true);
 				}
 			}
-			
+
 		});
-		
-		
+
+		//自定义事件。接受选择微博页传回的数据
+		window.addEventListener('articleComment', function(event) {
+			//获得事件参数  
+			var articleid = event.detail.articleid;
+			var count=$("#commentCount_"+articleid).text();
+			$("#commentCount_"+articleid).html(parseInt(count)+1);
+		});
+
 		var allArticles = new Array();
 		var pageNum = 1;
 		var allCount = 0;

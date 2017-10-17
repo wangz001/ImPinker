@@ -17,7 +17,8 @@
 			"js/jquery.js",
 			"js/app.js",
 			"js/commonUtil.js",
-			"js/storageUtil.js"
+			"js/storageUtil.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"view/weibo/weibo_comment.html",
@@ -58,7 +59,8 @@
 			"fonts/mui-icons-extra.ttf",
 			"js/storageUtil.js",
 			"js/mui.lazyload.js",
-			"js/mui.lazyload.img.js"
+			"js/mui.lazyload.img.js",
+			"fonts/mui.ttf"
 		],
 		"refer": [
 			"view/article/preview.html"
@@ -120,7 +122,12 @@
 			"js/mui.lazyload.js",
 			"js/mui.lazyload.img.js",
 			"fonts/mui.ttf",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"js/qqFace/arclist/43.gif",
+			"js/qqFace/arclist/16.gif",
+			"js/qqFace/arclist/17.gif",
+			"js/qqFace/arclist/33.gif",
+			"js/qqFace/arclist/49.gif"
 		],
 		"refer": [
 			"login.html"

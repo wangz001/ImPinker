@@ -120,7 +120,7 @@
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
-		<script type="text/javascript" src="js/storageUtil.js" ></script>
+		<script type="text/javascript" src="js/storageUtil.js"></script>
 		<script type="text/template" id="mui-card-item">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
@@ -140,7 +140,7 @@
 				</div>
 				<div class="mui-card-footer">
 					<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
-					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em>$CommentCount$</em></span>
+					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
 					<span class="mui-icon mui-icon-map" weiboid='$Id$'></span>
 				</div>
 			</div>
@@ -174,6 +174,14 @@
 				} else {
 					mui.toast("网络暂时不给力奥~");
 				}
+			});
+
+			//自定义事件。接受选择微博页传回的数据
+			window.addEventListener('weiboComment', function(event) {
+				//获得事件参数  
+				var weiboid = event.detail.weiboid;
+				var count = $("#commentCount_" + weiboid).text();
+				$("#commentCount_" + weiboid).html(parseInt(count) + 1);
 			});
 
 			var pageNum = 1;
@@ -256,8 +264,8 @@
 				}
 				item.imglist = imgHtmlStr;
 				//判断我是否赞过此微博
-				var isVote=storageUtil.getWeiboVote(item.Id);
-				item.isVote=isVote? "mui-icon-extra-heart-filled":"mui-icon-extra-heart";
+				var isVote = storageUtil.getWeiboVote(item.Id);
+				item.isVote = isVote ? "mui-icon-extra-heart-filled" : "mui-icon-extra-heart";
 				var cardStr = templateCard.temp(item);
 				$(".mui-scroll").append(cardStr);
 			}
