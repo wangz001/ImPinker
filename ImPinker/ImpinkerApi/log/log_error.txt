@@ -1,30 +1,23 @@
 [Header]
-2017-09-12 21:15:05,450 [13] ERROR WebLogger [(null)] - 
-IP:127.0.0.1
-Url:http://api.impinker.com/api/ArticleVote/NewArticleVote?articleid=1160
-Referer:
-System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
-   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
-   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 44
-   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
-   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
-   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
 [Footer]
 [Header]
-2017-09-12 22:46:29,906 [7] ERROR WebLogger [(null)] - 
+2017-10-19 21:17:01,002 [11] ERROR WebLogger [(null)] - 
 IP:127.0.0.1
-Url:http://api.impinker.com/api/account/SendCheckNum
+Url:http://api.impinker.com/api/Article/GetByPage?pagenum=1&pagesize=10
 Referer:
-System.ArgumentException: 列“OAuthType”不属于表 ds。
-   在 System.Data.DataRow.GetDataColumn(String columnName)
-   在 System.Data.DataRow.get_Item(String columnName)
-   在 ImDal.User.DataRowToModel(DataRow row) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 238
-   在 ImDal.User.GetModelByPhoneNum(String phoneNum) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 392
-   在 ImBLL.UserBll.GetModelByPhoneNum(String phoneNum) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 194
-   在 ImpinkerApi.Controllers.AccountController.SendCheckNum(SendCheckNumViewModel vm) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 235
+System.Exception: '@startIndex' 附近有语法错误。
+关键字 'as' 附近有语法错误。
+关键字 'as' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.ArticleDal.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\Dal\Article.cs:行号 345
+   在 ImBLL.ArticleBll.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 174
+   在 ImBLL.ArticleBll.GetListByPage(Int32 pageNum, Int32 pageCount, Nullable`1 userid) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 351
+   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 73
    在 lambda_method(Closure , Object , Object[] )
    在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
    在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
 [Footer]
 [Header]
 [Footer]

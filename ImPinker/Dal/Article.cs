@@ -313,10 +313,8 @@ namespace ImDal
         public DataSet GetIndexListByPage(int pageNum, int count)
         {
             const string strSql = @"
-SELECT  T3.* ,
-        COUNT(AV.ArticleId) AS VoteCount ,
-        COUNT(ac.ArticleId) AS CommentCount
-FROM    ( SELECT    TT.Id ,
+select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as CommentCount from 
+( SELECT    TT.Id ,
                     TT.ArticleName ,
                     TT.Description ,
                     TT.Url ,
@@ -333,19 +331,9 @@ FROM    ( SELECT    TT.Id ,
                                 AND DATALENGTH(T.CoverImage) > 0
                     ) TT
           WHERE     TT.Row BETWEEN @startIndex AND @endIndex 
-        ) AS T3
-        LEFT JOIN ArticleVote AV ON T3.Id = AV.ArticleId
-        LEFT JOIN dbo.ArticleComment ac ON T3.Id = ac.ArticleId
-GROUP BY T3.Id ,
-        T3.ArticleName ,
-        T3.Description ,
-        T3.Url ,
-        T3.CoverImage ,
-        T3.UserId ,
-        T3.ComPany ,
-        T3.KeyWords ,
-        T3.CreateTime
-ORDER BY T3.Id DESC;
+        ) as t2
+		 LEFT JOIN (select count(*) as VoteCount,ArticleId from ArticleVote group by ArticleId) as t3 on t2.Id=t3.ArticleId
+		 LEFT JOIN (select count(*) as CommentCount,ArticleId from ArticleComment group by ArticleId) as t4 on t2.Id=t4.ArticleId
 ";
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;

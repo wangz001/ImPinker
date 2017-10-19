@@ -159,7 +159,7 @@
 						var weiboitem = data.Data;
 						console.log(JSON.stringify(weiboitem));
 						$("#lbs-title").html(weiboitem.LocationText);
-						setPoint(weiboitem.Longitude, weiboitem.Lantitude);
+						setPoint(weiboitem.Longitude, weiboitem.Lantitude,weiboitem.LocationText);
 					}
 				});
 			}
@@ -245,7 +245,7 @@
 				map = null;
 			var mapHeight = 0;
 			// H5 初始化地图
-			function setPoint(lon, lan) {
+			function setPoint(lon, lan,locationtext) {
 				em = document.getElementById("map");
 				// 确保DOM解析完成
 				if(!em || !window.plus || map) {
@@ -256,6 +256,13 @@
 					position: "absolute"
 				});
 				map.centerAndZoom(point, 12);
+				//显示气泡图标
+				var marker = new plus.maps.Marker(new plus.maps.Point(lon, lan));
+				marker.setIcon("../../images/icon-location.png");
+				//marker.setLabel("HBuilder");
+				var bubble = new plus.maps.Bubble(locationtext);
+				marker.setBubble(bubble);
+				map.addOverlay(marker);
 			}
 			// 改变地图大小
 			//			function resizeMap() {
@@ -275,7 +282,6 @@
 				if(event.detail.isActive) {
 
 					if(em && map) {
-						console.log("你启动了开关");
 						//map.show();
 						em.style.height = "300px";
 						map.resize();
@@ -283,7 +289,6 @@
 					}
 				} else {
 					if(em && map) {
-						console.log("你关闭了开关");
 						//map.hide();
 						em.style.height = "100px";
 						map.resize();

@@ -78,10 +78,7 @@ INSERT INTO [dbo].[WeiBo]
         public DataSet GetListByPage(int pageNum, int pagesize)
         {
             var sql = @"
-SELECT  T2.* ,
-        COUNT(WV.WeiBoId) AS VoteCount ,
-        COUNT(WC.WeiBoId) AS CommentCount
-FROM    ( SELECT    [Id] ,
+select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as CommentCount from ( SELECT    [Id] ,
                     [UserId] ,
                     [Description] ,
                     [ContentValue] ,
@@ -102,23 +99,9 @@ FROM    ( SELECT    [Id] ,
                     ) T
           WHERE     T.row BETWEEN @startIndex AND @endIndex
         ) AS T2
-        LEFT JOIN dbo.WeiBoVote WV ON T2.Id = WV.WeiBoId
-        LEFT JOIN dbo.WeiBoComment WC ON T2.Id = WC.WeiBoId
-GROUP BY T2.[Id] ,
-        T2.[UserId] ,
-        T2.[Description] ,
-        T2.[ContentValue] ,
-        T2.[ContentType] ,
-        T2.[Longitude] ,
-        T2.[Latitude] ,
-        T2.[Height] ,
-        T2.[LocationText] ,
-        T2.[State] ,
-        T2.[HardWareType] ,
-        T2.[IsRePost] ,
-        T2.[CreateTime] ,
-        T2.[UpdateTime]
-ORDER BY T2.Id DESC;
+		left join (select count(*)as VoteCount,WeiBoId from WeiBoVote group by WeiBoId) T3 on t2.Id=t3.WeiBoId
+		left join (select count(*)as CommentCount,WeiBoId from WeiBoComment group by WeiBoId) T4 on t2.Id=t4.WeiBoId
+
 ";
             var startIndex = (pageNum - 1) * pagesize + 1;
             var endIndex = pageNum * pagesize;
