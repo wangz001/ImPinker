@@ -235,9 +235,9 @@ namespace ImDal
                 {
                     model.AspNetId = row["AspNetId"].ToString();
                 }
-                if (row["OAuthType"] != null)
+                if (row.Table.Columns.Contains("OAuthType") && row["OAuthType"] != null)
                 {
-                    model.OAuthType = row["OAuthType"].ToString();
+                    model.OAuthType = row["OAuthType"].ToString(); 
                 }
                 
 			}

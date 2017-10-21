@@ -47,6 +47,14 @@
 				margin-bottom: 0px;
 			}
 			
+			.mui-card .card-location{
+				color: #b5bebf;
+				font-size: 13px;
+				margin-top: 3px;
+			}
+			.mui-card .card-location .mui-icon{
+				font-size: 15px;
+			}
 			.mui-card .mui-card-footer {
 				padding: 4px 45px;
 				min-height: 30px;
@@ -82,8 +90,8 @@
 									</li>
 								</ul>
 							</div>
+							<div class='card-location'><span class="mui-icon mui-icon-location" ></span><span>新疆罗布泊303国道</span></div>
 						</div>
-
 						<div class="mui-card-footer">
 							<span class="mui-icon mui-icon-location"><em>20</em></span>
 							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
@@ -101,15 +109,17 @@
 						<div class="mui-card-content">
 							<p>的空间疯狂的健康</p>
 							<div class="media-pic-list">
-								<img class="bigimage" src="images/yuantiao.jpg">
+									<img class="bigimage" src="images/yuantiao.jpg">
 							</div>
+							<div class='card-location'><span class="mui-icon mui-icon-location" ></span><span>新疆罗布泊303国道</span></div>
 						</div>
 						<div class="mui-card-footer">
 							<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
 							<span class="mui-icon mui-icon-compose"></span>
-							<span class="mui-icon mui-icon-map"></span>
+							<span class="mui-icon mui-icon-star"></span>
 						</div>
-					</div>-->
+					</div>
+				-->
 				</div>
 			</div>
 		</div>
@@ -133,15 +143,14 @@
 				<div class="mui-card-content">
 					<p>$Description$</p>
 					<div class="media-pic-list">
-						<ul>
-							$imglist$
-						</ul>
+						$imglist$
 					</div>
+					$cardlocation$
 				</div>
 				<div class="mui-card-footer">
 					<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
 					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
-					<span class="mui-icon mui-icon-map" weiboid='$Id$'></span>
+					<span class="mui-icon mui-icon-star" weiboid='$Id$'></span>
 				</div>
 			</div>
 		</script>
@@ -256,13 +265,21 @@
 				var imgs = item.ContentValue.split(',');
 				if(imgs.length > 1) {
 					//多图
+					imgHtmlStr+="<ul>";
 					for(var i = 0; i < imgs.length; i++) {
 						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 					}
+					imgHtmlStr+="</ul>";
 				} else {
-					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+					imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 				}
 				item.imglist = imgHtmlStr;
+				//显示地理位置
+				item.cardlocation="";
+				if(item.LocationText!=""&&item.Longitude!=""&&item.Lantitude!=""){
+					var lbsStr="<div weiboid='"+item.Id+"' class='card-location'><span class='mui-icon mui-icon-location'></span><span>"+item.LocationText+"</span></div>";
+					item.cardlocation=lbsStr;
+				}
 				//判断我是否赞过此微博
 				var isVote = storageUtil.getWeiboVote(item.Id);
 				item.isVote = isVote ? "mui-icon-extra-heart-filled" : "mui-icon-extra-heart";
@@ -270,7 +287,7 @@
 				$(".mui-scroll").append(cardStr);
 			}
 			//地图点击事件
-			mui('.mui-scroll').on('tap', '.mui-icon-map', function() {
+			mui('.mui-scroll').on('tap', '.card-location', function() {
 				var weiboid = this.getAttribute('weiboid');
 				mui.openWindow({
 					url: "view/map/lbs.html",

@@ -27,7 +27,7 @@
             </div>
             <div id="thelist" class="uploader-list"></div>
         </div>
-        <img id="preview180" src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" style="width: 300px; height: 300px" />
+        <img id="preview180" src="@ImBLL.ImageUrlHelper.GetArticleImage(article.CoverImage, 0)" style="width: 300px; height: 300px" />
         <input type="hidden" value="@article.CoverImage" name="Coverimage" id="imgPath" />
         <hr />
         @Html.ValidationSummary()

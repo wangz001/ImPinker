@@ -52,7 +52,7 @@
                 <li>
                     <a href="/Article/Index?id=@article.Id" class="img-box" target="_blank">
                         <span class="create-time">@article.CreateTime</span>
-                        <img src="@ImageUrlHelper.GetArticleCoverImage(article.CoverImage, 0)" class="upload">
+                        <img src="@ImBLL.ImageUrlHelper.GetArticleImage(article.CoverImage, 0)" class="upload">
                     </a>
                     <h5 class="thread-title">
                         <a href="/Article/Index?id=@article.Id" target="_blank">

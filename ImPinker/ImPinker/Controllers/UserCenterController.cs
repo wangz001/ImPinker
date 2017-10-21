@@ -18,18 +18,18 @@ namespace ImPinker.Controllers
         private static readonly UserBll UserBll = new UserBll();
         //个人中心首页
         // GET: /UserCenter/
-       [AuthorizationFilter]
+        [AuthorizationFilter]
         public ActionResult Index()
         {
             var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
-           var totalCount = 0;
-            var articles = ArticleBll.GetMyListByPage(user.Id, 1, 3,out totalCount);
+            var totalCount = 0;
+            var articles = ArticleBll.GetMyListByPage(user.Id, 1, 3, out totalCount);
             ViewBag.User = user;
-           ViewBag.Articles = articles;
-           ViewBag.totalCount = totalCount;
+            ViewBag.Articles = articles;
+            ViewBag.totalCount = totalCount;
             return View();
         }
-        
+
         /// <summary>
         /// 账号设置
         /// </summary>
@@ -37,7 +37,7 @@ namespace ImPinker.Controllers
         [AuthorizationFilter]
         public ActionResult UserSetting()
         {
-            var user= UserBll.GetModelByAspNetId(User.Identity.GetUserId());
+            var user = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
             ViewBag.User = user;
             return View();
         }
@@ -76,6 +76,6 @@ namespace ImPinker.Controllers
             ViewBag.Writer = user;
             return PartialView();
         }
-	
+
     }
 }
