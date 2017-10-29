@@ -114,7 +114,7 @@ function getArticleComment(articleid) {
 		pagenum: 1
 	};
 	commonUtil.sendRequestGet(url, data, function(data) {
-		console.log(JSON.stringify(data));
+		//console.log(JSON.stringify(data));
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			$("#comment").html("");
 			var list = data.Data;
@@ -157,10 +157,16 @@ $('#vote').bind('click', function() {
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
 		if(data.IsSuccess == 1) {
 			mui.toast("谢谢支持~");
+			//触发自定义事件。评论数+1
+			var articlePage = plus.webview.getWebviewById('tab-webview-subpage-article.html');
+			mui.fire(articlePage, 'articleVote', {
+				articleid: articleItem.Id
+			});
+			
 			storageUtil.setArticleVote(articleItem.Id);
 		} else {
-			mui.toast("谢谢支持~");
-			storageUtil.setArticleVote(articleItem.Id);
+			mui.toast("谢谢支持~~");
+			//storageUtil.setArticleVote(articleItem.Id);
 		}
 		$('#vote').removeClass("mui-icon-extra-heart");
 		$('#vote').addClass("mui-icon-extra-heart-filled");

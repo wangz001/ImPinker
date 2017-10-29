@@ -88,6 +88,15 @@ namespace ImpinkerApi.Controllers
                 ArticleId = vm.ArticleId,
                 UserId = userinfo.Id
             };
+            if (_articleVoteBll.Exists(voteModel.ArticleId, voteModel.UserId))
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess =  1 ,
+                    Data = voteModel,
+                    Description = "您已赞过"
+                });
+            }
             var flag = _articleVoteBll.AddVote(voteModel);
             return GetJson(new JsonResultViewModel
             {

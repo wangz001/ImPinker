@@ -242,8 +242,8 @@
 							<p class="userinfo">
 								<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTimeStr$</em>
 								<span class="viewcount">
-									<em class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
-									<em class="mui-icon mui-icon-compose">$CommentCount$</em>
+									<em Id="voteCount_$Id$" class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
+									<em Id="commentCount_$Id$" class="mui-icon mui-icon-compose">$CommentCount$</em>
 								</span></p>
 						</div>
 					</div>
@@ -279,12 +279,18 @@
 
 		});
 
-		//自定义事件。接受选择微博页传回的数据
+		//自定义事件。接受预览页传回的数据
 		window.addEventListener('articleComment', function(event) {
 			//获得事件参数  
 			var articleid = event.detail.articleid;
 			var count=$("#commentCount_"+articleid).text();
 			$("#commentCount_"+articleid).html(parseInt(count)+1);
+		});
+		window.addEventListener('articleVote', function(event) {
+			//获得事件参数  
+			var articleid = event.detail.articleid;
+			var count=$("#voteCount_"+articleid).text();
+			$("#voteCount_"+articleid).html(parseInt(count)+1);
 		});
 
 		var allArticles = new Array();
