@@ -66,6 +66,11 @@
 			#mapSize {
 				margin-top: 5px;
 			}
+			.near-title{
+				font-size: 19px;
+				margin: 13px;
+				background-color: ;
+			}
 		</style>
 	</head>
 
@@ -73,9 +78,6 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title" id="lbs-title">石景山游乐园</h1>
-			<div id="mapSize" class="mui-switch mui-switch-mini mui-active mui-pull-right">
-				<div class="mui-switch-handle"></div>
-			</div>
 		</header>
 		<div class="mui-content">
 			<div id="map">
@@ -83,7 +85,7 @@
 			</div>
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
-					<p>附近的途迹</p>
+					<p class="near-title">附近的途迹</p>
 					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img src="../../images/logo.png">
@@ -160,7 +162,7 @@
 						var weiboitem = data.Data;
 						console.log(JSON.stringify(weiboitem));
 						$("#lbs-title").html(weiboitem.LocationText);
-						setPoint(weiboitem.Longitude, weiboitem.Lantitude,weiboitem.LocationText);
+						setPoint(weiboitem.Longitude, weiboitem.Lantitude, weiboitem.LocationText);
 					}
 				});
 			}
@@ -246,7 +248,7 @@
 				map = null;
 			var mapHeight = 0;
 			// H5 初始化地图
-			function setPoint(lon, lan,locationtext) {
+			function setPoint(lon, lan, locationtext) {
 				em = document.getElementById("map");
 				// 确保DOM解析完成
 				if(!em || !window.plus || map) {
@@ -265,40 +267,31 @@
 				marker.setBubble(bubble);
 				map.addOverlay(marker);
 			}
-			// 改变地图大小
-			//			function resizeMap() {
-			//				if(mapHeight == 50) {
-			//					em.style.height = "400px";
-			//					mapHeight = 30;
-			//					$(".mui-scroll").css("margin-top", "450px");
-			//				} else {
-			//					em.style.height = "200px";
-			//					mapHeight = 50;
-			//					$(".mui-scroll").css("margin-top", "250px");
-			//				}
-			//				map.resize();
-			//			}
 
-			document.getElementById("mapSize").addEventListener("toggle", function(event) {
-				if(event.detail.isActive) {
-
-					if(em && map) {
-						//map.show();
-						em.style.height = "300px";
-						map.resize();
-						$(".mui-scroll").css("margin-top", "300px");
-					}
-				} else {
-					if(em && map) {
-						//map.hide();
-						em.style.height = "100px";
-						map.resize();
-						$(".mui-scroll").css("margin-top", "100px");
-					}
-				}
-			});
 		</script>
 		<script type="text/javascript">
+			//获得滚动事件
+			var wh = $(window).height();
+			console.log(wh);
+			var mapSizeSmall = true;
+			$(window).scroll(function() {
+				var top = $(window).scrollTop();
+				//console.log(top);
+				if(top > 100 && !mapSizeSmall && em && map) {
+					em.style.height = "100px";
+					map.resize();
+					$(".mui-scroll").css("margin-top", "100px");
+					mapSizeSmall = true;
+					console.log("small");
+				}
+				if(top < 50 && mapSizeSmall && em && map) {
+					em.style.height = "300px";
+					map.resize();
+					$(".mui-scroll").css("margin-top", "300px");
+					mapSizeSmall = false;
+					console.log("big");
+				}
+			});
 		</script>
 	</body>
 
