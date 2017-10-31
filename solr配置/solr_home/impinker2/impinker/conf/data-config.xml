@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<dataConfig>
+    <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=MyAutosTest" user="myautos" password="myautos2016"/>
+    <document name="article">  
+        <entity name="article"  transformer="ClobTransformer" pk="table_id"
+                 query="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
+						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Company from Article "        
+                 deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
+						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Company from Article where userid>1000 "    
+                 deltaQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id FROM Article WHERE userid>1000 and CreateTime > '${dataimporter.last_index_time}'">             
+                    <field column="table_id"      name="id"      />  
+                    <field column="userid"      name="userid"      />
+					<field column="ArticleName"      name="ArticleName"      />
+					<field column="KeyWords"      name="KeyWords"      />
+					<field column="Description"      name="Description"      />
+					<field column="Url"      name="Url"      />
+					<field column="CreateTime"      name="CreateTime"      />
+					<field column="UpdateTime"      name="UpdateTime"      />
+					<field column="CoverImage"      name="CoverImage"      />
+					<field column="Company"      name="Content"      />	
+					<field column="Company"      name="Company"      />	
+         </entity> 
+</document>
+</dataConfig>
