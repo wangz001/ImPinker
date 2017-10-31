@@ -50,18 +50,18 @@
 <analyzer type="index" isMaxWordLength="false" class="org.wltea.analyzer.lucene.IKAnalyzer"/>
 <analyzer type="query" isMaxWordLength="true" class="org.wltea.analyzer.lucene.IKAnalyzer"/>
  </fieldType>
- <!-- textComplex-->
+ <!-- textComplex
 <fieldtype name="textComplex" class="solr.TextField">
     <analyzer>
         <tokenizer class="org.lionsoul.jcseg.analyzer.v5x.JcsegTokenizerFactory" mode="complex"/>
     </analyzer>
-</fieldtype>
-<!-- textSimple -->
+</fieldtype>-->
+<!-- textSimple 
 <fieldtype name="textSimple" class="solr.TextField">
     <analyzer>
         <tokenizer class="org.lionsoul.jcseg.analyzer.v5x.JcsegTokenizerFactory" mode="simple"/>
     </analyzer>
-</fieldtype>
+</fieldtype>-->
 
    <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
       or Solr won't start. _version_ and update log are required for SolrCloud
@@ -88,6 +88,8 @@
    <field name="Latitude" type="tdouble" indexed="true" stored="true" omitNorms="true"/>
    <field name="Height" type="tdouble" indexed="true" stored="true" omitNorms="true"/>
    <field name="LocationText" type="string" indexed="true" stored="true" omitNorms="true"/>
+   <!-- location field 使用“经度 纬度”这样的字符串格式 -->
+   <field name="weibo_position" type="location" indexed="true" stored="true"/>
 
    <!-- Main body of document extracted by SolrCell.
         NOTE: This field is not indexed by default, since it is also copied to "text"
@@ -618,6 +620,7 @@
     <!-- A specialized field for geospatial search. If indexed, this fieldType must not be multivalued. -->
     <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
 
+	
     <!-- An alternative geospatial field type new to Solr 4.  It supports multiValued and polygon shapes.
       For more information about this and other Spatial fields new to Solr 4, see:
       http://wiki.apache.org/solr/SolrAdaptersForLuceneSpatial4

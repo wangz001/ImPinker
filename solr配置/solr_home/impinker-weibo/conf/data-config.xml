@@ -3,10 +3,10 @@
     <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=MyAutosTest" user="myautos" password="myautos2016"/>
     <document name="weibo">  
         <entity name="weibo"  transformer="ClobTransformer" pk="weibo_id"
-                 query="SELECT 'travels_'+convert(varchar(100),id) as weibo_id,UserId,Description
-						,ContentType,Longitude,Latitude,Height,LocationText,CreateTime,UpdateTime from WeiBo  "        
-                 deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as weibo_id,UserId,Description
-						,ContentType,Longitude,Latitude,Height,LocationText,CreateTime,UpdateTime from WeiBo  where userid>1000 "    
+                 query="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id,UserId,Description
+						,ContentType,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo  "        
+                 deltaImportQuery="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id,UserId,Description
+						,ContentType,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo where userid>1000 "    
                  deltaQuery="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id FROM Article WHERE userid>1000 and CreateTime > '${dataimporter.last_index_time}'">             
                     <field column="weibo_id"      name="id"      />  
                     <field column="userid"      name="userid"      />
@@ -17,7 +17,8 @@
 					<field column="UpdateTime"      name="UpdateTime"      />
 					<field column="Longitude"      name="Longitude"      />
 					<field column="Latitude"      name="Latitude"      />	
-					<field column="Height"      name="Height"      />	
+					<field column="Height"      name="Height"      />
+					<field column="weibo_position"      name="weibo_position"      />					
          </entity> 
 </document>
 </dataConfig>
