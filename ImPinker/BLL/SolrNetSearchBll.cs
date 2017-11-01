@@ -15,6 +15,7 @@ namespace ImBLL
     {
         private static readonly ISolrOperations<ArticleViewModel> ArticleInstance;
         private static readonly ISolrOperations<WeiboVm> WeiboInstance;
+        static readonly UserBll _userBll = new UserBll();
         static SolrNetSearchBll()
         {
             ArticleInstance = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
@@ -235,7 +236,7 @@ namespace ImBLL
                 var tagsFacet = results.FacetFields["KeyWords"];
                 foreach (var f in tagsFacet)
                 {
-                    if (!string.IsNullOrEmpty(f.Key.Trim())&&f.Key.Trim().Count()>1 && f.Value > 0)
+                    if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Key.Trim().Count() > 1 && f.Value > 0)
                     {
                         facetDicTag.Add(new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
                     }
@@ -260,8 +261,8 @@ namespace ImBLL
             }
 
             #endregion
-            
-            
+
+
             var searchVm = new SearchResultVm()
             {
                 ArticleList = results,
@@ -455,9 +456,9 @@ namespace ImBLL
                             }
                         }
                     }
-                } 
+                }
             }
-            
+
 
             #endregion
 
@@ -511,7 +512,7 @@ namespace ImBLL
             }
 
             #endregion
-            
+
             var searchVm = new SearchResultVm()
             {
                 ArticleList = results,
@@ -688,34 +689,49 @@ namespace ImBLL
         /// 批量添加索引文件
         /// </summary>
         /// <returns></returns>
-        public static bool AddIndex(List<ArticleViewModel> list )
+        public static bool AddIndex(List<ArticleViewModel> list)
         {
             if (list == null || list.Count <= 0) return false;
             ArticleInstance.AddRange(list);
-            var result=ArticleInstance.Commit();
-            return result.Status>0;
+            var result = ArticleInstance.Commit();
+            return result.Status > 0;
         }
 
         #endregion
-    
-    
-    
+
+
+
         #region weibo操作
 
-        public static WeiboSearchResultVm QueryWeiboByGeo(double latitude, double longitude, int distance, int userid,int pagenum,int pagesize)
+        public static WeiboSearchResultVm QueryWeiboByGeo(double latitude, double longitude, int distance, int userid, int pagenum, int pagesize)
         {
             //创建条件集合
-            
+
             // ReSharper disable once CSharpWarnings::CS0618
             var geoQuery = new SolrQueryByDistance("weibo_position", latitude, longitude, distance, CalculationAccuracy.BoundingBox);
             //建立排序，条件.
             var options = new QueryOptions
             {
-                Start = (pagenum-1)*pagesize+1,
+                Start = (pagenum - 1) * pagesize + 1,
                 Rows = (pagenum) * pagesize
             };
-            SolrQueryResults<WeiboVm> weiboList = WeiboInstance.Query(geoQuery,options);
-
+            SolrQueryResults<WeiboVm> weiboList = WeiboInstance.Query(geoQuery, options);
+            if (weiboList != null && weiboList.Count > 0)
+            {
+                foreach (WeiboVm vm in weiboList)
+                {
+                    var idStr = vm.SolrId;
+                    vm.Id = Int32.Parse(idStr.Replace("weibo_", ""));
+                    if (!string.IsNullOrEmpty(vm.ContentValue))
+                    {
+                        vm.ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(vm.ContentValue, 240);
+                    }
+                    vm.PublishTime = TUtil.DateFormatToString(vm.CreateTime);
+                    var userinfo = _userBll.GetModelByCache(vm.UserId);
+                    vm.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                    vm.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                }
+            }
             var searchVm = new WeiboSearchResultVm()
             {
                 WeiboList = weiboList,

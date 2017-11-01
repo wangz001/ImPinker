@@ -4,14 +4,16 @@
     <document name="weibo">  
         <entity name="weibo"  transformer="ClobTransformer" pk="weibo_id"
                  query="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id,UserId,Description
-						,ContentType,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo  "        
+						,ContentType,ContentValue,State,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo  "        
                  deltaImportQuery="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id,UserId,Description
-						,ContentType,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo where userid>1000 "    
+						,ContentType,ContentValue,State,Longitude,Latitude,Height,LocationText,CAST(Latitude AS VARCHAR)+','+CAST(Longitude AS VARCHAR)as weibo_position,CreateTime,UpdateTime from WeiBo where userid>1000 "    
                  deltaQuery="SELECT 'weibo_'+convert(varchar(100),id) as weibo_id FROM Article WHERE userid>1000 and CreateTime > '${dataimporter.last_index_time}'">             
                     <field column="weibo_id"      name="id"      />  
                     <field column="userid"      name="userid"      />
 					<field column="LocationText"      name="LocationText"      />
 					<field column="ContentType"      name="ContentType"      />
+					<field column="ContentValue"      name="ContentValue"      />
+					<field column="State"      name="State"      />
 					<field column="Description"      name="Description"      />
 					<field column="CreateTime"      name="CreateTime"      />
 					<field column="UpdateTime"      name="UpdateTime"      />

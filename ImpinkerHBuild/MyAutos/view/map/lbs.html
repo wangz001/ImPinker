@@ -24,49 +24,60 @@
 				float: right;
 			}
 			
-			.mui-card-footer em {
+			.mui-scroll .mui-card {
+				margin: 0 0 5px 0;
+			}
+			
+			.mui-card-header.mui-card-media {
+				display: block;
+				padding: 6px 0 6px 10px;
+			}
+			
+			.mui-card-header.mui-card-media img {
+				border-radius: 4px;
+			}
+			
+			.mui-card-header .mui-media-body em {
 				font-size: 15px;
 			}
 			
-			.mui-scroll {
-				margin-top: 300px;
-			}
-			
-			.mui-scroll .mui-card {
-				margin: 0 0 10px 0;
+			.mui-card-header.mui-card-media .mui-media-body p {
+				font-size: 11px;
+				margin-top: 3px;
 			}
 			
 			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 55px;
-				overflow: visible;
-				width: 15rem;
-			}
-			
-			.media-pic-list {
-				overflow: hidden;
-				width: 20rem;
-				margin-top: .4375rem;
-			}
-			
-			.media-pic-list li {
-				width: 8.75rem;
-				height: 5.75rem;
-			}
-			
-			.media-pic-list li img {
-				height: 5.75rem;
-				width: 8.75rem;
-				vertical-align: text-bottom;
+				padding: 5px 5px 5px 10px
 			}
 			
 			.mui-card .mui-card-content p {
 				margin-bottom: 0px;
 			}
 			
+			.mui-card .card-location {
+				color: #b5bebf;
+				font-size: 13px;
+				margin-top: 3px;
+			}
+			
+			.mui-card .card-location .mui-icon {
+				font-size: 15px;
+			}
+			
+			.mui-card .mui-card-footer {
+				padding: 4px 45px;
+				min-height: 30px;
+			}
+			
+			.mui-card-footer em {
+				font-size: 10px;
+			}
+			
 			#mapSize {
 				margin-top: 5px;
 			}
-			.near-title{
+			
+			.near-title {
 				font-size: 19px;
 				margin: 13px;
 				background-color: ;
@@ -123,8 +134,26 @@
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/template" id="mui-card-item">
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="$UserHeadImage$">
+					<div class="mui-media-body">
+						<em class="mui-icon mui-icon-person">$UserName$</em>
+						<p>发表于 $PublishTime$</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<p>$Description$</p>
+					<div class="media-pic-list">
+						$imglist$
+					</div>
+					$cardlocation$
+				</div>
+			</div>
+		</script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
@@ -135,7 +164,7 @@
 					},
 					up: {
 						contentrefresh: '正在加载...',
-						auto: true,
+						auto: false,
 						callback: pullupRefresh
 					}
 				}
@@ -149,6 +178,18 @@
 			var pageNum = 1;
 			var allCount = 0;
 			var pageSize = 30;
+			var lan="";
+			var lng="";
+			var solrQueryData={
+				pagenum:1,
+				allCount:0,
+				pagesize:10,
+				lat:'',
+				lng:'',
+				weiboId:0,
+				distance:10,
+				userid:1
+			}
 
 			function getweibo(weiboid) {
 				var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
@@ -162,45 +203,43 @@
 						var weiboitem = data.Data;
 						console.log(JSON.stringify(weiboitem));
 						$("#lbs-title").html(weiboitem.LocationText);
+						solrQueryData.lat=weiboitem.Lantitude;
+						solrQueryData.lng=weiboitem.Longitude;
+						solrQueryData.weiboId=weiboid;
+						pullupRefresh();
 						setPoint(weiboitem.Longitude, weiboitem.Lantitude, weiboitem.LocationText);
 					}
 				});
 			}
 
 			function pullupRefresh() {
-				mui.ajax('http://api.myautos.cn/api/WeiBo/GetWeiBoList', {
-					data: {
-						pageindex: pageNum,
-						pageSize: pageSize
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
-					success: function(data) {
-						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-							var list = data.Data;
-							var table = document.body.querySelector('.mui-scroll');
-							for(var i = 0; i < list.length; i++) {
-								var item = list[i];
-								initWeiBoItem(table, item);
-							}
-						} else {
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-							return;
+				console.log("bbb");
+				var weiboApiPath = "http://api.myautos.cn/api/Search/GetWeiboByGeo";
+				var dataPara = solrQueryData;
+				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.WeiboList.length > 0) {
+						var list = data.Data.WeiboList;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItemTemplate(item);
 						}
-						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
-					},
-					error: function(xhr, type, errorThrown) {
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+						solrQueryData.pagenum=solrQueryData.pagenum+1;
+					} else {
+						console.log("aaa");
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
 					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh;
 				});
+
 			}
+
 			/**
 			 * 添加数据
 			 * @param {Object} table
 			 * @param {Object} item
 			 */
-			function initWeiBoItem(table, item) {
+			function initWeiBoItemTemplate(item) {
 				var img_1200style = 'style/weibo_1200';
 				var img_600style = 'style/weibo_600';
 				var img_24style = 'style/weibo_24_16';
@@ -208,39 +247,28 @@
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
-				var li = document.createElement('div');
-				li.className = 'mui-card';
-				var headdiv = document.createElement("div");
-				headdiv.className = 'mui-card-header mui-card-media';
-				headdiv.innerHTML = '<img src="' + item.UserHeadImage + '"><div class="mui-media-body">' +
-					item.UserName + '<p>发表于 ' + item.PublishTime + '</p></div>';
-				var contentdiv = document.createElement("div");
-				contentdiv.className = 'mui-card-content';
-				if(item.Description != null && item.Description.length > 0) {
-					contentdiv.innerHTML = '<p>' + item.Description + '</p>';
-				}
-				var imgs = item.ContentValue.split(',');
-				var imgdiv = document.createElement("div");
-				imgdiv.className = 'media-pic-list';
-
-				var ul = document.createElement("ul");
+				var templateCard = $('script[id="mui-card-item"]').html();
 				var imgHtmlStr = "";
-				var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
-				for(var i = 0; i < imgs.length; i++) {
-					imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+				var imgs = item.ContentValue.split(',');
+				if(imgs.length > 1) {
+					//多图
+					imgHtmlStr += "<ul>";
+					for(var i = 0; i < imgs.length; i++) {
+						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					}
+					imgHtmlStr += "</ul>";
+				} else {
+					imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 				}
-				ul.innerHTML = imgHtmlStr;
-				imgdiv.appendChild(ul);
-
-				contentdiv.appendChild(imgdiv);
-				var footdiv = document.createElement('div');
-				footdiv.className = 'mui-card-footer';
-				footdiv.innerHTML = '' +
-					'<span class="mui-icon mui-icon-map" ><em>桂林黄果树</em></span>';
-				li.appendChild(headdiv);
-				li.appendChild(contentdiv);
-				//li.appendChild(footdiv);
-				table.appendChild(li);
+				item.imglist = imgHtmlStr;
+				//显示地理位置
+				item.cardlocation = "";
+				if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
+					var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
+					item.cardlocation = lbsStr;
+				}
+				var cardStr = templateCard.temp(item);
+				$(".mui-scroll").append(cardStr);
 			}
 		</script>
 		<script type="text/javascript">
@@ -267,7 +295,6 @@
 				marker.setBubble(bubble);
 				map.addOverlay(marker);
 			}
-
 		</script>
 		<script type="text/javascript">
 			//获得滚动事件

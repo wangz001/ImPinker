@@ -16,10 +16,16 @@ namespace ImModel.ViewModel
         public long Id { get; set; }
         [SolrField("UserId")]
         public int UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public string UserHeadImage { get; set; }
+
         [SolrField("Description")]
         public string Description { get; set; }
-
+        [SolrField("ContentValue")]
         public string ContentValue { get; set; }
+        [SolrField("ContentType")]
         public WeiBoContentTypeEnum ContentType { get; set; }
         [SolrField("Longitude")]
         public decimal Longitude { get; set; }
@@ -34,7 +40,7 @@ namespace ImModel.ViewModel
         /// </summary>
         [SolrField("weibo_position")]
         public string WeiboPosition { get; set; }
-
+        [SolrField("State")]
         public WeiBoStateEnum State { get; set; }
         /// <summary>
         /// 硬件版本号（ios Android  等）
@@ -48,8 +54,11 @@ namespace ImModel.ViewModel
         public DateTime CreateTime { get; set; }
         [SolrField("UpdateTime")]
         public DateTime UpdateTime { get; set; }
-        [SolrField("ContentType")]
-        public string CccccType { get; set; }
+        /// <summary>
+        /// 发布时间，字符串
+        /// </summary>
+        public string PublishTime { get; set; }
+
         /// <summary>
         /// 点赞总数
         /// </summary>
@@ -59,5 +68,7 @@ namespace ImModel.ViewModel
         /// 评论总数
         /// </summary>
         public int CommentCount { get; set; }
+
+        
     }
 }

@@ -81,7 +81,9 @@
    <field name="UserId" type="string" indexed="false" stored="true" omitNorms="true"/>
    <field name="Description" type="text_ik" indexed="true" stored="true" omitNorms="true" termVectors="true" termPositions="true"  termOffsets="true"/>
    <field name="ContentType" type="string" indexed="false" stored="true" omitNorms="true" />
-      
+   <field name="ContentValue" type="string" indexed="false" stored="true" omitNorms="true" />
+   <field name="State" type="string" indexed="false" stored="true" omitNorms="true" />
+       
    <field name="CreateTime" type="date" indexed="true" stored="true" omitNorms="true"/>
    <field name="UpdateTime" type="date" indexed="true" stored="true" omitNorms="true"/>
    <field name="Longitude" type="tdouble" indexed="true" stored="true" omitNorms="true"/>

@@ -28,7 +28,6 @@ namespace ImpinkerApi.Controllers
                 {
                     IsSuccess = 1,
                     Data = searchVm,
-                    Description = "search"
                 });
             }
             //http://api.impinker.com/api/Search/GetWeiboByGeo?weiboId=1209&lat=36.702109&lng=119.033300&distance=10&pagenum=1&pagesize=10&userid=1
