@@ -63,6 +63,7 @@
     <Compile Include="UserRelation.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="ViewModel\NotifyVm.cs" />
+    <Compile Include="ViewModel\WeiboSearchResultVm.cs" />
     <Compile Include="ViewModel\WeiboCommentVm.cs" />
     <Compile Include="ViewModel\ArticleCommentVm.cs" />
     <Compile Include="ViewModel\ArticleViewModel.cs" />

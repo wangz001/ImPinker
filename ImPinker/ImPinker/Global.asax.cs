@@ -22,8 +22,8 @@ namespace ImPinker
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             string solrServer = ConfigurationManager.AppSettings.Get("SolrServer");
-            SolrNet.Startup.Init<ArticleViewModel>(solrServer);
-
+            SolrNet.Startup.Init<ArticleViewModel>(solrServer + "impinker");
+            SolrNet.Startup.Init<WeiboVm>(solrServer + "impinker-weibo");
             
         }
     }

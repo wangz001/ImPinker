@@ -3,11 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImModel.Enum;
+using SolrNet.Attributes;
 
 namespace ImModel.ViewModel
 {
-    public class WeiboVm:WeiBo
+    public class WeiboVm
     {
+        [SolrUniqueKey("id")]
+        public string SolrId { get; set; }
+
+        public long Id { get; set; }
+        [SolrField("UserId")]
+        public int UserId { get; set; }
+        [SolrField("Description")]
+        public string Description { get; set; }
+
+        public string ContentValue { get; set; }
+        public WeiBoContentTypeEnum ContentType { get; set; }
+        [SolrField("Longitude")]
+        public decimal Longitude { get; set; }
+        [SolrField("Latitude")]
+        public decimal Lantitude { get; set; }
+        [SolrField("Height")]
+        public decimal Height { get; set; }
+        [SolrField("LocationText")]
+        public string LocationText { get; set; }
+        /// <summary>
+        /// 'lan,lon'  地理位置查询用
+        /// </summary>
+        [SolrField("weibo_position")]
+        public string WeiboPosition { get; set; }
+
+        public WeiBoStateEnum State { get; set; }
+        /// <summary>
+        /// 硬件版本号（ios Android  等）
+        /// </summary>
+        public string HardWareType { get; set; }
+        /// <summary>
+        /// 是否转发
+        /// </summary>
+        public bool IsRePost { get; set; }
+        [SolrField("CreateTime")]
+        public DateTime CreateTime { get; set; }
+        [SolrField("UpdateTime")]
+        public DateTime UpdateTime { get; set; }
+        [SolrField("ContentType")]
+        public string CccccType { get; set; }
         /// <summary>
         /// 点赞总数
         /// </summary>

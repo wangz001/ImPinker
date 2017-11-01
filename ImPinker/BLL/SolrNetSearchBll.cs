@@ -13,12 +13,15 @@ namespace ImBLL
 {
     public class SolrNetSearchBll
     {
-        private static readonly ISolrOperations<ArticleViewModel> SolrInstance;
+        private static readonly ISolrOperations<ArticleViewModel> ArticleInstance;
+        private static readonly ISolrOperations<WeiboVm> WeiboInstance;
         static SolrNetSearchBll()
         {
-            SolrInstance = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
+            ArticleInstance = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
+            WeiboInstance = ServiceLocator.Current.GetInstance<ISolrOperations<WeiboVm>>();
         }
 
+        #region 文章操作
         /// <summary>
         /// 搜索-关键字简单查询
         /// </summary>
@@ -173,7 +176,7 @@ namespace ImBLL
             #endregion
 
             //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
 
             # region 高亮处理
 
@@ -431,7 +434,7 @@ namespace ImBLL
             #endregion
 
             //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
 
             # region 高亮处理
 
@@ -596,7 +599,7 @@ namespace ImBLL
             #endregion
 
             //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
 
             # region 高亮处理
 
@@ -674,7 +677,7 @@ namespace ImBLL
 
 
             //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = SolrInstance.Query(qTBO, options);
+            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
             if (results != null && results.Count > 0)
             {
                 return results[0];
@@ -688,9 +691,41 @@ namespace ImBLL
         public static bool AddIndex(List<ArticleViewModel> list )
         {
             if (list == null || list.Count <= 0) return false;
-            SolrInstance.AddRange(list);
-            var result=SolrInstance.Commit();
+            ArticleInstance.AddRange(list);
+            var result=ArticleInstance.Commit();
             return result.Status>0;
         }
+
+        #endregion
+    
+    
+    
+        #region weibo操作
+
+        public static WeiboSearchResultVm QueryWeiboByGeo(double latitude, double longitude, int distance, int userid,int pagenum,int pagesize)
+        {
+            //创建条件集合
+            
+            // ReSharper disable once CSharpWarnings::CS0618
+            var geoQuery = new SolrQueryByDistance("weibo_position", latitude, longitude, distance, CalculationAccuracy.BoundingBox);
+            //建立排序，条件.
+            var options = new QueryOptions
+            {
+                Start = (pagenum-1)*pagesize+1,
+                Rows = (pagenum) * pagesize
+            };
+            SolrQueryResults<WeiboVm> weiboList = WeiboInstance.Query(geoQuery,options);
+
+            var searchVm = new WeiboSearchResultVm()
+            {
+                WeiboList = weiboList,
+                PageCount = 10,
+                PageNum = 1,
+                TotalCount = weiboList.NumFound
+            };
+            return searchVm;
+        }
+
+        #endregion
     }
 }

@@ -38,6 +38,7 @@ namespace ImPinker.Controllers
             try
             {
                 vm = SolrNetSearchBll.GetArticleById(idStr);
+                
             }
             catch (Exception e)
             {

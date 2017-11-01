@@ -168,7 +168,7 @@ namespace ImBLL
         /// </summary>
         /// <param name="weiboid"></param>
         /// <returns></returns>
-        public WeiBo GetById(long weiboid)
+        public WeiboVm GetById(long weiboid)
         {
             var ds = _weiBoDal.GetById(weiboid);
             if (ds!=null&&ds.Tables[0].Rows.Count>0)

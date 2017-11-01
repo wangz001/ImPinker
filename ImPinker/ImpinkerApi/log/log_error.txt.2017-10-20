@@ -1,0 +1,27 @@
+[Header]
+[Footer]
+[Header]
+2017-10-19 21:17:01,002 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Article/GetByPage?pagenum=1&pagesize=10
+Referer:
+System.Exception: '@startIndex' 附近有语法错误。
+关键字 'as' 附近有语法错误。
+关键字 'as' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.ArticleDal.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\Dal\Article.cs:行号 345
+   在 ImBLL.ArticleBll.GetIndexListByPage(Int32 pageNum, Int32 count) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 174
+   在 ImBLL.ArticleBll.GetListByPage(Int32 pageNum, Int32 pageCount, Nullable`1 userid) 位置 d:\GitProject\ImPinker\ImPinker\BLL\ArticleBll.cs:行号 351
+   在 ImpinkerApi.Controllers.ArticleController.GetByPage(Int32 pageNum, Int32 pageSize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\ArticleController.cs:行号 73
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]
