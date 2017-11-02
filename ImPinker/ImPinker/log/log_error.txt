@@ -1,66 +1,23 @@
 [Header]
 [Footer]
 [Header]
-2017-11-01 11:35:29,633 [15] ERROR WebLogger [(null)] - solr服务未启动:System.Exception: weibo_106 不是 Int64 的有效值。 ---> System.FormatException: 输入字符串的格式不正确。
-   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   在 System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
-   在 System.ComponentModel.Int64Converter.FromString(String value, NumberFormatInfo formatInfo)
-   在 System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
-   在 System.ComponentModel.TypeConverter.ConvertFromInvariantString(String text)
-   在 SolrNet.Impl.FieldParsers.TypeConvertingFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\TypeConvertingFieldParser.cs:行号 63
-   在 SolrNet.Impl.FieldParsers.AggregateFieldParser.<>c__DisplayClass8.<Parse>b__7(ISolrFieldParser p) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\AggregateFieldParser.cs:行号 49
-   在 System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
-   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   在 SolrNet.Impl.FieldParsers.AggregateFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\AggregateFieldParser.cs:行号 47
-   在 SolrNet.Impl.FieldParsers.DefaultFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\DefaultFieldParser.cs:行号 58
-   在 SolrNet.Impl.DocumentPropertyVisitors.RegularDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\RegularDocumentVisitor.cs:行号 48
-   在 SolrNet.Impl.DocumentPropertyVisitors.AggregateDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\AggregateDocumentVisitor.cs:行号 37
-   在 SolrNet.Impl.DocumentPropertyVisitors.DefaultDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\DefaultDocumentVisitor.cs:行号 39
-   在 SolrNet.Impl.SolrDocumentResponseParser`1.ParseDocument(XElement node) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrDocumentResponseParser.cs:行号 62
-   在 SolrNet.Impl.SolrDocumentResponseParser`1.ParseResults(XElement parentNode) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrDocumentResponseParser.cs:行号 47
-   在 SolrNet.Impl.ResponseParsers.ResultsResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\ResultsResponseParser.cs:行号 73
-   在 SolrNet.Impl.ResponseParsers.AggregateResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\AggregateResponseParser.cs:行号 15
-   在 SolrNet.Impl.ResponseParsers.DefaultResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\DefaultResponseParser.cs:行号 30
-   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 674
-   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery q) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 88
-   在 ImBLL.SolrNetSearchBll.QueryWeiboByGeo(String keyWord, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 707
-   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 41
-2017-11-01 11:36:49,487 [8] ERROR WebLogger [(null)] - solr服务未启动:System.Exception: weibo_106 不是 Int64 的有效值。 ---> System.FormatException: 输入字符串的格式不正确。
-   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   在 System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
-   在 System.ComponentModel.Int64Converter.FromString(String value, NumberFormatInfo formatInfo)
-   在 System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
-   在 System.ComponentModel.TypeConverter.ConvertFromInvariantString(String text)
-   在 SolrNet.Impl.FieldParsers.TypeConvertingFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\TypeConvertingFieldParser.cs:行号 63
-   在 SolrNet.Impl.FieldParsers.AggregateFieldParser.<>c__DisplayClass8.<Parse>b__7(ISolrFieldParser p) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\AggregateFieldParser.cs:行号 49
-   在 System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
-   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   在 SolrNet.Impl.FieldParsers.AggregateFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\AggregateFieldParser.cs:行号 47
-   在 SolrNet.Impl.FieldParsers.DefaultFieldParser.Parse(XElement field, Type t) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\FieldParsers\DefaultFieldParser.cs:行号 58
-   在 SolrNet.Impl.DocumentPropertyVisitors.RegularDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\RegularDocumentVisitor.cs:行号 48
-   在 SolrNet.Impl.DocumentPropertyVisitors.AggregateDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\AggregateDocumentVisitor.cs:行号 37
-   在 SolrNet.Impl.DocumentPropertyVisitors.DefaultDocumentVisitor.Visit(Object doc, String fieldName, XElement field) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\DocumentPropertyVisitors\DefaultDocumentVisitor.cs:行号 39
-   在 SolrNet.Impl.SolrDocumentResponseParser`1.ParseDocument(XElement node) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrDocumentResponseParser.cs:行号 62
-   在 SolrNet.Impl.SolrDocumentResponseParser`1.ParseResults(XElement parentNode) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrDocumentResponseParser.cs:行号 47
-   在 SolrNet.Impl.ResponseParsers.ResultsResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\ResultsResponseParser.cs:行号 73
-   在 SolrNet.Impl.ResponseParsers.AggregateResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\AggregateResponseParser.cs:行号 15
-   在 SolrNet.Impl.ResponseParsers.DefaultResponseParser`1.Parse(XDocument xml, AbstractSolrQueryResults`1 results) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\ResponseParsers\DefaultResponseParser.cs:行号 30
-   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrQueryExecuter.cs:行号 674
-   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrBasicServer.cs:行号 98
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 49
-   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery q) 位置 c:\Users\wangzheng1\Desktop\solr\SolrNet-master\SolrNet-master\SolrNet\Impl\SolrServer.cs:行号 88
-   在 ImBLL.SolrNetSearchBll.QueryWeiboByGeo(String keyWord, Int32 pageNum, Int32 pageCount) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 707
-   在 ImPinker.Controllers.ArticleController.Index(String id) 位置 d:\GitHubProject\ImPinker\ImPinker\ImPinker\Controllers\ArticleController.cs:行号 41
-[Footer]
-[Header]
-[Footer]
-[Header]
+2017-11-02 15:12:27,208 [6] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=1203
+Referer:http://www.impinker.com/
+System.MissingMethodException: 找不到方法:“ImModel.ViewModel.SearchResultVm ImBLL.SolrNetSearchBll.QueryWeiboByGeo(System.String, System.String, Int32, Int32)”。
+   在 ImPinker.Controllers.ArticleController.Index(String id)
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
 [Footer]
 [Header]
 [Footer]

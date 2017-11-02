@@ -1,8 +1,5 @@
-﻿
-using System.Net.Http;
-using System.Web.Helpers;
+﻿using System.Net.Http;
 using System.Web.Http;
-using System.Web.UI;
 using ImBLL;
 using ImpinkerApi.Models;
 
@@ -10,8 +7,17 @@ namespace ImpinkerApi.Controllers
 {
     public class SearchController : BaseApiController
     {
-        //
-        // GET: /Search/
+        /// <summary>
+        /// 微博，根据地理位置查询
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="weiboId"></param>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <param name="distance"></param>
+        /// <param name="pagenum"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
         [HttpGet]
         public HttpResponseMessage GetWeiboByGeo(int userid,int weiboId,string lat,string lng,int distance,int pagenum,int pagesize)
         {
@@ -23,15 +29,13 @@ namespace ImpinkerApi.Controllers
             double.TryParse(lng, out dLng);
             if (!string.IsNullOrEmpty(lat)&&!string.IsNullOrEmpty(lng)&&dLat>0&&dLng>0)
             {
-                var searchVm = SolrNetSearchBll.QueryWeiboByGeo(dLat, dLng, distance, userid>0? userid:0,pagenum,pagesize);
+                var searchVm = SolrNetSearchBll.QueryWeiboByGeo(dLat, dLng, distance, userid,pagenum,pagesize);
                 return GetJson(new JsonResultViewModel
                 {
                     IsSuccess = 1,
                     Data = searchVm,
                 });
             }
-            //http://api.impinker.com/api/Search/GetWeiboByGeo?weiboId=1209&lat=36.702109&lng=119.033300&distance=10&pagenum=1&pagesize=10&userid=1
-            
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 0,

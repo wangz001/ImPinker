@@ -702,20 +702,33 @@ namespace ImBLL
 
 
         #region weibo操作
-
+        /// <summary>
+        /// 根据地理位置获取微博列表
+        /// </summary>
+        /// <param name="latitude">纬度</param>
+        /// <param name="longitude">经度</param>
+        /// <param name="distance">距离</param>
+        /// <param name="userid"></param>
+        /// <param name="pagenum">页码</param>
+        /// <param name="pagesize">条数</param>
+        /// <returns></returns>
         public static WeiboSearchResultVm QueryWeiboByGeo(double latitude, double longitude, int distance, int userid, int pagenum, int pagesize)
         {
             //创建条件集合
-
+            var query = new List<ISolrQuery>();
             // ReSharper disable once CSharpWarnings::CS0618
             var geoQuery = new SolrQueryByDistance("weibo_position", latitude, longitude, distance, CalculationAccuracy.BoundingBox);
+            query.Add(geoQuery);
             //建立排序，条件.
             var options = new QueryOptions
             {
-                Start = (pagenum - 1) * pagesize + 1,
-                Rows = (pagenum) * pagesize
+                Rows = (pagenum)*pagesize,
+                Start = (pagenum - 1)*pagesize + 1,
             };
-            SolrQueryResults<WeiboVm> weiboList = WeiboInstance.Query(geoQuery, options);
+            options.AddOrder(new SortOrder("CreateTime", Order.DESC));
+            //options.AddOrder(new SortOrder("geofilt", Order.ASC));
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+            SolrQueryResults<WeiboVm> weiboList = WeiboInstance.Query(qTBO, options);
             if (weiboList != null && weiboList.Count > 0)
             {
                 foreach (WeiboVm vm in weiboList)
@@ -737,7 +750,7 @@ namespace ImBLL
                 WeiboList = weiboList,
                 PageCount = 10,
                 PageNum = 1,
-                TotalCount = weiboList.NumFound
+                TotalCount =weiboList!=null? weiboList.NumFound:0
             };
             return searchVm;
         }
