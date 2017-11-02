@@ -8,6 +8,7 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 			#map {
 				width: 100%;
@@ -135,6 +136,8 @@
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/template" id="mui-card-item">
 			<div class="mui-card">
@@ -165,6 +168,7 @@
 					up: {
 						contentrefresh: '正在加载...',
 						auto: false,
+						contentnomore:'没有更多数据了',
 						callback: pullupRefresh
 					}
 				}
@@ -175,6 +179,9 @@
 				console.log(weiboid);
 				getweibo(weiboid);
 			});
+			
+			mui.previewImage();
+			
 			var pageNum = 1;
 			var allCount = 0;
 			var pageSize = 30;
@@ -213,7 +220,6 @@
 			}
 
 			function pullupRefresh() {
-				console.log("bbb");
 				var weiboApiPath = "http://api.myautos.cn/api/Search/GetWeiboByGeo";
 				var dataPara = solrQueryData;
 				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
@@ -224,12 +230,13 @@
 							initWeiBoItemTemplate(item);
 						}
 						solrQueryData.pagenum=solrQueryData.pagenum+1;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 					} else {
 						console.log("aaa");
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;
 					}
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh;
+					
 				});
 
 			}
@@ -263,7 +270,7 @@
 				item.imglist = imgHtmlStr;
 				//显示地理位置
 				item.cardlocation = "";
-				if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
+				if(item.LocationText!=null&&item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
 					var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
 					item.cardlocation = lbsStr;
 				}
@@ -299,7 +306,7 @@
 		<script type="text/javascript">
 			//获得滚动事件
 			var wh = $(window).height();
-			console.log(wh);
+			//console.log(wh);
 			var mapSizeSmall = true;
 			$(window).scroll(function() {
 				var top = $(window).scrollTop();
