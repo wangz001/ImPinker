@@ -128,7 +128,9 @@
 			"js/qqFace/arclist/17.gif",
 			"js/qqFace/arclist/33.gif",
 			"js/qqFace/arclist/49.gif",
-			"js/qqFace/arclist/28.gif"
+			"js/qqFace/arclist/28.gif",
+			"images/datong.png",
+			"images/yuantiao.jpg"
 		],
 		"refer": [
 			"login.html"
@@ -377,7 +379,9 @@
 		"resources": [
 			"js/mui.min.js",
 			"css/mui.min.css",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"images/yuantiao.jpg",
+			"images/shuijiao.jpg"
 		]
 	},
 	"view/setting/setting-account.html": {
