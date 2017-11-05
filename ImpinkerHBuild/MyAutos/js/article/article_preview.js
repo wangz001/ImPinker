@@ -91,7 +91,7 @@ function getArticle(articleid) {
 			var articleinfo = data.Data;
 			articleItem = articleinfo;
 			$("#coverimage").attr("src",articleItem.CoverImage.replace("style/articlecover_36_24","style/article_900"));
-			$("#article_description").html(articleItem.Description);
+			$("#article_description").html("简介："+articleItem.Description);
 			var contentStr = articleinfo.Content;
 			$("#articlename").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);

@@ -130,7 +130,8 @@
 			"js/qqFace/arclist/49.gif",
 			"js/qqFace/arclist/28.gif",
 			"images/datong.png",
-			"images/yuantiao.jpg"
+			"images/yuantiao.jpg",
+			"css/article/preview.css"
 		],
 		"refer": [
 			"login.html"
@@ -348,7 +349,9 @@
 	"view/search/search.html": {
 		"resources": [
 			"js/mui.min.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"images/logo.png"
 		]
 	},
 	"view/setting/feedback.html": {
