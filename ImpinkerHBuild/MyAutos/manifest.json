@@ -382,7 +382,8 @@
 					"view/map/lbs.html",
 					"view/weibo/weibo_comment.html",
 					"view/map/lbs2.html",
-					"login.html"
+					"login.html",
+					"view/user/userindex.html"
 				],
 				"priority": 0
 			},
@@ -851,6 +852,33 @@
 					"js/jquery.js",
 					"js/commonUtil.js",
 					"css/weibo.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"view/user/userindex.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"images/cbd.jpg",
+					"images/food.png",
+					"js/webviewGroup.js",
+					"view/article/youji_my.html"
+				],
+				"refer": [
+					"view/user/user_article.html"
+				],
+				"priority": 0
+			},
+			"view/user/user_article.html": {
+				"resources": [
+					"js/app.js",
+					"css/icons-extra.css",
+					"js/commonUtil.js",
+					"js/jquery.js",
+					"css/weibo.css",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -72,7 +72,7 @@
 				<div class="mui-scroll">
 					<!--<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
-							<img src="images/logo.png">
+							<img class="head-img" src="images/logo.png">
 							<div class="mui-media-body">
 								<em class="mui-icon mui-icon-person">bwlang</em>
 								<p>发表于 2016-06-30 15:30</p>
@@ -134,7 +134,7 @@
 		<script type="text/template" id="mui-card-item">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
-					<img src="$UserHeadImage$">
+					<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
 					<div class="mui-media-body">
 						<em class="mui-icon mui-icon-person">$UserName$</em>
 						<p>发表于 $PublishTime$</p>
@@ -298,6 +298,22 @@
 					},
 					extras: {
 						weiboid: weiboid
+					}
+				});
+			});
+			
+			//用户头像点击事件
+			mui('.mui-scroll').on('tap', '.head-img', function() {
+				var userid = this.getAttribute('userid');
+				mui.openWindow({
+					url: "view/user/userindex.html",
+					id: "userindex",
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					},
+					extras: {
+						userid: userid
 					}
 				});
 			});

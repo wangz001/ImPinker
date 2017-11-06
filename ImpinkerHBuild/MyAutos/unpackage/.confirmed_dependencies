@@ -24,7 +24,8 @@
 			"view/weibo/weibo_comment.html",
 			"view/map/lbs.html",
 			"view/map/lbs2.html",
-			"login.html"
+			"login.html",
+			"view/user/userindex.html"
 		]
 	},
 	"tab-webview-main.html": {
@@ -478,6 +479,31 @@
 			"css/mui.min.css",
 			"js/reg.js",
 			"js/jquery.js"
+		]
+	},
+	"view/user/userindex.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"images/cbd.jpg",
+			"images/food.png",
+			"js/webviewGroup.js",
+			"view/article/youji_my.html"
+		],
+		"refer": [
+			"view/article/youji_my.html",
+			"view/user/user_article.html"
+		]
+	},
+	"view/user/user_article.html": {
+		"resources": [
+			"js/app.js",
+			"css/icons-extra.css",
+			"js/commonUtil.js",
+			"js/jquery.js",
+			"css/weibo.css",
+			"css/mui.min.css"
 		]
 	}
 }
