@@ -194,6 +194,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeiBoController.cs" />
     <Compile Include="Controllers\WeiBoVoteController.cs" />
