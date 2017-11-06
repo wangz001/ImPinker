@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.UI;
 using Common.Utils;
 using ImBLL;
 using ImModel;
@@ -167,11 +168,11 @@ namespace ImpinkerApi.Controllers
                 });
             }
             var entity = _articleBll.GetModelByCache(article.Id);
-            if (entity!=null)
+            if (entity != null)
             {
                 entity.ArticleName = article.ArticleName;
                 entity.UpdateTime = DateTime.Now;
-                var flag=_articleBll.Update(entity);
+                var flag = _articleBll.Update(entity);
                 if (flag)
                 {
                     return GetJson(new JsonResultViewModel
@@ -232,8 +233,8 @@ namespace ImpinkerApi.Controllers
             });
         }
 
-        
-        
+
+
         /// <summary>
         /// 发布游记
         /// </summary>
@@ -337,7 +338,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl,360));
+                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl, 360));
                     break;
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
@@ -419,7 +420,7 @@ namespace ImpinkerApi.Controllers
                             Data = file.LocalFileName
                         });
                     }
-                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl,900));
+                    files.Add(ImageUrlHelper.GetArticleImage(imgUrl, 900));
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                 {
@@ -475,7 +476,7 @@ namespace ImpinkerApi.Controllers
         {
             int totalCount;
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Normal,out totalCount);
+            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Normal, out totalCount);
             foreach (var item in articles)
             {
                 item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
@@ -522,6 +523,35 @@ namespace ImpinkerApi.Controllers
 
         #endregion
 
-        
+        #region 获取用户的文章列表
+
+        public HttpResponseMessage GetUsersArticleByPage(int userid, int pageindex, int pagesize)
+        {
+            int totalCount;
+            pageindex = pagesize > 0 ? pageindex : 1;
+            pagesize = (pagesize > 0 && pagesize < 50) ? pagesize : 10;
+            var articles = _articleBll.GetMyListByState(userid, pageindex, pagesize, ArticleStateEnum.Normal, out totalCount);
+            if (articles == null || articles.Count == 0)
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Data = null,
+                    Description = "没有更多数据"
+                });
+            }
+            foreach (var item in articles)
+            {
+                item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = articles,
+                Description = "获取草稿成功"
+            });
+        }
+
+        #endregion
     }
 }

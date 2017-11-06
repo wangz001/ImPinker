@@ -1,0 +1,25 @@
+[Header]
+[Footer]
+[Header]
+2017-11-02 15:12:27,208 [6] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://www.impinker.com/Article/Index?id=1203
+Referer:http://www.impinker.com/
+System.MissingMethodException: 找不到方法:“ImModel.ViewModel.SearchResultVm ImBLL.SolrNetSearchBll.QueryWeiboByGeo(System.String, System.String, Int32, Int32)”。
+   在 ImPinker.Controllers.ArticleController.Index(String id)
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__36(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass45.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3e()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<>c__DisplayClass28.<BeginInvokeAction>b__19()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass1e.<BeginInvokeAction>b__1b(IAsyncResult asyncResult)
+[Footer]
+[Header]
+[Footer]
+[Header]
+[Footer]

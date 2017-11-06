@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Common.Utils;
 using ImBLL;
 using ImModel;
+using ImModel.ViewModel;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
@@ -67,7 +68,7 @@ namespace ImpinkerApi.Controllers
                         return Request.CreateResponse(HttpStatusCode.OK, new JsonResultViewModel
                         {
                             IsSuccess = 0,
-                            Description = "上传图片到oss失败，图片大小" ,
+                            Description = "上传图片到oss失败，图片大小",
                             Data = file.LocalFileName
                         });
                     }
@@ -196,15 +197,15 @@ namespace ImpinkerApi.Controllers
                     Id = weiBo.Id,
                     UserId = weiBo.UserId,
                     Description = weiBo.Description,
-                    ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue,240),
+                    ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue, 240),
                     Longitude = weiBo.Longitude,
                     Lantitude = weiBo.Lantitude,
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
                     PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
                     IsRePost = weiBo.IsRePost,
-                    VoteCount=weiBo.VoteCount,
-                    CommentCount=weiBo.CommentCount
+                    VoteCount = weiBo.VoteCount,
+                    CommentCount = weiBo.CommentCount
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);
                 model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
@@ -278,8 +279,8 @@ namespace ImpinkerApi.Controllers
             {
                 Id = weiBo.Id,
                 UserId = weiBo.UserId,
-                UserName=string.IsNullOrEmpty(userinfo.ShowName)? userinfo.UserName:userinfo.ShowName,
-                UserHeadImage=ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100),
+                UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
+                UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100),
                 Description = weiBo.Description,
                 ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue, 240),
                 Longitude = weiBo.Longitude,
@@ -299,6 +300,52 @@ namespace ImpinkerApi.Controllers
                 Data = vm
             });
         }
+
+        #endregion
+
+        #region 获取用户微博列表
+
+        public HttpResponseMessage GetUsersListByPage(int userid, int pageindex, int pagesize)
+        {
+            var list = _weiBoBll.GetListByPage(userid, pageindex, pagesize);
+            if (list == null || list.Count == 0)
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "暂无更多数据",
+                    Data = null
+                });
+            }
+            var resultList = new List<WeiBoListViewModel>();
+            foreach (var weiBo in list)
+            {
+                var model = new WeiBoListViewModel
+                {
+                    Id = weiBo.Id,
+                    UserId = weiBo.UserId,
+                    Description = weiBo.Description,
+                    ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiBo.ContentValue, 240),
+                    Longitude = weiBo.Longitude,
+                    Lantitude = weiBo.Lantitude,
+                    Height = weiBo.Height,
+                    LocationText = weiBo.LocationText,
+                    PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
+                    IsRePost = weiBo.IsRePost
+                };
+                var userinfo = _userBll.GetModelByCache(weiBo.UserId);
+                model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                model.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                resultList.Add(model);
+            }
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Description = "ok",
+                Data = resultList
+            });
+        }
+
 
         #endregion
     }
