@@ -1,0 +1,52 @@
+html,
+body {
+	background-color: #efeff4;
+}
+
+.mui-bar .mui-pull-left {
+	padding-right: 5px;
+	font-size: 28px;
+	color:#444444;
+}
+
+.personal-top {
+	width: auto;
+	height: 200px;
+	position: relative;
+	padding-top: 30px;
+}
+
+.personal-top .head-img {
+	width: 75px;
+	height: 75px;
+	position: relative;
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.personal-top .head-img img {
+	width: 70px;
+	height: 70px;
+	border: 3px solid #fff;
+	border-radius: 50px;
+}
+
+.personal-top .username {
+	font-size: 1.8rem;
+	text-align: center;
+	line-height: 25px;
+	font-weight: 700;
+	vertical-align: middle;
+	position: relative;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.mui-control-content {
+	background-color: white;
+	min-height: 515px;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 50px;
+}
