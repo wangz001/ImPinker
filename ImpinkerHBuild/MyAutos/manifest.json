@@ -864,7 +864,20 @@
 					"images/cbd.jpg",
 					"images/food.png",
 					"js/webviewGroup.js",
-					"view/article/youji_my.html"
+					"view/article/youji_my.html",
+					"css/user/userindex.css",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"images/shuijiao.jpg",
+					"images/muwu.jpg",
+					"images/logo.png",
+					"images/login-1.png",
+					"css/weibo.css",
+					"css/icons-extra.css",
+					"images/yuantiao.jpg",
+					"js/commonUtil.js",
+					"js/jquery.js",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
 					"view/user/user_article.html"

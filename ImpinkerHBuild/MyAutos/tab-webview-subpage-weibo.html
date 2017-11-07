@@ -17,52 +17,7 @@
 				float: right;
 			}
 			
-			.mui-scroll .mui-card {
-				margin: 0 0 5px 0;
-			}
 			
-			.mui-card-header.mui-card-media {
-				display: block;
-				padding: 6px 0 6px 10px;
-			}
-			
-			.mui-card-header.mui-card-media img {
-				border-radius: 4px;
-			}
-			
-			.mui-card-header .mui-media-body em {
-				font-size: 15px;
-			}
-			
-			.mui-card-header.mui-card-media .mui-media-body p {
-				font-size: 11px;
-				margin-top: 3px;
-			}
-			
-			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 10px
-			}
-			
-			.mui-card .mui-card-content p {
-				margin-bottom: 0px;
-			}
-			
-			.mui-card .card-location{
-				color: #b5bebf;
-				font-size: 13px;
-				margin-top: 3px;
-			}
-			.mui-card .card-location .mui-icon{
-				font-size: 15px;
-			}
-			.mui-card .mui-card-footer {
-				padding: 4px 45px;
-				min-height: 30px;
-			}
-			
-			.mui-card-footer em {
-				font-size: 10px;
-			}
 		</style>
 	</head>
 
@@ -70,7 +25,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<!--<div class="mui-card">
+					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img class="head-img" src="images/logo.png">
 							<div class="mui-media-body">
@@ -119,7 +74,7 @@
 							<span class="mui-icon mui-icon-star"></span>
 						</div>
 					</div>
-				-->
+			
 				</div>
 			</div>
 		</div>
@@ -165,7 +120,8 @@
 						callback: pulldownRefresh
 					},
 					up: {
-						contentrefresh: '正在加载...',
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
 						callback: pullupRefresh
 					}
 				}
@@ -265,20 +221,20 @@
 				var imgs = item.ContentValue.split(',');
 				if(imgs.length > 1) {
 					//多图
-					imgHtmlStr+="<ul>";
+					imgHtmlStr += "<ul>";
 					for(var i = 0; i < imgs.length; i++) {
 						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 					}
-					imgHtmlStr+="</ul>";
+					imgHtmlStr += "</ul>";
 				} else {
 					imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 				}
 				item.imglist = imgHtmlStr;
 				//显示地理位置
-				item.cardlocation="";
-				if(item.LocationText!=""&&item.Longitude!=""&&item.Lantitude!=""){
-					var lbsStr="<div weiboid='"+item.Id+"' class='card-location'><span class='mui-icon mui-icon-location'></span><span>"+item.LocationText+"</span></div>";
-					item.cardlocation=lbsStr;
+				item.cardlocation = "";
+				if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
+					var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
+					item.cardlocation = lbsStr;
 				}
 				//判断我是否赞过此微博
 				var isVote = storageUtil.getWeiboVote(item.Id);
@@ -301,7 +257,7 @@
 					}
 				});
 			});
-			
+
 			//用户头像点击事件
 			mui('.mui-scroll').on('tap', '.head-img', function() {
 				var userid = this.getAttribute('userid');

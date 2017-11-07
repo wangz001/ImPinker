@@ -6,11 +6,11 @@
 		<title>用户主页</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link href="../../css/user/userindex.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<link href="../../css/user/userindex.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/weibo.css" />
 		<style type="text/css">
-			
-			
-			
+
 		</style>
 	</head>
 
@@ -20,133 +20,140 @@
 			<h1 class="mui-title"></h1>
 		</header>
 		<div class="mui-content">
-			<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
-				<div class="head-img"><img src="../../images/food.png">
-				</div>
-				<div class="username">
-					<h4>Bwlang星</h4>
-				</div>
-			</div>
-			<div id="slider" class="mui-slider">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="#item1mobile">
-						weibo
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						article
-					</a>
-					<a class="mui-control-item" href="#item3mobile">
-						quanbu
-					</a>
-				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
-				<div class="mui-slider-group">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<ul class="mui-table-view">
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-1
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-2
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-3
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-4
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-5
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-6
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-7
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-8
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-9
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-10
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-11
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-12
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-13
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-14
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-15
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-16
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-17
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-18
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-19
-									</li>
-									<li class="mui-table-view-cell">
-										第一个选项卡子项-20
-									</li>
-								</ul>
-							</div>
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
+						<div class="head-img"><img src="../../images/food.png">
+						</div>
+						<div class="username">
+							<h4>Bwlang星</h4>
 						</div>
 					</div>
-					<div id="item2mobile" class="mui-slider-item mui-control-content">
-						<div id="scroll2" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
+
+					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item" href="#item1mobile">
+							主页
+						</a>
+						<a class="mui-control-item" href="#item2mobile">
+							途迹
+						</a>
+						<a class="mui-control-item" href="#item3mobile">
+							游记
+						</a>
+					</div>
+					<ul class="mui-table-view" id="cardlist">
+						<li class="card-article">
+							<div class="mui-card">
+								<div class="mui-card-title">
+									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+								</div>
+								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)
+									"></div>
+								<div class="mui-card-content">
+									<div class="mui-card-content-inner">
+										<p class="userinfo">Posted on January 18, 2016
+											<span class="viewcount">
+											<em class="mui-icon-extra mui-icon-extra-like">10</em>
+											<em class="mui-icon mui-icon-compose">23</em>
+											</span>
+										</p>
 									</div>
 								</div>
 							</div>
-						</div>
-
-					</div>
-					<div id="item3mobile" class="mui-slider-item mui-control-content">
-						<div id="scroll3" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
+						</li>
+						<li class="card-weibo1">
+							<div class="mui-card">
+								<div class="mui-card-header mui-card-media">
+									<img class="head-img" src="../../images/logo.png">
+									<div class="mui-media-body">
+										<em class="mui-icon mui-icon-person">bwlang</em>
+										<p>发表于 2016-06-30 15:30</p>
 									</div>
 								</div>
+								<div class="mui-card-content">
+									<p>的空间疯狂的健康</p>
+									<div class="media-pic-list">
+										<ul>
+											<li>
+												<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+											</li>
+											<li>
+												<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+											</li>
+										</ul>
+									</div>
+									<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+								</div>
+								<div class="mui-card-footer">
+									<span class="mui-icon mui-icon-location"><em>20</em></span>
+									<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+									<span class="mui-icon mui-icon-compose"></span>
+								</div>
 							</div>
-						</div>
-
-					</div>
+						</li>
+						<li class="card-weibo2">
+							<div class="mui-card">
+								<div class="mui-card-header mui-card-media">
+									<img src="../../images/logo.png">
+									<div class="mui-media-body">
+										小Mf
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
+								<div class="mui-card-content">
+									<p>的空间疯狂的健康</p>
+									<div class="media-pic-list">
+										<img class="bigimage" src="../../images/yuantiao.jpg">
+									</div>
+									<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+								</div>
+								<div class="mui-card-footer">
+									<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
+									<span class="mui-icon mui-icon-compose"></span>
+									<span class="mui-icon mui-icon-star"></span>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
+
 		</div>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/webviewGroup.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type=type="text/template" id="card-article">
+			<li class="card-article">
+				<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+					<div class="mui-card">
+						<div class="mui-card-title">
+							<p>$ArticleName$</p>
+						</div>
+						<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
+						<div class="mui-card-content">
+							<div class="mui-card-content-inner">
+								<p class="userinfo">
+									<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTimeStr$</em>
+									<span class="viewcount">
+									<em Id="voteCount_$Id$" class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
+									<em Id="commentCount_$Id$" class="mui-icon mui-icon-compose">$CommentCount$</em>
+								</span></p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
 				pullRefresh: {
 					container: '#pullrefresh',
-					down: {
-						callback: pullupRefresh
-					},
 					up: {
 						contentrefresh: '正在加载...',
-						auto: false,
+						auto: true,
 						contentnomore: '没有更多数据了',
 						callback: pullupRefresh
 					}
@@ -159,8 +166,33 @@
 				getUserinfo(userid);
 			});
 
-			function pullupRefresh() {
+			var pageNum = 1;
+			var pageSize = 30;
 
+			function pullupRefresh() {
+				var url = 'http://api.myautos.cn/api/Article/GetUsersArticleByPage';
+				var data = {
+					userid: 1,
+					pageindex: pageNum,
+					pagesize: pageSize
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						var imgTemplate = $('script[id="card-article"]').html();
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							item.CoverImage = item.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+							var imgHtmlStr = imgTemplate.temp(item);
+							$("#cardlist").append(imgHtmlStr);
+						}
+						pageNum++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+				});
 			}
 
 			function getUserinfo() {
@@ -168,32 +200,6 @@
 			}
 		</script>
 		<script type="text/javascript">
-			(function($) {
-				$('.mui-scroll-wrapper').scroll({
-					indicators: true //是否显示滚动条
-				});
-				var html2 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第二个选项卡子项-1</li><li class="mui-table-view-cell">第二个选项卡子项-2</li><li class="mui-table-view-cell">第二个选项卡子项-3</li><li class="mui-table-view-cell">第二个选项卡子项-4</li><li class="mui-table-view-cell">第二个选项卡子项-5</li></ul>';
-				var html3 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第三个选项卡子项-1</li><li class="mui-table-view-cell">第三个选项卡子项-2</li><li class="mui-table-view-cell">第三个选项卡子项-3</li><li class="mui-table-view-cell">第三个选项卡子项-4</li><li class="mui-table-view-cell">第三个选项卡子项-5</li></ul>';
-				var item2 = document.getElementById('item2mobile');
-				var item3 = document.getElementById('item3mobile');
-				document.getElementById('slider').addEventListener('slide', function(e) {
-					if(e.detail.slideNumber === 1) {
-						if(item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item2.querySelector('.mui-scroll').innerHTML = html2;
-							}, 500);
-						}
-					} else if(e.detail.slideNumber === 2) {
-						if(item3.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item3.querySelector('.mui-scroll').innerHTML = html3;
-							}, 500);
-						}
-					}
-				});
-				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
-				
-			})(mui);
 		</script>
 	</body>
 
