@@ -553,5 +553,25 @@ namespace ImpinkerApi.Controllers
         }
 
         #endregion
+
+        #region 时间倒叙获取用户文章和微博列表
+
+        public HttpResponseMessage GetUserArticleAndWeiboListByPage(int userid, int pageindex, int pagesize)
+        {
+            pageindex = pagesize > 0 ? pageindex : 1;
+            pagesize = (pagesize > 0 && pagesize < 50) ? pagesize : 10;
+            var articles = _articleBll.GetUserArticleAndWeiboListByPage(userid, pageindex, pagesize);
+            
+
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Data = articles,
+                Description = "获取草稿成功"
+            });
+        }
+
+
+        #endregion
     }
 }

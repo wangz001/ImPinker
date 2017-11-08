@@ -4,8 +4,10 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using Common.AlyOssUtil;
+using Common.DateTimeUtil;
 using ImDal;
 using ImModel;
+using ImModel.Enum;
 using ImModel.ViewModel;
 using Maticsoft.Common;
 using Common.Utils;
@@ -149,10 +151,10 @@ namespace ImBLL
         /// <param name="stateEnum"></param>
         /// <param name="totalaCount"></param>
         /// <returns></returns>
-        public List<Article> GetMyListByState(int userid, int pageNum, int count,ArticleStateEnum stateEnum, out int totalaCount)
+        public List<Article> GetMyListByState(int userid, int pageNum, int count, ArticleStateEnum stateEnum, out int totalaCount)
         {
             totalaCount = 0;
-            var ds = _dal.GetMyListByState(userid, pageNum, count,stateEnum);
+            var ds = _dal.GetMyListByState(userid, pageNum, count, stateEnum);
             var list = new List<Article>();
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -174,7 +176,6 @@ namespace ImBLL
             var ds = _dal.GetIndexListByPage(pageNum, count);
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
-                var random = new Random();
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     var model = new ArticleViewModel();
@@ -240,7 +241,7 @@ namespace ImBLL
                         model.CommentCount = int.Parse(row["CommentCount"].ToString());
                     }
                     //点赞数和浏览数------暂时处理。后期改为不从db中直接查询
-                    
+
                     listResult.Add(model);
                 }
             }
@@ -301,7 +302,7 @@ namespace ImBLL
                 Company = article.Company,
                 CreateTime = article.CreateTime,
                 Content = snap == null ? null : new List<Object> { snap.Content },
-                UserName=string.IsNullOrEmpty(userinfo.ShowName)? userinfo.UserName:userinfo.ShowName,
+                UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
                 UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100)
             };
             return vm;
@@ -361,7 +362,7 @@ namespace ImBLL
         /// <param name="articleid"></param>
         /// <param name="localFileName"></param>
         /// <returns></returns>
-        public string UploadArticleCoverImgToOss(string buckeyName, int userid,int articleid, string localFileName)
+        public string UploadArticleCoverImgToOss(string buckeyName, int userid, int articleid, string localFileName)
         {
             var coverimageFormat = ConfigurationManager.AppSettings["ArticleFirstImage"];
             var imgUrl = string.Format(coverimageFormat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
@@ -373,7 +374,7 @@ namespace ImBLL
                 var flag1 = ObjectOperate.UploadImage(buckeyName, sLocalPath, imgUrl, 1024);
                 if (flag1)
                 {
-                    var flag2=UpdateCoverImage(articleid, imgUrl);
+                    var flag2 = UpdateCoverImage(articleid, imgUrl);
                     return flag2 ? imgUrl : "";
                 }
             }
@@ -396,8 +397,152 @@ namespace ImBLL
             }
             string imgUrlformat = ConfigurationManager.AppSettings["ArticleImage"];
             var imgUrl = string.Format(imgUrlformat, DateTime.Now.ToString("yyyyMMdd"), userid, articleid, DateTime.Now.Ticks);
-            var flag1 = ObjectOperate.UploadImage(buckeyName, sourcePath, imgUrl,1024);
+            var flag1 = ObjectOperate.UploadImage(buckeyName, sourcePath, imgUrl, 1024);
             return flag1 ? imgUrl : "";
+        }
+
+        /// <summary>
+        /// 根据时间倒叙获取用户的微博和article列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public List<ArticleWeiboVm> GetUserArticleAndWeiboListByPage(int userid, int pageindex, int pagesize)
+        {
+            var resultList = new List<ArticleWeiboVm>();
+            var ds = _dal.GetUserArticleAndWeiboListByPage(userid, pageindex, pagesize);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    var vm = new ArticleWeiboVm
+                    {
+                        EntityId = Int32.Parse(row["EntityId"].ToString()),
+                        EntityType = Int32.Parse(row["EntityType"].ToString()),
+                        Userid = Int32.Parse(row["UserId"].ToString()),
+                        CreateTime = DateTime.Parse(row["CreateTime"].ToString())
+                    };
+                    #region 组装数据
+                    if (vm.EntityType == 1)
+                    {
+                        var articleVm = new ArticleViewModel();
+                        if (row.Table.Columns.Contains("AId") && row["AId"] != null && row["AId"].ToString() != "")
+                        {
+                            articleVm.Id = row["AId"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("ArticleName") && row["ArticleName"] != null)
+                        {
+                            articleVm.ArticleName = row["ArticleName"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("ADescription") && row["ADescription"] != null)
+                        {
+                            articleVm.Description = row["ADescription"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("AUrl") && row["AUrl"] != null)
+                        {
+                            articleVm.Url = row["AUrl"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("ACoverImage") && row["ACoverImage"] != null)
+                        {
+                            articleVm.CoverImage = row["ACoverImage"].ToString();
+                            articleVm.CoverImage = ImageUrlHelper.GetArticleImage(articleVm.CoverImage, 360);
+                        }
+                        if (row.Table.Columns.Contains("AKeyWords") && row["AKeyWords"] != null)
+                        {
+                            articleVm.KeyWords = row["AKeyWords"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("ACreateTime") && row["ACreateTime"] != null && row["ACreateTime"].ToString() != "")
+                        {
+                            articleVm.CreateTime = DateTime.Parse(row["ACreateTime"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("AUpdateTime") && row["AUpdateTime"] != null && row["AUpdateTime"].ToString() != "")
+                        {
+                            articleVm.UpdateTime = DateTime.Parse(row["AUpdateTime"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("ACompany") && row["ACompany"] != null && row["ACompany"].ToString() != "")
+                        {
+                            articleVm.Company = row["ACompany"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("AUserId") && row["AUserId"] != null && row["AUserId"].ToString() != "")
+                        {
+                            articleVm.Userid = row["AUserId"].ToString();
+                            var useritem = _userBll.GetModelByCache(int.Parse(articleVm.Userid));
+                            articleVm.UserName = string.IsNullOrEmpty(useritem.ShowName) ? useritem.UserName : useritem.ShowName;
+                        }
+                        vm.ArticleVm = articleVm;
+                    }
+                    else
+                    {
+                        var weiboVm = new WeiboVm();
+                        if (row.Table.Columns.Contains("WId") && row["WId"] != null && row["WId"].ToString() != "")
+                        {
+                            weiboVm.Id = long.Parse(row["WId"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WUserid") && row["WUserid"] != null)
+                        {
+                            weiboVm.UserId = Int32.Parse(row["WUserid"].ToString());
+                            var userinfo = _userBll.GetModelByCache(weiboVm.UserId);
+                            weiboVm.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                            weiboVm.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                        }
+                        if (row.Table.Columns.Contains("WDescription") && row["WDescription"] != null)
+                        {
+                            weiboVm.Description = row["WDescription"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("WContentValue") && row["WContentValue"] != null)
+                        {
+                            weiboVm.ContentValue = row["WContentValue"].ToString();
+                            weiboVm.ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(weiboVm.ContentValue, 240);
+                        }
+                        if (row.Table.Columns.Contains("WContentType") && row["WContentType"] != null)
+                        {
+                            weiboVm.ContentType = (WeiBoContentTypeEnum)Int32.Parse(row["WContentType"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WLocationText") && row["WLocationText"] != null)
+                        {
+                            weiboVm.LocationText = row["WLocationText"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("WLongitude") && row["WLongitude"] != null)
+                        {
+                            weiboVm.Longitude = decimal.Parse(row["WLongitude"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WLatitude") && row["WLatitude"] != null)
+                        {
+                            weiboVm.Lantitude = decimal.Parse(row["WLatitude"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WHeight") && row["WHeight"] != null)
+                        {
+                            weiboVm.Height = decimal.Parse(row["WHeight"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WState") && row["WState"] != null && row["WState"].ToString() != "")
+                        {
+                            weiboVm.State = (WeiBoStateEnum)int.Parse(row["WState"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WHardWareType") && row["WHardWareType"] != null)
+                        {
+                            weiboVm.HardWareType = row["WHardWareType"].ToString();
+                        }
+                        if (row.Table.Columns.Contains("WIsRepost") && row["WIsRepost"] != null)
+                        {
+                            weiboVm.IsRePost = Boolean.Parse(row["WIsRepost"].ToString());
+                        }
+                        if (row.Table.Columns.Contains("WCreateTime") && row["WCreateTime"] != null && row["WCreateTime"].ToString() != "")
+                        {
+                            weiboVm.CreateTime = DateTime.Parse(row["WCreateTime"].ToString());
+                            weiboVm.PublishTime = TUtil.DateFormatToString(weiboVm.CreateTime);
+                        }
+                        if (row.Table.Columns.Contains("WUpdateTime") && row["WUpdateTime"] != null && row["WUpdateTime"].ToString() != "")
+                        {
+                            weiboVm.UpdateTime = DateTime.Parse(row["WUpdateTime"].ToString());
+                        }
+                        vm.WeiboVm = weiboVm;
+                    }
+                    #endregion
+                    resultList.Add(vm);
+                }
+            }
+            return resultList;
         }
     }
 }

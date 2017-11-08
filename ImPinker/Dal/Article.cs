@@ -452,6 +452,86 @@ UPDATE [dbo].[ArticleSnaps]
             int rows = DbHelperSQL.ExecuteSqlTran(strlist);
             return rows > 0;
         }
+        /// <summary>
+        /// 根据时间倒叙获取用户的微博和article列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public DataSet GetUserArticleAndWeiboListByPage(int userid, int pageindex, int pagesize)
+        {
+            const string strSql = @"
+SELECT  T3.Id AS EntityId ,
+        T3.UserId ,
+        T3.CreateTime ,
+        T3.EntityType ,
+        Art.Id AS AId ,
+        Art.ArticleName ,
+        Art.Url AS AUrl ,
+        Art.CoverImage AS ACoverImage ,
+        Art.UserId AS AUserId ,
+        Art.KeyWords AS AKeyWords ,
+        Art.Description AS ADescription ,
+        Art.State AS AState ,
+        Art.PublishTime AS APublishTime ,
+        Art.CreateTime AS ACreateTime ,
+        Art.UpdateTime AS AUpdateTime ,
+        Art.ComPany AS ACompany ,
+        Wei.Id AS WId ,
+        Wei.UserId AS WUserid ,
+        Wei.Description AS WDescription ,
+        Wei.ContentValue AS WContentValue ,
+        Wei.ContentType AS WContentType ,
+        Wei.Longitude AS WLongitude ,
+        Wei.Latitude AS WLatitude ,
+        Wei.Height AS WHeight ,
+        Wei.LocationText AS WLocationText ,
+        Wei.State AS WState ,
+        Wei.HardWareType AS WHardWareType ,
+        Wei.IsRePost AS WIsRepost ,
+        Wei.CreateTime AS WCreateTime ,
+        Wei.UpdateTime AS WUpdateTime
+FROM    ( SELECT    T2.*
+          FROM      ( SELECT    ROW_NUMBER() OVER ( ORDER BY T1.CreateTime DESC ) AS rownindex ,
+                                *
+                      FROM      ( SELECT    Id ,
+                                            UserId ,
+                                            State ,
+                                            CreateTime ,
+                                            EntityType = 1
+                                  FROM      dbo.Article
+                                  WHERE     UserId = @userid
+                                            AND State = 1
+                                  UNION ALL
+                                  SELECT    Id ,
+                                            UserId ,
+                                            State ,
+                                            CreateTime ,
+                                            EntityType = 2
+                                  FROM      dbo.WeiBo
+                                  WHERE     UserId = @userid
+                                            AND State = 1
+                                ) T1
+                    ) AS T2
+          WHERE     T2.rownindex BETWEEN @startIndex AND @endIndex
+        ) AS T3
+        LEFT JOIN dbo.Article Art ON T3.Id = Art.Id
+                                     AND T3.EntityType = 1
+        LEFT JOIN dbo.WeiBo Wei ON T3.Id = Wei.Id
+                                   AND T3.EntityType = 2;
+";
+            var startIndex = (pageindex - 1) * pagesize + 1;
+            var endIndex = pageindex * pagesize;
+            var paras = new SqlParameter[]
+		    {
+                new SqlParameter("@userid",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+		    };
+            return DbHelperSQL.Query(strSql, paras);
+
+        }
     }
 }
 

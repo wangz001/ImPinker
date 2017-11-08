@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRelation.cs" />
     <Compile Include="Users.cs" />
+    <Compile Include="ViewModel\ArticleWeiboVm.cs" />
     <Compile Include="ViewModel\NotifyVm.cs" />
     <Compile Include="ViewModel\WeiboSearchResultVm.cs" />
     <Compile Include="ViewModel\WeiboCommentVm.cs" />
