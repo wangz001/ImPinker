@@ -502,7 +502,10 @@
 			"images/yuantiao.jpg",
 			"js/commonUtil.js",
 			"js/jquery.js",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"css/imageviewer.css"
 		],
 		"refer": [
 			"view/article/youji_my.html",

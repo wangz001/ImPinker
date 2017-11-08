@@ -7,8 +7,10 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link href="../../css/user/userindex.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 
 		</style>
@@ -123,8 +125,10 @@
 		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
 		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type=type="text/template" id="card-article">
+		<script type="text/template" id="card-article">
 			<li class="card-article">
 				<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 					<div class="mui-card">
@@ -146,6 +150,31 @@
 				</a>
 			</li>
 		</script>
+		<script type="text/template" id="card-weibo">
+			<li class="card-weibo">
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
+						<div class="mui-media-body">
+							<em class="mui-icon mui-icon-person">$UserName$</em>
+							<p>发表于 $PublishTime$</p>
+						</div>
+					</div>
+					<div class="mui-card-content">
+						<p>$Description$</p>
+						<div class="media-pic-list">
+							$imglist$
+						</div>
+						$cardlocation$
+					</div>
+					<div class="mui-card-footer">
+						<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
+						<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+						<span class="mui-icon mui-icon-star" weiboid='$Id$'></span>
+					</div>
+				</div>
+			</li>
+		</script>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true,
@@ -165,12 +194,14 @@
 				console.log(userid);
 				getUserinfo(userid);
 			});
+			mui.previewImage();
 
 			var pageNum = 1;
 			var pageSize = 30;
 
 			function pullupRefresh() {
-				var url = 'http://api.myautos.cn/api/Article/GetUsersArticleByPage';
+				//var url = 'http://api.myautos.cn/api/Article/GetUsersArticleByPage';
+				var url = 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
 				var data = {
 					userid: 1,
 					pageindex: pageNum,
@@ -179,12 +210,45 @@
 				commonUtil.sendRequestGet(url, data, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
-						var imgTemplate = $('script[id="card-article"]').html();
+						var articleTemplate = $('script[id="card-article"]').html();
+						var weiboTemplate = $('script[id="card-weibo"]').html();
+						var img_1200style = 'style/weibo_1200';
+						var img_600style = 'style/weibo_600';
+						var img_24style = 'style/weibo_24_16';
+						var img_36style = 'style/weibo_36_24';
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
-							item.CoverImage = item.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
-							var imgHtmlStr = imgTemplate.temp(item);
-							$("#cardlist").append(imgHtmlStr);
+							if(item.EntityType == 1) {
+								var article = item.ArticleVm;
+								article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+								var imgHtmlStr = articleTemplate.temp(article);
+								$("#cardlist").append(imgHtmlStr);
+							}
+							if(item.EntityType == 2) {
+								var weibo = item.WeiboVm;
+								var imgHtmlStr = "";
+								var imgs = weibo.ContentValue.split(',');
+								if(imgs.length > 1) {
+									//多图
+									imgHtmlStr += "<ul>";
+									for(var j = 0; j < imgs.length; j++) {
+										imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+									}
+									imgHtmlStr += "</ul>";
+								} else {
+									imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+								}
+								weibo.imglist = imgHtmlStr;
+								//显示地理位置
+								weibo.cardlocation = "";
+								if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
+									var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
+									weibo.cardlocation = lbsStr;
+								}
+								var cardStr = weiboTemplate.temp(weibo);
+								$("#cardlist").append(cardStr);
+							}
+
 						}
 						pageNum++;
 					} else {
