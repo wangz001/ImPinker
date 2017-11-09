@@ -525,7 +525,7 @@ FROM    ( SELECT    T2.*
             var endIndex = pageindex * pagesize;
             var paras = new SqlParameter[]
 		    {
-                new SqlParameter("@userid",SqlDbType.Int){Value = startIndex},
+                new SqlParameter("@userid",SqlDbType.Int){Value = userid},
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
 		    };

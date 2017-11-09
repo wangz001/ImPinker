@@ -33,13 +33,13 @@
 					</div>
 
 					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-						<a class="mui-control-item" href="#item1mobile">
+						<a class="mui-control-item" id="item1">
 							主页
 						</a>
-						<a class="mui-control-item" href="#item2mobile">
+						<a class="mui-control-item" id="item2">
 							途迹
 						</a>
-						<a class="mui-control-item" href="#item3mobile">
+						<a class="mui-control-item" id="item3">
 							游记
 						</a>
 					</div>
@@ -200,6 +200,7 @@
 			var pageSize = 30;
 
 			function pullupRefresh() {
+				console.log(pageNum);
 				//var url = 'http://api.myautos.cn/api/Article/GetUsersArticleByPage';
 				var url = 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
 				var data = {
@@ -208,47 +209,19 @@
 					pagesize: pageSize
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
+					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
-						var articleTemplate = $('script[id="card-article"]').html();
-						var weiboTemplate = $('script[id="card-weibo"]').html();
-						var img_1200style = 'style/weibo_1200';
-						var img_600style = 'style/weibo_600';
-						var img_24style = 'style/weibo_24_16';
-						var img_36style = 'style/weibo_36_24';
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
 							if(item.EntityType == 1) {
 								var article = item.ArticleVm;
-								article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
-								var imgHtmlStr = articleTemplate.temp(article);
-								$("#cardlist").append(imgHtmlStr);
+								initCard(1,article);
 							}
 							if(item.EntityType == 2) {
 								var weibo = item.WeiboVm;
-								var imgHtmlStr = "";
-								var imgs = weibo.ContentValue.split(',');
-								if(imgs.length > 1) {
-									//多图
-									imgHtmlStr += "<ul>";
-									for(var j = 0; j < imgs.length; j++) {
-										imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
-									}
-									imgHtmlStr += "</ul>";
-								} else {
-									imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-								}
-								weibo.imglist = imgHtmlStr;
-								//显示地理位置
-								weibo.cardlocation = "";
-								if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
-									var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
-									weibo.cardlocation = lbsStr;
-								}
-								var cardStr = weiboTemplate.temp(weibo);
-								$("#cardlist").append(cardStr);
+								initCard(2,weibo);
 							}
-
 						}
 						pageNum++;
 					} else {
@@ -258,6 +231,68 @@
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
+
+			var img_1200style = 'style/weibo_1200';
+			var img_600style = 'style/weibo_600';
+			var img_24style = 'style/weibo_24_16';
+			var img_36style = 'style/weibo_36_24';
+			var articleTemplate = $('script[id="card-article"]').html();
+			var weiboTemplate = $('script[id="card-weibo"]').html();
+			///填充内容
+			function initCard(entityType, item) {
+
+				if(entityType == 1) {
+					var article = item;
+					article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+					var imgHtmlStr = articleTemplate.temp(article);
+					$("#cardlist").append(imgHtmlStr);
+				}
+				if(entityType == 2) {
+					var weibo = item;
+					var imgHtmlStr = "";
+					var imgs = weibo.ContentValue.split(',');
+					if(imgs.length > 1) {
+						//多图
+						imgHtmlStr += "<ul>";
+						for(var j = 0; j < imgs.length; j++) {
+							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+						}
+						imgHtmlStr += "</ul>";
+					} else {
+						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+					}
+					weibo.imglist = imgHtmlStr;
+					//显示地理位置
+					weibo.cardlocation = "";
+					if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
+						var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
+						weibo.cardlocation = lbsStr;
+					}
+					var cardStr = weiboTemplate.temp(weibo);
+					$("#cardlist").append(cardStr);
+				}
+			}
+
+
+
+//
+//tab切换
+			mui('.mui-slider-indicator').on('tap', 'a', function() {
+				var tabid = this.getAttribute('id');
+				if(tabid=="item1"){
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").show();
+				}
+				if(tabid=="item2"){
+					$(".mui-table-view .card-article").hide();
+					$(".mui-table-view .card-weibo").show();
+				}
+				if(tabid=="item3"){
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").hide();
+				}
+			});
+
 
 			function getUserinfo() {
 
