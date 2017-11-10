@@ -1,11 +1,11 @@
-html,
+/*html,
 body {
 	margin: 0px;
 	padding: 0px;
 	overflow: hidden;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-}
+}*/
 
 .mui-card-header.mui-card-media {
 	display: block;

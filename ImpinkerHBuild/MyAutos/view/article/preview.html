@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -47,7 +47,6 @@
 				<div>
 					<p id="article_description">简介：车酷自驾游是专注自驾游车酷自驾游是专注自驾游</p>
 				</div>
-				<br />
 				<!-- 文章主体 -->
 				<div class="" id='articlecontent'>
 				</div>
@@ -55,47 +54,44 @@
 					<!--<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />-->
 					<p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
 				</div>
-				<div class="mui-clearfix"></div>
-				<div class="mui-content">
-					<div class="row mui-input-row">
-						<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
-					</div>
-					<div class="mui-card-content">
-						<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
-						<button id="sendComposs" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+
+			</div>
+			<div class="mui-content-padded">
+				<div class="row mui-input-row">
+					<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+				</div>
+				<div class="mui-card-content">
+					<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
+					<button id="sendComposs" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
 					发布
 					</button>
-					</div>
-					<div class="mui-content-padded">
-						<div class="mui-inline">评论列表</div>
-					</div>
-					<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
-						<p>暂无评论</p>
-					</div>
+				</div>
+				<div class="mui-content-padded">
+					<div class="mui-inline">评论列表</div>
+				</div>
+				<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
+					<p>暂无评论</p>
 				</div>
 			</div>
 		</div>
-		<br>
-		<br>
 		<footer id="mui-footer" class="mui-bar mui-bar-footer">
 			<a class="mui-icon mui-icon-compose" style="float: inherit;"></a>
 			<a id="vote" class="mui-icon mui-icon-extra mui-icon-extra-heart" style="float: inherit;"></a>
 			<a id="share" class="mui-icon-extra mui-icon-extra-share"></a>
-			<!--<input id="composeText" type="text" placeholder="请输入评论" style="width: 80%;display: none;margin-top: 5px;" />
-			<a id="sendComposs" class="mui-btn mui-btn-primary mui-btn-outlined" style="display:none;">发送</a>-->
 		</footer>
-		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/app.js"></script>
-		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
-		<script type="text/javascript" src="../../js/article/article_preview.js"></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
-		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/storageUtil.js"></script>
-		<script type="text/template" id='comment_item'>
-			<dl class="comment-list hot" commentid="@comment.Id">
-				<dt>
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/app.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/commonUtil.js"></script>
+	<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
+	<script type="text/javascript" src="../../js/article/article_preview.js"></script>
+	<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+	<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../../js/storageUtil.js"></script>
+	<script type="text/template" id='comment_item'>
+		<dl class="comment-list hot" commentid="@comment.Id">
+			<dt>
                         <i class="headpic">
                             <img src="$HeadImage$">
                         </i>
@@ -108,18 +104,18 @@
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
                 </dt>
-				<dd>
-					<p>
-						$Content$
-					</p>
-				</dd>
-				$tocomment$
-			</dl>
+			<dd>
+				<p>
+					$Content$
+				</p>
+			</dd>
+			$tocomment$
+		</dl>
 
-		</script>
-		<script type="text/template" id="comment_item_to">
-			<dl class="quote">
-				<dt>
+	</script>
+	<script type="text/template" id="comment_item_to">
+		<dl class="quote">
+			<dt>
                     <i class="headpic">
                         <img src="$HeadImage$">
                     </i>
@@ -128,134 +124,133 @@
                         <p>$CreateTime$</p>
                     </em>
                 </dt>
-				<dd>
-					<p>
-						$Content$
-					</p>
-				</dd>
-			</dl>
-		</script>
-		<script type="text/javascript">
-			var articleItem = null;
-			var shares = null,
-				sharewx = null,
-				shareweibo = null;
-			mui.plusReady(function() {
-				//获取参数
-				var self = plus.webview.currentWebview();
-				var articleid = self.articleid;
-				var articlename = self.articlename;
-				$("#title").html(articlename);
-				//判断是否赞过文章
-				var isVote = storageUtil.getArticleVote(articleid);
-				if(isVote) {
-					$('#vote').removeClass("mui-icon-extra-heart");
-					$('#vote').addClass("mui-icon-extra-heart-filled");
-				}
-				getArticle(articleid);
-				getArticleComment(articleid);
-				// 扩展API加载完毕，现在可以正常调用扩展API
-				plus.share.getServices(function(s) {
-					shares = s;
-					for(var i in s) {
-						if('weixin' == s[i].id) {
-							sharewx = s[i];
-						}
-						if('sinaweibo' == s[i].id) {
-							shareweibo = s[i];
-						}
-					}
-				}, function(e) {
-					alert("获取分享服务列表失败：" + e.message);
-				});
-			});
-
-			mui.previewImage();
-
-			$(function() {
-				$('.emotion').qqFace({
-					assign: 'comment_text',
-					path: '../../js/qqFace/arclist/' //表情存放的路径
-				});
-			});
-
-			//查看结果
-
-			function replace_em(str) {
-				str = str.replace(/\</g, '&lt;');
-				str = str.replace(/\>/g, '&gt;');
-				str = str.replace(/\n/g, '<br/>');
-				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
-				return str;
+			<dd>
+				<p>
+					$Content$
+				</p>
+			</dd>
+		</dl>
+	</script>
+	<script type="text/javascript">
+		var articleItem = null;
+		var shares = null,
+			sharewx = null,
+			shareweibo = null;
+		mui.plusReady(function() {
+			//获取参数
+			var self = plus.webview.currentWebview();
+			var articleid = self.articleid;
+			var articlename = self.articlename;
+			$("#title").html(articlename);
+			//判断是否赞过文章
+			var isVote = storageUtil.getArticleVote(articleid);
+			if(isVote) {
+				$('#vote').removeClass("mui-icon-extra-heart");
+				$('#vote').addClass("mui-icon-extra-heart-filled");
 			}
-
-			document.getElementById('share').addEventListener('tap', function() {
-				var btnArray = [{
-					title: '分享给微信好友'
-				}, {
-					title: '分享到微信朋友圈'
-				}, {
-					title: '分享到新浪微博'
-				}];
-				plus.nativeUI.actionSheet({
-					title: "分享",
-					cancel: '取消',
-					buttons: btnArray
-				}, function(e) {
-					var index = e.index; // 
-					switch(index) {
-						case 1:
-							sharewx.send({
-								title: articleItem.ArticleName,
-								content: articleItem.Description,
-								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
-								thumbs: [
-									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
-								],
-								extra: {
-									scene: "WXSceneSession"
-								}
-							}, function() {
-								mui.toast("分享给好友成功");
-							}, function(e) {
-								mui.toast("取消分享");
-							});
-							break;
-						case 2:
-							sharewx.send({
-								title: articleItem.ArticleName,
-								content: articleItem.Description,
-								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
-								thumbs: [
-									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
-								],
-								extra: {
-									scene: "WXSceneTimeline"
-								}
-							}, function() {
-								mui.toast("分享成功");
-							}, function(e) {
-								mui.toast("取消分享");
-							});
-							break;
-						case 3:
-							shareweibo.send({
-								title: articleItem.ArticleName,
-								content: articleItem.Description,
-								href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
-								thumbs: [
-									articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
-								]
-							}, function() {
-								mui.toast("分享成功");
-							}, function(e) {
-								mui.toast("取消分享");
-							});
-							break;
+			getArticle(articleid);
+			getArticleComment(articleid);
+			// 扩展API加载完毕，现在可以正常调用扩展API
+			plus.share.getServices(function(s) {
+				shares = s;
+				for(var i in s) {
+					if('weixin' == s[i].id) {
+						sharewx = s[i];
 					}
-				});
+					if('sinaweibo' == s[i].id) {
+						shareweibo = s[i];
+					}
+				}
+			}, function(e) {
+				alert("获取分享服务列表失败：" + e.message);
 			});
-		</script>
-	</body>
+		});
+
+		mui.previewImage();
+
+		$(function() {
+			$('.emotion').qqFace({
+				assign: 'comment_text',
+				path: '../../js/qqFace/arclist/' //表情存放的路径
+			});
+		});
+
+		//查看结果
+
+		function replace_em(str) {
+			str = str.replace(/\</g, '&lt;');
+			str = str.replace(/\>/g, '&gt;');
+			str = str.replace(/\n/g, '<br/>');
+			str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
+			return str;
+		}
+
+		document.getElementById('share').addEventListener('tap', function() {
+			var btnArray = [{
+				title: '分享给微信好友'
+			}, {
+				title: '分享到微信朋友圈'
+			}, {
+				title: '分享到新浪微博'
+			}];
+			plus.nativeUI.actionSheet({
+				title: "分享",
+				cancel: '取消',
+				buttons: btnArray
+			}, function(e) {
+				var index = e.index; // 
+				switch(index) {
+					case 1:
+						sharewx.send({
+							title: articleItem.ArticleName,
+							content: articleItem.Description,
+							href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+							thumbs: [
+								articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+							],
+							extra: {
+								scene: "WXSceneSession"
+							}
+						}, function() {
+							mui.toast("分享给好友成功");
+						}, function(e) {
+							mui.toast("取消分享");
+						});
+						break;
+					case 2:
+						sharewx.send({
+							title: articleItem.ArticleName,
+							content: articleItem.Description,
+							href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+							thumbs: [
+								articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+							],
+							extra: {
+								scene: "WXSceneTimeline"
+							}
+						}, function() {
+							mui.toast("分享成功");
+						}, function(e) {
+							mui.toast("取消分享");
+						});
+						break;
+					case 3:
+						shareweibo.send({
+							title: articleItem.ArticleName,
+							content: articleItem.Description,
+							href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+							thumbs: [
+								articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+							]
+						}, function() {
+							mui.toast("分享成功");
+						}, function(e) {
+							mui.toast("取消分享");
+						});
+						break;
+				}
+			});
+		});
+	</script>
 
 </html>

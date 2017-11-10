@@ -137,7 +137,6 @@ function initComment(item) {
 		toItem.Content = replace_em(toItem.Content);
 		var htmlTo = toTemplate.temp(toItem);
 		item.tocomment = htmlTo;
-		//articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
 	}
 	//显示qqFace
 	item.Content = replace_em(item.Content);
