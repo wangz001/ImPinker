@@ -196,17 +196,68 @@
 			});
 			mui.previewImage();
 
-			var pageNum = 1;
-			var pageSize = 30;
+			var currentParamEntity = {
+				all: {
+					url: 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage',
+					pageindex: 1,
+					pagesize: 10
+				},
+				article: {
+					url: 'http://api.myautos.cn/api/Article/GetUsersArticleByPage',
+					pageindex: 1,
+					pagesize: 10
+				},
+				weibo: {
+					url: 'http://api.myautos.cn/api/weibo/GetUsersListByPage',
+					pageindex: 1,
+					pagesize: 10
+				},
+				current: 1
+			}
+			//tab切换
+			mui('.mui-slider-indicator').on('tap', 'a', function() {
+				var tabid = this.getAttribute('id');
+				if(tabid == "item1") {
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").show();
+					currentParamEntity.current = 1;
+				}
+				if(tabid == "item2") {
+					$(".mui-table-view .card-article").hide();
+					$(".mui-table-view .card-weibo").show();
+					currentParamEntity.current = 2;
+				}
+				if(tabid == "item3") {
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").hide();
+					currentParamEntity.current = 3;
+				}
+			});
 
 			function pullupRefresh() {
-				console.log(pageNum);
-				//var url = 'http://api.myautos.cn/api/Article/GetUsersArticleByPage';
-				var url = 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
+				switch(currentParamEntity.current){
+					case 1:
+					getAllList();
+					break;
+					case 2:
+					getWeiboList();
+					break;
+					case 3:
+					getArticleList();
+					break;
+				}
+				
+				
+				
+			}
+			
+			function getAllList(){
+				console.log(JSON.stringify(currentParamEntity));
+				var url =currentParamEntity.all.url;// 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
 				var data = {
 					userid: 1,
-					pageindex: pageNum,
-					pagesize: pageSize
+					pageindex: currentParamEntity.all.pageindex,
+					pagesize: currentParamEntity.all.pagesize
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
 					console.log(JSON.stringify(data));
@@ -216,14 +267,64 @@
 							var item = list[i];
 							if(item.EntityType == 1) {
 								var article = item.ArticleVm;
-								initCard(1,article);
+								initCard(1, article);
 							}
 							if(item.EntityType == 2) {
 								var weibo = item.WeiboVm;
-								initCard(2,weibo);
+								initCard(2, weibo);
 							}
 						}
-						pageNum++;
+						currentParamEntity.all.pageindex++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+				});
+			}
+			
+			function getArticleList(){
+				console.log(JSON.stringify(currentParamEntity));
+				var url =currentParamEntity.article.url;
+				var data = {
+					userid: 1,
+					pageindex: currentParamEntity.article.pageindex,
+					pagesize: currentParamEntity.article.pagesize
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initCard(1, item);
+						}
+						currentParamEntity.article.pageindex++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+				});
+			}
+			
+			function getWeiboList(){
+				console.log(JSON.stringify(currentParamEntity));
+				var url =currentParamEntity.weibo.url;
+				var data = {
+					userid: 1,
+					pageindex: currentParamEntity.weibo.pageindex,
+					pagesize: currentParamEntity.weibo.pagesize
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initCard(2, item);
+						}
+						currentParamEntity.weibo.pageindex++;
 					} else {
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;
@@ -273,26 +374,7 @@
 				}
 			}
 
-
-
-//
-//tab切换
-			mui('.mui-slider-indicator').on('tap', 'a', function() {
-				var tabid = this.getAttribute('id');
-				if(tabid=="item1"){
-					$(".mui-table-view .card-article").show();
-					$(".mui-table-view .card-weibo").show();
-				}
-				if(tabid=="item2"){
-					$(".mui-table-view .card-article").hide();
-					$(".mui-table-view .card-weibo").show();
-				}
-				if(tabid=="item3"){
-					$(".mui-table-view .card-article").show();
-					$(".mui-table-view .card-weibo").hide();
-				}
-			});
-
+			//
 
 			function getUserinfo() {
 
