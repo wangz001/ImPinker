@@ -23,11 +23,12 @@ namespace ImpinkerApi.Controllers
 {
     public class WeiBoController : BaseApiController
     {
-        readonly WeiBoBll _weiBoBll = new WeiBoBll();
-        readonly UserBll _userBll = new UserBll();
-        readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
+        private readonly WeiBoBll _weiBoBll = new WeiBoBll();
+        private readonly UserBll _userBll = new UserBll();
+        private readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
 
         #region 新建微博(图文)
+
         /// <summary>
         /// mui 多图上传.创建微博
         /// </summary>
@@ -46,7 +47,8 @@ namespace ImpinkerApi.Controllers
                     Data = HttpStatusCode.UnsupportedMediaType
                 });
             }
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/ImageUpload/weiboimage/" + DateTime.Now.ToString("yyyyMMdd"));
+            string fileSaveLocation =
+                HttpContext.Current.Server.MapPath("~/ImageUpload/weiboimage/" + DateTime.Now.ToString("yyyyMMdd"));
             if (!Directory.Exists(fileSaveLocation))
             {
                 Directory.CreateDirectory(fileSaveLocation);
@@ -168,9 +170,11 @@ namespace ImpinkerApi.Controllers
             }
             return vm;
         }
+
         #endregion
 
         #region 获取微博列表
+
         /// <summary>
         /// 获取微博列表
         /// </summary>
@@ -223,6 +227,7 @@ namespace ImpinkerApi.Controllers
         #endregion
 
         #region 获取我的微博
+
         [HttpGet]
         [TokenCheck]
         public HttpResponseMessage GetMyWeiBoList(int pageindex, int pagesize)
@@ -270,6 +275,7 @@ namespace ImpinkerApi.Controllers
         #endregion
 
         #region 获取微博信息
+
         [HttpGet]
         public HttpResponseMessage GetWeiBoById(int weiboid)
         {
@@ -348,5 +354,25 @@ namespace ImpinkerApi.Controllers
 
 
         #endregion
+
+
+        #region 删除微博
+
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage DeleteWeibo(int weiboId)
+        {
+            var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
+            var flag = _weiBoBll.DeleteWeibo(userid, weiboId);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess =flag?1: 0,
+                Description = "ok",
+                Data = flag
+            });
+        }
+
+    #endregion
+
     }
 }

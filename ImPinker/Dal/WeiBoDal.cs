@@ -174,5 +174,46 @@ SELECT              [Id] ,
             var ds = DbHelperSQL.Query(sql, parameters);
             return ds;
         }
+
+        public bool Update(ImModel.ViewModel.WeiboVm model)
+        {
+            const string sqlStr = @"
+UPDATE [dbo].[WeiBo]
+   SET [UserId] = @UserId
+      ,[Description] = @Description
+      ,[ContentValue] = @ContentValue
+      ,[ContentType] = @ContentType
+      ,[Longitude] = @Longitude
+      ,[Latitude] = @Latitude
+      ,[Height] = @Height
+      ,[LocationText] = @LocationText
+      ,[State] = @State
+      ,[HardWareType] = @HardWareType
+      ,[IsRePost] = @IsRePost
+      ,[CreateTime] = @CreateTime
+      ,[UpdateTime] = @UpdateTime
+ WHERE Id=@Id
+";
+            SqlParameter[] parameters =
+			{
+				new SqlParameter("@UserId", SqlDbType.Int, 100){Value =model.UserId },
+				new SqlParameter("@Description", SqlDbType.VarChar, 200){Value =model.Description },
+				new SqlParameter("@ContentValue", SqlDbType.VarChar, 100){Value =model.ContentValue },
+				new SqlParameter("@ContentType", SqlDbType.Int, 4){Value =model.ContentType },
+				new SqlParameter("@Longitude", SqlDbType.Decimal, 100){Value =model.Longitude },
+				new SqlParameter("@Latitude", SqlDbType.Decimal, 200){Value =model.Lantitude },
+				new SqlParameter("@Height", SqlDbType.Decimal, 1){Value =model.Height },
+				new SqlParameter("@LocationText", SqlDbType.VarChar){Value =model.LocationText },
+				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
+				new SqlParameter("@HardWareType", SqlDbType.VarChar){Value =model.HardWareType },
+				new SqlParameter("@IsRePost", SqlDbType.TinyInt, 1){Value =model.IsRePost },
+				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value =model.PublishTime },
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime },
+				new SqlParameter("@Id", SqlDbType.BigInt, 8){Value =model.Id }
+			};
+
+            int rows = DbHelperSQL.ExecuteSql(sqlStr, parameters);
+            return rows > 0;
+        }
     }
 }

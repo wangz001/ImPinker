@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using Aliyun.Api;
 using Common.AlyOssUtil;
@@ -177,6 +178,36 @@ namespace ImBLL
                 return item;
             }
             return null;
+        }
+        /// <summary>
+        /// 删除微博
+        /// </summary>
+        /// <param name="weiboid"></param>
+        /// <returns></returns>
+        public bool DeleteWeibo(int userid,int weiboid)
+        {
+            var weibo = GetById(weiboid);
+            if (weibo != null && weibo.State == WeiBoStateEnum.Normal&&weibo.UserId==userid)
+            {
+                weibo.UpdateTime = DateTime.Now;
+                weibo.State = WeiBoStateEnum.Delete;
+                bool flag = Update(weibo);
+                return flag;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 修改微博
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Update(WeiboVm model)
+        {
+            var flag = _weiBoDal.Update(model);
+
+            return flag;
+
         }
     }
 }
