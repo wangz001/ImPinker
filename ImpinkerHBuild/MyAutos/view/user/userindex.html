@@ -212,7 +212,10 @@
 					pageindex: 1,
 					pagesize: 10
 				},
-				current: 1
+				current: 1,
+				articleids: new Array(),
+				weiboids: new Array()
+
 			}
 			//tab切换
 			mui('.mui-slider-indicator').on('tap', 'a', function() {
@@ -235,32 +238,30 @@
 			});
 
 			function pullupRefresh() {
-				switch(currentParamEntity.current){
+				switch(currentParamEntity.current) {
 					case 1:
-					getAllList();
-					break;
+						getAllList();
+						break;
 					case 2:
-					getWeiboList();
-					break;
+						getWeiboList();
+						break;
 					case 3:
-					getArticleList();
-					break;
+						getArticleList();
+						break;
 				}
-				
-				
-				
+
 			}
-			
-			function getAllList(){
-				console.log(JSON.stringify(currentParamEntity));
-				var url =currentParamEntity.all.url;// 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
+
+			function getAllList() {
+				//console.log(JSON.stringify(currentParamEntity));
+				var url = currentParamEntity.all.url; // 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
 				var data = {
 					userid: 1,
 					pageindex: currentParamEntity.all.pageindex,
 					pagesize: currentParamEntity.all.pagesize
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
-					console.log(JSON.stringify(data));
+					//console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
 						for(var i = 0; i < list.length; i++) {
@@ -282,17 +283,16 @@
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
-			
-			function getArticleList(){
+
+			function getArticleList() {
 				console.log(JSON.stringify(currentParamEntity));
-				var url =currentParamEntity.article.url;
+				var url = currentParamEntity.article.url;
 				var data = {
 					userid: 1,
 					pageindex: currentParamEntity.article.pageindex,
 					pagesize: currentParamEntity.article.pagesize
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
-					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
 						for(var i = 0; i < list.length; i++) {
@@ -307,17 +307,16 @@
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
-			
-			function getWeiboList(){
+
+			function getWeiboList() {
 				console.log(JSON.stringify(currentParamEntity));
-				var url =currentParamEntity.weibo.url;
+				var url = currentParamEntity.weibo.url;
 				var data = {
 					userid: 1,
 					pageindex: currentParamEntity.weibo.pageindex,
 					pagesize: currentParamEntity.weibo.pagesize
 				};
 				commonUtil.sendRequestGet(url, data, function(data) {
-					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
 						for(var i = 0; i < list.length; i++) {
@@ -341,36 +340,42 @@
 			var weiboTemplate = $('script[id="card-weibo"]').html();
 			///填充内容
 			function initCard(entityType, item) {
-
 				if(entityType == 1) {
 					var article = item;
-					article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
-					var imgHtmlStr = articleTemplate.temp(article);
-					$("#cardlist").append(imgHtmlStr);
+					if($.inArray(article.Id, currentParamEntity.articleids) == -1) {
+						article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+						var imgHtmlStr = articleTemplate.temp(article);
+						$("#cardlist").append(imgHtmlStr);
+						currentParamEntity.articleids.push(article.Id);
+					}
 				}
+				
 				if(entityType == 2) {
 					var weibo = item;
-					var imgHtmlStr = "";
-					var imgs = weibo.ContentValue.split(',');
-					if(imgs.length > 1) {
-						//多图
-						imgHtmlStr += "<ul>";
-						for(var j = 0; j < imgs.length; j++) {
-							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					if($.inArray(weibo.Id, currentParamEntity.weiboids) == -1) {
+						var imgHtmlStr = "";
+						var imgs = weibo.ContentValue.split(',');
+						if(imgs.length > 1) {
+							//多图
+							imgHtmlStr += "<ul>";
+							for(var j = 0; j < imgs.length; j++) {
+								imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
+							}
+							imgHtmlStr += "</ul>";
+						} else {
+							imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 						}
-						imgHtmlStr += "</ul>";
-					} else {
-						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+						weibo.imglist = imgHtmlStr;
+						//显示地理位置
+						weibo.cardlocation = "";
+						if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
+							var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
+							weibo.cardlocation = lbsStr;
+						}
+						var cardStr = weiboTemplate.temp(weibo);
+						$("#cardlist").append(cardStr);
+						currentParamEntity.weiboids.push(weibo.Id);
 					}
-					weibo.imglist = imgHtmlStr;
-					//显示地理位置
-					weibo.cardlocation = "";
-					if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
-						var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
-						weibo.cardlocation = lbsStr;
-					}
-					var cardStr = weiboTemplate.temp(weibo);
-					$("#cardlist").append(cardStr);
 				}
 			}
 
