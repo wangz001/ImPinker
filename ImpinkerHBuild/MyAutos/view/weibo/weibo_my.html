@@ -50,22 +50,26 @@
 			<script type="text/javascript" src="../../js/jquery.js"></script>
 			<script type="text/javascript" src="../../js/commonUtil.js"></script>
 			<script type="text/template" id='weiboitem'>
-				<div class="mui-card">
+				<div class="mui-card" id="card_$Id$">
+					<div class="mui-card-header mui-card-media">
+						<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
+						<div class="mui-media-body">
+							<em class="mui-icon mui-icon-person">$UserName$</em>
+							<p>发表于 $PublishTime$</p>
+						</div>
+					</div>
 					<div class="mui-card-content">
-						<p style="color: #333;">$Description$</p>
-						<p>Posted on $PublishTime$</p>
+						<p>$Description$</p>
+						<div class="media-pic-list">
+							$imglist$
+						</div>
+						$cardlocation$
 					</div>
-					<div class="media-pic-list">
-						<ul>
-							<li>
-								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-							</li>
-							<li>
-								<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-							</li>
-						</ul>
+					<div class="mui-card-footer">
+						<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
+						<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+						<span class="mui-icon mui-icon-trash" weiboid='$Id$'></span>
 					</div>
-
 				</div>
 			</script>
 			<script>
@@ -113,47 +117,68 @@
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 					});
 				}
+
+				var img_1200style = 'style/weibo_1200';
+				var img_600style = 'style/weibo_600';
+				var img_24style = 'style/weibo_24_16';
+				var img_36style = 'style/weibo_36_24';
+				var weiboTemplate = $('script[id="weiboitem"]').html();
 				/**
 				 * 添加数据
 				 * @param {Object} table
 				 * @param {Object} item
 				 */
 				function initWeiBoItem(table, item) {
-					var img_1200style = 'style/weibo_1200';
-					var img_600style = 'style/weibo_600';
-					var img_24style = 'style/weibo_24_16';
 					if(item.ContentValue == null || item.ContentValue == '') {
 						return;
 					}
-
-					var li = document.createElement('div');
-					li.className = 'mui-card';
-					var imgdiv = document.createElement("div");
-
+					var imgHtmlStr = "";
 					var imgs = item.ContentValue.split(',');
 					if(imgs.length > 1) {
 						//多图
-						imgdiv.className = 'media-pic-list';
-						var ul = document.createElement("ul");
-						var imgHtmlStr = "";
-						var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
-						for(var i = 0; i < imgs.length; i++) {
-							imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+						imgHtmlStr += "<ul>";
+						for(var j = 0; j < imgs.length; j++) {
+							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 						}
-						ul.innerHTML = imgHtmlStr;
-						imgdiv.appendChild(ul);
+						imgHtmlStr += "</ul>";
 					} else {
-						imgdiv.className = "mui-card-content";
-						var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-						imgdiv.innerHTML = imgHtmlStr;
+						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 					}
-					var footdiv = document.createElement('div');
-					footdiv.className = 'mui-card-content';
-					footdiv.innerHTML = '<p style="color: #333;">' + item.Description + '...</p><p>Posted on ' + item.PublishTime + '</p>';
-					li.appendChild(footdiv);
-					li.appendChild(imgdiv);
-					table.appendChild(li);
+					item.imglist = imgHtmlStr;
+					//显示地理位置
+					item.cardlocation = "";
+					if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
+						var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
+						item.cardlocation = lbsStr;
+					}
+					var cardStr = weiboTemplate.temp(item);
+					$(".mui-scroll").append(cardStr);
+
 				}
+
+				//删除点击事件
+				mui('.mui-scroll').on('tap', '.mui-icon-trash', function() {
+					var weiboid = this.getAttribute('weiboid');
+					mui.confirm("是否要删除？" + weiboid, "title", ["是", "否"], function(event, index) {
+						console.log(JSON.stringify(event));
+						if(event.index == 0) {
+							var url = 'http://api.myautos.cn/api/weibo/WeiboDelete';
+							var dataPara = {
+								id: weiboid
+							}
+							commonUtil.sendRequestWithToken(url, dataPara, true, function(data) {
+								console.log(JSON.stringify(data));
+								if(data.IsSuccess == 1) {
+									//plus.webview.currentWebview().reload();
+									$("#card_"+weiboid).remove();
+								} else {
+									mui.toast("删除失败");
+								}
+							});
+						}
+					});
+
+				});
 			</script>
 	</body>
 

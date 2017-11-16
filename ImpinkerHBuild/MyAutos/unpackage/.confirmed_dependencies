@@ -220,7 +220,8 @@
 			"js/commonUtil.js",
 			"js/jquery.js",
 			"css/icons-extra.css",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"login.html"

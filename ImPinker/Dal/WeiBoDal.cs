@@ -208,6 +208,7 @@ UPDATE [dbo].[WeiBo]
 				new SqlParameter("@HardWareType", SqlDbType.VarChar){Value =model.HardWareType },
 				new SqlParameter("@IsRePost", SqlDbType.TinyInt, 1){Value =model.IsRePost },
 				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value =model.PublishTime },
+				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.CreateTime },
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value =model.UpdateTime },
 				new SqlParameter("@Id", SqlDbType.BigInt, 8){Value =model.Id }
 			};

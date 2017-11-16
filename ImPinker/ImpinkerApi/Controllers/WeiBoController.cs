@@ -358,12 +358,12 @@ namespace ImpinkerApi.Controllers
 
         #region 删除微博
 
-        [HttpGet]
+        [HttpPost]
         [TokenCheck]
-        public HttpResponseMessage DeleteWeibo(int weiboId)
+        public HttpResponseMessage WeiboDelete([System.Web.Http.FromBody]WeiboVm weibo)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            var flag = _weiBoBll.DeleteWeibo(userid, weiboId);
+            var flag = _weiBoBll.DeleteWeibo(userid, (int)weibo.Id);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess =flag?1: 0,

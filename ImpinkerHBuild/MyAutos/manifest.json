@@ -730,7 +730,8 @@
 					"css/icons-extra.css",
 					"js/commonUtil.js",
 					"js/jquery.js",
-					"css/weibo.css"
+					"css/weibo.css",
+					"fonts/mui-icons-extra.ttf"
 				],
 				"refer": [
 					"login.html"
