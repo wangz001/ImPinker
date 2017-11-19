@@ -283,15 +283,31 @@ namespace ImDal
         /// <returns></returns>
         public DataSet GetMyListByState(int userid, int pageNum, int count,ArticleStateEnum state)
         {
-            var strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM ( ");
-            strSql.Append(" SELECT ROW_NUMBER() OVER (");
-            strSql.Append("order by T.CreateTime desc");
-            strSql.Append(")AS Row, T.*  from Article T ");
-            strSql.Append(" WHERE UserId=@UserId and state=@state");
-            strSql.Append(" ) TT");
-            strSql.AppendFormat(" WHERE TT.Row between @startIndex and @endIndex ;");
-            strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state=@state");
+            var sqlStr = @"
+SELECT  T2.* ,
+        ISNULL(t3.VoteCount, 0) AS VoteCount ,
+        ISNULL(t4.CommentCount, 0) AS CommentCount
+FROM    ( SELECT    *
+          FROM      ( SELECT    ROW_NUMBER() OVER ( ORDER BY T.CreateTime DESC ) AS Row ,
+                                T.*
+                      FROM      Article T
+                      WHERE     UserId = @UserId
+                                AND State = @state
+                    ) TT
+          WHERE     TT.Row BETWEEN @startIndex AND @endIndex
+        ) AS T2
+        LEFT JOIN ( SELECT  COUNT(*) AS VoteCount ,
+                            ArticleId
+                    FROM    ArticleVote
+                    GROUP BY ArticleId
+                  ) AS t3 ON T2.Id = t3.ArticleId
+        LEFT JOIN ( SELECT  COUNT(*) AS CommentCount ,
+                            ArticleId
+                    FROM    ArticleComment
+                    GROUP BY ArticleId
+                  ) AS t4 ON T2.Id = t4.ArticleId;
+select count(1) from Article T WHERE UserId=@UserId and state=@state;
+";
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
             var paras = new[]
@@ -301,18 +317,18 @@ namespace ImDal
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
                 new SqlParameter("@state",SqlDbType.Int){Value = (int)state},
 		    };
-            return DbHelperSQL.Query(strSql.ToString(), paras);
+            return DbHelperSQL.Query(sqlStr, paras);
         }
 
         /// <summary>
-        /// 获取首页的文章(按publishtime 倒叙排序)
+        /// 分页获取文章(按publishtime 倒叙排序)。有点赞数和评论数
         /// </summary>
         /// <param name="pageNum"></param>
         /// <param name="count"></param>
         /// <returns></returns>
         public DataSet GetIndexListByPage(int pageNum, int count)
         {
-            const string strSql = @"
+            string strSql = @"
 select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as CommentCount from 
 ( SELECT    TT.Id ,
                     TT.ArticleName ,
@@ -328,21 +344,21 @@ select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as Comme
                       FROM      Article T
                       WHERE     T.State = 1
                                 AND T.CoverImage IS NOT NULL
-                                AND DATALENGTH(T.CoverImage) > 0
                     ) TT
           WHERE     TT.Row BETWEEN @startIndex AND @endIndex 
         ) as t2
 		 LEFT JOIN (select count(*) as VoteCount,ArticleId from ArticleVote group by ArticleId) as t3 on t2.Id=t3.ArticleId
 		 LEFT JOIN (select count(*) as CommentCount,ArticleId from ArticleComment group by ArticleId) as t4 on t2.Id=t4.ArticleId
 ";
+
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
-            var paras = new SqlParameter[]
+            var paras = new List<SqlParameter>
 		    {
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
 		    };
-            return DbHelperSQL.Query(strSql, paras);
+            return DbHelperSQL.Query(strSql, paras.ToArray());
         }
 
         /// <summary>

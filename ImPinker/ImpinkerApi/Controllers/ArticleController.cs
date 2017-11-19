@@ -452,7 +452,7 @@ namespace ImpinkerApi.Controllers
             const int pageSize = 30;
             int totalCount;
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Draft,
+            var articles = _articleBll.GetUsersListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Draft,
                 out totalCount);
             foreach (var item in articles)
             {
@@ -476,7 +476,7 @@ namespace ImpinkerApi.Controllers
         {
             int totalCount;
             var userinfo = TokenHelper.GetUserInfoByHeader(Request.Headers);
-            var articles = _articleBll.GetMyListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Normal, out totalCount);
+            var articles = _articleBll.GetUsersListByState(userinfo.Id, pageNum, pageSize, ArticleStateEnum.Normal, out totalCount);
             foreach (var item in articles)
             {
                 item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
@@ -530,7 +530,7 @@ namespace ImpinkerApi.Controllers
             int totalCount;
             pageindex = pagesize > 0 ? pageindex : 1;
             pagesize = (pagesize > 0 && pagesize < 50) ? pagesize : 10;
-            var articles = _articleBll.GetMyListByState(userid, pageindex, pagesize, ArticleStateEnum.Normal, out totalCount);
+            var articles = _articleBll.GetUsersListByState(userid, pageindex, pagesize, ArticleStateEnum.Normal, out totalCount);
             if (articles == null || articles.Count == 0)
             {
                 return GetJson(new JsonResultViewModel

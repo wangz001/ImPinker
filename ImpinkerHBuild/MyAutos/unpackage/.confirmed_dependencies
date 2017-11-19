@@ -221,7 +221,11 @@
 			"js/jquery.js",
 			"css/icons-extra.css",
 			"fonts/mui.ttf",
-			"fonts/mui-icons-extra.ttf"
+			"fonts/mui-icons-extra.ttf",
+			"images/cbd.jpg",
+			"images/muwu.jpg",
+			"images/logo.png",
+			"images/login-1.png"
 		],
 		"refer": [
 			"login.html"

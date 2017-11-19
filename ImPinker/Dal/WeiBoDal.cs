@@ -113,10 +113,17 @@ select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as Comme
             var  ds = DbHelperSQL.Query(sql, parameters);
             return ds;
         }
-
+        /// <summary>
+        /// 根据用户id获取列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
         public DataSet GetListByPage(int userid,int pageNum, int pagesize)
         {
             const string sql = @"
+select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as CommentCount FROM (
 SELECT  *
 FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
                     [Id] ,
@@ -136,7 +143,9 @@ FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY UpdateTime DESC ) AS row ,
           FROM      [MyAutosTest].[dbo].[WeiBo]
           WHERE     UserId=@UserId AND State = 1
         ) T
-WHERE   T.row BETWEEN @startIndex AND @endIndex 
+WHERE   T.row BETWEEN @startIndex AND @endIndex )AS t2
+ left join (select count(*)as VoteCount,WeiBoId from WeiBoVote group by WeiBoId) T3 on t2.Id=t3.WeiBoId
+ left join (select count(*)as CommentCount,WeiBoId from WeiBoComment group by WeiBoId) T4 on t2.Id=t4.WeiBoId
 ";
             var startIndex = (pageNum - 1) * pagesize + 1;
             var endIndex = pageNum * pagesize;

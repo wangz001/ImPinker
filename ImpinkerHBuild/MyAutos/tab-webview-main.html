@@ -14,14 +14,21 @@
 			body {
 				background-color: #efeff4;
 			}
+			#newweibo .mui-icon{
+				width: 40px;
+    			height: 40px;
+				font-size:40px;
+				color: red;
+				top: -3px;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a id="search" class="mui-icon mui-icon-search mui-pull-left" style="color: #999;"></a>
+			<a id="search" class="mui-icon mui-icon-search mui-pull-right" style="color: #999;"></a>
 			<h1 id="title" class="mui-title">首页</h1>
-			<a id="newweibo" class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>
+			<!--<a class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>-->
 		</header>
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-article.html">
@@ -32,10 +39,9 @@
 				<span class="mui-icon mui-icon-pengyouquan"></span>
 				<span class="mui-tab-label">途迹</span>
 			</a>
-			<!--<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
-				<span class="mui-icon mui-icon-chat"></span>
-				<span class="mui-tab-label">消息</span>
-			</a>-->
+			<a style="display:none;" id="newweibo" class="mui-tab-item" href="tab-webview-subpage-contact.html">
+				<span class="mui-icon mui-icon-plus"></span>
+			</a>
 			<a class="mui-tab-item" href="tab-webview-subpage-setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
 				<span class="mui-tab-label">我的</span>
@@ -126,6 +132,14 @@
 			var title = document.getElementById("title");
 			//选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var tabId = this.getAttribute("id");
+				//显示添加按钮或微博按钮
+				if(tabId!=null&&tabId == "newweibo") {
+					newWeibo();
+					return;
+				}
+				
+				//--------------------
 				var targetTab = this.getAttribute('href');
 				if(targetTab == activeTab) {
 					return;
@@ -147,7 +161,14 @@
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
-
+				///显示隐藏切换
+				if(tabId!=null&&tabId == "weiboTab") {
+					$("#weiboTab").hide();
+					$("#newweibo").show();
+				} else {
+					$("#weiboTab").show();
+					$("#newweibo").hide();
+				}
 			});
 
 			//自定义事件，模拟点击“首页选项卡”
@@ -177,9 +198,7 @@
 				}
 			});
 
-			//新建微博页面
-			//处理右上角关于图标的点击事件；
-			document.getElementById('newweibo').addEventListener('tap', function() {
+			function newWeibo() {
 				var btnArray = [{
 						title: '拍照'
 					}, {
@@ -268,9 +287,16 @@
 							break;
 					}
 				});
+			}
+
+			//新建微博页面
+			//处理右上角关于图标的点击事件；
+			document.getElementById('newweibo').addEventListener('tap', function() {
+				//newWeibo();
 			});
 
 			var compressimgArr = new Array();
+
 			function compressImage(filesArr) {
 				if(compressimgArr.length == filesArr.length) {
 					//所有图片都压缩完成
@@ -287,7 +313,7 @@
 								if(compressimgArr.length == filesArr.length) {
 									//所有图片都压缩完成
 									toWeiboPage(compressimgArr);
-								}else{
+								} else {
 									compressImage(filesArr);
 								}
 							});
@@ -298,69 +324,68 @@
 					});
 				}
 			}
-			
-			function toWeiboPage(imgArr){
+
+			function toWeiboPage(imgArr) {
 				mui.openWindow({
-						url: "view/weibo/weibo_new.html",
-						id: "newweibo",
-						extras: {
-							path: imgArr.join(",") //扩展参数
-						},
-						createNew: true,
-						show: {
-							aniShow: 'slide-in-right',
-							duration: 200
-						}
-					});
+					url: "view/weibo/weibo_new.html",
+					id: "newweibo",
+					extras: {
+						path: imgArr.join(",") //扩展参数
+					},
+					createNew: true,
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
 			}
 
-
-//			function toNewWeiBo(filesArr) {
-//				var newarr = new Array();
-//				console.log(JSON.stringify(filesArr));
-//				for(var i in filesArr) {
-//					var imgpath = filesArr[i];
-//					commonUtil.compressImage(imgpath, function(zip) {
-//						if((zip.size / 1024) > 1024) {
-//							//如果大于1M，继续压缩(ios拍照时会出现此问题)
-//							console.log('sssss---' + zip.size);
-//							commonUtil.compressImageByHeightWeight(zip.target, zip.width, zip.height, function(zip2) {
-//								console.log('sssss222---' + zip2.size);
-//								alert('sssss222---' + (zip2.size / 1024));
-//								newarr.push(zip2.target);
-//								if(newarr.length == filesArr.length) {
-//									//所有图片都压缩完成
-//									toWeiboNew(newarr);
-//								}
-//							});
-//						} else {
-//							newarr.push(zip.target);
-//						}
-//						console.log('fdfd---' + zip.size);
-//						if(newarr.length == filesArr.length) {
-//							//所有图片都压缩完成
-//							console.log(JSON.stringify(newarr));
-//							toWeiboNew(newarr);
-//						}
-//					});
-//				}
-//
-//				//跳转到发微博页
-//				function toWeiboNew(imgArr) {
-//					mui.openWindow({
-//						url: "view/weibo/weibo_new.html",
-//						id: "newweibo",
-//						extras: {
-//							path: imgArr.join(",") //扩展参数
-//						},
-//						createNew: true,
-//						show: {
-//							aniShow: 'slide-in-right',
-//							duration: 200
-//						}
-//					});
-//				}
-//			}
+			//			function toNewWeiBo(filesArr) {
+			//				var newarr = new Array();
+			//				console.log(JSON.stringify(filesArr));
+			//				for(var i in filesArr) {
+			//					var imgpath = filesArr[i];
+			//					commonUtil.compressImage(imgpath, function(zip) {
+			//						if((zip.size / 1024) > 1024) {
+			//							//如果大于1M，继续压缩(ios拍照时会出现此问题)
+			//							console.log('sssss---' + zip.size);
+			//							commonUtil.compressImageByHeightWeight(zip.target, zip.width, zip.height, function(zip2) {
+			//								console.log('sssss222---' + zip2.size);
+			//								alert('sssss222---' + (zip2.size / 1024));
+			//								newarr.push(zip2.target);
+			//								if(newarr.length == filesArr.length) {
+			//									//所有图片都压缩完成
+			//									toWeiboNew(newarr);
+			//								}
+			//							});
+			//						} else {
+			//							newarr.push(zip.target);
+			//						}
+			//						console.log('fdfd---' + zip.size);
+			//						if(newarr.length == filesArr.length) {
+			//							//所有图片都压缩完成
+			//							console.log(JSON.stringify(newarr));
+			//							toWeiboNew(newarr);
+			//						}
+			//					});
+			//				}
+			//
+			//				//跳转到发微博页
+			//				function toWeiboNew(imgArr) {
+			//					mui.openWindow({
+			//						url: "view/weibo/weibo_new.html",
+			//						id: "newweibo",
+			//						extras: {
+			//							path: imgArr.join(",") //扩展参数
+			//						},
+			//						createNew: true,
+			//						show: {
+			//							aniShow: 'slide-in-right',
+			//							duration: 200
+			//						}
+			//					});
+			//				}
+			//			}
 
 			//搜索页跳转；
 			document.getElementById('search').addEventListener('tap', function() {

@@ -731,7 +731,10 @@
 					"js/commonUtil.js",
 					"js/jquery.js",
 					"css/weibo.css",
-					"fonts/mui-icons-extra.ttf"
+					"fonts/mui-icons-extra.ttf",
+					"images/muwu.jpg",
+					"images/logo.png",
+					"images/login-1.png"
 				],
 				"refer": [
 					"login.html"

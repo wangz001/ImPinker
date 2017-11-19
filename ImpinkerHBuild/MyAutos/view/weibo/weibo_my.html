@@ -12,7 +12,11 @@
 		<style type="text/css">
 			.mui-scroll .mui-card {
 				margin: 0 0 10px 0;
-				padding: 10px;
+				padding: 0px;
+			}
+			
+			.mui-card-footer em {
+				font-size: 10px;
 			}
 		</style>
 	</head>
@@ -26,19 +30,31 @@
 			<div id="pullrefresh" class=" mui-scroll-wrapper ">
 				<div class="mui-scroll">
 					<!--<div class="mui-card">
-						<div class="mui-card-content">
-							<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
-							<p>Posted on January 18, 2016</p>
+						<div class="mui-card-header mui-card-media">
+							<img class="head-img" src="../../images/logo.png">
+							<div class="mui-media-body">
+								<em class="mui-icon mui-icon-person">bwlang</em>
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
 						</div>
-						<div class="media-pic-list">
-							<ul>
-								<li>
-									<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-								</li>
-								<li>
-									<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-								</li>
-							</ul>
+						<div class="mui-card-content">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<ul>
+									<li>
+										<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+								</ul>
+							</div>
+							<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon mui-icon-extra-heart"><em>20</em></span>
+							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+							<span class="mui-icon mui-icon-trash"></span>
 						</div>
 					</div>-->
 				</div>
@@ -66,7 +82,7 @@
 						$cardlocation$
 					</div>
 					<div class="mui-card-footer">
-						<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
+						<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
 						<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
 						<span class="mui-icon mui-icon-trash" weiboid='$Id$'></span>
 					</div>
@@ -159,7 +175,7 @@
 				//删除点击事件
 				mui('.mui-scroll').on('tap', '.mui-icon-trash', function() {
 					var weiboid = this.getAttribute('weiboid');
-					mui.confirm("是否要删除？" + weiboid, "title", ["是", "否"], function(event, index) {
+					mui.confirm("是否要删除微博？" + weiboid, "我的微博", ["是", "否"], function(event, index) {
 						console.log(JSON.stringify(event));
 						if(event.index == 0) {
 							var url = 'http://api.myautos.cn/api/weibo/WeiboDelete';
@@ -170,7 +186,7 @@
 								console.log(JSON.stringify(data));
 								if(data.IsSuccess == 1) {
 									//plus.webview.currentWebview().reload();
-									$("#card_"+weiboid).remove();
+									$("#card_" + weiboid).remove();
 								} else {
 									mui.toast("删除失败");
 								}

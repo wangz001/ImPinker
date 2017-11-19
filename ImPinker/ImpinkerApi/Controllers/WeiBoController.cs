@@ -257,7 +257,9 @@ namespace ImpinkerApi.Controllers
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
                     PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
-                    IsRePost = weiBo.IsRePost
+                    IsRePost = weiBo.IsRePost,
+                    VoteCount = weiBo.VoteCount,
+                    CommentCount = weiBo.CommentCount
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);
                 model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
@@ -337,7 +339,9 @@ namespace ImpinkerApi.Controllers
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
                     PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
-                    IsRePost = weiBo.IsRePost
+                    IsRePost = weiBo.IsRePost,
+                    VoteCount = weiBo.VoteCount,
+                    CommentCount = weiBo.CommentCount
                 };
                 var userinfo = _userBll.GetModelByCache(weiBo.UserId);
                 model.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;

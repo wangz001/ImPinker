@@ -208,7 +208,7 @@
 					plus.nativeUI.closeWaiting();
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var weiboitem = data.Data;
-						console.log(JSON.stringify(weiboitem));
+						//console.log(JSON.stringify(weiboitem));
 						$("#lbs-title").html(weiboitem.LocationText);
 						solrQueryData.lat=weiboitem.Lantitude;
 						solrQueryData.lng=weiboitem.Longitude;
@@ -232,7 +232,6 @@
 						solrQueryData.pagenum=solrQueryData.pagenum+1;
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 					} else {
-						console.log("aaa");
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;
 					}

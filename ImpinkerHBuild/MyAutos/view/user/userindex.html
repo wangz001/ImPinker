@@ -31,7 +31,6 @@
 							<h4>Bwlang星</h4>
 						</div>
 					</div>
-
 					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 						<a class="mui-control-item" id="item1">
 							主页
@@ -49,8 +48,7 @@
 								<div class="mui-card-title">
 									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 								</div>
-								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)
-									"></div>
+								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)"></div>
 								<div class="mui-card-content">
 									<div class="mui-card-content-inner">
 										<p class="userinfo">Posted on January 18, 2016
@@ -168,7 +166,7 @@
 						$cardlocation$
 					</div>
 					<div class="mui-card-footer">
-						<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
+						<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
 						<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
 						<span class="mui-icon mui-icon-star" weiboid='$Id$'></span>
 					</div>
@@ -191,7 +189,6 @@
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var userid = self.userid;
-				console.log(userid);
 				getUserinfo(userid);
 			});
 			mui.previewImage();
@@ -349,7 +346,7 @@
 						currentParamEntity.articleids.push(article.Id);
 					}
 				}
-				
+
 				if(entityType == 2) {
 					var weibo = item;
 					if($.inArray(weibo.Id, currentParamEntity.weiboids) == -1) {

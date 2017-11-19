@@ -151,20 +151,16 @@ namespace ImBLL
         /// <param name="stateEnum"></param>
         /// <param name="totalaCount"></param>
         /// <returns></returns>
-        public List<Article> GetMyListByState(int userid, int pageNum, int count, ArticleStateEnum stateEnum, out int totalaCount)
+        public List<ArticleViewModel> GetUsersListByState(int userid, int pageNum, int count, ArticleStateEnum stateEnum, out int totalaCount)
         {
             totalaCount = 0;
             var ds = _dal.GetMyListByState(userid, pageNum, count, stateEnum);
-            var list = new List<Article>();
-            if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
-            {
-                list = DataTableToList(ds.Tables[0]);
-            }
+            var resultList = DsToArticleVm(ds);
             if (ds != null && ds.Tables[1] != null)
             {
                 int.TryParse(ds.Tables[1].Rows[0][0].ToString(), out totalaCount);
             }
-            return list;
+            return resultList;
         }
 
         /// <summary>
@@ -172,8 +168,19 @@ namespace ImBLL
         /// </summary>
         public List<ArticleViewModel> GetIndexListByPage(int pageNum, int count)
         {
-            var listResult = new List<ArticleViewModel>();
             var ds = _dal.GetIndexListByPage(pageNum, count);
+            var listResult = DsToArticleVm(ds);
+            return listResult;
+        }
+
+        /// <summary>
+        /// 模型转换，带评论数和点赞数
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns></returns>
+        private List<ArticleViewModel> DsToArticleVm(DataSet ds)
+        {
+            var listResult = new List<ArticleViewModel>();
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
@@ -207,17 +214,17 @@ namespace ImBLL
                     {
                         model.KeyWords = row["KeyWords"].ToString();
                     }
-                    //keywords只去一个，首页及搜索页显示用
-                    var keyStr = model.KeyWords;
-                    var keyArr = keyStr.Split(',');
-                    if (keyArr.Length > 1)
-                    {
-                        model.KeyWords = keyArr[1];
-                    }
-                    else
-                    {
-                        model.KeyWords = "";
-                    }
+                    ////keywords只去一个，首页及搜索页显示用
+                    //var keyStr = model.KeyWords;
+                    //var keyArr = keyStr.Split(',');
+                    //if (keyArr.Length > 1)
+                    //{
+                    //    model.KeyWords = keyArr[1];
+                    //}
+                    //else
+                    //{
+                    //    model.KeyWords = "";
+                    //}
                     if (row.Table.Columns.Contains("CreateTime") && row["CreateTime"] != null && row["CreateTime"].ToString() != "")
                     {
                         model.CreateTime = DateTime.Parse(row["CreateTime"].ToString());
@@ -241,13 +248,12 @@ namespace ImBLL
                         model.CommentCount = int.Parse(row["CommentCount"].ToString());
                     }
                     //点赞数和浏览数------暂时处理。后期改为不从db中直接查询
-
                     listResult.Add(model);
                 }
             }
+
             return listResult;
         }
-
 
         #endregion  BasicMethod
 

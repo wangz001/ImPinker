@@ -25,7 +25,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<div class="mui-card">
+					<!--<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img class="head-img" src="images/logo.png">
 							<div class="mui-media-body">
@@ -50,7 +50,7 @@
 						<div class="mui-card-footer">
 							<span class="mui-icon mui-icon-location"><em>20</em></span>
 							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-							<span class="mui-icon mui-icon-compose"></span>
+							<span class="mui-icon-extra mui-icon-extra-share"></span>
 						</div>
 					</div>
 					<div class="mui-card">
@@ -71,9 +71,9 @@
 						<div class="mui-card-footer">
 							<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
 							<span class="mui-icon mui-icon-compose"></span>
-							<span class="mui-icon mui-icon-star"></span>
+							<span class="mui-icon-extra mui-icon-extra-share"></span>
 						</div>
-					</div>
+					</div>-->
 			
 				</div>
 			</div>
@@ -163,6 +163,7 @@
 				}
 				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						mui.toast("已为您获取最新数据");
 						var list = data.Data;
 						var table = document.body.querySelector('.mui-scroll');
 						//清空老数据
@@ -261,6 +262,24 @@
 			//用户头像点击事件
 			mui('.mui-scroll').on('tap', '.head-img', function() {
 				var userid = this.getAttribute('userid');
+				mui.openWindow({
+					url: "view/user/userindex.html",
+					id: "userindex",
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					},
+					extras: {
+						userid: userid
+					}
+				});
+			});
+			
+			//分享点击事件
+			mui('.mui-scroll').on('tap', '.mui-icon-star', function() {
+				var weiboid = this.getAttribute('weiboid');
+				mui.alert("收藏到我的微博");
+				return;
 				mui.openWindow({
 					url: "view/user/userindex.html",
 					id: "userindex",

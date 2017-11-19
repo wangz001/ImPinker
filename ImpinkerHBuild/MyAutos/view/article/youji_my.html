@@ -45,15 +45,11 @@
 							</div>
 						</div>
 						<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url(../../images/cbd.jpg)"></div>
-					</div>
-					<div articleid='23' class="mui-card">
-						<div class="mui-card-content">
-							<div class="mui-card-content-inner">
-								<p class="articlename">奔驰Ml400</p>
-								<p>发表于 2017</p>
-							</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon-extra mui-icon-extra-heart"></span>
+							<span class="mui-icon mui-icon-compose"></span>
+							<span class="mui-icon mui-icon-trash"></span>
 						</div>
-						<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url(../../images/cbd.jpg)"></div>
 					</div>-->
 				</div>
 			</div>
@@ -63,16 +59,20 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type='text/template' id='articlelistitem'>
-			<div articleid='$Id$' class="mui-card">
+			<div class="mui-card" id="article_$Id$">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
 						<p class="articlename">$ArticleName$</p>
 						<p>发表于 $CreateTime$</p>
 					</div>
 				</div>
-				<div class="mui-card-header mui-card-media" style="height:55vw;background-image:url($CoverImage$)"></div>
+				<div articleid='$Id$' class="mui-card-header mui-card-media" style="height:55vw;background-image:url($CoverImage$)"></div>
+				<div class="mui-card-footer">
+					<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
+					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+					<span class="mui-icon mui-icon-trash" articleid='$Id$'></span>
+				</div>
 			</div>
-
 		</script>
 		<script>
 			mui.plusReady(function() {
@@ -86,14 +86,12 @@
 							callback: pullupRefresh
 						}
 					}
-
 				});
 			});
 			var previewPage = null;
 			//添加列表项的点击事件  
-			mui('.mui-scroll').on('tap', '.mui-card', function(e) {
+			mui('.mui-scroll').on('tap', '.mui-card-media', function(e) {
 				var articleid = $(this).attr("articleid");
-				console.log(articleid)
 				//获得详情页面  
 				mui.openWindow({
 					id: "preview.html",
@@ -110,23 +108,27 @@
 					}
 				});
 			});
-
-			//删文章
-			var deleteArticle = function(articleid, callback) {
-				callback = callback || $.noop;
-				var url = 'http://api.myautos.cn/api/article/DeleteArticle';
-				var data = {
-					Id: articleid
+			//删除文章
+			mui('.mui-scroll').on('tap', '.mui-icon-trash', function(e) {
+				var articleid = $(this).attr("articleid");
+				if(articleid > 0) {
+					mui.confirm("是否要删除文章？", "我的文章", ["是", "否"], function(event, index) {
+						if(event.index == 0) {
+							var url = 'http://api.myautos.cn/api/article/DeleteArticle';
+							var data = {
+								Id: articleid
+							}
+							commonUtil.sendRequestWithToken(url, data, true, function(data) {
+								if(data.IsSuccess == 1) {
+									$("#article_" + articleid).remove();
+								} else {
+									mui.toast("删除失败");
+								}
+							});
+						}
+					});
 				}
-				commonUtil.sendRequestWithToken(url, data, true, function(data) {
-					console.log(JSON.stringify(data));
-					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-						return callback();
-					} else {
-						return callback(data.Description);
-					}
-				});
-			}
+			});
 
 			var pageNum = 1;
 			var pageSize = 30;
