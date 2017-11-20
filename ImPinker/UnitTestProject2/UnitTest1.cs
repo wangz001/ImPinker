@@ -20,7 +20,7 @@ namespace UnitTestProject2
         public void TestWeiboSearch()
         {
             SolrNet.Startup.Init<WeiboVm>("http://127.0.0.1:8080/solr/impinker-weibo");
-            var aa = SolrNetSearchBll.QueryWeiboByGeo("aa", 1, 10);
+            //var aa = SolrNetSearchBll.QueryWeiboByGeo("aa", 1, 10);
         }
          [TestMethod]
          public void TestArticleSearch()

@@ -4,15 +4,17 @@ using ImBLL;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
+using ImModel;
+using ImModel.Enum;
 
 namespace ImpinkerApi.Controllers
 {
     /// <summary>
     /// 文章收藏操作
     /// </summary>
-    public class ArticleCollectionController : BaseApiController
+    public class UserCollectionController : BaseApiController
     {
-        readonly ArticleCollectionBll _articleCollectBll = new ArticleCollectionBll();
+        readonly UserCollectionBll _articleCollectBll = new UserCollectionBll();
         
         /// <summary>
         /// 我的收藏
@@ -43,14 +45,14 @@ namespace ImpinkerApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [TokenCheck]
-        public HttpResponseMessage AddCollect(long articleId)
+        public HttpResponseMessage AddWeiboCollect(long weiboId)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            var flag = _articleCollectBll.AddCollect(articleId, userid);
+            var flag = _articleCollectBll.AddCollect(weiboId, userid,EntityTypeEnum.Weibo);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1 : 0,
-                Data = articleId,
+                Data = weiboId,
                 Description = "请求成功"
             });
         }
@@ -64,7 +66,7 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage RemoveCollect(long articleId)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            bool flag = _articleCollectBll.RemoveCollect(articleId, userid);
+            bool flag = _articleCollectBll.RemoveCollect(articleId, userid,EntityTypeEnum.Weibo);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1:0,

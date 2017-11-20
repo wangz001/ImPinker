@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
-    <Compile Include="ArticleCollection.cs" />
+    <Compile Include="UserCollection.cs" />
     <Compile Include="ArticleComment.cs" />
     <Compile Include="ArticleCommentVote.cs" />
     <Compile Include="ArticleSnaps.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="ArticleVote.cs" />
     <Compile Include="Dto\SearchDto.cs" />
     <Compile Include="Enum\ArticleCollectionStateEnum.cs" />
+    <Compile Include="Enum\EntityTypeEnum.cs" />
     <Compile Include="Enum\NotifyTypeEnum.cs" />
     <Compile Include="Enum\UserRelationStateEnum.cs" />
     <Compile Include="Enum\FrountShowStateEnum.cs" />

@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleBll.cs" />
-    <Compile Include="ArticleCollectionBll.cs" />
+    <Compile Include="UserCollectionBll.cs" />
     <Compile Include="ArticleCommentBll.cs" />
     <Compile Include="ArticleCommentVoteBll.cs" />
     <Compile Include="ArticleSnapsBll.cs" />

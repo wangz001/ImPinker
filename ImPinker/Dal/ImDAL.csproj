@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
-    <Compile Include="ArticleCollectionDal.cs" />
+    <Compile Include="UserCollectionDal.cs" />
     <Compile Include="ArticleCommentDal.cs" />
     <Compile Include="ArticleCommentVoteDal.cs" />
     <Compile Include="ArticleSnaps.cs" />

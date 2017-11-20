@@ -15,7 +15,7 @@ namespace ImPinker.Controllers
     /// </summary>
     public class ArticleCollectionController : Controller
     {
-        ArticleCollectionBll _articleCollectBll = new ArticleCollectionBll();
+        UserCollectionBll _articleCollectBll = new UserCollectionBll();
         private static readonly UserBll UserBll = new UserBll();
         // 我的收藏，首页
         // GET: /ArticleCollection/
@@ -43,7 +43,7 @@ namespace ImPinker.Controllers
         public ActionResult AddCollect(long articleId)
         {
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            var flag = _articleCollectBll.AddCollect(articleId, userid);
+            var flag = _articleCollectBll.AddCollect(articleId, userid,ImModel.Enum.EntityTypeEnum.Article);
             return Json(new AjaxReturnViewModel
             {
                 IsSuccess = flag ? 1: 0,
@@ -59,7 +59,7 @@ namespace ImPinker.Controllers
         public ActionResult RemoveCollect(long articleId)
         {
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            bool flag = _articleCollectBll.RemoveCollect(articleId, userid);
+            bool flag = _articleCollectBll.RemoveCollect(articleId, userid,ImModel.Enum.EntityTypeEnum.Article);
             return Json(new AjaxReturnViewModel
             {
                 IsSuccess = flag ? 1 : 0,

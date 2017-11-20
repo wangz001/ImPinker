@@ -11,45 +11,34 @@ using System.Threading.Tasks;
 
 namespace ImDal
 {
-    
-    public class ArticleCollectionDal
+
+    public class UserCollectionDal
     {
-        public bool IsExist(long articleId, int userid)
+        public bool AddCollect(UserCollection model)
         {
             var sql = @"
-select Id from ArticleCollection where ArticleId=@ArticleId and UserId=@UserId
-";
-            SqlParameter[] parameters = {
-					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value =articleId},
-					new SqlParameter("@UserId", SqlDbType.Int){Value = userid}};
-
-            var flag = DbHelperSQL.Exists(sql, parameters);
-            return flag;
-        }
-
-        public bool AddCollect(ArticleCollection model)
-        {
-            var sql = @"
-INSERT INTO [dbo].[ArticleCollection]
-           ([ArticleId]
-           ,[UserId]
+INSERT INTO [dbo].[UserCollection]
+           ([UserId]
+            ,[EntityId]
+            ,[EntityType]
            ,[State]
            ,[CreateTime]
            ,[UpdateTime])
      VALUES
-           (@ArticleId
-           ,@UserId
+           (@UserId
+           ,@EntityId
+           ,@EntityType
            ,@State
            ,@CreateTime
            ,@UpdateTime)
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value = model.ArticleId},
 					new SqlParameter("@UserId", SqlDbType.Int){Value = model.UserId},
-					new SqlParameter("@State", SqlDbType.TinyInt,1){Value = (int)model.State},
+					new SqlParameter("@EntityId", SqlDbType.Int){Value = model.EntityId},
+					new SqlParameter("@EntityType", SqlDbType.Int){Value = (int)model.EntityType},
+					new SqlParameter("@State", SqlDbType.TinyInt){Value = (int)model.State},
 					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}};
-
             int rows = DbHelperSQL.ExecuteSql(sql, parameters);
             if (rows > 0)
             {
@@ -67,24 +56,26 @@ INSERT INTO [dbo].[ArticleCollection]
         /// <param name="articleId"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public ArticleCollection GetModel(long articleId, int userid)
+        public UserCollection GetModel(long entityId, int userid, EntityTypeEnum entityType)
         {
             var sql = @"
-SELECT [Id]
-      ,[ArticleId]
+SELECT  [Id]
+      ,[EntityId]
       ,[UserId]
       ,[State]
       ,[CreateTime]
       ,[UpdateTime]
-  FROM [dbo].[ArticleCollection] where UserId=@UserId and ArticleId=@ArticleId
+      ,[EntityType]
+  FROM [UserCollection] where UserId=@UserId and EntityId=@EntityId and EntityType=@EntityType
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value = articleId},
-					new SqlParameter("@UserId", SqlDbType.Int){Value = userid}};
+					new SqlParameter("@UserId", System.Data.SqlDbType.Int){Value = userid},
+					new SqlParameter("@EntityId", System.Data.SqlDbType.BigInt,8){Value = entityId},
+					new SqlParameter("@EntityType", SqlDbType.Int){Value = (int)entityType}};
 
             var ds = DbHelperSQL.Query(sql, parameters);
             var list = DsToList(ds);
-            if (list!=null&&list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 return list[0];
             }
@@ -95,21 +86,21 @@ SELECT [Id]
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public List<ArticleCollection> DsToList(DataSet ds)
+        public List<UserCollection> DsToList(DataSet ds)
         {
-            var list = new List<ArticleCollection>();
+            var list = new List<UserCollection>();
             if (ds != null && ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    var model = new ArticleCollection();
+                    var model = new UserCollection();
                     if (row["Id"] != null && row["Id"].ToString() != "")
                     {
                         model.Id = int.Parse(row["Id"].ToString());
                     }
                     if (row["ArticleId"] != null)
                     {
-                        model.ArticleId = long.Parse(row["ArticleId"].ToString());
+                        model.EntityId = long.Parse(row["ArticleId"].ToString());
                     }
                     if (row["UserId"] != null)
                     {
@@ -117,7 +108,7 @@ SELECT [Id]
                     }
                     if (row["State"] != null)
                     {
-                        model.State = (ArticleCollectionStateEnum)int.Parse(row["State"].ToString());
+                        model.State = (UserCollectionStateEnum)int.Parse(row["State"].ToString());
                     }
                     if (row["UpdateTime"] != null && row["UpdateTime"].ToString() != "")
                     {
@@ -139,19 +130,19 @@ SELECT [Id]
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateCollect(ArticleCollection model)
+        public bool UpdateCollect(UserCollection model)
         {
             var sql = @"
-UPDATE [dbo].[ArticleCollection]
-   SET [ArticleId] = @ArticleId
-      ,[UserId] = @UserId
+UPDATE [dbo].[UserCollection]
+   SET [EntityId] = @EntityId
+      ,[EntityType] = @EntityType
       ,[State] = @State
       ,[UpdateTime] = @UpdateTime
  WHERE Id=@Id
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@ArticleId", System.Data.SqlDbType.BigInt,8){Value = model.ArticleId},
-					new SqlParameter("@UserId", SqlDbType.Int){Value = model.UserId},
+					new SqlParameter("@EntityId", System.Data.SqlDbType.BigInt,8){Value = model.EntityId},
+					new SqlParameter("@EntityType", SqlDbType.Int){Value = model.EntityType},
 					new SqlParameter("@State", SqlDbType.Int){Value = model.State},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
 					new SqlParameter("@Id", SqlDbType.Int){Value = model.Id},
@@ -169,11 +160,11 @@ UPDATE [dbo].[ArticleCollection]
 	select ROW_NUMBER() over(
 		order by AC.CreateTime desc) as row,
 		A.Id,A.ArticleName,A.Url,A.CoverImage,A.CreateTime   
-		from Article A join ArticleCollection AC on A.Id=AC.ArticleId
+		from Article A join UserCollection AC on A.Id=AC.ArticleId
 	where AC.UserId=@UserId and AC.State=1
   ) TT WHERE TT.Row between @startIndex and @endIndex ;
 
-  select COUNT(0) from ArticleCollection where UserId=@UserId and state=1 ;
+  select COUNT(0) from UserCollection where UserId=@UserId and state=1 ;
 ";
 
             var startIndex = (pageNum - 1) * pagecount + 1;

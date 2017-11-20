@@ -6,23 +6,23 @@ using System.Collections.Generic;
 
 namespace ImBLL
 {
-    public class ArticleCollectionBll
+    public class UserCollectionBll
     {
-        readonly ArticleCollectionDal _dal = new ArticleCollectionDal();
+        readonly UserCollectionDal _dal = new UserCollectionDal();
         /// <summary>
         /// 添加收藏
         /// </summary>
-        /// <param name="articleId"></param>
+        /// <param name="entityId"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public bool AddCollect(long articleId,int userid)
+        public bool AddCollect(long entityId,int userid,EntityTypeEnum entityType)
         {
-            var model = _dal.GetModel(articleId, userid);
+            var model = _dal.GetModel(entityId, userid, entityType);
             if (model!=null)
             {//如果是取消收藏，重新修改状态为收藏
-                if (model.State == ArticleCollectionStateEnum.UnCollect)
+                if (model.State == UserCollectionStateEnum.UnCollect)
                 {
-                    model.State = ArticleCollectionStateEnum.Collect;
+                    model.State = UserCollectionStateEnum.Collect;
                     model.UpdateTime = DateTime.Now;
                     bool flag = _dal.UpdateCollect(model);
                     return flag;
@@ -30,11 +30,12 @@ namespace ImBLL
             }
             else
             {
-                var newModel = new ArticleCollection
+                var newModel = new UserCollection
                 {
-                    ArticleId = articleId,
+                    EntityId = entityId,
+                    EntityType=entityType,
                     UserId = userid,
-                    State = ArticleCollectionStateEnum.Collect,
+                    State = UserCollectionStateEnum.Collect,
                     CreateTime = DateTime.Now,
                     UpdateTime = DateTime.Now
                 };
@@ -48,12 +49,12 @@ namespace ImBLL
         /// <param name="articleId"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public bool RemoveCollect(long articleId, int userid)
+        public bool RemoveCollect(long articleId, int userid,EntityTypeEnum entityType)
         {
-            var model = _dal.GetModel(articleId, userid);
+            var model = _dal.GetModel(articleId, userid, entityType);
             if (model!=null)
             {
-                model.State = ArticleCollectionStateEnum.UnCollect;
+                model.State = UserCollectionStateEnum.UnCollect;
                 model.UpdateTime = DateTime.Now;
                 bool flag = _dal.UpdateCollect(model);
                 return flag;

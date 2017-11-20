@@ -185,7 +185,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Common\TokenHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArticleCollectionController.cs" />
+    <Compile Include="Controllers\UserCollectionController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticleVoteController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />

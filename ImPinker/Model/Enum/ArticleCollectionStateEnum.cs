@@ -10,7 +10,7 @@ namespace ImModel.Enum
     /// <summary>
     ///ArticleTag 表 tag前台展示状态
     /// </summary>
-    public enum ArticleCollectionStateEnum
+    public enum UserCollectionStateEnum
     {
         /// <summary>
         /// 删除

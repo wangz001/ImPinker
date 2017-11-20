@@ -10,7 +10,7 @@ namespace ImModel
     /// <summary>
     /// 文章收藏表
     /// </summary>
-    public class ArticleCollection
+    public class UserCollection
     {
         public int Id { get; set; }
         /// <summary>
@@ -20,11 +20,16 @@ namespace ImModel
         /// <summary>
         /// 文章id
         /// </summary>
-        public long ArticleId { get; set; }
+        public long EntityId { get; set; }
         /// <summary>
         /// 状态：0：删除  1:关注   2：取消关注
         /// </summary>
-        public ArticleCollectionStateEnum State { get; set; }
+        public UserCollectionStateEnum State { get; set; }
+
+        /// <summary>
+        /// 收藏类型
+        /// </summary>
+        public EntityTypeEnum EntityType { get; set; }
 
         public DateTime CreateTime { set; get; }
         public DateTime UpdateTime { set; get; }
