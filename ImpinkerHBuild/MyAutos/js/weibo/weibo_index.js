@@ -35,6 +35,30 @@ $(document).ready(function() {
 			sendVote(weiboid, false)
 		}
 	});
+
+	//收藏点击事件
+	mui('.mui-scroll').on('tap', '.mui-icon-star', function() {
+		var weiboid = this.getAttribute('weiboid');
+		var heartType = $(this).attr("class");
+		//mui.alert("收藏到我的微博");
+		var url = "http://api.myautos.cn/api/UserCollection/AddWeiboCollect";
+		var data = {
+			"weiboId": weiboid
+		}
+		if(heartType.indexOf("mui-icon-star-filled") != -1) {
+			mui.toast("您已收藏过");
+		} else {
+			$(this).attr("class", "mui-icon mui-icon-star-filled");
+			commonUtil.sendRequestWithToken(url, data, false, function(data) {
+				if(data.IsSuccess == 1) {
+					mui.toast("收藏成功");
+					//$(this).attr("class", "mui-icon mui-icon-star-filled");
+				} else {
+					//mui.toast("收藏失败");
+				}
+			});
+		}
+	});
 });
 
 function sendVote(weiboid, isVote) {

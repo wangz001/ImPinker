@@ -15,7 +15,10 @@ namespace ImpinkerApi.Controllers
     public class UserCollectionController : BaseApiController
     {
         readonly UserCollectionBll _articleCollectBll = new UserCollectionBll();
-        
+
+
+        #region 微博
+
         /// <summary>
         /// 我的收藏
         /// </summary>
@@ -75,5 +78,7 @@ namespace ImpinkerApi.Controllers
             });
         }
 
+
+        #endregion
     }
 }
