@@ -4,7 +4,6 @@ using ImBLL;
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
-using ImModel;
 using ImModel.Enum;
 
 namespace ImpinkerApi.Controllers
@@ -14,7 +13,7 @@ namespace ImpinkerApi.Controllers
     /// </summary>
     public class UserCollectionController : BaseApiController
     {
-        readonly UserCollectionBll _articleCollectBll = new UserCollectionBll();
+        readonly UserCollectionBll _userCollectBll = new UserCollectionBll();
 
 
         #region 微博
@@ -28,12 +27,8 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage GetMyCollect(int pageNum, int pageSize)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            int totalCount;
-            var lists = _articleCollectBll.GetMyListByPage(userid, pageNum, pageSize, out totalCount);
-            foreach (var article in lists)
-            {
-                article.CoverImage = ImageUrlHelper.GetArticleImage(article.Company, 360);
-            }
+            var lists = _userCollectBll.GetMyListByPage(userid, pageNum, pageSize);
+            
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 1,
@@ -41,17 +36,17 @@ namespace ImpinkerApi.Controllers
                 Description = "请求成功"
             });
         }
+
         /// <summary>
         /// 添加收藏
         /// </summary>
-        /// <param name="articleId"></param>
         /// <returns></returns>
         [HttpGet]
         [TokenCheck]
         public HttpResponseMessage AddWeiboCollect(long weiboId)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            var flag = _articleCollectBll.AddCollect(weiboId, userid,EntityTypeEnum.Weibo);
+            var flag = _userCollectBll.AddCollect(weiboId, userid,EntityTypeEnum.Weibo);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1 : 0,
@@ -69,7 +64,7 @@ namespace ImpinkerApi.Controllers
         public HttpResponseMessage RemoveCollect(long articleId)
         {
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            bool flag = _articleCollectBll.RemoveCollect(articleId, userid,EntityTypeEnum.Weibo);
+            bool flag = _userCollectBll.RemoveCollect(articleId, userid,EntityTypeEnum.Weibo);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = flag ? 1:0,
@@ -78,6 +73,28 @@ namespace ImpinkerApi.Controllers
             });
         }
 
+
+        #endregion
+
+        #region article Operation
+        /// <summary>
+        /// 添加文章收藏
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage AddArticleCollect(long articleId)
+        {
+            var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
+            var flag = _userCollectBll.AddCollect(articleId, userid, EntityTypeEnum.Article);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = flag ? 1 : 0,
+                Data = articleId,
+                Description = "请求成功"
+            });
+        }
 
         #endregion
     }

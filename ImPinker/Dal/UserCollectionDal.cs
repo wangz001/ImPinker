@@ -82,7 +82,7 @@ SELECT  [Id]
             return null;
         }
         /// <summary>
-        /// ds 转换成List<ArticleCollection>
+        /// ds 转换成List
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
@@ -98,9 +98,13 @@ SELECT  [Id]
                     {
                         model.Id = int.Parse(row["Id"].ToString());
                     }
-                    if (row["ArticleId"] != null)
+                    if (row["EntityId"] != null)
                     {
-                        model.EntityId = long.Parse(row["ArticleId"].ToString());
+                        model.EntityId = long.Parse(row["EntityId"].ToString());
+                    }
+                    if (row["EntityType"] != null)
+                    {
+                        model.EntityId = long.Parse(row["EntityType"].ToString());
                     }
                     if (row["UserId"] != null)
                     {
@@ -151,20 +155,62 @@ UPDATE [dbo].[UserCollection]
             return num > 0;
         }
 
-
-        public DataTable GetMyCollectsByPage(int userId, int pageNum, int pagecount, out int totalCount)
+        /// <summary>
+        /// 获取用户收藏的文章和微博
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagecount"></param>
+        /// <returns></returns>
+        public DataSet GetMyCollectsByPage(int userId, int pageNum, int pagecount)
         {
-            totalCount = 0;
-            var sql = @"
-  select * from (
-	select ROW_NUMBER() over(
-		order by AC.CreateTime desc) as row,
-		A.Id,A.ArticleName,A.Url,A.CoverImage,A.CreateTime   
-		from Article A join UserCollection AC on A.Id=AC.ArticleId
-	where AC.UserId=@UserId and AC.State=1
-  ) TT WHERE TT.Row between @startIndex and @endIndex ;
-
-  select COUNT(0) from UserCollection where UserId=@UserId and state=1 ;
+            const string sql = @"
+SELECT  T2.* ,
+        Art.Id AS AId ,
+        Art.ArticleName ,
+        Art.Url AS AUrl ,
+        Art.CoverImage AS ACoverImage ,
+        Art.UserId AS AUserId ,
+        Art.KeyWords AS AKeyWords ,
+        Art.Description AS ADescription ,
+        Art.State AS AState ,
+        Art.PublishTime AS APublishTime ,
+        Art.CreateTime AS ACreateTime ,
+        Art.UpdateTime AS AUpdateTime ,
+        Art.ComPany AS ACompany ,
+        Wei.Id AS WId ,
+        Wei.UserId AS WUserid ,
+        Wei.Description AS WDescription ,
+        Wei.ContentValue AS WContentValue ,
+        Wei.ContentType AS WContentType ,
+        Wei.Longitude AS WLongitude ,
+        Wei.Latitude AS WLatitude ,
+        Wei.Height AS WHeight ,
+        Wei.LocationText AS WLocationText ,
+        Wei.State AS WState ,
+        Wei.HardWareType AS WHardWareType ,
+        Wei.IsRePost AS WIsRepost ,
+        Wei.CreateTime AS WCreateTime ,
+        Wei.UpdateTime AS WUpdateTime
+FROM    ( SELECT    T.rownum ,
+                    T.Id ,
+                    T.EntityId ,
+                    T.EntityType ,
+                    T.UserId ,
+                    T.CreateTime
+          FROM      ( SELECT    ROW_NUMBER() OVER ( ORDER BY Id DESC ) AS rownum ,
+                                *
+                      FROM      dbo.UserCollection
+                      WHERE     State = 1
+                                AND UserId = @UserId
+                    ) T
+          WHERE     rownum BETWEEN @startIndex AND @endIndex
+        ) T2
+        LEFT JOIN dbo.Article Art ON T2.EntityId = Art.Id
+                                     AND T2.EntityType = 1
+        LEFT JOIN dbo.WeiBo Wei ON T2.EntityId = Wei.Id
+                                   AND T2.EntityType = 2;
 ";
 
             var startIndex = (pageNum - 1) * pagecount + 1;
@@ -175,13 +221,9 @@ UPDATE [dbo].[UserCollection]
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
 		    };
-            var ds = DbHelperSQL.Query(sql.ToString(), paras);
-            if (ds != null && ds.Tables.Count > 1)
-            {
-                int.TryParse(ds.Tables[1].Rows[0][0].ToString(), out totalCount);
-                return ds.Tables[0];
-            }
-            return null;
+            var ds = DbHelperSQL.Query(sql, paras);
+
+            return ds;
         }
     }
 }

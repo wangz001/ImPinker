@@ -10,10 +10,10 @@ namespace ImModel.Enum
     public enum EntityTypeEnum
     {
         [Description("文章")]
-        Article=0,
+        Article=1,
 
         [Description("微博")]
-        Weibo=1
+        Weibo=2
 
 
     }
