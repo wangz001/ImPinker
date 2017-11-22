@@ -76,7 +76,8 @@
 			"view/about.html",
 			"view/setting/setting.html",
 			"login.html",
-			"view/setting/setting-notify.html"
+			"view/setting/setting-notify.html",
+			"view/user/usercollect.html"
 		],
 		"resources": [
 			"js/mui.min.js",
@@ -691,6 +692,34 @@
 			"js/qqFace/arclist/27.gif",
 			"js/qqFace/arclist/30.gif",
 			"css/icons-extra.css"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"view/user/usercollect.html": {
+		"resources": [
+			"images/cbd.jpg",
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"css/user/userindex.css",
+			"images/muwu.jpg",
+			"js/mui.pullToRefresh.material.js",
+			"css/imageviewer.css",
+			"js/commonUtil.js",
+			"css/weibo.css",
+			"js/mui.zoom.js",
+			"images/logo.png",
+			"images/yuantiao.jpg",
+			"js/mui.previewimage.js",
+			"images/login-1.png",
+			"images/food.png",
+			"js/jquery.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"css/icons-extra.css",
+			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
 			"login.html"

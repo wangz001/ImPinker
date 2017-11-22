@@ -44,7 +44,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a id='my_collect' href="#">
 						<span class="mui-icon mui-icon-star"></span>
 						<div class="mui-media-body">收藏</div>
 					</a>
@@ -148,6 +148,17 @@
 			mui.openWindow({
 				url: "view/weibo/weibo_my.html",
 				id: "weibo_my",
+				show: {
+					aniShow: 'slide-in-right',
+					duration: 200
+				}
+			});
+		});
+		//收藏
+		document.getElementById("my_collect").addEventListener('tap', function() {
+			mui.openWindow({
+				url: "view/user/usercollect.html",
+				id: "my_collect",
 				show: {
 					aniShow: 'slide-in-right',
 					duration: 200
