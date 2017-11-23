@@ -167,6 +167,7 @@
                 font-size: 15px;
                 color: #888;
                 line-height: 1.5em;
+                margin-left: 5px;
             }
 
             #comment-container .comment .comment-list dd .comment-img-box {
