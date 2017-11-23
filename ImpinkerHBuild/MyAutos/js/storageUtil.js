@@ -58,6 +58,29 @@
 		return false;
 	}
 	
+	//保存我收藏的weibo
+	owner.setWeiboCollect = function(weiboid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
+		var username='0';
+		if(userstate&&userstate.account){
+			username=userstate.account;
+		}
+		localStorage.setItem('$weibo_Collect_'+username+"_"+weiboid, "true"); //app本地存储（速度慢，但可跨域）
+	}
+	//获取我收藏的weibo
+	owner.getWeiboCollect = function(weiboid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
+		var username='0';
+		if(userstate!=null){
+			username=userstate.account;
+		}
+		var isVote = localStorage.getItem('$weibo_Collect_'+username+"_"+weiboid);
+		if(isVote!=null&&isVote=="true"){
+			return true;
+		}
+		return false;
+	}
+	
 	
 	//保存我赞过的文章
 	owner.setArticleVote = function(articleid) {
@@ -76,6 +99,30 @@
 			username=userstate.account;
 		}
 		var isVote = localStorage.getItem('$article_vote_'+username+"_"+articleid);
+		if(isVote!=null&&isVote=="true"){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	//保存我收藏的文章
+	owner.setArticleCollect = function(articleid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
+		var username='0';
+		if(userstate&&userstate.account){
+			username=userstate.account;
+		}
+		localStorage.setItem('$article_Collect_'+username+"_"+articleid, "true"); //app本地存储（速度慢，但可跨域）
+	}
+	//获取我收藏的文章
+	owner.getArticleCollect = function(articleid) {
+		userstate = JSON.parse(localStorage.getItem('$state') || "{}");
+		var username='0';
+		if(userstate!=null){
+			username=userstate.account;
+		}
+		var isVote = localStorage.getItem('$article_Collect_'+username+"_"+articleid);
 		if(isVote!=null&&isVote=="true"){
 			return true;
 		}

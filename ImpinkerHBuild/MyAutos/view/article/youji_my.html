@@ -9,6 +9,9 @@
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<style type="text/css">
+			#pullrefresh{
+				margin-top: 50px;
+			}
 			.mui-scroll .mui-card {
 				margin: 0 0 10px 0;
 			}
@@ -37,7 +40,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<!--<div articleid='23' class="mui-card">
+					<div articleid='23' class="mui-card">
 						<div class="mui-card-content">
 							<div class="mui-card-content-inner">
 								<p class="articlename">奔驰Ml400</p>
@@ -50,7 +53,7 @@
 							<span class="mui-icon mui-icon-compose"></span>
 							<span class="mui-icon mui-icon-trash"></span>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -77,7 +80,7 @@
 		<script>
 			mui.plusReady(function() {
 				mui.init({
-					swipeBack: false,
+					swipeBack: true,
 					pullRefresh: {
 						container: '#pullrefresh',
 						up: {

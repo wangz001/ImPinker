@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -77,6 +78,7 @@
 		<footer id="mui-footer" class="mui-bar mui-bar-footer">
 			<a class="mui-icon mui-icon-compose" style="float: inherit;"></a>
 			<a id="vote" class="mui-icon mui-icon-extra mui-icon-extra-heart" style="float: inherit;"></a>
+			<a id="collect" class="mui-icon mui-icon-star" style="float: inherit;"></a>
 			<a id="share" class="mui-icon-extra mui-icon-extra-share"></a>
 		</footer>
 	</body>
@@ -101,7 +103,7 @@
                         </em>
                         <em class="commentvote">
                             <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
-                            <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
+                            <a class="comment_to" commentid='$Id$' username='$UserName$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
                 </dt>
 			<dd>
@@ -148,6 +150,12 @@
 				$('#vote').removeClass("mui-icon-extra-heart");
 				$('#vote').addClass("mui-icon-extra-heart-filled");
 			}
+			//判断是否收藏过文章
+			var isVote = storageUtil.getArticleCollect(articleid);
+			if(isVote) {
+				$('#collect').removeClass("mui-icon-star");
+				$('#collect').addClass("mui-icon-star-filled");
+			}
 			getArticle(articleid);
 			getArticleComment(articleid);
 			// 扩展API加载完毕，现在可以正常调用扩展API
@@ -184,6 +192,8 @@
 			str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
 			return str;
 		}
+
+		
 
 		document.getElementById('share').addEventListener('tap', function() {
 			var btnArray = [{

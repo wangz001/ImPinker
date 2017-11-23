@@ -105,7 +105,7 @@
 				<div class="mui-card-footer">
 					<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
 					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
-					<span class="mui-icon mui-icon-star" weiboid='$Id$'></span>
+					<span class="mui-icon collectbtn $isCollect$" weiboid='$Id$'></span>
 				</div>
 			</div>
 		</script>
@@ -240,6 +240,9 @@
 				//判断我是否赞过此微博
 				var isVote = storageUtil.getWeiboVote(item.Id);
 				item.isVote = isVote ? "mui-icon-extra-heart-filled" : "mui-icon-extra-heart";
+				//判断我是否收藏过此微博
+				var isCollect = storageUtil.getWeiboCollect(item.Id);
+				item.isCollect = isCollect ? "mui-icon-star-filled" : "mui-icon-star";
 				var cardStr = templateCard.temp(item);
 				$(".mui-scroll").append(cardStr);
 			}

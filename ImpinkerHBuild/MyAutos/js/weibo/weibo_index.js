@@ -37,7 +37,7 @@ $(document).ready(function() {
 	});
 
 	//收藏点击事件
-	mui('.mui-scroll').on('tap', '.mui-icon-star', function() {
+	mui('.mui-scroll').on('tap', '.collectbtn', function() {
 		var weiboid = this.getAttribute('weiboid');
 		var heartType = $(this).attr("class");
 		//mui.alert("收藏到我的微博");
@@ -46,15 +46,16 @@ $(document).ready(function() {
 			"weiboId": weiboid
 		}
 		if(heartType.indexOf("mui-icon-star-filled") != -1) {
-			mui.toast("您已收藏过");
+			mui.toast("您已收藏");
 		} else {
 			$(this).attr("class", "mui-icon mui-icon-star-filled");
 			commonUtil.sendRequestWithToken(url, data, false, function(data) {
 				if(data.IsSuccess == 1) {
 					mui.toast("收藏成功");
+					storageUtil.setWeiboCollect(weiboid);
 					//$(this).attr("class", "mui-icon mui-icon-star-filled");
 				} else {
-					//mui.toast("收藏失败");
+					mui.toast("收藏失败");
 				}
 			});
 		}

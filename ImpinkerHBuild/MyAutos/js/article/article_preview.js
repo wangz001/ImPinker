@@ -24,7 +24,7 @@ function hideComment() {
 			toCommentId = 0;
 		}, 200);
 	}
-
+	$("#comment_text").val('');
 }
 
 $('#comment_text').focus(function() {
@@ -32,6 +32,7 @@ $('#comment_text').focus(function() {
 });
 $('#comment_text').bind('focusout', function() {
 	hideComment();
+	$("#comment_text").attr("placeholder","请输入评论内容....");
 });
 
 $(document).ready(function() {
@@ -74,8 +75,9 @@ var toCommentId = 0;
 //评论 回复  comment_to
 mui('#comment ').on('tap', '.comment_to', function() {
 	var Id = this.getAttribute('commentid');
+	var username=this.getAttribute('username');
+	$("#comment_text").attr("placeholder","回复:"+username);
 	toCommentId = Id;
-	console.log(toCommentId);
 	showComment();
 });
 
@@ -90,8 +92,8 @@ function getArticle(articleid) {
 		if(data.IsSuccess == 1 && data.Data != null) {
 			var articleinfo = data.Data;
 			articleItem = articleinfo;
-			$("#coverimage").attr("src",articleItem.CoverImage.replace("style/articlecover_36_24","style/article_900"));
-			$("#article_description").html("简介："+articleItem.Description);
+			$("#coverimage").attr("src", articleItem.CoverImage.replace("style/articlecover_36_24", "style/article_900"));
+			$("#article_description").html("简介：" + articleItem.Description);
 			var contentStr = articleinfo.Content;
 			$("#articlename").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
@@ -163,7 +165,7 @@ $('#vote').bind('click', function() {
 			mui.fire(articlePage, 'articleVote', {
 				articleid: articleItem.Id
 			});
-			
+
 			storageUtil.setArticleVote(articleItem.Id);
 		} else {
 			mui.toast("谢谢支持~~");
@@ -172,4 +174,29 @@ $('#vote').bind('click', function() {
 		$('#vote').removeClass("mui-icon-extra-heart");
 		$('#vote').addClass("mui-icon-extra-heart-filled");
 	});
+});
+
+//收藏点击事件
+$('#collect').bind('click', function() {
+	var heartType = $(this).attr("class");
+	//mui.alert("收藏到我的微博");
+	var url = "http://api.myautos.cn/api/UserCollection/AddArticleCollect";
+	var para = {
+		"articleId": articleItem.Id
+	}
+	if(heartType.indexOf("mui-icon-star-filled") != -1) {
+		mui.toast("您已收藏过");
+	} else {
+		$(this).attr("class", "mui-icon mui-icon-star-filled");
+		commonUtil.sendRequestWithToken(url, para, false, function(data) {
+			console.log(JSON.stringify(data));
+			if(data.IsSuccess == 1) {
+				mui.toast("收藏成功");
+				//$(this).attr("class", "mui-icon mui-icon-star-filled");
+				storageUtil.setArticleCollect(articleItem.Id);
+			} else {
+				//mui.toast("收藏失败");
+			}
+		});
+	}
 });
