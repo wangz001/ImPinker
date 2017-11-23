@@ -13,11 +13,13 @@ namespace ImBLL
     {
         readonly UserCollectionDal _dal = new UserCollectionDal();
         private readonly UserBll _userBll = new UserBll();
+
         /// <summary>
         /// 添加收藏
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="userid"></param>
+        /// <param name="entityType">实体类型</param>
         /// <returns></returns>
         public bool AddCollect(long entityId,int userid,EntityTypeEnum entityType)
         {
@@ -47,11 +49,13 @@ namespace ImBLL
             }
             return false;
         }
+
         /// <summary>
         /// 取消收藏
         /// </summary>
         /// <param name="articleId"></param>
         /// <param name="userid"></param>
+        /// <param name="entityType">实体类型</param>
         /// <returns></returns>
         public bool RemoveCollect(long articleId, int userid,EntityTypeEnum entityType)
         {
@@ -72,7 +76,6 @@ namespace ImBLL
         /// <param name="userId"></param>
         /// <param name="pageNum"></param>
         /// <param name="pagecount"></param>
-        /// <param name="totalCount"></param>
         /// <returns></returns>
         public List<ArticleWeiboVm> GetMyListByPage(int userId,int  pageNum, int pagecount)
         {

@@ -23,6 +23,7 @@
         .header .headimage {
             width: 35px;
             height: 35px;
+            -ms-border-radius: 5px;
             border-radius: 5px;
             vertical-align: middle;
             overflow: hidden;
@@ -38,7 +39,7 @@
             }
 
             .thread-info .userinfo .publish-time {
-                margin-bottom: 0px;
+                margin-bottom: 0;
             }
 
         .mui-content-padded p img {
@@ -50,6 +51,10 @@
 
         .mui-content .header h2 {
             margin: 10px;
+        }
+
+        .commentText {
+            font-size: 15px;
         }
     </style>
 </head>
@@ -87,6 +92,24 @@
 <script src="~/Scripts/mui.min.js"></script>
 <script src="~/Scripts/mui.previewimage.js"></script>
 <script src="~/Scripts/mui.zoom.js"></script>
+<script src="~/Scripts/jquery-1.8.3.js"></script>
 <script type="text/javascript">
     mui.previewImage();
+</script>
+<script type="text/javascript">
+    //替换表情符号
+    function replace_em(str) {
+        str = str.replace(/\</g, '&lt;');
+        str = str.replace(/\>/g, '&gt;');
+        //str = str.replace(/\n/g, '<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../Scripts/qqFace/arclist/$1.gif" border="0" />');
+        return str;
+    }
+    $(document).ready(function () {
+        var textList = $(".commentText");
+        for (var i = 0; i < textList.length; i++) {
+            var text = $(textList[i]).text();
+            $(textList[i]).html(replace_em(text));
+        }
+    });
 </script>

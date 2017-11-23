@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 using DBUtility;
@@ -18,7 +17,7 @@ namespace ImDal
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(long Id)
+        public bool Exists(long id)
         {
             var strSql = new StringBuilder();
             strSql.Append("select count(1) from Article");
@@ -27,7 +26,7 @@ namespace ImDal
 			{
 				new SqlParameter("@Id", SqlDbType.BigInt, 8)
 			};
-            parameters[0].Value = Id;
+            parameters[0].Value = id;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -56,7 +55,7 @@ namespace ImDal
 				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.CreateTime },
 				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
 				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value = model.PublishTime},
-                new SqlParameter("@Company",SqlDbType.Char){Value = model.Company}, 
+                new SqlParameter("@Company",SqlDbType.Char){Value = model.Company} 
 			};
             object  obj = DbHelperSQL.ExecuteScalar(strSql.ToString(), parameters);
             return Convert.ToInt32(obj);
@@ -93,22 +92,15 @@ namespace ImDal
 				new SqlParameter("@Id", SqlDbType.BigInt, 8){Value =model.Id }
 			};
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            return rows > 0;
         }
 
         
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool DeleteThread(int userid,long Id)
+        public bool DeleteThread(int userid,long id)
         {
             var strSql = new StringBuilder();
             strSql.Append("update Article ");
@@ -116,7 +108,7 @@ namespace ImDal
             SqlParameter[] parameters =
 			{
 				new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
-				new SqlParameter("@Id", SqlDbType.BigInt){Value = Id}
+				new SqlParameter("@Id", SqlDbType.BigInt){Value = id}
 			};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -126,7 +118,7 @@ namespace ImDal
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Article GetModel(long Id)
+        public Article GetModel(long id)
         {
 
             StringBuilder strSql = new StringBuilder();
@@ -137,18 +129,10 @@ namespace ImDal
 			{
 				new SqlParameter("@Id", SqlDbType.BigInt, 8)
 			};
-            parameters[0].Value = Id;
+            parameters[0].Value = id;
 
-            Article model = new Article();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
+            var ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            return ds.Tables[0].Rows.Count > 0 ? DataRowToModel(ds.Tables[0].Rows[0]) : null;
         }
 
 
@@ -239,14 +223,7 @@ namespace ImDal
                 strSql.Append(" where " + strWhere);
             }
             object obj = DbHelperSQL.GetSingle(strSql.ToString());
-            if (obj == null)
-            {
-                return 0;
-            }
-            else
-            {
-                return Convert.ToInt32(obj);
-            }
+            return obj == null ? 0 : Convert.ToInt32(obj);
         }
 
         /// <summary>
@@ -265,11 +242,11 @@ namespace ImDal
             strSql.Append(" select count(1) from Article T WHERE UserId=@UserId and state<>0");
             var startIndex = (pageNum - 1) * count + 1;
             var endIndex = pageNum * count;
-            var paras = new SqlParameter[]
+            var paras = new []
 		    {
                 new SqlParameter("@UserId",SqlDbType.Int){Value = userid},
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
-                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex}
 		    };
             return DbHelperSQL.Query(strSql.ToString(), paras);
         }
@@ -315,7 +292,7 @@ select count(1) from Article T WHERE UserId=@UserId and state=@state;
                 new SqlParameter("@UserId",SqlDbType.Int){Value = userid},
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
                 new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
-                new SqlParameter("@state",SqlDbType.Int){Value = (int)state},
+                new SqlParameter("@state",SqlDbType.Int){Value = (int)state}
 		    };
             return DbHelperSQL.Query(sqlStr, paras);
         }
@@ -385,7 +362,7 @@ select t2.*,isnull(t3.VoteCount,0)as VoteCount,isnull(t4.CommentCount,0)as Comme
 				new SqlParameter("@State", SqlDbType.TinyInt, 1){Value =model.State },
 				new SqlParameter("@PublishTime", SqlDbType.DateTime){Value =model.Createtime },
 				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime },
-				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.Updatetime},
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.Updatetime}
 			};
 
             const string sql2 = @"
@@ -399,17 +376,17 @@ INSERT INTO [dbo].[ArticleSnaps]
             SqlParameter[] parameters2 =
 			{
 				new SqlParameter("@ConTent", SqlDbType.NVarChar){Value =model.Content },
-				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime },
+				new SqlParameter("@CreateTime", SqlDbType.DateTime){Value =model.Createtime }
 			};
 
             var strlist = new List<CommandInfo>
             {
-                new CommandInfo()
+                new CommandInfo
                 {
                     CommandText = sql1.ToString(),
                     Parameters = parameters1
                 },
-                new CommandInfo()
+                new CommandInfo
                 {
                     CommandText = sql2,
                     Parameters = parameters2
@@ -438,7 +415,7 @@ INSERT INTO [dbo].[ArticleSnaps]
 				new SqlParameter("@UserId", SqlDbType.Int, 4){Value = vm.Userid},
 				new SqlParameter("@KeyWords", SqlDbType.NVarChar, 100){Value =vm.Keywords },
 				new SqlParameter("@Description", SqlDbType.NVarChar, 200){Value =vm.Description },
-				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = vm.Updatetime},
+				new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = vm.Updatetime}
 			};
 
             const string sql2 = @"
@@ -449,17 +426,17 @@ UPDATE [dbo].[ArticleSnaps]
             SqlParameter[] parameters2 =
 			{
 				new SqlParameter("@ArticleId", SqlDbType.BigInt){Value =vm.ArticleId },
-				new SqlParameter("@ConTent", SqlDbType.Text){Value =vm.Content },
+				new SqlParameter("@ConTent", SqlDbType.Text){Value =vm.Content }
 			};
 
             var strlist = new List<CommandInfo>
             {
-                new CommandInfo()
+                new CommandInfo
                 {
                     CommandText = sql1.ToString(),
                     Parameters = parameters1
                 },
-                new CommandInfo()
+                new CommandInfo
                 {
                     CommandText = sql2,
                     Parameters = parameters2
@@ -539,11 +516,11 @@ FROM    ( SELECT    T2.*
 ";
             var startIndex = (pageindex - 1) * pagesize + 1;
             var endIndex = pageindex * pagesize;
-            var paras = new SqlParameter[]
+            var paras = new []
 		    {
                 new SqlParameter("@userid",SqlDbType.Int){Value = userid},
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
-                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex}
 		    };
             return DbHelperSQL.Query(strSql, paras);
 

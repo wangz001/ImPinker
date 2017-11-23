@@ -33,12 +33,10 @@
 
                     </dt>
                     <dd>
-                        <p>
+                        <p class="commentText">
                             @comment.Content&nbsp;
-                        </p>
-
+                    </p>
                     </dd>
-
                     @{
                 if (comment.ToCommentId > 0 && comment.ListToComment.Count > 0)
                 {
@@ -54,19 +52,18 @@
                             </em>
                         </dt>
                         <dd>
-                            <p>
+                            <p class="commentText">
                                 @item.Content&nbsp;
                             </p>
                         </dd>
                     </dl>
                 }
                     }
-
                 </dl>
             }
-
                 }
             </div>
         }
     }
 </div>
+

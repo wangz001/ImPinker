@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImDal
 {
@@ -39,22 +36,17 @@ INSERT INTO [dbo].[UserCollection]
 					new SqlParameter("@State", SqlDbType.TinyInt){Value = (int)model.State},
 					new SqlParameter("@CreateTime", SqlDbType.DateTime){Value = model.CreateTime},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime}};
-            int rows = DbHelperSQL.ExecuteSql(sql, parameters);
-            if (rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var rows = DbHelperSQL.ExecuteSql(sql, parameters);
+            return rows > 0;
 
         }
+
         /// <summary>
         /// 获取记录，根据用户id和文章id
         /// </summary>
-        /// <param name="articleId"></param>
+        /// <param name="entityId"></param>
         /// <param name="userid"></param>
+        /// <param name="entityType"></param>
         /// <returns></returns>
         public UserCollection GetModel(long entityId, int userid, EntityTypeEnum entityType)
         {
@@ -69,8 +61,8 @@ SELECT  [Id]
   FROM [UserCollection] where UserId=@UserId and EntityId=@EntityId and EntityType=@EntityType
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@UserId", System.Data.SqlDbType.Int){Value = userid},
-					new SqlParameter("@EntityId", System.Data.SqlDbType.BigInt,8){Value = entityId},
+					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
+					new SqlParameter("@EntityId", SqlDbType.BigInt,8){Value = entityId},
 					new SqlParameter("@EntityType", SqlDbType.Int){Value = (int)entityType}};
 
             var ds = DbHelperSQL.Query(sql, parameters);
@@ -145,11 +137,11 @@ UPDATE [dbo].[UserCollection]
  WHERE Id=@Id
 ";
             SqlParameter[] parameters = {
-					new SqlParameter("@EntityId", System.Data.SqlDbType.BigInt,8){Value = model.EntityId},
+					new SqlParameter("@EntityId", SqlDbType.BigInt,8){Value = model.EntityId},
 					new SqlParameter("@EntityType", SqlDbType.Int){Value = model.EntityType},
 					new SqlParameter("@State", SqlDbType.Int){Value = model.State},
 					new SqlParameter("@UpdateTime", SqlDbType.DateTime){Value = model.UpdateTime},
-					new SqlParameter("@Id", SqlDbType.Int){Value = model.Id},
+					new SqlParameter("@Id", SqlDbType.Int){Value = model.Id}
                                         };
             int num = DbHelperSQL.ExecuteSql(sql, parameters);
             return num > 0;
@@ -215,11 +207,11 @@ FROM    ( SELECT    T.rownum ,
 
             var startIndex = (pageNum - 1) * pagecount + 1;
             var endIndex = pageNum * pagecount;
-            var paras = new SqlParameter[]
+            var paras = new []
 		    {
                 new SqlParameter("@UserId",SqlDbType.Int){Value = userId},
                 new SqlParameter("@startIndex",SqlDbType.Int){Value = startIndex},
-                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex},
+                new SqlParameter("@endIndex",SqlDbType.Int){Value = endIndex}
 		    };
             var ds = DbHelperSQL.Query(sql, paras);
 
