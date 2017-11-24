@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,7 +36,7 @@ namespace ImpinkerMobile.Controllers
             {
                 LogHelper.Instance.Error(e.ToString());
             }
-            if (vm == null || vm.Content == null || vm.Content.Count == 0)
+            if (vm == null || string.IsNullOrEmpty(vm.Content))
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
@@ -49,7 +50,7 @@ namespace ImpinkerMobile.Controllers
             }
             else
             {//网络爬的文章
-                vm.Id = idInt.ToString();
+                vm.Id = idInt.ToString(CultureInfo.InvariantCulture);
                 ViewBag.Article = vm;
                 return View("Index");
             }

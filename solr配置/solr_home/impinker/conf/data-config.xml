@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <dataConfig>
-    <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=ImPinker" user="sa" password="funnycar2015"/>
+    <dataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://101.200.175.157;DatabaseName=MyAutosTest" user="myautos" password="myautos2016"/>
     <document name="article">  
         <entity name="article"  transformer="ClobTransformer" pk="table_id"
-                 query="SELECT 'travels_'+convert(varchar(100),T1.Id) as table_id,T1.UserId
-						,T1.ArticleName,T1.KeyWords,T1.Description,T1.Url,T1.CreateTime,T1.UpdateTime,T1.CoverImage,T2.Content,T1.Company from Article T1 
-						left join ArticleSnaps T2 on T1.Id=T2.ArticleId "        
-                 deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,UserId
-						,ArticleName,KeyWords,Description,Url,CreateTime,UpdateTime,CoverImage,Content,Company from Article where userid>1000 "    
+                 query="SELECT 'travels_'+convert(varchar(100),id) as table_id,T1.UserId
+						,T1.ArticleName,T1.KeyWords,T1.Description,T1.Url,T1.CreateTime,T1.UpdateTime,T1.CoverImage,T1.Company,T2.ConTent from Article T1
+						LEFT JOIN dbo.ArticleSnaps T2 ON T1.Id=T2.ArticleId "        
+                 deltaImportQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id,T1.UserId
+						,T1.ArticleName,T1.KeyWords,T1.Description,T1.Url,T1.CreateTime,T1.UpdateTime,T1.CoverImage,T1.Company,T2.ConTent from Article T1
+						LEFT JOIN dbo.ArticleSnaps T2 ON T1.Id=T2.ArticleId"    
                  deltaQuery="SELECT 'travels_'+convert(varchar(100),id) as table_id FROM Article WHERE userid>1000 and CreateTime > '${dataimporter.last_index_time}'">             
                     <field column="table_id"      name="id"      />  
                     <field column="userid"      name="userid"      />

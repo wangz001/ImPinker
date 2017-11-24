@@ -307,7 +307,7 @@ namespace ImBLL
                 Description = article.Description,
                 Company = article.Company,
                 CreateTime = article.CreateTime,
-                Content = snap == null ? null : new List<Object> { snap.Content },
+                Content = snap == null ? null : snap.Content,
                 UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
                 UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100)
             };

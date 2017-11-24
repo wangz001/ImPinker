@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using Common.DateTimeUtil;
+﻿using System.Web.Mvc;
 using ImBLL;
 using ImModel.Dto;
 using ImModel.ViewModel;
-using ImPinker.Common;
-using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
 {
@@ -71,7 +67,7 @@ namespace ImPinker.Controllers
                 dto.PageCount = 32;
             }
             dto.IsHighLight = false;
-            var searchvm = SolrNetSearchBll.QueryHotTag(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount, false); ;
+            var searchvm = SolrNetSearchBll.QueryHotTag(dto.Key, dto.Tab, dto.FacetCompany, dto.FacetTag, dto.FacetDateTime, dto.PageNum, dto.PageCount, false);
             ViewBag.HotTag = dto.Key;
             ViewBag.searchVm = searchvm;
             return View();

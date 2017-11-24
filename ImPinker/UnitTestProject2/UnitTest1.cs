@@ -20,13 +20,15 @@ namespace UnitTestProject2
         public void TestWeiboSearch()
         {
             SolrNet.Startup.Init<WeiboVm>("http://127.0.0.1:8080/solr/impinker-weibo");
+            SolrNet.Startup.Init<ArticleViewModel>("http://127.0.0.1:8080/solr/impinker");
             //var aa = SolrNetSearchBll.QueryWeiboByGeo("aa", 1, 10);
         }
          [TestMethod]
          public void TestArticleSearch()
          {
+             SolrNet.Startup.Init<WeiboVm>("http://127.0.0.1:8080/solr/impinker-weibo");
              SolrNet.Startup.Init<ArticleViewModel>("http://127.0.0.1:8080/solr/impinker");
-             var aa = SolrNetSearchBll.GetArticleById("travel_1206");
+             var aa = SolrNetSearchBll.GetArticleById("travels__1206");
          }
     }
 }

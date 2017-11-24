@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="articlecontent">
-                @Html.Raw(article.Content == null ? "" : article.Content[0])
+                @Html.Raw(article.Content ?? "")
                 
             </div>
             <div class="article-footer">

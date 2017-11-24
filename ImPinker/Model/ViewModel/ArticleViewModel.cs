@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SolrNet.Attributes;
 
 namespace ImModel.ViewModel
@@ -36,8 +35,9 @@ namespace ImModel.ViewModel
         [SolrField("UpdateTime")]
         public DateTime UpdateTime { get; set; }
 
-        [SolrField("content")]
-        public List<Object> Content { get; set; }
+        [SolrField("Content")]
+        public string Content { get; set; }
+
         [SolrField("Company")]
         public string Company { get; set; }
         /// <summary>

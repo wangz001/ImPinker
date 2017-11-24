@@ -4,7 +4,6 @@ using ImDal;
 using ImModel;
 using ImModel.Enum;
 using ImModel.ViewModel;
-using SolrNet.Utils;
 
 namespace ImBLL
 {

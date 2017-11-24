@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using Common.DateTimeUtil;
-using Common.Utils;
 using ImModel.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using SolrNet;
@@ -15,14 +14,14 @@ namespace ImBLL
     {
         private static readonly ISolrOperations<ArticleViewModel> ArticleInstance;
         private static readonly ISolrOperations<WeiboVm> WeiboInstance;
-        static readonly UserBll _userBll = new UserBll();
+        private static readonly UserBll UserBll = new UserBll();
         static SolrNetSearchBll()
         {
             ArticleInstance = ServiceLocator.Current.GetInstance<ISolrOperations<ArticleViewModel>>();
             WeiboInstance = ServiceLocator.Current.GetInstance<ISolrOperations<WeiboVm>>();
         }
 
-        #region 文章操作
+        #region 根据关键字查询，并根据时间、来源、关键字进行分组
         /// <summary>
         /// 搜索-关键字简单查询
         /// </summary>
@@ -70,6 +69,7 @@ namespace ImBLL
             //建立排序，条件.
             var options = new QueryOptions
             {
+                // ReSharper disable once CSharpWarnings::CS0618
                 Start = startNum,
                 Rows = pageCount,
                 Highlight = high
@@ -133,7 +133,7 @@ namespace ImBLL
             if (!string.IsNullOrEmpty(facetCompany)) //facet分组
             {
                 query.Add(new SolrQueryByField("Company", facetCompany));
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "来源：" + facetCompany,
                     Url = searchParaStr.Replace("&facetCompany=" + facetCompany, "")
@@ -142,7 +142,7 @@ namespace ImBLL
             if (!string.IsNullOrEmpty(facetTag)) //facet分组
             {
                 query.Add(new SolrQueryByField("KeyWords", facetTag));
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "标签：" + facetTag,
                     Url = searchParaStr.Replace("&facetTag=" + facetTag, "")
@@ -154,14 +154,13 @@ namespace ImBLL
             {
                 var tupleTime = showTimeRange[index];
                 //创建时间范围条件， 开始时间和结束时间 
-                SolrQueryByRange<DateTime> qDateRange = null;
-                var stime = DateTime.Parse(tupleTime.Item3.ToString());
-                var etime = DateTime.Parse(tupleTime.Item4.ToString());
+                var stime = DateTime.Parse(tupleTime.Item3.ToString(CultureInfo.InvariantCulture));
+                var etime = DateTime.Parse(tupleTime.Item4.ToString(CultureInfo.InvariantCulture));
                 //后两个参数,一个是开始时间,一个是结束时时间
-                qDateRange = new SolrQueryByRange<DateTime>("CreateTime", stime, etime);
+                var qDateRange = new SolrQueryByRange<DateTime>("CreateTime", stime, etime);
                 //时间范围条件加入集合
                 query.Add(qDateRange);
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "时间：" + tupleTime.Item2,
                     Url = searchParaStr.Replace("&facetDateTime=" + facetDateTime, "")
@@ -223,7 +222,7 @@ namespace ImBLL
                     {
                         var key = string.IsNullOrEmpty(f.Key.Trim()) ? "其他" : f.Key;
                         facetDicCompany.Add(
-                            new FacetItemVm() { Name = key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + key });
+                            new FacetItemVm { Name = key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + key });
                     }
                 }
             }
@@ -238,7 +237,7 @@ namespace ImBLL
                 {
                     if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Key.Trim().Count() > 1 && f.Value > 0)
                     {
-                        facetDicTag.Add(new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
+                        facetDicTag.Add(new FacetItemVm { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
                     }
                     if (facetDicTag.Count > 12) break;
                 }
@@ -254,7 +253,7 @@ namespace ImBLL
                 {
                     if (f.Value > 0)
                     {
-                        facetDicDateTime.Add(new FacetItemVm() { Name = showTimeRange[i].Item2, Count = f.Value, Url = searchParaStr + "&facetDateTime=" + showTimeRange[i].Item1 });
+                        facetDicDateTime.Add(new FacetItemVm { Name = showTimeRange[i].Item2, Count = f.Value, Url = searchParaStr + "&facetDateTime=" + showTimeRange[i].Item1 });
                     }
                     i++;
                 }
@@ -263,7 +262,7 @@ namespace ImBLL
             #endregion
 
 
-            var searchVm = new SearchResultVm()
+            var searchVm = new SearchResultVm
             {
                 ArticleList = results,
                 PageCount = pageCount,
@@ -277,6 +276,117 @@ namespace ImBLL
             };
             return searchVm;
         }
+
+        #endregion
+
+        #region 搜索框，关键字查询
+        /// <summary>
+        /// 搜索-关键字简单查询
+        /// </summary>
+        /// <param name="keyWord"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pageCount"></param>
+        /// <param name="isHighLight"></param>
+        /// <returns></returns>
+        public static SearchResultVm QueryArticleByKeyword(string keyWord, int pageNum, int pageCount, bool isHighLight = false)
+        {
+            pageNum = pageNum > 0 ? pageNum : 1;
+            pageCount = (pageCount > 0 && pageCount < 50) ? pageCount : 30;
+            #region 查询条件
+
+            //建立排序，条件.
+            var options = new QueryOptions
+            {
+                Rows = pageCount,
+                // ReSharper disable once CSharpWarnings::CS0618
+                Start = (pageNum - 1) * pageCount
+            };
+            if (isHighLight)
+            {
+                //高亮设置
+                var high = new HighlightingParameters
+                {
+                    Fields = new List<string> { "ArticleName", "KeyWords", "Description" },
+                    BeforeTerm = "<font color='red'><b>",
+                    AfterTerm = "</b></font>"
+                };
+                options.Highlight = high;
+            }
+
+            //创建条件集合
+            var query = new List<ISolrQuery>();
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                var ar = new List<ISolrQuery>
+                {
+                    new SolrQueryByField("ArticleName", keyWord),
+                    new SolrQueryByField("KeyWords", keyWord),
+                    new SolrQueryByField("Description", keyWord)
+                };
+                //创建keyWord 条件集合的关系,是OR还是AND
+                var kw = new SolrMultipleCriteriaQuery(ar, "OR");
+                query.Add(kw);
+            }
+
+            //按照时间倒排序.
+            //options.AddOrder(new SortOrder("CreateTime", Order.DESC));
+
+            //条件集合之间的关系
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+
+            #endregion
+
+            //执行查询,有5个重载
+            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
+
+            # region 高亮处理
+
+            if (isHighLight)
+            {
+                var highlights = results.Highlights;
+                if (highlights != null && highlights.Count > 0)
+                {
+                    foreach (var item in results)
+                    {
+                        var snippets = highlights[item.Id].Snippets;
+                        foreach (var snippet in snippets)
+                        {
+                            if (snippet.Key.Equals("ArticleName"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.ArticleName = t;
+                            }
+                            if (snippet.Key.Equals("KeyWords"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.KeyWords = t;
+                            }
+                            if (snippet.Key.Equals("Description"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.Description = t;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            var searchVm = new SearchResultVm
+            {
+                ArticleList = results,
+                PageCount = pageCount,
+                PageNum = pageNum,
+                TotalCount = results.NumFound,
+                MaxPageNum = results.NumFound / pageNum + 1
+            };
+            return searchVm;
+        }
+
+
+        #endregion
+
+        #region 热门标签搜索，返回搜索结果
 
         /// <summary>
         /// 热门标签搜索，返回搜索结果
@@ -317,6 +427,7 @@ namespace ImBLL
             //建立排序，条件.
             var options = new QueryOptions
             {
+                // ReSharper disable once CSharpWarnings::CS0618
                 Start = startNum,
                 Rows = pageCount
             };
@@ -394,7 +505,7 @@ namespace ImBLL
             if (!string.IsNullOrEmpty(facetCompany)) //facet分组
             {
                 query.Add(new SolrQueryByField("Company", facetCompany));
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "来源：" + facetCompany,
                     Url = searchParaStr.Replace("&facetCompany=" + facetCompany, "")
@@ -403,7 +514,7 @@ namespace ImBLL
             if (!string.IsNullOrEmpty(facetTag)) //facet分组
             {
                 query.Add(new SolrQueryByField("KeyWords", facetTag));
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "标签：" + facetTag,
                     Url = searchParaStr.Replace("&facetTag=" + facetTag, "")
@@ -415,14 +526,13 @@ namespace ImBLL
             {
                 var tupleTime = showTimeRange[index];
                 //创建时间范围条件， 开始时间和结束时间 
-                SolrQueryByRange<DateTime> qDateRange = null;
-                var stime = DateTime.Parse(tupleTime.Item3.ToString());
-                var etime = DateTime.Parse(tupleTime.Item4.ToString());
+                var startTime = DateTime.Parse(tupleTime.Item3.ToString(CultureInfo.InvariantCulture));
+                var endTime = DateTime.Parse(tupleTime.Item4.ToString(CultureInfo.InvariantCulture));
                 //后两个参数,一个是开始时间,一个是结束时时间
-                qDateRange = new SolrQueryByRange<DateTime>("CreateTime", stime, etime);
+                var qDateRange = new SolrQueryByRange<DateTime>("CreateTime", startTime, endTime);
                 //时间范围条件加入集合
                 query.Add(qDateRange);
-                facetSelectedList.Add(new FacetItemVm()
+                facetSelectedList.Add(new FacetItemVm
                 {
                     Name = "时间：" + tupleTime.Item2,
                     Url = searchParaStr.Replace("&facetDateTime=" + facetDateTime, "")
@@ -475,7 +585,7 @@ namespace ImBLL
                     {
                         var key = string.IsNullOrEmpty(f.Key.Trim()) ? "其他" : f.Key;
                         facetDicCompany.Add(
-                            new FacetItemVm() { Name = key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + key });
+                            new FacetItemVm { Name = key, Count = f.Value, Url = searchParaStr + "&facetCompany=" + key });
                     }
                 }
             }
@@ -489,7 +599,7 @@ namespace ImBLL
                 {
                     if (!string.IsNullOrEmpty(f.Key.Trim()) && f.Key.Trim().Count() > 1 && f.Value > 0)
                     {
-                        facetDicTag.Add(new FacetItemVm() { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
+                        facetDicTag.Add(new FacetItemVm { Name = f.Key, Count = f.Value, Url = searchParaStr + "&facetTag=" + f.Key });
                     }
                     if (facetDicTag.Count > 12) break;
                 }
@@ -505,7 +615,7 @@ namespace ImBLL
                 {
                     if (f.Value > 0)
                     {
-                        facetDicDateTime.Add(new FacetItemVm() { Name = showTimeRange[i].Item2, Count = f.Value, Url = searchParaStr + "&facetDateTime=" + showTimeRange[i].Item1 });
+                        facetDicDateTime.Add(new FacetItemVm { Name = showTimeRange[i].Item2, Count = f.Value, Url = searchParaStr + "&facetDateTime=" + showTimeRange[i].Item1 });
                     }
                     i++;
                 }
@@ -513,7 +623,7 @@ namespace ImBLL
 
             #endregion
 
-            var searchVm = new SearchResultVm()
+            var searchVm = new SearchResultVm
             {
                 ArticleList = results,
                 PageCount = pageCount,
@@ -528,125 +638,9 @@ namespace ImBLL
             return searchVm;
         }
 
-        /// <summary>
-        /// 根据不同的viewtype。不同页面的搜索框。有通过标签跳转的，有页面的相关文章等
-        /// </summary>
-        /// <param name="ViewType"></param>
-        /// <param name="keyWord"></param>
-        /// <param name="IsHighLight"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="pageCount"></param>
-        /// <returns></returns>
-        public static SearchResultVm QueryByViewTpye(string ViewType, string keyWord, bool IsHighLight
-            , int pageNum, int pageCount)
-        {
-            switch (ViewType)
-            {
-                case "RelativeArticle":
-                    //文章详情页，右侧相关车型推荐
-                    IsHighLight = false;
-                    break;
-                case "MyArticles":
-                    //搜索我发的帖子和我收藏的帖子
-                    //userid=。。。。。
-                    break;
-                case "3":
-                    break;
-                default: break;
-            }
-            var startNum = (pageNum - 1) * pageCount;
+        #endregion
 
-            #region 查询条件
-
-            //建立排序，条件.
-            var options = new QueryOptions
-            {
-                Start = startNum,
-                Rows = pageCount
-            };
-            if (IsHighLight)
-            {
-                //高亮设置
-                var high = new HighlightingParameters
-                {
-                    Fields = new List<string> { "ArticleName", "KeyWords", "Description" },
-                    BeforeTerm = "<font color='red'><b>",
-                    AfterTerm = "</b></font>"
-                };
-                options.Highlight = high;
-            }
-
-            //创建条件集合
-            var query = new List<ISolrQuery>();
-            if (!string.IsNullOrEmpty(keyWord))
-            {
-                var ar = new List<ISolrQuery>
-                {
-                    new SolrQueryByField("ArticleName", keyWord),
-                    new SolrQueryByField("KeyWords", keyWord),
-                    new SolrQueryByField("Description", keyWord)
-                };
-                //创建keyWord 条件集合的关系,是OR还是AND
-                var kw = new SolrMultipleCriteriaQuery(ar, "OR");
-                query.Add(kw);
-            }
-
-            //按照时间倒排序.
-            //options.AddOrder(new SortOrder("CreateTime", Order.DESC));
-
-            //条件集合之间的关系
-            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
-
-            #endregion
-
-            //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
-
-            # region 高亮处理
-
-            if (IsHighLight)
-            {
-                var highlights = results.Highlights;
-                if (highlights != null && highlights.Count > 0)
-                {
-                    foreach (var item in results)
-                    {
-                        var snippets = highlights[item.Id].Snippets;
-                        foreach (var snippet in snippets)
-                        {
-                            if (snippet.Key.Equals("ArticleName"))
-                            {
-                                var t = snippet.Value.ToList()[0];
-                                item.ArticleName = t;
-                            }
-                            if (snippet.Key.Equals("KeyWords"))
-                            {
-                                var t = snippet.Value.ToList()[0];
-                                item.KeyWords = t;
-                            }
-                            if (snippet.Key.Equals("Description"))
-                            {
-                                var t = snippet.Value.ToList()[0];
-                                item.Description = t;
-                            }
-                        }
-                    }
-                }
-            }
-            #endregion
-
-            var searchVm = new SearchResultVm()
-            {
-                ArticleList = results,
-                PageCount = pageCount,
-                PageNum = pageNum,
-                TotalCount = results.NumFound,
-                MaxPageNum = results.NumFound / pageNum + 1
-            };
-            return searchVm;
-        }
-
-
+        #region 获取文章详情
         /// <summary>
         /// 获取文章详情
         /// </summary>
@@ -654,37 +648,33 @@ namespace ImBLL
         /// <returns></returns>
         public static ArticleViewModel GetArticleById(string travelId)
         {
-            //创建条件集合
-            var query = new List<ISolrQuery>();
-            if (!string.IsNullOrEmpty(travelId))
+            if (!string.IsNullOrEmpty(travelId) && travelId.StartsWith("travels_"))
             {
-                var ar = new List<ISolrQuery>
+                var query = new List<ISolrQuery>
                 {
                     new SolrQueryByField("id", travelId)
                 };
-                //创建keyWord 条件集合的关系,是OR还是AND
-                var kw = new SolrMultipleCriteriaQuery(ar, "OR");
-                query.Add(kw);
-            }
-            //建立排序，条件.
-            var options = new QueryOptions
-            {
-                Start = 0,
-                Rows = 1
-            };
-
-            //条件集合之间的关系
-            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
-
-
-            //执行查询,有5个重载
-            SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
-            if (results != null && results.Count > 0)
-            {
-                return results[0];
+                var options = new QueryOptions
+                {
+                    // ReSharper disable once CSharpWarnings::CS0618
+                    Start = 0,
+                    Rows = 1
+                };
+                var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+                SolrQueryResults<ArticleViewModel> results = ArticleInstance.Query(qTBO, options);
+                if (results != null && results.Count > 0)
+                {
+                    return results[0];
+                }
             }
             return null;
         }
+
+        #endregion
+
+        #region 添加索引
+
+
         /// <summary>
         /// 批量添加索引文件
         /// </summary>
@@ -699,9 +689,7 @@ namespace ImBLL
 
         #endregion
 
-
-
-        #region weibo操作
+        #region 根据地理位置获取微博列表
         /// <summary>
         /// 根据地理位置获取微博列表
         /// </summary>
@@ -716,14 +704,16 @@ namespace ImBLL
         {
             //创建条件集合
             var query = new List<ISolrQuery>();
-            // ReSharper disable once CSharpWarnings::CS0618
+            #pragma warning disable 618
             var geoQuery = new SolrQueryByDistance("weibo_position", latitude, longitude, distance, CalculationAccuracy.BoundingBox);
+            #pragma warning restore 618
             query.Add(geoQuery);
             //建立排序，条件.
             var options = new QueryOptions
             {
-                Rows = (pagenum)*pagesize,
-                Start = (pagenum - 1)*pagesize + 1,
+                Rows = (pagenum) * pagesize,
+                // ReSharper disable once CSharpWarnings::CS0618
+                Start = (pagenum - 1) * pagesize + 1,
             };
             options.AddOrder(new SortOrder("CreateTime", Order.DESC));
             //options.AddOrder(new SortOrder("geofilt", Order.ASC));
@@ -740,21 +730,94 @@ namespace ImBLL
                         vm.ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(vm.ContentValue, 240);
                     }
                     vm.PublishTime = TUtil.DateFormatToString(vm.CreateTime);
-                    var userinfo = _userBll.GetModelByCache(vm.UserId);
+                    var userinfo = UserBll.GetModelByCache(vm.UserId);
                     vm.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
                     vm.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
                 }
             }
-            var searchVm = new WeiboSearchResultVm()
+            var searchVm = new WeiboSearchResultVm
             {
                 WeiboList = weiboList,
                 PageCount = 10,
                 PageNum = 1,
-                TotalCount =weiboList!=null? weiboList.NumFound:0
+                TotalCount = weiboList != null ? weiboList.NumFound : 0
             };
             return searchVm;
         }
 
         #endregion
+
+        #region 根据关键字搜索微博
+
+        public static WeiboSearchResultVm QueryWeiboByKeyword(string keyWord, int pageNum, int pageCount, bool isHighLight = false)
+        {
+            pageNum = pageNum > 0 ? pageNum : 1;
+            pageCount = (pageCount > 0 && pageCount < 50) ? pageCount : 30;
+            #region 查询条件
+            //建立排序，条件.
+            var options = new QueryOptions
+            {
+                Rows = pageCount,
+                // ReSharper disable once CSharpWarnings::CS0618
+                Start = (pageNum - 1) * pageCount
+            };
+            if (isHighLight)
+            {
+                //高亮设置
+                var high = new HighlightingParameters
+                {
+                    Fields = new List<string> { "Description"},
+                    BeforeTerm = "<font color='red'><b>",
+                    AfterTerm = "</b></font>"
+                };
+                options.Highlight = high;
+            }
+
+            //创建条件集合
+            var query = new List<ISolrQuery>();
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                query.Add(new SolrQueryByField("Description", keyWord));
+            }
+            //条件集合之间的关系
+            var qTBO = new SolrMultipleCriteriaQuery(query, "AND");
+            #endregion
+            //执行查询,有5个重载
+            SolrQueryResults<WeiboVm> results = WeiboInstance.Query(qTBO, options);
+            # region 高亮处理
+            if (isHighLight)
+            {
+                var highlights = results.Highlights;
+                if (highlights != null && highlights.Count > 0)
+                {
+                    foreach (var item in results)
+                    {
+                        var snippets = highlights[item.SolrId].Snippets;
+                        foreach (var snippet in snippets)
+                        {
+                            if (snippet.Key.Equals("Description"))
+                            {
+                                var t = snippet.Value.ToList()[0];
+                                item.Description = t;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            var searchVm = new WeiboSearchResultVm
+            {
+                WeiboList = results,
+                PageCount = pageCount,
+                PageNum = pageNum,
+                TotalCount = results.NumFound
+            };
+            return searchVm;
+        }
+
+
+        #endregion
+
     }
 }

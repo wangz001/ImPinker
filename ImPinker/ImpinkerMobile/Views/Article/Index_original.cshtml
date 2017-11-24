@@ -75,7 +75,7 @@
         </div>
         <!-- 文章主体 -->
         <div class="mui-content-padded">
-            @Html.Raw(article.Content == null ? "" : article.Content[0])
+            @Html.Raw(article.Content ?? "")
             <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
             @*<div class="article-footer">
                     <img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />

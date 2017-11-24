@@ -44,5 +44,46 @@ namespace ImpinkerApi.Controllers
             });
         }
 
+        /// <summary>
+        /// 根据关键字搜索微博
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public HttpResponseMessage SearchWeibo(int userid, string keyWord, int pageNum, int pagesize)
+        {
+            var list = SolrNetSearchBll.QueryWeiboByKeyword(keyWord, pageNum, pagesize, true);
+
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Data = list,
+                Description = "查询文章"
+            });
+        }
+
+        /// <summary>
+        /// 根据关键字搜索
+        /// </summary>
+        /// <param name="userid">如果是0，表示用户未登录</param>
+        /// <param name="keyWord">关键字</param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public HttpResponseMessage SearchArticle(int userid, string keyWord, int pageNum, int pagesize)
+        {
+            var list = SolrNetSearchBll.QueryArticleByKeyword(keyWord, pageNum, pagesize, true);
+
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 0,
+                Data = list,
+                Description = "查询文章"
+            });
+        }
     }
 }

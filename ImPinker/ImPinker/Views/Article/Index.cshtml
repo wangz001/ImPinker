@@ -36,8 +36,7 @@
                             }
                             if (!string.IsNullOrEmpty(keyWord))
                             {
-                                <a href="/Search/Index?key=@keyWord" target="_blank" class="topic-lab"
-                                   topicid="3" style="background: rgb(46, 75, 107); margin: 5px;">@keyWord<i></i></a>
+                                <a href="/Search/Index?key=@keyWord" target="_blank" class="topic-lab" topicid="3" style="background: rgb(46, 75, 107); margin: 5px;">@keyWord<i></i></a>
                                 i++;
                             }
                         }
@@ -50,7 +49,7 @@
                 <span class="publish-time">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
             </div>
             <div class="articlecontent">
-                @Html.Raw(article.Content==null? "":article.Content[0])
+                @Html.Raw(article.Content)
             </div>
             <!--分享-->
             <div class="interest-share">

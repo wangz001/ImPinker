@@ -1,9 +1,5 @@
 ﻿using ImBLL;
 using ImPinker.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using ImPinker.Models;
@@ -15,7 +11,7 @@ namespace ImPinker.Controllers
     /// </summary>
     public class ArticleCollectionController : Controller
     {
-        UserCollectionBll _articleCollectBll = new UserCollectionBll();
+        readonly UserCollectionBll _articleCollectBll = new UserCollectionBll();
         private static readonly UserBll UserBll = new UserBll();
         // 我的收藏，首页
         // GET: /ArticleCollection/
@@ -25,11 +21,10 @@ namespace ImPinker.Controllers
             int pageNum = (int)(pageIndex > 0 ? pageIndex : 1);
             int pagecount = (int)(pageCount > 0 ? pageCount : 9); 
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            int totalCount;
-            var lists = _articleCollectBll.GetMyListByPage(userid, pageNum, pagecount, out totalCount);
+            var lists = _articleCollectBll.GetMyListByPage(userid, pageNum, pagecount);
             ViewBag.pageIndex = pageNum;
             ViewBag.pageCount = pagecount;
-            ViewBag.totalCount = totalCount;
+            ViewBag.totalCount = 0;
             ViewBag.Articles = lists;
             return View();
         }

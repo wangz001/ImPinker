@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.Web.Mvc;
 using Common.AlyOssUtil;
 using Common.Utils;
@@ -9,9 +10,7 @@ using ImModel;
 using ImModel.ViewModel;
 using ImPinker.Filters;
 using ImPinker.Models;
-using log4net;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 
 namespace ImPinker.Controllers
 {
@@ -29,7 +28,7 @@ namespace ImPinker.Controllers
         {
             var vm = new ArticleViewModel();
             var idStr = id;
-            long idInt = 0;
+            long idInt;
             if (!id.StartsWith("travels_"))
             {
                 idStr = "travels_" + id;
@@ -38,17 +37,16 @@ namespace ImPinker.Controllers
             try
             {
                 vm = SolrNetSearchBll.GetArticleById(idStr);
-                
             }
             catch (Exception e)
             {
                 LogHelper.Instance.Error("solr服务未启动:" + e);
             }
-            if (vm == null || vm.Content == null || vm.Content.Count == 0)
+            if (vm == null || string.IsNullOrEmpty(vm.Content))
             {
                 vm = ArticleBll.GetModelWithContent(idInt);
             }
-            vm.Id = idInt.ToString();
+            vm.Id = idInt.ToString(CultureInfo.InvariantCulture);
             ViewBag.Article = vm;
             return View("Index");
         }
@@ -65,13 +63,13 @@ namespace ImPinker.Controllers
             {
                 try
                 {
-                    list = SolrNetSearchBll.QueryByViewTpye("RelativeArticle", articleViewModel.KeyWords, false, 1, 5).ArticleList;
+                    list = SolrNetSearchBll.QueryArticleByKeyword(articleViewModel.KeyWords, 1, 5).ArticleList;
                 }
                 catch (Exception e)
                 {
                     LogHelper.Instance.Warn("lalalla89898989989898------------:" + e);
                 }
-                
+
             }
             ViewBag.RelativeArticle = list;
             return PartialView();
@@ -82,10 +80,10 @@ namespace ImPinker.Controllers
         /// </summary>
         /// <returns></returns>
         [AuthorizationFilter]
-        public ActionResult MyArticle(int ? pageIndex, int ? pageCount)
+        public ActionResult MyArticle(int? pageIndex, int? pageCount)
         {
-            int pageNum = (int) (pageIndex > 0 ? pageIndex : 1);
-            int pagecount = (int)(pageCount > 0 ? pageCount : 9); ;
+            var pageNum = (int)(pageIndex > 0 ? pageIndex : 1);
+            var pagecount = (int)(pageCount > 0 ? pageCount : 9);
             var userId = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
             int totalCount;
             var articles = ArticleBll.GetMyListByPage(userId, pageNum, pagecount, out totalCount);
@@ -127,7 +125,7 @@ namespace ImPinker.Controllers
                 Company = ""
             };
             //审核通过后添加索引
-            var flag = ArticleBll.Add(article);
+            ArticleBll.Add(article);
             return RedirectToAction("MyArticle");
 
         }
@@ -219,7 +217,7 @@ namespace ImPinker.Controllers
                 //缩放
                 ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
                 string buckeyName = "myautos";
-                var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage,1024);
+                var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage, 1024);
                 if (ossSucess)
                 {
                     var vm = new CreateThreadVm
@@ -276,7 +274,7 @@ namespace ImPinker.Controllers
         public ActionResult UpdateThread(CreateThreadVm model)
         {
             var userid = UserBll.GetModelByAspNetId(User.Identity.GetUserId()).Id;
-            
+
             if (string.IsNullOrEmpty(model.Content) || string.IsNullOrEmpty(model.ArticleName))
             {
                 AddErrors(IdentityResult.Failed("不能为空"));
@@ -294,7 +292,7 @@ namespace ImPinker.Controllers
                     //缩放
                     ImageUtils.ThumbnailImage(sourcepath, sourcepath, 360, 240, ImageFormat.Jpeg);
                     string buckeyName = "myautos";
-                    var ossSucess = ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage,200);
+                    ObjectOperate.UploadImage(buckeyName, sourcepath, coverimage, 200);
                 }
                 var article = ArticleBll.GetModelByCache(model.ArticleId);
                 var vm = new CreateThreadVm
@@ -330,10 +328,10 @@ namespace ImPinker.Controllers
         public ActionResult DeleteThread(long articleId)
         {
             var userinfo = UserBll.GetModelByAspNetId(User.Identity.GetUserId());
-            var flag = ArticleBll.DeleteThread(userinfo.Id,articleId);
-            return RedirectToAction("MyArticle","Article");
+            ArticleBll.DeleteThread(userinfo.Id, articleId);
+            return RedirectToAction("MyArticle", "Article");
         }
-        
+
 
         private void AddErrors(IdentityResult result)
         {
@@ -351,7 +349,7 @@ namespace ImPinker.Controllers
         [AuthorizationFilter]
         public void InitUeEditor()
         {
-            Handler action = null;
+            Handler action;
             var context = System.Web.HttpContext.Current;
             var aa = context.Request["action"];
             switch (aa)
@@ -360,7 +358,7 @@ namespace ImPinker.Controllers
                     action = new ConfigHandler(context);
                     break;
                 case "uploadimage":
-                    action = new UploadHandler(context, new UploadConfig()
+                    action = new UploadHandler(context, new UploadConfig
                     {
                         AllowExtensions = Config.GetStringList("imageAllowFiles"),
                         PathFormat = Config.GetString("imagePathFormat"),
@@ -369,9 +367,9 @@ namespace ImPinker.Controllers
                     });
                     break;
                 case "uploadscrawl":
-                    action = new UploadHandler(context, new UploadConfig()
+                    action = new UploadHandler(context, new UploadConfig
                     {
-                        AllowExtensions = new string[] { ".png" },
+                        AllowExtensions = new[] { ".png" },
                         PathFormat = Config.GetString("scrawlPathFormat"),
                         SizeLimit = Config.GetInt("scrawlMaxSize"),
                         UploadFieldName = Config.GetString("scrawlFieldName"),
@@ -380,7 +378,7 @@ namespace ImPinker.Controllers
                     });
                     break;
                 case "uploadvideo":
-                    action = new UploadHandler(context, new UploadConfig()
+                    action = new UploadHandler(context, new UploadConfig
                     {
                         AllowExtensions = Config.GetStringList("videoAllowFiles"),
                         PathFormat = Config.GetString("videoPathFormat"),
@@ -389,7 +387,7 @@ namespace ImPinker.Controllers
                     });
                     break;
                 case "uploadfile":
-                    action = new UploadHandler(context, new UploadConfig()
+                    action = new UploadHandler(context, new UploadConfig
                     {
                         AllowExtensions = Config.GetStringList("fileAllowFiles"),
                         PathFormat = Config.GetString("filePathFormat"),
@@ -415,7 +413,5 @@ namespace ImPinker.Controllers
 
         #endregion
 
-
-        public int pageindex { get; set; }
     }
 }

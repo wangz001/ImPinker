@@ -1,0 +1,180 @@
+[Header]
+2017-11-20 23:05:03,244 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 articleId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:ab00e301-2dd3-45a7-97db-33acf1295d20
+Error Number:547,State:0,Class:16
+2017-11-20 23:09:22,071 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 articleId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:ab00e301-2dd3-45a7-97db-33acf1295d20
+Error Number:547,State:0,Class:16
+[Footer]
+[Header]
+2017-11-20 23:11:11,630 [20] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:ad084c52-ca5c-46a7-82e4-ebf85bbae265
+Error Number:547,State:0,Class:16
+[Footer]
+[Header]
+2017-11-20 23:17:06,056 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:6f64f7b8-9ca1-4f92-8aa2-fcf5212bfc00
+Error Number:547,State:0,Class:16
+[Footer]
+[Header]
+2017-11-20 23:18:20,250 [26] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:3b36e756-c4ef-4179-b6f7-10be521ad689
+Error Number:547,State:0,Class:16
+[Footer]
+[Header]
+2017-11-20 23:18:54,278 [24] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+2017-11-20 23:20:20,146 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddWeiboCollect?weiboId=1121
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK_ArticleCollection_Users"冲突。该冲突发生于数据库"MyAutosTest"，表"dbo.Users", column 'Id'。
+语句已终止。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserCollectionDal.AddCollect(UserCollection model) 位置 d:\GitProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 42
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 42
+   在 ImpinkerApi.Controllers.UserCollectionController.AddWeiboCollect(Int64 weiboId) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 51
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:03f28008-03ba-4510-bd0e-39a98f51e5c7
+Error Number:547,State:0,Class:16
+[Footer]
+[Header]
+2017-11-22 15:09:03,248 [6] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/GetMyCollect?pageNum=1&pageSize=30
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+2017-11-22 16:09:25,465 [8] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/GetMyCollect?pageNum=1&pageSize=30
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+2017-11-22 16:35:34,520 [5] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddArticleCollect?articleId=1121
+Referer:
+System.ArgumentException: 列“ArticleId”不属于表 ds。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 ImDal.UserCollectionDal.DsToList(DataSet ds) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 101
+   在 ImDal.UserCollectionDal.GetModel(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\UserCollectionDal.cs:行号 77
+   在 ImBLL.UserCollectionBll.AddCollect(Int64 entityId, Int32 userid, EntityTypeEnum entityType) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\UserCollectionBll.cs:行号 24
+   在 ImpinkerApi.Controllers.UserCollectionController.AddArticleCollect(Int64 articleId) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\UserCollectionController.cs:行号 90
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2017-11-22 16:38:14,098 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/UserCollection/AddArticleCollect?articleId=1121
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Header]
+[Footer]
+[Header]
+2017-11-22 20:55:21,372 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/usercollection/GetMyCollect?pageNum=1&pageSize=30
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
