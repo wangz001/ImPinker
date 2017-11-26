@@ -22,9 +22,11 @@ function hideComment() {
 		setTimeout(function() {
 			//防止和提交按钮冲突
 			toCommentId = 0;
+			//$("#comment_text").val("");
+			$("#comment_text").attr("placeholder","请输入评论内容....");
 		}, 200);
 	}
-	$("#comment_text").val('');
+	
 }
 
 $('#comment_text').focus(function() {
@@ -32,7 +34,6 @@ $('#comment_text').focus(function() {
 });
 $('#comment_text').bind('focusout', function() {
 	hideComment();
-	$("#comment_text").attr("placeholder","请输入评论内容....");
 });
 
 $(document).ready(function() {
@@ -76,6 +77,7 @@ var toCommentId = 0;
 mui('#comment ').on('tap', '.comment_to', function() {
 	var Id = this.getAttribute('commentid');
 	var username=this.getAttribute('username');
+	$("#comment_text").val('');
 	$("#comment_text").attr("placeholder","回复:"+username);
 	toCommentId = Id;
 	showComment();

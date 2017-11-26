@@ -806,6 +806,25 @@ namespace ImBLL
             }
             #endregion
 
+            #region 数据封装
+            if (results != null && results.Count > 0)
+            {
+                foreach (WeiboVm vm in results)
+                {
+                    var idStr = vm.SolrId;
+                    vm.Id = Int32.Parse(idStr.Replace("weibo_", ""));
+                    if (!string.IsNullOrEmpty(vm.ContentValue))
+                    {
+                        vm.ContentValue = ImageUrlHelper.GetWeiboFullImageUrl(vm.ContentValue, 240);
+                    }
+                    vm.PublishTime = TUtil.DateFormatToString(vm.CreateTime);
+                    var userinfo = UserBll.GetModelByCache(vm.UserId);
+                    vm.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                    vm.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                }
+            }
+
+            #endregion
             var searchVm = new WeiboSearchResultVm
             {
                 WeiboList = results,

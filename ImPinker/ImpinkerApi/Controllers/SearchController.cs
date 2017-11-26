@@ -59,7 +59,7 @@ namespace ImpinkerApi.Controllers
 
             return GetJson(new JsonResultViewModel
             {
-                IsSuccess = 0,
+                IsSuccess = (list!=null&&list.TotalCount>0) ?1:0,
                 Data = list,
                 Description = "查询文章"
             });
