@@ -114,3 +114,51 @@ System.FormatException: 输入字符串的格式不正确。
 [Footer]
 [Header]
 [Footer]
+[Header]
+2017-11-27 23:15:17,115 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Search/SearchWeibo?userid=1&pagenum=1&pagesize=10&keyword=自驾游
+Referer:
+SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request)
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)
+   在 ImBLL.SolrNetSearchBll.QueryWeiboByKeyword(String keyWord, Int32 pageNum, Int32 pageCount, Boolean isHighLight) 位置 d:\GitProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 786
+   在 ImpinkerApi.Controllers.SearchController.SearchWeibo(Int32 userid, String keyWord, Int32 pageNum, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\SearchController.cs:行号 63
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2017-11-27 23:15:22,375 [14] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Search/SearchByKeyword?userid=1&pagenum=1&pagesize=10&keyword=自驾游
+Referer:
+SolrNet.Exceptions.SolrConnectionException: 无法连接到远程服务器 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 HttpWebAdapters.Adapters.HttpWebRequestAdapter.GetResponse()
+   在 SolrNet.Impl.SolrConnection.GetResponse(IHttpWebRequest request)
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)
+   在 SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)
+   在 SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)
+   在 SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)
+   在 ImBLL.SolrNetSearchBll.QueryArticleByKeyword(String keyWord, Int32 pageNum, Int32 pageCount, Boolean isHighLight) 位置 d:\GitProject\ImPinker\ImPinker\BLL\SolrNetSearchBll.cs:行号 340
+   在 ImpinkerApi.Controllers.SearchController.SearchByKeyword(Int32 userid, String keyWord, Int32 pageNum, Int32 pagesize) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\SearchController.cs:行号 104
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+[Footer]

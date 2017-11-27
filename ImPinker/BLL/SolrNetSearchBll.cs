@@ -371,7 +371,25 @@ namespace ImBLL
                 }
             }
             #endregion
+            #region 封装数据
 
+            if (results != null && results.Count > 0)
+            {
+                foreach (ArticleViewModel vm in results)
+                {
+                    
+                    if (!string.IsNullOrEmpty(vm.CoverImage))
+                    {
+                        vm.CoverImage = ImageUrlHelper.GetArticleImage(vm.CoverImage, 360);
+                    }
+                    vm.CreateTimeStr = TUtil.DateFormatToString(vm.CreateTime);
+                    var userinfo = UserBll.GetModelByCache(Int32.Parse(vm.Userid));
+                    vm.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                    vm.UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                }
+            }
+
+            #endregion
             var searchVm = new SearchResultVm
             {
                 ArticleList = results,

@@ -43,7 +43,7 @@
 			.mui-card-title p {
 				display: block;
 				color: #6d6d72;
-				font-size: 17px;
+				font-size: 14px;
 				margin-bottom: 5px;
 			}
 			/*card 样式*/
@@ -96,13 +96,13 @@
 			}
 			
 			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 10px;
 				margin: inherit;
 				margin-bottom: initial;
 			}
 			
 			.mui-card .mui-card-content p {
 				margin-bottom: 0px;
+				    margin-top: 5px;
 			}
 			
 			.media-pic {

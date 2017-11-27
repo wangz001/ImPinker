@@ -29,8 +29,8 @@
 						<img src="../../images/logo.png"></div>
 					<div class="mui-content-padded" style="margin: 5px;">
 						<div class="mui-input-row">
-							<input type="text" placeholder="请输入要搜索的内容">
-							<button type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+							<input id="searchbox" type="text" placeholder="请输入要搜索的内容">
+							<button id="btnsearch" type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>
 						</div>
 					</div>
 					<div class="title">
@@ -96,7 +96,6 @@
 						<p class="mui-ellipsis">$Description$</p>
 						<p class="userinfo">
 							<em class="mui-icon mui-icon-person">$UserName$</em>
-							<em class="mui-icon-extra mui-icon-extra-phone">$CreateTimeStr$</em>
 						</p>
 					</div>
 				</a>
@@ -142,9 +141,20 @@
 				//var self = plus.webview.currentWebview();
 				//var userid = self.userid;
 				//getUserinfo(userid);
+				
+				$("#btnsearch").bind('click',function(){
+					var txt=$("#searchbox").val();
+					console.log(txt);
+					if(txt!=""){
+						param.keyword=txt;
+						param.param=1;
+						$("#cardlist").html("");
+						search();
+					}
+				});
 			});
 
-			var url = 'http://api.myautos.cn/api/Search/SearchWeibo';
+			var url = 'http://api.myautos.cn/api/Search/SearchByKeyword';
 			var param = {
 				userid: 1,
 				pageNum: 1,
@@ -153,13 +163,24 @@
 			};
 
 			function pullupRefresh() {
+				search();
+			}
+			///搜索
+			function search() {
 				commonUtil.sendRequestGet(url, param, function(data) {
-					console.log(JSON.stringify(data));
+					//console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null) {
-						var list = data.Data.WeiboList;
+						var list = data.Data;
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
-							initCard(2, item);
+							if(item.EntityType == 1) {
+								var article = item.ArticleVm;
+								initCard(1, article);
+							}
+							if(item.EntityType == 2) {
+								var weibo = item.WeiboVm;
+								initCard(2, weibo);
+							}
 						}
 						param.pageNum++;
 					} else {
@@ -180,26 +201,36 @@
 			function initCard(entityType, item) {
 				if(entityType == 1) {
 					var article = item;
-					article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+					//console.log(JSON.stringify(article));
+					if(article.CoverImage!=null&&article.CoverImage!=""){
+						article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+					}else{
+						//默认图片
+						article.CoverImage="http://img.myautos.cn/articlefirstimg/20170717/1_1174_636359314136863157.jpg?x-oss-process=style/articlecover_36_24";
+					}
 					var imgHtmlStr = articleTemplate.temp(article);
 					$("#cardlist").append(imgHtmlStr);
-					currentParamEntity.articleids.push(article.Id);
 				}
 				if(entityType == 2) {
-					console.log(JSON.stringify(item));
+					//console.log(JSON.stringify(item));
 					var weibo = item;
 					var imgHtmlStr = "";
 					var imgs = weibo.ContentValue.split(',');
-					if(imgs.length > 1) {
-						//多图
-						imgHtmlStr += "<ul>";
+					imgHtmlStr += "<ul>";
 						for(var j = 0; j < imgs.length; j++) {
 							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
 						}
 						imgHtmlStr += "</ul>";
-					} else {
-						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-					}
+//					if(imgs.length > 1) {
+//						//多图
+//						imgHtmlStr += "<ul>";
+//						for(var j = 0; j < imgs.length; j++) {
+//							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
+//						}
+//						imgHtmlStr += "</ul>";
+//					} else {
+//						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+//					}
 					weibo.imglist = imgHtmlStr;
 					//显示地理位置
 					weibo.cardlocation = "";

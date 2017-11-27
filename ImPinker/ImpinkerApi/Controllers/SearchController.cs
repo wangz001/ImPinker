@@ -110,7 +110,6 @@ namespace ImpinkerApi.Controllers
                 {
                     ArticleVm = articleVm,
                     CreateTime = articleVm.CreateTime,
-                    EntityId = 0,
                     EntityType = (int)EntityTypeEnum.Article,
                     Userid = Int32.Parse(articleVm.Userid)
                 });
@@ -122,7 +121,7 @@ namespace ImpinkerApi.Controllers
                     WeiboVm = weiboVm,
                     CreateTime = weiboVm.CreateTime,
                     EntityId = (int)weiboVm.Id,
-                    EntityType = (int)EntityTypeEnum.Article,
+                    EntityType = (int)EntityTypeEnum.Weibo,
                     Userid = weiboVm.UserId
                 });
             }
