@@ -14,10 +14,11 @@
 			body {
 				background-color: #efeff4;
 			}
-			#newweibo .mui-icon{
+			
+			#newweibo .mui-icon {
 				width: 40px;
-    			height: 40px;
-				font-size:40px;
+				height: 40px;
+				font-size: 40px;
 				color: red;
 				top: -3px;
 			}
@@ -134,11 +135,11 @@
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var tabId = this.getAttribute("id");
 				//显示添加按钮或微博按钮
-				if(tabId!=null&&tabId == "newweibo") {
+				if(tabId != null && tabId == "newweibo") {
 					newWeibo();
 					return;
 				}
-				
+
 				//--------------------
 				var targetTab = this.getAttribute('href');
 				if(targetTab == activeTab) {
@@ -162,7 +163,7 @@
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
 				///显示隐藏切换
-				if(tabId!=null&&tabId == "weiboTab") {
+				if(tabId != null && tabId == "weiboTab") {
 					$("#weiboTab").hide();
 					$("#newweibo").show();
 				} else {
@@ -393,9 +394,10 @@
 					url: "view/search/search.html",
 					id: "search",
 					show: {
-						aniShow: 'slide-in-left',
-						duration: 200
-					}
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						aniShow: "slide-in-right", //页面显示动画，默认为”slide-in-right“；
+						duration: "200" //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+					},
 				});
 			});
 		</script>

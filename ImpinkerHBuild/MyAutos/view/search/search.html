@@ -37,7 +37,7 @@
 						搜索结果：
 					</div>
 					<ul class="mui-table-view" id="cardlist">
-						<li class="mui-table-view-cell mui-media">
+						<!--<li class="mui-table-view-cell mui-media">
 							<a href="view/article/preview.html">
 								<img class="mui-media-object mui-pull-left" src="../../images/shuijiao.jpg">
 								<div class="mui-media-body">
@@ -77,7 +77,7 @@
 									</div>
 								</div>
 							</div>
-						</li>
+						</li>-->
 
 					</ul>
 				</div>
@@ -89,7 +89,7 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/template" id="card-article">
 			<li class="mui-table-view-cell mui-media">
-				<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+				<a class="articlecard" articleid="$Id$" articlename="$ArticleName$">
 					<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 					<div class="mui-media-body">
 						<P class="title">$ArticleName$</P>
@@ -103,7 +103,7 @@
 		</script>
 		<script type="text/template" id="card-weibo">
 			<li>
-				<div class="mui-card">
+				<div class="mui-card weibocard" weiboid="$Id$">
 					<div class="mui-card-title">
 						<p>$Description$</p>
 					</div>
@@ -122,10 +122,6 @@
 		</script>
 		<script>
 			mui.init({
-				swipeBack: true //启用右滑关闭功能
-			});
-
-			mui.init({
 				swipeBack: true,
 				pullRefresh: {
 					container: '#pullrefresh',
@@ -138,18 +134,15 @@
 				}
 			});
 			mui.plusReady(function() {
-				//var self = plus.webview.currentWebview();
-				//var userid = self.userid;
-				//getUserinfo(userid);
-				
-				$("#btnsearch").bind('click',function(){
-					var txt=$("#searchbox").val();
+				$("#btnsearch").bind('click', function() {
+					var txt = $("#searchbox").val();
 					console.log(txt);
-					if(txt!=""){
-						param.keyword=txt;
-						param.param=1;
-						$("#cardlist").html("");
+					if(txt != "") {
+						param.keyword = txt;
+						param.param = 1;
 						search();
+						$("#cardlist").html("");
+						plus.nativeUI.showWaiting('正在加载数据。。。');
 					}
 				});
 			});
@@ -168,6 +161,7 @@
 			///搜索
 			function search() {
 				commonUtil.sendRequestGet(url, param, function(data) {
+					plus.nativeUI.closeWaiting();
 					//console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var list = data.Data;
@@ -202,11 +196,10 @@
 				if(entityType == 1) {
 					var article = item;
 					//console.log(JSON.stringify(article));
-					if(article.CoverImage!=null&&article.CoverImage!=""){
+					if(article.CoverImage != null && article.CoverImage != "") {
 						article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
-					}else{
-						//默认图片
-						article.CoverImage="http://img.myautos.cn/articlefirstimg/20170717/1_1174_636359314136863157.jpg?x-oss-process=style/articlecover_36_24";
+					} else {
+						article.CoverImage = "http://img.myautos.cn/articlefirstimg/20170717/1_1174_636359314136863157.jpg?x-oss-process=style/articlecover_36_24";
 					}
 					var imgHtmlStr = articleTemplate.temp(article);
 					$("#cardlist").append(imgHtmlStr);
@@ -217,20 +210,10 @@
 					var imgHtmlStr = "";
 					var imgs = weibo.ContentValue.split(',');
 					imgHtmlStr += "<ul>";
-						for(var j = 0; j < imgs.length; j++) {
-							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
-						}
-						imgHtmlStr += "</ul>";
-//					if(imgs.length > 1) {
-//						//多图
-//						imgHtmlStr += "<ul>";
-//						for(var j = 0; j < imgs.length; j++) {
-//							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
-//						}
-//						imgHtmlStr += "</ul>";
-//					} else {
-//						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-//					}
+					for(var j = 0; j < imgs.length; j++) {
+						imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
+					}
+					imgHtmlStr += "</ul>";
 					weibo.imglist = imgHtmlStr;
 					//显示地理位置
 					weibo.cardlocation = "";
@@ -242,6 +225,50 @@
 					$("#cardlist").append(cardStr);
 				}
 			}
+
+			//列表项的点击事件  
+			mui('#cardlist').on('tap', '.articlecard', function(e) {
+				var articleid = $(this).attr("articleid");
+				if(articleid.indexOf("travels_") != -1) {
+					articleid = articleid.replace("travels_", "");
+				}
+				console.log(articleid);
+				//获得详情页面  
+				mui.openWindow({
+					id: "preview.html",
+					url: "../article/preview.html",
+					show: {
+						aniShow: "pop-in"
+					},
+					waiting: {
+						autoShow: false
+					},
+					extras: {
+						articleid: articleid, //扩展参数
+						articlename: ''
+					}
+				});
+			});
+			//微博
+			mui('#cardlist').on('tap', '.weibocard', function(e) {
+				var weiboid = this.getAttribute("weiboid");
+				if(weiboid.indexOf("travels_") != -1) {
+					weiboid = weiboid.replace("travels_", "");
+				}
+				console.log(weiboid);
+				//获得详情页面  
+				mui.openWindow({
+					url: "../weibo/weibo_preview.html",
+					id: "weibo_preview",
+					extras: {
+						weiboid: weiboid
+					},
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+			});
 		</script>
 	</body>
 

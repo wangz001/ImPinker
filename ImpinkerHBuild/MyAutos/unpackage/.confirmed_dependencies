@@ -429,6 +429,11 @@
 			"css/mui.min.css",
 			"fonts/mui.ttf",
 			"images/logo.png"
+		],
+		"refer": [
+			"view/article/preview.html",
+			"view/weibo/weibo_comment.html",
+			"view/weibo/weibo_preview.html"
 		]
 	},
 	"view/setting/feedback.html": {

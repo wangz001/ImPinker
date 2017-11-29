@@ -487,7 +487,11 @@
 					"css/mui.min.css",
 					"images/logo.png"
 				],
-				"refer": [],
+				"refer": [
+					"view/article/preview.html",
+					"view/weibo/weibo_comment.html",
+					"view/weibo/weibo_preview.html"
+				],
 				"priority": 0
 			},
 			"login.html": {
