@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
+		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
 		<style type="text/css">
 			.mui-icon-extra-heart {
 				position: relative;
@@ -74,7 +75,21 @@
 					</div>
 				</div>-->
 			</div>
-			<div class="title">评论列表</div>
+			<div class="mui-content-padded">
+				<div class="mui-inline">评论</div>
+			</div>
+			<div class="row mui-input-row">
+				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+			</div>
+			<div class="mui-card-content">
+				<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
+				<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+					发布
+			</button>
+			</div>
+			<div class="mui-content-padded">
+				<div class="mui-inline">评论列表</div>
+			</div>
 			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
 				<p>暂无评论</p>
 			</div>
@@ -85,6 +100,7 @@
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
 		<script type="text/template" id='comment_item'>
 			<dl class="comment-list hot" commentid="@comment.Id">
 				<dt>
@@ -93,31 +109,31 @@
                         </i>
                         <em class="userinfo">
                             $UserName$
-                            $CreateTime$
+                            <p>$CreateTime$</p>
                         </em>
                         <em class="commentvote">
-                            <!--<a class="comment_like" commentid='$Id$'><span class="mui-icon-extra mui-icon-extra-heart"></span></a>-->
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
                         </em>
-                    </dt>
+                </dt>
 				<dd>
 					<p>
 						$ContentText$
 					</p>
 				</dd>
+				$tocomment$
 			</dl>
 		</script>
 		<script type="text/template" id="comment_item_to">
 			<dl class="quote">
 				<dt>
-                            <i class="headpic">
-                                <img src="$HeadImage$">
-                            </i>
-                            <em class="userinfo">
-                                $UserName$
-                            $CreateTime$
-                            </em>
-                        </dt>
+                    <i class="headpic">
+                        <img src="$HeadImage$">
+                    </i>
+                    <em class="userinfo">
+                        $UserName$
+                        $CreateTime$
+                     </em>
+                </dt>
 				<dd>
 					<p>
 						$ContentText$
@@ -148,10 +164,15 @@
 			</div>
 		</script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+				swipeBack: true
+			});
+			var cweiboid = 0;
+			var toCommentId = 0; //会否某人的评论
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var weiboid = self.weiboid;
+				cweiboid = weiboid;
 				getWeibo(weiboid);
 				getCommentLists(weiboid);
 				mui.previewImage();
@@ -214,20 +235,77 @@
 							var item = list[i];
 							initComment(item);
 						}
+					} else {
+						$("#comment").append("<p>暂无更多数据</p>");
 					}
 				});
 			}
 
 			function initComment(item) {
 				var template = $('script[id="comment_item"]').html();
-				var articleHtmlStr = template.temp(item);
+				var toTemplate = $('script[id="comment_item_to"]').html();
 				if(item.ToCommentId > 0 && item.ToCommentItemVm != null) {
-					var toTemplate = $('script[id="comment_item_to"]').html();
+					item.ToCommentItemVm.ContentText = replace_em(item.ToCommentItemVm.ContentText);
 					var htmlTo = toTemplate.temp(item.ToCommentItemVm);
-					articleHtmlStr = articleHtmlStr.replace('</dl>', htmlTo + '</dl>'); // 暂时处理方法
+					item.tocomment = htmlTo;
 				}
+				//显示qqFace
+				item.ContentText = replace_em(item.ContentText);
+				var articleHtmlStr = template.temp(item);
 				$("#comment").append(articleHtmlStr);
 			}
+
+			$(function() {
+				$('.emotion').qqFace({
+					assign: 'comment_text',
+					path: '../../js/qqFace/arclist/' //表情存放的路径
+				});
+			});
+
+			//查看结果
+
+			function replace_em(str) {
+				str = str.replace(/\</g, '&lt;');
+				str = str.replace(/\>/g, '&gt;');
+				str = str.replace(/\n/g, '<br/>');
+				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
+				return str;
+			}
+
+			//提交评论
+			document.getElementById('comment_submit').addEventListener('tap', function() {
+				console.log(cweiboid);
+				var textStr = $("#comment_text").val();
+				var url = 'http://api.myautos.cn/api/weibovote/NewWeiBoComment';
+				var data = {
+					WeiBoId: cweiboid,
+					CommentStr: textStr,
+					ToCommentId: toCommentId
+				}
+				commonUtil.sendRequestWithToken(url, data, true, function(data) {
+					//console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null) {
+						mui.toast("评论成功");
+						$("#comment_text").val("");
+						getCommentLists(cweiboid);
+						//触发自定义事件。评论数+1
+						var articlePage = plus.webview.getWebviewById('tab-webview-subpage-weibo.html');
+						mui.fire(articlePage, 'weiboComment', {
+							weiboid: cweiboid
+						});
+					} else {
+						mui.toast("评论失败");
+					}
+				});
+			});
+
+			//评论 回复  comment_to
+			mui('#comment ').on('tap', '.comment_to', function() {
+				var Id = this.getAttribute('commentid');
+				toCommentId = Id;
+				console.log(toCommentId);
+				$('#comment_text').focus();
+			});
 		</script>
 	</body>
 

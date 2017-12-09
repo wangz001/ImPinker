@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Web.Security;
 using ImBLL;
 using ImModel;
+using Maticsoft.Common;
 
 namespace ImpinkerApi.Common
 {
@@ -20,15 +21,21 @@ namespace ImpinkerApi.Common
         public static string AddOrUpdateToken(string username)
         {
             var token = GenerateToken(username);
-            if (_userTokenDic.ContainsKey(username))
-            {
-                _userTokenDic[username] = token;
-            }
-            else
-            {
-                _userTokenDic.Add(username, token);
-            }
+            //改为cache存储
+            string cacheKey = "UserLoginToken-" + username;
+            //object objModel = DataCache.GetCache(cacheKey);
+            DataCache.SetCache(cacheKey, token, DateTime.Now.AddHours(24), TimeSpan.Zero);//默认缓存1天
             return token;
+            
+            //if (_userTokenDic.ContainsKey(username))
+            //{
+            //    _userTokenDic[username] = token;
+            //}
+            //else
+            //{
+            //    _userTokenDic.Add(username, token);
+            //}
+            //return token;
         }
         /// <summary>
         /// 根据用户名获取token
@@ -37,11 +44,20 @@ namespace ImpinkerApi.Common
         /// <returns></returns>
         public static string GetToken(string username)
         {
-            if (_userTokenDic.ContainsKey(username))
+            //改为cache存储
+            string cacheKey = "UserLoginToken-" + username;
+            string token = (string)DataCache.GetCache(cacheKey);
+            if (token != null)
             {
-                return _userTokenDic[username];
+                return token;
             }
             return "";
+
+            //if (_userTokenDic.ContainsKey(username))
+            //{
+            //    return _userTokenDic[username];
+            //}
+            //return "";
         }
         /// <summary>
         /// 验证token是否有效
