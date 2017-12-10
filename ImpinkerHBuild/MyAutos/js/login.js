@@ -6,6 +6,18 @@
 		plus.screen.lockOrientation("portrait-primary");
 		var settings = app.getSettings(); //配置
 		var state = app.getState(); //用户信息
+		//默认显示用户名和密码
+		if(state.account){
+			var username=state.account;
+			document.getElementById("account").value=username;
+		}
+		if(state.password){
+			var password=state.password;
+			document.getElementById("password").value=password;
+		}
+		//$('#account').val("username");
+		//$('#password').val("password");
+		
 		var mainPage = $.preload({
 			"id": 'tab-webview-main.html',
 			"url": 'tab-webview-main.html'
