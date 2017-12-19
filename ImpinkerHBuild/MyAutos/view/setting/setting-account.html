@@ -48,6 +48,7 @@
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			document.getElementById("head-img").addEventListener('tap', function(e) {
@@ -227,6 +228,29 @@
 					}
 				});
 			}
+		</script>
+		<script type="text/javascript">
+			$("#username").bind("click", function(e) {
+				mui.prompt('请输入新的昵称', '', '修改昵称', ['确认', '取消'], function(event, index) {
+					console.log(JSON.stringify(event));
+					if(event.index == 0) {
+						var url = 'http://api.myautos.cn/api/UserCenter/GetNewShowName';
+						var dataPara = {
+							showname: event.value
+						}
+						commonUtil.sendRequestWithToken(url, dataPara, false, function(data) {
+							console.log(JSON.stringify(data));
+							if(data.IsSuccess == 1) {
+								//plus.webview.currentWebview().reload();
+								$("#username").html(event.value);
+							} else {
+								mui.toast("修改失败");
+							}
+						});
+					}
+				}, 'div');
+
+			});
 		</script>
 	</body>
 

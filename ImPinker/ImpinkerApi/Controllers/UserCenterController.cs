@@ -22,7 +22,8 @@ namespace ImpinkerApi.Controllers
         /// <param name="showname"></param>
         /// <returns></returns>
         [TokenCheck]
-        public HttpResponseMessage UpdateShowName(string showname)
+        [HttpGet]
+        public HttpResponseMessage GetNewShowName(string showname)
         {
             var userid=TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
             var user = UserBll.GetModelByCache(userid);

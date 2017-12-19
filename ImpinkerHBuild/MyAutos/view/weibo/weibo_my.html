@@ -10,12 +10,10 @@
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
-			
 			.mui-scroll .mui-card {
-				margin: 0 0 5px 0;
+				margin: 0 0 3px 0;
 				padding: 0px;
 			}
-			
 			.mui-card-footer em {
 				font-size: 10px;
 			}
@@ -194,7 +192,21 @@
 							});
 						}
 					});
-
+				});
+				//评论  
+				mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
+					var weiboid = this.getAttribute("weiboid");
+					mui.openWindow({
+						url: "../weibo/weibo_preview.html",
+						id: "weibo_preview",
+						extras: {
+							weiboid: weiboid
+						},
+						show: {
+							aniShow: 'slide-in-right',
+							duration: 200
+						}
+					});
 				});
 			</script>
 	</body>

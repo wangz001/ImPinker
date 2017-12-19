@@ -160,6 +160,7 @@
 				<div class="mui-card-footer">
 					<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
 					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+					<span class="mui-icon mui-icon-flag" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
 				</div>
 			</div>
 		</script>
@@ -203,7 +204,7 @@
 							}
 							imgHtmlStr += "</ul>";
 						} else {
-							imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+							imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '">';
 						}
 						weibo.imglist = imgHtmlStr;
 						//显示地理位置

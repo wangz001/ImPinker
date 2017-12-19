@@ -742,7 +742,8 @@
 					"images/login-1.png"
 				],
 				"refer": [
-					"login.html"
+					"login.html",
+					"view/weibo/weibo_preview.html"
 				],
 				"priority": 0
 			},
@@ -919,7 +920,9 @@
 					"css/icons-extra.css",
 					"fonts/mui.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			},
 			"view/map/lbs2.html": {

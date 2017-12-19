@@ -7,6 +7,7 @@ namespace ImBLL
     public class ImageUrlHelper
     {
         static readonly string ImgDomain = ConfigurationManager.AppSettings["ImageDomain"];
+        static readonly string DefaultHeadimg = ConfigurationManager.AppSettings["DefaultHeadImage"];
         /// <summary>
         /// 获取头像url地址
         /// </summary>
@@ -15,23 +16,24 @@ namespace ImBLL
         /// <returns></returns>
         public static string GetHeadImageUrl(string url, int size)
         {
+            var sizeStyle = "";
+            switch (size)
+            {
+                case 180: sizeStyle = HeadImageFormat.head_180; break;
+                case 100: sizeStyle = HeadImageFormat.head_100; break;
+                case 40: sizeStyle = HeadImageFormat.head_40; break;
+            }
             if (!string.IsNullOrEmpty(url))
             {
-                var sizeStyle = "";
-                switch (size)
-                {
-                    case 180: sizeStyle = HeadImageFormat.head_180; break;
-                    case 100: sizeStyle = HeadImageFormat.head_100; break;
-                    case 40: sizeStyle = HeadImageFormat.head_40; break;
-                }
-                url=url+sizeStyle;
+                url = url + sizeStyle;
                 if (!url.StartsWith("http://"))
                 {
-                    return ImgDomain+ url;
+                    return ImgDomain + url;
                 }
                 return url;
             }
-            return ""; //默认的图片
+            var defaultHeadImg = ImgDomain + DefaultHeadimg + sizeStyle;
+            return defaultHeadImg;//默认的图片
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace ImBLL
         /// <param name="imagesStr">weibo content</param>
         /// <param name="size">1200/900/600/240</param>
         /// <returns></returns>
-        public static string GetWeiboFullImageUrl(string imagesStr,int size)
+        public static string GetWeiboFullImageUrl(string imagesStr, int size)
         {
             var contentValue = new List<string>();
             var imagearr = imagesStr.Split(',');

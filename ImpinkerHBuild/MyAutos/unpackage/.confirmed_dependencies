@@ -229,7 +229,8 @@
 			"images/login-1.png"
 		],
 		"refer": [
-			"login.html"
+			"login.html",
+			"view/weibo/weibo_preview.html"
 		]
 	},
 	"view/weibo/weibo_comment.html": {
@@ -518,6 +519,9 @@
 			"fonts/mui-icons-extra.ttf",
 			"css/icons-extra.css",
 			"fonts/mui.ttf"
+		],
+		"refer": [
+			"login.html"
 		]
 	},
 	"view/map/lbs2.html": {
