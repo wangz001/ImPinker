@@ -19,13 +19,9 @@ public class SolrSearchService {
 
     //http://localhost:8080/solr/impinker";
 
-    public String search(String keyword) {
-        return "aaa";
-    }
-
     public List<SolrArticleVo> search(String keywords, Integer page, Integer rows) throws Exception {
         String solrServer = solrConfig.getSolrpath();
-        SolrClient solr = new HttpSolrClient(solrServer);
+        SolrClient client = new HttpSolrClient(solrServer);
         SolrQuery solrQuery = new SolrQuery(); //构造搜索条件
         solrQuery.setQuery("ArticleName:" + keywords); //搜索关键词
         // 设置分页 start=0就是从0开始，，rows=5当前返回5条记录，第二页就是变化start这个值为5就可以了。
@@ -33,10 +29,8 @@ public class SolrSearchService {
         solrQuery.setRows(rows);
 
         // 执行查询
-        QueryResponse queryResponse = solr.query(solrQuery);
+        QueryResponse queryResponse = client.query(solrQuery);
         List<SolrArticleVo> foos = queryResponse.getBeans(SolrArticleVo.class);
-
-
         return foos;
     }
 
