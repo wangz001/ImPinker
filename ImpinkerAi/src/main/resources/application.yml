@@ -10,3 +10,5 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+solrserver:
+  solrpath: http://localhost:8080/solr/impinker
