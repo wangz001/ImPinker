@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>我的收藏</title>
@@ -12,9 +13,10 @@
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
-			#pullrefresh{
+			#pullrefresh {
 				/*margin-top: 50px;*/
 			}
+			
 			.mui-card-header.mui-card-media img {
 				border-radius: 22px;
 			}
@@ -55,30 +57,7 @@
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul class="mui-table-view" id="cardlist">
-						<li class="card-weibo2">
-							<div class="mui-card">
-								<div class="mui-card-header mui-card-media">
-									<img src="../../images/logo.png">
-									<div class="mui-media-body">
-										小Mf
-										<p>发表于 2016-06-30 15:30</p>
-									</div>
-								</div>
-								<div class="mui-card-content">
-									<p>的空间疯狂的健康</p>
-									<div class="media-pic-list">
-										<img class="bigimage" src="../../images/yuantiao.jpg">
-									</div>
-									<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
-								</div>
-								<div class="mui-card-footer">
-									<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
-									<span class="mui-icon mui-icon-compose"></span>
-									<span class="mui-icon mui-icon-star"></span>
-								</div>
-							</div>
-						</li>
-						<li class="card-article">
+						<!--<li class="card-article">
 							<div class="mui-card">
 								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)"></div>
 								<div class="mui-card-content">
@@ -117,7 +96,7 @@
 									<span class="collecttime">2016/11/23</span>
 								</div>
 							</div>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>
@@ -132,27 +111,25 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/template" id="card-article">
-			<li class="card-article">
-				<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-					<div class="mui-card">
-						<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
-						<div class="mui-card-content">
-							<div class="mui-card-content-inner">
+			<li class="card-article" articleid="$Id$">
+				<div class="mui-card">
+					<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							<p class="userinfo">
 								<p class="userinfo">
-									<p class="userinfo">
-										<em class="mui-icon">$ArticleName$</em>
-										<span class="collecttime">$collectTime$</span>
-									</p>
-									</span>
+									<em class="mui-icon">$ArticleName$</em>
+									<span class="collecttime">$collectTime$</span>
 								</p>
-							</div>
+								</span>
+							</p>
 						</div>
 					</div>
-				</a>
+				</div>
 			</li>
 		</script>
 		<script type="text/template" id="card-weibo">
-			<li class="card-weibo">
+			<li class="card-weibo" weiboid="$Id$">
 				<div class="mui-card">
 					<div class="mui-card-header mui-card-media">
 						<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
@@ -277,6 +254,40 @@
 			}
 		</script>
 		<script type="text/javascript">
+			//跳转 
+			mui('#cardlist').on('tap', '.mui-card-header', function() {
+				var liTag = $(this).closest("li");
+				var cardType = $(liTag).attr("class");
+				if("card-weibo" == cardType) {
+					var weiboid = $(liTag).attr("weiboid");
+					mui.openWindow({
+						url: "../weibo/weibo_preview.html",
+						id: "weibo_preview",
+						extras: {
+							weiboid: weiboid
+						},
+						show: {
+							aniShow: 'slide-in-right',
+							duration: 200
+						}
+					});
+				}
+				if("card-article" == cardType) {
+					var articleid = $(liTag).attr("articleid");
+					mui.openWindow({
+						url: "../article/preview.html",
+						id: "preview",
+						extras: {
+							articleid: articleid
+						},
+						show: {
+							aniShow: 'slide-in-right',
+							duration: 200
+						}
+					});
+				}
+
+			});
 		</script>
 	</body>
 

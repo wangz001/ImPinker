@@ -731,7 +731,9 @@
 			"fonts/mui-icons-extra.ttf"
 		],
 		"refer": [
-			"login.html"
+			"login.html",
+			"view/weibo/weibo_preview.html",
+			"view/article/preview.html"
 		]
 	}
 }

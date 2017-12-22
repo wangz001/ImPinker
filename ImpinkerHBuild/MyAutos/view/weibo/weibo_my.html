@@ -174,7 +174,7 @@
 				//删除点击事件
 				mui('.mui-scroll').on('tap', '.mui-icon-trash', function() {
 					var weiboid = this.getAttribute('weiboid');
-					mui.confirm("是否要删除微博？" + weiboid, "我的微博", ["是", "否"], function(event, index) {
+					mui.confirm("是否要删除微博？", "我的微博", ["是", "否"], function(event, index) {
 						console.log(JSON.stringify(event));
 						if(event.index == 0) {
 							var url = 'http://api.myautos.cn/api/weibo/WeiboDelete';
