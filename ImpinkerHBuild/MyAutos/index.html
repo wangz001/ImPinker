@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -21,78 +20,49 @@
 				padding: 0px;
 			}
 			
-			
 			.mui-content {
 				height: 100%;
 				overflow: auto;
 				padding-bottom: 50px;
 			}
-			
-			#composeText {
-				margin-bottom: 5px;
-			}
-			
-			
-			.ui-content img{
-				width: 100%;
-			}
-			.hm-description{
-				margin: .5em 0 2em;
-			}
-			
-			.hm-description>li {
-				font-size: 14px;
-				color: #8f8f94;
-			}
-			
-			
 		</style>
 	</head>
 
 	<body>
-
-		<header id="header" class="mui-bar mui-bar-transparent">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">导航栏</h1>
-		</header>
-
 		<div class="mui-content">
-			<img id="img1" src="images/yuantiao.jpg"/>
-			
-			<p style="margin: 35px 15px;">这是transparent bar（透明导航栏）演示页面， 默认情况下标题栏透明，
-				当用户向下滚动时，标题栏逐渐由透明转变为不透明；当用户再次向上滚动时，标题栏又从不透明变为透明状态。
-			</p>
-			<p style="margin: 5px 15px 15px 15px;">
-				这是一种解决滚动条通顶问题的变通解决方案，该方案相比双webview的方案，性能更高，动效更酷，但也有其适用场景：
-			</p>
-			<ul class="hm-description">
-				<li>顶部最好有图片或轮播组件</li>
-				<li>导航栏字体颜色和图片颜色互搭</li>
-			</ul>
-			<p style="margin: 35px 15px;">这是transparent bar（透明导航栏）演示页面， 默认情况下标题栏透明，
-				当用户向下滚动时，标题栏逐渐由透明转变为不透明；当用户再次向上滚动时，标题栏又从不透明变为透明状态。
-			</p>
-			<p style="margin: 5px 15px 15px 15px;">
-				这是一种解决滚动条通顶问题的变通解决方案，该方案相比双webview的方案，性能更高，动效更酷，但也有其适用场景：
-			</p>
-			<ul class="hm-description">
-				<li>顶部最好有图片或轮播组件</li>
-				<li>导航栏字体颜色和图片颜色互搭</li>
-			</ul>
-			
+			<img src="images/datong.png" style="width: 100%;" />
+			<p><em id="timespan">5</em>秒后跳转</p>
 		</div>
+
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
-		<script type="text/javascript" src="js/qqFace/js/jquery.qqFace.js"></script>
-		<script type="text/javascript" src="js/article/article_preview.js"></script>
-		<script type="text/javascript" src="js/mui.previewimage.js"></script>
-		<script type="text/javascript" src="js/mui.zoom.js"></script>
-		<script type="text/javascript" src="js/storageUtil.js"></script>
-		<script type="text/javascript">
-			
-		</script>
+		<script type="text/javascript" charset="utf-8">
+			mui.back = function() {};
+			mui.plusReady(function() {
+				if(mui.os.ios) {
+					plus.navigator.setFullscreen(true);
+				}
+				plus.navigator.closeSplashscreen();
+				timespan();
+			});
 
+			var second = 5;
+
+			function timespan() {
+				$("#timespan").html(second);
+				console.log(second);
+				if(second == 0) {
+					plus.navigator.setFullscreen(false);
+					plus.webview.currentWebview().close();
+					return;
+				}
+				setTimeout(function() {
+					timespan();
+				}, 1000);
+				second--;
+			}
+		</script>
 	</body>
 
 </html>

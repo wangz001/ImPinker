@@ -108,7 +108,7 @@
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true,"delay":"3"
+			"waiting": true,"delay":"5"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -239,7 +239,7 @@
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina35": "C:/Users/wangzheng/Desktop/车酷/31bcd6299f9f0c0be6624f7806a7ce1f.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
 						"retina40": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina47":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina55":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png","retina55l":"C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png"
 					},
 					"ipad": {
@@ -286,7 +286,9 @@
 					"view/weibo/weibo_new_video.html",
 					"view/article/youji_new.html",
 					"view/article/preview.html",
-					"view/article/youji_new_selectweibo.html"
+					"view/article/youji_new_selectweibo.html",
+					"view/guide.html",
+					"index.html"
 				],
 				"priority": 0
 			},
@@ -1112,13 +1114,19 @@
 					"view/article/preview.html"
 				],
 				"priority": 0
+			},
+			"index.html": {
+				"resources": [],
+				"refer": [
+					"view/guide.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
 				"view/me/index.html",
 				"view/news/tab-webview-subpage-chat.html",
-				"index.html",
 				"view/news/tab-webview-subpage-setting.html",
 				"view/news/tab-webview-main.html",
 				"view/weibo/index.html",
@@ -1127,5 +1135,5 @@
 				"view/news/tab-webview-subpage-contact.html"
 			]
 		}
-	}
+	},"fullscreen":false
 }

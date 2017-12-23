@@ -45,7 +45,9 @@
 			"view/weibo/weibo_new.html",
 			"view/article/youji_new.html",
 			"view/article/youji_new_selectweibo.html",
-			"view/search/search.html"
+			"view/search/search.html",
+			"view/guide.html",
+			"index.html"
 		]
 	},
 	"tab-webview-subpage-article.html": {
@@ -361,7 +363,8 @@
 			"css/icons-extra.css",
 			"css/imageviewer.css",
 			"fonts/mui.ttf"
-		]
+		],
+		"refer": []
 	},
 	"view/weibo/weibo_new.html": {
 		"resources": [
@@ -444,7 +447,8 @@
 			"js/mui.min.js",
 			"css/mui.min.css",
 			"fonts/mui.ttf"
-		]
+		],
+		"refer": []
 	},
 	"view/setting/setting.html": {
 		"resources": [
@@ -468,7 +472,8 @@
 			"fonts/mui.ttf",
 			"images/yuantiao.jpg",
 			"images/shuijiao.jpg"
-		]
+		],
+		"refer": []
 	},
 	"view/setting/setting-account.html": {
 		"resources": [
@@ -534,7 +539,8 @@
 			"js/jquery.js",
 			"js/commonUtil.js",
 			"css/weibo.css"
-		]
+		],
+		"refer": []
 	},
 	"view/article/youji_preview.html": {
 		"resources": [
@@ -544,7 +550,8 @@
 			"js/mui.previewimage.js",
 			"css/imageviewer.css",
 			"js/jquery.js"
-		]
+		],
+		"refer": []
 	},
 	"view/setting/setting-imgcut.html": {
 		"resources": [
@@ -554,7 +561,8 @@
 			"js/cropper/cropper.js",
 			"css/mui.min.css",
 			"js/jquery.js"
-		]
+		],
+		"refer": []
 	},
 	"reg.html": {
 		"resources": [
@@ -564,7 +572,8 @@
 			"css/mui.min.css",
 			"js/reg.js",
 			"js/jquery.js"
-		]
+		],
+		"refer": []
 	},
 	"view/user/userindex.html": {
 		"resources": [
@@ -605,7 +614,8 @@
 			"js/jquery.js",
 			"css/weibo.css",
 			"css/mui.min.css"
-		]
+		],
+		"refer": []
 	},
 	"view/article/previewtest.html": {
 		"resources": [
@@ -734,6 +744,11 @@
 			"login.html",
 			"view/weibo/weibo_preview.html",
 			"view/article/preview.html"
+		]
+	},
+	"index.html": {
+		"refer": [
+			"view/guide.html"
 		]
 	}
 }
