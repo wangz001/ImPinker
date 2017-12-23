@@ -22,6 +22,13 @@
 				color: red;
 				top: -3px;
 			}
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
 		</style>
 		<style type="text/css">
 			.zhezhaoDiv {
@@ -55,7 +62,11 @@
 				<span class="mui-tab-label">途迹</span>
 			</a>
 			<a style="display:none;" id="newweibo" class="mui-tab-item" href="tab-webview-subpage-contact.html">
-				<span class="mui-icon mui-icon-plus"></span>
+				<span class="mui-icon">
+					<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-fabu"></use>
+					</svg>
+				</span>
 			</a>
 			<a class="mui-tab-item" href="tab-webview-subpage-setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
@@ -67,6 +78,7 @@
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
+		<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init({

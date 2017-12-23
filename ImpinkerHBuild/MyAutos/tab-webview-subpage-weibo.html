@@ -11,13 +11,20 @@
 		<link rel="stylesheet" href="css/icons-extra.css" />
 		<link rel="stylesheet" href="css/weibo.css" />
 		<link rel="stylesheet" href="css/imageviewer.css" />
+		<link rel="stylesheet" href="css/iconfont/iconfont.css" />
 		<style type="text/css">
 			.mui-icon-extra-heart {
 				position: relative;
 				float: right;
 			}
 			
-			
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -25,7 +32,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<!--<div class="mui-card">
+					<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img class="head-img" src="images/logo.png">
 							<div class="mui-media-body">
@@ -45,12 +52,18 @@
 									</li>
 								</ul>
 							</div>
-							<div class='card-location'><span class="mui-icon mui-icon-location" ></span><span>新疆罗布泊303国道</span></div>
+							<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 						</div>
 						<div class="mui-card-footer">
 							<span class="mui-icon mui-icon-location"><em>20</em></span>
 							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-							<span class="mui-icon-extra mui-icon-extra-share"></span>
+							<span class="mui-icon">
+								<svg class="icon" aria-hidden="true">
+  									<use xlink:href="#icon-zan1"></use>
+  									<em>3</em>
+								</svg>
+								
+							</span>
 						</div>
 					</div>
 					<div class="mui-card">
@@ -64,17 +77,29 @@
 						<div class="mui-card-content">
 							<p>的空间疯狂的健康</p>
 							<div class="media-pic-list">
-									<img class="bigimage" src="images/yuantiao.jpg">
+								<img class="bigimage" src="images/yuantiao.jpg">
 							</div>
-							<div class='card-location'><span class="mui-icon mui-icon-location" ></span><span>新疆罗布泊303国道</span></div>
+							<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 						</div>
 						<div class="mui-card-footer">
-							<span class="mui-icon-extra mui-icon-extra-heart-filled"></span>
-							<span class="mui-icon mui-icon-compose"></span>
-							<span class="mui-icon-extra mui-icon-extra-share"></span>
+							<span class="mui-icon">
+								<svg class="icon" aria-hidden="true">
+  									<use xlink:href="#icon-zan"></use>
+								</svg>
+							</span>
+							<span class="mui-icon icon-compose">
+								<svg class="icon" aria-hidden="true">
+  									<use xlink:href="#icon-favorite_diss"></use>
+								</svg>
+							</span>
+							<span class="mui-icon">
+								<svg class="icon" aria-hidden="true">
+  									<use xlink:href="#icon-shoucang"></use>
+								</svg>
+							</span>
 						</div>
-					</div>-->
-			
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -86,6 +111,7 @@
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
 		<script type="text/javascript" src="js/storageUtil.js"></script>
+		<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
 		<script type="text/template" id="mui-card-item">
 			<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
@@ -103,9 +129,23 @@
 					$cardlocation$
 				</div>
 				<div class="mui-card-footer">
-					<span class="mui-icon-extra votebtn $isVote$" weiboid='$Id$'><em>$VoteCount$</em></span>
-					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
-					<span class="mui-icon collectbtn $isCollect$" weiboid='$Id$'></span>
+					<span class="mui-icon votebtn" isVote="$isVote$" weiboid='$Id$'>
+						<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-$isVote$"></use>
+						</svg>
+						<em>$VoteCount$</em>
+					</span>
+					<span class="mui-icon icon-compose" weiboid='$Id$'>
+						<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-pinglun"></use>
+						</svg>
+						<em id="commentCount_$Id$">$CommentCount$</em>
+					</span>
+					<span class="mui-icon collectbtn" isCollect="$isCollect$" weiboid='$Id$'>
+						<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-$isCollect$"></use>
+						</svg>
+					</span>
 				</div>
 			</div>
 		</script>
@@ -239,10 +279,10 @@
 				}
 				//判断我是否赞过此微博
 				var isVote = storageUtil.getWeiboVote(item.Id);
-				item.isVote = isVote ? "mui-icon-extra-heart-filled" : "mui-icon-extra-heart";
+				item.isVote = isVote ? "zan1" : "zan";
 				//判断我是否收藏过此微博
 				var isCollect = storageUtil.getWeiboCollect(item.Id);
-				item.isCollect = isCollect ? "mui-icon-star-filled" : "mui-icon-star";
+				item.isCollect = isCollect ? "favorite_diss" : "shoucang";
 				var cardStr = templateCard.temp(item);
 				$(".mui-scroll").append(cardStr);
 			}
@@ -277,8 +317,6 @@
 					}
 				});
 			});
-			
-			
 		</script>
 	</body>
 

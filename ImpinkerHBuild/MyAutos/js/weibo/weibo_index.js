@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	//评论  
-	mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
+	mui('.mui-scroll').on('tap', '.icon-compose', function() {
 		var weiboid = this.getAttribute("weiboid");
 		mui.openWindow({
 			url: "view/weibo/weibo_comment.html",
@@ -16,20 +16,15 @@ $(document).ready(function() {
 	});
 	//点赞
 	mui('.mui-scroll').on('tap', '.votebtn', function() {
-		var heartType = $(this).attr("class");
-		var count = $(this).text();
+		var heartType = $(this).attr("isVote");
+		var count = $(this).find("em").text();
 		var weiboid = this.getAttribute("weiboid");
 		console.log(count);
-		if(heartType.indexOf("mui-icon-extra-heart-filled") != -1) {
-			//				$(this).removeClass("mui-icon-extra-heart-filled");
-			//				$(this).addClass("mui-icon-extra-heart");
-			//				if(count > 0) {
-			//					$(this).find("em").html(parseInt(count) - 1);
-			//				}
+		if(heartType.indexOf("zan1") != -1) {
 			mui.toast("您已赞过此微博");
 		} else {
-			$(this).removeClass("mui-icon-extra-heart");
-			$(this).addClass("mui-icon-extra-heart-filled");
+			var zan1Str="<use xlink:href=\"#icon-zan1\"></use>";
+			$(this).find("svg").html(zan1Str);
 			$(this).find("em").html(parseInt(count) + 1);
 			mui.toast("点赞成功！");
 			sendVote(weiboid, false)
@@ -39,16 +34,16 @@ $(document).ready(function() {
 	//收藏点击事件
 	mui('.mui-scroll').on('tap', '.collectbtn', function() {
 		var weiboid = this.getAttribute('weiboid');
-		var heartType = $(this).attr("class");
-		//mui.alert("收藏到我的微博");
+		var heartType = $(this).attr("isCollect");
 		var url = "http://api.myautos.cn/api/UserCollection/AddWeiboCollect";
 		var data = {
 			"weiboId": weiboid
 		}
-		if(heartType.indexOf("mui-icon-star-filled") != -1) {
+		if(heartType.indexOf("shoucang") != -1) {
 			mui.toast("您已收藏");
 		} else {
-			$(this).attr("class", "mui-icon mui-icon-star-filled");
+			var zan1Str="<use xlink:href=\"#icon-shoucang\"></use>";
+			$(this).find("svg").html(zan1Str);
 			commonUtil.sendRequestWithToken(url, data, false, function(data) {
 				if(data.IsSuccess == 1) {
 					mui.toast("收藏成功");
