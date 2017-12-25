@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRelationDal.cs" />
+    <Compile Include="UserTokenDal.cs" />
     <Compile Include="WeiBoCommentDal.cs" />
     <Compile Include="WeiBoDal.cs" />
     <Compile Include="WeiBoVoteDal.cs" />

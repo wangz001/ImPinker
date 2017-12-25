@@ -2,19 +2,15 @@
 using ImpinkerApi.Common;
 using ImpinkerApi.Filters;
 using ImpinkerApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace ImpinkerApi.Controllers
 {
     public class WeiBoVoteController : BaseApiController
     {
-        WeiBoVoteBll _weiboVoteBll = new WeiBoVoteBll();
-        WeiBoCommentBll _weiboCommentBll = new WeiBoCommentBll();
+        readonly WeiBoVoteBll _weiboVoteBll = new WeiBoVoteBll();
+        readonly WeiBoCommentBll _weiboCommentBll = new WeiBoCommentBll();
         #region 点赞操作
         /// <summary>
         /// 点赞

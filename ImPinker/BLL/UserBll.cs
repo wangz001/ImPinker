@@ -84,7 +84,7 @@ namespace ImBLL
         /// <returns></returns>
         public Users GetModelByAspNetId(string aspnetId)
         {
-            string cacheKey = "UserModel-" + aspnetId;
+            string cacheKey = "UserModel-aspnetid-" + aspnetId;
             object objModel = DataCache.GetCache(cacheKey);
             if (objModel == null)
             {
@@ -201,12 +201,18 @@ namespace ImBLL
         /// <returns></returns>
         public Users GetModelByUserName(string username)
         {
-            if (string.IsNullOrEmpty(username))
+            string cacheKey = "UserModel-username-" + username;
+            object objModel = DataCache.GetCache(cacheKey);
+            if (objModel == null)
             {
-                return null;
+                objModel = _dal.GetModelByUserName(username);
+                if (objModel != null)
+                {
+                    int modelCache = ConfigHelper.GetConfigInt("ModelCache");
+                    DataCache.SetCache(cacheKey, objModel, DateTime.Now.AddMinutes(modelCache), TimeSpan.Zero);
+                }
             }
-            var user = _dal.GetModelByUserName(username);
-            return user;
+            return (Users)objModel;
         }
 
         /// <summary>

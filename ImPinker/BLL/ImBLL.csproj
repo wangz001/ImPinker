@@ -73,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBll.cs" />
     <Compile Include="UserRelationBll.cs" />
+    <Compile Include="UserTokenBll.cs" />
     <Compile Include="WeiBoBll.cs" />
     <Compile Include="WeiBoCommentBll.cs" />
     <Compile Include="WeiBoVoteBll.cs" />

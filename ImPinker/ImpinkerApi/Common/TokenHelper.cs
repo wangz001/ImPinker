@@ -5,14 +5,13 @@ using System.Net.Http.Headers;
 using System.Web.Security;
 using ImBLL;
 using ImModel;
-using Maticsoft.Common;
 
 namespace ImpinkerApi.Common
 {
     public class TokenHelper
     {
-        static Dictionary<string, string> _userTokenDic = new Dictionary<string, string>();
-        static readonly UserBll _userBll=new UserBll();
+        static readonly UserBll UserBll=new UserBll();
+        static readonly UserTokenBll UserTokenBll=new UserTokenBll();
         /// <summary>
         /// 添加或更新token，用户登录的时候返回token
         /// </summary>
@@ -20,22 +19,10 @@ namespace ImpinkerApi.Common
         /// <returns></returns>
         public static string AddOrUpdateToken(string username)
         {
+            var user = UserBll.GetModelByUserName(username);
             var token = GenerateToken(username);
-            //改为cache存储
-            string cacheKey = "UserLoginToken-" + username;
-            //object objModel = DataCache.GetCache(cacheKey);
-            DataCache.SetCache(cacheKey, token, DateTime.Now.AddHours(24), TimeSpan.Zero);//默认缓存1天
+            var flag=UserTokenBll.Update(user.Id, token);
             return token;
-            
-            //if (_userTokenDic.ContainsKey(username))
-            //{
-            //    _userTokenDic[username] = token;
-            //}
-            //else
-            //{
-            //    _userTokenDic.Add(username, token);
-            //}
-            //return token;
         }
         /// <summary>
         /// 根据用户名获取token
@@ -44,20 +31,8 @@ namespace ImpinkerApi.Common
         /// <returns></returns>
         public static string GetToken(string username)
         {
-            //改为cache存储
-            string cacheKey = "UserLoginToken-" + username;
-            string token = (string)DataCache.GetCache(cacheKey);
-            if (token != null)
-            {
-                return token;
-            }
-            return "";
-
-            //if (_userTokenDic.ContainsKey(username))
-            //{
-            //    return _userTokenDic[username];
-            //}
-            //return "";
+            var token = UserTokenBll.GetTokenStr(username);
+            return token;
         }
         /// <summary>
         /// 验证token是否有效
@@ -105,7 +80,7 @@ namespace ImpinkerApi.Common
                 var token = usertokens.ToList()[0];
                 if (CheckUserToken(username, token))
                 {
-                    var user = _userBll.GetModelByUserName(username);
+                    var user = UserBll.GetModelByUserName(username);
                     return user;
                 }
             }

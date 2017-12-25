@@ -30,3 +30,34 @@ System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 
    在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
    在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
 [Footer]
+[Header]
+2017-12-25 18:25:59,976 [8] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/Login
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 必须声明标量变量 "@Token"。
+   在 DBUtility.DbHelperSQL.ExecuteSql(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitHubProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 462
+   在 ImDal.UserTokenDal.Update(UserToken userToken) 位置 d:\GitHubProject\ImPinker\ImPinker\Dal\UserTokenDal.cs:行号 76
+   在 ImBLL.UserTokenBll.Update(Int32 userid, String token) 位置 d:\GitHubProject\ImPinker\ImPinker\BLL\UserTokenBll.cs:行号 20
+   在 ImpinkerApi.Common.TokenHelper.AddOrUpdateToken(String username) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Common\TokenHelper.cs:行号 24
+   在 ImpinkerApi.Controllers.AccountController.Login(UserLoginViewModel loginViewModel) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 45
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:ba7ca21d-d3c2-4d9d-b40e-687257708f2a
+Error Number:137,State:2,Class:15
+[Footer]
+[Header]
+2017-12-25 18:30:51,624 [27] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/usercollection/GetMyCollect?pageNum=1&pageSize=30
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitHubProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.<>c__DisplayClass4.<OnAuthorization>b__1()
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
