@@ -61,3 +61,4 @@ System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 
    在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
    在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
    在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]

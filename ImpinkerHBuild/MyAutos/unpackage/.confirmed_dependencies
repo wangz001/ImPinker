@@ -18,7 +18,9 @@
 			"js/app.js",
 			"js/commonUtil.js",
 			"js/storageUtil.js",
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"css/iconfont/iconfont.css",
+			"css/iconfont/iconfont.js"
 		],
 		"refer": [
 			"view/weibo/weibo_comment.html",
@@ -36,7 +38,8 @@
 			"css/mui.min.css",
 			"tab-webview-subpage-article.html",
 			"js/commonUtil.js",
-			"js/jquery.js"
+			"js/jquery.js",
+			"css/iconfont/iconfont.js"
 		],
 		"refer": [
 			"tab-webview-subpage-weibo.html",
@@ -749,6 +752,15 @@
 	"index.html": {
 		"refer": [
 			"view/guide.html"
+		],
+		"resources": [
+			"images/20171223221008.jpg",
+			"css/mui.min.css"
+		]
+	},
+	"view/guide.html": {
+		"resources": [
+			"css/mui.min.css"
 		]
 	}
 }

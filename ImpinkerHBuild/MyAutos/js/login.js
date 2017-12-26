@@ -7,25 +7,22 @@
 		var settings = app.getSettings(); //配置
 		var state = app.getState(); //用户信息
 		//默认显示用户名和密码
-		if(state.account){
-			var username=state.account;
-			document.getElementById("account").value=username;
+		if(state.account) {
+			var username = state.account;
+			document.getElementById("account").value = username;
 		}
-		if(state.password){
-			var password=state.password;
-			document.getElementById("password").value=password;
+		if(state.password) {
+			var password = state.password;
+			document.getElementById("password").value = password;
 		}
-		//$('#account').val("username");
-		//$('#password').val("password");
-		
-		var mainPage = $.preload({
-			"id": 'tab-webview-main.html',
-			"url": 'tab-webview-main.html'
-		});
-		var main_loaded_flag = false;
-		mainPage.addEventListener("loaded", function() {
-			main_loaded_flag = true;
-		});
+		//		var mainPage = $.preload({
+		//			"id": 'tab-webview-main.html',
+		//			"url": 'tab-webview-main.html'
+		//		});
+		//		var main_loaded_flag = false;
+		//		mainPage.addEventListener("loaded", function() {
+		//			main_loaded_flag = true;
+		//		});
 		//获取上一个页面的id
 		var self = plus.webview.currentWebview();
 		var lastViewid = self.lastviewid;
@@ -45,11 +42,11 @@
 			topView.reload();
 			console.log("to main");
 			setTimeout(function() {
-				mui.back();
+				plus.webview.currentWebview().close();
 			}, 200);
 		};
 
-		if(state.account && 1>2) {
+		if(state.account && 1 > 2) {
 			//每次打开应用。重新登录，获取token
 			app.login(state, function(data) {
 				if(data.IsSuccess == 0) {

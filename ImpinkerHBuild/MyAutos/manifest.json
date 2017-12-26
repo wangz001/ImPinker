@@ -274,7 +274,8 @@
 					"tab-webview-subpage-article.html",
 					"js/app.js",
 					"js/jquery.js",
-					"js/commonUtil.js"
+					"js/commonUtil.js",
+					"css/iconfont/iconfont.js"
 				],
 				"refer": [
 					"tab-webview-subpage-setting.html",
@@ -449,7 +450,9 @@
 					"js/jquery.js",
 					"js/app.js",
 					"js/commonUtil.js",
-					"js/storageUtil.js"
+					"js/storageUtil.js",
+					"css/iconfont/iconfont.css",
+					"css/iconfont/iconfont.js"
 				],
 				"refer": [
 					"view/map/lbs.html",
@@ -1116,10 +1119,20 @@
 				"priority": 0
 			},
 			"index.html": {
-				"resources": [],
+				"resources": [
+					"images/20171223221008.jpg",
+					"css/mui.min.css"
+				],
 				"refer": [
 					"view/guide.html"
 				],
+				"priority": 0
+			},
+			"view/guide.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
