@@ -39,8 +39,7 @@
 			//			}, 20);
 			var topView = plus.webview.getWebviewById(lastViewid);
 			console.log(topView.id);
-			topView.reload();
-			console.log("to main");
+			//topView.reload();
 			setTimeout(function() {
 				plus.webview.currentWebview().close();
 			}, 200);
@@ -139,7 +138,6 @@
 		var regButton = doc.getElementById('reg');
 		var forgetButton = doc.getElementById('forgetPassword');
 		loginButton.addEventListener('tap', function(event) {
-			console.log("开始登录。。。");
 			var loginInfo = {
 				account: accountBox.value,
 				password: passwordBox.value

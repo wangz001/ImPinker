@@ -18,6 +18,7 @@ namespace ImBLL
             {
                 objModel.Token = token;
                 flag = _dal.Update(objModel);
+                SetTokenCache(userid, objModel);
             }
             else
             {
@@ -29,8 +30,23 @@ namespace ImBLL
                     UpdateTime = DateTime.Now
                 };
                 flag = _dal.Add(newmodel);
+                SetTokenCache(userid, newmodel);
             }
             return flag;
+        }
+        /// <summary>
+        /// 更新缓存中的token
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="userToken"></param>
+        private void SetTokenCache(int userid, UserToken userToken)
+        {
+            string cacheKey = "UserToken-" + userid;
+            if (userToken != null)
+            {
+                int modelCache = ConfigHelper.GetConfigInt("ModelCache");
+                DataCache.SetCache(cacheKey, userToken, DateTime.Now.AddMinutes(modelCache), TimeSpan.Zero);
+            }
         }
 
         public UserToken Get(int userid)

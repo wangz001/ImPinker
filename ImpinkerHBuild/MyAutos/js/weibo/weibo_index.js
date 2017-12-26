@@ -19,7 +19,6 @@ $(document).ready(function() {
 		var heartType = $(this).attr("isVote");
 		var count = $(this).find("em").text();
 		var weiboid = this.getAttribute("weiboid");
-		console.log(count);
 		if(heartType.indexOf("zan1") != -1) {
 			mui.toast("您已赞过此微博");
 		} else {

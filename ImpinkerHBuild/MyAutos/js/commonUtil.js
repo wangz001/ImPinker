@@ -2,6 +2,38 @@
  * 公用方法
  **/
 (function(apputil, owner) {
+
+	//判断用户是否已获取token
+	owner.checkToken = function() {
+		var state = app.getState();
+		var token = state.token;
+		if(token != null && token.length > 0) {
+			return true;
+		} else {
+			owner.redirectTologin();
+			return false;
+		}
+	}
+
+	//重定向到登录页
+	owner.redirectTologin = function() {
+		var currentview = plus.webview.currentWebview().id;
+		mui.openWindow({
+			//手势登录
+			url: "/login.html",
+			id: 'login',
+			show: {
+				aniShow: 'pop-in'
+			},
+			extras: {
+				lastviewid: currentview
+			},
+			waiting: {
+				autoShow: false
+			}
+		});
+	}
+
 	//发请求，不用身份验证
 	owner.sendRequestGet = function(url, data, callback) {
 		callback = callback || $.noop;
@@ -50,21 +82,7 @@
 				if("Unauthorized" == errorThrown) {
 					//无权限，重新登录
 					mui.toast("身份验证失败，请重新登陆！");
-					var currentview = plus.webview.currentWebview().id;
-					mui.openWindow({
-						//手势登录
-						url: "/login.html",
-						id: 'login',
-						show: {
-							aniShow: 'pop-in'
-						},
-						extras: {
-							lastviewid: currentview
-						},
-						waiting: {
-							autoShow: false
-						}
-					});
+					owner.redirectTologin();
 				} else {
 					return callback({
 						IsSuccess: 0,

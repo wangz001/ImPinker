@@ -1,6 +1,8 @@
 //评论
 $('.mui-icon-compose').bind('click', function() {
-	showComment();
+	if(commonUtil.checkToken()){
+		showComment();
+	}
 });
 
 function showComment() {
