@@ -347,7 +347,8 @@
 		],
 		"refer": [
 			"tab-webview-main.html",
-			"reg.html"
+			"reg.html",
+			"forget_password.html"
 		]
 	},
 	"view/map/lbs.html": {

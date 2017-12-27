@@ -1,8 +1,8 @@
-(function($, doc) {
-	$.init({
+(function(mui, doc) {
+	mui.init({
 		statusBarBackground: '#f7f7f7'
 	});
-	$.plusReady(function() {
+	mui.plusReady(function() {
 		plus.screen.lockOrientation("portrait-primary");
 		var settings = app.getSettings(); //配置
 		var state = app.getState(); //用户信息
@@ -15,7 +15,7 @@
 			var password = state.password;
 			document.getElementById("password").value = password;
 		}
-		//		var mainPage = $.preload({
+		//		var mainPage = mui.preload({
 		//			"id": 'tab-webview-main.html',
 		//			"url": 'tab-webview-main.html'
 		//		});
@@ -33,7 +33,7 @@
 			//			var id = setInterval(function() {
 			//				if(true) {
 			//					clearInterval(id);
-			//					$.fire(mainPage, 'show', null);
+			//					mui.fire(mainPage, 'show', null);
 			//					mainPage.show("pop-in");
 			//				}
 			//			}, 20);
@@ -75,7 +75,7 @@
 						oauthArea.appendChild(btn);
 					}
 				}
-				$(oauthArea).on('tap', '.oauth-btn', function() {
+				mui(oauthArea).on('tap', '.oauth-btn', function() {
 					if(this.classList.contains('disabled')) {
 						plus.nativeUI.toast('您尚未安装微信客户端');
 						return;
@@ -135,8 +135,8 @@
 		var accountBox = doc.getElementById('account');
 		var passwordBox = doc.getElementById('password');
 		var autoLoginButton = doc.getElementById("autoLogin");
-		var regButton = doc.getElementById('reg');
-		var forgetButton = doc.getElementById('forgetPassword');
+		//var regButton = doc.getElementById('reg');
+		//var forgetButton = doc.getElementById('forgetPassword');
 		loginButton.addEventListener('tap', function(event) {
 			var loginInfo = {
 				account: accountBox.value,
@@ -154,8 +154,8 @@
 				}
 			});
 		});
-		$.enterfocus('#login-form input', function() {
-			$.trigger(loginButton, 'tap');
+		mui.enterfocus('#login-form input', function() {
+			mui.trigger(loginButton, 'tap');
 		});
 		autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
 		autoLoginButton.addEventListener('toggle', function(event) {
@@ -164,38 +164,6 @@
 				settings.autoLogin = isActive;
 				app.setSettings(settings);
 			}, 50);
-		}, false);
-		regButton.addEventListener('tap', function(event) {
-			$.openWindow({
-				url: 'reg.html',
-				id: 'reg',
-				preload: true,
-				show: {
-					aniShow: 'pop-in'
-				},
-				styles: {
-					popGesture: 'hide'
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		}, false);
-		forgetButton.addEventListener('tap', function(event) {
-			$.openWindow({
-				url: 'forget_password.html',
-				id: 'forget_password',
-				preload: true,
-				show: {
-					aniShow: 'pop-in'
-				},
-				styles: {
-					popGesture: 'hide'
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
 		}, false);
 	});
 }(mui, document));

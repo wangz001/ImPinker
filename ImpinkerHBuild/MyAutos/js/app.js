@@ -198,7 +198,7 @@
 		regInfo = regInfo || {};
 		regInfo.account = regInfo.account || '';
 		regInfo.password = regInfo.password || '';
-		if(!checkPhone(regInfo.account)) {
+		if(!owner.checkPhone(regInfo.account)) {
 			return callback('手机号不合法');
 		}
 		if(regInfo.password.length < 6) {
@@ -223,10 +223,13 @@
 				'Content-Type': 'application/json'
 			},
 			success: function(data) {
+				console.log(data.IsSuccess);
 				if(data.IsSuccess == 1) {
 					var users = JSON.parse(localStorage.getItem('$users') || '[]');
 					users.push(regInfo);
 					localStorage.setItem('$users', JSON.stringify(users));
+					//设置登录名和密码
+					owner.setState(regInfo);
 					return callback();
 				} else {
 					console.log(data.Description);
@@ -234,7 +237,7 @@
 				}
 			},
 			error: function(xhr, type, errorThrown) {
-				console.log(type + xhr + errorThrown);
+				console.log(JSON.stringify({"aa":type,"bb":xhr,"cc":errorThrown}));
 			}
 		});
 	};

@@ -29,22 +29,29 @@
 					return;
 				}
 				plus.nativeUI.toast('注册成功');
-				/*
-				 * 注意：
-				 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
-				 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
-				 */
-				plus.webview.getLaunchWebview().show("pop-in", 200, function() {
-					plus.webview.currentWebview().close("none");
-				});
-				//若启动页不是登录页，则需通过如下方式打开登录页
-				mui.openWindow({
-					url: 'login.html',
-					id: 'login',
-					show: {
-						aniShow: 'pop-in'
-					}
-				});
+				var loginView=plus.webview.getWebviewById("login");
+				plus.webview.close(loginView);
+				//更新token
+				setTimeout(function() {
+					app.updateToken(function(data) {
+						console.log(JSON.stringify(data));
+						if(data.IsSuccess == 1) {
+							plus.webview.getLaunchWebview().show("pop-in", 200, function() {
+								plus.webview.currentWebview().close("none");
+							});
+							console.log('更新token成功：' + data.Data);
+						} else {
+							mui.openWindow({
+								url: 'login.html',
+								id: 'login',
+								show: {
+									aniShow: 'pop-in'
+								}
+							});
+							mui.toast('更新token失败:' + data.Description);
+						}
+					});
+				}, 500);
 			});
 		});
 

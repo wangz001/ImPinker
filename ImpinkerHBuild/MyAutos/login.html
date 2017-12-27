@@ -40,6 +40,41 @@
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/login.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				$("#reg").bind("click", function() {
+					mui.openWindow({
+						url: 'reg.html',
+						id: 'reg',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						},
+						styles: {
+							popGesture: 'hide'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				});
+				$('#forgetPassword').bind("click", function(event) {
+					mui.openWindow({
+						url: 'forget_password.html',
+						id: 'forget_password',
+						preload: true,
+						show: {
+							aniShow: 'pop-in'
+						},
+						styles: {
+							popGesture: 'hide'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				});
+			});
+		</script>
 	</body>
-
 </html>

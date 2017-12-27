@@ -255,10 +255,7 @@
 				},
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/wangzheng/Desktop/车酷/11280e677c99eccad2348871218fa37b.png"
+					"ldpi": ""
 				}
 			}
 		}
