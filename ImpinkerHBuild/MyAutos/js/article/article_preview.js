@@ -98,6 +98,7 @@ function getArticle(articleid) {
 			articleItem = articleinfo;
 			$("#coverimage").attr("src", articleItem.CoverImage.replace("style/articlecover_36_24", "style/article_900"));
 			$("#article_description").html("简介：" + articleItem.Description);
+			articleinfo.Content=replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
 			$("#articlename").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);

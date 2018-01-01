@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="css/weibo.css" />
 		<link rel="stylesheet" href="css/imageviewer.css" />
 		<link rel="stylesheet" href="css/iconfont/iconfont.css" />
+		<link rel="stylesheet" href="js/qqFace/css/reset.css" />
 		<style type="text/css">
 			.mui-icon-extra-heart {
 				position: relative;
@@ -32,7 +33,7 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<div class="mui-card">
+					<!--<div class="mui-card">
 						<div class="mui-card-header mui-card-media">
 							<img class="head-img" src="images/logo.png">
 							<div class="mui-media-body">
@@ -98,7 +99,7 @@
 								</svg>
 							</span>
 						</div>
-					</div>
+					</div>-->
 
 				</div>
 			</div>
@@ -107,6 +108,7 @@
 		<script type="text/javascript" src="js/mui.zoom.js"></script>
 		<script type="text/javascript" src="js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/qqFace/js/jquery.qqFace.js"></script>
 		<script type="text/javascript" src="js/weibo/weibo_index.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
@@ -277,15 +279,27 @@
 					var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
 					item.cardlocation = lbsStr;
 				}
+				//qq表情
+				item.Description = replace_em(item.Description);
 				//判断我是否赞过此微博
 				var isVote = storageUtil.getWeiboVote(item.Id);
 				item.isVote = isVote ? "zan1" : "zan";
 				//判断我是否收藏过此微博
 				var isCollect = storageUtil.getWeiboCollect(item.Id);
-				item.isCollect = isCollect ? "favorite_diss" : "shoucang";
+				item.isCollect = isCollect ? "shoucang" : "favorite_diss";
 				var cardStr = templateCard.temp(item);
 				$(".mui-scroll").append(cardStr);
 			}
+
+			//查看结果
+			function replace_em(str) {
+				str = str.replace(/\</g, '&lt;');
+				str = str.replace(/\>/g, '&gt;');
+				str = str.replace(/\n/g, '<br/>');
+				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="js/qqFace/arclist/$1.gif" border="0" />');
+				return str;
+			}
+
 			//地图点击事件
 			mui('.mui-scroll').on('tap', '.card-location', function() {
 				var weiboid = this.getAttribute('weiboid');

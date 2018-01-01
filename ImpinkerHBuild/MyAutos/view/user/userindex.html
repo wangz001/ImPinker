@@ -20,7 +20,7 @@
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">Bwlang星</h1>
+			<h1 class="mui-title" </h1>
 		</header>
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-scroll-wrapper">
@@ -29,7 +29,7 @@
 						<div class="head-img"><img src="../../images/food.png">
 						</div>
 						<div class="username">
-						  <!--<h4>Bwlang星</h4>-->
+							<!--<h4>Bwlang星</h4>-->
 						</div>
 					</div>
 					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -167,12 +167,13 @@
 			});
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				var userid = self.userid;
-				getUserinfo(userid);
+				currentParamEntity.userid = self.userid;
+				//getUserinfo(userid);
 			});
 			mui.previewImage();
 
 			var currentParamEntity = {
+				userid:0,
 				all: {
 					url: 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage',
 					pageindex: 1,
@@ -232,7 +233,7 @@
 				//console.log(JSON.stringify(currentParamEntity));
 				var url = currentParamEntity.all.url; // 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
 				var data = {
-					userid: 1,
+					userid: currentParamEntity.userid,
 					pageindex: currentParamEntity.all.pageindex,
 					pagesize: currentParamEntity.all.pagesize
 				};
@@ -240,6 +241,11 @@
 					//console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
+						var firstItem = list[0].ArticleVm;
+						if(firstItem == null) {
+							firstItem = list[0].WeiboVm;
+						}
+						setUserinfo(firstItem);
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
 							if(item.EntityType == 1) {
@@ -264,7 +270,7 @@
 				console.log(JSON.stringify(currentParamEntity));
 				var url = currentParamEntity.article.url;
 				var data = {
-					userid: 1,
+					userid: currentParamEntity.userid,
 					pageindex: currentParamEntity.article.pageindex,
 					pagesize: currentParamEntity.article.pagesize
 				};
@@ -288,7 +294,7 @@
 				console.log(JSON.stringify(currentParamEntity));
 				var url = currentParamEntity.weibo.url;
 				var data = {
-					userid: 1,
+					userid: currentParamEntity.userid,
 					pageindex: currentParamEntity.weibo.pageindex,
 					pagesize: currentParamEntity.weibo.pagesize
 				};
@@ -357,8 +363,9 @@
 
 			//
 
-			function getUserinfo() {
-
+			function setUserinfo(item) {
+				$("#header .mui-title").html(item.UserName);
+				$(".personal-top .head-img img").attr("src", item.UserHeadImage);
 			}
 		</script>
 		<script type="text/javascript">

@@ -124,7 +124,6 @@
 					ToCommentId: toCommentId
 				}
 				commonUtil.sendRequestWithToken(url, data, true, function(data) {
-					console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null) {
 						mui.toast("评论成功");
 						$("#comment_text").val("");

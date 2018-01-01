@@ -237,7 +237,6 @@
 					NotifyId: targetid,
 					IsRead: 1
 				};
-				console.log("markread" + targetid);
 				commonUtil.sendRequestWithToken(url, data, true, function(data) {
 					console.log(JSON.stringify(data));
 				});

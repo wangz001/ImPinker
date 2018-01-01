@@ -207,6 +207,8 @@
 							imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '">';
 						}
 						weibo.imglist = imgHtmlStr;
+						//qq表情
+						weibo.Description = replace_em(weibo.Description);
 						//显示地理位置
 						weibo.cardlocation = "";
 						if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
@@ -264,7 +266,6 @@
 			});
 
 			//查看结果
-
 			function replace_em(str) {
 				str = str.replace(/\</g, '&lt;');
 				str = str.replace(/\>/g, '&gt;');

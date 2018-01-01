@@ -7,13 +7,14 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo/weibo_add.css" />
+		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发送</button>
-			<h1 class="mui-title">游记小记</h1>
+			<h1 class="mui-title">新途迹</h1>
 		</header>
 		<div class="mui-content">
 			<div class="mui-content-padded">
@@ -22,8 +23,11 @@
 			</div>
 		</div>
 		<div class="row mui-input-row">
-			<textarea id='description' class="mui-input-clear question" placeholder="请说说现在的想法和感受..."></textarea>
+			<textarea id='description' class="mui-input-clear question" placeholder="说说现在的想法和感受..."></textarea>
 		</div>
+		<p>
+			<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
+		</p>
 		<p>图片(最多可选择6张图片)</p>
 		<div id="image-list" class="row image-list">
 			<!--<div class="image-item" style="background-image: url(../../images/cbd.jpg);">
@@ -47,22 +51,30 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
-		<script type="text/javascript" src="../../js/commonUtil.js" ></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/weibo/weibo_add.js"></script>
+		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
 		<script type="application/javascript">
 			mui.init({
-				swipeBack:true //启用右滑关闭功能
+				swipeBack: true //启用右滑关闭功能
 			});
-//			document.getElementById('youjidraft').addEventListener('tap', function() {
-//				mui.openWindow({
-//					url: "../article/youji_mydraft.html",
-//					id: "youji_mydraft",
-//					show: {
-//						aniShow: 'slide-in-right',
-//						duration: 200
-//					}
-//				});
-//			});
+			//			document.getElementById('youjidraft').addEventListener('tap', function() {
+			//				mui.openWindow({
+			//					url: "../article/youji_mydraft.html",
+			//					id: "youji_mydraft",
+			//					show: {
+			//						aniShow: 'slide-in-right',
+			//						duration: 200
+			//					}
+			//				});
+			//			});
+			$(function() {
+				$('.emotion').qqFace({
+					assign: 'description',
+					path: '../../js/qqFace/arclist/' //表情存放的路径
+				});
+			});
 		</script>
 	</body>
+
 </html>
