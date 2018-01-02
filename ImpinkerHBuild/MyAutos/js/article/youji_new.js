@@ -19,13 +19,14 @@
 		for(var i = 0; i < items.length; i++) {
 			var item = items[i];
 			if(item.ContentValue.length > 0) {
+				if(item.Description != "") {
+					owner.showTextAreaStr(item.Description);
+				}
 				var imgs = item.ContentValue.split(',');
 				var imgHtmlStr = "";
 				for(var j = 0; j < imgs.length; j++) {
 					owner.showImage(imgs[j]);
-					if(item.Description != "") {
-						owner.showTextAreaStr(item.Description);
-					}
+
 				}
 			}
 		}

@@ -103,7 +103,6 @@
 			plus.nativeUI.closeWaiting();
 			if(status == 200 || status == "200") {
 				var data = JSON.parse(upload.responseText);
-				console.log(JSON.stringify(data));
 				return callback(data);
 			} else {
 				if(status == 401) {

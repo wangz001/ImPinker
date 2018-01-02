@@ -113,11 +113,8 @@
 				plus.screen.lockOrientation("portrait-primary");
 				if(showGuide) {
 					//有值，说明已经显示过了，无需显示；
-					//关闭splash页面；
-					//plus.navigator.closeSplashscreen();
-					//plus.navigator.setFullscreen(false);
 					//显示广告
-					var adShow = true;
+					var adShow = false;
 					if(adShow) {
 						//显示启动导航
 						mui.openWindow({
@@ -133,6 +130,10 @@
 								autoShow: false
 							}
 						});
+					} else {
+						//关闭splash页面；
+						plus.navigator.closeSplashscreen();
+						plus.navigator.setFullscreen(false);
 					}
 					setTimeout(function() {
 						//预加载
@@ -329,24 +330,31 @@
 							});
 							break;
 						case 3:
-							//							mui.openWindow({
-							//								url: "view/article/youji_new.html",
-							//								id: "youji_new",
-							//								show: {
-							//									aniShow: 'slide-in-right',
-							//									duration: 100
-							//								}
-							//							});
-
-							mui.openWindow({
-								url: "view/article/youji_new_selectweibo.html",
-								id: "youji_new_selectweibo",
-								createNew: true,
-								show: {
-									aniShow: 'slide-in-right',
-									duration: 200
+							var btn = ['是', '否'];
+							mui.confirm("选择途迹快速生成游记", "是否选择？", btn, function(event) {
+								console.log(JSON.stringify(event));
+								if(event.index == 0) {
+									mui.openWindow({
+										url: "view/article/youji_new_selectweibo.html",
+										id: "youji_new_selectweibo",
+										createNew: true,
+										show: {
+											aniShow: 'slide-in-right',
+											duration: 200
+										}
+									});
+								} else {
+									mui.openWindow({
+										url: "view/article/youji_new.html",
+										id: "youji_new",
+										show: {
+											aniShow: 'slide-in-right',
+											duration: 100
+										}
+									});
 								}
 							});
+
 							break;
 						case 4:
 							//摄像
