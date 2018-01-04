@@ -18,7 +18,7 @@
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
 		</header>
 
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<!--<div class="mui-card">
 					<div class="mui-input-row mui-checkbox">
@@ -49,20 +49,30 @@
 			<script type="text/javascript" src="../../js/jquery.js"></script>
 			<script type="text/javascript" src="../../js/commonUtil.js"></script>
 			<script>
+				var pageNum = 1;
+				var pageSize = 10;
+				var count = 0;
 				mui.init({
-					swipeBack: false,
+					swipeBack: true,
 					pullRefresh: {
 						container: '#pullrefresh',
 						up: {
-							auto: true, //可选,默认false.自动上拉加载一次
-							contentrefresh: '正在加载...',
-							callback: pullupRefresh
+							style: 'circle',
+							callback: pullupRefresh()
+						},
+						down: {
+							style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+							color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+							height: '50px', //可选,默认50px.下拉刷新控件的高度,
+							range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+							offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+							auto: true, //可选,默认false.首次加载自动上拉刷新一次
+							callback: pulldownRefresh()
 						}
 					},
 					preloadPages: [{
 						url: "youji_new.html",
 						id: "youji_new"
-						
 					}],
 
 				});
@@ -85,9 +95,18 @@
 							id: 'youji_new',
 							url: "youji_new.html"
 						});
-//						setTimeout(function() {
-//							mui.back();
-//						}, 500);
+					} else {
+						mui.confirm("您还未选择", "是否继续？", ['是', '否'], function(event) {
+							console.log(JSON.stringify(event));
+							if(event.index === 1) {
+								return;
+							} else {
+								mui.openWindow({
+									id: 'youji_new',
+									url: "youji_new.html"
+								});
+							}
+						});
 					}
 				});
 
@@ -122,20 +141,25 @@
 					});
 				}
 
+				function pullupRefresh() {
+
+				}
+
 				mui.previewImage();
-				var pageNum = 1;
-				var pageSize = 10;
-				var count = 0;
+
 				/**
 				 * 上拉加载具体业务实现
 				 */
-				function pullupRefresh() {
+				function pulldownRefresh() {
+					console.log("444")
 					var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
-					var data = {
+					var datapara = {
 						pageindex: pageNum,
 						pageSize: pageSize
 					};
-					commonUtil.sendRequestWithToken(url, data, false, function(data) {
+					console.log(JSON.stringify(datapara));
+					commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
+						console.log(JSON.stringify(data));
 						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 							var list = data.Data;
 							allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
@@ -146,11 +170,11 @@
 							}
 							bindCheckBoxTab();
 						} else {
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 							return;
 						}
 						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
 					});
 				}
 				/**
@@ -159,6 +183,7 @@
 				 * @param {Object} item
 				 */
 				function initWeiBoItem(table, item) {
+
 					var img_1200style = 'style/weibo_1200';
 					var img_600style = 'style/weibo_600';
 					var img_24style = 'style/weibo_24_16';
@@ -198,7 +223,7 @@
 					li.appendChild(headdiv);
 					li.appendChild(imgdiv);
 					li.appendChild(footdiv);
-					table.appendChild(li);
+					table.insertBefore(li, table.firstChild);
 				}
 			</script>
 
