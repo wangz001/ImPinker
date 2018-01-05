@@ -9,6 +9,7 @@
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
 	</head>
 
 	<body>
@@ -16,9 +17,31 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">选择途迹</h1>
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
+			
 		</header>
 
+		<div id="popover" class="mui-popover">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id='datePicker1' data-options='{"type":"date"}'>选择开始日期 ...</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<div id='result' class="ui-alert"></div>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id='datePicker2' data-options='{"type":"date"}'>选择结束日期 ...</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">Item2</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">筛选</a>
+				</li>
+			</ul>
+		</div>
+		
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<a href="#popover" id="openPopover" class="btn mui-btn mui-btn-block">按时间筛选 ...</a>
 			<div class="mui-scroll">
 				<!--<div class="mui-card">
 					<div class="mui-input-row mui-checkbox">
@@ -41,192 +64,225 @@
 					</div>
 				</div>-->
 			</div>
+		</div>
 
-			<script src="../../js/mui.min.js"></script>
-			<script type="text/javascript" src="../../js/app.js"></script>
-			<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-			<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
-			<script type="text/javascript" src="../../js/jquery.js"></script>
-			<script type="text/javascript" src="../../js/commonUtil.js"></script>
-			<script>
-				var pageNum = 1;
-				var pageSize = 10;
-				var count = 0;
-				mui.init({
-					swipeBack: true,
-					pullRefresh: {
-						container: '#pullrefresh',
-						up: {
-							style: 'circle',
-							callback: pullupRefresh()
-						},
-						down: {
-							style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-							color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-							height: '50px', //可选,默认50px.下拉刷新控件的高度,
-							range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-							offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-							auto: true, //可选,默认false.首次加载自动上拉刷新一次
-							callback: pulldownRefresh()
-						}
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+		<script>
+			var pageNum = 1;
+			var pageSize = 10;
+			var count = 0;
+			mui.init({
+				swipeBack: true,
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						style: 'circle',
+						callback: pullupRefresh()
 					},
-					preloadPages: [{
-						url: "youji_new.html",
-						id: "youji_new"
-					}],
+					down: {
+						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: true, //可选,默认false.首次加载自动上拉刷新一次
+						callback: pulldownRefresh()
+					}
+				},
+				preloadPages: [{
+					url: "youji_new.html",
+					id: "youji_new"
+				}],
 
-				});
+			});
 
-				var selectedItems = new Array(); // 选中的对象集合
-				var allItems = new Array(); //全部微博对象
-				var youjiPage = null;
-				document.getElementById('submit').addEventListener('tap', function() {
-					if(selectedItems.length > 0) {
-						//获得详情页面  
-						if(!youjiPage) {
-							youjiPage = plus.webview.getWebviewById('youji_new');
+			var selectedItems = new Array(); // 选中的对象集合
+			var allItems = new Array(); //全部微博对象
+			var youjiPage = null;
+			document.getElementById('submit').addEventListener('tap', function() {
+				if(selectedItems.length > 0) {
+					//获得详情页面  
+					if(!youjiPage) {
+						youjiPage = plus.webview.getWebviewById('youji_new');
+					}
+					//触发详情页面的weiboitems事件  
+					mui.fire(youjiPage, 'weiboitems', {
+						items: selectedItems
+					});
+					//打开详情页面            
+					mui.openWindow({
+						id: 'youji_new',
+						url: "youji_new.html"
+					});
+				} else {
+					mui.confirm("您还未选择", "是否继续？", ['是', '否'], function(event) {
+						console.log(JSON.stringify(event));
+						if(event.index === 1) {
+							return;
+						} else {
+							mui.openWindow({
+								id: 'youji_new',
+								url: "youji_new.html"
+							});
 						}
-						//触发详情页面的weiboitems事件  
-						mui.fire(youjiPage, 'weiboitems', {
-							items: selectedItems
-						});
-						//打开详情页面            
-						mui.openWindow({
-							id: 'youji_new',
-							url: "youji_new.html"
-						});
-					} else {
-						mui.confirm("您还未选择", "是否继续？", ['是', '否'], function(event) {
-							console.log(JSON.stringify(event));
-							if(event.index === 1) {
-								return;
-							} else {
-								mui.openWindow({
-									id: 'youji_new',
-									url: "youji_new.html"
-								});
+					});
+				}
+			});
+
+			//添加列表项的点击事件  
+			mui('.mui-content').on('tap', 'a', function(e) {
+				var id = this.getAttribute('id');
+
+			});
+
+			// 绑定复选框点击事件
+			function bindCheckBoxTab() {
+				$("#pullrefresh [name = checkbox1]:checkbox").unbind("click"); //防止重复绑定
+				$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
+					var weiboid = $(this).val();
+					var isChecked = $(this).is(':checked');
+					console.log(isChecked + "id:" + weiboid);
+					if(isChecked) {
+						//往selectedItems 数组添加数据，并改变编号显示
+						for(var i = 0; i < allItems.length; i++) {
+							var item = allItems[i];
+							if(item.Id.toString() == weiboid) {
+								selectedItems.push(item);
+								break;
 							}
-						});
+						}
+						$(this).next('label').html("已选择：" + (selectedItems.length));
+					} else {
+						//从selectedItems 数组移除数据，并改变编号显示
+						selectedItems.splice(jQuery.inArray(item, selectedItems), 1);
+						$(this).next('label').html("");
 					}
 				});
+			}
 
-				//添加列表项的点击事件  
-				mui('.mui-content').on('tap', 'a', function(e) {
-					var id = this.getAttribute('id');
+			function pullupRefresh() {
 
-				});
+			}
 
-				// 绑定复选框点击事件
-				function bindCheckBoxTab() {
-					$("#pullrefresh [name = checkbox1]:checkbox").unbind("click"); //防止重复绑定
-					$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
-						var weiboid = $(this).val();
-						var isChecked = $(this).is(':checked');
-						console.log(isChecked + "id:" + weiboid);
-						if(isChecked) {
-							//往selectedItems 数组添加数据，并改变编号显示
-							for(var i = 0; i < allItems.length; i++) {
-								var item = allItems[i];
-								if(item.Id.toString() == weiboid) {
-									selectedItems.push(item);
-									break;
-								}
-							}
-							$(this).next('label').html("已选择：" + (selectedItems.length));
-						} else {
-							//从selectedItems 数组移除数据，并改变编号显示
-							selectedItems.splice(jQuery.inArray(item, selectedItems), 1);
-							$(this).next('label').html("");
+			mui.previewImage();
+
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pulldownRefresh() {
+				console.log("444")
+				var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
+				var datapara = {
+					pageindex: pageNum,
+					pageSize: pageSize
+				};
+				console.log(JSON.stringify(datapara));
+				commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
+					console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
+						var table = document.body.querySelector('.mui-scroll');
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItem(table, item);
 						}
-					});
-				}
-
-				function pullupRefresh() {
-
-				}
-
-				mui.previewImage();
-
-				/**
-				 * 上拉加载具体业务实现
-				 */
-				function pulldownRefresh() {
-					console.log("444")
-					var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
-					var datapara = {
-						pageindex: pageNum,
-						pageSize: pageSize
-					};
-					console.log(JSON.stringify(datapara));
-					commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
-						console.log(JSON.stringify(data));
-						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-							var list = data.Data;
-							allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
-							var table = document.body.querySelector('.mui-scroll');
-							for(var i = 0; i < list.length; i++) {
-								var item = list[i];
-								initWeiBoItem(table, item);
-							}
-							bindCheckBoxTab();
-						} else {
-							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-							return;
-						}
-						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
-					});
-				}
-				/**
-				 * 添加数据
-				 * @param {Object} table
-				 * @param {Object} item
-				 */
-				function initWeiBoItem(table, item) {
-
-					var img_1200style = 'style/weibo_1200';
-					var img_600style = 'style/weibo_600';
-					var img_24style = 'style/weibo_24_16';
-					if(item.ContentValue == null || item.ContentValue == '') {
+						bindCheckBoxTab();
+					} else {
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						return;
 					}
-					var li = document.createElement('div');
-					li.className = 'mui-card';
-					var headdiv = document.createElement("div");
-					headdiv.className = 'mui-input-row mui-checkbox';
-					headdiv.innerHTML = '<input name="checkbox1" value="' + item.Id + '" type="checkbox"><label>选择：</label>';
+					pageNum++;
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
+				});
+			}
+			/**
+			 * 添加数据
+			 * @param {Object} table
+			 * @param {Object} item
+			 */
+			function initWeiBoItem(table, item) {
 
-					var imgdiv = document.createElement("div");
-
-					var imgs = item.ContentValue.split(',');
-					if(imgs.length > 1) {
-						//多图
-						imgdiv.className = 'media-pic-list';
-						var ul = document.createElement("ul");
-						var imgHtmlStr = "";
-						var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
-						for(var i = 0; i < imgs.length; i++) {
-							imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
-						}
-						ul.innerHTML = imgHtmlStr;
-						imgdiv.appendChild(ul);
-					} else {
-						imgdiv.className = "mui-card-content";
-						var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-						imgdiv.innerHTML = imgHtmlStr;
-					}
-
-					var footdiv = document.createElement('div');
-					footdiv.className = 'mui-card-content';
-					footdiv.innerHTML = '<p>Posted on ' + item.PublishTime + '</p>' +
-						'<p style="color: #333;">' + item.Description + '...</p>';
-					li.appendChild(headdiv);
-					li.appendChild(imgdiv);
-					li.appendChild(footdiv);
-					table.insertBefore(li, table.firstChild);
+				var img_1200style = 'style/weibo_1200';
+				var img_600style = 'style/weibo_600';
+				var img_24style = 'style/weibo_24_16';
+				if(item.ContentValue == null || item.ContentValue == '') {
+					return;
 				}
-			</script>
+				var li = document.createElement('div');
+				li.className = 'mui-card';
+				var headdiv = document.createElement("div");
+				headdiv.className = 'mui-input-row mui-checkbox';
+				headdiv.innerHTML = '<input name="checkbox1" value="' + item.Id + '" type="checkbox"><label>选择：</label>';
 
+				var imgdiv = document.createElement("div");
+
+				var imgs = item.ContentValue.split(',');
+				if(imgs.length > 1) {
+					//多图
+					imgdiv.className = 'media-pic-list';
+					var ul = document.createElement("ul");
+					var imgHtmlStr = "";
+					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
+					for(var i = 0; i < imgs.length; i++) {
+						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					}
+					ul.innerHTML = imgHtmlStr;
+					imgdiv.appendChild(ul);
+				} else {
+					imgdiv.className = "mui-card-content";
+					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+					imgdiv.innerHTML = imgHtmlStr;
+				}
+
+				var footdiv = document.createElement('div');
+				footdiv.className = 'mui-card-content';
+				footdiv.innerHTML = '<p>Posted on ' + item.PublishTime + '</p>' +
+					'<p style="color: #333;">' + item.Description + '...</p>';
+				li.appendChild(headdiv);
+				li.appendChild(imgdiv);
+				li.appendChild(footdiv);
+				table.insertBefore(li, table.firstChild);
+			}
+		</script>
+		<script type="text/javascript">
+			var result = $('#result')[0];
+			$("#datePicker2,#datePicker1").bind("click", function() {
+				var dtpicker = new mui.DtPicker({
+					type: "date", //设置日历初始视图模式 
+				});
+				console.log("232232");
+				dtpicker.show(function(rs) {
+					/*
+					 * rs.value 拼合后的 value
+					 * rs.text 拼合后的 text
+					 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+					 * rs.m 月，用法同年
+					 * rs.d 日，用法同年
+					 * rs.h 时，用法同年
+					 * rs.i 分（minutes 的第二个字母），用法同年
+					 */
+					result.innerText = '选择结果: ' + rs.text;
+					/* 
+					 * 返回 false 可以阻止选择框的关闭
+					 * return false;
+					 */
+					/*
+					 * 释放组件资源，释放后将将不能再操作组件
+					 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+					 */
+					
+				});
+			});
+		</script>
 	</body>
 
 </html>
