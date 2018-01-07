@@ -71,6 +71,23 @@ namespace ImBLL
         }
 
         /// <summary>
+        /// 根据时间范围获取微博列表
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public List<WeiboVm> GetListByDateRange(int userid, DateTime dateStart, DateTime dateEnd)
+        {
+            var resultList = new List<WeiboVm>();
+            var ds = _weiBoDal.GetListByDateRange(userid,dateStart,dateEnd);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                resultList.AddRange(from DataRow dataRow in ds.Tables[0].Rows select DataRowToModel(dataRow));
+            }
+            return resultList;
+        }
+
+        /// <summary>
         /// 分页获取数据,获取用户微博列表
         /// </summary>
         /// <param name="userid"></param>

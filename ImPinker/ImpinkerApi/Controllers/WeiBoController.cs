@@ -243,8 +243,19 @@ namespace ImpinkerApi.Controllers
                     Data = null
                 });
             }
+            var resultList = weiboVmTrans(list);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Description = "ok",
+                Data = resultList
+            });
+        }
+
+        private List<WeiBoListViewModel>  weiboVmTrans(List<WeiboVm> lists)
+        {
             var resultList = new List<WeiBoListViewModel>();
-            foreach (var weiBo in list)
+            foreach (var weiBo in lists)
             {
                 var model = new WeiBoListViewModel
                 {
@@ -266,6 +277,35 @@ namespace ImpinkerApi.Controllers
                 model.UserHeadImage = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
                 resultList.Add(model);
             }
+            return resultList;
+        }
+
+        /// <summary>
+        /// 根据时间范围获取我的微博列表
+        /// </summary>
+        /// <param name="datestart">开始时间</param>
+        /// <param name="dateend">结束时间</param>
+        /// <returns></returns>
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage GetMyWeiBoByDateRange(DateTime dateStart, DateTime dateEnd)
+        {
+            if (dateEnd > DateTime.Now)
+            {
+                dateEnd = DateTime.Now;
+            }
+            var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
+            var list = _weiBoBll.GetListByDateRange(userid, dateStart, dateEnd);
+            if (list == null || list.Count == 0)
+            {
+                return GetJson(new JsonResultViewModel
+                {
+                    IsSuccess = 0,
+                    Description = "暂无更多数据",
+                    Data = null
+                });
+            }
+            var resultList = weiboVmTrans(list);
             return GetJson(new JsonResultViewModel
             {
                 IsSuccess = 1,

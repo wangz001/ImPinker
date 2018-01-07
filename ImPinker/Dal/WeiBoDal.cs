@@ -157,6 +157,44 @@ WHERE   T.row BETWEEN @startIndex AND @endIndex )AS t2
             return ds;
         }
 
+        /// <summary>
+        /// 根据时间范围获取微博列表
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="pagesize"></param>
+        /// <returns></returns>
+        public DataSet GetListByDateRange(int userid, DateTime dateStart, DateTime dateEnd)
+        {
+            const string sql = @"
+ ( SELECT           [Id] ,
+                    [UserId] ,
+                    [Description] ,
+                    [ContentValue] ,
+                    [ContentType] ,
+                    [Longitude] ,
+                    [Latitude] ,
+                    [Height] ,
+                    [LocationText] ,
+                    [State] ,
+                    [HardWareType] ,
+                    [IsRePost] ,
+                    [CreateTime] ,
+                    [UpdateTime]
+          FROM      [MyAutosTest].[dbo].[WeiBo]
+          WHERE     UserId=@UserId AND State = 1 and CreateTime between @startDate and @endDate
+        ) 
+";
+            
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
+					new SqlParameter("@startDate", SqlDbType.DateTime){Value = dateStart},
+					new SqlParameter("@endDate", SqlDbType.DateTime){Value = dateEnd}};
+            var ds = DbHelperSQL.Query(sql, parameters);
+            return ds;
+        }
+
+        
         public DataSet GetById(long weiboid)
         {
             var sql = @"
