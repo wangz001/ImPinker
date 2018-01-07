@@ -10,6 +10,12 @@
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<style type="text/css">
+			#datePicker1,
+			#datePicker2 {
+				width: 61%;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,29 +23,29 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 id="title" class="mui-title">选择途迹</h1>
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
-			
+
 		</header>
 
 		<div id="popover" class="mui-popover">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a id='datePicker1' data-options='{"type":"date"}'>选择开始日期 ...</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<div id='result' class="ui-alert"></div>
-				</li>
-				<li class="mui-table-view-cell">
-					<a id='datePicker2' data-options='{"type":"date"}'>选择结束日期 ...</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">Item2</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">筛选</a>
-				</li>
-			</ul>
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<a data-options='{"type":"date"}'></a>
+				</div>
+				<div class="mui-input-row">
+					<label>start</label>
+					<label id='datePicker1' data-options='{"type":"date"}'>选择开始日期 ...</label>
+				</div>
+				<div class="mui-input-row mui-plus-visible">
+					<label>end</label>
+					<label id='datePicker2' data-options='{"type":"date"}'>选择结束日期 ...</label>
+				</div>
+				<div class="mui-button-row">
+					<button id="btn_submitTime" type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+					<button id="btn_closePop" type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+				</div>
+			</div>
 		</div>
-		
+
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<a href="#popover" id="openPopover" class="btn mui-btn mui-btn-block">按时间筛选 ...</a>
 			<div class="mui-scroll">
@@ -252,12 +258,23 @@
 			}
 		</script>
 		<script type="text/javascript">
-			var result = $('#result')[0];
-			$("#datePicker2,#datePicker1").bind("click", function() {
+			$("#btn_closePop").bind("click", function() {
+				mui('#popover').popover('hide');
+			});
+			var date1, date2;
+			$("#btn_submitTime").bind("click", function() {
+				if(date1 != null && date2 != null) {
+					mui.alert(date1 + "~" + date2);
+					mui('#popover').popover('hide');
+				} else {
+					mui.alert("请选择时间范围~");
+				}
+			});
+
+			$("#datePicker1").bind("click", function() {
 				var dtpicker = new mui.DtPicker({
 					type: "date", //设置日历初始视图模式 
 				});
-				console.log("232232");
 				dtpicker.show(function(rs) {
 					/*
 					 * rs.value 拼合后的 value
@@ -268,7 +285,8 @@
 					 * rs.h 时，用法同年
 					 * rs.i 分（minutes 的第二个字母），用法同年
 					 */
-					result.innerText = '选择结果: ' + rs.text;
+					$("#datePicker1").html(rs.text);
+					date1 = rs.value;
 					/* 
 					 * 返回 false 可以阻止选择框的关闭
 					 * return false;
@@ -279,7 +297,16 @@
 					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
 					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 					 */
-					
+				});
+			});
+
+			$("#datePicker2").bind("click", function() {
+				var dtpicker = new mui.DtPicker({
+					type: "date", //设置日历初始视图模式 
+				});
+				dtpicker.show(function(rs) {
+					$("#datePicker2").html(rs.text);
+					date2 = rs.value;
 				});
 			});
 		</script>
