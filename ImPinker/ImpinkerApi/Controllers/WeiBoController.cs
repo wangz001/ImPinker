@@ -252,7 +252,7 @@ namespace ImpinkerApi.Controllers
             });
         }
 
-        private List<WeiBoListViewModel>  weiboVmTrans(List<WeiboVm> lists)
+        private List<WeiBoListViewModel> weiboVmTrans(List<WeiboVm> lists)
         {
             var resultList = new List<WeiBoListViewModel>();
             foreach (var weiBo in lists)
@@ -290,21 +290,20 @@ namespace ImpinkerApi.Controllers
         [TokenCheck]
         public HttpResponseMessage GetMyWeiBoByDateRange(DateTime dateStart, DateTime dateEnd)
         {
+            if (dateStart == null) dateStart = DateTime.Now;
+            if (dateEnd == null) dateEnd = DateTime.Now;
             if (dateEnd > DateTime.Now)
             {
                 dateEnd = DateTime.Now;
             }
+            if (dateStart > dateEnd)
+            {
+                var temp = dateStart;
+                dateStart = dateEnd;
+                dateEnd = temp;
+            }
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
             var list = _weiBoBll.GetListByDateRange(userid, dateStart, dateEnd);
-            if (list == null || list.Count == 0)
-            {
-                return GetJson(new JsonResultViewModel
-                {
-                    IsSuccess = 0,
-                    Description = "暂无更多数据",
-                    Data = null
-                });
-            }
             var resultList = weiboVmTrans(list);
             return GetJson(new JsonResultViewModel
             {
@@ -410,13 +409,13 @@ namespace ImpinkerApi.Controllers
             var flag = _weiBoBll.DeleteWeibo(userid, (int)weibo.Id);
             return GetJson(new JsonResultViewModel
             {
-                IsSuccess =flag?1: 0,
+                IsSuccess = flag ? 1 : 0,
                 Description = "ok",
                 Data = flag
             });
         }
 
-    #endregion
+        #endregion
 
     }
 }

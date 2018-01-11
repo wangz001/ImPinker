@@ -21,9 +21,8 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 id="title" class="mui-title">选择途迹</h1>
+			<h1 id="title" class="mui-title"><a href="#popover" id="openPopover" >按时间筛选 <i class="mui-icon mui-icon-arrowdown"></i></a></h1>
 			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
-
 		</header>
 
 		<div id="popover" class="mui-popover">
@@ -32,22 +31,19 @@
 					<a data-options='{"type":"date"}'></a>
 				</div>
 				<div class="mui-input-row">
-					<label>start</label>
 					<label id='datePicker1' data-options='{"type":"date"}'>选择开始日期 ...</label>
 				</div>
 				<div class="mui-input-row mui-plus-visible">
-					<label>end</label>
 					<label id='datePicker2' data-options='{"type":"date"}'>选择结束日期 ...</label>
 				</div>
 				<div class="mui-button-row">
-					<button id="btn_submitTime" type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
 					<button id="btn_closePop" type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+					<button id="btn_submitTime" type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
 				</div>
 			</div>
 		</div>
 
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<a href="#popover" id="openPopover" class="btn mui-btn mui-btn-block">按时间筛选 ...</a>
 			<div class="mui-scroll">
 				<!--<div class="mui-card">
 					<div class="mui-input-row mui-checkbox">
@@ -79,6 +75,21 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+		<script type="text/template" id="weiboitem">
+			<div class="mui-card">
+				<div class="mui-input-row mui-checkbox">
+					<input name="checkbox1" value="$Id$" type="checkbox">
+					<label>序号:</label>
+				</div>
+				<div class="media-pic-list">
+					$imglist$
+				</div>
+				<div class="mui-card-content">
+					<p>$PublishTime$</p>
+					<p style="color: #333;">$Description$</p>
+				</div>
+			</div>
+		</script>
 		<script>
 			var pageNum = 1;
 			var pageSize = 10;
@@ -88,17 +99,9 @@
 				pullRefresh: {
 					container: '#pullrefresh',
 					up: {
-						style: 'circle',
-						callback: pullupRefresh()
-					},
-					down: {
-						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-						height: '50px', //可选,默认50px.下拉刷新控件的高度,
-						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-						auto: true, //可选,默认false.首次加载自动上拉刷新一次
-						callback: pulldownRefresh()
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
 					}
 				},
 				preloadPages: [{
@@ -172,7 +175,7 @@
 				});
 			}
 
-			function pullupRefresh() {
+			function pulldownRefresh() {
 
 			}
 
@@ -181,31 +184,29 @@
 			/**
 			 * 上拉加载具体业务实现
 			 */
-			function pulldownRefresh() {
-				console.log("444")
+			function pullupRefresh() {
 				var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
 				var datapara = {
 					pageindex: pageNum,
 					pageSize: pageSize
 				};
-				console.log(JSON.stringify(datapara));
+				//console.log(JSON.stringify(datapara));
 				commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
-					console.log(JSON.stringify(data));
+					//console.log(JSON.stringify(data));
 					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 						var list = data.Data;
 						allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
-						var table = document.body.querySelector('.mui-scroll');
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
-							initWeiBoItem(table, item);
+							initWeiBoItem(item);
 						}
 						bindCheckBoxTab();
 					} else {
-						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 						return;
 					}
 					pageNum++;
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //参数为true代表没有更多数据了。
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 				});
 			}
 			/**
@@ -213,48 +214,32 @@
 			 * @param {Object} table
 			 * @param {Object} item
 			 */
-			function initWeiBoItem(table, item) {
+			var img_1200style = 'style/weibo_1200';
+			var img_600style = 'style/weibo_600';
+			var img_24style = 'style/weibo_24_16';
+			var img_36style = 'style/weibo_36_24';
+			var weiboTemplate = $('script[id="weiboitem"]').html();
 
-				var img_1200style = 'style/weibo_1200';
-				var img_600style = 'style/weibo_600';
-				var img_24style = 'style/weibo_24_16';
+			function initWeiBoItem(item) {
 				if(item.ContentValue == null || item.ContentValue == '') {
 					return;
 				}
-				var li = document.createElement('div');
-				li.className = 'mui-card';
-				var headdiv = document.createElement("div");
-				headdiv.className = 'mui-input-row mui-checkbox';
-				headdiv.innerHTML = '<input name="checkbox1" value="' + item.Id + '" type="checkbox"><label>选择：</label>';
-
-				var imgdiv = document.createElement("div");
-
+				var imgHtmlStr = "";
 				var imgs = item.ContentValue.split(',');
 				if(imgs.length > 1) {
 					//多图
-					imgdiv.className = 'media-pic-list';
-					var ul = document.createElement("ul");
-					var imgHtmlStr = "";
-					var imgclass = imgs.length > 1 ? "smallimage" : "bigimage";
-					for(var i = 0; i < imgs.length; i++) {
-						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					imgHtmlStr += "<ul>";
+					for(var j = 0; j < imgs.length; j++) {
+						imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
 					}
-					ul.innerHTML = imgHtmlStr;
-					imgdiv.appendChild(ul);
+					imgHtmlStr += "</ul>";
 				} else {
-					imgdiv.className = "mui-card-content";
-					var imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_600style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-					imgdiv.innerHTML = imgHtmlStr;
+					imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
 				}
-
-				var footdiv = document.createElement('div');
-				footdiv.className = 'mui-card-content';
-				footdiv.innerHTML = '<p>Posted on ' + item.PublishTime + '</p>' +
-					'<p style="color: #333;">' + item.Description + '...</p>';
-				li.appendChild(headdiv);
-				li.appendChild(imgdiv);
-				li.appendChild(footdiv);
-				table.insertBefore(li, table.firstChild);
+				item.imglist = imgHtmlStr;
+				var cardStr = weiboTemplate.temp(item);
+				$(".mui-scroll").append(cardStr);
+				//table.insertBefore(li, table.firstChild);
 			}
 		</script>
 		<script type="text/javascript">
@@ -266,49 +251,64 @@
 				if(date1 != null && date2 != null) {
 					mui.alert(date1 + "~" + date2);
 					mui('#popover').popover('hide');
+					getListByRange(date1, date2);
 				} else {
 					mui.alert("请选择时间范围~");
 				}
 			});
 
+			var dtpicker1;
 			$("#datePicker1").bind("click", function() {
-				var dtpicker = new mui.DtPicker({
-					type: "date", //设置日历初始视图模式 
-				});
-				dtpicker.show(function(rs) {
-					/*
-					 * rs.value 拼合后的 value
-					 * rs.text 拼合后的 text
-					 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
-					 * rs.m 月，用法同年
-					 * rs.d 日，用法同年
-					 * rs.h 时，用法同年
-					 * rs.i 分（minutes 的第二个字母），用法同年
-					 */
+				if(dtpicker1 == null) {
+					dtpicker1 = new mui.DtPicker({
+						type: "date", //设置日历初始视图模式 
+					});
+				}
+				dtpicker1.show(function(rs) {
 					$("#datePicker1").html(rs.text);
 					date1 = rs.value;
-					/* 
-					 * 返回 false 可以阻止选择框的关闭
-					 * return false;
-					 */
-					/*
-					 * 释放组件资源，释放后将将不能再操作组件
-					 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
-					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
-					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
-					 */
 				});
 			});
-
+			var dtpicker2; //防止重复加载
 			$("#datePicker2").bind("click", function() {
-				var dtpicker = new mui.DtPicker({
-					type: "date", //设置日历初始视图模式 
-				});
-				dtpicker.show(function(rs) {
+				if(dtpicker2 == null) {
+					dtpicker2 = new mui.DtPicker({
+						type: "date", //设置日历初始视图模式 
+					});
+				}
+				dtpicker2.show(function(rs) {
 					$("#datePicker2").html(rs.text);
 					date2 = rs.value;
 				});
 			});
+
+			function getListByRange(date1, date2) {
+				plus.nativeUI.showWaiting('正在获取数据。。。');
+				var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoByDateRange';
+				var datapara = {
+					dateStart: date1,
+					dateEnd: date2
+				};
+				//console.log(JSON.stringify(datapara));
+				commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
+					//console.log(JSON.stringify(data));
+					plus.nativeUI.closeWaiting();
+					$(".mui-scroll").html("");
+					allItems = new Array();
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItem(item);
+						}
+						bindCheckBoxTab();
+					} else {
+						mui.toast("没有搜索到相关数据");
+					}
+				});
+
+			}
 		</script>
 	</body>
 
