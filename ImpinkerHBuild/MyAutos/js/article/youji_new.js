@@ -131,6 +131,8 @@
 							console.log(JSON.stringify(data));
 							return callback(data);
 						});
+					} else {
+						mui.toast("请填写游记名称~");
 					}
 				}, function(zipe) {
 					mui.toast('压缩失败！')
@@ -237,6 +239,8 @@
 						owner.article.coverimage = url;
 						$("#setcoverimage").attr('src', url);
 					});
+				} else {
+					mui.toast("请填写游记名称~");
 				}
 			});
 		}, function(e) {
