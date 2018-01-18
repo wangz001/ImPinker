@@ -560,7 +560,8 @@
 					"view/about.html",
 					"login.html",
 					"view/setting/setting-notify.html",
-					"view/user/usercollect.html"
+					"view/user/usercollect.html",
+					"view/weibo/index.html"
 				],
 				"priority": 0
 			},
@@ -1139,7 +1140,6 @@
 				"view/news/tab-webview-subpage-chat.html",
 				"view/news/tab-webview-subpage-setting.html",
 				"view/news/tab-webview-main.html",
-				"view/weibo/index.html",
 				"view/partialView/_nav_partial.html",
 				"view/news/tab-webview-subpage-about.html",
 				"view/news/tab-webview-subpage-contact.html"

@@ -82,7 +82,8 @@
 			"view/setting/setting.html",
 			"login.html",
 			"view/setting/setting-notify.html",
-			"view/user/usercollect.html"
+			"view/user/usercollect.html",
+			"view/weibo/index.html"
 		],
 		"resources": [
 			"js/mui.min.js",
