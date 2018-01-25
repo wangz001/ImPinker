@@ -15,74 +15,72 @@
 			<h1 id="title" class="mui-title">消息</h1>
 		</header>
 		<div class="mui-content">
-			<div style="padding: 10px 10px;background-color: #fff;">
-				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-					<a class="mui-control-item mui-active" href="#item1">
-						新通知（8）
-					</a>
-					<a class="mui-control-item" href="#item2">
-						全部
-					</a>
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile">
+							新通知
+						</a>
+						<a class="mui-control-item" href="#item2mobile">
+							全部
+						</a>
+					</div>
 				</div>
-			</div>
-			<div style="background-color: #fff;" class="mui-slider-group">
-				<div id="item1" class="mui-control-content mui-active">
-					<!--<div class="info-rows-2">
-						<div class="info-box-2">
-							<div class="img-box">
-								<img src="../../images/logo1.png">
-							</div>
-							<div class="content">
-								<div class="panel">
-									<div class="wrap">
-										<h6>直播小张</h6>
-										<p>北京未实名认证的手机卡被分批实施单向停</p>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="mui-table-view-1">
 
-										<strong class="date">3分钟前</strong>
-									</div>
-								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="info-rows-2">
-						<div class="info-box-2">
-							<div class="img-box">
-								<img src="../../images/logo1.png">
-							</div>
-							<div class="content noread">
-								<div class="panel">
-									<div class="wrap">
-										<h6><em class="icon-red">New</em> 直播小张</h6>
-										<p>北京未实名认证的手机卡被分批实施单向停</p>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="mui-table-view-2">
+									<!--<li class="mui-table-view-cell">
+										<div class="info-rows-2">
+											<div class="info-box-2">
+												<div class="img-box">
+													<img src="../../images/logo1.png">
+												</div>
+												<div class="content noread">
+													<div class="panel">
+														<div class="wrap">
+															<h6><em class="icon-red">New</em> 直播小张</h6>
+															<p>北京未实名认证的手机卡被分批实施单向停</p>
 
-										<strong class="date">3分钟前</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>-->
-				</div>
-				<div id="item2" class="mui-control-content">
-					<div id="item2-content">
-						<div class="info-rows-2">
-							<div class="info-box-2">
-								<div class="img-box">
-									<img src="../../images/logo1.png">
-								</div>
-								<div class="content noread">
-									<div class="panel">
-										<div class="wrap">
-											<h6><em class="icon-red">New</em> 直播小张</h6>
-											<p>北京未实名认证的手机卡被分批实施单向停</p>
-											<strong class="date">3分钟前</strong>
+															<strong class="date">3分钟前</strong>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+									</li>
+									<li class="mui-table-view-cell">
+										<div class="info-rows-2">
+											<div class="info-box-2">
+												<div class="img-box">
+													<img src="../../images/logo1.png">
+												</div>
+												<div class="content">
+													<div class="panel">
+														<div class="wrap">
+															<h6>直播小张</h6>
+															<p>北京未实名认证的手机卡被分批实施单向停</p>
+
+															<strong class="date">3分钟前</strong>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>-->
+								</ul>
 							</div>
 						</div>
-					</div>
-					<div class="loadmore">
-						<p id="loadMore">加载更多...</p>
 					</div>
 				</div>
 			</div>
@@ -91,57 +89,95 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/template" id="notifyitem">
-			<div class="info-rows-2" targettype="$TargetType$" targetid="$Target$" notifyid="$Id$">
-				<div class="info-box-2">
-					<div class="img-box">
-						<img src="$SenderHeadUrl$">
-					</div>
-					<div class="content">
-						<div class="panel">
-							<div class="wrap">
-								<h6>$SenderName$ $ActionName$ 你的 $TargetTypeName$ 《$TargetName$》</h6>
-								<p>$ContentStr$</p>
-								<strong class="date">$CreateTime$</strong>
+			<li class="mui-table-view-cell">
+				<div class="info-rows-2" targettype="$TargetType$" targetid="$Target$" notifyid="$Id$">
+					<div class="info-box-2">
+						<div class="img-box">
+							<img src="$SenderHeadUrl$">
+						</div>
+						<div class="content">
+							<div class="panel">
+								<div class="wrap">
+									<h6>$SenderName$ $ActionName$ 你的 $TargetTypeName$ 《$TargetName$》</h6>
+									<p>$ContentStr$</p>
+									<strong class="date">$CreateTime$</strong>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</li>
 		</script>
 		<script type="text/template" id="notifyitem-noread">
-			<div class="info-rows-2" targettype="$TargetType$" targetid="$Target$" notifyid="$Id$">
-				<div class="info-box-2">
-					<div class="img-box">
-						<img src="$SenderHeadUrl$">
-					</div>
-					<div class="content noread">
-						<div class="panel">
-							<div class="wrap">
-								<h6><em class="icon-red">New</em> $SenderName$ $ActionName$ 你的 $TargetTypeName$ 《$TargetName$》</h6>
-								<p>$ContentStr$</p>
-								<strong class="date">$CreateTime$</strong>
+			<li class="mui-table-view-cell">
+				<div class="info-rows-2" targettype="$TargetType$" targetid="$Target$" notifyid="$Id$">
+					<div class="info-box-2">
+						<div class="img-box">
+							<img src="$SenderHeadUrl$">
+						</div>
+						<div class="content noread">
+							<div class="panel">
+								<div class="wrap">
+									<h6><em class="icon-red">New</em> $SenderName$ $ActionName$ 你的 $TargetTypeName$ 《$TargetName$》</h6>
+									<p>$ContentStr$</p>
+									<strong class="date">$CreateTime$</strong>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</li>
 		</script>
-		<script type="text/javascript">
-			var allNotifyPage = 1;
-			var allNotifyPageSize = 5;
+		<script>
 			mui.init();
 
 			mui.plusReady(function() {
-				getNotify();
-				getAllNotify(allNotifyPage, allNotifyPageSize);
-				$("#loadMore").bind('click', function() {
-					getAllNotify(allNotifyPage, allNotifyPageSize);
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				mui('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				//默认加载第一页
+				getNotify(function(data) {
+				});
+				getAllNotify(function(data) {
+				});
+
+				mui("#item1mobile .mui-scroll").pullToRefresh({
+					up: {
+						callback: function() {
+							var self = this;
+							getNotify(function(data) {
+								self.endPullUpToRefresh();
+							});
+						}
+					}
+				});
+				mui("#item2mobile .mui-scroll").pullToRefresh({
+					up: {
+						callback: function() {
+							var self = this;
+							getAllNotify(function(data) {
+								if(data.IsSuccess == 1 && data.Data != null) {
+									self.endPullUpToRefresh();
+								} else {
+									self.endPullUpToRefresh(true);
+								}
+							});
+						}
+					}
 				});
 			});
-
+		</script>
+		<script type="text/javascript">
 			///获取通知。 isnew=1时，表示获取新通知；isnew=0表示获取全部
-			function getNotify() {
+			function getNotify(callback) {
+				callback = callback || $.noop;
 				var url = "http://api.myautos.cn/api/Notify/GetNewNotifyList";
 				var data = {
 					isread: 1
@@ -153,19 +189,22 @@
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
 							var tempStr = template_notifyitem.temp(item);
-							$("#item1").append(tempStr);
+							$("#mui-table-view-1").append(tempStr);
 						}
 					}
+					return callback(data);
 				});
 			}
 
 			///获取所有通知。分页
-			function getAllNotify(page, pagesize) {
-				$("#loadMore").html("正在加载...");
+			var allNotifyPage = 1;
+			var allNotifyPageSize = 15;
+			function getAllNotify(callback) {
+				callback = callback || $.noop;
 				var url = "http://api.myautos.cn/api/Notify/GetAllNotifyList";
 				var data = {
-					page: page,
-					pagesize: pagesize
+					page: allNotifyPage,
+					pagesize: allNotifyPageSize
 				};
 				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null) {
@@ -180,13 +219,13 @@
 							} else {
 								tempStr = template_notifyitem_noread.temp(item);
 							}
-							$("#item2-content").append(tempStr);
+							$("#mui-table-view-2").append(tempStr);
 						}
 						allNotifyPage++;
-						$("#loadMore").html("加载更多...");
-					}else{
-						$("#loadMore").html("没有更多数据");
+					} else {
+						mui.toast("没有更多数据");
 					}
+					return callback(data);
 				});
 			}
 

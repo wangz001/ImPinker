@@ -88,6 +88,24 @@ html {
 }
 
 
+/*标签切换*/
+
+#sliderSegmentedControl .mui-scroll {
+	position: inherit;
+}
+
+
+/*正在加载。。。 文字样式*/
+
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #efeff4;
+	font-size: 15px;
+	line-height: 40px;
+	color: #777;
+}
+
+
 /*聊天室块*/
 
 .info-rows-2 {
@@ -121,8 +139,9 @@ html {
 	box-sizing: border-box;
 	border-radius: 5px;
 }
+
 .info-box-2 .content.noread .panel {
-	background:#dbe6f6;
+	background: #dbe6f6;
 }
 
 .info-box-2 .content .panel .wrap {
@@ -217,7 +236,8 @@ html {
 	color: #999;
 	line-height: 18px;
 }
-#item2 .loadmore{
+
+#item2 .loadmore {
 	align-content: center;
 	position: relative;
 	text-align: center;
