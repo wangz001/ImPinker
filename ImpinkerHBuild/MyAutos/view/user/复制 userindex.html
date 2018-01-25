@@ -13,125 +13,98 @@
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
-			#scroll1 .mui-card-header>img:first-child {
-				font-size: 0;
-				line-height: 0;
-				float: left;
-				width: 34px;
-				height: 34px;
-			}
+
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">
-			</h1>
+			<h1 class="mui-title"></h1>
 		</header>
 		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll">
-						<a class="mui-control-item mui-active" href="#item1mobile">
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
+						<div class="head-img"><img src="../../images/food.png">
+						</div>
+						<div class="username">
+							<!--<h4>Bwlang星</h4>-->
+						</div>
+					</div>
+					<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item" id="item1">
+							主页
+						</a>
+						<a class="mui-control-item" id="item2">
 							途迹
 						</a>
-						<a class="mui-control-item" href="#item2mobile">
+						<a class="mui-control-item" id="item3">
 							游记
 						</a>
 					</div>
-				</div>
-				<div class="mui-slider-group">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
-									<div class="head-img"><img src="../../images/food.png">
-									</div>
-									<div class="username">
-										<!--<h4>Bwlang星</h4>-->
-									</div>
+					<ul class="mui-table-view" id="cardlist">
+						<li class="card-article">
+							<div class="mui-card">
+								<div class="mui-card-title">
+									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 								</div>
-								<ul class="mui-table-view" id="mui-table-view-1">
-									<li class="card-article">
-										<div class="mui-card">
-											<div class="mui-card-title">
-												<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
-											</div>
-											<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)"></div>
-											<div class="mui-card-content">
-												<div class="mui-card-content-inner">
-													<p class="userinfo">Posted on January 18, 2016
-														<span class="viewcount">
+								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../../images/cbd.jpg)"></div>
+								<div class="mui-card-content">
+									<div class="mui-card-content-inner">
+										<p class="userinfo">Posted on January 18, 2016
+											<span class="viewcount">
 											<em class="mui-icon-extra mui-icon-extra-like">10</em>
 											<em class="mui-icon mui-icon-compose">23</em>
 											</span>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="card-weibo1">
-										<div class="mui-card">
-											<div class="mui-card-header mui-card-media">
-												<img class="head-img" src="../../images/logo.png">
-												<div class="mui-media-body">
-													<em class="mui-icon mui-icon-person">bwlang</em>
-													<p>发表于 2016-06-30 15:30</p>
-												</div>
-											</div>
-											<div class="mui-card-content">
-												<p>的空间疯狂的健康</p>
-												<div class="media-pic-list">
-													<ul>
-														<li>
-															<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
-														</li>
-														<li>
-															<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
-														</li>
-													</ul>
-												</div>
-												<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
-											</div>
-											<div class="mui-card-footer">
-												<span class="mui-icon mui-icon-location"><em>20</em></span>
-												<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-												<span class="mui-icon mui-icon-compose"></span>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div id="item2mobile" class="mui-slider-item mui-control-content">
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
-									<div class="head-img"><img src="../../images/food.png">
-									</div>
-									<div class="username">
-										<!--<h4>Bwlang星</h4>-->
+										</p>
 									</div>
 								</div>
-								<ul class="mui-table-view" id="mui-table-view-2">
-
-								</ul>
 							</div>
-						</div>
-					</div>
+						</li>
+						<li class="card-weibo1">
+							<div class="mui-card">
+								<div class="mui-card-header mui-card-media">
+									<img class="head-img" src="../../images/logo.png">
+									<div class="mui-media-body">
+										<em class="mui-icon mui-icon-person">bwlang</em>
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
+								<div class="mui-card-content">
+									<p>的空间疯狂的健康</p>
+									<div class="media-pic-list">
+										<ul>
+											<li>
+												<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+											</li>
+											<li>
+												<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+											</li>
+										</ul>
+									</div>
+									<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+								</div>
+								<div class="mui-card-footer">
+									<span class="mui-icon mui-icon-location"><em>20</em></span>
+									<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+									<span class="mui-icon mui-icon-compose"></span>
+								</div>
+							</div>
+						</li>
+
+					</ul>
 				</div>
 			</div>
+
 		</div>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/app.js"></script>
-		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script src="../../js/mui.pullToRefresh.js"></script>
-		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/template" id="card-article">
 			<li class="card-article">
 				<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -179,58 +152,28 @@
 				</div>
 			</li>
 		</script>
-		<script>
-			mui.init();
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true,
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在加载...',
+						auto: true,
+						contentnomore: '没有更多数据了',
+						callback: pullupRefresh
+					}
+				}
+			});
 			mui.plusReady(function() {
-				//阻尼系数
-				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				mui('.mui-scroll-wrapper').scroll({
-					bounce: false,
-					indicators: true, //是否显示滚动条
-					deceleration: deceleration
-				});
-				//获取参数
 				var self = plus.webview.currentWebview();
 				currentParamEntity.userid = self.userid;
-
-				//默认加载第一页
-				getWeiboList(function(data) {});
-				getArticleList(function(data) {});
-
-				mui("#item1mobile .mui-scroll").pullToRefresh({
-					up: {
-						callback: function() {
-							var self = this;
-							getWeiboList(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null) {
-									self.endPullUpToRefresh();
-								} else {
-									self.endPullUpToRefresh(true);
-								}
-							});
-						}
-					}
-				});
-				mui("#item2mobile .mui-scroll").pullToRefresh({
-					up: {
-						callback: function() {
-							var self = this;
-							getArticleList(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null) {
-									self.endPullUpToRefresh();
-								} else {
-									self.endPullUpToRefresh(true);
-								}
-							});
-						}
-					}
-				});
+				//getUserinfo(userid);
 			});
 			mui.previewImage();
-		</script>
-		<script type="text/javascript">
+
 			var currentParamEntity = {
-				userid: 0,
+				userid:0,
 				all: {
 					url: 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage',
 					pageindex: 1,
@@ -251,9 +194,80 @@
 				weiboids: new Array()
 
 			}
+			//tab切换
+			mui('.mui-slider-indicator').on('tap', 'a', function() {
+				var tabid = this.getAttribute('id');
+				if(tabid == "item1") {
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").show();
+					currentParamEntity.current = 1;
+				}
+				if(tabid == "item2") {
+					$(".mui-table-view .card-article").hide();
+					$(".mui-table-view .card-weibo").show();
+					currentParamEntity.current = 2;
+				}
+				if(tabid == "item3") {
+					$(".mui-table-view .card-article").show();
+					$(".mui-table-view .card-weibo").hide();
+					currentParamEntity.current = 3;
+				}
+			});
 
-			function getArticleList(callback) {
-				callback = callback || $.noop;
+			function pullupRefresh() {
+				switch(currentParamEntity.current) {
+					case 1:
+						getAllList();
+						break;
+					case 2:
+						getWeiboList();
+						break;
+					case 3:
+						getArticleList();
+						break;
+				}
+
+			}
+
+			function getAllList() {
+				//console.log(JSON.stringify(currentParamEntity));
+				var url = currentParamEntity.all.url; // 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage';
+				var data = {
+					userid: currentParamEntity.userid,
+					pageindex: currentParamEntity.all.pageindex,
+					pagesize: currentParamEntity.all.pagesize
+				};
+				commonUtil.sendRequestGet(url, data, function(data) {
+					//console.log(JSON.stringify(data));
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						var list = data.Data;
+						var firstItem = list[0].ArticleVm;
+						if(firstItem == null) {
+							firstItem = list[0].WeiboVm;
+						}
+						setUserinfo(firstItem);
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							if(item.EntityType == 1) {
+								var article = item.ArticleVm;
+								initCard(1, article);
+							}
+							if(item.EntityType == 2) {
+								var weibo = item.WeiboVm;
+								initCard(2, weibo);
+							}
+						}
+						currentParamEntity.all.pageindex++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
+				});
+			}
+
+			function getArticleList() {
+				console.log(JSON.stringify(currentParamEntity));
 				var url = currentParamEntity.article.url;
 				var data = {
 					userid: currentParamEntity.userid,
@@ -268,13 +282,16 @@
 							initCard(1, item);
 						}
 						currentParamEntity.article.pageindex++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
 					}
-					return callback(data);
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
 
-			function getWeiboList(callback) {
-				callback = callback || $.noop;
+			function getWeiboList() {
+				console.log(JSON.stringify(currentParamEntity));
 				var url = currentParamEntity.weibo.url;
 				var data = {
 					userid: currentParamEntity.userid,
@@ -289,8 +306,11 @@
 							initCard(2, item);
 						}
 						currentParamEntity.weibo.pageindex++;
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
 					}
-					return callback(data);
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
 				});
 			}
 
@@ -307,7 +327,7 @@
 					if($.inArray(article.Id, currentParamEntity.articleids) == -1) {
 						article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
 						var imgHtmlStr = articleTemplate.temp(article);
-						$("#mui-table-view-2").append(imgHtmlStr);
+						$("#cardlist").append(imgHtmlStr);
 						currentParamEntity.articleids.push(article.Id);
 					}
 				}
@@ -335,7 +355,7 @@
 							weibo.cardlocation = lbsStr;
 						}
 						var cardStr = weiboTemplate.temp(weibo);
-						$("#mui-table-view-1").append(cardStr);
+						$("#cardlist").append(cardStr);
 						currentParamEntity.weiboids.push(weibo.Id);
 					}
 				}
@@ -347,6 +367,8 @@
 				$("#header .mui-title").html(item.UserName);
 				$(".personal-top .head-img img").attr("src", item.UserHeadImage);
 			}
+		</script>
+		<script type="text/javascript">
 		</script>
 	</body>
 

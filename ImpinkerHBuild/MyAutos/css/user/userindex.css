@@ -52,7 +52,24 @@ body {
 }
 
 
-/*article 样式  card 样式*/
+/*标签切换*/
+
+#sliderSegmentedControl .mui-scroll {
+	position: inherit;
+}
+
+
+/*正在加载。。。 文字样式*/
+
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #efeff4;
+	font-size: 15px;
+	line-height: 40px;
+	color: #777;
+}
+
+/*article 样式 */
 
 .mui-card-title p {
 	display: block;
@@ -70,14 +87,15 @@ body {
 }
 
 .mui-card-content .viewcount,
-			.mui-media-body .viewcount {
-				float: right;
-			}
-			
-			.mui-card .mui-card-content-inner {
-				position: relative;
-				padding: 3px;
-			}
+.mui-media-body .viewcount {
+	float: right;
+}
+
+.mui-card .mui-card-content-inner {
+	position: relative;
+	padding: 3px;
+}
+
 .mui-card-content-inner .userinfo {
 	margin-bottom: 1px;
 }
@@ -86,53 +104,53 @@ body {
 	font-size: 13px;
 }
 
-/*card 样式*/
 
+/*card 样式*/
 .mui-scroll .mui-card {
-				margin: 0 0 5px 0;
-			}
-			
-			.mui-card-header.mui-card-media {
-				display: block;
-				padding: 6px 0 6px 10px;
-			}
-			
-			.mui-card-header.mui-card-media img {
-				border-radius: 4px;
-			}
-			
-			.mui-card-header .mui-media-body em {
-				font-size: 15px;
-			}
-			
-			.mui-card-header.mui-card-media .mui-media-body p {
-				font-size: 11px;
-				margin-top: 3px;
-			}
-			
-			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 10px
-			}
-			
-			.mui-card .mui-card-content p {
-				margin-bottom: 0px;
-			}
-			
-			.mui-card .card-location {
-				color: #b5bebf;
-				font-size: 13px;
-				margin-top: 3px;
-			}
-			
-			.mui-card .card-location .mui-icon {
-				font-size: 15px;
-			}
-			
-			.mui-card .mui-card-footer {
-				padding: 4px 45px;
-				min-height: 30px;
-			}
-			
-			.mui-card-footer em {
-				font-size: 10px;
-			}
+	margin: 0 0 5px 0;
+}
+
+.mui-card-header .mui-card-media {
+	display: block;
+	padding: 6px 0 6px 10px;
+}
+
+.mui-card-header .mui-card-media img {
+	border-radius: 4px;
+}
+
+.mui-card-header .mui-media-body em {
+	font-size: 15px;
+}
+
+.mui-card-header.mui-card-media .mui-media-body p {
+	font-size: 11px;
+	margin-top: 3px;
+}
+
+.mui-card .mui-card-content {
+	padding: 5px 5px 5px 10px
+}
+
+.mui-card .mui-card-content p {
+	margin-bottom: 0px;
+}
+
+.mui-card .card-location {
+	color: #b5bebf;
+	font-size: 13px;
+	margin-top: 3px;
+}
+
+.mui-card .card-location .mui-icon {
+	font-size: 15px;
+}
+
+.mui-card .mui-card-footer {
+	padding: 4px 45px;
+	min-height: 30px;
+}
+
+.mui-card-footer em {
+	font-size: 10px;
+}
