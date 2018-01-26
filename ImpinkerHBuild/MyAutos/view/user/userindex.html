@@ -24,7 +24,7 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-nav" id="header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">
 			</h1>
@@ -192,7 +192,9 @@
 				//获取参数
 				var self = plus.webview.currentWebview();
 				currentParamEntity.userid = self.userid;
-
+				var username=self.username;
+				var headimg=self.headimg;
+				setUserinfo(username,headimg);
 				//默认加载第一页
 				getWeiboList(function(data) {});
 				getArticleList(function(data) {});
@@ -342,12 +344,10 @@
 			}
 
 			//
-
-			function setUserinfo(item) {
-				$("#header .mui-title").html(item.UserName);
-				$(".personal-top .head-img img").attr("src", item.UserHeadImage);
+			function setUserinfo(username,headimg) {
+				$("#header .mui-title").html(username);
+				$(".personal-top .head-img img").attr("src", headimg);
 			}
 		</script>
 	</body>
-
 </html>

@@ -109,7 +109,7 @@ html {
 /*聊天室块*/
 
 .info-rows-2 {
-	padding: 15px 15px 0 15px;
+	
 }
 
 .info-box-2 {
@@ -167,7 +167,7 @@ html {
 .info-box-2 .content h6 {
 	font-size: 1.4rem;
 	color: #333;
-	line-height: 15px;
+	line-height: 20px;
 }
 
 .info-box-2 .content .icon-red {

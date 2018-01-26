@@ -51,7 +51,6 @@
 														<div class="wrap">
 															<h6><em class="icon-red">New</em> 直播小张</h6>
 															<p>北京未实名认证的手机卡被分批实施单向停</p>
-
 															<strong class="date">3分钟前</strong>
 														</div>
 													</div>
@@ -153,7 +152,7 @@
 						callback: function() {
 							var self = this;
 							getNotify(function(data) {
-								self.endPullUpToRefresh();
+								self.endPullUpToRefresh(true);
 							});
 						}
 					}
@@ -185,7 +184,7 @@
 				commonUtil.sendRequestWithToken(url, data, false, function(data) {
 					if(data.IsSuccess == 1 && data.Data != null) {
 						var list = data.Data;
-						var template_notifyitem = $('script[id="notifyitem"]').html();
+						var template_notifyitem = $('script[id="notifyitem-noread"]').html();
 						for(var i = 0; i < list.length; i++) {
 							var item = list[i];
 							var tempStr = template_notifyitem.temp(item);
