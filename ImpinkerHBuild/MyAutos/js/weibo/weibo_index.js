@@ -14,6 +14,7 @@ mui.init({
 	}
 
 });
+//图片预览
 mui.previewImage();
 
 mui.plusReady(function() {
@@ -146,44 +147,9 @@ function replace_em(str) {
 	return str;
 }
 
-//地图点击事件
-mui('.mui-scroll').on('tap', '.card-location', function() {
-	var weiboid = this.getAttribute('weiboid');
-	mui.openWindow({
-		url: "view/map/lbs.html",
-		id: "lbs",
-		show: {
-			aniShow: 'slide-in-right',
-			duration: 200
-		},
-		extras: {
-			weiboid: weiboid
-		}
-	});
-});
-
-//用户头像点击事件
-mui('.mui-scroll').on('tap', '.head-img', function() {
-	var userid = this.getAttribute('userid');
-	var username = this.getAttribute('username');
-	var headimg = this.getAttribute('src');
-	mui.openWindow({
-		url: "view/user/userindex.html",
-		id: "userindex",
-		show: {
-			aniShow: 'slide-in-right',
-			duration: 200
-		},
-		extras: {
-			userid: userid,
-			username: username,
-			headimg: headimg
-		}
-	});
-});
 //----------------------------------------------
 
-function bindClickEvent(){
+function bindClickEvent() {
 	//评论  
 	mui('.mui-scroll').on('tap', '.icon-compose', function() {
 		var weiboid = this.getAttribute("weiboid");
@@ -238,6 +204,42 @@ function bindClickEvent(){
 				}
 			});
 		}
+	});
+
+	//地图点击事件
+	mui('.mui-scroll').on('tap', '.card-location', function() {
+		var weiboid = this.getAttribute('weiboid');
+		mui.openWindow({
+			url: "view/map/lbs.html",
+			id: "lbs",
+			show: {
+				aniShow: 'slide-in-right',
+				duration: 200
+			},
+			extras: {
+				weiboid: weiboid
+			}
+		});
+	});
+
+	//用户头像点击事件
+	mui('.mui-scroll').on('tap', '.head-img', function() {
+		var userid = this.getAttribute('userid');
+		var username = this.getAttribute('username');
+		var headimg = this.getAttribute('src');
+		mui.openWindow({
+			url: "view/user/userindex.html",
+			id: "userindex",
+			show: {
+				aniShow: 'slide-in-right',
+				duration: 200
+			},
+			extras: {
+				userid: userid,
+				username: username,
+				headimg: headimg
+			}
+		});
 	});
 }
 
