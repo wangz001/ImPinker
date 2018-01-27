@@ -6,18 +6,8 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
-		<link href="../../css/icons-extra.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
-		<style type="text/css">
-			.mui-scroll .mui-card {
-				margin: 0 0 3px 0;
-				padding: 0px;
-			}
-			.mui-card-footer em {
-				font-size: 10px;
-			}
-		</style>
+		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
 	</head>
 
 	<body>
@@ -28,34 +18,92 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class=" mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<!--<div class="mui-card">
-						<div class="mui-card-header mui-card-media">
-							<img class="head-img" src="../../images/logo.png">
-							<div class="mui-media-body">
-								<em class="mui-icon mui-icon-person">bwlang</em>
-								<p>发表于 2016-06-30 15:30</p>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<div class="user_info">
+								<img src="../../images/logo1.png">
+								<span class="name">silva</span>
 							</div>
-						</div>
-						<div class="mui-card-content">
-							<p>的空间疯狂的健康</p>
-							<div class="media-pic-list">
-								<ul>
-									<li>
-										<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
-									</li>
-									<li>
-										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
-									</li>
-								</ul>
+							<div class="user_detail">
+								<p class="text">
+									欧亚大陆桥一共是两座。1973年博斯普鲁斯海峡上建起第一座跨海公路大吊桥。 桥的两头各有一呈门字型的高达165米的桥塔，水中不设桥墩。
+								</p>
+								<div class="list_img">
+									<a href="#">
+										<img src="../../images/cbd.jpg">
+									</a>
+									<a href="#">
+										<img src="../../images/datong.png">
+									</a>
+									<a href="#">
+										<img src="../../images/jeep.png">
+									</a>
+								</div>
+								<div class="user_news">
+									<span class="time">21分钟前</span>
+									<span class="love">736</span>
+									<span class="comment">2736</span>
+								</div>
 							</div>
-							<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
-						</div>
-						<div class="mui-card-footer">
-							<span class="mui-icon mui-icon-extra-heart"><em>20</em></span>
-							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-							<span class="mui-icon mui-icon-trash"></span>
-						</div>
-					</div>-->
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="user_info">
+								<img src="../../images/logo.png">
+								<span class="name">176斤的胖子</span>
+							</div>
+							<div class="user_detail">
+								<p class="text">
+									欧亚大陆桥一共是两座。
+								</p>
+								<div class="list_img">
+									<a href="#">
+										<img src="../../images/cbd.jpg">
+									</a>
+									<a href="#">
+										<img src="../../images/20171223221008.jpg">
+									</a>
+									<a href="#">
+										<img src="../../images/food.png">
+									</a>
+									<a href="#">
+										<img src="../../images/muwu.jpg">
+									</a>
+									<a href="#">
+										<img src="../../images/ruifeng.png">
+									</a>
+									<a href="#">
+										<img src="../../images/yuantiao.jpg">
+									</a>
+								</div>
+								<div class="user_news">
+									<span class="time">21分钟前</span>
+									<span class="love">736</span>
+									<span class="comment">2736</span>
+								</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="user_info">
+								<img src="../../images/cbd.jpg">
+								<span class="name">176斤的胖子</span>
+							</div>
+							<div class="user_detail">
+								<p class="text">
+									欧亚大陆桥一共是两座。1973年博斯普鲁斯海峡上建起第一座跨海公路大吊桥。桥的两头各有一呈门字型的高达165米的桥塔，水中不设桥墩。
+								</p>
+								<div class="list_img">
+									<a href="#">
+										<img src="../../js/cropper/picture.jpg" style="width:95%; height: 170px;border-radius:2px;">
+									</a>
+								</div>
+								<div class="user_news">
+									<span class="time">2小时前</span>
+									<span class="love">736</span>
+									<span class="comment">2736</span>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<script src="../../js/mui.min.js"></script>
@@ -87,128 +135,8 @@
 					</div>
 				</div>
 			</script>
-			<script>
-				mui.init({
-					swipeBack: true,
-					pullRefresh: {
-						container: '#pullrefresh',
-						up: {
-							auto: true, //可选,默认false.自动上拉加载一次
-							contentrefresh: '正在加载...',
-							callback: pullupRefresh
-						}
-					}
+			<script type="text/javascript" src="../../js/weibo/weibo_my.js"></script>
 
-				});
-
-				//添加列表项的点击事件  
-				mui('.mui-content').on('tap', 'a', function(e) {
-					var id = this.getAttribute('id');
-				});
-				mui.previewImage();
-				var pageNum = 1;
-				var pageSize = 30;
-				/**
-				 * 上拉加载具体业务实现
-				 */
-				function pullupRefresh() {
-					var data = {
-						pageindex: pageNum,
-						pageSize: pageSize
-					}
-					commonUtil.sendRequestWithToken('http://api.myautos.cn/api/weibo/GetMyWeiBoList', data, false, function(data) {
-						if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-							var list = data.Data;
-							var table = document.body.querySelector('.mui-scroll');
-							for(var i = 0; i < list.length; i++) {
-								var item = list[i];
-								initWeiBoItem(table, item);
-							}
-						} else {
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-							return;
-						}
-						pageNum++;
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
-					});
-				}
-
-				var img_1200style = 'style/weibo_1200';
-				var img_600style = 'style/weibo_600';
-				var img_24style = 'style/weibo_24_16';
-				var img_36style = 'style/weibo_36_24';
-				var weiboTemplate = $('script[id="weiboitem"]').html();
-				/**
-				 * 添加数据
-				 * @param {Object} table
-				 * @param {Object} item
-				 */
-				function initWeiBoItem(table, item) {
-					if(item.ContentValue == null || item.ContentValue == '') {
-						return;
-					}
-					var imgHtmlStr = "";
-					var imgs = item.ContentValue.split(',');
-					if(imgs.length > 1) {
-						//多图
-						imgHtmlStr += "<ul>";
-						for(var j = 0; j < imgs.length; j++) {
-							imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
-						}
-						imgHtmlStr += "</ul>";
-					} else {
-						imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
-					}
-					item.imglist = imgHtmlStr;
-					//显示地理位置
-					item.cardlocation = "";
-					if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
-						var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
-						item.cardlocation = lbsStr;
-					}
-					var cardStr = weiboTemplate.temp(item);
-					$(".mui-scroll").append(cardStr);
-
-				}
-
-				//删除点击事件
-				mui('.mui-scroll').on('tap', '.mui-icon-trash', function() {
-					var weiboid = this.getAttribute('weiboid');
-					mui.confirm("是否要删除微博？", "我的微博", ["是", "否"], function(event, index) {
-						console.log(JSON.stringify(event));
-						if(event.index == 0) {
-							var url = 'http://api.myautos.cn/api/weibo/WeiboDelete';
-							var dataPara = {
-								id: weiboid
-							}
-							commonUtil.sendRequestWithToken(url, dataPara, true, function(data) {
-								console.log(JSON.stringify(data));
-								if(data.IsSuccess == 1) {
-									//plus.webview.currentWebview().reload();
-									$("#card_" + weiboid).remove();
-								} else {
-									mui.toast("删除失败");
-								}
-							});
-						}
-					});
-				});
-				//评论  
-				mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
-					var weiboid = this.getAttribute("weiboid");
-					mui.openWindow({
-						url: "../weibo/weibo_preview.html",
-						id: "weibo_preview",
-						extras: {
-							weiboid: weiboid
-						},
-						show: {
-							aniShow: 'slide-in-right',
-							duration: 200
-						}
-					});
-				});
-			</script>
 	</body>
 
 </html>

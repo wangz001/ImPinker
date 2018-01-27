@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/weibo/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">我的途迹</h1>
+		</header>
+		<div class="mui-content">
+			<div id="pullrefresh" class=" mui-scroll-wrapper ">
+				<div class="mui-scroll">
+					<!--<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img class="head-img" src="../../images/logo.png">
+							<div class="mui-media-body">
+								<em class="mui-icon mui-icon-person">bwlang</em>
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+							<p>的空间疯狂的健康</p>
+							<div class="media-pic-list">
+								<ul>
+									<li>
+										<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+								</ul>
+							</div>
+							<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+						</div>
+						<div class="mui-card-footer">
+							<span class="mui-icon mui-icon-extra-heart"><em>20</em></span>
+							<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
+							<span class="mui-icon mui-icon-trash"></span>
+						</div>
+					</div>-->
+				</div>
+			</div>
+			<script src="../../js/mui.min.js"></script>
+			<script type="text/javascript" src="../../js/app.js"></script>
+			<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+			<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+			<script type="text/javascript" src="../../js/jquery.js"></script>
+			<script type="text/javascript" src="../../js/commonUtil.js"></script>
+			<script type="text/template" id='weiboitem'>
+				<div class="mui-card" id="card_$Id$">
+					<div class="mui-card-header mui-card-media">
+						<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
+						<div class="mui-media-body">
+							<em class="mui-icon mui-icon-person">$UserName$</em>
+							<p>发表于 $PublishTime$</p>
+						</div>
+					</div>
+					<div class="mui-card-content">
+						<p>$Description$</p>
+						<div class="media-pic-list">
+							$imglist$
+						</div>
+						$cardlocation$
+					</div>
+					<div class="mui-card-footer">
+						<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
+						<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+						<span class="mui-icon mui-icon-trash" weiboid='$Id$'></span>
+					</div>
+				</div>
+			</script>
+			<script type="text/javascript" src="../../js/weibo/weibo_my.js" ></script>
+			
+	</body>
+
+</html>
