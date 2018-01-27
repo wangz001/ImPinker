@@ -232,7 +232,8 @@
 			"images/cbd.jpg",
 			"images/muwu.jpg",
 			"images/logo.png",
-			"images/login-1.png"
+			"images/login-1.png",
+			"/img/pinglun.png"
 		],
 		"refer": [
 			"login.html",
