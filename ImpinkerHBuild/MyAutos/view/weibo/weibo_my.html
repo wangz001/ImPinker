@@ -39,42 +39,7 @@
 										<img src="../../images/jeep.png">
 									</a>
 								</div>
-								<div class="user_news">
-									<span class="time">21分钟前</span>
-									<span class="love">736</span>
-									<span class="comment">2736</span>
-								</div>
-							</div>
-						</li>
-						<li class="mui-table-view-cell">
-							<div class="user_info">
-								<img src="../../images/logo.png">
-								<span class="name">176斤的胖子</span>
-							</div>
-							<div class="user_detail">
-								<p class="text">
-									欧亚大陆桥一共是两座。
-								</p>
-								<div class="list_img">
-									<a href="#">
-										<img src="../../images/cbd.jpg">
-									</a>
-									<a href="#">
-										<img src="../../images/20171223221008.jpg">
-									</a>
-									<a href="#">
-										<img src="../../images/food.png">
-									</a>
-									<a href="#">
-										<img src="../../images/muwu.jpg">
-									</a>
-									<a href="#">
-										<img src="../../images/ruifeng.png">
-									</a>
-									<a href="#">
-										<img src="../../images/yuantiao.jpg">
-									</a>
-								</div>
+								<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 								<div class="user_news">
 									<span class="time">21分钟前</span>
 									<span class="love">736</span>
@@ -113,6 +78,28 @@
 			<script type="text/javascript" src="../../js/jquery.js"></script>
 			<script type="text/javascript" src="../../js/commonUtil.js"></script>
 			<script type="text/template" id='weiboitem'>
+				<li class="mui-table-view-cell" id="card_$Id$">
+					<div class="user_info">
+						<img userid="$UserId$" src="$UserHeadImage$">
+						<span class="name">$UserName$</span>
+					</div>
+					<div class="user_detail">
+						<p class="text">
+							$Description$
+						</p>
+						<div class="list_img">
+							$imglist$
+						</div>
+						$cardlocation$
+						<div class="user_news">
+							<span class="time">$PublishTime$</span>
+							<span class="love" weiboid='$Id$'>$VoteCount$</span>
+							<span class="comment" weiboid='$Id$'>$CommentCount$</span>
+						</div>
+					</div>
+				</li>
+			</script>
+			<script type="text/template">
 				<div class="mui-card" id="card_$Id$">
 					<div class="mui-card-header mui-card-media">
 						<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
@@ -136,7 +123,5 @@
 				</div>
 			</script>
 			<script type="text/javascript" src="../../js/weibo/weibo_my.js"></script>
-
 	</body>
-
 </html>
