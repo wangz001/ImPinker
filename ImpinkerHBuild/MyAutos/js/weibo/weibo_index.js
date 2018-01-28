@@ -54,9 +54,8 @@ function pulldownRefresh() {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			mui.toast("已为您获取最新数据");
 			var list = data.Data;
-			var table = document.body.querySelector('.mui-scroll');
 			//清空老数据
-			table.innerHTML = "";
+			document.body.querySelector('.mui-scroll ul').innerHTML = "";
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
 				initWeiBoItemTemplate(item);
@@ -100,9 +99,9 @@ function pullupRefresh() {
  */
 function initWeiBoItemTemplate(item) {
 	var img_1200style = 'style/weibo_1200';
-	var img_600style = 'style/weibo_600';
 	var img_24style = 'style/weibo_24_16';
 	var img_36style = 'style/weibo_36_24';
+	var img_200style = 'style/weibo_200_200';
 	if(item.ContentValue == null || item.ContentValue == '') {
 		return;
 	}
@@ -111,13 +110,11 @@ function initWeiBoItemTemplate(item) {
 	var imgs = item.ContentValue.split(',');
 	if(imgs.length > 1) {
 		//多图
-		imgHtmlStr += "<ul>";
 		for(var i = 0; i < imgs.length; i++) {
-			imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+			imgHtmlStr += '<a href="#"><img src="' + imgs[i].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 		}
-		imgHtmlStr += "</ul>";
 	} else {
-		imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置
@@ -135,7 +132,7 @@ function initWeiBoItemTemplate(item) {
 	var isCollect = storageUtil.getWeiboCollect(item.Id);
 	item.isCollect = isCollect ? "shoucang" : "favorite_diss";
 	var cardStr = templateCard.temp(item);
-	$(".mui-scroll").append(cardStr);
+	$(".mui-scroll ul").append(cardStr);
 }
 
 //查看结果

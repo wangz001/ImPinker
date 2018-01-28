@@ -44,7 +44,7 @@ function pullupRefresh() {
 }
 
 var img_1200style = 'style/weibo_1200';
-var img_600style = 'style/weibo_600';
+var img_200style = 'style/weibo_200_200';
 var img_24style = 'style/weibo_24_16';
 var img_36style = 'style/weibo_36_24';
 var weiboTemplate = $('script[id="weiboitem"]').html();
@@ -63,7 +63,7 @@ function initWeiBoItem(table, item) {
 		//多图
 		//imgHtmlStr += "<ul>";
 		for(var j = 0; j < imgs.length; j++) {
-			imgHtmlStr += '<a href="#"><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+			imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 		//imgHtmlStr += "</ul>";
 	} else {

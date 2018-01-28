@@ -15,7 +15,7 @@
 .user_info .name {
 	padding-left: 7px;
 	line-height: 35px;
-	color: #454f5b;
+	color: #b5bebf;;
 	font-size: 14px;
 	vertical-align: top;
 }
@@ -43,7 +43,7 @@
 	height: 90px;
 	border-radius: 2px;
 	margin-right: 5px;
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	margin-bottom: 5px;
 }
 

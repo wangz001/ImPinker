@@ -20,7 +20,8 @@
 			"js/storageUtil.js",
 			"fonts/mui.ttf",
 			"css/iconfont/iconfont.css",
-			"css/iconfont/iconfont.js"
+			"css/iconfont/iconfont.js",
+			"/images/cbd.jpg"
 		],
 		"refer": [
 			"view/weibo/weibo_comment.html",

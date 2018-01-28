@@ -449,7 +449,8 @@
 					"js/commonUtil.js",
 					"js/storageUtil.js",
 					"css/iconfont/iconfont.css",
-					"css/iconfont/iconfont.js"
+					"css/iconfont/iconfont.js",
+					"/images/cbd.jpg"
 				],
 				"refer": [
 					"view/map/lbs.html",
