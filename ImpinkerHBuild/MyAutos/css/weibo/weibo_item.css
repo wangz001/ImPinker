@@ -2,6 +2,15 @@
 	width: 90%;
 }
 
+/*取消li 点击背景变灰效果*/
+.mui-scroll .weibo-card{
+	position: relative;
+    overflow: hidden;
+    padding: 11px 15px;
+    list-style: none;
+    border-bottom: 1px solid #eceff4;
+
+}
 .user_info {
 	width: 100%;
 }
@@ -68,13 +77,13 @@
 	display: flex;
 	flex: 1 1 auto;
 	height: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 3px;
 }
 
 .user_news .time {
 	font-size: 10px;
 	line-height: 20px;
-	width: 65%;
+	width: 70%;
 	color: #bdc6d2;
 	text-align: -webkit-left;
 	padding-left: 6px;
@@ -84,24 +93,27 @@
 	font-size: 9px;
 	line-height: 16px;
 	height: 16px;
-	width: 16%;
+	width: 15%;
 	color: #bdc6d2;
 	text-align: -webkit-center;
 	background: url(../../img/zan.png) no-repeat left;
 	background-size: 16px;
 	padding-left: 12px;
+	float: right;
 }
 
 .user_news .comment {
 	font-size: 9px;
 	line-height: 16px;
 	height: 16px;
-	width: 25%;
+	width: 15%;
 	color: #bdc6d2;
 	text-align: -webkit-center;
 	background: url(../../img/pinglun.png) no-repeat left;
 	background-size: 16px;
+	float: right;
 }
+
 
 
 /*手机屏幕在375px时*/
