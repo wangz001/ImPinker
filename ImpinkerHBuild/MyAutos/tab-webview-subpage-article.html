@@ -9,7 +9,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" href="css/icons-extra.css" />
-		<link rel="stylesheet" href="css/article/article.css" />
+		<!--<link rel="stylesheet" href="css/article/article.css" />-->
+		<link rel="stylesheet" href="css/article/article_item.css" />
 	</head>
 
 	<body>
@@ -59,39 +60,34 @@
 						</div>
 					</div>
 					<ul class="mui-table-view" id="articlelist">
-						<li class="mui-table-view-cell mui-media">
-							<a href="view/article/preview.html">
-								<img class="mui-media-object mui-pull-left" src="images/shuijiao.jpg">
-								<div class="mui-media-body">
-									<P class="title">幸福</P>
-									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-									<p class="userinfo">
-										<em class="mui-icon mui-icon-person">bwlang</em>
-										<em class="mui-icon-extra mui-icon-extra-phone">2017-07-09</em>
-										<span class="viewcount">
-										<em class="mui-icon-extra mui-icon-extra-like">10</em>
-										<em class="mui-icon mui-icon-compose">23</em>
-									</span>
-									</p>
+						<li class="article_card">
+							<div class="left_div">
+								<div class="title">
+									<p class="caption">第一次出境旅游--泰国跳岛游~最多三行显示</p>
+									<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
 								</div>
-							</a>
+								<div class="detail">
+									<span class="love2">736</span><span class="comment2">2736</span>
+								</div>
+							</div>
+							<div class="right_div">
+								<a href="#">
+									<img src="images/cbd.jpg" />
+								</a>
+							</div>
 						</li>
-						<li>
-							<div class="mui-card">
-								<div class="mui-card-title">
-									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+						<li class="article_card">
+							<div class="left_div">
+								<p class="caption">第一次出境</p>
+								<p class="content">前！@两行...</p>
+								<div class="detail">
+									<span class="love2">736</span><span class="comment2">2736</span>
 								</div>
-								<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(images/cbd.jpg)"></div>
-								<div class="mui-card-content">
-									<div class="mui-card-content-inner">
-										<p class="userinfo">Posted on January 18, 2016
-											<span class="viewcount">
-											<em class="mui-icon-extra mui-icon-extra-like">10</em>
-											<em class="mui-icon mui-icon-compose">23</em>
-											</span>
-										</p>
-									</div>
-								</div>
+							</div>
+							<div class="right_div">
+								<a href="#">
+									<img src="images/cbd.jpg" />
+								</a>
 							</div>
 						</li>
 					</ul>
@@ -121,6 +117,24 @@
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/javascript" src="js/storageUtil.js"></script>
 	<script type="text/template" id='article_item'>
+		<li class="article_card">
+			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
+				<div class="left_div">
+					<div class="title">
+					<p class="caption">$ArticleName$</p>
+					<p class="content">$Description$</p>
+					</div>
+					<div class="detail">
+						<span class="love2">$VoteCount$</span><span class="comment2">$CommentCount$</span>
+					</div>
+				</div>
+				<div class="right_div">
+					<img src="$CoverImage$" />
+				</div>
+			</a>
+		</li>
+	</script>
+	<script type="text/template">
 		<li class="mui-table-view-cell mui-media">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
@@ -175,7 +189,7 @@
 			</a>
 		</li>
 	</script>
-	
-	<script type="text/javascript" src="js/article/article_index.js" ></script>
+
+	<script type="text/javascript" src="js/article/article_index.js"></script>
 
 </html>

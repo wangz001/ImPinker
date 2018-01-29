@@ -1,54 +1,69 @@
-ul li{
+.mui-scroll .article_card{
 	list-style: none;
-	width: 90%;
-	height: 9rem;
+	/*height: 9rem;*/
+	position: relative;
+    overflow: hidden;
+    padding: 11px 15px;
+    list-style: none;
+    border-bottom: 1px solid #eceff4;
 }
 .left_div{
 	height: 7rem;
 	width: 50%;
 	float: left;
 	padding-right: 0.7rem;
-	margin-top: 1rem;
+	margin-top: 2px;
+	/*margin-top: 1rem;*/
 }
-.left_div .caption{
-	font-size: 0.9rem;
-	width: 100%;
+.left_div .title{
+	height: 5.5rem;
 	overflow: hidden;
 }
+.left_div .caption{
+	font-size: 1.1rem;
+	width: 100%;
+	overflow: hidden;
+	color: #000000;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
 .left_div .content{
-	font-size: 0.8rem;
+	/*font-size: 0.8rem;*/
 	color: #a8b5c4;
-	height:2rem ;
+	height:3rem ;
 	overflow : hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
+	margin-bottom: 2px;
 }
 .left_div .detail {
     width: 100%;
-    height: 1.7rem;
-    line-height: 1.7rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 2px;
+    margin-left: 2px;
 }
 .detail .love2{
-	font-size: 9px;
+	font-size: 12px;
     line-height: 16px;
     height: 16px;
     width: 16%;
     color: #bdc6d2;
     text-align: -webkit-center;
-    background: url(img/zan.png) no-repeat left;
+    background: url(../../img/zan.png) no-repeat left;
     background-size: 16px;
     padding-left:  22px;
     margin-right: 20%;
 }
 .detail .comment2{
-	font-size: 9px;
+	font-size: 12px;
     line-height: 16px;
     height: 16px;
     width: 25%;
     color: #bdc6d2;
-    background: url(img/pinglun.png) no-repeat left;
+    background: url(../../img/pinglun.png) no-repeat left;
     background-size: 16px;
     padding-left:1.2rem;
 }
@@ -56,7 +71,7 @@ ul li{
 	height: 7rem;
 	width: 50%;
 	float: left;
-	margin-top: 1rem;
+	/*margin-top: 1rem;*/
 }
 .right_div img{
 	width: 100%;
@@ -73,7 +88,7 @@ ul li{
     width: 26%;
     color: #bdc6d2;
     text-align: -webkit-center;
-    background: url(img/pinglun.png) no-repeat left;
+    background: url(../../img/pinglun.png) no-repeat left;
     background-size: 16px;
 }
 .left_div .caption {

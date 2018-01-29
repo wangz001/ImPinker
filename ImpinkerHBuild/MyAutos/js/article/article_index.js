@@ -57,7 +57,7 @@ function pulldownRefresh() {
 	commonUtil.sendRequestGet(apiPath, data, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null) {
 			mui.toast("已为您获取最新数据");
-			$("#articlelist").html("");
+			//$("#articlelist").html("");
 			var list = data.Data;
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
@@ -101,13 +101,13 @@ function initItem(item, isPullDown) {
 	var template = $('script[id="article_item"]').html();
 	var templateCard = $('script[id="article_item_card"]').html();
 	var articleHtmlStr;
-	if(allCount % 10 == 5) {
-		item.CoverImage = item.CoverImage.replace(img_24style, img_600style);
-		//console.log(JSON.stringify(item));
-		articleHtmlStr = templateCard.temp(item);
-	} else {
+//	if(allCount % 10 == 5) {
+//		item.CoverImage = item.CoverImage.replace(img_24style, img_600style);
+//		//console.log(JSON.stringify(item));
+//		articleHtmlStr = templateCard.temp(item);
+//	} else {
 		articleHtmlStr = template.temp(item);
-	}
+//	}
 	if(isPullDown) {
 		//下拉刷新，新纪录插到最前面；
 		$("#articlelist").append(articleHtmlStr);
@@ -169,7 +169,6 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 	var type = "common"; // this.getAttribute("open-type");
 	var articleid = this.getAttribute('articleid');
 	var articlename = this.getAttribute('articlename');
-
 	//不使用父子模板方案的页面
 	if(type == "common") {
 		var webview_style = {
