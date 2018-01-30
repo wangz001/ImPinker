@@ -97,6 +97,7 @@ function pullupRefresh() {
 function initItem(item, isPullDown) {
 	var img_600style = 'style/weibo_600';
 	var img_24style = 'style/articlecover_36_24';
+	var img_24_20='style/article_24_20';
 	allArticles.push(item);
 	var template = $('script[id="article_item"]').html();
 	var templateCard = $('script[id="article_item_card"]').html();
@@ -106,6 +107,7 @@ function initItem(item, isPullDown) {
 //		//console.log(JSON.stringify(item));
 //		articleHtmlStr = templateCard.temp(item);
 //	} else {
+		item.CoverImage = item.CoverImage.replace(img_24style, img_24_20);
 		articleHtmlStr = template.temp(item);
 //	}
 	if(isPullDown) {

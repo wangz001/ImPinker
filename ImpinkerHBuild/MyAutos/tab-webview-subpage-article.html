@@ -60,23 +60,23 @@
 						</div>
 					</div>
 					<ul class="mui-table-view" id="articlelist">
-						<li class="article_card">
-							<div class="left_div">
-								<div class="title">
-									<p class="caption">第一次出境旅游--泰国跳岛游~最多三行显示</p>
-									<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
+						<li class="article_card mui-table-view-cell">
+							<a href="view/article/preview.html">
+								<div class="left_div">
+									<div class="title">
+										<p class="caption">第一次出境旅游--泰国跳岛游~最多三行显示</p>
+										<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
+									</div>
+									<div class="detail">
+										<span class="love2">736</span><span class="comment2">2736</span>
+									</div>
 								</div>
-								<div class="detail">
-									<span class="love2">736</span><span class="comment2">2736</span>
+								<div class="right_div">
+									<img src="images/20171223221008.jpg" />
 								</div>
-							</div>
-							<div class="right_div">
-								<a href="#">
-									<img src="images/cbd.jpg" />
-								</a>
-							</div>
+							</a>
 						</li>
-						<li class="article_card">
+						<li class="article_card mui-table-view-cell">
 							<div class="left_div">
 								<p class="caption">第一次出境</p>
 								<p class="content">前！@两行...</p>
@@ -86,7 +86,7 @@
 							</div>
 							<div class="right_div">
 								<a href="#">
-									<img src="images/cbd.jpg" />
+									<img src="images/muwu.jpg" />
 								</a>
 							</div>
 						</li>
@@ -117,12 +117,12 @@
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/javascript" src="js/storageUtil.js"></script>
 	<script type="text/template" id='article_item'>
-		<li class="article_card">
+		<li class="article_card mui-table-view-cell">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<div class="left_div">
 					<div class="title">
-					<p class="caption">$ArticleName$</p>
-					<p class="content">$Description$</p>
+						<p class="caption">$ArticleName$</p>
+						<p class="content">$Description$</p>
 					</div>
 					<div class="detail">
 						<span class="love2">$VoteCount$</span><span class="comment2">$CommentCount$</span>
@@ -167,29 +167,7 @@
 			</a>
 		</div>
 	</script>
-	<script type="text/template" id="article_item_card">
-		<li>
-			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-				<div class="mui-card">
-					<div class="mui-card-title">
-						<p>$ArticleName$</p>
-					</div>
-					<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url($CoverImage$)"></div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							<p class="userinfo">
-								<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTimeStr$</em>
-								<span class="viewcount">
-									<em Id="voteCount_$Id$" class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
-									<em Id="commentCount_$Id$" class="mui-icon mui-icon-compose">$CommentCount$</em>
-								</span></p>
-						</div>
-					</div>
-				</div>
-			</a>
-		</li>
-	</script>
-
+	
 	<script type="text/javascript" src="js/article/article_index.js"></script>
 
 </html>
