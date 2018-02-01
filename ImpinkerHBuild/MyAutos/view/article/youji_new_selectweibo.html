@@ -192,6 +192,7 @@
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() {
+				//http://api.myautos.cn/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=0    //根据时间向前或向后取数据
 				var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
 				var datapara = {
 					pageindex: pageNum,
