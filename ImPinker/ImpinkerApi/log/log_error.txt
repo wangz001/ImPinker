@@ -1,2 +1,104 @@
 [Header]
+2018-02-01 22:05:54,801 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2018-02-01 22:08:27,121 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2018-02-01 22:09:56,838 [19] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2018-02-01 22:11:07,735 [17] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2018-02-01 22:13:16,343 [11] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2018-02-01 22:17:20,029 [7] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2018-02-01 22:17:29,171 [19] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+2018-02-01 22:23:59,406 [21] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListByDatePointForPage?datePoint=2017-11-01&pageSize=30&isdown=1
+Referer:
+System.Exception: '@pageSize' 附近有语法错误。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 299
+   在 ImBLL.WeiBoBll.GetListByDatePointForPage(Int32 userid, DateTime datePoint, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListByDatePointForPage(DateTime datePoint, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 329
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
 [Footer]

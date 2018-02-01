@@ -275,9 +275,9 @@ UPDATE [dbo].[WeiBo]
         public DataSet GetListByDatePointForPage(int userid, DateTime datePoint, int pageSize, bool isDown)
         {
             var sql = new StringBuilder();
-            sql.Append("SELECT TOP @pageSize");
-            sql.Append(" [Id] ,[UserId] ,[Description] ,[ContentValue] , [ContentType] ,[Longitude] ,[Latitude] ,[Height] ,[LocationText] ,[State] ,[HardWareType] ,[IsRePost] ,[CreateTime] ,[UpdateTime] ");
-            sql.Append(" FROM  dbo.WeiBo  WHERE  UserId = @UserId");
+            sql.AppendFormat("SELECT TOP {0} ",pageSize);
+            sql.Append(" Id,UserId,Description,ContentValue,ContentType,Longitude,Latitude,Height,LocationText,State,HardWareType,IsRePost,CreateTime,UpdateTime ");
+            sql.Append(" FROM  WeiBo  WHERE  UserId = @UserId and State=1 ");
             if (isDown)
             {
                 //向下取
@@ -293,7 +293,6 @@ UPDATE [dbo].[WeiBo]
             
 
             SqlParameter[] parameters = {
-					new SqlParameter("@pageSize", SqlDbType.Int){Value = pageSize},
 					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
 					new SqlParameter("@datePoint", SqlDbType.DateTime){Value = datePoint}};
             var ds = DbHelperSQL.Query(sql.ToString(), parameters);
