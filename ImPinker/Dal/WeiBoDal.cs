@@ -263,5 +263,41 @@ UPDATE [dbo].[WeiBo]
             int rows = DbHelperSQL.ExecuteSql(sqlStr, parameters);
             return rows > 0;
         }
+
+        /// <summary>
+        /// 从某时间点向前或向后获取N条微博
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="datePoint"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="isDown"></param>
+        /// <returns></returns>
+        public DataSet GetListByDatePointForPage(int userid, DateTime datePoint, int pageSize, bool isDown)
+        {
+            var sql = new StringBuilder();
+            sql.Append("SELECT TOP @pageSize");
+            sql.Append(" [Id] ,[UserId] ,[Description] ,[ContentValue] , [ContentType] ,[Longitude] ,[Latitude] ,[Height] ,[LocationText] ,[State] ,[HardWareType] ,[IsRePost] ,[CreateTime] ,[UpdateTime] ");
+            sql.Append(" FROM  dbo.WeiBo  WHERE  UserId = @UserId");
+            if (isDown)
+            {
+                //向下取
+                sql.Append(" AND CreateTime > @datePoint ");
+                sql.Append(" ORDER BY CreateTime ASC ");
+            }
+            else
+            {
+                //向上取
+                sql.Append(" AND CreateTime < @datePoint ");
+                sql.Append(" ORDER BY CreateTime DESC ");
+            }
+            
+
+            SqlParameter[] parameters = {
+					new SqlParameter("@pageSize", SqlDbType.Int){Value = pageSize},
+					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
+					new SqlParameter("@datePoint", SqlDbType.DateTime){Value = datePoint}};
+            var ds = DbHelperSQL.Query(sql.ToString(), parameters);
+            return ds;
+        }
     }
 }

@@ -312,6 +312,29 @@ namespace ImpinkerApi.Controllers
                 Data = resultList
             });
         }
+        /// <summary>
+        /// 从某时间点向前或向后获取N条微博
+        /// </summary>
+        /// <param name="datePoint">时间点</param>
+        /// <param name="pageSize">数量</param>
+        /// <param name="isDown">1:down;  0:up</param>
+        /// <returns></returns>
+        [HttpGet]
+        [TokenCheck]
+        public HttpResponseMessage GetListByDatePointForPage(DateTime datePoint, int pageSize, int isDown)
+        {
+            if (datePoint == null) datePoint = DateTime.Now;
+            if (pageSize > 30) pageSize = 30;
+            var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
+            var list = _weiBoBll.GetListByDatePointForPage(userid, datePoint, pageSize,isDown>0);
+            var resultList = weiboVmTrans(list);
+            return GetJson(new JsonResultViewModel
+            {
+                IsSuccess = 1,
+                Description = "ok",
+                Data = resultList
+            });
+        }
 
         #endregion
 

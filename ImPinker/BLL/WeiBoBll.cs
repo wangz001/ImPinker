@@ -226,5 +226,23 @@ namespace ImBLL
             return flag;
 
         }
+        /// <summary>
+        /// 从某时间点向前或向后获取N条微博
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="datePoint"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="isDown"></param>
+        /// <returns></returns>
+        public List<WeiboVm> GetListByDatePointForPage(int userid, DateTime datePoint, int pageSize, bool isDown)
+        {
+            var resultList = new List<WeiboVm>();
+            var ds = _weiBoDal.GetListByDatePointForPage(userid, datePoint, pageSize, isDown);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                resultList.AddRange(from DataRow dataRow in ds.Tables[0].Rows select DataRowToModel(dataRow));
+            }
+            return resultList;
+        }
     }
 }
