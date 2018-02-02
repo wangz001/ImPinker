@@ -431,7 +431,8 @@
 			"css/icons-extra.css"
 		],
 		"refer": [
-			"view/article/youji_new.html"
+			"view/article/youji_new.html",
+			"login.html"
 		]
 	},
 	"view/search/search.html": {

@@ -672,7 +672,8 @@
 					"js/commonUtil.js"
 				],
 				"refer": [
-					"view/article/youji_new.html"
+					"view/article/youji_new.html",
+					"login.html"
 				],
 				"priority": 0
 			},
