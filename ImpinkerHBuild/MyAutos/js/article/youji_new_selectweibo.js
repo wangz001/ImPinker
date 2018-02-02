@@ -93,8 +93,8 @@ function bindCheckBoxTab() {
 var pageNum = 1;
 var pageSize = 10;
 var count = 0;
-var dateFirstPoint;
-var dateLastPoint
+var dateFirstId=0;
+var dateLastId=0;
 /**
  * 获取第一页数据
  * @param {Object} callback
@@ -103,14 +103,15 @@ function getFirstPage(callback) {
 	callback = callback || $.noop;
 	var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
 	var datapara = {
-		pageindex: pageNum,
-		pageSize: 1
+		pageindex: 1,
+		pageSize: pageSize
 	};
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
 			allItems = allItems.concat(list);
-			for(var i = 0; i < list.length; i++) {
+			for(var i = list.length-1; i >-1 ; i--) {
+				//返回的list 是倒叙排序，所以这么处理
 				var item = list[i];
 				initWeiBoItem(item,true);
 			}
@@ -128,15 +129,14 @@ function getFirstPage(callback) {
 function pulldownRefresh(callback) {
 	callback = callback || $.noop;
 	//  //根据时间向前或向后取数据
-	var url = 'http://api.myautos.cn/api/weibo/GetListByDatePointForPage';
+	var url = 'http://api.myautos.cn/api/weibo/GetListFromIdForPage';
 	var datapara = {
-		datePoint: '2017-1-31',
+		startId: dateFirstId,
 		pageSize: pageSize,
-		isdown:1
+		isdown:0
 	};
 	//console.log(JSON.stringify(datapara));
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
-		console.log(JSON.stringify(data));
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
 			allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
@@ -145,6 +145,8 @@ function pulldownRefresh(callback) {
 				initWeiBoItem(item,false);
 			}
 			bindCheckBoxTab();
+		}else{
+			mui.toast("没有更多数据~");
 		}
 		return callback(data);
 	});
@@ -157,15 +159,14 @@ function pulldownRefresh(callback) {
  */
 function pullupRefresh(callback) {
 	callback = callback || $.noop;
-	var url = 'http://api.myautos.cn/api/weibo/GetListByDatePointForPage';
+	var url = 'http://api.myautos.cn/api/weibo/GetListFromIdForPage';
 	var datapara = {
-		datePoint: '2017-10-31',
+		startId: dateLastId,
 		pageSize: pageSize,
 		isdown:1
 	};
 	//console.log(JSON.stringify(datapara));
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
-		console.log(JSON.stringify(data));
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
 			allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
@@ -189,7 +190,7 @@ var img_24style = 'style/weibo_24_16';
 var img_36style = 'style/weibo_36_24';
 var weiboTemplate = $('script[id="weiboitem"]').html();
 
-function initWeiBoItem(item,isAfter) {
+function initWeiBoItem(item,isPullUp) {
 	if(item.ContentValue == null || item.ContentValue == '') {
 		return;
 	}
@@ -207,15 +208,26 @@ function initWeiBoItem(item,isAfter) {
 	}
 	item.imglist = imgHtmlStr;
 	var cardStr = weiboTemplate.temp(item);
-	if(isAfter){
-		if(dateFirstPoint==null){
-			//dateFirstPoint=item.create
-		}else{
-			
+	console.log("first:"+dateFirstId+"--last:"+dateLastId);
+	if(isPullUp){
+		if(dateLastId<item.Id){
+			console.log("aaa"+item.Id);
+			dateLastId=item.Id;
+		}
+		if(dateFirstId>item.Id||dateFirstId==0){
+			console.log("abb"+item.Id);
+			dateFirstId=item.Id;
 		}
 		$("#weibo-content").append(cardStr);
 	}else{
-		//var firstLi=$("#weibo-content li:eq(0)");
+		if(dateLastId<item.Id){
+			console.log("aaa"+item.Id);
+			dateLastId=item.Id;
+		}
+		if(dateFirstId>item.Id||dateFirstId==0){
+			console.log("abb"+item.Id);
+			dateFirstId=item.Id;
+		}
 		$("#weibo-content").prepend(cardStr);
 	}
 }

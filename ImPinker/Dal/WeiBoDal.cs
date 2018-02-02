@@ -272,7 +272,7 @@ UPDATE [dbo].[WeiBo]
         /// <param name="pageSize"></param>
         /// <param name="isDown"></param>
         /// <returns></returns>
-        public DataSet GetListByDatePointForPage(int userid, DateTime datePoint, int pageSize, bool isDown)
+        public DataSet GetListFromIdForPage(int userid, int startId, int pageSize, bool isDown)
         {
             var sql = new StringBuilder();
             sql.AppendFormat("SELECT TOP {0} ",pageSize);
@@ -281,20 +281,20 @@ UPDATE [dbo].[WeiBo]
             if (isDown)
             {
                 //向下取
-                sql.Append(" AND CreateTime > @datePoint ");
-                sql.Append(" ORDER BY CreateTime ASC ");
+                sql.Append(" AND Id > @startId ");
+                sql.Append(" ORDER BY Id ASC ");
             }
             else
             {
                 //向上取
-                sql.Append(" AND CreateTime < @datePoint ");
-                sql.Append(" ORDER BY CreateTime DESC ");
+                sql.Append(" AND Id < @startId ");
+                sql.Append(" ORDER BY Id DESC ");
             }
             
 
             SqlParameter[] parameters = {
 					new SqlParameter("@UserId", SqlDbType.Int){Value = userid},
-					new SqlParameter("@datePoint", SqlDbType.DateTime){Value = datePoint}};
+					new SqlParameter("@startId", SqlDbType.Int){Value = startId}};
             var ds = DbHelperSQL.Query(sql.ToString(), parameters);
             return ds;
         }

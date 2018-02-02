@@ -234,7 +234,6 @@
 						"articleid": owner.article.articleid
 					};
 					commonUtil.uploadImageWithFomedata(url, files, params, function(data) {
-						console.log(JSON.stringify(data));
 						var url = data.Data;
 						owner.article.coverimage = url;
 						$("#setcoverimage").attr('src', url);

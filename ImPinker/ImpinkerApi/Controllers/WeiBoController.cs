@@ -321,12 +321,11 @@ namespace ImpinkerApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [TokenCheck]
-        public HttpResponseMessage GetListByDatePointForPage(DateTime datePoint, int pageSize, int isDown)
+        public HttpResponseMessage GetListFromIdForPage(int startId, int pageSize, int isDown)
         {
-            if (datePoint == null) datePoint = DateTime.Now;
             if (pageSize > 30) pageSize = 30;
             var userid = TokenHelper.GetUserInfoByHeader(Request.Headers).Id;
-            var list = _weiBoBll.GetListByDatePointForPage(userid, datePoint, pageSize,isDown>0);
+            var list = _weiBoBll.GetListFromIdForPage(userid, startId, pageSize, isDown > 0);
             var resultList = weiboVmTrans(list);
             return GetJson(new JsonResultViewModel
             {

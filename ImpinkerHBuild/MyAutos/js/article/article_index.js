@@ -57,7 +57,7 @@ function pulldownRefresh() {
 	commonUtil.sendRequestGet(apiPath, data, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null) {
 			mui.toast("已为您获取最新数据");
-			//$("#articlelist").html("");
+			$("#articlelist").html("");
 			var list = data.Data;
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];

@@ -125,7 +125,7 @@
 							var self = this;
 							//alert("down");
 							pulldownRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null) {
+								if(data.IsSuccess == 1 && data.Data != null&&data.Data.length>0) {
 									self.endPullDownToRefresh();
 								} else {
 									self.endPullDownToRefresh(true);
@@ -137,7 +137,7 @@
 						callback: function() {
 							var self = this;
 							pullupRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null) {
+								if(data.IsSuccess == 1 && data.Data != null&&data.Data.length>0) {
 									self.endPullUpToRefresh();
 								} else {
 									self.endPullUpToRefresh(true);
