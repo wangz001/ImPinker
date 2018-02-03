@@ -1,0 +1,61 @@
+.description {
+	width: 100%;
+	background-color: #fff;
+}
+
+textarea {
+	border: 0;
+	background-color: transparent;
+	grid-auto-rows: inherit;
+	color: #666464;
+	height: auto;
+}
+
+
+.mui-content-padded {
+	background-color: white;
+}
+
+.post-img img{
+	width: 100%;
+	/*margin:0px 10px;*/
+}
+
+.post-move {
+	bottom: 23px;
+	right: 5px;
+	position: absolute;
+}
+
+a.move-up,
+a.move-down,
+a.del {
+	background-color: #AAAAAA;
+	background-size: 196px;
+	background-position: -4px -86px;
+}
+
+html,
+.mui-content {
+	height: 100%;
+	overflow: auto;
+	padding-bottom: 50px;
+}
+
+footer {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	min-height: 50px;
+	border-top: solid 1px #bbb;
+	left: 0px;
+	bottom: 0px;
+	overflow: hidden;
+	padding: 0px 50px;
+	background-color: #fafafa;
+}
+
+.mui-popover {
+	height: 110px;
+	margin-left: 50px;
+}

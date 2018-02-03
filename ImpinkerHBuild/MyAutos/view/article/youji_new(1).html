@@ -8,7 +8,73 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/feedback.css" />
-		<link rel="stylesheet" href="../../css/article/youji_new.css" />
+		<style>
+			.description {
+				width: 100%;
+				background-color: #fff;
+			}
+			
+			textarea {
+				border: 0;
+				background-color: transparent;
+				grid-auto-rows: inherit;
+				color: #666464;
+				height: auto;
+			}
+			
+			img {
+				width: 100%;
+				padding: 20px;
+			}
+			
+			.mui-content-padded {
+				background-color: white;
+			}
+			
+			.post-img {
+				margin: 0 0 10px;
+				position: relative;
+			}
+			
+			.post-move {
+				bottom: 23px;
+				right: 5px;
+				position: absolute;
+			}
+			
+			a.move-up,
+			a.move-down,
+			a.del {
+				background-color: #AAAAAA;
+				background-size: 196px;
+				background-position: -4px -86px;
+			}
+			
+			html,
+			.mui-content {
+				height: 100%;
+				overflow: auto;
+				padding-bottom: 50px;
+			}
+			
+			footer {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				min-height: 50px;
+				border-top: solid 1px #bbb;
+				left: 0px;
+				bottom: 0px;
+				overflow: hidden;
+				padding: 0px 50px;
+				background-color: #fafafa;
+			}
+			
+			.mui-popover {
+				height: 110px;
+				margin-left: 50px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -34,7 +100,7 @@
 			<p>设置封面图</p>
 			<div class="row image-list">
 				<div class="image-item space">
-					<img style="max-height: 200px;width: 100%" id='setcoverimage' src="../../images/iconfont-tianjia.png">
+					<img style="max-height: 200px;" id='setcoverimage' src="../../images/iconfont-tianjia.png">
 				</div>
 			</div>
 			<!--谈出框-->
@@ -57,32 +123,14 @@
 			<p>正文</p>
 			<div class="mui-content-padded" style="margin: 0px">
 				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
-				<!--<div class="post-img mui-card">
+				<div class="post-img">
 					<div class="add-img" name='yjcontent'>
 						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
 						<div class="post-move" role="operator" style="">
 							<a class="del mui-icon mui-icon-trash" role="del"></a>
 						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link">Like</a>
-						<a class="mui-card-link">Comment</a>
-						<a class="mui-card-link">Read more</a>
 					</div>
 				</div>
-				<div class="post-img mui-card">
-					<div class="add-img" name='yjcontent'>
-						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
-						<div class="post-move" role="operator" style="">
-							<a class="del mui-icon mui-icon-trash" role="del"></a>
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link">Like</a>
-						<a class="mui-card-link">Comment</a>
-						<a class="mui-card-link">Read more</a>
-					</div>
-				</div>-->
 			</div>
 		</div>
 
@@ -100,7 +148,7 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/autosize.js"></script>
 		<script type='text/template' id='postimg'>
-			<div class="post-img mui-card">
+			<div class="post-img">
 				<div class="add-img" name='yjcontent'>
 					<img src="$src$" type="upload" data-preview-src="" data-preview-group="1">
 				</div>
@@ -186,18 +234,13 @@
 			});
 			//图片删除图片事件绑定  mui-icon-trash
 			mui('.mui-content-padded').on('tap', '.del', function() {
-				var thisa = this;
-				mui.confirm("是否要删除图片？", "", ["是", "否"], function(event, index) {
-					if(event.index == 0) {
-						console.log("aaa");
-						var imgitem = $(thisa).parents('.post-img');
-						var nextTextarea = $(imgitem).next();
-						var preTextarea = $(imgitem).prev();
-						$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
-						$(imgitem).remove(); //删除图片和图片的上一个textarea
-						$(preTextarea).remove();
-					}
-				});
+				console.log("aaa");
+				var imgitem = $(this).parents('.post-img');
+				var nextTextarea = $(imgitem).next();
+				var preTextarea = $(imgitem).prev();
+				$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
+				$(imgitem).remove(); //删除图片和图片的上一个textarea
+				$(preTextarea).remove();
 			});
 			//标记当前文本框
 			mui('.mui-content-padded').on('tap', 'textarea', function() {
