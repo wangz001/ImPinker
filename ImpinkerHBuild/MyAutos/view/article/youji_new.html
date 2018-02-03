@@ -24,6 +24,7 @@
 			
 			img {
 				width: 100%;
+				padding: 20px;
 			}
 			
 			.mui-content-padded {
@@ -122,6 +123,14 @@
 			<p>正文</p>
 			<div class="mui-content-padded" style="margin: 0px">
 				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
+				<div class="post-img">
+					<div class="add-img" name='yjcontent'>
+						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
+						<div class="post-move" role="operator" style="">
+							<a class="del mui-icon mui-icon-trash" role="del"></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -258,12 +267,12 @@
 				//edityoujiUtil.setCoverimage();
 				mui("#middlePopover").popover("show");
 			});
-			$("#middlePopover a").bind("click",function(){
+			$("#middlePopover a").bind("click", function() {
 				mui("#middlePopover").popover("hide");
-				var type=$(this).attr("datetype");
-				if(type=="1"){
+				var type = $(this).attr("datetype");
+				if(type == "1") {
 					edityoujiUtil.setCoverimage();
-				}else{
+				} else {
 					mui.toast("请稍后");
 				}
 			});

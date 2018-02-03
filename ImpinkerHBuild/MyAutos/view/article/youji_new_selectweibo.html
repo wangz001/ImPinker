@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -49,25 +50,25 @@
 							<div class="mui-scroll">
 								<ul id="weibo-content" class="mui-table-view">
 									<li class="mui-table-view-cell">
-										<div class="mui-card">
-											<div class="mui-input-row mui-checkbox">
-												<input name="checkbox1" value="Item 4" type="checkbox" checked="">
-												<label>序号：2</label>
-											</div>
-											<div class="media-pic-list">
-												<ul>
-													<li>
-														<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-													</li>
-													<li>
-														<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
-													</li>
-												</ul>
-											</div>
-											<div class="mui-card-content">
-												<p>Posted on January 18, 2016</p>
-												<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
-											</div>
+										<div class="mui-input-row">
+											<p>2017-12-08</p>
+										</div>
+										<div class="mui-input-row mui-checkbox">
+											<input name="checkbox1" value="Item 4" type="checkbox" checked="">
+											<label>序号：2</label>
+										</div>
+										<div class="media-pic-list">
+											<ul>
+												<li>
+													<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+												</li>
+												<li>
+													<img src="../../images/cbd.jpg" data-preview-src="" data-preview-group="1">
+												</li>
+											</ul>
+										</div>
+										<div class="mui-card-content">
+											<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 										</div>
 									</li>
 								</ul>
@@ -88,18 +89,18 @@
 		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/template" id="weiboitem">
 			<li class="mui-table-view-cell">
-				<div class="mui-card">
-					<div class="mui-input-row mui-checkbox">
-						<input name="checkbox1" value="$Id$" type="checkbox">
-						<label>序号:</label>
-					</div>
-					<div class="media-pic-list">
-						$imglist$
-					</div>
-					<div class="mui-card-content">
-						<p>$PublishTime$</p>
-						<p style="color: #333;">$Description$</p>
-					</div>
+				<div class="mui-input-row">
+					<p>$PublishTime$</p>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<input name="checkbox1" value="$Id$" type="checkbox">
+					<label>序号:</label>
+				</div>
+				<div class="media-pic-list">
+					$imglist$
+				</div>
+				<div class="mui-card-content">
+					<p style="color: #333;">$Description$</p>
 				</div>
 			</li>
 		</script>
@@ -125,7 +126,7 @@
 							var self = this;
 							//alert("down");
 							pulldownRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null&&data.Data.length>0) {
+								if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 									self.endPullDownToRefresh();
 								} else {
 									self.endPullDownToRefresh(true);
@@ -137,7 +138,7 @@
 						callback: function() {
 							var self = this;
 							pullupRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null&&data.Data.length>0) {
+								if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 									self.endPullUpToRefresh();
 								} else {
 									self.endPullUpToRefresh(true);
