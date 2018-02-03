@@ -49,7 +49,7 @@
 						<div id="pullrefresh" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
 								<ul id="weibo-content" class="mui-table-view">
-									<li class="mui-table-view-cell">
+									<!--<li class="mui-table-view-cell">
 										<div class="mui-input-row">
 											<p>2017-12-08</p>
 										</div>
@@ -70,7 +70,7 @@
 										<div class="mui-card-content">
 											<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 										</div>
-									</li>
+									</li>-->
 								</ul>
 							</div>
 						</div>
@@ -105,50 +105,5 @@
 			</li>
 		</script>
 		<script type="text/javascript" src="../../js/article/youji_new_selectweibo.js"></script>
-		<script type="text/javascript">
-			mui.init();
-			mui.plusReady(function() {
-				//阻尼系数
-				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				mui('.mui-scroll-wrapper').scroll({
-					bounce: false,
-					indicators: true, //是否显示滚动条
-					deceleration: deceleration
-				});
-				//默认加载第一页
-				getFirstPage(function(data) {
-
-				});
-
-				mui("#pullrefresh .mui-scroll").pullToRefresh({
-					down: {
-						callback: function() {
-							var self = this;
-							//alert("down");
-							pulldownRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-									self.endPullDownToRefresh();
-								} else {
-									self.endPullDownToRefresh(true);
-								}
-							});
-						}
-					},
-					up: {
-						callback: function() {
-							var self = this;
-							pullupRefresh(function(data) {
-								if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
-									self.endPullUpToRefresh();
-								} else {
-									self.endPullUpToRefresh(true);
-								}
-							});
-						}
-					}
-				});
-			});
-		</script>
 	</body>
-
 </html>

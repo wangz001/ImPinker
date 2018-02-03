@@ -1,14 +1,5 @@
-
 mui.init({
 	swipeBack: true,
-	//	pullRefresh: {
-	//		container: '#pullrefresh',
-	//		up: {
-	//			auto: true,
-	//			contentrefresh: '正在加载...',
-	//			callback: pullupRefresh
-	//		}
-	//	},
 	preloadPages: [{
 		url: "youji_new.html",
 		id: "youji_new"
@@ -22,7 +13,48 @@ mui.init({
 		return true;
 	}
 });
+mui.plusReady(function() {
+	//阻尼系数
+	var deceleration = mui.os.ios ? 0.003 : 0.0009;
+	mui('.mui-scroll-wrapper').scroll({
+		bounce: false,
+		indicators: true, //是否显示滚动条
+		deceleration: deceleration
+	});
+	//默认加载第一页
+	getFirstPage(function(data) {});
 
+	mui("#pullrefresh .mui-scroll").pullToRefresh({
+		down: {
+			callback: function() {
+				var self = this;
+				//alert("down");
+				pulldownRefresh(function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						self.endPullDownToRefresh();
+					} else {
+						mui.alert("已加载完全部数据~");
+						self.endPullDownToRefresh(true);
+					}
+				});
+			}
+		},
+		up: {
+			callback: function() {
+				var self = this;
+				pullupRefresh(function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
+						self.endPullUpToRefresh();
+					} else {
+						self.endPullUpToRefresh(true);
+					}
+				});
+			}
+		}
+	});
+});
+
+//图片放大预览
 mui.previewImage();
 
 var selectedItems = new Array(); // 选中的对象集合
@@ -43,6 +75,8 @@ document.getElementById('submit').addEventListener('tap', function() {
 			id: 'youji_new',
 			url: "youji_new.html"
 		});
+		//关闭当前页面，防止返回的时候，又返回该页面
+		plus.webview.currentWebview().close();
 	} else {
 		mui.confirm("您还未选择", "是否继续？", ['是', '否'], function(event) {
 			console.log(JSON.stringify(event));
@@ -53,16 +87,13 @@ document.getElementById('submit').addEventListener('tap', function() {
 					id: 'youji_new',
 					url: "youji_new.html"
 				});
+				//关闭当前页面，防止返回的时候，又返回该页面
+				plus.webview.currentWebview().close();
 			}
 		});
 	}
 });
 
-//添加列表项的点击事件  
-mui('.mui-content').on('tap', 'a', function(e) {
-	var id = this.getAttribute('id');
-
-});
 
 // 绑定复选框点击事件
 function bindCheckBoxTab() {
@@ -89,12 +120,10 @@ function bindCheckBoxTab() {
 	});
 }
 
-
-var pageNum = 1;
 var pageSize = 10;
 var count = 0;
-var dateFirstId=0;
-var dateLastId=0;
+var dateFirstId = 0;
+var dateLastId = 0;
 /**
  * 获取第一页数据
  * @param {Object} callback
@@ -110,14 +139,13 @@ function getFirstPage(callback) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
 			allItems = allItems.concat(list);
-			for(var i = list.length-1; i >-1 ; i--) {
+			for(var i = list.length - 1; i > -1; i--) {
 				//返回的list 是倒叙排序，所以这么处理
 				var item = list[i];
-				initWeiBoItem(item,true);
+				initWeiBoItem(item, true);
 			}
 			bindCheckBoxTab();
 		}
-		pageNum++;
 		return callback(data);
 	});
 }
@@ -133,26 +161,24 @@ function pulldownRefresh(callback) {
 	var datapara = {
 		startId: dateFirstId,
 		pageSize: pageSize,
-		isdown:0
+		isdown: 0
 	};
 	//console.log(JSON.stringify(datapara));
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
-			allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
+			allItems = allItems.concat(list);
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
-				initWeiBoItem(item,false);
+				initWeiBoItem(item, false);
 			}
 			bindCheckBoxTab();
-		}else{
+		} else {
 			mui.toast("没有更多数据~");
 		}
 		return callback(data);
 	});
 }
-
-
 
 /**
  * 上拉加载具体业务实现
@@ -163,16 +189,16 @@ function pullupRefresh(callback) {
 	var datapara = {
 		startId: dateLastId,
 		pageSize: pageSize,
-		isdown:1
+		isdown: 1
 	};
 	//console.log(JSON.stringify(datapara));
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
-			allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
+			allItems = allItems.concat(list); 
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
-				initWeiBoItem(item,true);
+				initWeiBoItem(item, true);
 			}
 			bindCheckBoxTab();
 		}
@@ -190,7 +216,7 @@ var img_24style = 'style/weibo_24_16';
 var img_36style = 'style/weibo_36_24';
 var weiboTemplate = $('script[id="weiboitem"]').html();
 
-function initWeiBoItem(item,isPullUp) {
+function initWeiBoItem(item, isPullUp) {
 	if(item.ContentValue == null || item.ContentValue == '') {
 		return;
 	}
@@ -208,25 +234,21 @@ function initWeiBoItem(item,isPullUp) {
 	}
 	item.imglist = imgHtmlStr;
 	var cardStr = weiboTemplate.temp(item);
-	console.log("first:"+dateFirstId+"--last:"+dateLastId);
-	if(isPullUp){
-		if(dateLastId<item.Id){
-			console.log("aaa"+item.Id);
-			dateLastId=item.Id;
+	//console.log("first:" + dateFirstId + "--last:" + dateLastId);
+	if(isPullUp) {
+		if(dateLastId < item.Id) {
+			dateLastId = item.Id;
 		}
-		if(dateFirstId>item.Id||dateFirstId==0){
-			console.log("abb"+item.Id);
-			dateFirstId=item.Id;
+		if(dateFirstId > item.Id || dateFirstId == 0) {
+			dateFirstId = item.Id;
 		}
 		$("#weibo-content").append(cardStr);
-	}else{
-		if(dateLastId<item.Id){
-			console.log("aaa"+item.Id);
-			dateLastId=item.Id;
+	} else {
+		if(dateLastId < item.Id) {
+			dateLastId = item.Id;
 		}
-		if(dateFirstId>item.Id||dateFirstId==0){
-			console.log("abb"+item.Id);
-			dateFirstId=item.Id;
+		if(dateFirstId > item.Id || dateFirstId == 0) {
+			dateFirstId = item.Id;
 		}
 		$("#weibo-content").prepend(cardStr);
 	}
@@ -274,6 +296,8 @@ $("#datePicker2").bind("click", function() {
 });
 
 function getListByRange(date1, date2) {
+	dateFirstId=0;
+	dateLastId=0;
 	plus.nativeUI.showWaiting('正在获取数据。。。');
 	var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoByDateRange';
 	var datapara = {
@@ -282,21 +306,19 @@ function getListByRange(date1, date2) {
 	};
 	//console.log(JSON.stringify(datapara));
 	commonUtil.sendRequestWithToken(url, datapara, false, function(data) {
-		//console.log(JSON.stringify(data));
 		plus.nativeUI.closeWaiting();
 		$("#weibo-content").html("");
 		allItems = new Array();
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
-			allItems = allItems.concat(list); //console.log("我的微博ok：" + JSON.stringify(list));
+			allItems = allItems.concat(list); 
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
-				initWeiBoItem(item);
+				initWeiBoItem(item,true);
 			}
 			bindCheckBoxTab();
 		} else {
 			mui.toast("没有搜索到相关数据");
 		}
 	});
-
 }
