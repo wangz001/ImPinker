@@ -9,7 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" href="css/icons-extra.css" />
-		<!--<link rel="stylesheet" href="css/article/article.css" />-->
+		<link rel="stylesheet" href="css/article/article.css" />
 		<link rel="stylesheet" href="css/article/article_item.css" />
 	</head>
 
@@ -17,6 +17,9 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
+					<nav>
+						<span class="title">精彩游记</span>
+					</nav>
 					<div class="mui-slider">
 						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
 							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
@@ -28,19 +31,37 @@
 							<div class="mui-slider-item">
 								<a href="#">
 									<img src="images/suzuki.png">
-									<p class="mui-slider-title">吉姆尼行走滇藏线</p>
+									<p class="mui-slider-title">吉姆尼行走滇藏线22</p>
 								</a>
+								<div class="user_info">
+									<div class="head_div">
+										<a href="#">
+											<img src="images/logo.png">
+										</a>
+									</div>
+									<div class="user_news">
+										<p class="name">silva</p>
+										<div class="user_detail">
+											<span class="time">发表于：2018.01.03</span>
+											<span class="love">736</span>
+											<span class="comment">2736</span>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="mui-slider-item">
-								<a href="#">
-									<img src="images/datong.png">
-								</a>
-							</div>
+
 							<div class="mui-slider-item">
 								<a href="#">
 									<img src="images/jeep.png">
 									<p class="mui-slider-title">吉姆尼行走滇藏线</p>
 								</a>
+								<div class="mui-card-header mui-card-media">
+									<img src="images/logo.png" style="width: 1.5rem;height: 1.5rem;">
+									<div class="mui-media-body">
+										小M
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
 							</div>
 							<div class="mui-slider-item">
 								<a href="#">
@@ -134,23 +155,6 @@
 			</a>
 		</li>
 	</script>
-	<script type="text/template">
-		<li class="mui-table-view-cell mui-media">
-			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-				<img class="mui-media-object mui-pull-left" src="$CoverImage$">
-				<div class="mui-media-body">
-					<P class="title">$ArticleName$</P>
-					<p class="mui-ellipsis">$Description$</p>
-					<p class="userinfo"><em class="mui-icon mui-icon-person">$UserName$</em>
-						<em class="mui-icon-extra mui-icon-extra-phone">$CreateTimeStr$</em>
-						<span class="viewcount">
-						<em Id="voteCount_$Id$" class="mui-icon-extra mui-icon-extra-heart">$VoteCount$</em>
-						<em Id="commentCount_$Id$" class="mui-icon mui-icon-compose">$CommentCount$</em>
-					</span>
-				</div>
-			</a>
-		</li>
-	</script>
 	<script type="text/template" id="slide_item_a">
 		<div class="mui-slider-item mui-slider-item-duplicate">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -167,7 +171,7 @@
 			</a>
 		</div>
 	</script>
-	
+
 	<script type="text/javascript" src="js/article/article_index.js"></script>
 
 </html>
