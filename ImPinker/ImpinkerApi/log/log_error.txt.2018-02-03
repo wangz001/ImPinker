@@ -1,0 +1,138 @@
+[Header]
+2018-02-02 22:45:30,308 [12] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListFromIdForPage?startId=100&pageSize=30&isdown=0
+Referer:
+System.Exception: 必须声明标量变量 "@startId"。
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 775
+   在 ImDal.WeiBoDal.GetListFromIdForPage(Int32 userid, Int32 startId, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\Dal\WeiBoDal.cs:行号 298
+   在 ImBLL.WeiBoBll.GetListFromIdForPage(Int32 userid, Int32 startId, Int32 pageSize, Boolean isDown) 位置 d:\GitProject\ImPinker\ImPinker\BLL\WeiBoBll.cs:行号 240
+   在 ImpinkerApi.Controllers.WeiBoController.GetListFromIdForPage(Int32 startId, Int32 pageSize, Int32 isDown) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\WeiBoController.cs:行号 328
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+[Footer]
+[Header]
+2018-02-02 22:46:30,400 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/Login
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 已成功与服务器建立连接，但是在登录前的握手期间发生错误。 (provider: TCP Provider, error: 0 - 指定的网络名不再可用。) ---> System.ComponentModel.Win32Exception (0x80004005): 指定的网络名不再可用。
+   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
+   在 ImDal.User.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 409
+   在 ImBLL.UserBll.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 208
+   在 ImpinkerApi.Controllers.AccountController.Login(UserLoginViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 32
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:95a1e32a-7180-4cc4-9dc1-d602db8c5587
+Error Number:64,State:0,Class:20
+2018-02-02 22:46:35,649 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/Login
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 已成功与服务器建立连接，但是在登录前的握手期间发生错误。 (provider: TCP Provider, error: 0 - 指定的网络名不再可用。) ---> System.ComponentModel.Win32Exception (0x80004005): 指定的网络名不再可用。
+   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
+   在 ImDal.User.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 409
+   在 ImBLL.UserBll.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 208
+   在 ImpinkerApi.Controllers.AccountController.Login(UserLoginViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 32
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:82dbc74c-6551-4e3b-8df0-f166fe298f43
+Error Number:64,State:0,Class:20
+[Footer]
+[Header]
+2018-02-02 22:47:01,329 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/Account/Login
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 已成功与服务器建立连接，但是在登录前的握手期间发生错误。 (provider: TCP Provider, error: 0 - 指定的网络名不再可用。) ---> System.ComponentModel.Win32Exception (0x80004005): 指定的网络名不再可用。
+   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
+   在 ImDal.User.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 409
+   在 ImBLL.UserBll.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 208
+   在 ImpinkerApi.Controllers.AccountController.Login(UserLoginViewModel loginViewModel) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Controllers\AccountController.cs:行号 32
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+ClientConnectionId:b1c874dd-e470-450c-bd75-1be3dc62e6cd
+Error Number:64,State:0,Class:20
+2018-02-02 22:47:05,942 [14] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetListFromIdForPage?startId=100&pageSize=30&isdown=0
+Referer:
+System.Data.SqlClient.SqlException (0x80131904): 已成功与服务器建立连接，但是在登录前的握手期间发生错误。 (provider: TCP Provider, error: 0 - 指定的网络名不再可用。) ---> System.ComponentModel.Win32Exception (0x80004005): 指定的网络名不再可用。
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 DBUtility.DbHelperSQL.PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, String cmdText, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 786
+   在 DBUtility.DbHelperSQL.Query(String SQLString, SqlParameter[] cmdParms) 位置 d:\GitProject\ImPinker\ImPinker\DBUtility\DbHelperSQL.cs:行号 764
+   在 ImDal.User.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\Dal\User.cs:行号 409
+   在 ImBLL.UserBll.GetModelByUserName(String username) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserBll.cs:行号 208
+   在 ImBLL.UserTokenBll.GetTokenStr(String username) 位置 d:\GitProject\ImPinker\ImPinker\BLL\UserTokenBll.cs:行号 75
+   在 ImpinkerApi.Common.TokenHelper.GetToken(String username) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Common\TokenHelper.cs:行号 34
+   在 ImpinkerApi.Common.TokenHelper.CheckUserToken(String username, String tokenstr) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Common\TokenHelper.cs:行号 47
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 29
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+ClientConnectionId:b1c874dd-e470-450c-bd75-1be3dc62e6cd
+Error Number:64,State:0,Class:20
+[Footer]
+[Header]
+2018-02-02 23:54:49,151 [10] ERROR WebLogger [(null)] - 
+IP:127.0.0.1
+Url:http://api.impinker.com/api/weibo/GetMyWeiBoList?pageindex=2&pagesize=10
+Referer:
+System.Web.Http.HttpResponseException: 处理 HTTP 请求导致了异常。请参见此异常的 "Response" 属性返回的 HTTP 响应，以了解详细信息。
+   在 ImpinkerApi.Filters.TokenCheckAttribute.HandleUnauthorizedRequest(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 53
+   在 ImpinkerApi.Filters.TokenCheckAttribute.OnAuthorization(HttpActionContext actionContext) 位置 d:\GitProject\ImPinker\ImPinker\ImpinkerApi\Filters\TokenCheckFilter.cs:行号 35
+   在 System.Web.Http.Tracing.ITraceWriterExtensions.TraceBeginEnd(ITraceWriter traceWriter, HttpRequestMessage request, String category, TraceLevel level, String operatorName, String operationName, Action`1 beginTrace, Action execute, Action`1 endTrace, Action`1 errorTrace)
+   在 System.Web.Http.Tracing.Tracers.AuthorizationFilterAttributeTracer.OnAuthorization(HttpActionContext actionContext)
+   在 System.Web.Http.Filters.AuthorizationFilterAttribute.System.Web.Http.Filters.IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func`1 continuation)
+[Footer]
+[Header]
+[Footer]

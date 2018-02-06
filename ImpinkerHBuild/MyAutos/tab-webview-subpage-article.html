@@ -18,7 +18,7 @@
 			<div id="pullrefresh" class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<nav>
-						<span class="title">精彩游记</span>
+						<span class="head-title">精彩游记</span>
 					</nav>
 					<div class="mui-slider">
 						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
@@ -30,21 +30,17 @@
 							</div>
 							<div class="mui-slider-item">
 								<a href="#">
-									<img src="images/suzuki.png">
-									<p class="mui-slider-title">吉姆尼行走滇藏线22</p>
+									<img src="images/cbd.jpg">
+									<p class="slider-title">吉姆尼行走滇藏线22</p>
 								</a>
 								<div class="user_info">
 									<div class="head_div">
-										<a href="#">
-											<img src="images/logo.png">
-										</a>
+										<img class="head-img2" src="images/logo.png">
 									</div>
 									<div class="user_news">
-										<p class="name">silva</p>
+										<span class="name">silva</span>
 										<div class="user_detail">
 											<span class="time">发表于：2018.01.03</span>
-											<span class="love">736</span>
-											<span class="comment">2736</span>
 										</div>
 									</div>
 								</div>
@@ -52,20 +48,25 @@
 
 							<div class="mui-slider-item">
 								<a href="#">
-									<img src="images/jeep.png">
-									<p class="mui-slider-title">吉姆尼行走滇藏线</p>
+									<img src="images/cbd.png">
+									<p class="slider-title">吉姆尼行走滇藏线</p>
 								</a>
-								<div class="mui-card-header mui-card-media">
-									<img src="images/logo.png" style="width: 1.5rem;height: 1.5rem;">
-									<div class="mui-media-body">
-										小M
-										<p>发表于 2016-06-30 15:30</p>
+								<div class="user_info">
+									<div class="head_div">
+										<img class="head-img2" src="images/logo.png">
+									</div>
+									<div class="user_news">
+										<span class="name">silva</span>
+										<div class="user_detail">
+											<span class="time">发表于：2018.01.03</span>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="mui-slider-item">
 								<a href="#">
-									<img src="images/food.png">
+									<img src="images/suzuki.png">
+									<p class="slider-title">吉姆尼行走滇藏线</p>
 								</a>
 							</div>
 							<div class="mui-slider-item mui-slider-item-duplicate">
@@ -74,11 +75,11 @@
 								</a>
 							</div>
 						</div>
-						<div class="mui-slider-indicator mui-text-right">
+						<!--<div class="mui-slider-indicator mui-text-right">
 							<div class="mui-indicator mui-active"></div>
 							<div class="mui-indicator"></div>
 							<div class="mui-indicator"></div>
-						</div>
+						</div>-->
 					</div>
 					<ul class="mui-table-view" id="articlelist">
 						<li class="article_card mui-table-view-cell">
@@ -159,16 +160,38 @@
 		<div class="mui-slider-item mui-slider-item-duplicate">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img src="$CoverImage$">
-				<p class="mui-slider-title">$ArticleName$</p>
+				<p class="slider-title">$ArticleName$</p>
 			</a>
+			<div class="user_info">
+				<div class="head_div">
+					<img class="head-img2" src="$UserHeadUrl$">
+				</div>
+				<div class="user_news">
+					<span class="name">$UserName$</span>
+					<div class="user_detail">
+						<span class="time">$CreateTimeStr$</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</script>
 	<script type="text/template" id="slide_item_b">
 		<div class="mui-slider-item">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img src="$CoverImage$">
-				<p class="mui-slider-title">$ArticleName$</p>
+				<p class="slider-title">$ArticleName$</p>
 			</a>
+			<div class="user_info">
+				<div class="head_div">
+					<img class="head-img2" src="$UserHeadUrl$">
+				</div>
+				<div class="user_news">
+					<span class="name">$UserName$</span>
+					<div class="user_detail">
+						<span class="time">$CreateTimeStr$</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</script>
 

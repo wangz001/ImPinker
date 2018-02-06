@@ -4,43 +4,57 @@ body {
 	background-color: #fff;
 }
 
-
 nav {
     height: 3rem;
     font-size: 1.35rem;
     line-height: 3rem;
     position: relative;
     width: 90%;
+    background-color: #fff;
 }
-.title {
+.head-title {
 	font-size: 1.35rem;
     color: #454f5b;
+    padding-left: 20px;
+}
+.mui-scroll{
+	background-color: #fff;
 }
 
 /*sliderName*/
+.mui-slider{
+	top: 0px;
+	bottom: 0px;
+}
+.mui-slider-group {
+	background-color: #fff;
+}
 .mui-slider .mui-slider-group .mui-slider-item {
     font-size: 14px;
     position: relative;
     display: inline-block;
     width: 90%;
-    height: 80%;
+    /*height: 80%;*/
     vertical-align: top;
     white-space: normal;
-    padding: 20px;
+    padding:0 0px 0 15px;
+    background-color: #fff;
+    height: 250px;
 }
 
-.mui-slider-title {
+.slider-title {
     line-height: 30px;
     position: relative; 
     bottom: 0;
     left: 0;
     width: 100%;
     height: 30px;
-    margin: 0;
+    margin: 5px 0px;
     text-align: left;
-    text-indent: 12px;
     opacity: .8;
-    background-color: #efeff4; 
+    background-color: #fff;
+    font-size: 20px;
+	color: #454F5B;
 }
 
 /*userdetail*/
@@ -56,127 +70,50 @@ nav {
 
 
 .user_info {
-    height: 1.5rem;
-    width: 90%;
+    height: 50px;
+    width: 100%;
     display: inline-block;
-    margin-left: 5%;
+    /*margin-left: 5%;*/
+   position: relative;
 }
 .user_info .head_div {
-	width:10%;
+	width:20%;
 	height: 1.5rem;
 	float: left;
+	line-height: 35px;
+    max-width: 35px;
+    height: 35px;
+    margin-right: 10px;
 }
-.head_div img{
-	width:1.5rem;
-    height:1.5rem;
-    border-radius: 50%;
-    line-height: 0.7rem;
+.user_info .head_div img{
+	border-radius: 50%;
+	margin: 3px;
 }
+
 .user_news{
-	width:90%;
-	float: left;
+	width:60%;
+	/*float: right;*/
+	margin-left: 20px;
 }
 .user_news .name{
-	font-size:0.5rem;
-	padding-left:0.5rem;
+	font-size:0.9rem;
+	/*padding-left:0.5rem;*/
 	color:#454f5b ;
 }
 .user_detail{
-	width: 100%;
 	position: relative;
 }
 .user_detail .time{
-	position: absolute;
+	/*position: absolute;*/
 	top: 0px;
-	font-size: 0.5rem;
+	font-size: 0.9rem;
 	color: #a1aebf;
-	padding-left:0.5rem;
-}
-.user_detail .love{
-	position: absolute;
-	right: 25%;
-	font-size: 9px;
-    line-height: 16px;
-    height: 16px;
-    width: 16%;
-    color: #bdc6d2;
-    text-align: -webkit-center;
-    background: url(img/zan.png) no-repeat left;
-    background-size: 16px;
-    padding-left: 12px;
-}
-.user_detail .comment{
-	position: absolute;
-	right: -26px;
-	font-size: 9px;
-    line-height: 16px;
-    height: 16px;
-    width: 25%;
-    color: #bdc6d2;
-    text-align: -webkit-center;
-    background: url(img/pinglun.png) no-repeat left;
-    background-size: 16px;
+	/*padding-left:0.5rem;*/
 }
 
 
-nav .current_page {
-    position: absolute;
-    top: 0;
-    width:70px;
-    right:20px;
-    height: 25px;
-}
-.swiper-container {
-    padding-top: 30px;
-	width:100%;
-	height: 12.5rem;
-	position: absolute;
-	top: -38px;
-}
-.swiper-slide a img {
-	width:90%;
-	margin-left: 5%;
-	height: 8.5rem;
-	border-radius: 3px;
-}
-.swiper-slide p{
-	color: #454f5b;
-	width:90%;
-	font-size:0.9rem;
-	height: 3rem;
-	overflow: hidden;
-}
-.swiper-pagination {
-    position: absolute;
-    text-align: -webkit-right;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    -o-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    z-index: 10;
-    top: -1px;
-    text-align: right !important;
-}
-/*页数样式控制*/
-.swiper-pagination-current{
-	color:#5b646f;
-	font-size: 0.6rem;
-}
-.swiper-pagination-fraction {
-    bottom: 10px;
-    left: 0;
-    width: 100%;
-    color: #5b646f;
-    font-size: 0.6rem;
-}
-.swiper-pagination-total{
-	color: #9dabbc;
-	font-size: 0.45rem;
-}
+
+
 
 /*.mui-table-view-cell {
 	padding: 10px;
@@ -239,7 +176,7 @@ nav .current_page {
 .mui-slider-indicator {
 	position: absolute;
 	bottom: 12px;
-	right: 10px;
+	right: 20px;
 	width: 100%;
 	text-align: center;
 	background: 0 0;

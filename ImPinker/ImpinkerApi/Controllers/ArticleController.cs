@@ -25,6 +25,7 @@ namespace ImpinkerApi.Controllers
     {
 
         private readonly ArticleBll _articleBll = new ArticleBll();
+        private readonly UserBll _userBll = new UserBll();
         readonly string _buckeyName = ConfigurationManager.AppSettings["MyautosOssBucket"];
         #region 获取首页文章列表
         /// <summary>
@@ -39,6 +40,10 @@ namespace ImpinkerApi.Controllers
             {
                 foreach (var item in list)
                 {
+                    var userinfo = _userBll.GetModelByCache(Int32.Parse(item.Userid));
+                    item.UserName = !string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.ShowName : userinfo.UserName;
+                    item.UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100);
+                    item.CreateTimeStr = TUtil.DateFormatToString(item.CreateTime);
                     item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 900);
                 }
                 return GetJson(new JsonResultViewModel

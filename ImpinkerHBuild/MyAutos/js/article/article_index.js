@@ -138,6 +138,10 @@ function initSlide() {
 		}
 	});
 
+
+
+	var img_1200style = 'style/article_1200_605';
+	var img_900style = 'style/article_900';
 	//显示轮播图
 	function initHtml(list) {
 		$("#sliderContent").html("");
@@ -147,6 +151,7 @@ function initSlide() {
 		$("#sliderContent").append(aTopStr);
 		for(var i = 0; i < list.length; i++) {
 			var item = list[i];
+			item.CoverImage=item.CoverImage.replace(img_900style, img_1200style);
 			var tempStr = template_b.temp(item);
 			$("#sliderContent").append(tempStr);
 		}
