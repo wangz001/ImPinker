@@ -52,12 +52,13 @@
 .left_div .content{
 	/*font-size: 0.8rem;*/
 	color: #a8b5c4;
-	max-height:2.8rem ;
+	/*max-height:2.8rem ;*/
 	overflow : hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
+	margin-top:8px
 }
 .left_div .detail {
     width: 100%;
@@ -92,14 +93,12 @@
 	height: 9rem;
 	width: 50%;
 	float: left;
-	
-	/*margin-top: 1rem;*/
 }
 .right_div img{
 	width: 100%;
 	border-radius: 5px;
 	max-height: 9rem;
-	/*max-width: 11rem;*/
+	margin-top:3px;
 }
 /*iphone5兼容*/
 @media only screen and (max-width:320px ) {

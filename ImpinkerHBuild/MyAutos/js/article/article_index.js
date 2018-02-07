@@ -26,7 +26,7 @@ mui.plusReady(function() {
 //轮播图滚动事件监听；
 document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 	//注意slideNumber是从0开始的；
-	document.getElementById("head-page").innerText = "你正在看第" + (event.detail.slideNumber + 1) + "张图片";
+	document.getElementById("head-page-num").innerText = (event.detail.slideNumber + 1);
 });
 
 //自定义事件。接受预览页传回的数据

@@ -17,6 +17,17 @@ nav {
     color: #454f5b;
     padding-left: 20px;
 }
+
+.head-page{
+	float: right;
+	font-size: 0.9rem;
+    color: #a8b5c4;
+}
+#head-page-num{
+	font-size: 1.1rem;
+    color: #202123;
+}
+
 .mui-scroll{
 	background-color: #fff;
 }
@@ -25,6 +36,7 @@ nav {
 .mui-slider{
 	top: 0px;
 	bottom: 0px;
+	/*border-bottom: 1px solid #eceff4;*/
 }
 .mui-slider-group {
 	background-color: #fff;
@@ -40,6 +52,9 @@ nav {
     padding:0 0px 0 15px;
     background-color: #fff;
     height: 250px;
+}
+.mui-slider .mui-slider-group .mui-slider-item .slider-item-coverimg{
+	border-radius: 10px;
 }
 
 .slider-title {
@@ -87,11 +102,11 @@ nav {
 }
 .user_info .head_div img{
 	border-radius: 50%;
-	margin: 3px;
+	margin: 3px 0;
 }
 
 .user_news{
-	width:60%;
+	width:100%;
 	/*float: right;*/
 	margin-left: 20px;
 }
@@ -109,32 +124,47 @@ nav {
 	font-size: 0.9rem;
 	color: #a1aebf;
 	/*padding-left:0.5rem;*/
+	width: 40%;
+	float: left;
+}
+.user_detail_right{
+	width: 40%;
+	float: right;
+}
+
+.user_detail .love2{
+	font-size: 12px;
+    color: #bdc6d2;
+    text-align: -webkit-center;
+    background: url(../../img/zan.png) no-repeat left;
+    background-size: 16px;
+    padding-left:  22px;
+    padding-right:  15px;
+}
+.user_detail .comment2{
+	font-size: 12px;
+    color: #bdc6d2;
+    background: url(../../img/pinglun.png) no-repeat left;
+    background-size: 16px;
+    padding-left:1.2rem;
 }
 
 
 
-
-
-/*.mui-table-view-cell {
-	padding: 10px;
+/*list 最上方的分割线样式*/
+.mui-table-view:before {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    height: 2px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #eceff4;
 }
-
-.mui-table-view .mui-media-object {
-	line-height: 64px;
-	max-width: 74px;
-	height: 61px;
-}
-
-.mui-card-title p {
-	display: block;
-	color: #6d6d72;
-	font-size: 17px;
-	margin-bottom: 5px;
-}
-
 
 /*card 样式*/
-
 .mui-table-view .mui-card {
 	font-size: 14px;
 	position: relative;

@@ -19,21 +19,20 @@
 				<div class="mui-scroll">
 					<nav>
 						<span class="head-title">精彩游记</span>
-						<span id="head-page" class="head-page">1/5</span>
+						<span id="head-page" class="head-page">
+							<em id="head-page-num">1</em>/3</span>
 					</nav>
 					<div class="mui-slider">
 						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
 							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 							<div class="mui-slider-item mui-slider-item-duplicate">
 								<a href="#">
-									<img src="images/food.png">
+									<img src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 								</a>
 							</div>
 							<div class="mui-slider-item">
-								<a href="#">
-									<img src="images/cbd.jpg">
+									<img class="slider-item-coverimg" src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 									<p class="slider-title">吉姆尼行走滇藏线22</p>
-								</a>
 								<div class="user_info">
 									<div class="head_div">
 										<img class="head-img2" src="images/logo.png">
@@ -41,7 +40,11 @@
 									<div class="user_news">
 										<span class="name">silva</span>
 										<div class="user_detail">
-											<span class="time">发表于：2018.01.03</span>
+											<span class="time">2018.01.03</span>
+											<div class="user_detail_right">
+												<span class="love2">736</span><span class="comment2">2736</span>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -49,7 +52,7 @@
 
 							<div class="mui-slider-item">
 								<a href="#">
-									<img src="images/cbd.png">
+									<img class="slider-item-coverimg" src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 									<p class="slider-title">吉姆尼行走滇藏线</p>
 								</a>
 								<div class="user_info">
@@ -59,14 +62,15 @@
 									<div class="user_news">
 										<span class="name">silva</span>
 										<div class="user_detail">
-											<span class="time">发表于：2018.01.03</span>
+											<span class="time">2018.01.03</span>
+											<span class="love2">736</span><span class="comment2">2736</span>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="mui-slider-item">
 								<a href="#">
-									<img src="images/suzuki.png">
+									<img src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 									<p class="slider-title">吉姆尼行走滇藏线</p>
 								</a>
 							</div>
@@ -100,18 +104,20 @@
 							</a>
 						</li>
 						<li class="article_card mui-table-view-cell">
-							<div class="left_div">
-								<p class="caption">第一次出境</p>
-								<p class="content">前！@两行...</p>
-								<div class="detail">
-									<span class="love2">736</span><span class="comment2">2736</span>
+							<a href="view/article/preview.html">
+								<div class="left_div">
+									<div class="title">
+										<p class="caption">第一次出境旅岛游~最多三行显示</p>
+										<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
+									</div>
+									<div class="detail">
+										<span class="love2">736</span><span class="comment2">2736</span>
+									</div>
 								</div>
-							</div>
-							<div class="right_div">
-								<a href="#">
-									<img src="images/muwu.jpg" />
-								</a>
-							</div>
+								<div class="right_div">
+									<img src="images/20171223221008.jpg" />
+								</div>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -160,7 +166,7 @@
 	<script type="text/template" id="slide_item_a">
 		<div class="mui-slider-item mui-slider-item-duplicate">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-				<img src="$CoverImage$">
+				<img class="slider-item-coverimg" src="$CoverImage$">
 				<p class="slider-title">$ArticleName$</p>
 			</a>
 			<div class="user_info">
@@ -171,6 +177,9 @@
 					<span class="name">$UserName$</span>
 					<div class="user_detail">
 						<span class="time">$CreateTimeStr$</span>
+						<div class="user_detail_right">
+							<span class="love2">736</span><span class="comment2">2736</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -179,7 +188,7 @@
 	<script type="text/template" id="slide_item_b">
 		<div class="mui-slider-item">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
-				<img src="$CoverImage$">
+				<img class="slider-item-coverimg" src="$CoverImage$">
 				<p class="slider-title">$ArticleName$</p>
 			</a>
 			<div class="user_info">
@@ -190,6 +199,9 @@
 					<span class="name">$UserName$</span>
 					<div class="user_detail">
 						<span class="time">$CreateTimeStr$</span>
+						<div class="user_detail_right">
+							<span class="love2">736</span><span class="comment2">2736</span>
+						</div>
 					</div>
 				</div>
 			</div>
