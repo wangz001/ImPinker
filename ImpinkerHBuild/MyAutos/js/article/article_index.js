@@ -23,6 +23,7 @@ mui.plusReady(function() {
 		}
 	}
 });
+
 //轮播图滚动事件监听；
 document.querySelector('.mui-slider').addEventListener('slide', function(event) {
 	//注意slideNumber是从0开始的；
@@ -45,7 +46,6 @@ window.addEventListener('articleVote', function(event) {
 
 var allArticles = new Array();
 var pageNum = 1;
-var allCount = 0;
 var pageSize = 30;
 var apiPath = "http://api.myautos.cn/api/Article/GetByPage";
 /**
@@ -98,31 +98,31 @@ function pullupRefresh() {
 	});
 }
 
+var img_600style = 'style/weibo_600';
+var img_24style = 'style/articlecover_36_24';
+var img_24_20 = 'style/article_24_20';
+var img_1200style = 'style/article_1200_605';
+var img_900style = 'style/article_900';
+var template = $('script[id="article_item"]').html();
 function initItem(item, isPullDown) {
-	var img_600style = 'style/weibo_600';
-	var img_24style = 'style/articlecover_36_24';
-	var img_24_20 = 'style/article_24_20';
+	//如果轮播图已显示，跳过
+	if($.inArray(item.Id, sliderIds) != -1) {
+		return;
+	}
 	allArticles.push(item);
-	var template = $('script[id="article_item"]').html();
-	var templateCard = $('script[id="article_item_card"]').html();
 	var articleHtmlStr;
-	//	if(allCount % 10 == 5) {
-	//		item.CoverImage = item.CoverImage.replace(img_24style, img_600style);
-	//		//console.log(JSON.stringify(item));
-	//		articleHtmlStr = templateCard.temp(item);
-	//	} else {
 	item.CoverImage = item.CoverImage.replace(img_24style, img_24_20);
 	articleHtmlStr = template.temp(item);
-	//	}
 	if(isPullDown) {
-		//下拉刷新，新纪录插到最前面；
+		//下拉刷新，新纪录插到最前面；(后面实现)
 		$("#articlelist").append(articleHtmlStr);
 	} else {
 		$("#articlelist").append(articleHtmlStr);
 	}
-	allCount++;
 }
 
+//轮播图文章id，展示下面的列表时排重
+var sliderIds = new Array();
 //显示轮播图内容
 function initSlide() {
 	//先显示本地缓存的数据
@@ -130,7 +130,6 @@ function initSlide() {
 	if(sliderData != null && sliderData.length > 0) {
 		initHtml(sliderData);
 	}
-
 	//获取最新数据
 	var slidePath = 'http://api.myautos.cn/api/Article/GetSlideArticle';
 	var para = {};
@@ -142,11 +141,10 @@ function initSlide() {
 		}
 	});
 
-	var img_1200style = 'style/article_1200_605';
-	var img_900style = 'style/article_900';
 	//显示轮播图
 	function initHtml(list) {
 		$("#sliderContent").html("");
+		sliderIds = new Array();
 		var template_a = $('script[id="slide_item_a"]').html();
 		var template_b = $('script[id="slide_item_b"]').html();
 		var aTopStr = template_a.temp(list[list.length - 1]);
@@ -156,6 +154,7 @@ function initSlide() {
 			item.CoverImage = item.CoverImage.replace(img_900style, img_1200style);
 			var tempStr = template_b.temp(item);
 			$("#sliderContent").append(tempStr);
+			sliderIds.push(item.Id);
 		}
 		var aBottomStr = template_a.temp(list[0]);
 		$("#sliderContent").append(aBottomStr);
@@ -188,10 +187,6 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 			webview_style.zindex = 9998;
 			webview_style.popGesture = ~id.indexOf('offcanvas-with-right') ? "close" : "none";
 		}
-		//图标界面需要启动硬件加速
-		if(~id.indexOf('icons.html')) {
-			webview_style.hardwareAccelerated = true;
-		}
 		//打开详情页面            
 		mui.openWindow({
 			id: id,
@@ -209,56 +204,5 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 				articlename: articlename
 			}
 		});
-	} else if(id && ~id.indexOf('.html')) {
-		if(!mui.os.plus || (!~id.indexOf('popovers.html') && mui.os.ios)) {
-			mui.openWindow({
-				id: id,
-				url: this.href,
-				styles: {
-					popGesture: 'close'
-				},
-				show: {
-					aniShow: aniShow
-				},
-				waiting: {
-					autoShow: false
-				}
-			});
-		} else {
-			//TODO  by chb 当初这么设计，是为了一个App中有多个模板，目前仅有一个模板的情况下，实际上无需这么复杂
-			//使用父子模板方案打开的页面
-			//获得共用模板组
-			var template = getTemplate('default');
-			//判断是否显示右上角menu图标；
-			var showMenu = ~href.indexOf('popovers.html') ? true : false;
-			//获得共用父模板
-			var headerWebview = template.header;
-			//获得共用子webview
-			var contentWebview = template.content;
-			var title = this.innerText.trim();
-			//通知模板修改标题，并显示隐藏右上角图标；
-			mui.fire(headerWebview, 'updateHeader', {
-				title: title,
-				showMenu: showMenu,
-				target: href,
-				aniShow: aniShow
-			});
-
-			if(mui.os.ios || (mui.os.android && parseFloat(mui.os.version) < 4.4)) {
-				var reload = true;
-				if(!template.loaded) {
-					if(contentWebview.getURL() != this.href) {
-						contentWebview.loadURL(this.href);
-					} else {
-						reload = false;
-					}
-				} else {
-					reload = false;
-				}
-				(!reload) && contentWebview.show();
-
-				headerWebview.show(aniShow, 150);
-			}
-		}
 	}
 });

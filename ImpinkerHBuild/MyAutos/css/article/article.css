@@ -1,21 +1,17 @@
 html,
 body {
-	/*background-color: #efeff4;*/
 	background-color: #fff;
 }
 
 nav {
-    height: 3rem;
-    font-size: 1.35rem;
     line-height: 3rem;
     position: relative;
     width: 90%;
-    background-color: #fff;
 }
 .head-title {
 	font-size: 1.35rem;
     color: #454f5b;
-    padding-left: 20px;
+    padding-left: 15px;
 }
 
 .head-page{
@@ -33,14 +29,7 @@ nav {
 }
 
 /*sliderName*/
-.mui-slider{
-	top: 0px;
-	bottom: 0px;
-	/*border-bottom: 1px solid #eceff4;*/
-}
-.mui-slider-group {
-	background-color: #fff;
-}
+
 .mui-slider .mui-slider-group .mui-slider-item {
     font-size: 14px;
     position: relative;
@@ -148,7 +137,6 @@ nav {
     background-size: 16px;
     padding-left:1.2rem;
 }
-
 
 
 /*list 最上方的分割线样式*/
