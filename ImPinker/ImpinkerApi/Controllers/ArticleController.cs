@@ -80,6 +80,9 @@ namespace ImpinkerApi.Controllers
             {
                 foreach (var item in list)
                 {
+                    var itemUser = _userBll.GetModelByCache(Int32.Parse(item.Userid));
+                    item.UserName = !string.IsNullOrEmpty(itemUser.ShowName) ? itemUser.ShowName : itemUser.UserName;
+                    item.UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(itemUser.ImgUrl, 100);
                     item.CreateTimeStr = TUtil.DateFormatToString(item.CreateTime);
                     item.CoverImage = ImageUrlHelper.GetArticleImage(item.CoverImage, 360);
                 }
