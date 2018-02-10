@@ -2,14 +2,17 @@
 	width: 90%;
 }
 
+
 /*取消li 点击背景变灰效果*/
-.mui-scroll .weibo-card{
+
+.mui-scroll .weibo-card {
 	position: relative;
-    overflow: hidden;
-    padding: 11px 15px;
-    list-style: none;
-    border-bottom: 1px solid #eceff4;
+	overflow: hidden;
+	padding: 11px 15px;
+	list-style: none;
+	border-bottom: 1px solid #eceff4;
 }
+
 .user_info {
 	width: 100%;
 }
@@ -23,7 +26,8 @@
 .user_info .name {
 	padding-left: 7px;
 	line-height: 35px;
-	color: #b5bebf;;
+	color: #b5bebf;
+	;
 	font-size: 14px;
 	vertical-align: top;
 }
@@ -42,7 +46,7 @@
 	margin-top: 10px;
 	margin-bottom: 8px;
 	overflow: hidden;
-    width: 100%;
+	width: 100%;
 }
 
 .list_img a img {
@@ -60,35 +64,74 @@
 	height: 170px;
 	border-radius: 2px;
 }
+
+
 /*地理位置*/
+
 .user_detail .card-location {
-    color: #b5bebf;
-    font-size: 10px;
-    margin-top: 1px;
-}
-.user_detail .card-location .mui-icon{
-    font-size: 17px;
+	color: #b5bebf;
+	font-size: 10px;
+	margin-top: 1px;
 }
 
+.user_detail .card-location .mui-icon {
+	font-size: 17px;
+}
 
 .user_news {
-	clear: both;
-	display: flex;
-	flex: 1 1 auto;
+	position: relative;
 	height: 20px;
-	margin-bottom: 3px;
+	width: 99%;
 }
 
 .user_news .time {
-	font-size: 10px;
+	font-size: 12px;
 	line-height: 20px;
-	width: 60%;
 	color: #bdc6d2;
 	text-align: -webkit-left;
-	/*padding-left: 6px;*/
+	float: left;
 }
 
-.user_news .love {
+.user_news .detail {
+	height: 20px;
+	line-height: 20px;
+	margin-left: 2px;
+	float: right;
+}
+
+.svg-icon {
+	width: 16px;
+	height: 16px;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+}
+
+.detail .love {
+	width: 16%;
+	color: #bdc6d2;
+	margin-right: 1rem;
+}
+
+.detail .love span {
+	font-size: 12px;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+
+.detail .comment {
+	width: 25%;
+	color: #bdc6d2;
+}
+
+.detail .comment span {
+	font-size: 12px;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+
+
+/*.user_news .love {
 	font-size: 9px;
 	line-height: 16px;
 	height: 16px;
@@ -111,8 +154,7 @@
 	background: url(../../img/pinglun.png) no-repeat left;
 	background-size: 16px;
 	float: right;
-}
-
+}*/
 
 
 /*手机屏幕在375px时*/
@@ -125,9 +167,33 @@
 		width: 16%;
 		color: #bdc6d2;
 		text-align: -webkit-center;
-		background: url(../../img/zan.png) no-repeat left;
+		/*background: url(../../img/zan.png) no-repeat left;*/
 		background-size: 16px;
-		padding-left: 12px;
+	}
+	.svg-icon {
+		width: 16px;
+		height: 16px;
+		vertical-align: -0.15em;
+		fill: currentColor;
+		overflow: hidden;
+	}
+	.detail .love {
+		width: 16%;
+		color: #bdc6d2;
+	}
+	.detail .love span {
+		font-size: 12px;
+		margin-left: 5px;
+		margin-bottom: 3px;
+	}
+	.detail .comment {
+		width: 25%;
+		color: #bdc6d2;
+	}
+	.detail .comment span {
+		font-size: 12px;
+		margin-left: 5px;
+		margin-bottom: 3px;
 	}
 }
 
@@ -135,14 +201,7 @@
 /*手机屏幕在414px时*/
 
 @media only screen and (min-width:414px) {
-	.user_news .time {
-		font-size: 10px;
-		line-height: 20px;
-		width: 49%;
-		color: #bdc6d2;
-		text-align: -webkit-left;
-		padding-left: 6px;
-	}
+	
 	.list_img a img {
 		float: left;
 		width: 90px;

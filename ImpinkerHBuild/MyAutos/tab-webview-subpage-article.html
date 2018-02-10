@@ -8,7 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<link rel="stylesheet" href="css/icons-extra.css" />
+		<link rel="stylesheet" href="css/iconfont/iconfont.css" />
 		<link rel="stylesheet" href="css/article/article.css" />
 		<link rel="stylesheet" href="css/article/article_item.css" />
 	</head>
@@ -20,12 +20,12 @@
 					<nav>
 						<span class="head-title">精彩游记</span>
 						<span id="head-page" class="head-page">
-							<em id="head-page-num">1</em>/3</span>
+							<span id="head-page-num">1</span>/3</span>
 					</nav>
 					<div class="mui-slider">
 						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
 							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-							<!--<div class="mui-slider-item mui-slider-item-duplicate">
+							<div class="mui-slider-item mui-slider-item-duplicate">
 								<a href="#">
 									<img src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 								</a>
@@ -72,11 +72,11 @@
 								<a href="#">
 									<img src="images/suzuki.png">
 								</a>
-							</div>-->
+							</div>
 						</div>
 					</div>
 					<ul class="mui-table-view" id="articlelist">
-						<!--<li class="article_card mui-table-view-cell">
+						<li class="article_card mui-table-view-cell">
 							<a href="view/article/preview.html">
 								<div class="left_div">
 									<div class="title">
@@ -84,7 +84,18 @@
 										<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
 									</div>
 									<div class="detail">
-										<span class="love2">736</span><span class="comment2">2736</span>
+										<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  												<span>358</span>
+										</svg>
+										</span>
+										<span class="comment">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-04"></use>
+  												<span>3658</span>
+										</svg>
+										</span>
 									</div>
 								</div>
 								<div class="right_div">
@@ -100,14 +111,25 @@
 										<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
 									</div>
 									<div class="detail">
-										<span class="love2">736</span><span class="comment2">2736</span>
+										<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  												<span>358</span>
+										</svg>
+										</span>
+										<span class="comment">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-04"></use>
+  												<span>3658</span>
+										</svg>
+										</span>
 									</div>
 								</div>
 								<div class="right_div">
 									<img src="images/20171223221008.jpg" />
 								</div>
 							</a>
-						</li>-->
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -133,6 +155,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/javascript" src="js/storageUtil.js"></script>
+	<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
 	<script type="text/template" id='article_item'>
 		<li class="article_card mui-table-view-cell">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -142,7 +165,18 @@
 						<p class="content">$Description$</p>
 					</div>
 					<div class="detail">
-						<span class="love2">$VoteCount$</span><span class="comment2">$CommentCount$</span>
+						<span class="love">
+							<svg class="svg-icon" aria-hidden="true">
+  								<use xlink:href="#icon-xihuan"></use>
+  								<span>$VoteCount$</span>
+							</svg>
+						</span>
+						<span class="comment">
+							<svg class="svg-icon" aria-hidden="true">
+  								<use xlink:href="#icon-04"></use>
+  								<span>$CommentCount$</span>
+							</svg>
+						</span>
 					</div>
 				</div>
 				<div class="right_div">

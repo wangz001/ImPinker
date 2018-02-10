@@ -6,7 +6,7 @@ mui.init({
 var subpages = ['tab-webview-subpage-article.html', 'tab-webview-subpage-weibo.html', 'tab-webview-subpage-setting.html'];
 var subpage_style = {
 	top: '45px',
-	bottom: '51px'
+	bottom: '50px'
 };
 
 var aniShow = {};

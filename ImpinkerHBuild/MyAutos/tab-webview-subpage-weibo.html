@@ -22,7 +22,7 @@
 					<ul class="mui-table-view">
 						<li class="weibo-card">
 							<div class="user_info">
-								<img src="images/logo1.png">
+								<img class="head-img" src="images/logo1.png">
 								<span class="name">silva</span>
 							</div>
 							<div class="user_detail">
@@ -43,8 +43,20 @@
 								<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 								<div class="user_news">
 									<span class="time">21分钟前</span>
-									<span class="love">736</span>
-									<span class="comment">2736</span>
+									<div class="detail">
+										<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  												<span>358</span>
+										</svg>
+										</span>
+										<span class="comment">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-04"></use>
+  												<span>3658</span>
+										</svg>
+										</span>
+									</div>
 								</div>
 							</div>
 						</li>
@@ -61,12 +73,24 @@
 									<a href="#">
 										<img class="bigimage" src="images/cbd.jpg">
 									</a>
-									
 								</div>
 								<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 								<div class="user_news">
 									<span class="time">21分钟前</span>
-									<span class="comment">2736</span>
+									<div class="detail">
+										<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  												<span>358</span>
+										</svg>
+										</span>
+										<span class="comment">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-04"></use>
+  												<span>3658</span>
+										</svg>
+										</span>
+									</div>
 								</div>
 							</div>
 						</li>
@@ -88,7 +112,7 @@
 		<script type="text/template" id="mui-card-item">
 			<li class="weibo-card">
 				<div class="user_info">
-					<img userid="$UserId$" src="$UserHeadImage$">
+					<img class="head-img" userid="$UserId$" username="$UserName$" src="$UserHeadImage$">
 					<span class="name">$UserName$</span>
 				</div>
 				<div class="user_detail">
@@ -101,8 +125,20 @@
 					$cardlocation$
 					<div class="user_news">
 						<span class="time">$PublishTime$</span>
-						<span class="love" weiboid='$Id$'>$VoteCount$</span>
-						<span class="comment" weiboid='$Id$'>$CommentCount$</span>
+						<div class="detail">
+							<span class="love votebtn" isVote="$isVote$" weiboid='$Id$'>
+								<svg class="svg-icon" aria-hidden="true">
+  									<use xlink:href="#icon-$isVote$"></use>
+  									<span>$VoteCount$</span>
+								</svg>
+							</span>
+							<span class="comment icon-compose" weiboid='$Id$'>
+								<svg class="svg-icon" aria-hidden="true">
+  									<use xlink:href="#icon-04"></use>
+  									<span id="commentCount_$Id$">$CommentCount$</span>
+								</svg>
+							</span>
+						</div>
 					</div>
 				</div>
 			</li>

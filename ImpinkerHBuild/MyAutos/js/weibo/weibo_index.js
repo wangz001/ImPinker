@@ -127,7 +127,7 @@ function initWeiBoItemTemplate(item) {
 	item.Description = replace_em(item.Description);
 	//判断我是否赞过此微博
 	var isVote = storageUtil.getWeiboVote(item.Id);
-	item.isVote = isVote ? "zan1" : "zan";
+	item.isVote = isVote ? "xin" : "xihuan";
 	//判断我是否收藏过此微博
 	var isCollect = storageUtil.getWeiboCollect(item.Id);
 	item.isCollect = isCollect ? "shoucang" : "favorite_diss";
@@ -165,14 +165,14 @@ function bindClickEvent() {
 	//点赞
 	mui('.mui-scroll').on('tap', '.votebtn', function() {
 		var heartType = $(this).attr("isVote");
-		var count = $(this).find("em").text();
+		var count = $(this).find("span").text();
 		var weiboid = this.getAttribute("weiboid");
 		if(heartType.indexOf("zan1") != -1) {
 			mui.toast("您已赞过此微博");
 		} else {
-			var zan1Str = "<use xlink:href=\"#icon-zan1\"></use>";
+			var zan1Str = "<use xlink:href=\"#icon-xin\"></use>";
 			$(this).find("svg").html(zan1Str);
-			$(this).find("em").html(parseInt(count) + 1);
+			$(this).find("span").html(parseInt(count) + 1);
 			mui.toast("点赞成功！");
 			sendVote(weiboid, false)
 		}
