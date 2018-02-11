@@ -167,12 +167,13 @@ function bindClickEvent() {
 		var heartType = $(this).attr("isVote");
 		var count = $(this).find("span").text();
 		var weiboid = this.getAttribute("weiboid");
-		if(heartType.indexOf("zan1") != -1) {
+		if(heartType.indexOf("xin") != -1) {
 			mui.toast("您已赞过此微博");
 		} else {
 			var zan1Str = "<use xlink:href=\"#icon-xin\"></use>";
 			$(this).find("svg").html(zan1Str);
 			$(this).find("span").html(parseInt(count) + 1);
+			$(this).attr("isVote","xin");
 			mui.toast("点赞成功！");
 			sendVote(weiboid, false)
 		}

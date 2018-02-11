@@ -22,7 +22,7 @@
 				bottom: 0;
 				left: 0;
 				background-color: #fafafa;
-				/*display: none;*/
+				display: none;
 			}
 		</style>
 	</head>
@@ -38,18 +38,65 @@
 		<div id="content" class="mui-content">
 			<img id="coverimage" src="">
 			<div class="mui-content-padded">
-				<div class="mui-card-header mui-card-media thread-info">
-					<img src="" id='user_headimg'>
+				<div class="head-title">永定河越野基地小试牛刀,H9冲破给力！</div>
+				<div class="article-user mui-card-header mui-card-media">
+					<img src="../../images/20171223221008.jpg" id='user_headimg'>
 					<div class="mui-media-body">
 						<em class="mui-icon mui-icon-person username" id="user_name">bwlang</em>
 						<p class="publish-time">发表于 2016-06-30 15:30</p>
 					</div>
 				</div>
-				<div>
-					<p id="article_description">简介：车酷自驾游是专注自驾游车酷自驾游是专注自驾游</p>
+				<div class="tips">
+					<span>Tips：</span>
+					<p id="article_description">车酷自驾游是专注自驾游车酷自驾游是专注自驾游</p>
 				</div>
-				<!-- 文章主体 -->
 				<div class="" id='articlecontent'>
+					<p>永定河是离市区最近的越野基地了，周末，吸引了不少越野爱好者来此游玩，他们顺便也可以体验自己爱车的性能， 与爱车更好的磨合</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977955035034.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>永定河越野基地，不过现在开始收费了</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977994011140.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>永定河越野基地，不过现在开始收费了</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171028/1_636447985580200876.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>红叶</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171028/1_636447985599205512.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>红叶</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449798355854857.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>永定河越野</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449798380435879.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>永定河越野</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449798397331059.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>永定河越野</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449798426423973.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>
+						永定河越野</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449799306985129.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>越野车的天堂啊</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449799325931169.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>越野车的天堂啊</p>
+					<p>
+						<img src="http://img.myautos.cn/weiboimage/20171030/1_636449799358520311.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+					</p>
+					<p>越野车的天堂啊</p>
 				</div>
 				<div class="article-footer">
 					<!--<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />-->
@@ -192,8 +239,6 @@
 			str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
 			return str;
 		}
-
-		
 
 		document.getElementById('share').addEventListener('tap', function() {
 			var btnArray = [{
