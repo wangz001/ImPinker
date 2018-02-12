@@ -179,14 +179,24 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 	var articlename = this.getAttribute('articlename');
 	//不使用父子模板方案的页面
 	if(type == "common") {
-		var webview_style = {
-			popGesture: "close",
-		};
-		//侧滑菜单需动态控制一下zindex值；
-		if(~id.indexOf('offcanvas-')) {
-			webview_style.zindex = 9998;
-			webview_style.popGesture = ~id.indexOf('offcanvas-with-right') ? "close" : "none";
+		var titleNView = { //详情页原生导航配置
+				backgroundColor: '#f7f7f7', //导航栏背景色
+				titleText: '', //导航栏标题
+				titleColor: '#000000', //文字颜色
+				titleText:articlename,
+				type: 'transparent', //透明渐变样式
+				autoBackButton: true, //自动绘制返回箭头
+				splitLine: { //底部分割线
+					color: '#cccccc'
+				}
 		}
+		var webview_style = {
+			"render": "always",
+			"popGesture": "hide",
+			"bounce": "vertical",
+			"bounceBackground": "#efeff4",
+			"titleNView": titleNView
+		};
 		//打开详情页面            
 		mui.openWindow({
 			id: id,

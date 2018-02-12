@@ -8,12 +8,11 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<link rel="stylesheet" href="../../css/article/preview.css" />
-		<link rel="stylesheet" href="../../css/article/list-to-detail.css" />
-		<link rel="stylesheet" href="../../css/iconfont/iconfont.css" />
 		<style type="text/css">
 			.zhezhaoDiv {
 				position: fixed;
@@ -32,22 +31,24 @@
 		<div class="zhezhaoDiv">
 			<p id="mui-progressbar" class="mui-progressbar mui-progressbar-infinite"></p>
 		</div>
+		<header id="header" class="mui-bar mui-bar-transparent">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id='articlename' class="mui-title">导航栏</h1>
+		</header>
 		<div id="content" class="mui-content">
 			<img id="coverimage" src="">
 			<div class="article-area">
 				<div class="head-title">永定河越野基地小试牛刀,H9冲破给力！</div>
-				<div class="article-createtime">
-					发表于 : <span id="article-createtime">2018-01-25</span>
-					<span class="mui-icon mui-icon-chat">500</span>
-					<span class="mui-icon mui-icon-chatboxes">500</span>
-				</div>
-				<div class="article-user">
+				<div class="article-user mui-card-header mui-card-media">
 					<img src="../../images/20171223221008.jpg" id='user_headimg'>
-					<span class="article-username" id="user_name">bwlang</span>
+					<div class="mui-media-body">
+						<em class="mui-icon mui-icon-person username" id="user_name">bwlang</em>
+						<p class="publish-time">发表于 2016-06-30 15:30</p>
+					</div>
 				</div>
 				<div class="tips">
 					<span>Tips：</span>
-					<p id="article_description"></p>
+					<p id="article_description">车酷自驾游是专注自驾游车酷自驾游是专注自驾游</p>
 				</div>
 				<div class="" id='articlecontent'>
 
@@ -77,36 +78,12 @@
 				</div>
 			</div>
 		</div>
-		<footer class="mui-bar mui-bar-footer">
-				<span class="mui-icon">
-					<svg class="svg-icon" aria-hidden="true">
-  						<use xlink:href="#icon-pinglun1"></use>
-					</svg>
-				</span>
-			</a>
-			<a id="vote" class="mui-icon" style="float: inherit;">
-				<span class="mui-icon">
-					<svg class="svg-icon" aria-hidden="true">
-  						<use xlink:href="#icon-xihuan-copy"></use>
-					</svg>
-				</span>
-			</a>
-			<a id="collect" class="mui-icon" style="float: inherit;">
-				<span class="mui-icon">
-					<svg class="svg-icon" aria-hidden="true">
-  						<use xlink:href="#icon-shoucang1"></use>
-					</svg>
-				</span>
-			</a>
-			<a id="share" class="mui-icon">
-				<span class="mui-icon">
-					<svg class="svg-icon" aria-hidden="true">
-  						<use xlink:href="#icon-fenxiang"></use>
-					</svg>
-				</span>
-			</a>
+		<footer id="mui-footer" class="mui-bar mui-bar-footer">
+			<a class="mui-icon mui-icon-compose" style="float: inherit;"></a>
+			<a id="vote" class="mui-icon mui-icon-extra mui-icon-extra-heart" style="float: inherit;"></a>
+			<a id="collect" class="mui-icon mui-icon-star" style="float: inherit;"></a>
+			<a id="share" class="mui-icon-extra mui-icon-extra-share"></a>
 		</footer>
-
 	</body>
 	<script src="../../js/mui.min.js"></script>
 	<script type="text/javascript" src="../../js/app.js"></script>
@@ -117,7 +94,6 @@
 	<script type="text/javascript" src="../../js/mui.zoom.js"></script>
 	<script type="text/javascript" src="../../js/storageUtil.js"></script>
 	<script type="text/javascript" src="../../js/article/article_preview.js"></script>
-	<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 	<script type="text/template" id='comment_item'>
 		<dl class="comment-list hot" commentid="@comment.Id">
 			<dt>

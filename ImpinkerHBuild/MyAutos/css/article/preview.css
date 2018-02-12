@@ -8,26 +8,68 @@ body {
 	background-color: white;
 }
 
-#coverimage{
+#coverimage {
 	width: 100%;
 }
+
 .mui-card-header.mui-card-media {
 	display: block;
 	padding: 0px;
 }
 
-.mui-content-padded {
-	padding: 12px 15px;
-	margin: 0px;
+.mui-content {
 	background-color: white;
 }
 
-.mui-content-padded .head-title {
+.article-area {
+	padding: 12px 15px;
+	margin: 0px;
+}
+
+.article-area .head-title {
 	font-size: 30px;
 	line-height: 42px;
 }
 
-.mui-content-padded .tips {
+.article-area .article-createtime {
+	/*margin: 10px 0;*/
+	font-size: 15px;
+	color: #9DABBC;
+}
+.article-area .article-createtime .mui-icon{
+	margin: 10px 0;
+	font-size: 15px;
+	margin-left: 20px;
+
+}
+
+.article-user {
+	width: 100%;
+	margin:0 0 10px 0;
+}
+
+.article-user img {
+	border-radius: 50%;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+}
+
+.article-user .article-username {
+	padding-left: 7px;
+	line-height: 50px;
+	/*color: #b5bebf;*/
+	font-size: 18px;
+	vertical-align: top;
+}
+
+.article-area .article-user {
+	width: 100%;
+}
+
+.article-area .tips {
 	padding: 10px;
 	background: #F3F6FA;
 	border-radius: 6px;
@@ -42,40 +84,7 @@ body {
 	line-height: 20px;
 }
 
-.article-user img {
-	border-radius: 50%;
-	vertical-align: middle;
-	overflow: hidden;
-	margin-right: 2px;
-	font-size: 0;
-    line-height: 0;
-    float: left;
-    width: 34px;
-    height: 34px;
-}
-
-.article-user {
-	margin: 10px 10px 10px 0px;
-	display: block;
-	padding: 0px;
-	vertical-align: bottom;
-	color: #fff;
-	background-position: center;
-	background-size: cover;
-	font-size: 17px;
-	border-radius: 2px 2px 0 0;
-}
-
-.article-user .username {
-	font-size: 16px;
-}
-
-.article-user .publish-time{
-	font-size: 13px;
-    margin-bottom: 0;
-}
-
-.mui-content-padded p img {
+.article-area p img {
 	width: auto;
 	height: auto;
 	max-width: 100%;
@@ -90,10 +99,9 @@ body {
 	color: #454F5B;
 }
 
-.mui-content {
-	height: 100%;
-	overflow: auto;
-	padding-bottom: 50px;
+.comment-content{
+	padding: 12px 15px;
+	margin: 0px;
 }
 
 .mui-bar-footer {
@@ -111,6 +119,14 @@ body {
 
 .mui-bar-footer .mui-btn {
 	margin-bottom: 13px;
+}
+
+.mui-bar-footer .svg-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
 }
 
 #composeText {
