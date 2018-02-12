@@ -1,6 +1,133 @@
+var articleItem = null;
+var shares = null,
+	sharewx = null,
+	shareweibo = null;
+mui.plusReady(function() {
+	//获取参数
+	var self = plus.webview.currentWebview();
+	var articleid = self.articleid;
+	var articlename = self.articlename;
+	$("#articlename").html(articlename);
+	//判断是否赞过文章
+	var isVote = storageUtil.getArticleVote(articleid);
+	if(isVote) {
+		$('#vote').removeClass("mui-icon-extra-heart");
+		$('#vote').addClass("mui-icon-extra-heart-filled");
+	}
+	//判断是否收藏过文章
+	var isVote = storageUtil.getArticleCollect(articleid);
+	if(isVote) {
+		$('#collect').removeClass("mui-icon-star");
+		//$('#collect').addClass("mui-icon-star-filled");
+	}
+	getArticle(articleid);
+	getArticleComment(articleid);
+	// 扩展API加载完毕，现在可以正常调用扩展API
+	plus.share.getServices(function(s) {
+		shares = s;
+		for(var i in s) {
+			if('weixin' == s[i].id) {
+				sharewx = s[i];
+			}
+			if('sinaweibo' == s[i].id) {
+				shareweibo = s[i];
+			}
+		}
+	}, function(e) {
+		alert("获取分享服务列表失败：" + e.message);
+	});
+	
+});
+mui.previewImage();
+
+
+$(function() {
+	$('.emotion').qqFace({
+		assign: 'comment_text',
+		path: '../../js/qqFace/arclist/' //表情存放的路径
+	});
+});
+
+//查看结果
+
+function replace_em(str) {
+	//str = str.replace(/\</g, '&lt;');
+	//str = str.replace(/\>/g, '&gt;');
+	//str = str.replace(/\n/g, '<br/>');
+	str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
+	return str;
+}
+
+document.getElementById('share').addEventListener('tap', function() {
+	var btnArray = [{
+		title: '分享给微信好友'
+	}, {
+		title: '分享到微信朋友圈'
+	}, {
+		title: '分享到新浪微博'
+	}];
+	plus.nativeUI.actionSheet({
+		title: "分享",
+		cancel: '取消',
+		buttons: btnArray
+	}, function(e) {
+		var index = e.index; // 
+		switch(index) {
+			case 1:
+				sharewx.send({
+					title: articleItem.ArticleName,
+					content: articleItem.Description,
+					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					thumbs: [
+						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+					],
+					extra: {
+						scene: "WXSceneSession"
+					}
+				}, function() {
+					mui.toast("分享给好友成功");
+				}, function(e) {
+					mui.toast("取消分享");
+				});
+				break;
+			case 2:
+				sharewx.send({
+					title: articleItem.ArticleName,
+					content: articleItem.Description,
+					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					thumbs: [
+						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+					],
+					extra: {
+						scene: "WXSceneTimeline"
+					}
+				}, function() {
+					mui.toast("分享成功");
+				}, function(e) {
+					mui.toast("取消分享");
+				});
+				break;
+			case 3:
+				shareweibo.send({
+					title: articleItem.ArticleName,
+					content: articleItem.Description,
+					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					thumbs: [
+						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+					]
+				}, function() {
+					mui.toast("分享成功");
+				}, function(e) {
+					mui.toast("取消分享");
+				});
+				break;
+		}
+	});
+});
+
 //评论
-$('.mui-icon-compose').bind('click', function() {
-	if(commonUtil.checkToken()){
+$('#compose').bind('click', function() {
+	if(commonUtil.checkToken()) {
 		showComment();
 	}
 });
@@ -25,10 +152,10 @@ function hideComment() {
 			//防止和提交按钮冲突
 			toCommentId = 0;
 			//$("#comment_text").val("");
-			$("#comment_text").attr("placeholder","请输入评论内容....");
+			$("#comment_text").attr("placeholder", "请输入评论内容....");
 		}, 200);
 	}
-	
+
 }
 
 $('#comment_text').focus(function() {
@@ -78,9 +205,9 @@ var toCommentId = 0;
 //评论 回复  comment_to
 mui('#comment ').on('tap', '.comment_to', function() {
 	var Id = this.getAttribute('commentid');
-	var username=this.getAttribute('username');
+	var username = this.getAttribute('username');
 	$("#comment_text").val('');
-	$("#comment_text").attr("placeholder","回复:"+username);
+	$("#comment_text").attr("placeholder", "回复:" + username);
 	toCommentId = Id;
 	showComment();
 });
@@ -98,14 +225,14 @@ function getArticle(articleid) {
 			articleItem = articleinfo;
 			$("#coverimage").attr("src", articleItem.CoverImage.replace("style/articlecover_36_24", "style/article_900"));
 			$("#article_description").html("简介：" + articleItem.Description);
-			articleinfo.Content=replace_em(articleinfo.Content);
+			articleinfo.Content = replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
-			$("#articlename").html(articleinfo.ArticleName);
+			$(".head-title").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
 			//console.log(articleItem.UserHeadUrl);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
-			$(".thread-info .publish-time").html(articleItem.CreateTime);
+			$("#article-createtime").html(articleItem.CreateTime.substring(0,11));
 			setTimeout(function() {
 				$(".zhezhaoDiv").hide();
 				$("#mui-progressbar").hide();
@@ -192,7 +319,7 @@ $('#collect').bind('click', function() {
 	if(heartType.indexOf("mui-icon-star-filled") != -1) {
 		mui.toast("您已收藏过");
 	} else {
-		$(this).attr("class", "mui-icon mui-icon-star-filled");
+		//$(this).attr("class", "mui-icon mui-icon-star-filled");
 		commonUtil.sendRequestWithToken(url, para, false, function(data) {
 			console.log(JSON.stringify(data));
 			if(data.IsSuccess == 1) {
