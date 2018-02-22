@@ -46,7 +46,7 @@ function pullupRefresh() {
 var img_1200style = 'style/weibo_1200';
 var img_200style = 'style/weibo_200_200';
 var img_24style = 'style/weibo_24_16';
-var img_36style = 'style/weibo_36_24';
+var img_60style = 'style/weibo_60_34';
 var weiboTemplate = $('script[id="weiboitem"]').html();
 /**
  * 添加数据
@@ -67,7 +67,7 @@ function initWeiBoItem(table, item) {
 		}
 		//imgHtmlStr += "</ul>";
 	} else {
-		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置

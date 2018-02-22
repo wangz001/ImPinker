@@ -100,11 +100,12 @@ function pullupRefresh() {
 function initWeiBoItemTemplate(item) {
 	var img_1200style = 'style/weibo_1200';
 	var img_24style = 'style/weibo_24_16';
-	var img_36style = 'style/weibo_36_24';
+	var img_60style = 'style/weibo_60_34';
 	var img_200style = 'style/weibo_200_200';
 	if(item.ContentValue == null || item.ContentValue == '') {
 		return;
 	}
+	//console.log(item.Description);
 	var templateCard = $('script[id="mui-card-item"]').html();
 	var imgHtmlStr = "";
 	var imgs = item.ContentValue.split(',');
@@ -114,7 +115,7 @@ function initWeiBoItemTemplate(item) {
 			imgHtmlStr += '<a href="#"><img src="' + imgs[i].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 	} else {
-		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置

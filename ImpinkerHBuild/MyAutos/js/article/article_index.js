@@ -105,9 +105,9 @@ var img_1200style = 'style/article_1200_605';
 var img_900style = 'style/article_900';
 var template = $('script[id="article_item"]').html();
 function initItem(item, isPullDown) {
-	//如果轮播图已显示，跳过
+	//如果轮播图已显示，跳过。。。暂时不启用
 	if($.inArray(item.Id, sliderIds) != -1) {
-		return;
+		//return;
 	}
 	allArticles.push(item);
 	var articleHtmlStr;
