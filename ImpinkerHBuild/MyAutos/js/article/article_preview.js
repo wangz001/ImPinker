@@ -36,10 +36,9 @@ mui.plusReady(function() {
 	}, function(e) {
 		alert("获取分享服务列表失败：" + e.message);
 	});
-	
+
 });
 mui.previewImage();
-
 
 $(function() {
 	$('.emotion').qqFace({
@@ -174,6 +173,7 @@ $(document).ready(function() {
 			SendComposs(txt);
 		}
 	});
+
 });
 
 function SendComposs(txtStr) {
@@ -227,17 +227,24 @@ function getArticle(articleid) {
 			$("#article_description").html("简介：" + articleItem.Description);
 			articleinfo.Content = replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
+			//替换成图片懒加载的地址
+			var reg = new RegExp("img src=","g");//g,表示全部替换。
+			contentStr=contentStr.replace(reg,"img data-lazyload=");
+			//console.log("aaa:"+contentStr);
 			$(".head-title").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
 			//console.log(articleItem.UserHeadUrl);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
-			$("#article-createtime").html(articleItem.CreateTime.substring(0,11));
+			$("#article-createtime").html(articleItem.CreateTime.substring(0, 11));
 			setTimeout(function() {
 				$(".zhezhaoDiv").hide();
 				$("#mui-progressbar").hide();
 			}, 500)
-
+			//图片懒加载
+			mui(document).imageLazyload({
+				placeholder: '../../images/60x60.gif'
+			});
 		}
 	});
 }

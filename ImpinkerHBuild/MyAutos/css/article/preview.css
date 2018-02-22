@@ -19,6 +19,8 @@ body {
 
 .mui-content {
 	background-color: white;
+	/*padding-bottom: 50px;*/
+	/*margin-bottom: 50px;*/
 }
 
 .article-area {
@@ -99,9 +101,27 @@ body {
 	color: #454F5B;
 }
 
+.before_comment{
+	background-color: gainsboro;
+	height: 10px;
+	width: 100%;
+}
+
 .comment-content{
-	padding: 12px 15px;
+	padding: 12px 9px;
 	margin: 0px;
+}
+
+
+.comment-content .pinlun_p{
+	font-size: 16px;
+	margin-top: 10px;
+}
+
+#comment{
+	/*background-color:#fff;*/
+	min-height: 50px;
+	padding: 0 5px;
 }
 
 .mui-bar-footer {

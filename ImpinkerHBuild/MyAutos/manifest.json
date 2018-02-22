@@ -231,7 +231,7 @@
 					"ldpi": ""
 				}
 			}
-		},"ads":{"rp":true,"splash":false,"push":true,"spot":false},"adid":""
+		},"ads":{"rp":false,"splash":true,"push":true,"spot":false},"adid":""
 	},
 	"dependencies": {
 		"pages": {
