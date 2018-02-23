@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/icons-extra.css" />
+		<link rel="stylesheet" href="../../css//weibo/weibo.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<style type="text/css">
+			#map {
+				width: 100%;
+				height: 300px;
+				position: fixed;
+				top: 40px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+			
+			.mui-icon-extra-heart {
+				position: relative;
+				float: right;
+			}
+			
+			.mui-scroll .mui-card {
+				margin: 0 0 5px 0;
+			}
+			
+			.mui-card-header.mui-card-media {
+				display: block;
+				padding: 6px 0 6px 10px;
+			}
+			
+			.mui-card-header.mui-card-media img {
+				border-radius: 4px;
+			}
+			
+			.mui-card-header .mui-media-body em {
+				font-size: 15px;
+			}
+			
+			.mui-card-header.mui-card-media .mui-media-body p {
+				font-size: 11px;
+				margin-top: 3px;
+			}
+			
+			.mui-card .mui-card-content {
+				padding: 5px 5px 5px 10px
+			}
+			
+			.mui-card .mui-card-content p {
+				margin-bottom: 0px;
+			}
+			
+			.mui-card .card-location {
+				color: #b5bebf;
+				font-size: 13px;
+				margin-top: 3px;
+			}
+			
+			.mui-card .card-location .mui-icon {
+				font-size: 15px;
+			}
+			
+			.mui-card .mui-card-footer {
+				padding: 4px 45px;
+				min-height: 30px;
+			}
+			
+			.mui-card-footer em {
+				font-size: 10px;
+			}
+			
+			#mapSize {
+				margin-top: 5px;
+			}
+			
+			.near-title {
+				font-size: 19px;
+				margin: 13px;
+				background-color: ;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="lbs-title">石景山游乐园</h1>
+		</header>
+		<div class="mui-content">
+			<div id="map">
+				<p>地图加载中...</p>
+			</div>
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<p class="near-title">附近的途迹</p>
+					<div class="mui-card">
+						<div class="mui-card-header mui-card-media">
+							<img src="../../images/logo.png">
+							<div class="mui-media-body">
+								小Mf
+								<p>发表于 2016-06-30 15:30</p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+							<p>的dfdfdfdfdfdfdfd康</p>
+
+							<div class="media-pic-list">
+								<ul>
+									<li>
+										<img src="../../images/login-1.png" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+									<li>
+										<img src="../../images/muwu.jpg" data-preview-src="" data-preview-group="1">
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/template" id="mui-card-item">
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="$UserHeadImage$">
+					<div class="mui-media-body">
+						<em class="mui-icon mui-icon-person">$UserName$</em>
+						<p>发表于 $PublishTime$</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<p>$Description$</p>
+					<div class="media-pic-list">
+						$imglist$
+					</div>
+					$cardlocation$
+				</div>
+			</div>
+		</script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pullupRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						auto: false,
+						contentnomore:'没有更多数据了',
+						callback: pullupRefresh
+					}
+				}
+			});
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var weiboid = self.weiboid;
+				console.log(weiboid);
+				getweibo(weiboid);
+			});
+			
+			mui.previewImage();
+			
+			var pageNum = 1;
+			var allCount = 0;
+			var pageSize = 30;
+			var lan="";
+			var lng="";
+			var solrQueryData={
+				pagenum:1,
+				allCount:0,
+				pagesize:10,
+				lat:'',
+				lng:'',
+				weiboId:0,
+				distance:10,
+				userid:1
+			}
+
+			function getweibo(weiboid) {
+				var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
+				var data = {
+					weiboid: weiboid,
+				};
+				plus.nativeUI.showWaiting('正在加载');
+				commonUtil.sendRequestGet(url, data, function(data) {
+					plus.nativeUI.closeWaiting();
+					if(data.IsSuccess == 1 && data.Data != null) {
+						var weiboitem = data.Data;
+						//console.log(JSON.stringify(weiboitem));
+						$("#lbs-title").html(weiboitem.LocationText);
+						solrQueryData.lat=weiboitem.Lantitude;
+						solrQueryData.lng=weiboitem.Longitude;
+						solrQueryData.weiboId=weiboid;
+						pullupRefresh();
+						setPoint(weiboitem.Longitude, weiboitem.Lantitude, weiboitem.LocationText);
+					}
+				});
+			}
+
+			function pullupRefresh() {
+				var weiboApiPath = "http://api.myautos.cn/api/Search/GetWeiboByGeo";
+				var dataPara = solrQueryData;
+				commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
+					if(data.IsSuccess == 1 && data.Data != null && data.Data.WeiboList.length > 0) {
+						var list = data.Data.WeiboList;
+						for(var i = 0; i < list.length; i++) {
+							var item = list[i];
+							initWeiBoItemTemplate(item);
+						}
+						solrQueryData.pagenum=solrQueryData.pagenum+1;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						return;
+					}
+					
+				});
+
+			}
+
+			/**
+			 * 添加数据
+			 * @param {Object} table
+			 * @param {Object} item
+			 */
+			function initWeiBoItemTemplate(item) {
+				var img_1200style = 'style/weibo_1200';
+				var img_600style = 'style/weibo_600';
+				var img_24style = 'style/weibo_24_16';
+				var img_36style = 'style/weibo_36_24';
+				if(item.ContentValue == null || item.ContentValue == '') {
+					return;
+				}
+				var templateCard = $('script[id="mui-card-item"]').html();
+				var imgHtmlStr = "";
+				var imgs = item.ContentValue.split(',');
+				if(imgs.length > 1) {
+					//多图
+					imgHtmlStr += "<ul>";
+					for(var i = 0; i < imgs.length; i++) {
+						imgHtmlStr += '<li><img src="' + imgs[i] + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+					}
+					imgHtmlStr += "</ul>";
+				} else {
+					imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+				}
+				item.imglist = imgHtmlStr;
+				//显示地理位置
+				item.cardlocation = "";
+				if(item.LocationText!=null&&item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
+					var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
+					item.cardlocation = lbsStr;
+				}
+				var cardStr = templateCard.temp(item);
+				$(".mui-scroll").append(cardStr);
+			}
+		</script>
+		<script type="text/javascript">
+			var em = null,
+				map = null;
+			var mapHeight = 0;
+			// H5 初始化地图
+			function setPoint(lon, lan, locationtext) {
+				em = document.getElementById("map");
+				// 确保DOM解析完成
+				if(!em || !window.plus || map) {
+					return
+				};
+				var point = new plus.maps.Point(lon, lan);
+				map = new plus.maps.Map("map", {
+					position: "absolute"
+				});
+				map.centerAndZoom(point, 12);
+				//显示气泡图标
+				var marker = new plus.maps.Marker(new plus.maps.Point(lon, lan));
+				marker.setIcon("../../images/icon-location.png");
+				//marker.setLabel("HBuilder");
+				var bubble = new plus.maps.Bubble(locationtext);
+				marker.setBubble(bubble);
+				map.addOverlay(marker);
+			}
+		</script>
+		<script type="text/javascript">
+			//获得滚动事件
+			var wh = $(window).height();
+			//console.log(wh);
+			var mapSizeSmall = true;
+			$(window).scroll(function() {
+				var top = $(window).scrollTop();
+				//console.log(top);
+				if(top > 100 && !mapSizeSmall && em && map) {
+					em.style.height = "100px";
+					map.resize();
+					$(".mui-scroll").css("margin-top", "100px");
+					mapSizeSmall = true;
+					console.log("small");
+				}
+				if(top < 50 && mapSizeSmall && em && map) {
+					em.style.height = "300px";
+					map.resize();
+					$(".mui-scroll").css("margin-top", "300px");
+					mapSizeSmall = false;
+					console.log("big");
+				}
+			});
+		</script>
+	</body>
+
+</html>

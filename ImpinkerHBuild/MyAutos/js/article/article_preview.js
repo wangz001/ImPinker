@@ -11,14 +11,14 @@ mui.plusReady(function() {
 	//判断是否赞过文章
 	var isVote = storageUtil.getArticleVote(articleid);
 	if(isVote) {
-		$('#vote').removeClass("mui-icon-extra-heart");
-		$('#vote').addClass("mui-icon-extra-heart-filled");
+		$("#vote").find("use").attr("xlink:href","#icon-xin");
+		$('#vote').attr("isVote", "true");
 	}
 	//判断是否收藏过文章
 	var isVote = storageUtil.getArticleCollect(articleid);
 	if(isVote) {
-		$('#collect').removeClass("mui-icon-star");
-		//$('#collect').addClass("mui-icon-star-filled");
+		$("#collect").find("use").attr("xlink:href","#icon-shoucang");
+		$('#collect').attr("isCollect", "true");
 	}
 	getArticle(articleid);
 	getArticleComment(articleid);
@@ -287,8 +287,8 @@ function initComment(item) {
 
 ///点赞
 $('#vote').bind('click', function() {
-	var heartType = $(this).attr("class");
-	if(heartType.indexOf("mui-icon-extra-heart-filled") != -1) {
+	var isVote = $(this).attr("isVote");
+	if(isVote.indexOf("true") != -1) {
 		mui.toast("您已赞过此文章~");
 		return;
 	}
@@ -304,26 +304,27 @@ $('#vote').bind('click', function() {
 			mui.fire(articlePage, 'articleVote', {
 				articleid: articleItem.Id
 			});
-
 			storageUtil.setArticleVote(articleItem.Id);
 		} else {
 			mui.toast("谢谢支持~~");
 			//storageUtil.setArticleVote(articleItem.Id);
 		}
-		$('#vote').removeClass("mui-icon-extra-heart");
-		$('#vote').addClass("mui-icon-extra-heart-filled");
+		$("#vote").find("use").attr("xlink:href","#icon-xin");
+		$('#vote').attr("isVote","true");
+		//$('#vote').removeClass("mui-icon-extra-heart");
+		//$('#vote').addClass("mui-icon-extra-heart-filled");
 	});
 });
 
 //收藏点击事件
 $('#collect').bind('click', function() {
-	var heartType = $(this).attr("class");
+	var isCollect = $(this).attr("isCollect");
 	//mui.alert("收藏到我的微博");
 	var url = "http://api.myautos.cn/api/UserCollection/AddArticleCollect";
 	var para = {
 		"articleId": articleItem.Id
 	}
-	if(heartType.indexOf("mui-icon-star-filled") != -1) {
+	if(isCollect.indexOf("true") != -1) {
 		mui.toast("您已收藏过");
 	} else {
 		//$(this).attr("class", "mui-icon mui-icon-star-filled");
@@ -331,7 +332,8 @@ $('#collect').bind('click', function() {
 			console.log(JSON.stringify(data));
 			if(data.IsSuccess == 1) {
 				mui.toast("收藏成功");
-				//$(this).attr("class", "mui-icon mui-icon-star-filled");
+				$("#collect").find("use").attr("xlink:href","#icon-shoucang");
+				$('#collect').attr("isCollect", "true");
 				storageUtil.setArticleCollect(articleItem.Id);
 			} else {
 				//mui.toast("收藏失败");

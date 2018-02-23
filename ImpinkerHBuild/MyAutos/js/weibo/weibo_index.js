@@ -250,7 +250,7 @@ function sendVote(weiboid, isVote) {
 	commonUtil.sendRequestWithToken(url, data, true, function(data) {
 		if(data.IsSuccess == 1) {
 			storageUtil.setWeiboVote(weiboid);
-			console.log("aa");
+			//console.log("aa");
 		} else {
 			console.log("bb");
 		}
