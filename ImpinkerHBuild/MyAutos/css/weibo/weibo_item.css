@@ -110,10 +110,17 @@
 .detail .love {
 	width: 16%;
 	color: #bdc6d2;
-	margin-right: 1rem;
+	/*margin-right: 1rem;*/
 }
 
-.detail .love span {
+.detail span {
+		font-size: 12px;
+		margin-left: 5px;
+		margin-bottom: 3px;
+		color: #bdc6d2;
+}
+
+/*.detail .love span {
 	font-size: 12px;
 	margin-left: 5px;
 	margin-bottom: 3px;
@@ -128,7 +135,7 @@
 	font-size: 12px;
 	margin-left: 5px;
 	margin-bottom: 3px;
-}
+}*/
 
 
 /*.user_news .love {
@@ -177,24 +184,25 @@
 		fill: currentColor;
 		overflow: hidden;
 	}
-	.detail .love {
+	/*.detail .love {
 		width: 16%;
 		color: #bdc6d2;
-	}
-	.detail .love span {
+	}*/
+	.detail span {
 		font-size: 12px;
 		margin-left: 5px;
 		margin-bottom: 3px;
-	}
-	.detail .comment {
-		width: 25%;
 		color: #bdc6d2;
 	}
-	.detail .comment span {
+	/*.detail .comment {
+		width: 25%;
+		color: #bdc6d2;
+	}*/
+	/*.detail .comment span {
 		font-size: 12px;
 		margin-left: 5px;
 		margin-bottom: 3px;
-	}
+	}*/
 }
 
 

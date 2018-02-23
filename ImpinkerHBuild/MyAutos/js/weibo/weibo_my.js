@@ -82,7 +82,7 @@ function initWeiBoItem(table, item) {
 }
 
 //删除点击事件
-mui('.mui-scroll').on('tap', '.mui-icon-trash', function() {
+mui('.mui-scroll').on('tap', '.delete_weibo', function() {
 	var weiboid = this.getAttribute('weiboid');
 	mui.confirm("是否要删除微博？", "我的微博", ["是", "否"], function(event, index) {
 		console.log(JSON.stringify(event));
