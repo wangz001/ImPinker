@@ -15,7 +15,21 @@ mui.init({
 
 });
 //图片预览
-mui.previewImage();
+mui.previewImage(function() {}, function(img) {
+		//open
+		plus.webview.currentWebview().setStyle({
+			top: '0px',
+			bottom: '0px'
+		});
+	},
+	function(img) {
+		//close
+		plus.webview.currentWebview().setStyle({
+			top: '45px',
+			bottom: '50px'
+		});
+	}
+);
 
 mui.plusReady(function() {
 	//显示微博缓存
@@ -174,7 +188,7 @@ function bindClickEvent() {
 			var zan1Str = "<use xlink:href=\"#icon-xin\"></use>";
 			$(this).find("svg").html(zan1Str);
 			$(this).find("span").html(parseInt(count) + 1);
-			$(this).attr("isVote","xin");
+			$(this).attr("isVote", "xin");
 			mui.toast("点赞成功！");
 			sendVote(weiboid, false)
 		}
