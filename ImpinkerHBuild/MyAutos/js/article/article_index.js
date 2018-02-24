@@ -212,7 +212,8 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 				articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
 				articleid: articleid, //扩展参数
 				articlename: articlename
-			}
+			},
+			createNew:true //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 		});
 	}
 });

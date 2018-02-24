@@ -1,3 +1,6 @@
+mui.init({
+	swipeBack: true //启用右滑关闭功能
+});
 var articleItem = null;
 var shares = null,
 	sharewx = null,
@@ -11,13 +14,13 @@ mui.plusReady(function() {
 	//判断是否赞过文章
 	var isVote = storageUtil.getArticleVote(articleid);
 	if(isVote) {
-		$("#vote").find("use").attr("xlink:href","#icon-xin");
+		$("#vote").find("use").attr("xlink:href", "#icon-xin");
 		$('#vote').attr("isVote", "true");
 	}
 	//判断是否收藏过文章
 	var isVote = storageUtil.getArticleCollect(articleid);
 	if(isVote) {
-		$("#collect").find("use").attr("xlink:href","#icon-shoucang");
+		$("#collect").find("use").attr("xlink:href", "#icon-shoucang");
 		$('#collect').attr("isCollect", "true");
 	}
 	getArticle(articleid);
@@ -228,8 +231,8 @@ function getArticle(articleid) {
 			articleinfo.Content = replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
 			//替换成图片懒加载的地址
-			var reg = new RegExp("img src=","g");//g,表示全部替换。
-			contentStr=contentStr.replace(reg,"img data-lazyload=");
+			var reg = new RegExp("img src=", "g"); //g,表示全部替换。
+			contentStr = contentStr.replace(reg, "img data-lazyload=");
 			//console.log("aaa:"+contentStr);
 			$(".head-title").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
@@ -309,8 +312,8 @@ $('#vote').bind('click', function() {
 			mui.toast("谢谢支持~~");
 			//storageUtil.setArticleVote(articleItem.Id);
 		}
-		$("#vote").find("use").attr("xlink:href","#icon-xin");
-		$('#vote').attr("isVote","true");
+		$("#vote").find("use").attr("xlink:href", "#icon-xin");
+		$('#vote').attr("isVote", "true");
 		//$('#vote').removeClass("mui-icon-extra-heart");
 		//$('#vote').addClass("mui-icon-extra-heart-filled");
 	});
@@ -332,7 +335,7 @@ $('#collect').bind('click', function() {
 			console.log(JSON.stringify(data));
 			if(data.IsSuccess == 1) {
 				mui.toast("收藏成功");
-				$("#collect").find("use").attr("xlink:href","#icon-shoucang");
+				$("#collect").find("use").attr("xlink:href", "#icon-shoucang");
 				$('#collect').attr("isCollect", "true");
 				storageUtil.setArticleCollect(articleItem.Id);
 			} else {
