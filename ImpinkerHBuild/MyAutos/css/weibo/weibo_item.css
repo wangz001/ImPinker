@@ -10,8 +10,21 @@
 	overflow: hidden;
 	padding: 11px 15px;
 	list-style: none;
-	border-bottom: 1px solid #eceff4;
+	/*border-bottom: 1px solid #eceff4;*/
 }
+
+.mui-scroll .weibo-card:after {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #ECEFF4;
+}
+
 
 .user_info {
 	width: 100%;
@@ -40,11 +53,12 @@
 .user_detail .text {
 	color: #454f5b;
 	font-size: 16px;
+	margin-top: -10px;
 }
 
 .list_img {
 	margin-top: 10px;
-	margin-bottom: 8px;
+	/*margin-bottom: 8px;*/
 	overflow: hidden;
 	width: 100%;
 }

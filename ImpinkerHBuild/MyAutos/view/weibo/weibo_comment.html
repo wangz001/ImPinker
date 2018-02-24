@@ -7,8 +7,9 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
-		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
+		<link rel="stylesheet" href="../../css/weibo/comment.css" />
+		<link rel="stylesheet" href="../../css/weibo/weibo_comment.css" />
 	</head>
 
 	<body>
@@ -33,6 +34,25 @@
 				<div class="mui-inline">评论列表</div>
 			</div>
 			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
+				<dl class="comment-list hot" commentid="">
+						<dt>
+                        <i class="headpic">
+                            <img src="../../images/logo.png">
+                        </i>
+                        <span class="userinfo">
+                            哈弗
+                            <p>2019-56-65</p>
+                        </span>
+                        <span class="commentvote">
+                            <a class="comment_to" ><span class="mui-icon mui-icon-compose"></span></a>
+                        </span>
+                		</dt>
+						<dd>
+							<p>
+								你真是厉害
+							</p>
+						</dd>
+					</dl>
 				<p>暂无评论</p>
 			</div>
 		</div>
@@ -49,13 +69,13 @@
                         <i class="headpic">
                             <img src="$HeadImage$">
                         </i>
-                        <em class="userinfo">
+                        <span class="userinfo">
                             $UserName$
                             <p>$CreateTime$</p>
-                        </em>
-                        <em class="commentvote">
+                        </span>
+                        <span class="commentvote">
                             <a class="comment_to" commentid='$Id$'><span class="mui-icon mui-icon-compose"></span></a>
-                        </em>
+                        </span>
                 </dt>
 				<dd>
 					<p>

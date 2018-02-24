@@ -135,7 +135,9 @@ function initWeiBoItemTemplate(item) {
 	//显示地理位置
 	item.cardlocation = "";
 	if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {
-		var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + item.LocationText + "</span></div>";
+		var lbsStr = "<div weiboid='" + item.Id + "' class='card-location'>"+
+		"<span class='mui-icon'><svg class='svg-icon' aria-hidden='true'><use xlink:href='#icon-tuji-weizhi-copy'></use></svg></span>"+
+		"<span>" + item.LocationText + "</span></div>";
 		item.cardlocation = lbsStr;
 	}
 	//qq表情

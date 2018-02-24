@@ -34,15 +34,28 @@ body {
 }
 
 .article-area .article-createtime {
-	/*margin: 10px 0;*/
 	font-size: 15px;
-	color: #9DABBC;
+	color: #bdc6d2;
 }
 .article-area .article-createtime .mui-icon{
 	margin: 10px 0;
 	font-size: 15px;
 	margin-left: 20px;
+    line-height: 1.8rem;
+    height: 1.8rem;
+}
 
+.article-area .article-createtime .svg-icon {
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    vertical-align: -0.15em;
+    fill: currentColor;
+}
+.article-area .article-createtime .svg-icon span{
+    font-size: 12px;
+    margin-left: 5px;
+    margin-bottom: 3px;
 }
 
 .article-user {
