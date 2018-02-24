@@ -169,6 +169,7 @@ nav {
 
 
 /*1100分辨率（大于960px，小于1199px）*/
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
 	.mui-slider .mui-slider-group .mui-slider-item {
 		height: 280px;
 	}
@@ -177,7 +178,9 @@ nav {
 
 /*880分辨率（大于768px，小于959px）*/
 
+@media only screen and (min-width: 768px) and (max-width: 959px) {
 	.mui-slider .mui-slider-group .mui-slider-item {
+		height: 280px;
 	}
 }
 
