@@ -136,6 +136,8 @@ mui('.mui-bar-tab').on('tap', 'a', function(e) {
 		newWeibo();
 		return;
 	}
+	//tab 选中状态
+	changeTabStates(tabId);
 
 	//--------------------
 	var targetTab = this.getAttribute('href');
@@ -169,10 +171,25 @@ mui('.mui-bar-tab').on('tap', 'a', function(e) {
 	}
 });
 
+function changeTabStates(tabId){
+	$("#articleTab").find("use").attr("xlink:href", "#icon-youji-moren");
+	$("#weiboTab").find("use").attr("xlink:href", "#icon-tujimoren");
+	$("#mineTab").find("use").attr("xlink:href", "#icon-wode-moren");
+	if(tabId != null && tabId == "articleTab"){
+		$("#articleTab").find("use").attr("xlink:href", "#icon-youji-moren-copy");
+	}
+	if(tabId != null && tabId == "weiboTab"){
+		$("#weiboTab").find("use").attr("xlink:href", "#icon-tujimoren-copy");
+	}
+	if(tabId != null && tabId == "mineTab"){
+		$("#mineTab").find("use").attr("xlink:href", "#icon-wode-moren-copy");
+	}
+}
+
 //自定义事件，模拟点击“首页选项卡”
 document.addEventListener('gohome', function(event) {
 	console.log("******************:gohome_weibo");
-	var defaultTab = document.getElementById("defaultTab");
+	var defaultTab = document.getElementById("articleTab");
 	//模拟首页点击
 	mui.trigger(defaultTab, 'tap');
 	//切换选项卡高亮

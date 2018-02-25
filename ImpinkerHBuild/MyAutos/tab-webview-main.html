@@ -9,6 +9,18 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" href="css/main_index.css" />
+		<style type="text/css">
+			.zhezhaoDiv {
+				position: fixed;
+				z-index: 998;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-color: #fafafa;
+				/*display: none;*/
+			}
+		</style>
 	</head>
 
 	<body>
@@ -20,12 +32,20 @@
 			<!--<a class="mui-icon mui-icon-camera mui-pull-right" style="color: #999;"></a>-->
 		</header>
 		<nav class="mui-bar mui-bar-tab">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-article.html">
-				<span class="mui-icon mui-icon-home"></span>
+			<a id="articleTab" class="mui-tab-item mui-active" href="tab-webview-subpage-article.html">
+				<span class="mui-icon">
+					<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-youji-moren-copy"></use>
+					</svg>
+				</span>
 				<span class="mui-tab-label">游记</span>
 			</a>
 			<a id="weiboTab" class="mui-tab-item" href="tab-webview-subpage-weibo.html">
-				<span class="mui-icon mui-icon-pengyouquan"></span>
+				<span class="mui-icon">
+					<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-tujimoren"></use>
+					</svg>
+				</span>
 				<span class="mui-tab-label">途迹</span>
 			</a>
 			<a style="display:none;" id="newweibo" class="mui-tab-item" href="tab-webview-subpage-contact.html">
@@ -35,12 +55,15 @@
 					</svg>
 				</span>
 			</a>
-			<a class="mui-tab-item" href="tab-webview-subpage-setting.html">
-				<span class="mui-icon mui-icon-gear"></span>
+			<a id="mineTab" class="mui-tab-item" href="tab-webview-subpage-setting.html">
+				<span class="mui-icon">
+					<svg class="icon" aria-hidden="true">
+  							<use xlink:href="#icon-wode-moren"></use>
+					</svg>
+				</span>
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
-
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>

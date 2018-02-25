@@ -191,7 +191,7 @@ function bindClickEvent() {
 			$(this).find("svg").html(zan1Str);
 			$(this).find("span").html(parseInt(count) + 1);
 			$(this).attr("isVote", "xin");
-			mui.toast("点赞成功！");
+			mui.toast("多谢支持！");
 			sendVote(weiboid, false)
 		}
 	});

@@ -233,13 +233,14 @@ function getArticle(articleid) {
 			//替换成图片懒加载的地址
 			var reg = new RegExp("img src=", "g"); //g,表示全部替换。
 			contentStr = contentStr.replace(reg, "img data-lazyload=");
-			//console.log("aaa:"+contentStr);
 			$(".head-title").html(articleinfo.ArticleName);
 			$("#articlecontent").html(contentStr);
-			//console.log(articleItem.UserHeadUrl);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
 			$("#article-createtime").html(articleItem.CreateTime.substring(0, 11));
+			//点赞评论数
+			$(".span_VoteCount").html(articleItem.VoteCount);
+			$(".span_CommentCount").html(articleItem.CommentCount);
 			setTimeout(function() {
 				$(".zhezhaoDiv").hide();
 				$("#mui-progressbar").hide();

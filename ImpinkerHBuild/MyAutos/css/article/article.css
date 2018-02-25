@@ -32,7 +32,6 @@ nav {
 
 
 /*sliderName*/
-
 .mui-slider .mui-slider-group .mui-slider-item {
 	font-size: 14px;
 	position: relative;
@@ -42,7 +41,7 @@ nav {
 	white-space: normal;
 	padding: 0 0px 0 15px;
 	background-color: #fff;
-	/*height: 250px;*/
+	height: 250px;
 }
 
 .mui-slider .mui-slider-group .mui-slider-item .slider-item-coverimg {
@@ -160,6 +159,13 @@ nav {
 	background-color: #eceff4;
 }
 
+/*手机屏幕在414px时*/
+
+@media only screen and (min-width:414px) {
+	.mui-slider .mui-slider-group .mui-slider-item {
+		height: 280px;
+	}
+}
 
 /*1280分辨率以上（大于1200px）*/
 

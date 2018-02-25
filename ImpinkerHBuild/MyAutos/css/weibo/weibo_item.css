@@ -226,8 +226,8 @@
 	
 	.list_img a img {
 		float: left;
-		width: 90px;
-		height: 90px;
+		width: 100px;
+		height: 100px;
 		border-radius: 2px;
 		margin-right: 5px;
 		margin-top: 5px;
