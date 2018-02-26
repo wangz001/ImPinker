@@ -8,201 +8,89 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
-			}
-			
-			.title {
-				margin: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 15px;
-			}
-		</style>
+		<link rel="stylesheet" href="css/setting/setting_index.css" />
+
 	</head>
 
 	<body>
 		<div class="mui-content">
-			<ul class="mui-table-view mui-grid-view mui-grid-9">
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id='my_youji' href="#">
-						<span class="mui-icon mui-icon-home"></span>
-						<div class="mui-media-body">我的游记</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id='my_weibo' href="#">
-						<span class="mui-icon mui-icon-location"></span>
-						<div class="mui-media-body">我的途迹</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id="notify" href="#">
-						<span class="mui-icon mui-icon-chatbubble"><span style="display: none;" id="notifycount" class="mui-badge">5</span></span>
-						<div class="mui-media-body">消息</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id='my_collect' href="#">
-						<span class="mui-icon mui-icon-star"></span>
-						<div class="mui-media-body">收藏</div>
-					</a>
-				</li>
-				<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
-						<span class="mui-icon mui-icon-search"></span>
-						<div class="mui-media-body">通用</div>
-					</a>
-				</li>-->
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id='feedback' href="#">
-						<span class="mui-icon mui-icon-paperplane"></span>
-						<div class="mui-media-body">问题反馈</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id="setting" href="#">
-						<span class="mui-icon mui-icon-gear"></span>
-						<div class="mui-media-body">设置</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id="about" href="#">
-						<span class="mui-icon mui-icon-info"></span>
-						<div class="mui-media-body">关于</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a id="testindex" href="#">
-						<span class="mui-icon mui-icon-chatbubble"></span>
-						<div class="mui-media-body">test</div>
-					</a>
-				</li>
-			</ul>
+			<div class="header">
+				<div class="bg1"></div>
+				<div class="bg2"></div>
+				<div class="head_pic">
+					<img src="images/cbd.jpg" />
+				</div>
+				
+			</div>
+			<div class="info">
+					<h4>登陆  / 注册 →</h4>
+					<p class="tip">点击登陆查看更多精彩信息</p>
+				</div>
+			<!--显示各项设置内容-->
+			<div>
+				<p class="line"></p>
+			</div>
+			
+			<div class="btn-list">
+				<ul>
+					<li class="li-view-cell">
+						<a id='my_youji' href="javascript:;">
+							<span class="mui-icon mui-icon-home"></span>
+							<span class="btn-text">我的游记</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id='my_weibo' href="javascript:;">
+							<span class="mui-icon mui-icon-location"></span>
+							<span class="btn-text">我的途迹</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id="notify" href="javascript:;">
+							<span class="mui-icon mui-icon-chatbubble"><span id="notifycount" class="mui-badge">5</span></span>
+							<span class="btn-text">消息</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id='my_collect' href="javascript:;">
+							<span class="mui-icon mui-icon-star"></span>
+							<span class="btn-text">收藏</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id='feedback' href="javascript:;">
+							<span class="mui-icon mui-icon-paperplane"></span>
+							<span class="btn-text">问题反馈</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id="setting" href="javascript:;">
+							<span class="mui-icon mui-icon-gear"></span>
+							<span class="btn-text">设置</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id="about" href="javascript:;">
+							<span class="mui-icon mui-icon-info"></span>
+							<span class="btn-text">关于</span>
+						</a>
+					</li>
+					<li class="li-view-cell">
+						<a id="testindex" href="javascript:;">
+							<span class="mui-icon mui-icon-chatbubble"></span>
+							<span class="btn-text">test</span>
+						</a>
+					</li>
+				</ul>
+
+			</div>
+
 		</div>
-		</style>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/commonUtil.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script>
-		mui.init({
-			swipeBack: true //启用右滑关闭功能
-		});
-		mui.plusReady(function() {
-			setTimeout(function() {
-				//避免更新token的时候token过期
-				getNotifyCunt();
-			}, 10 * 1000);
-		});
-
-		function getNotifyCunt() {
-			var url = "http://api.myautos.cn/api/Notify/GetNewNotifyCount";
-			var data = {};
-			var state = app.getState(); //用户信息
-			if(state.account && state.password) {
-				commonUtil.sendRequestWithToken(url, data, false, function(data) {
-					if(data.IsSuccess == 1 && data.Data != null) {
-						$("#notifycount").html(data.Data);
-						$("#notifycount").show();
-					}
-				});
-			}
-		}
-		document.getElementById("setting").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/setting/setting.html",
-				id: "setting",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		document.getElementById("notify").addEventListener('tap', function() {
-			//获得主页面的webview
-			//var main = plus.webview.currentWebview().parent();
-			//触发主页面的gohome事件
-			//mui.fire(main, 'gohome');
-			mui.openWindow({
-				url: "view/setting/setting-notify.html",
-				id: "setting-notify",
-
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		document.getElementById("my_youji").addEventListener('tap', function() {
-			//获得主页面的webview
-			//var main = plus.webview.currentWebview().parent();
-			//触发主页面的gohome事件
-			//mui.fire(main, 'gohome');
-			mui.openWindow({
-				url: "view/article/youji_my.html",
-				id: "youji_my",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		document.getElementById("my_weibo").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/weibo/weibo_my.html",
-				id: "weibo_my",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		//收藏
-		document.getElementById("my_collect").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/user/usercollect.html",
-				id: "my_collect",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		document.getElementById("about").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/about.html",
-				id: "about",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		//
-		document.getElementById("feedback").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/setting/feedback.html",
-				id: "feedback",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-		//
-		document.getElementById("testindex").addEventListener('tap', function() {
-			mui.openWindow({
-				url: "view/weibo/index.html",
-				id: "test",
-				show: {
-					aniShow: 'slide-in-right',
-					duration: 200
-				}
-			});
-		});
-	</script>
+	<script type="text/javascript" src="js/setting/setting.js"></script>
 
 </html>

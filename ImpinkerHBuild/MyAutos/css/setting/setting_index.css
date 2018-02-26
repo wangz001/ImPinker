@@ -1,0 +1,179 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "微软雅黑";
+}
+
+html {
+	font-size: 62.5%;
+	background-color: white;
+}
+.mui-content{
+	background-color: white;
+}
+
+.header {
+	width: 100%;
+	background: #ffd300;
+	position: relative;
+	/*height: 10rem;*/
+}
+
+.bg1 {
+	border-style: solid;
+	border-top-width: 48px;
+	border-right-width: 0px;
+	border-bottom-width: 51px;
+	border-left-width: 375px;
+	border-color: transparent transparent #fff transparent;
+	width: 0px;
+	height: 0px;
+}
+
+
+/*当分辨率在320时*/
+
+@media only screen and (min-width:320px) {
+	.bg1 {
+		border-left-width: 320px;
+	}
+}
+
+
+/*当分辨率在360时*/
+
+@media only screen and (min-width:360px) {
+	.bg1 {
+		border-left-width: 360px;
+	}
+}
+
+
+/*当分辨率在375px时*/
+
+@media only screen and (min-width:375px) {
+	.bg1 {
+		border-left-width: 375px;
+	}
+}
+
+
+/*当分辨率在384px时*/
+
+@media only screen and (min-width:384px) {
+	.bg1 {
+		border-left-width: 384px;
+	}
+}
+
+
+/*当分辨率在412px时*/
+
+@media only screen and (min-width:412px) {
+	.bg1 {
+		border-left-width: 412px;
+	}
+}
+
+
+/*当分辨率在414px时*/
+
+@media only screen and (min-width:414px) {
+	.bg1 {
+		border-left-width: 414px;
+	}
+}
+
+.bg2 {
+	width: 100%;
+	height: 28px;
+	background: #fff;
+}
+
+.head_pic img {
+	width: 8rem;
+	height: 8rem;
+	border-radius: 50%;
+	border: 1px solid #FFD300;
+	position: absolute;
+	left: 6rem;
+	top: 4rem;
+}
+
+.info {
+	padding-left: 6rem;
+	background: #fff;
+}
+
+h4 {
+	font-size: 2.1rem;
+	color: #454f5b;
+}
+
+.info .tip {
+	color: #9dabbc;
+	font-size: 1.2rem;
+	padding-top: 1rem;
+}
+
+
+/*黑色的线*/
+
+.line {
+	margin-top: 3rem;
+	margin-left: 6rem;
+	border-radius: 2px;
+	width: 2rem;
+	height: 5px;
+	background: #000000;
+}
+
+
+.btn-list .mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 11px 7px;
+    -webkit-touch-callout: none;
+}
+
+/*内容详情*/
+
+.btn-list ul {
+	width: 100%;
+	height: 200px;
+	margin-top: 2rem;
+	padding-left: 6rem;
+	list-style: none;
+	color: #454f5b;
+	font-size: 1.5rem;
+	line-height: 5rem;
+}
+
+.li-view-cell>a:not(.mui-btn){
+	position: relative;
+    display: block;
+    overflow: hidden;
+    padding: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+}
+
+.btn-list .btn-text{
+	margin-left: 10px;
+}
+
+.btn-list ul li a {
+	text-decoration: none;
+}
+
+.btn-list ul li p {
+	color: #454f5b;
+}
+
+/*角标信息*/
+.mui-icon .mui-badge {
+     top: 10px; 
+     left: 25px; 
+}
