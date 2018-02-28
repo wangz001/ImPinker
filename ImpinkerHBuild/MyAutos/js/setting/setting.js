@@ -26,7 +26,6 @@ mui.plusReady(function() {
 	document.getElementById("head-img").addEventListener('tap', function(e) {
 				e.stopPropagation();
 	});
-	
 });
 
 function defaultImg() {

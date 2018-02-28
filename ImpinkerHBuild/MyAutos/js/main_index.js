@@ -8,6 +8,18 @@ var subpage_style = {
 	top: '45px',
 	bottom: '50px'
 };
+//原生到航头
+var titleNView = {
+	backgroundColor: '#f7f7f7', //导航栏背景色
+	titleText: '游记', //导航栏标题
+	titleColor: '#000000', //文字颜色
+	type: 'transparent', //透明渐变样式
+	autoBackButton: false, //自动绘制返回箭头
+	titleSize: "20px",//标题字体大小
+	splitLine: { //底部分割线
+		color: '#cccccc'
+	}
+}
 
 var aniShow = {};
 //登录页跳转过来的事件
@@ -88,7 +100,31 @@ function preload() {
 	var self = plus.webview.currentWebview();
 	for(var i = 0; i < 3; i++) {
 		var temp = {};
-		var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+		//var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+		var sub;
+		//不使用mui的窗口打开方式
+		if(i == 1) {
+			titleNView.titleText="途迹";
+			sub = plus.webview.create(subpages[i], subpages[i], {
+				titleNView: titleNView,
+				top: '0px',
+				bottom: '50px'
+			});
+		} else {
+			if(i==0){
+				titleNView.titleText="游记";
+			}else{
+				titleNView.titleText="个人中心";
+			}
+			sub = plus.webview.create(subpages[i], subpages[i], {
+				titleNView: titleNView,
+				top: '0px',
+				bottom: '50px'
+			});
+		}
+
+		//webview.show("slide-in-right", 300);
+
 		if(i > 0) {
 			sub.hide();
 		} else {
@@ -145,7 +181,7 @@ mui('.mui-bar-tab').on('tap', 'a', function(e) {
 		return;
 	}
 	//更换标题
-	title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+	//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 	//显示目标选项卡
 	//若为iOS平台或非首次显示，则直接显示
 	if(mui.os.ios || aniShow[targetTab]) {
@@ -171,17 +207,17 @@ mui('.mui-bar-tab').on('tap', 'a', function(e) {
 	}
 });
 
-function changeTabStates(tabId){
+function changeTabStates(tabId) {
 	$("#articleTab").find("use").attr("xlink:href", "#icon-youji-moren");
 	$("#weiboTab").find("use").attr("xlink:href", "#icon-tujimoren");
 	$("#mineTab").find("use").attr("xlink:href", "#icon-wode-moren");
-	if(tabId != null && tabId == "articleTab"){
+	if(tabId != null && tabId == "articleTab") {
 		$("#articleTab").find("use").attr("xlink:href", "#icon-youji-moren-copy");
 	}
-	if(tabId != null && tabId == "weiboTab"){
+	if(tabId != null && tabId == "weiboTab") {
 		$("#weiboTab").find("use").attr("xlink:href", "#icon-tujimoren-copy");
 	}
-	if(tabId != null && tabId == "mineTab"){
+	if(tabId != null && tabId == "mineTab") {
 		$("#mineTab").find("use").attr("xlink:href", "#icon-wode-moren-copy");
 	}
 }
@@ -362,15 +398,3 @@ function toWeiboPage(imgArr) {
 	});
 }
 
-//搜索页跳转；
-document.getElementById('search').addEventListener('tap', function() {
-	mui.openWindow({
-		url: "view/search/search.html",
-		id: "search",
-		show: {
-			autoShow: true, //页面loaded事件发生后自动显示，默认为true
-			aniShow: "slide-in-right", //页面显示动画，默认为”slide-in-right“；
-			duration: "200" //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
-		},
-	});
-});
