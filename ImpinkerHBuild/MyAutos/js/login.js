@@ -38,8 +38,11 @@
 			//				}
 			//			}, 20);
 			var topView = plus.webview.getWebviewById(lastViewid);
-			console.log(topView.id);
+			//console.log(topView.id);
 			//topView.reload();
+			//登录成功后，刷新下‘我的’页面
+			var myView = plus.webview.getWebviewById("tab-webview-subpage-setting.html");
+			myView.reload();
 			setTimeout(function() {
 				plus.webview.currentWebview().close();
 			}, 200);
@@ -157,13 +160,13 @@
 		mui.enterfocus('#login-form input', function() {
 			mui.trigger(loginButton, 'tap');
 		});
-		autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
-		autoLoginButton.addEventListener('toggle', function(event) {
-			setTimeout(function() {
-				var isActive = event.detail.isActive;
-				settings.autoLogin = isActive;
-				app.setSettings(settings);
-			}, 50);
-		}, false);
+//		autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
+//		autoLoginButton.addEventListener('toggle', function(event) {
+//			setTimeout(function() {
+//				var isActive = event.detail.isActive;
+//				settings.autoLogin = isActive;
+//				app.setSettings(settings);
+//			}, 50);
+//		}, false);
 	});
 }(mui, document));

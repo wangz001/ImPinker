@@ -31,6 +31,17 @@ html {
 	height: 0px;
 }
 
+.btn-list .svg-icon{
+	font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+}
+
 
 /*当分辨率在320时*/
 
