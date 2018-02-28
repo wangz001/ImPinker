@@ -152,6 +152,22 @@ SELECT  tt.Id,tt.ArticleId,tt.UserId,tt.ToCommentId,tt.Content,tt.CreateTime,cou
             return list;
         }
 
-       
+        
+        /// <summary>
+        /// 获取文章评论数
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int GetArticleCommentCount(long id)
+        {
+            const string sqlStr = " SELECT COUNT(1) AS CommentCount FROM dbo.ArticleComment WHERE ArticleId =@ArticleId";
+            SqlParameter[] parameters = {
+                    new SqlParameter("@ArticleId", SqlDbType.BigInt,8){Value = id}};
+
+            int count = (int)DbHelperSQL.GetSingle(sqlStr.ToString(), parameters);
+            return count;
+        }
+
+
     }
 }

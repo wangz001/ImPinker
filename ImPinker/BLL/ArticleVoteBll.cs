@@ -12,7 +12,7 @@ namespace ImBLL
 	/// </summary>
 	public class ArticleVoteBll
 	{
-		private readonly ImDal.ArticleVote _dal=new ImDal.ArticleVote();
+		private readonly ImDal.ArticleVoteDal _dal=new ImDal.ArticleVoteDal();
         readonly NotifyBll _notifyBll = new NotifyBll();
 		
         /// <summary>

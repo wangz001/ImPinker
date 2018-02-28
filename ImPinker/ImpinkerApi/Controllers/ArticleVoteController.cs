@@ -86,7 +86,8 @@ namespace ImpinkerApi.Controllers
             var voteModel = new ArticleVote
             {
                 ArticleId = vm.ArticleId,
-                UserId = userinfo.Id
+                UserId = userinfo.Id,
+                Vote=true
             };
             if (_articleVoteBll.Exists(voteModel.ArticleId, voteModel.UserId))
             {

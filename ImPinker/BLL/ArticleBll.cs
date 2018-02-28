@@ -23,6 +23,8 @@ namespace ImBLL
         private readonly ArticleDal _dal = new ArticleDal();
         private readonly ArticleSnapsBll _articleSnapsBll = new ArticleSnapsBll();
         private readonly UserBll _userBll = new UserBll();
+        private readonly ArticleVoteDal _articleVoteDal = new ArticleVoteDal();
+        private readonly ArticleCommentDal _articleCommentDal = new ArticleCommentDal();
 
         #region  BasicMethod
         /// <summary>
@@ -295,7 +297,9 @@ namespace ImBLL
             var article = _dal.GetModel(id);
             var snap = _articleSnapsBll.GetModel(id);
             var userinfo = _userBll.GetModelByCache(article.UserId);
-
+            //暂用。以后改为从缓存读取
+            int voteCount = _articleVoteDal.GetArticleVoteCount(id,true);
+            int commentCount = _articleCommentDal.GetArticleCommentCount(id);
             var vm = new ArticleViewModel
             {
                 Id = id.ToString(CultureInfo.InvariantCulture),
@@ -309,7 +313,9 @@ namespace ImBLL
                 CreateTime = article.CreateTime,
                 Content = snap == null ? null : snap.Content,
                 UserName = string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName,
-                UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100)
+                UserHeadUrl = ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl, 100),
+                CommentCount=commentCount,
+                VoteCount=voteCount
             };
             return vm;
         }

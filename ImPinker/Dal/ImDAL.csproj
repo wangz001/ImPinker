@@ -45,7 +45,7 @@
     <Compile Include="ArticleCommentVoteDal.cs" />
     <Compile Include="ArticleSnaps.cs" />
     <Compile Include="ArticleTag.cs" />
-    <Compile Include="ArticleVote.cs" />
+    <Compile Include="ArticleVoteDal.cs" />
     <Compile Include="FeedbackDal.cs" />
     <Compile Include="NotifyDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
