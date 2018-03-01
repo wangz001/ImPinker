@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的收藏</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
+		<link rel="stylesheet" href="../../css/article/article_item.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的收藏</h1>
+		</header>
+		<div class="mui-content">
+			<div id="pullrefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="cardlist">
+						<li class="article_card">
+							<a href="view/article/preview.html">
+								<div class="left_div">
+									<div class="title">
+										<p class="caption">第一次出境旅游--泰国跳岛游~最多三行显示</p>
+										<p class="content">前期准备三大件，零基础入门滑雪季来了！@两行...</p>
+									</div>
+									<div class="detail">
+										<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-favorite_diss"></use>
+  												<span>2018-02-05</span>
+										</svg>
+										</span>
+										<span class='delete_article' articleid=''>
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-shanchu"></use>
+										</svg>
+										</span>
+									</div>
+								</div>
+								<div class="right_div">
+									<img src="../../images/20171223221008.jpg" />
+								</div>
+							</a>
+						</li>
+						<li class="weibo-card">
+							<div class="user_info">
+								<img src="../../images/cbd.jpg">
+								<span class="name">176斤的胖子</span>
+							</div>
+							<div class="user_detail">
+								<p class="text">
+									欧亚大陆桥一共是两座。1973年博斯普鲁斯海峡上建起第一座跨海公路大吊桥。桥的两头各有一呈门字型的高达165米的桥塔，水中不设桥墩。
+								</p>
+								<div class="list_img">
+									<a href="#">
+										<img src="../../js/cropper/picture.jpg" style="width:95%; height: 170px;border-radius:2px;">
+									</a>
+								</div>
+								<div class="user_news">
+									<span class="time">
+										<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-favorite_diss"></use>
+  												<span>2018-02-05</span>
+									</svg>
+									</span>
+									<div class="detail">
+										<span class='delete_weibo' weiboid=''>
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-shanchu"></use>
+										</svg>
+										</span>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
+		<script type="text/template" id="card-article">
+			<li class="article_card" articleid="$Id$">
+				<a>
+					<div class="left_div">
+						<div class="article_card_href title" articleid="$Id$" articlename="$ArticleName$">
+							<p class="caption">$ArticleName$</p>
+							<p class="content">$Description$</p>
+						</div>
+						<div class="detail">
+							<span class="love">
+								<svg class="svg-icon" aria-hidden="true">
+  									<use xlink:href="#icon-favorite_diss"></use>
+  									<span>$collectTime$</span>
+							</svg>
+							</span>
+							<span class='delete_article' articleid=''>
+								<svg class="svg-icon" aria-hidden="true">
+  									<use xlink:href="#icon-shanchu"></use>
+									</svg>
+							</span>
+						</div>
+					</div>
+					<div class="right_div article_card_href" articleid="$Id$" articlename="$ArticleName$">
+						<img src="$CoverImage$" />
+					</div>
+				</a>
+			</li>
+		</script>
+		<script type="text/template" id="card-weibo">
+			<li class="weibo-card" weiboid="$Id$">
+				<div class="user_info">
+					<img userid="$UserId$" src="$UserHeadImage$">
+					<span class="name">$UserName$</span>
+				</div>
+				<div class="user_detail">
+					<p class="text">
+						$Description$
+					</p>
+					<div class="list_img">
+						$imglist$
+					</div>
+					<div class="user_news">
+						<span class="time">
+							<svg class="svg-icon" aria-hidden="true">
+  								<use xlink:href="#icon-favorite_diss"></use>
+  								<span>$collectTime$</span>
+						</svg>
+						</span>
+						<div class="detail">
+							<span class='delete_weibo' weiboid=''>
+								<svg class="svg-icon" aria-hidden="true">
+  									<use xlink:href="#icon-shanchu"></use>
+								</svg>
+							</span>
+						</div>
+					</div>
+				</div>
+			</li>
+
+		</script>
+		<script type="text/javascript" src="../../js/user/user_collect.js"></script>
+	</body>
+
+</html>

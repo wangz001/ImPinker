@@ -120,7 +120,7 @@ document.getElementById("my_weibo").addEventListener('tap', function() {
 //收藏
 document.getElementById("my_collect").addEventListener('tap', function() {
 	mui.openWindow({
-		url: "view/user/usercollect.html",
+		url: "view/user/user_collect.html",
 		id: "my_collect",
 		show: {
 			aniShow: 'slide-in-right',

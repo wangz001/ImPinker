@@ -532,7 +532,8 @@
 					"login.html",
 					"view/setting/setting-notify.html",
 					"view/user/usercollect.html",
-					"view/weibo/index.html"
+					"view/weibo/index.html",
+					"view/user/user_collect.html"
 				],
 				"priority": 0
 			},
@@ -1104,6 +1105,14 @@
 					"css/mui.min.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"view/user/user_collect.html": {
+				"resources": [],
+				"refer": [
+					"view/weibo/weibo_preview.html",
+					"view/article/preview.html"
+				],
 				"priority": 0
 			}
 		},
