@@ -116,6 +116,7 @@ var img_1200style = 'style/weibo_1200';
 var img_600style = 'style/weibo_600';
 var img_200style = 'style/weibo_200_200';
 var img_24style = 'style/weibo_24_16';
+var img_24_20 = 'style/article_24_20';
 var img_60style = 'style/weibo_60_34';
 var articleTemplate = $('script[id="card-article"]').html();
 var weiboTemplate = $('script[id="card-weibo"]').html();
@@ -124,7 +125,7 @@ function initCard(entityType, item) {
 	if(entityType == 1) {
 		var article = item;
 		if($.inArray(article.Id, currentParamEntity.articleids) == -1) {
-			article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
+			article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", img_24_20)
 			var imgHtmlStr = articleTemplate.temp(article);
 			$("#mui-table-view-2").append(imgHtmlStr);
 			currentParamEntity.articleids.push(article.Id);
@@ -139,7 +140,7 @@ function initCard(entityType, item) {
 			if(imgs.length > 1) {
 				//多图
 				for(var j = 0; j < imgs.length; j++) {
-					imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+					imgHtmlStr += '<div class="img-box"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></div>';
 				}
 			} else {
 				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';

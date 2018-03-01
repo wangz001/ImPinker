@@ -29,18 +29,11 @@
 .user_info {
 	width: 100%;
 }
-.user_info .img-box {
-	float: left;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-}
 
 .user_info img {
 	width: 33px;
 	height: 33px;
 	border-radius: 50%;
-	display: block;
 }
 
 .user_info .name {
@@ -64,14 +57,14 @@
 }
 
 .list_img {
-	margin-top: 10px;
+	margin-top: 6px;
 	/*margin-bottom: 8px;*/
 	overflow: hidden;
 	width: 100%;
 }
 
 
-.list_img a img {
+.list_img a img{
 	float: left;
 	width: 90px;
 	height: 90px;

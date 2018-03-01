@@ -427,7 +427,8 @@
 					"view/weibo/weibo_comment.html",
 					"view/map/lbs2.html",
 					"login.html",
-					"view/user/userindex.html"
+					"view/user/userindex.html",
+					"view/user/user_index.html"
 				],
 				"priority": 0
 			},

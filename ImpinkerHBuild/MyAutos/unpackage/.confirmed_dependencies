@@ -28,7 +28,8 @@
 			"view/map/lbs.html",
 			"view/map/lbs2.html",
 			"login.html",
-			"view/user/userindex.html"
+			"view/user/userindex.html",
+			"view/user/user_index.html"
 		]
 	},
 	"tab-webview-main.html": {

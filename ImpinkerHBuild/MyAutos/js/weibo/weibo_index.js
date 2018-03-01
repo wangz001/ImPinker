@@ -243,7 +243,7 @@ function bindClickEvent() {
 		var username = this.getAttribute('username');
 		var headimg = this.getAttribute('src');
 		mui.openWindow({
-			url: "view/user/userindex.html",
+			url: "view/user/user_index.html",
 			id: "userindex",
 			show: {
 				aniShow: 'slide-in-right',

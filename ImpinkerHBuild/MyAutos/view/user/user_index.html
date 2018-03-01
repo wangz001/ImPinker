@@ -9,19 +9,9 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
-		<link rel="stylesheet" href="../../css/user/userindex.css" />
 		<link rel="stylesheet" href="../../css/article/article_item.css" />
 		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
-
-		<style type="text/css">
-			#scroll1 .mui-card-header>img:first-child {
-				font-size: 0;
-				line-height: 0;
-				float: left;
-				width: 34px;
-				height: 34px;
-			}
-		</style>
+		<link rel="stylesheet" href="../../css/user/user_index.css" />
 	</head>
 
 	<body>
@@ -32,7 +22,7 @@
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div style="display: none;" id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
 						<a class="mui-control-item mui-active" href="#item1mobile">
 							途迹
@@ -44,7 +34,7 @@
 				</div>
 				<div class="mui-slider-group">
 					<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">-->
-					<div id="item1mobile" class="mui-control-content mui-active">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
 								<!--<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
@@ -57,7 +47,7 @@
 									<li class="weibo-card mui-table-view-cell">
 										<div class="user_info">
 											<div class="img-box">
-												<img  src="../../images/logo1.png">
+												<img src="../../images/logo1.png">
 											</div>
 											<span class="name">silva</span>
 										</div>
@@ -66,21 +56,21 @@
 												欧亚大陆桥一共是两座。1973年博斯普鲁斯海峡上建起第一座跨海公路大吊桥。 桥的两头各有一呈门字型的高达165米的桥塔，水中不设桥墩。
 											</p>
 											<div class="list_img">
-												<a class="img-box" href="#">
+												<div class="img-box">
 													<img class="weibo_img" src="../../images/cbd.jpg">
-												</a>
-												<a href="#">
+												</div>
+												<div class="img-box">
 													<img class="weibo_img" src="../../images/datong.png">
-												</a>
-												<a href="#">
+												</div>
+												<div class="img-box">
 													<img class="weibo_img" src="../../images/jeep.png">
-												</a>
+												</div>
 											</div>
 											<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
 											<div class="user_news">
 												<span class="time">21分钟前</span>
 												<div class="detail">
-													
+
 													<span class="love">
 											<svg class="svg-icon" aria-hidden="true">
   												<use xlink:href="#icon-xihuan"></use>
@@ -132,7 +122,7 @@
 
 		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id="card-article">
-			<li class="article_card" id="article_$Id$">
+			<li class="article_card mui-table-view-cell" id="article_$Id$">
 				<a>
 					<div class="left_div">
 						<div class="article_card_href title" articleid="$Id$" articlename="$ArticleName$">
@@ -151,11 +141,6 @@
   								<use xlink:href="#icon-tuji-pinglun-copy"></use>
   								<span Id="commentCount_$Id$">$CommentCount$</span>
 							</svg>
-							</span>
-							<span class='delete_article' articleid='$Id$'>
-								<svg class="svg-icon" aria-hidden="true">
-  									<use xlink:href="#icon-shanchu"></use>
-								</svg>
 							</span>
 						</div>
 					</div>
@@ -187,14 +172,14 @@
 						<div class="detail">
 							<span class="love">
 								<svg class="svg-icon" aria-hidden="true">
-  												<use xlink:href="#icon-xihuan"></use>
-  									<span>$VoteCount$</span>
+  									<use xlink:href="#icon-xihuan"></use>
+  								<span>$VoteCount$</span>
 							</svg>
 							</span>
 							<span class="comment">
 								<svg class="svg-icon" aria-hidden="true">
-  												<use xlink:href="#icon-tuji-pinglun-copy"></use>
-  												<span>$CommentCount$</span>
+  									<use xlink:href="#icon-tuji-pinglun-copy"></use>
+  								<span>$CommentCount$</span>
 							</svg>
 							</span>
 						</div>
