@@ -7,37 +7,12 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/icons-extra.css" />
-		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
-		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<link rel="stylesheet" href="../../js/qqFace/css/reset.css" />
+		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
+		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<style type="text/css">
-			.mui-icon-extra-heart {
-				position: relative;
-				float: right;
-			}
-			
-			.mui-card-footer em {
-				font-size: 15px;
-			}
-			
-			.mui-cardlist .mui-card {
-				margin: 0 0 10px 0;
-			}
-			
-			.mui-card .mui-card-content {
-				padding: 5px 5px 5px 10px
-			}
-			
-			.mui-card .mui-card-content p {
-				margin-bottom: 0px;
-			}
-			
-			.title {
-				margin: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 18px;
-			}
+
 		</style>
 	</head>
 
@@ -48,32 +23,51 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-cardlist" id="content">
-				<!--<div class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="images/logo.png">
-						<div class="mui-media-body">
-							小Mf
-							<p>发表于 2016-06-30 15:30</p>
+				<div class="weibo-card">
+					<div class="user_info">
+						<img src="../../images/logo1.png">
+						<span class="name">silva</span>
+					</div>
+					<div class="user_detail">
+						<p class="text">
+							欧亚大陆桥一共是两座。1973年博斯普鲁斯海峡上建起第一座跨海公路大吊桥。 桥的两头各有一呈门字型的高达165米的桥塔，水中不设桥墩。
+						</p>
+						<div class="list_img">
+							<a href="#">
+								<img src="../../images/cbd.jpg">
+							</a>
+							<a href="#">
+								<img src="../../images/datong.png">
+							</a>
+							<a href="#">
+								<img src="../../images/jeep.png">
+							</a>
+						</div>
+						<div class='card-location'><span class="mui-icon mui-icon-location"></span><span>新疆罗布泊303国道</span></div>
+						<div class="user_news">
+							<span class="time">21分钟前</span>
+							<div class="detail">
+								<span class='delete_weibo'>
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-shanchu"></use>
+										</svg>
+										</span>
+								<span class="love">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  												<span>358</span>
+								</svg>
+								</span>
+								<span class="comment">
+											<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-tuji-pinglun-copy"></use>
+  												<span>3658</span>
+								</svg>
+								</span>
+							</div>
 						</div>
 					</div>
-					<div class="mui-card-content">
-						<p>的空间疯狂的健康</p>
-						<div class="media-pic-list">
-							<ul>
-								<li>
-									<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
-								</li>
-								<li>
-									<img src="../../images/60x60.gif" data-preview-src="" data-preview-group="1">
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<span class="mui-icon-extra mui-icon-extra-heart"><em>5</em></span>
-						<span class="mui-icon mui-icon-compose"></span>
-					</div>
-				</div>-->
+				</div>
 			</div>
 			<div class="mui-content-padded">
 				<div class="mui-inline">评论</div>
@@ -101,6 +95,7 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/qqFace/js/jquery.qqFace.js"></script>
+		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id='comment_item'>
 			<dl class="comment-list hot" commentid="@comment.Id">
 				<dt>
@@ -142,25 +137,36 @@
 			</dl>
 		</script>
 		<script type="text/template" id="card-weibo">
-			<div class="mui-card">
-				<div class="mui-card-header mui-card-media">
-					<img class="head-img" userid="$UserId$" src="$UserHeadImage$">
-					<div class="mui-media-body">
-						<em class="mui-icon mui-icon-person">$UserName$</em>
-						<p>发表于 $PublishTime$</p>
-					</div>
+			<div class="weibo-card" id="card_$Id$">
+				<div class="user_info">
+					<img userid="$UserId$" src="$UserHeadImage$">
+					<span class="name">$UserName$</span>
 				</div>
-				<div class="mui-card-content">
-					<p>$Description$</p>
-					<div class="media-pic-list">
+				<div class="user_detail">
+					<p class="text">
+						$Description$
+					</p>
+					<div class="list_img">
 						$imglist$
 					</div>
 					$cardlocation$
-				</div>
-				<div class="mui-card-footer">
-					<span class="mui-icon-extra votebtn mui-icon-extra-heart" weiboid='$Id$'><em>$VoteCount$</em></span>
-					<span class="mui-icon mui-icon-compose" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
-					<span class="mui-icon mui-icon-flag" weiboid='$Id$'><em id="commentCount_$Id$">$CommentCount$</em></span>
+					<div class="user_news">
+						<span class="time">$PublishTime$</span>
+						<div class="detail">
+							<span class="love">
+								<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-xihuan"></use>
+  									<span>$VoteCount$</span>
+							</svg>
+							</span>
+							<span class="comment">
+								<svg class="svg-icon" aria-hidden="true">
+  												<use xlink:href="#icon-tuji-pinglun-copy"></use>
+  												<span>$CommentCount$</span>
+							</svg>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</script>
@@ -182,7 +188,7 @@
 			var img_1200style = 'style/weibo_1200';
 			var img_600style = 'style/weibo_600';
 			var img_24style = 'style/weibo_24_16';
-			var img_36style = 'style/weibo_36_24';
+			var img_200style = 'style/weibo_200_200';
 
 			function getWeibo(weiboid) {
 				var url = 'http://api.myautos.cn/api/WeiBo/GetWeiBoById';
@@ -198,13 +204,11 @@
 						var imgs = weibo.ContentValue.split(',');
 						if(imgs.length > 1) {
 							//多图
-							imgHtmlStr += "<ul>";
 							for(var j = 0; j < imgs.length; j++) {
-								imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
+								imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></a>';
 							}
-							imgHtmlStr += "</ul>";
 						} else {
-							imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '">';
+							imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></a>';
 						}
 						weibo.imglist = imgHtmlStr;
 						//qq表情

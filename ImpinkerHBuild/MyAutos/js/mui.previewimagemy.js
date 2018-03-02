@@ -38,8 +38,9 @@
 	};
 	proto.initEvent = function() {
 		var self = this;
-		$(document.body).on('tap', 'img[data-preview-src]', function() {
+		$(document.body).on('tap', 'img[data-preview-src]', function(e) {
 			self.open(this);
+			e.stopPropagation();
 			return false;
 		});
 		var laterClose = null;

@@ -25,7 +25,7 @@ mui.previewImage(function() {}, function(img) {
 	function(img) {
 		//close
 		plus.webview.currentWebview().setStyle({
-			top: '45px',
+			top: '0px',
 			bottom: '50px'
 		});
 	}

@@ -775,5 +775,11 @@
 			"view/weibo/weibo_preview.html",
 			"view/article/preview.html"
 		]
+	},
+	"view/user/user_index.html": {
+		"refer": [
+			"view/weibo/weibo_preview.html",
+			"view/article/preview.html"
+		]
 	}
 }

@@ -1115,6 +1115,14 @@
 					"view/article/preview.html"
 				],
 				"priority": 0
+			},
+			"view/user/user_index.html": {
+				"resources": [],
+				"refer": [
+					"view/weibo/weibo_preview.html",
+					"view/article/preview.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

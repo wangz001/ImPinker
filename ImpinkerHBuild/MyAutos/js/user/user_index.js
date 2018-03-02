@@ -164,3 +164,52 @@ function setUserinfo(username, headimg) {
 	$("#header .mui-title").html(username);
 	$(".personal-top .head-img img").attr("src", headimg);
 }
+
+//跳转 
+mui('.mui-table-view').on('tap', 'li', function() {
+	var cardType = $(this).attr("class");
+//	if(cardType.indexOf("weibo-card") != -1) {
+//		var weiboid = $(this).attr("weiboid");
+//		return; //暂时不跳转
+//		mui.openWindow({
+//			url: "../weibo/weibo_preview.html",
+//			id: "weibo_preview",
+//			extras: {
+//				weiboid: weiboid
+//			},
+//			show: {
+//				aniShow: 'slide-in-right',
+//				duration: 200
+//			}
+//		});
+//	}
+	if(cardType.indexOf("article_card") != -1) {
+		var articleid = $(this).attr("articleid");
+		mui.openWindow({
+			url: "../article/preview.html",
+			id: "preview",
+			extras: {
+				articleid: articleid
+			},
+			show: {
+				aniShow: 'slide-in-right',
+				duration: 200
+			}
+		});
+	}
+});
+//跳转到微博
+mui('#mui-table-view-1').on('tap', '.user_info', function() {
+	var weiboid = $(this).attr("weiboid");
+	mui.openWindow({
+		url: "../weibo/weibo_preview.html",
+		id: "weibo_preview",
+		extras: {
+			weiboid: weiboid
+		},
+		show: {
+			aniShow: 'slide-in-right',
+			duration: 200
+		}
+	});
+});

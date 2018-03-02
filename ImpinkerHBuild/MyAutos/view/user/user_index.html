@@ -119,10 +119,9 @@
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
-
 		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id="card-article">
-			<li class="article_card mui-table-view-cell" id="article_$Id$">
+			<li class="article_card mui-table-view-cell" articleid="$Id$">
 				<a>
 					<div class="left_div">
 						<div class="article_card_href title" articleid="$Id$" articlename="$ArticleName$">
@@ -149,11 +148,10 @@
 					</div>
 				</a>
 			</li>
-
 		</script>
 		<script type="text/template" id="card-weibo">
-			<li class="weibo-card" id="card_$Id$">
-				<div class="user_info">
+			<li class="weibo-card" weiboid="$Id$">
+				<div class="user_info" weiboid="$Id$">
 					<div class="img-box">
 						<img userid="$UserId$" src="$UserHeadImage$">
 					</div>
