@@ -373,7 +373,9 @@
 			"css/imageviewer.css",
 			"fonts/mui.ttf"
 		],
-		"refer": []
+		"refer": [
+			"view/weibo/weibo_preview.html"
+		]
 	},
 	"view/weibo/weibo_new.html": {
 		"resources": [

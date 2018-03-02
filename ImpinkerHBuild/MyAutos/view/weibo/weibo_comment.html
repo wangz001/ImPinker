@@ -21,20 +21,21 @@
 			<div class="mui-content-padded">
 				<div class="mui-inline">评论</div>
 			</div>
-			<div class="row mui-input-row">
-				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
-			</div>
-			<div class="mui-card-content">
-				<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
-				<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+			<div class="comment-content">
+				<div class="row mui-input-row">
+					<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+				</div>
+				<div class="mui-card-content">
+					<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
+					<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
 					发布
 			</button>
-			</div>
-			<div class="mui-content-padded">
-				<div class="mui-inline">评论列表</div>
-			</div>
-			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
-				<!--<dl class="comment-list hot" commentid="">
+				</div>
+				<div class="mui-content-padded">
+					<div class="mui-inline">评论列表</div>
+				</div>
+				<div id='comment' class="comment-list-content mui-card-content">
+					<!--<dl class="comment-list hot" commentid="">
 						<dt>
                         <i class="headpic">
                             <img src="../../images/logo.png">
@@ -53,10 +54,10 @@
 							</p>
 						</dd>
 					</dl>-->
-				<p>暂无评论</p>
+					<p>暂无评论</p>
+				</div>
 			</div>
 		</div>
-
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<!--<script type="text/javascript" src="http://img.myautos.cn/UI_file/js/qqFace/js/jquery.qqFace.js"></script>-->

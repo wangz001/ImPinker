@@ -8,7 +8,6 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/iconfont/iconfont.css" />
 		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
-		<link rel="stylesheet" href="../../css/imageviewer.css" />
 		<style type="text/css">
 			#map {
 				width: 100%;
@@ -123,12 +122,10 @@
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id="weiboitem">
-			<li class="weibo-card" id="card_$Id$">
+			<li class="weibo-card" weiboid="$Id$">
 				<div class="user_info">
 					<img userid="$UserId$" src="$UserHeadImage$">
 					<span class="name">$UserName$</span>

@@ -742,7 +742,9 @@
 					"css/imageviewer.css",
 					"fonts/mui.ttf"
 				],
-				"refer": [],
+				"refer": [
+					"view/weibo/weibo_preview.html"
+				],
 				"priority": 0
 			},
 			"view/setting/feedback.html": {

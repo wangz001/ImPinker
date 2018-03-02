@@ -14,8 +14,6 @@ mui.plusReady(function() {
 	var self = plus.webview.currentWebview();
 	var userid = self.userid;
 });
-mui.previewImage();
-
 
 var pageNum = 1;
 var pageSize = 30;

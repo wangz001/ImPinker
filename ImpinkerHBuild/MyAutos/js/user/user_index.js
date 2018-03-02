@@ -199,7 +199,7 @@ mui('.mui-table-view').on('tap', 'li', function() {
 	}
 });
 //跳转到微博
-mui('#mui-table-view-1').on('tap', '.user_info', function() {
+mui('#mui-table-view-1').on('tap', '.user_info,.user_detail .text', function() {
 	var weiboid = $(this).attr("weiboid");
 	mui.openWindow({
 		url: "../weibo/weibo_preview.html",

@@ -20,8 +20,6 @@ mui.plusReady(function() {
 	getweibo(weiboid);
 });
 
-mui.previewImage();
-
 var pageNum = 1;
 var allCount = 0;
 var pageSize = 30;
@@ -99,10 +97,10 @@ function initWeiBoItem(item) {
 	if(imgs.length > 1) {
 		//多图
 		for(var j = 0; j < imgs.length; j++) {
-			imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+			imgHtmlStr += '<a href="javascript:;"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 	} else {
-		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+		imgHtmlStr = '<a href="javascript:;"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置
@@ -115,6 +113,40 @@ function initWeiBoItem(item) {
 	$(".mui-scroll ul").append(cardStr);
 
 }
+
+//跳转 
+mui('#pullrefresh').on('tap', 'li', function() {
+	var cardType = $(this).attr("class");
+	if(cardType.indexOf("weibo-card") != -1) {
+		var weiboid = $(this).attr("weiboid");
+		mui.openWindow({
+			url: "../weibo/weibo_preview.html",
+			id: "weibo_preview",
+			extras: {
+				weiboid: weiboid
+			},
+			show: {
+				aniShow: 'slide-in-right',
+				duration: 200
+			}
+		});
+	}
+	if(cardType.indexOf("article_card") != -1) {
+		var articleid = $(this).attr("articleid");
+		mui.openWindow({
+			url: "../article/preview.html",
+			id: "preview",
+			extras: {
+				articleid: articleid
+			},
+			show: {
+				aniShow: 'slide-in-right',
+				duration: 200
+			}
+		});
+	}
+});
+
 
 //地图-----------------------------------------------------
 var em = null,

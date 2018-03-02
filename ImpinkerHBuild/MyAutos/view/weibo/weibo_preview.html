@@ -12,7 +12,22 @@
 		<link rel="stylesheet" href="../../css/weibo/weibo_item.css" />
 		<link rel="stylesheet" href="../../css/weibo/comment.css" />
 		<style type="text/css">
-
+			.mui-content {
+				background-color: #fff;
+			}
+			
+			.mui-cardlist .weibo-card {
+				position: relative;
+				overflow: hidden;
+				padding: 11px 15px;
+				list-style: none;
+				/* border-bottom: 1px solid #eceff4; */
+			}
+			
+			.comment-content {
+				padding: 12px 9px;
+				margin: 0px;
+			}
 		</style>
 	</head>
 
@@ -23,7 +38,7 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-cardlist" id="content">
-				<div class="weibo-card">
+				<!--<div class="weibo-card">
 					<div class="user_info">
 						<img src="../../images/logo1.png">
 						<span class="name">silva</span>
@@ -67,25 +82,27 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 			<div class="mui-content-padded">
 				<div class="mui-inline">评论</div>
 			</div>
-			<div class="row mui-input-row">
-				<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
-			</div>
-			<div class="mui-card-content">
-				<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
-				<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+			<div class="comment-content">
+				<div class="row mui-input-row">
+					<textarea id='comment_text' class="mui-input-clear question" placeholder="请输入评论内容..."></textarea>
+				</div>
+				<div class="mui-card-content">
+					<a id="icon-plus" class="emotion"><span class="mui-icon mui-icon-plus"></span></a>
+					<button id="comment_submit" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
 					发布
 			</button>
-			</div>
-			<div class="mui-content-padded">
-				<div class="mui-inline">评论列表</div>
-			</div>
-			<div id='comment' style="background-color:#fff;min-height: 50px;" class="mui-card-content">
-				<p>暂无评论</p>
+				</div>
+				<div class="mui-content-padded">
+					<div class="mui-inline">评论列表</div>
+				</div>
+				<div id='comment' class="comment-list-content mui-card-content">
+					<p>暂无评论</p>
+				</div>
 			</div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
@@ -189,6 +206,7 @@
 			var img_600style = 'style/weibo_600';
 			var img_24style = 'style/weibo_24_16';
 			var img_200style = 'style/weibo_200_200';
+			var img_60style = 'style/weibo_60_34';
 
 			function getWeibo(weiboid) {
 				var url = 'http://api.myautos.cn/api/WeiBo/GetWeiBoById';

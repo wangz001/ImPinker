@@ -1,6 +1,5 @@
 #comment {
-	background-color: ghostwhite;
-	padding: 3px 10px 3px 10px;
+	
 }
 
 .mui-content .mui-inline {
@@ -21,10 +20,15 @@
 #comment_submit{
 	margin: 5px 10px 5px 10px;l./,
 }
+.comment-list-content{
+	padding: 3px 10px 3px 10px;
+	background-color: ghostwhite;
+}
 
 .comment-list {
 	padding: 3px 0px 0px 0px;
 	border-top: .5px solid #ece4e4;
+	
 }
 
 .comment-list:first-child {
