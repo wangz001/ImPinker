@@ -1,154 +1,113 @@
-.logo {
-				text-align: center;
-			}
-			
-			.logo img {
-				width: 100px;
-				height: 100px;
-			}
-			
-			.mui-input-row button {
-				font-family: 'Helvetica Neue', Helvetica, sans-serif;
-				line-height: 1.1;
-				float: right;
-				width: 35%;
-				padding: 11px 15px;
-			}
-			
-			.mui-input-row input {
-				float: left;
-				width: 83%;
-				margin-bottom: 0;
-				padding-left: 0;
-				border: 0;
-			}
-			/*card*/
-			
-			.title {
-				margin: 3px 11px 15px 2px;
-				color: #6d6d72;
-				font-size: 17px;
-			}
-			
-			.mui-table-view-cell {
-				padding: 10px;
-			}
-			
-			.mui-table-view .mui-media-object {
-				line-height: 64px;
-				max-width: 74px;
-				height: 61px;
-			}
-			
-			.mui-card-title p {
-				display: block;
-				color: #6d6d72;
-				font-size: 14px;
-				margin-bottom: 5px;
-			}
-			/*card 样式*/
-			
-			.mui-table-view .mui-card {
-				font-size: 14px;
-				position: relative;
-				overflow: hidden;
-				margin: 0px;
-				padding: 5px;
-			}
-			
-			.mui-card-content-inner .userinfo {
-				margin-bottom: 1px;
-			}
-			
-			.userinfo em {
-				font-size: 13px;
-			}
-			
-			.mui-media-body .viewcount .mui-icon,
-			.mui-media-body .viewcount .mui-icon-extra {
-				font-size: 13px;
-			}
-			
-			.mui-card-content .viewcount,
-			.mui-media-body .viewcount {
-				float: right;
-			}
-			
-			.mui-card .mui-card-content-inner {
-				position: relative;
-				padding: 3px;
-			}
-			
-			.mui-slider-title {
-				height: 45px;
-				line-height: 45px;
-				opacity: 0.5;
-				font-size: 18px;
-			}
-			
-			.mui-slider-indicator {
-				position: absolute;
-				bottom: 12px;
-				right: 10px;
-				width: 100%;
-				text-align: center;
-				background: 0 0;
-			}
-			
-			.mui-card .mui-card-content {
-				margin: inherit;
-				margin-bottom: initial;
-			}
-			
-			.mui-card .mui-card-content p {
-				margin-bottom: 0px;
-				    margin-top: 5px;
-			}
-			
-			.media-pic {
-				text-align: left;
-				margin: .3125rem 0 0 0;
-				max-width: 90%;
-				max-height: 13.5rem;
-				overflow: hidden;
-			}
-			
-			.media-pic-list {
-				overflow: hidden;
-				width: 21.5rem;
-				margin-top: .4375rem;
-			}
-			
-			.media-pic-list ul {
-				margin-top: -.3125rem;
-				list-style: none;
-				padding: 2px 5px 0 0px;
-			}
-			
-			.media-pic-list li {
-				float: left;
-				width: 6.75rem;
-				height: 5.75rem;
-				margin: .3125rem .3125rem 0 0;
-			}
-			
-			.media-pic-list li img {
-				height: 5.75rem;
-				width: 6.75rem;
-				vertical-align: text-bottom;
-			}
-			.userinfo em {
-				font-size: 13px;
-				max-width: 70%;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-			
-			.collecttime {
-				position: absolute;
-				top: 25%;
-				right: 6px;
-				width: 74px;
-				height: 30px;
-			}
+.mui-content {
+	background-color: #FFFFFF;
+}
+
+.search-content{
+	padding: 5px 10px;
+}
+
+.mui-input-row button {
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	line-height: 1.1;
+	float: right;
+	width: 35%;
+}
+
+.mui-input-row input {
+	float: left;
+	width: 83%;
+	margin-bottom: 0;
+	padding-left: 0;
+	border: 1;
+}
+
+.search-result-content{
+	padding: 0 5px;
+}
+
+.tab-title {
+	/*margin: 3px 11px 15px 5px;*/
+	color: #8f8f94;
+	font-size: 20px;
+	background-color: #efeff4;
+	line-height: 40px;
+	padding-left: 10px;
+}
+
+.mui-table-view-cell {
+	padding: 5px 10px;
+}
+
+.mui-table-view .mui-media-object {
+	line-height: 64px;
+	max-width: 74px;
+	height: 61px;
+	border-radius: 5px;
+}
+
+.mui-card-title p {
+	display: block;
+	color: #6d6d72;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+
+/*card 样式*/
+
+.card-article .title{
+	font-size: 15px;
+	color: #3b3b41;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.card-article .description{
+	font-size: 12px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card-userinfo em {
+	font-size: 13px;
+	color: #8f8f94;
+}
+
+.mui-card .mui-card-content {
+	margin: inherit;
+	margin-bottom: initial;
+}
+
+.mui-card .mui-card-content p {
+	margin-bottom: 0px;
+	margin-top: 5px;
+}
+
+
+.media-pic-list {
+	overflow: hidden;
+	width: 21.5rem;
+	margin-top: .4375rem;
+}
+
+.media-pic-list ul {
+	margin-top: -.3125rem;
+	list-style: none;
+	padding: 2px 5px 0 0px;
+}
+
+.media-pic-list li {
+	float: left;
+	width: 5.75rem;
+	height: 4.75rem;
+	margin: .3125rem .3125rem 0 0;
+}
+
+.media-pic-list li img {
+	width: 5.75rem;
+	height: 4.75rem;
+	border-radius: 5px;
+	vertical-align: text-bottom;
+}
+

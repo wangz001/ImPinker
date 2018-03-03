@@ -106,7 +106,7 @@ function preload() {
 		if(i == 1) {
 			titleNView.titleText="途迹";
 			sub = plus.webview.create(subpages[i], subpages[i], {
-				titleNView: titleNView,
+				//titleNView: titleNView,
 				top: '0px',
 				bottom: '50px'
 			});

@@ -7,14 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<!--标准mui.css-->
 		<link rel="stylesheet" href="../../css/mui.min.css">
 		<link rel="stylesheet" href="../../css/search/search.css" />
-		<style>
-			#pullrefresh {
-				margin-top: 5px;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -25,33 +19,30 @@
 		<div class="mui-content">
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper ">
 				<div class="mui-scroll">
-					<div class="logo">
-						<img src="../../images/logo.png"></div>
-					<div class="mui-content-padded" style="margin: 5px;">
+					<div class="search-content">
 						<div class="mui-input-row">
 							<input id="searchbox" type="text" placeholder="请输入要搜索的内容">
 							<button id="btnsearch" type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>
 						</div>
 					</div>
-					<div class="title">
-						搜索结果：
+					<div class="tab-title">
+						搜索结果：<span style="font-size: 14px;">共找到120条相关结果</span>
 					</div>
-					<ul class="mui-table-view" id="cardlist">
-						<!--<li class="mui-table-view-cell mui-media">
-							<a href="view/article/preview.html">
-								<img class="mui-media-object mui-pull-left" src="../../images/shuijiao.jpg">
-								<div class="mui-media-body">
-									<P class="title">幸福</P>
-									<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-									<p class="userinfo">
-										<em class="mui-icon mui-icon-person">bwlang</em>
-										<em class="mui-icon-extra mui-icon-extra-phone">2017-07-09</em>
-									</p>
+					<div class="search-result-content">
+						<ul class="mui-table-view" id="cardlist">
+							<!--<li class="mui-table-view-cell card-article">
+								<div>
+									<img class="mui-media-object mui-pull-left" src="../../images/shuijiao.jpg">
+									<div class="mui-media-body">
+										<P class="title">幸福</P>
+										<p class="description">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+										<p class="card-userinfo">
+											<em class="mui-icon mui-icon-person">bwlang 2017-07-09</em>
+										</p>
+									</div>
 								</div>
-							</a>
-						</li>
-						<li>
-							<div class="mui-card">
+							</li>
+							<li class="mui-table-view-cell">
 								<div class="mui-card-title">
 									<p>这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
 								</div>
@@ -69,16 +60,13 @@
 											</li>
 										</ul>
 									</div>
-									<div class="mui-card-content-inner">
-										<p class="userinfo">
-											<em class="mui-icon mui-icon-person">UserName 发表于发表于发表于发表于发表于发表于发表于 CreateTimeStr</em>
-											<span class="collecttime">15454551</span>
-										</p>
+									<div class="card-userinfo">
+										<em class="mui-icon mui-icon-person">UserName 表于发表于 CreateTimeStr</em>
 									</div>
 								</div>
-							</div>
-						</li>-->
-					</ul>
+							</li>-->
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,188 +75,35 @@
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/template" id="card-article">
-			<li class="mui-table-view-cell mui-media">
-				<a class="articlecard" articleid="$Id$" articlename="$ArticleName$">
+			<li class="mui-table-view-cell card-article" articleid="$Id$" articlename="$ArticleName$">
+				<div class="articlecard" >
 					<img class="mui-media-object mui-pull-left" src="$CoverImage$">
 					<div class="mui-media-body">
 						<P class="title">$ArticleName$</P>
-						<p class="mui-ellipsis">$Description$</p>
-						<p class="userinfo">
-							<em class="mui-icon mui-icon-person">$UserName$</em>
+						<p class="description">$Description$</p>
+						<p class="card-userinfo">
+							<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTime$</em>
 						</p>
-					</div>
-				</a>
-			</li>
-		</script>
-		<script type="text/template" id="card-weibo">
-			<li>
-				<div class="mui-card weibocard" weiboid="$Id$">
-					<div class="mui-card-title">
-						<p>$Description$</p>
-					</div>
-					<div class="mui-card-content">
-						<div class="media-pic-list">
-							$imglist$
-						</div>
-						<div class="mui-card-content-inner">
-							<p class="userinfo">
-								<em class="mui-icon mui-icon-person">$UserName$发表于$CreateTime$</em>
-							</p>
-						</div>
 					</div>
 				</div>
 			</li>
 		</script>
-		<script>
-			mui.init({
-				swipeBack: true,
-				pullRefresh: {
-					container: '#pullrefresh',
-					up: {
-						contentrefresh: '正在加载...',
-						auto: true,
-						contentnomore: '没有更多数据了',
-						callback: pullupRefresh
-					}
-				}
-			});
-			mui.plusReady(function() {
-				$("#btnsearch").bind('click', function() {
-					var txt = $("#searchbox").val();
-					console.log(txt);
-					if(txt != "") {
-						param.keyword = txt;
-						param.param = 1;
-						search();
-						$("#cardlist").html("");
-						plus.nativeUI.showWaiting('正在加载数据。。。');
-					}
-				});
-			});
-
-			var url = 'http://api.myautos.cn/api/Search/SearchByKeyword';
-			var param = {
-				userid: 1,
-				pageNum: 1,
-				pagesize: 10,
-				keyword: "自驾游"
-			};
-
-			function pullupRefresh() {
-				search();
-			}
-			///搜索
-			function search() {
-				commonUtil.sendRequestGet(url, param, function(data) {
-					plus.nativeUI.closeWaiting();
-					//console.log(JSON.stringify(data));
-					if(data.IsSuccess == 1 && data.Data != null) {
-						var list = data.Data;
-						for(var i = 0; i < list.length; i++) {
-							var item = list[i];
-							if(item.EntityType == 1) {
-								var article = item.ArticleVm;
-								initCard(1, article);
-							}
-							if(item.EntityType == 2) {
-								var weibo = item.WeiboVm;
-								initCard(2, weibo);
-							}
-						}
-						param.pageNum++;
-					} else {
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-						return;
-					}
-					mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //参数为true代表没有更多数据了。
-				});
-			}
-
-			var img_1200style = 'style/weibo_1200';
-			var img_600style = 'style/weibo_600';
-			var img_24style = 'style/weibo_24_16';
-			var img_36style = 'style/weibo_36_24';
-			var articleTemplate = $('script[id="card-article"]').html();
-			var weiboTemplate = $('script[id="card-weibo"]').html();
-			///填充内容
-			function initCard(entityType, item) {
-				if(entityType == 1) {
-					var article = item;
-					//console.log(JSON.stringify(article));
-					if(article.CoverImage != null && article.CoverImage != "") {
-						article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/weibo_600")
-					} else {
-						article.CoverImage = "http://img.myautos.cn/articlefirstimg/20170717/1_1174_636359314136863157.jpg?x-oss-process=style/articlecover_36_24";
-					}
-					var imgHtmlStr = articleTemplate.temp(article);
-					$("#cardlist").append(imgHtmlStr);
-				}
-				if(entityType == 2) {
-					//console.log(JSON.stringify(item));
-					var weibo = item;
-					var imgHtmlStr = "";
-					var imgs = weibo.ContentValue.split(',');
-					imgHtmlStr += "<ul>";
-					for(var j = 0; j < imgs.length; j++) {
-						imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + weibo.Id + '"></li>';
-					}
-					imgHtmlStr += "</ul>";
-					weibo.imglist = imgHtmlStr;
-					//显示地理位置
-					weibo.cardlocation = "";
-					if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
-						var lbsStr = "<div weiboid='" + weibo.Id + "' class='card-location'><span class='mui-icon mui-icon-location'></span><span>" + weibo.LocationText + "</span></div>";
-						weibo.cardlocation = lbsStr;
-					}
-					var cardStr = weiboTemplate.temp(weibo);
-					$("#cardlist").append(cardStr);
-				}
-			}
-
-			//列表项的点击事件  
-			mui('#cardlist').on('tap', '.articlecard', function(e) {
-				var articleid = $(this).attr("articleid");
-				if(articleid.indexOf("travels_") != -1) {
-					articleid = articleid.replace("travels_", "");
-				}
-				console.log(articleid);
-				//获得详情页面  
-				mui.openWindow({
-					id: "preview.html",
-					url: "../article/preview.html",
-					show: {
-						aniShow: "pop-in"
-					},
-					waiting: {
-						autoShow: false
-					},
-					extras: {
-						articleid: articleid, //扩展参数
-						articlename: ''
-					}
-				});
-			});
-			//微博
-			mui('#cardlist').on('tap', '.weibocard', function(e) {
-				var weiboid = this.getAttribute("weiboid");
-				if(weiboid.indexOf("travels_") != -1) {
-					weiboid = weiboid.replace("travels_", "");
-				}
-				console.log(weiboid);
-				//获得详情页面  
-				mui.openWindow({
-					url: "../weibo/weibo_preview.html",
-					id: "weibo_preview",
-					extras: {
-						weiboid: weiboid
-					},
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
-			});
+		<script type="text/template" id="card-weibo">
+			<li class="mui-table-view-cell card-weibo" weiboid="$Id$">
+				<div class="mui-card-title">
+					<p>$Description$</p>
+				</div>
+				<div class="mui-card-content">
+					<div class="media-pic-list">
+						$imglist$
+					</div>
+					<div class="card-userinfo">
+						<em class="mui-icon mui-icon-person">$UserName$ 发表于 $CreateTime$</em>
+					</div>
+				</div>
+			</li>
 		</script>
+		<script type="text/javascript" src="../../js/search/searche.js"></script>
 	</body>
 
 </html>
