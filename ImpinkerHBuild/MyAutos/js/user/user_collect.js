@@ -102,9 +102,21 @@ mui('#cardlist').on('tap', 'li', function() {
 	}
 	if(cardType.indexOf("article_card") != -1) {
 		var articleid = $(this).attr("articleid");
+		var articleName=$(this).attr("articlename");
+		var titleNView =commonConfig.titleNView;
+		titleNView.titleText=articleName;
+		var webview_style = {
+			"render": "always",
+			"popGesture": "hide",
+			"bounce": "vertical",
+			"bounceBackground": "#efeff4",
+			"titleNView": titleNView
+		};
+		
 		mui.openWindow({
 			url: "../article/preview.html",
 			id: "preview",
+			styles: webview_style,
 			extras: {
 				articleid: articleid
 			},

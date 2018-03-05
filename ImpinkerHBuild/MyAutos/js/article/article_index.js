@@ -47,7 +47,7 @@ window.addEventListener('articleVote', function(event) {
 var allArticles = new Array();
 var pageNum = 1;
 var pageSize = 30;
-var apiPath = "http://api.myautos.cn/api/Article/GetByPage";
+var apiPath = commonConfig.apiRoot+"/api/Article/GetByPage";
 /**
  * 下拉刷新具体业务实现
  */
@@ -98,11 +98,6 @@ function pullupRefresh() {
 	});
 }
 
-var img_600style = 'style/weibo_600';
-var img_24style = 'style/articlecover_36_24';
-var img_24_20 = 'style/article_24_20';
-var img_1200style = 'style/article_1200_605';
-var img_900style = 'style/article_900';
 var template = $('script[id="article_item"]').html();
 function initItem(item, isPullDown) {
 	//如果轮播图已显示，跳过。。。暂时不启用
@@ -111,7 +106,7 @@ function initItem(item, isPullDown) {
 	}
 	allArticles.push(item);
 	var articleHtmlStr;
-	item.CoverImage = item.CoverImage.replace(img_24style, img_24_20);
+	item.CoverImage = item.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_24_20);
 	articleHtmlStr = template.temp(item);
 	if(isPullDown) {
 		//下拉刷新，新纪录插到最前面；(后面实现)
@@ -131,7 +126,7 @@ function initSlide() {
 		initHtml(sliderData);
 	}
 	//获取最新数据
-	var slidePath = 'http://api.myautos.cn/api/Article/GetSlideArticle';
+	var slidePath = commonConfig.apiRoot+'/api/Article/GetSlideArticle';
 	var para = {};
 	commonUtil.sendRequestGet(slidePath, para, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null) {
@@ -151,7 +146,7 @@ function initSlide() {
 		$("#sliderContent").append(aTopStr);
 		for(var i = 0; i < list.length; i++) {
 			var item = list[i];
-			item.CoverImage = item.CoverImage.replace(img_900style, img_1200style);
+			item.CoverImage = item.CoverImage.replace(commonConfig.imgStyle.article_900, commonConfig.imgStyle.article_1200_605);
 			var tempStr = template_b.temp(item);
 			$("#sliderContent").append(tempStr);
 			sliderIds.push(item.Id);
@@ -179,17 +174,8 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 	var articlename = this.getAttribute('articlename');
 	//不使用父子模板方案的页面
 	if(type == "common") {
-		var titleNView = { //详情页原生导航配置
-				backgroundColor: '#f7f7f7', //导航栏背景色
-				titleText: '', //导航栏标题
-				titleColor: '#000000', //文字颜色
-				titleText:articlename,
-				type: 'transparent', //透明渐变样式
-				autoBackButton: true, //自动绘制返回箭头
-				splitLine: { //底部分割线
-					color: '#cccccc'
-				}
-		}
+		var titleNView =commonConfig.titleNView;
+		titleNView.titleText=articlename;
 		var webview_style = {
 			"render": "always",
 			"popGesture": "hide",
@@ -209,7 +195,7 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 				autoShow: false
 			},
 			extras: {
-				articleUrl: "http://m.myautos.cn/Article/Index?id=" + articleid,
+				articleUrl: commonConfig.mWebRoot+"/Article/Index?id=" + articleid,
 				articleid: articleid, //扩展参数
 				articlename: articlename
 			},

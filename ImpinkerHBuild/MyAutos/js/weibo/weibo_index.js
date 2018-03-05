@@ -112,10 +112,6 @@ function pullupRefresh() {
  * @param {Object} item
  */
 function initWeiBoItemTemplate(item) {
-	var img_1200style = 'style/weibo_1200';
-	var img_24style = 'style/weibo_24_16';
-	var img_60style = 'style/weibo_60_34';
-	var img_200style = 'style/weibo_200_200';
 	if(item.ContentValue == null || item.ContentValue == '') {
 		return;
 	}
@@ -126,10 +122,10 @@ function initWeiBoItemTemplate(item) {
 	if(imgs.length > 1) {
 		//多图
 		for(var i = 0; i < imgs.length; i++) {
-			imgHtmlStr += '<a href="#"><img src="' + imgs[i].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[i].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+			imgHtmlStr += '<a href="#"><img src="' + imgs[i].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[i].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 	} else {
-		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置

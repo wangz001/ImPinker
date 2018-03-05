@@ -106,17 +106,8 @@ mui('#cardlist').on('tap', '.card-article', function(e) {
 		articleid = articleid.replace("travels_", "");
 	}
 	console.log(articleid);
-	var titleNView = { //详情页原生导航配置
-		backgroundColor: '#f7f7f7', //导航栏背景色
-		titleText: '', //导航栏标题
-		titleColor: '#000000', //文字颜色
-		titleText: articlename,
-		type: 'transparent', //透明渐变样式
-		autoBackButton: true, //自动绘制返回箭头
-		splitLine: { //底部分割线
-			color: '#cccccc'
-		}
-	}
+	var titleNView =commonConfig.titleNView;
+	titleNView.titleText=articlename;
 	//获得详情页面  
 	mui.openWindow({
 		id: "preview.html",
