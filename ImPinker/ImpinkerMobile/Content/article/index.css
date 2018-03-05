@@ -1,0 +1,398 @@
+﻿@@ -1,398 +0,0 @@ #thread-container .header {
+    padding: 10px 0px;
+    border-bottom: 1px solid #dfdfdf;
+    border-bottom: .5px solid #dfdfdf;
+    -webkit-border-bottom: 1px solid #dfdfdf;
+}
+
+#thread-container .header h1 {
+    font-size: 22px;
+    padding: 10px 0px;
+}
+
+#thread-container .header .thread-info {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+    #thread-container .header .thread-info .userinfo .headpic {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        vertical-align: middle;
+        overflow: hidden;
+        margin-right: 2px;
+    }
+
+        #thread-container .header .thread-info .userinfo .headpic img {
+            width: 15px;
+            height: 15px;
+        }
+
+    #thread-container .header .thread-info .userinfo .username {
+        vertical-align: middle;
+    }
+
+    #thread-container .header .thread-info .comment-count {
+        display: inline-block;
+        float: right;
+        vertical-align: middle;
+        margin-top: 1px;
+    }
+
+        #thread-container .header .thread-info .comment-count i {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 11px;
+            background-size: 146px 47px;
+            margin-right: 2px;
+        }
+
+#thread-container article {
+    margin-top: 10px;
+}
+
+    #thread-container article p {
+        font-size: 17px;
+        line-height: 1.5em;
+        color: #888;
+    }
+
+#comment-container {
+    margin: 0px 0px;
+    background-color: white;
+}
+
+    #comment-container h3 {
+        font-size: 14px;
+        color: #666;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: 1px solid #dfdfdf;
+        border-bottom: .5px solid #dfdfdf;
+    }
+
+        #comment-container h3 i {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 11px;
+            background-size: 146px 47px;
+            margin-right: 5px;
+        }
+
+    #comment-container .comment {
+        margin: 10px 10px;
+    }
+
+        #comment-container .comment .no-comment {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            line-height: 110px;
+        }
+
+        #comment-container .comment .comment-list {
+            padding: 0px 0px;
+            border-top: 1px solid #f3f3f3;
+            border-top: .5px solid #f3f3f3;
+        }
+
+            #comment-container .comment .comment-list:first-child {
+                border-top: none;
+            }
+
+            #comment-container .comment .comment-list dt .headpic {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                -ms-border-radius: 15px;
+                border-radius: 15px;
+                vertical-align: middle;
+                overflow: hidden;
+            }
+
+                #comment-container .comment .comment-list dt .headpic img {
+                    width: 30px;
+                    height: 30px;
+                }
+
+            #comment-container .comment .comment-list dt .userinfo {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 12px;
+                color: #5b4646;
+                margin-top: 8px;
+            }
+
+                #comment-container .comment .comment-list dt .userinfo p {
+                    vertical-align: middle;
+                    font-size: 10px;
+                    color: #5b4646;
+                }
+
+            #comment-container .comment .comment-list dt .commentvote {
+                float: right;
+            }
+
+        #comment-container .comment .hot .up {
+            display: inline-block;
+            float: right;
+        }
+
+            #comment-container .comment .hot .up i {
+                display: inline-block;
+                width: 53px;
+                height: 12px;
+                background-size: 146px 47px;
+                vertical-align: middle;
+            }
+
+            #comment-container .comment .hot .up em {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 12px;
+                color: #ea5454;
+            }
+
+        #comment-container .comment .comment-list dd {
+            margin-top: 1px;
+            margin-left: 30px;
+        }
+
+            #comment-container .comment .comment-list dd p {
+                font-size: 15px;
+                color: #888;
+                line-height: 1.5em;
+                margin-left: 5px;
+            }
+
+            #comment-container .comment .comment-list dd .comment-img-box {
+                width: 55px;
+                height: 60px;
+                margin-top: 5px;
+                overflow: hidden;
+                text-align: center;
+                line-height: 0;
+            }
+
+                #comment-container .comment .comment-list dd .comment-img-box img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                #comment-container .comment .comment-list dd .comment-img-box span {
+                    display: inline-block;
+                    background-size: 146px 47px;
+                    width: 55px;
+                    height: 10px;
+                    margin-top: 5px;
+                }
+
+        #comment-container .comment .comment-list .quote {
+            padding: 10px;
+            background: #fafafc;
+            border: 1px solid #f8f8fb;
+            border: .5px solid #f8f8fb;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 25px;
+        }
+
+            #comment-container .comment .comment-list .quote dd p {
+                font-size: 14px;
+                color: #999;
+            }
+
+        #comment-container .comment .comment-app-btn {
+            display: block;
+            line-height: 38px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            background-color: #2175d0;
+            border-radius: 5px;
+            background-size: cover;
+        }
+/*----App�Զ����css---*/
+.mui-preview-image.mui-fullscreen {
+    position: fixed;
+    z-index: 20;
+    background-color: #000;
+}
+
+.mui-preview-header,
+.mui-preview-footer {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+}
+
+.mui-preview-header {
+    height: 44px;
+    top: 0;
+}
+
+.mui-preview-footer {
+    height: 50px;
+    bottom: 0px;
+}
+
+.mui-preview-header .mui-preview-indicator {
+    display: block;
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    margin: 15px auto 4px;
+    width: 70px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.mui-preview-image {
+    display: none;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+    .mui-preview-image.mui-preview-in {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+
+    .mui-preview-image.mui-preview-out {
+        background: none;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+    }
+
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+
+.mui-zoom-scroller {
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-backface-visibility: hidden;
+}
+
+.mui-zoom {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.mui-slider .mui-slider-group .mui-slider-item img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+    width: 100%;
+}
+
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+    display: inline-table;
+}
+
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mui-preview-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+    .mui-preview-loading.mui-active {
+        display: block;
+    }
+
+    .mui-preview-loading .mui-spinner-white {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        height: 50px;
+        width: 50px;
+    }
+
+.mui-preview-image img.mui-transitioning {
+    -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+p img {
+    max-width: 100%;
+    height: auto;
+}
