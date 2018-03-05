@@ -1,0 +1,150 @@
+﻿body {
+
+}
+
+#coverimage {
+    width: 100%;
+}
+
+.mui-card-header.mui-card-media {
+    display: block;
+    padding: 0px;
+}
+
+.mui-content {
+    background-color: white;
+    /*padding-bottom: 50px;*/
+    /*margin-bottom: 50px;*/
+}
+
+.article-area {
+    padding: 12px 15px;
+    margin: 0px;
+}
+
+    .article-area .head-title {
+        font-size: 30px;
+        line-height: 42px;
+    }
+
+    .article-area .article-createtime {
+        font-size: 15px;
+        color: #bdc6d2;
+    }
+
+        .article-area .article-createtime .mui-icon {
+            margin: 10px 0;
+            font-size: 15px;
+            margin-left: 20px;
+            line-height: 1.8rem;
+            height: 1.8rem;
+        }
+
+        .article-area .article-createtime .svg-icon {
+            width: 16px;
+            height: 16px;
+            overflow: hidden;
+            vertical-align: -0.15em;
+            fill: currentColor;
+        }
+
+            .article-area .article-createtime .svg-icon span {
+                font-size: 12px;
+                margin-left: 5px;
+                margin-bottom: 3px;
+            }
+
+.article-user {
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+
+    .article-user img {
+        border-radius: 50%;
+        vertical-align: middle;
+        overflow: hidden;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+    }
+
+    .article-user .article-username {
+        padding-left: 7px;
+        line-height: 50px;
+        /*color: #b5bebf;*/
+        font-size: 18px;
+        vertical-align: top;
+    }
+
+.article-area .article-user {
+    width: 100%;
+}
+
+.article-area .tips {
+    padding: 10px;
+    background: #F3F6FA;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #9DABBC;
+}
+
+#article_description {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.article-area p img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+}
+
+#articlecontent p {
+    line-height: 24px;
+    font-family: PingFangSC-Regular;
+    font-size: 17px;
+    color: #454F5B;
+}
+
+
+
+/*.header .headimage {
+    width: 35px;
+    height: 35px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    vertical-align: middle;
+    overflow: hidden;
+    margin-right: 2px;
+}
+
+.thread-info {
+    margin: 10px 10px;
+}
+
+    .thread-info .userinfo .username {
+        font-size: 16px;
+    }
+
+    .thread-info .userinfo .publish-time {
+        margin-bottom: 0;
+    }
+
+.mui-content-padded p img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mui-content .header h2 {
+    margin: 10px;
+}*/
+
+.commentText {
+    font-size: 15px;
+}

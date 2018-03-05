@@ -15,72 +15,64 @@
     <meta name="format-detection" content="email=no" />
 
     <link href="~/Content/mui.min.css" rel="stylesheet" />
-    <link href="~/Content/thread.css" rel="stylesheet" />
-
+    <link href="~/Content/article/thread.css" rel="stylesheet" />
+    <link href="~/Content/article/index-original.css"  rel="stylesheet"/>
     <title>@article.ArticleName</title>
 
-    <style type="text/css">
-        .header .headimage {
-            width: 35px;
-            height: 35px;
-            -ms-border-radius: 5px;
-            border-radius: 5px;
-            vertical-align: middle;
-            overflow: hidden;
-            margin-right: 2px;
-        }
-
-        .thread-info {
-            margin: 10px 10px;
-        }
-
-            .thread-info .userinfo .username {
-                font-size: 16px;
-            }
-
-            .thread-info .userinfo .publish-time {
-                margin-bottom: 0;
-            }
-
-        .mui-content-padded p img {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .mui-content .header h2 {
-            margin: 10px;
-        }
-
-        .commentText {
-            font-size: 15px;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="mui-content">
         <input type="hidden" id="articleId" value="@article.Id">
-        <div class="header">
-            <h2>
-                @article.ArticleName
-            </h2>
-            <div class="mui-card-header mui-card-media">
-                <img class="headimage" src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)">
-                <div class="mui-media-body">
-                    @Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)
-                    <p>发表于 @article.CreateTime.ToString("yy-MM-dd HH:mm")</p>
-                </div>
+        <img id="coverimage" src="@article.CoverImage.Replace("style/articlecover_36_24","style/article_1200_605")">
+        <div class="article-area">
+            <div class="head-title">@article.ArticleName</div>
+            <div class="article-createtime">
+                发表于 : <span id="article-createtime">@article.CreateTime.ToString("yy-MM-dd HH:mm")</span>
+                @*<span class="mui-icon">
+                    <svg class="svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-tuji-dianzan-copy"></use>
+                        <span class="span_VoteCount">500</span>
+                    </svg>
+                </span>
+                <span class="mui-icon">
+                    <svg class="svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-tuji-pinglun-copy"></use>
+                        <span class="span_CommentCount">500</span>
+                    </svg>
+                </span>*@
             </div>
-        </div>
-        <!-- 文章主体 -->
-        <div class="mui-content-padded">
-            @Html.Raw(article.Content ?? "")
-            <p>作者：<em class="username">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</em></p>
-            @*<div class="article-footer">
-                    <img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />
-                    <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
-                </div>*@
+            <div class="article-user">
+                <img src="@ImBLL.ImageUrlHelper.GetHeadImageUrl(userinfo.ImgUrl,100)" id='user_headimg'>
+                <span class="article-username" id="user_name">@Html.Raw(string.IsNullOrEmpty(userinfo.ShowName) ? userinfo.UserName : userinfo.ShowName)</span>
+            </div>
+            <div class="tips">
+                <span>简介：</span>
+                <p id="article_description">@article.Description</p>
+            </div>
+            <div class="" id='articlecontent'>
+                @Html.Raw(article.Content ?? "")
+            </div>
+
+            <div class="article-createtime">
+                发表于 : <span id="article-createtime">2018-01-25</span>
+                @*<span class="mui-icon">
+                    <svg class="svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-tuji-dianzan-copy"></use>
+                        <span class="span_VoteCount">500</span>
+                    </svg>
+                </span>
+                <span class="mui-icon">
+                    <svg class="svg-icon" aria-hidden="true">
+                        <use xlink:href="#icon-tuji-pinglun-copy"></use>
+                        <span class="span_CommentCount">500</span>
+                    </svg>
+                </span>*@
+            </div>
+            <div class="article-footer">
+                <!--<img src="http://img.myautos.cn/commenfile/qrcode_for_gh_7f5be927b079_258.jpg" />-->
+                <p>车酷自驾游是专注自驾游分享、交友社区，欢迎关注</p>
+            </div>
         </div>
     </div>
 
