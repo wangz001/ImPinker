@@ -26,7 +26,7 @@ function pullupRefresh() {
 		pageindex: pageNum,
 		pageSize: pageSize
 	}
-	commonUtil.sendRequestWithToken('http://api.myautos.cn/api/weibo/GetMyWeiBoList', data, false, function(data) {
+	commonUtil.sendRequestWithToken(commonConfig.apiRoot+'/api/weibo/GetMyWeiBoList', data, false, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.length > 0) {
 			var list = data.Data;
 			var table = document.body.querySelector('.mui-scroll');
@@ -43,10 +43,6 @@ function pullupRefresh() {
 	});
 }
 
-var img_1200style = 'style/weibo_1200';
-var img_200style = 'style/weibo_200_200';
-var img_24style = 'style/weibo_24_16';
-var img_60style = 'style/weibo_60_34';
 var weiboTemplate = $('script[id="weiboitem"]').html();
 /**
  * 添加数据
@@ -63,11 +59,11 @@ function initWeiBoItem(table, item) {
 		//多图
 		//imgHtmlStr += "<ul>";
 		for(var j = 0; j < imgs.length; j++) {
-			imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+			imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 		//imgHtmlStr += "</ul>";
 	} else {
-		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
 	//显示地理位置
@@ -87,7 +83,7 @@ mui('.mui-scroll').on('tap', '.delete_weibo', function() {
 	mui.confirm("是否要删除微博？", "我的微博", ["是", "否"], function(event, index) {
 		console.log(JSON.stringify(event));
 		if(event.index == 0) {
-			var url = 'http://api.myautos.cn/api/weibo/WeiboDelete';
+			var url = commonConfig.apiRoot+'/api/weibo/WeiboDelete';
 			var dataPara = {
 				id: weiboid
 			}
@@ -104,7 +100,7 @@ mui('.mui-scroll').on('tap', '.delete_weibo', function() {
 	});
 });
 //评论  
-mui('.mui-scroll').on('tap', '.mui-icon-compose', function() {
+mui('.mui-scroll').on('tap', '.icon-compose', function() {
 	var weiboid = this.getAttribute("weiboid");
 	mui.openWindow({
 		url: "../weibo/weibo_preview.html",

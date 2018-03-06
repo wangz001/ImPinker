@@ -19,7 +19,7 @@ var pageNum = 1;
 var pageSize = 30;
 function pullupRefresh() {
 	//console.log(JSON.stringify(currentParamEntity));
-	var url = 'http://api.myautos.cn/api/usercollection/GetMyCollect';
+	var url = commonConfig.apiRoot+'/api/usercollection/GetMyCollect';
 	var data = {
 		pageNum: pageNum,
 		pagesize: pageSize
@@ -49,9 +49,6 @@ function pullupRefresh() {
 	});
 }
 
-var img_1200style = 'style/weibo_1200';
-var img_24style = 'style/weibo_24_16';
-var img_200style = 'style/weibo_200_200';
 var img_60style = 'style/weibo_60_34';
 var articleTemplate = $('script[id="card-article"]').html();
 var weiboTemplate = $('script[id="card-weibo"]').html();
@@ -59,7 +56,7 @@ var weiboTemplate = $('script[id="card-weibo"]').html();
 function initCard(entityType, item) {
 	if(entityType == 1) {
 		var article = item;
-		article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", "style/article_24_20")
+		article.CoverImage = article.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_24_20)
 		var imgHtmlStr = articleTemplate.temp(article);
 		$("#cardlist").append(imgHtmlStr);
 	}
@@ -71,10 +68,10 @@ function initCard(entityType, item) {
 		if(imgs.length > 1) {
 			//多图
 			for(var j = 0; j < imgs.length; j++) {
-				imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+				imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 			}
 		} else {
-			imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+			imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 		}
 		weibo.imglist = imgHtmlStr;
 		var cardStr = weiboTemplate.temp(weibo);

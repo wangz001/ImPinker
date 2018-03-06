@@ -50,17 +50,17 @@ mui.previewImage();
 var currentParamEntity = {
 	userid: 0,
 	all: {
-		url: 'http://api.myautos.cn/api/Article/GetUserArticleAndWeiboListByPage',
+		url: commonConfig.apiRoot+'/api/Article/GetUserArticleAndWeiboListByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
 	article: {
-		url: 'http://api.myautos.cn/api/Article/GetUsersArticleByPage',
+		url: commonConfig.apiRoot+'/api/Article/GetUsersArticleByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
 	weibo: {
-		url: 'http://api.myautos.cn/api/weibo/GetUsersListByPage',
+		url: commonConfig.apiRoot+'/api/api/weibo/GetUsersListByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
@@ -112,12 +112,6 @@ function getWeiboList(callback) {
 	});
 }
 
-var img_1200style = 'style/weibo_1200';
-var img_600style = 'style/weibo_600';
-var img_200style = 'style/weibo_200_200';
-var img_24style = 'style/weibo_24_16';
-var img_24_20 = 'style/article_24_20';
-var img_60style = 'style/weibo_60_34';
 var articleTemplate = $('script[id="card-article"]').html();
 var weiboTemplate = $('script[id="card-weibo"]').html();
 ///填充内容
@@ -125,7 +119,7 @@ function initCard(entityType, item) {
 	if(entityType == 1) {
 		var article = item;
 		if($.inArray(article.Id, currentParamEntity.articleids) == -1) {
-			article.CoverImage = article.CoverImage.replace("style/articlecover_36_24", img_24_20)
+			article.CoverImage = article.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_24_20)
 			var imgHtmlStr = articleTemplate.temp(article);
 			$("#mui-table-view-2").append(imgHtmlStr);
 			currentParamEntity.articleids.push(article.Id);
@@ -140,10 +134,10 @@ function initCard(entityType, item) {
 			if(imgs.length > 1) {
 				//多图
 				for(var j = 0; j < imgs.length; j++) {
-					imgHtmlStr += '<div class="img-box"><img src="' + imgs[j].replace(img_24style, img_200style) + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></div>';
+					imgHtmlStr += '<div class="img-box"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></div>';
 				}
 			} else {
-				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(img_24style, img_60style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></a>';
+				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 			}
 			weibo.imglist = imgHtmlStr;
 			//显示地理位置

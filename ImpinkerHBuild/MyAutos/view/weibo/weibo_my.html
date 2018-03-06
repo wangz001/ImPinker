@@ -20,7 +20,7 @@
 			<div id="pullrefresh" class=" mui-scroll-wrapper ">
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
-						<li class="weibo-card">
+						<!--<li class="weibo-card">
 							<div class="user_info">
 								<img src="../../images/logo1.png">
 								<span class="name">silva</span>
@@ -97,7 +97,7 @@
 									</div>
 								</div>
 							</div>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>
@@ -108,6 +108,7 @@
 		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/commenConfig.js" ></script>
 		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id='weiboitem'>
 			<li class="weibo-card" id="card_$Id$">
@@ -137,7 +138,7 @@
   									<span>$VoteCount$</span>
 							</svg>
 							</span>
-							<span class="comment">
+							<span class="comment icon-compose" weiboid='$Id$'>
 								<svg class="svg-icon" aria-hidden="true">
   												<use xlink:href="#icon-tuji-pinglun-copy"></use>
   												<span>$CommentCount$</span>

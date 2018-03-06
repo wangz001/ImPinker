@@ -21,8 +21,8 @@
 	owner.imgStyle={
 		weibo_1200:'style/weibo_1200',
 		weibo_200_200:'style/weibo_200_200',
-		weibo_60_34:'style/weibo_60_34',
-		weibo_24_16:'style/weibo_24_16',
+		weibo_60_34:'style/weibo_60_34',    //600*340
+		weibo_24_16:'style/weibo_24_16',    //240*160
 		article_1200_605:'style/article_1200_605',
 		article_900:'style/article_900',
 		article_24_20:'style/article_24_20',
