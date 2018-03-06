@@ -54,7 +54,7 @@ window.addEventListener('weiboComment', function(event) {
 
 var pageNum = 1;
 var pageSize = 20;
-var weiboApiPath = 'http://api.myautos.cn/api/WeiBo/GetWeiBoList';
+var weiboApiPath = commonConfig.apiRoot+'/api/WeiBo/GetWeiBoList';
 /**
  * 下拉刷新具体业务实现
  */
@@ -196,7 +196,7 @@ function bindClickEvent() {
 	mui('.mui-scroll').on('tap', '.collectbtn', function() {
 		var weiboid = this.getAttribute('weiboid');
 		var heartType = $(this).attr("isCollect");
-		var url = "http://api.myautos.cn/api/UserCollection/AddWeiboCollect";
+		var url = commonConfig.apiRoot+"/api/UserCollection/AddWeiboCollect";
 		var data = {
 			"weiboId": weiboid
 		}
@@ -255,7 +255,7 @@ function bindClickEvent() {
 }
 
 function sendVote(weiboid, isVote) {
-	var url = "http://api.myautos.cn/api/weibovote/newweibovote";
+	var url = commonConfig.apiRoot+"/api/weibovote/newweibovote";
 	var data = {
 		"weiboid": weiboid
 	}

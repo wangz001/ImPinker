@@ -17,17 +17,8 @@ mui('.mui-scroll').on('tap', '.article_card_href', function(e) {
 	var articleid = $(this).attr("articleid");
 	var articlename = this.getAttribute('articlename');
 	console.log(articleid);
-	var titleNView = { //详情页原生导航配置
-		backgroundColor: '#f7f7f7', //导航栏背景色
-		titleText: '', //导航栏标题
-		titleColor: '#000000', //文字颜色
-		titleText: articlename,
-		type: 'transparent', //透明渐变样式
-		autoBackButton: true, //自动绘制返回箭头
-		splitLine: { //底部分割线
-			color: '#cccccc'
-		}
-	}
+	var titleNView =commonConfig.titleNView;
+	titleNView.titleText=articlename;
 	var webview_style = {
 		"render": "always",
 		"popGesture": "hide",
@@ -58,7 +49,7 @@ mui('.mui-scroll').on('tap', '.delete_article', function(e) {
 	if(articleid > 0) {
 		mui.confirm("是否要删除文章？", "我的文章", ["是", "否"], function(event, index) {
 			if(event.index == 0) {
-				var url = 'http://api.myautos.cn/api/article/DeleteArticle';
+				var url = commonConfig.apiRoot+'/api/article/DeleteArticle';
 				var data = {
 					Id: articleid
 				}
@@ -82,7 +73,7 @@ var lastTime = "";
  * 上拉加载具体业务实现
  */
 function pullupRefresh() {
-	var url = 'http://api.myautos.cn/api/article/GetMyArticle';
+	var url = commonConfig.apiRoot+'/api/article/GetMyArticle';
 	var data = {
 		pageNum: pageNum,
 		pageSize: pageSize
@@ -106,7 +97,7 @@ function pullupRefresh() {
 					$("#articlelist").append(htmlStr);
 				}
 				//添加日期栏结束
-				item.CoverImage = item.CoverImage.replace("style/articlecover_36_24", 'style/article_24_20');
+				item.CoverImage = item.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_24_20);
 
 				var imgHtmlStr = articleItemTemplate.temp(item);
 				$("#articlelist").append(imgHtmlStr);

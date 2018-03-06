@@ -1,0 +1,37 @@
+html,
+body {
+	background-color: #fff;
+}
+
+nav {
+	line-height: 3rem;
+	position: relative;
+	background-color: #fff;
+}
+
+.head-title {
+	font-size: 1.35rem;
+	color: #454f5b;
+	padding-left: 15px;
+}
+
+#search {
+	float: right;
+	font-size: 1.35rem;
+	color: #454f5b;
+	padding-right: 25px;
+	padding-top: 15px;
+}
+
+.mui-table-view:before {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	left: 15px;
+	height: 1px;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #ECEFF4;
+}

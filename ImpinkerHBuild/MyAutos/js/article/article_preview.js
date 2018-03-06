@@ -79,9 +79,9 @@ document.getElementById('share').addEventListener('tap', function() {
 				sharewx.send({
 					title: articleItem.ArticleName,
 					content: articleItem.Description,
-					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					href: commonConfig.mWebRoot+"/Article/Index?id=" + articleItem.Id,
 					thumbs: [
-						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+						articleItem.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.articlecover_100)
 					],
 					extra: {
 						scene: "WXSceneSession"
@@ -96,9 +96,9 @@ document.getElementById('share').addEventListener('tap', function() {
 				sharewx.send({
 					title: articleItem.ArticleName,
 					content: articleItem.Description,
-					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					href: commonConfig.mWebRoot+"/Article/Index?id=" + articleItem.Id,
 					thumbs: [
-						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+						articleItem.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.articlecover_100)
 					],
 					extra: {
 						scene: "WXSceneTimeline"
@@ -113,9 +113,9 @@ document.getElementById('share').addEventListener('tap', function() {
 				shareweibo.send({
 					title: articleItem.ArticleName,
 					content: articleItem.Description,
-					href: "http://m.myautos.cn/Article/Index?id=" + articleItem.Id,
+					href: commonConfig.mWebRoot+"/Article/Index?id=" + articleItem.Id,
 					thumbs: [
-						articleItem.CoverImage.replace("articlecover_36_24", "articlecover_100")
+						articleItem.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.articlecover_100)
 					]
 				}, function() {
 					mui.toast("分享成功");
@@ -180,7 +180,7 @@ $(document).ready(function() {
 });
 
 function SendComposs(txtStr) {
-	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleComment";
+	var url = commonConfig.apiRoot+"/api/ArticleVote/NewArticleComment";
 	var data = {
 		ArticleId: articleItem.Id,
 		CommentStr: txtStr,
@@ -216,7 +216,7 @@ mui('#comment ').on('tap', '.comment_to', function() {
 });
 
 function getArticle(articleid) {
-	var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
+	var url = commonConfig.apiRoot+'/api/article/GetArticleWithContent';
 	var data = {
 		articleid: articleid,
 	};
@@ -226,7 +226,7 @@ function getArticle(articleid) {
 		if(data.IsSuccess == 1 && data.Data != null) {
 			var articleinfo = data.Data;
 			articleItem = articleinfo;
-			$("#coverimage").attr("src", articleItem.CoverImage.replace("style/articlecover_36_24", "style/article_900"));
+			$("#coverimage").attr("src", articleItem.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_900));
 			$("#article_description").html("简介：" + articleItem.Description);
 			articleinfo.Content = replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
@@ -254,7 +254,7 @@ function getArticle(articleid) {
 }
 
 function getArticleComment(articleid) {
-	var url = 'http://api.myautos.cn/api/ArticleVote/GetArticleComments';
+	var url = commonConfig.apiRoot+'/api/ArticleVote/GetArticleComments';
 	var data = {
 		articleid: articleid,
 		pagesize: 10,
@@ -296,7 +296,7 @@ $('#vote').bind('click', function() {
 		mui.toast("您已赞过此文章~");
 		return;
 	}
-	var url = "http://api.myautos.cn/api/ArticleVote/NewArticleVote";
+	var url = commonConfig.apiRoot+"/api/ArticleVote/NewArticleVote";
 	var data = {
 		articleid: articleItem.Id
 	}
@@ -324,7 +324,7 @@ $('#vote').bind('click', function() {
 $('#collect').bind('click', function() {
 	var isCollect = $(this).attr("isCollect");
 	//mui.alert("收藏到我的微博");
-	var url = "http://api.myautos.cn/api/UserCollection/AddArticleCollect";
+	var url = commonConfig.apiRoot+"/api/UserCollection/AddArticleCollect";
 	var para = {
 		"articleId": articleItem.Id
 	}

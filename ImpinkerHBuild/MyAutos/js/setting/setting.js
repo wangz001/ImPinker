@@ -42,7 +42,7 @@ function defaultImg() {
 }
 
 function getNotifyCunt() {
-	var url = "http://api.myautos.cn/api/Notify/GetNewNotifyCount";
+	var url = commonConfig.apiRoot+"/api/Notify/GetNewNotifyCount";
 	var data = {};
 	var state = app.getState(); //用户信息
 	if(state.account && state.password) {
@@ -128,17 +128,17 @@ document.getElementById("my_collect").addEventListener('tap', function() {
 		}
 	});
 });
-document.getElementById("about").addEventListener('tap', function() {
-	mui.openWindow({
-		url: "view/about.html",
-		id: "about",
-		show: {
-			aniShow: 'slide-in-right',
-			duration: 200
-		}
-	});
-});
-//
+//document.getElementById("about").addEventListener('tap', function() {
+//	mui.openWindow({
+//		url: "view/about.html",
+//		id: "about",
+//		show: {
+//			aniShow: 'slide-in-right',
+//			duration: 200
+//		}
+//	});
+//});
+
 document.getElementById("feedback").addEventListener('tap', function() {
 	mui.openWindow({
 		url: "view/setting/feedback.html",
@@ -150,13 +150,13 @@ document.getElementById("feedback").addEventListener('tap', function() {
 	});
 });
 //
-document.getElementById("testindex").addEventListener('tap', function() {
-	mui.openWindow({
-		url: "view/weibo/index.html",
-		id: "test",
-		show: {
-			aniShow: 'slide-in-right',
-			duration: 200
-		}
-	});
-});
+//document.getElementById("testindex").addEventListener('tap', function() {
+//	mui.openWindow({
+//		url: "view/weibo/index.html",
+//		id: "test",
+//		show: {
+//			aniShow: 'slide-in-right',
+//			duration: 200
+//		}
+//	});
+//});

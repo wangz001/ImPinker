@@ -26,7 +26,8 @@
 		article_1200_605:'style/article_1200_605',
 		article_900:'style/article_900',
 		article_24_20:'style/article_24_20',
-		articlecover_36_24:'style/articlecover_36_24'
+		articlecover_36_24:'style/articlecover_36_24',
+		articlecover_100:'style/articlecover_100'
 	}
 
 }(mui, window.commonConfig = {}));
