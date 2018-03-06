@@ -292,10 +292,10 @@ function newWeibo() {
 				}, {
 					filter: "image",
 					multiple: true,
-					maximum: 6,
+					maximum: 9,
 					system: false,
 					onmaxed: function() {
-						plus.nativeUI.alert('最多只能选择6张图片');
+						plus.nativeUI.alert('最多只能选择9张图片');
 					}
 				});
 				break;

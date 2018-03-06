@@ -88,7 +88,7 @@
 	 * 初始化图片域占位
 	 */
 	weibo.newPlaceholder = function() {
-		if(weibo.files.length > 5) { //最多选6张照片
+		if(weibo.files.length > 8) { //最多选9张照片
 			return;
 		}
 		var fileInputArray = weibo.getFileInputArray();
