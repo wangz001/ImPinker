@@ -44,10 +44,10 @@
 					<div class="mui-scroll">
 						<ul class="mui-table-view">
 							<li class="mui-table-view-cell">
-								<a datetype="1" href="#">从本地相册上传</a>
+								<a datetype="1" href="javascript:;">从本地相册上传</a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a datetype="2" href="#">从云相册选择图片</a>
+								<a datetype="2" href="javascript:;">从云相册选择图片</a>
 							</li>
 						</ul>
 					</div>
@@ -57,18 +57,25 @@
 			<p>正文</p>
 			<div class="mui-content-padded" style="margin: 0px">
 				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
-				<!--<div class="post-img mui-card">
+				<div class="post-img mui-card">
 					<div class="add-img" name='yjcontent'>
 						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
 						<div class="post-move" role="operator" style="">
 							<a class="del mui-icon mui-icon-trash" role="del"></a>
 						</div>
 					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link">Like</a>
-						<a class="mui-card-link">Comment</a>
-						<a class="mui-card-link">Read more</a>
-					</div>
+				</div>
+				
+				<textarea name="yjcontent">sahfjalfjdkljfl</textarea>
+				<div class="datetimeContent">
+					<span class="mui-icon mui-icon-camera"></span>
+					<span>2018-02-06</span>
+					<span class="cancel-datetime mui-icon mui-icon-close"></span>
+				</div>
+				<div class="gisContent">
+					<span class="mui-icon mui-icon-location"></span>
+					<span>北京市国家体育馆</span>
+					<span class="cancel-gis mui-icon mui-icon-close"></span>
 				</div>
 				<div class="post-img mui-card">
 					<div class="add-img" name='yjcontent'>
@@ -77,12 +84,8 @@
 							<a class="del mui-icon mui-icon-trash" role="del"></a>
 						</div>
 					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link">Like</a>
-						<a class="mui-card-link">Comment</a>
-						<a class="mui-card-link">Read more</a>
-					</div>
-				</div>-->
+				</div>
+				<textarea name="yjcontent">sahfjalfjdkljfl</textarea>
 			</div>
 		</div>
 
@@ -92,11 +95,9 @@
 			<a class="mui-tab-item" id="share"><span class="mui-icon mui-icon-camera"></span></a>
 			<a class="mui-tab-item" id="preview_btn"><span class="mui-icon mui-icon-search"></span></a>
 		</footer>
-
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/app.js"></script>
-		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
 		<script type="text/javascript" src="../../js/autosize.js"></script>
 		<script type='text/template' id='postimg'>
@@ -109,186 +110,8 @@
 				</div>
 			</div>
 		</script>
-		<script type="application/javascript">
-			mui.init({
-				beforeback: function() {
-					if(edityoujiUtil.article.articleid > 0) {
-						plus.nativeUI.showWaiting('正在发布保存到草稿');
-						edityoujiUtil.saveDraft(function(data) {
-							plus.nativeUI.closeWaiting();
-							mui.toast("修改已保存到草稿！");
-							setTimeout(function() {
-								var self = plus.webview.currentWebview();
-								self.close();
-							}, 1000);
-						});
-						return false;
-					}
-					return true;
-				}
-			});
-			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
-				//从草稿页跳转
-				var articleid = self.articleid;
-				var articlename = self.articlename;
-				var coverimage = self.coverimage;
-				var description = self.description;
-				var content = self.content;
-				if(articleid != null && articleid > 0) {
-					edityoujiUtil.article.articleid = articleid;
-					edityoujiUtil.article.articlename = articlename;
-					edityoujiUtil.article.coverimage = coverimage;
-					edityoujiUtil.article.description = description;
-					edityoujiUtil.article.content = content;
-					$("#youi_title").val(articlename);
-					$("#coverimage").attr('src', coverimage);
-					$("#description").val(description);
-					edityoujiUtil.getandShowContent(articleid, function() {});
-				}
-				autosize($(".mui-content-padded textarea"));
-			});
-			//自定义事件。接受选择微博页传回的数据
-			window.addEventListener('weiboitems', function(event) {
-				//获得事件参数  
-				var selectedWeibos = event.detail.items;
-				if(selectedWeibos != null) {
-					//在页面上展示
-					edityoujiUtil.showWeiBoItems(selectedWeibos);
-				}
-			});
-
-			$("#youi_title").blur(function() {
-				var content = $(this).val();
-				console.log(content);
-				if(content == "") return;
-				//创建文章或更新标题
-				setTimeout(function() {
-					if(edityoujiUtil.article.articleid == 0) {
-						edityoujiUtil.createYouji(content, function(id) {
-							if(id != null && id > 0) {
-								console.log(id);
-								articleid = id;
-							}
-						});
-					} else {
-						edityoujiUtil.article.articlename = content;
-					}
-				}, 500);
-			});
-			//简介
-			$("#description").change(function() {
-				var textDescription = $(this).val();
-				setTimeout(function() {
-					console.log(textDescription);
-					edityoujiUtil.article.description = textDescription;
-				}, 200);
-			});
-			//图片删除图片事件绑定  mui-icon-trash
-			mui('.mui-content-padded').on('tap', '.del', function() {
-				var thisa = this;
-				mui.confirm("是否要删除图片？", "", ["是", "否"], function(event, index) {
-					if(event.index == 0) {
-						console.log("aaa");
-						var imgitem = $(thisa).parents('.post-img');
-						var nextTextarea = $(imgitem).next();
-						var preTextarea = $(imgitem).prev();
-						$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
-						$(imgitem).remove(); //删除图片和图片的上一个textarea
-						$(preTextarea).remove();
-					}
-				});
-			});
-			//标记当前文本框
-			mui('.mui-content-padded').on('tap', 'textarea', function() {
-				edityoujiUtil.article.currentNode = this;
-			});
-			//保存草稿
-			$("#youji_content textarea").change(function() {
-				setTimeout(function() {
-					if(edityoujiUtil.article.articleid > 0) {
-						edityoujiUtil.saveDraft(function(data) {
-							console.log("保存草稿成功！");
-						});
-					} else {
-						edityoujiUtil.createYouji("草稿" + (new Date().toLocaleString()), function(id) {
-							if(id != null && id > 0) {
-								console.log(id);
-							}
-						});
-					}
-				}, 2000);
-			});
-			//设置封面图
-			document.getElementById('setcoverimage').addEventListener('tap', function() {
-				//edityoujiUtil.setCoverimage();
-				mui("#middlePopover").popover("show");
-			});
-			$("#middlePopover a").bind("click", function() {
-				mui("#middlePopover").popover("hide");
-				var type = $(this).attr("datetype");
-				if(type == "1") {
-					edityoujiUtil.setCoverimage();
-				} else {
-					mui.toast("请稍后");
-				}
-			});
-			//发布
-			document.getElementById('publishyouji').addEventListener('tap', function() {
-				setTimeout(function() {
-					edityoujiUtil.publishYouji(function(err) {
-						if(err) {
-							alert(err);
-						} else {
-							plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
-							//关闭页面
-							var curr = plus.webview.currentWebview();
-							var youjiPage = plus.webview.getWebviewById('youji_new');
-							var selectPage = plus.webview.getWebviewById('youji_new_selectweibo');
-							plus.webview.close(youjiPage);
-							plus.webview.close(selectPage);
-							plus.webview.close(curr);
-							//mui.back();
-						}
-					});
-				}, 500);
-			});
-
-			//添加图片
-			document.getElementById('addimage').addEventListener('tap', function() {
-				edityoujiUtil.addImage(function(data) {
-					edityoujiUtil.showImage(data.Data);
-				});
-			});
-			//添加微博
-			document.getElementById('selectWeibo').addEventListener('tap', function() {
-				mui.openWindow({
-					url: "youji_new_selectweibo.html",
-					id: "youji_new_selectweibo",
-					createNew: true,
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					}
-				});
-			});
-			//预览
-			document.getElementById('preview_btn').addEventListener('tap', function() {
-				var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
-				mui.openWindow({
-					url: "youji_preview.html",
-					id: "youji_preview",
-					createNew: true,
-					show: {
-						aniShow: 'slide-in-right',
-						duration: 200
-					},
-					extras: {
-						contentStr: resultStr
-					},
-				});
-			});
-		</script>
+		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
+		<script type="text/javascript" src="../../js/article/youji_new_util.js"></script>
 	</body>
 
 </html>

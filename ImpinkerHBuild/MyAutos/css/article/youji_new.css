@@ -11,12 +11,11 @@ textarea {
 	height: auto;
 }
 
-
 .mui-content-padded {
 	background-color: white;
 }
 
-.post-img img{
+.post-img img {
 	width: 100%;
 	/*margin:0px 10px;*/
 }
@@ -40,6 +39,18 @@ html,
 	height: 100%;
 	overflow: auto;
 	padding-bottom: 50px;
+}
+
+.gisContent,
+.datetimeContent {
+	color: #b5bebf;
+	font-size: 15px;
+	margin: 10px;
+}
+
+.gisContent .cancel-gis,
+.cancel-datetime {
+	float: right;
 }
 
 footer {

@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/icons-extra.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/feedback.css" />
+		<link rel="stylesheet" href="../../css/article/youji_new.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">写游记</h1>
+			<button id="publishyouji" type="button" class="mui-btn mui-btn-primary mui-btn-outlined mui-pull-right">
+					发布
+			</button>
+		</header>
+		<div id="hideContent" style="display: none;"></div>
+
+		<div class="mui-content feedback">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<input id="youi_title" type="text" placeholder="请输入标题，6-12字最佳">
+				</div>
+			</div>
+			<div class="mui-inline"></div>
+			<div class="row mui-input-row description">
+				<textarea id='description' class="mui-input-clear question" placeholder="游记简介，100字以内..."></textarea>
+			</div>
+			<p>设置封面图</p>
+			<div class="row image-list">
+				<div class="image-item space">
+					<img style="max-height: 200px;width: 100%" id='setcoverimage' src="../../images/iconfont-tianjia.png">
+				</div>
+			</div>
+			<!--谈出框-->
+			<div id="middlePopover" class="mui-popover">
+				<div class="mui-popover-arrow"></div>
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a datetype="1" href="#">从本地相册上传</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a datetype="2" href="#">从云相册选择图片</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--谈出框end-->
+			<p>正文</p>
+			<div class="mui-content-padded" style="margin: 0px">
+				<textarea name='yjcontent' placeholder="试试插入微博内容，秒速发游记..."></textarea>
+				<!--<div class="post-img mui-card">
+					<div class="add-img" name='yjcontent'>
+						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
+						<div class="post-move" role="operator" style="">
+							<a class="del mui-icon mui-icon-trash" role="del"></a>
+						</div>
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">Like</a>
+						<a class="mui-card-link">Comment</a>
+						<a class="mui-card-link">Read more</a>
+					</div>
+				</div>
+				<div class="post-img mui-card">
+					<div class="add-img" name='yjcontent'>
+						<img src="../../images/cbd.jpg" type="upload" data-preview-src="" data-preview-group="1">
+						<div class="post-move" role="operator" style="">
+							<a class="del mui-icon mui-icon-trash" role="del"></a>
+						</div>
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">Like</a>
+						<a class="mui-card-link">Comment</a>
+						<a class="mui-card-link">Read more</a>
+					</div>
+				</div>-->
+			</div>
+		</div>
+
+		<footer class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="selectWeibo"><span class="mui-icon-extra mui-icon-extra-new"></span></a>
+			<a class="mui-tab-item" id='addimage'><span class="mui-icon mui-icon-image"></span></a>
+			<a class="mui-tab-item" id="share"><span class="mui-icon mui-icon-camera"></span></a>
+			<a class="mui-tab-item" id="preview_btn"><span class="mui-icon mui-icon-search"></span></a>
+		</footer>
+
+		<script src="../../js/mui.js"></script>
+		<script type="text/javascript" src="../../js/jquery.js"></script>
+		<script type="text/javascript" src="../../js/app.js"></script>
+		<script type="text/javascript" src="../../js/article/youji_new.js"></script>
+		<script type="text/javascript" src="../../js/commonUtil.js"></script>
+		<script type="text/javascript" src="../../js/autosize.js"></script>
+		<script type='text/template' id='postimg'>
+			<div class="post-img mui-card">
+				<div class="add-img" name='yjcontent'>
+					<img src="$src$" type="upload" data-preview-src="" data-preview-group="1">
+				</div>
+				<div class="post-move" role="operator" style="">
+					<a class="del mui-icon mui-icon-trash" role="del"></a>
+				</div>
+			</div>
+		</script>
+		<script type="application/javascript">
+			mui.init({
+				beforeback: function() {
+					if(edityoujiUtil.article.articleid > 0) {
+						plus.nativeUI.showWaiting('正在发布保存到草稿');
+						edityoujiUtil.saveDraft(function(data) {
+							plus.nativeUI.closeWaiting();
+							mui.toast("修改已保存到草稿！");
+							setTimeout(function() {
+								var self = plus.webview.currentWebview();
+								self.close();
+							}, 1000);
+						});
+						return false;
+					}
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				//从草稿页跳转
+				var articleid = self.articleid;
+				var articlename = self.articlename;
+				var coverimage = self.coverimage;
+				var description = self.description;
+				var content = self.content;
+				if(articleid != null && articleid > 0) {
+					edityoujiUtil.article.articleid = articleid;
+					edityoujiUtil.article.articlename = articlename;
+					edityoujiUtil.article.coverimage = coverimage;
+					edityoujiUtil.article.description = description;
+					edityoujiUtil.article.content = content;
+					$("#youi_title").val(articlename);
+					$("#coverimage").attr('src', coverimage);
+					$("#description").val(description);
+					edityoujiUtil.getandShowContent(articleid, function() {});
+				}
+				autosize($(".mui-content-padded textarea"));
+			});
+			//自定义事件。接受选择微博页传回的数据
+			window.addEventListener('weiboitems', function(event) {
+				//获得事件参数  
+				var selectedWeibos = event.detail.items;
+				if(selectedWeibos != null) {
+					//在页面上展示
+					edityoujiUtil.showWeiBoItems(selectedWeibos);
+				}
+			});
+
+			$("#youi_title").blur(function() {
+				var content = $(this).val();
+				console.log(content);
+				if(content == "") return;
+				//创建文章或更新标题
+				setTimeout(function() {
+					if(edityoujiUtil.article.articleid == 0) {
+						edityoujiUtil.createYouji(content, function(id) {
+							if(id != null && id > 0) {
+								console.log(id);
+								articleid = id;
+							}
+						});
+					} else {
+						edityoujiUtil.article.articlename = content;
+					}
+				}, 500);
+			});
+			//简介
+			$("#description").change(function() {
+				var textDescription = $(this).val();
+				setTimeout(function() {
+					console.log(textDescription);
+					edityoujiUtil.article.description = textDescription;
+				}, 200);
+			});
+			//图片删除图片事件绑定  mui-icon-trash
+			mui('.mui-content-padded').on('tap', '.del', function() {
+				var thisa = this;
+				mui.confirm("是否要删除图片？", "", ["是", "否"], function(event, index) {
+					if(event.index == 0) {
+						console.log("aaa");
+						var imgitem = $(thisa).parents('.post-img');
+						var nextTextarea = $(imgitem).next();
+						var preTextarea = $(imgitem).prev();
+						$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
+						$(imgitem).remove(); //删除图片和图片的上一个textarea
+						$(preTextarea).remove();
+					}
+				});
+			});
+			//标记当前文本框
+			mui('.mui-content-padded').on('tap', 'textarea', function() {
+				edityoujiUtil.article.currentNode = this;
+			});
+			//保存草稿
+			$("#youji_content textarea").change(function() {
+				setTimeout(function() {
+					if(edityoujiUtil.article.articleid > 0) {
+						edityoujiUtil.saveDraft(function(data) {
+							console.log("保存草稿成功！");
+						});
+					} else {
+						edityoujiUtil.createYouji("草稿" + (new Date().toLocaleString()), function(id) {
+							if(id != null && id > 0) {
+								console.log(id);
+							}
+						});
+					}
+				}, 2000);
+			});
+			//设置封面图
+			document.getElementById('setcoverimage').addEventListener('tap', function() {
+				//edityoujiUtil.setCoverimage();
+				mui("#middlePopover").popover("show");
+			});
+			$("#middlePopover a").bind("click", function() {
+				mui("#middlePopover").popover("hide");
+				var type = $(this).attr("datetype");
+				if(type == "1") {
+					edityoujiUtil.setCoverimage();
+				} else {
+					mui.toast("请稍后");
+				}
+			});
+			//发布
+			document.getElementById('publishyouji').addEventListener('tap', function() {
+				setTimeout(function() {
+					edityoujiUtil.publishYouji(function(err) {
+						if(err) {
+							alert(err);
+						} else {
+							plus.webview.getWebviewById("tab-webview-subpage-article.html").reload();
+							//关闭页面
+							var curr = plus.webview.currentWebview();
+							var youjiPage = plus.webview.getWebviewById('youji_new');
+							var selectPage = plus.webview.getWebviewById('youji_new_selectweibo');
+							plus.webview.close(youjiPage);
+							plus.webview.close(selectPage);
+							plus.webview.close(curr);
+							//mui.back();
+						}
+					});
+				}, 500);
+			});
+
+			//添加图片
+			document.getElementById('addimage').addEventListener('tap', function() {
+				edityoujiUtil.addImage(function(data) {
+					edityoujiUtil.showImage(data.Data);
+				});
+			});
+			//添加微博
+			document.getElementById('selectWeibo').addEventListener('tap', function() {
+				mui.openWindow({
+					url: "youji_new_selectweibo.html",
+					id: "youji_new_selectweibo",
+					createNew: true,
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					}
+				});
+			});
+			//预览
+			document.getElementById('preview_btn').addEventListener('tap', function() {
+				var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
+				mui.openWindow({
+					url: "youji_preview.html",
+					id: "youji_preview",
+					createNew: true,
+					show: {
+						aniShow: 'slide-in-right',
+						duration: 200
+					},
+					extras: {
+						contentStr: resultStr
+					},
+				});
+			});
+		</script>
+	</body>
+
+</html>
