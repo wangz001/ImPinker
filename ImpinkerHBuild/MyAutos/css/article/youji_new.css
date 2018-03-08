@@ -2,7 +2,12 @@
 	width: 100%;
 	background-color: #fff;
 }
-
+div.textareacontent{
+	border:1px;
+	border-style: solid;
+	border-color: #d8d8d0;
+	margin: 10px;
+}
 textarea {
 	border: 0;
 	background-color: transparent;
@@ -26,9 +31,7 @@ textarea {
 	position: absolute;
 }
 
-a.move-up,
-a.move-down,
-a.del {
+.post-img .del {
 	background-color: #AAAAAA;
 	background-size: 196px;
 	background-position: -4px -86px;
@@ -46,7 +49,11 @@ html,
 	color: #b5bebf;
 	font-size: 15px;
 	margin: 10px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
 
 .gisContent .cancel-gis,
 .cancel-datetime {

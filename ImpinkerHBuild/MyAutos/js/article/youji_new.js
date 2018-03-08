@@ -73,23 +73,57 @@ $("#description").change(function() {
 	}, 200);
 });
 //图片删除图片事件绑定  mui-icon-trash
-mui('.mui-content-padded').on('tap', '.del', function() {
+mui('.mui-content-padded').on('tap', '.post-img .del', function() {
+	blurTextarea();
 	var thisa = this;
 	mui.confirm("是否要删除图片？", "", ["是", "否"], function(event, index) {
 		if(event.index == 0) {
 			console.log("aaa");
 			var imgitem = $(thisa).parents('.post-img');
-			var nextTextarea = $(imgitem).next();
-			var preTextarea = $(imgitem).prev();
-			$(nextTextarea).val($(preTextarea).val() + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
-			$(imgitem).remove(); //删除图片和图片的上一个textarea
-			$(preTextarea).remove();
+			edityoujiUtil.delImage(imgitem)
+//			var nextTextarea = $(imgitem).next('textarea');
+//			var preTextarea = $(imgitem).prev('textarea');
+//			var preTextval=($(preTextarea).val()!=null ? $(preTextarea).val():"");
+//			$(preTextarea).val(preTextval + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
+//			$(imgitem).remove(); //删除图片和图片的下一个textarea
+//			$(nextTextarea).remove();
 		}
 	});
 });
+
+//让textarea失去焦点
+function blurTextarea(){
+	console.log("aa");
+	$("textarea").blur();
+}
+
+//时间及地理位置删除图片事件绑定  mui-icon-trash
+mui('.mui-content-padded').on('tap', '.datetimeContent .mui-icon-close', function() {
+	blurTextarea();
+	var thisa = this;
+	mui.confirm("是否要删除当前块？", "", ["是", "否"], function(event, index) {
+		if(event.index == 0) {
+			console.log("aaa");
+			var imgitem = $(thisa).parent('div');
+			$(imgitem).remove(); 
+		}
+	});
+});
+mui('.mui-content-padded').on('tap', '.gisContent .mui-icon-close', function() {
+	blurTextarea();
+	var thisa = this;
+	console.log("bbb");
+	mui.confirm("是否要删除当前块？", "", ["是", "否"], function(event, index) {
+		if(event.index == 0) {
+			var imgitem = $(thisa).parent('div');
+			$(imgitem).remove(); 
+		}
+	});
+});
+
 //标记当前文本框
 mui('.mui-content-padded').on('tap', 'textarea', function() {
-	edityoujiUtil.article.currentNode = this;
+	edityoujiUtil.article.currentNode = $(this).parent(".textareacontent");
 });
 //保存草稿
 $("#youji_content textarea").change(function() {

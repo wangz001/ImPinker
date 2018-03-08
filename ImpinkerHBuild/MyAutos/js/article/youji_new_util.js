@@ -12,16 +12,17 @@
 	}
 	var weiboimg_1200style = '?x-oss-process=style/weibo_1200';
 	var weiboimg_24style = '?x-oss-process=style/weibo_24_16';
-
 	var article_900 = '?x-oss-process=style/article_900';
 
-/*
- 在页面上显示微博。先显示地理位置、日期，然后显示图片，最后显示图片介绍
- * */
+	/*
+	 在页面上显示微博。先显示地理位置、日期，然后显示图片，最后显示图片介绍
+	 * */
 	owner.showWeiBoItems = function(items) {
 		for(var i = 0; i < items.length; i++) {
 			var item = items[i];
 			if(item.ContentValue.length > 0) {
+				owner.showDatetime(item.PublishTime);
+				owner.showGIs(item.LocationText);
 				var imgs = item.ContentValue.split(',');
 				var imgHtmlStr = "";
 				for(var j = 0; j < imgs.length; j++) {
@@ -33,33 +34,36 @@
 			}
 		}
 	}
-	//显示文字
+	//显示文字  
+	var textareaTemplate = $('script[id="textareacontent"]').html();
 	owner.showTextAreaStr = function(textStr) {
 		if(owner.article.currentNode == null) {
 			//初始化时，第一个文本框是默认
 			owner.article.currentNode = $(".mui-content-padded").children().last();
 		}
 		//图片之间只能有一个textarea。多了的内容合并
-		if($(owner.article.currentNode).is("textarea")) {
-			var inner = $(owner.article.currentNode).val();
+		var currentNodeClass = $(owner.article.currentNode).attr("class");
+		if(currentNodeClass.indexOf("textareacontent") != -1) {
+			var currentTextarea = $(owner.article.currentNode).find("textarea");
+			var inner = $(currentTextarea).val();
 			inner = inner.trim() == "" ? textStr : inner + "\r\n" + textStr;
-			$(owner.article.currentNode).val(inner);
-			autosize(owner.article.currentNode);
-			autosize.update(owner.article.currentNode);
+			$(currentTextarea).val(inner);
+			autosize(currentTextarea);
+			autosize.update(currentTextarea);
 		} else {
-			var textareaDom = document.createElement("textarea");
-			$(textareaDom).attr("name", "yjcontent");
-			$(textareaDom).val(textStr);
-			textareaDom.innerHTML = textStr;
-			//var textareaStr = '<textarea name="yjcontent" value="' + textStr + '">' + textStr + '</textarea>';
-			$(owner.article.currentNode).after(textareaDom);
+			var textareaHtml = textareaTemplate.temp({
+				"text": textStr
+			});
+			$(owner.article.currentNode).after(textareaHtml);
 			owner.article.currentNode = $(owner.article.currentNode).next();
+			var textareaDom = $(owner.article.currentNode).find("textarea");
 			autosize(textareaDom);
 			autosize.update(textareaDom);
 		}
 
 	}
 	//显示图片(可在文章中间插入图片)
+	var imgTemplate = $('script[id="postimg"]').html();
 	owner.showImage = function(imgurl) {
 		if(owner.article.currentNode == null) {
 			console.log("111");
@@ -74,7 +78,7 @@
 		var imgurl_900 = imgurl.substring(0, imgurl.indexOf('.jpg') + 4);
 		imgurl_900 = imgurl_900 + article_900;
 		//获取模板上的HTML
-		var imgTemplate = $('script[id="postimg"]').html();
+
 		var imgHtmlStr = imgTemplate.temp({
 			"src": imgurl_900
 		});
@@ -85,7 +89,55 @@
 
 	}
 
-	//根据标签 name属性，拼接出 content
+	//删除图片
+	owner.delImage = function(postImg) {
+		var imgitem = postImg;
+		var nextDiv = $(imgitem).next(".textareacontent");
+		var preDiv = $(imgitem).prev(".textareacontent");
+		var nextTextarea=$(nextDiv).find("textarea");
+		var preTextarea=$(preDiv).find("textarea");
+		var preTextval = ($(preTextarea).val() != null ? $(preTextarea).val() : "");
+		$(preTextarea).val(preTextval + "\r\n" + $(nextTextarea).val()); //两个文本框的内容合并
+		$(imgitem).remove(); //删除图片和图片的下一个textarea
+		$(nextDiv).remove();
+	}
+
+	//显示时间
+	var datetimeTemplate = $('script[id="datetimecontent"]').html();
+	var lastDatetimeStr;
+	owner.showDatetime = function(datetime) {
+		if(owner.article.currentNode == null) {
+			//初始化时，第一个文本框是默认
+			owner.article.currentNode = $(".mui-content-padded").children().last();
+		}
+		//当日期不同时，显示新日期
+		if(datetime != lastDatetimeStr) {
+			lastDatetimeStr = datetime;
+			var datetemeHtmlStr = datetimeTemplate.temp({
+				"PublishTime": datetime
+			});
+			$(owner.article.currentNode).after(datetemeHtmlStr);
+			owner.article.currentNode = $(owner.article.currentNode).next();
+		}
+	}
+
+	//显示地理位置
+	var gisTemplate = $('script[id="giscontent"]').html();
+	owner.showGIs = function(locationStr) {
+		if(owner.article.currentNode == null) {
+			//初始化时，第一个文本框是默认
+			owner.article.currentNode = $(".mui-content-padded").children().last();
+		}
+		if(locationStr != null && locationStr != "") {
+			var gisHtmlStr = gisTemplate.temp({
+				"LocationText": locationStr
+			});
+			$(owner.article.currentNode).after(gisHtmlStr);
+			owner.article.currentNode = $(owner.article.currentNode).next();
+		}
+	}
+
+	//根据标签 name属性，拼接出 游记content
 	owner.getcontenthtml = function(nodename) {
 		var resultStr = "";
 		var yjcontents = document.getElementsByName(nodename);
@@ -95,7 +147,19 @@
 				//console.log('是文本2:'+$(htmlnode).val());
 				resultStr += '<p>' + $(htmlnode).val() + '</p>';
 			} else {
-				resultStr += '<p>' + htmlnode.innerHTML + '</p>'
+				var divClass = $(htmlnode).attr("class");
+				if(divClass.indexOf("add-img") != -1) {
+					//图片
+					resultStr += '<p>' + htmlnode.innerHTML + '</p>'
+				}
+				if(divClass.indexOf("datetimeContent") != -1) {
+					//时间
+					resultStr += '<p><span>' + htmlnode.innerText + '</span></p>';
+				}
+				if(divClass.indexOf("gisContent") != -1) {
+					//gis 位置
+					resultStr += '<p><span class="mui-icon mui-icon-location"></span><span>' + htmlnode.innerText + '</span></p>'
+				}
 			}
 		}
 		return resultStr;
