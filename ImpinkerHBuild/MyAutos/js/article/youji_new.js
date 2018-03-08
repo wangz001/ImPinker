@@ -146,9 +146,10 @@ document.getElementById('setcoverimage').addEventListener('tap', function() {
 	//edityoujiUtil.setCoverimage();
 	mui("#middlePopover").popover("show");
 });
-$("#middlePopover a").bind("click", function() {
+mui('#middlePopover').on('tap', 'span', function() {
 	mui("#middlePopover").popover("hide");
 	var type = $(this).attr("datetype");
+	console.log(type);
 	if(type == "1") {
 		edityoujiUtil.setCoverimage();
 	} else {

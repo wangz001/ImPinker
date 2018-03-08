@@ -91,7 +91,7 @@ function pullupRefresh() {
 				if(lastTime != dateStr) {
 					lastTime = dateStr;
 					var obj = {
-						datetime: dateStr
+						"datetime": dateStr
 					};
 					var htmlStr = datetemeTemplate.temp(obj);
 					$("#articlelist").append(htmlStr);

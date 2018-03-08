@@ -9,38 +9,7 @@
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/weibo.css" />
 		<link rel="stylesheet" href="../../css/article/article_item.css" />
-		<style type="text/css">
-			#pullrefresh {
-				/*margin-top: 50px;*/
-			}
-			
-			.mui-scroll .mui-card {
-				margin: 0 0 10px 0;
-			}
-			
-			.mui-card-content-inner {
-				position: relative;
-				padding: 5px 5px 5px 5px;
-			}
-			
-			.mui-card-content-inner p {
-				margin-bottom: 5px;
-			}
-			
-			.mui-card-content-inner .articlename {
-				font-size: 17px;
-				color: #333;
-			}
-			
-			.mui-scroll .date_year {
-				background-color: #FFFFFF;
-			}
-			
-			.mui-scroll .date_year p {
-				font-size: 20px;
-				margin-bottom: 10px;
-			}
-		</style>
+		<link rel="stylesheet" href="../../css/article/youji_my.css" />
 	</head>
 
 	<body>
@@ -49,7 +18,7 @@
 			<h1 id="title" class="mui-title">我的游记</h1>
 		</header>
 		<div class="mui-content">
-			<div id="pullrefresh" class="mui-scroll-wrapper ">
+			<div id="pullrefresh" class="mui-scroll-wrapper" style="top: 45px; bottom: 0px;">
 				<div class="mui-scroll">
 					<ul class="mui-table-view" id="articlelist">
 						<!--<li class="article_card date_year">
@@ -86,6 +55,9 @@
 									<img src="../../images/20171223221008.jpg" />
 								</div>
 							</a>
+						</li>
+						<li class="article_card date_year">
+							<p>2017年8月</p>
 						</li>-->
 					</ul>
 				</div>
@@ -95,11 +67,11 @@
 		<script type="text/javascript" src="../../js/app.js"></script>
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/commonUtil.js"></script>
-		<script type="text/javascript" src="../../js/commenConfig.js" ></script>
+		<script type="text/javascript" src="../../js/commenConfig.js"></script>
 		<script type="text/javascript" src="../../js/article/youji_my.js"></script>
 		<script type="text/javascript" src="../../css/iconfont/iconfont.js"></script>
 		<script type="text/template" id='articlelistitem'>
-			<li class="article_card  mui-table-view-cell"  id="article_$Id$">
+			<li class="article_card  mui-table-view-cell" id="article_$Id$">
 				<a>
 					<div class="left_div">
 						<div class="article_card_href title" articleid="$Id$" articlename="$ArticleName$">

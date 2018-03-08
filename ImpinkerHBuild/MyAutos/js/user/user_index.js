@@ -60,7 +60,7 @@ var currentParamEntity = {
 		pagesize: 10
 	},
 	weibo: {
-		url: commonConfig.apiRoot+'/api/api/weibo/GetUsersListByPage',
+		url: commonConfig.apiRoot+'/api/weibo/GetUsersListByPage',
 		pageindex: 1,
 		pagesize: 10
 	},

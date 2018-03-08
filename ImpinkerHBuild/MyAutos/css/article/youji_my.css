@@ -1,0 +1,39 @@
+.mui-scroll .mui-card {
+	margin: 0 0 10px 0;
+}
+
+.mui-card-content-inner {
+	position: relative;
+	padding: 5px 5px 5px 5px;
+}
+
+.mui-card-content-inner p {
+	margin-bottom: 5px;
+}
+
+.mui-card-content-inner .articlename {
+	font-size: 17px;
+	color: #333;
+}
+
+.mui-scroll .date_year {
+	background-color: #FFFFFF;
+}
+
+.mui-scroll .date_year:after {
+	right: 15px;
+	height: 1px;
+	background-color: #ECEFF4;
+	position: absolute;
+	bottom: 0;
+	left: 15px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+}
+
+.mui-scroll .date_year p {
+	font-size: 20px;
+	margin-bottom: 10px;
+	float: left;
+}
