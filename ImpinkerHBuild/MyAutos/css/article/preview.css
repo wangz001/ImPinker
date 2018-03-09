@@ -37,30 +37,32 @@ body {
 	font-size: 15px;
 	color: #bdc6d2;
 }
-.article-area .article-createtime .mui-icon{
+
+.article-area .article-createtime .mui-icon {
 	margin: 10px 0;
 	font-size: 15px;
 	margin-left: 20px;
-    line-height: 1.8rem;
-    height: 1.8rem;
+	line-height: 1.8rem;
+	height: 1.8rem;
 }
 
 .article-area .article-createtime .svg-icon {
-    width: 16px;
-    height: 16px;
-    overflow: hidden;
-    vertical-align: -0.15em;
-    fill: currentColor;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	vertical-align: -0.15em;
+	fill: currentColor;
 }
-.article-area .article-createtime .svg-icon span{
-    font-size: 12px;
-    margin-left: 5px;
-    margin-bottom: 3px;
+
+.article-area .article-createtime .svg-icon span {
+	font-size: 12px;
+	margin-left: 5px;
+	margin-bottom: 3px;
 }
 
 .article-user {
 	width: 100%;
-	margin:0 0 10px 0;
+	margin: 0 0 10px 0;
 }
 
 .article-user img {
@@ -113,25 +115,41 @@ body {
 	font-size: 17px;
 	color: #454F5B;
 }
+/*时间及地理位置样式*/
+#articlecontent p.date-time {
+	margin-left: 5px;
+	font-size: 10px;
+	margin-bottom: 0px;
+	color: #b8b7be;
+}
 
-.before_comment{
+#articlecontent p.gis-location {
+	font-size: 10px;
+	margin-bottom: 0px;
+	color: #b8b7be;
+}
+
+#articlecontent .gis-location .mui-icon {
+	font-size: 15px;
+}
+/*时间及地理位置样式end*/
+.before_comment {
 	background-color: gainsboro;
 	height: 10px;
 	width: 100%;
 }
 
-.comment-content{
+.comment-content {
 	padding: 12px 9px;
 	margin: 0px;
 }
 
-
-.comment-content .pinlun_p{
+.comment-content .pinlun_p {
 	font-size: 16px;
 	margin-top: 10px;
 }
 
-#comment{
+#comment {
 	/*background-color:#fff;*/
 	min-height: 50px;
 	padding: 0 5px;
@@ -155,11 +173,11 @@ body {
 }
 
 .mui-bar-footer .svg-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+	width: 20px;
+	height: 20px;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
 }
 
 #composeText {

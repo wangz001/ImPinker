@@ -142,12 +142,11 @@ $("#youji_content textarea").change(function() {
 	}, 2000);
 });
 //设置封面图
-document.getElementById('setcoverimage').addEventListener('tap', function() {
-	//edityoujiUtil.setCoverimage();
-	mui("#middlePopover").popover("show");
-});
+//document.getElementById('setcoverimage').addEventListener('tap', function() {
+//	//edityoujiUtil.setCoverimage();
+//	mui("#middlePopover").popover("toggle");
+//});
 mui('#middlePopover').on('tap', 'span', function() {
-	mui("#middlePopover").popover("hide");
 	var type = $(this).attr("datetype");
 	console.log(type);
 	if(type == "1") {
@@ -155,6 +154,7 @@ mui('#middlePopover').on('tap', 'span', function() {
 	} else {
 		mui.toast("请稍后");
 	}
+	mui("#middlePopover").popover("hide");
 });
 //发布
 document.getElementById('publishyouji').addEventListener('tap', function() {

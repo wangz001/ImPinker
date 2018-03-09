@@ -145,7 +145,12 @@
 			var htmlnode = yjcontents[i];
 			if($(htmlnode).is("textarea")) {
 				//console.log('是文本2:'+$(htmlnode).val());
-				resultStr += '<p>' + $(htmlnode).val() + '</p>';
+				//替换空格和换行符
+				var strContent=$(htmlnode).val();
+				strContent = strContent.replace(/\r\n/g, '<br/>'); //IE9、FF、chrome  
+        		strContent = strContent.replace(/\n/g, '<br/>'); //IE7-8
+        		//strContent=strContent.replace(/\s/g,' ');
+				resultStr += '<p>' + strContent + '</p>';
 			} else {
 				var divClass = $(htmlnode).attr("class");
 				if(divClass.indexOf("add-img") != -1) {
@@ -154,11 +159,11 @@
 				}
 				if(divClass.indexOf("datetimeContent") != -1) {
 					//时间
-					resultStr += '<p><span>' + htmlnode.innerText + '</span></p>';
+					resultStr += '<p class="date-time"><span>' + htmlnode.innerText + '</span></p>';
 				}
 				if(divClass.indexOf("gisContent") != -1) {
 					//gis 位置
-					resultStr += '<p><span class="mui-icon mui-icon-location"></span><span>' + htmlnode.innerText + '</span></p>'
+					resultStr += '<p class="gis-location"><span class="mui-icon mui-icon-location"></span><span>' + htmlnode.innerText + '</span></p>'
 				}
 			}
 		}

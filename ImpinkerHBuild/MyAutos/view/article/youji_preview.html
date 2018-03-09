@@ -8,9 +8,24 @@
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link href="../../css/icons-extra.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/article/preview.css" />
 		<style>
 			img {
 				width: 100%;
+			}
+			p.date-time{
+				margin-left: 5px;
+				font-size: 10px;
+				margin-bottom: 0px;
+				color: #b8b7be;
+			}
+			p.gis-location{
+				font-size: 10px;
+				margin-bottom: 0px;
+				color: #b8b7be;
+			}
+			.gis-location .mui-icon{
+				font-size: 15px;
 			}
 		</style>
 	</head>
@@ -25,18 +40,46 @@
 			<div class="mui-content-padded">
 				<h3>土耳其游记</h3>
 			</div>
+			<div class="article-area">
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977955035034.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+				<p>永定河越野基地，不过现在开始收费了</p>
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977994011140.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+				<p>永定河越野基地，不过现在开始收费了</p>
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447985580200876.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+				<p>红叶</p>
+				<p class='date-time'><span>2018-02-03</span></p>
+				<p class="gis-location"><span class="mui-icon mui-icon-location"></span><span>越野基地，不过现在开始收</span></p>
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977955035034.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+				<p>永定河越野基地，不过现在开始收费了</p>
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447977994011140.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+				<p>永定河越野基地，不过现在开始收费了</p>
+				<p>
+					<img src="http://img.myautos.cn/weiboimage/20171028/1_636447985580200876.jpg?x-oss-process=style/article_900" type="upload" data-preview-src="" data-preview-group="1">
+				</p>
+			</div>
+			</div>
 		</div>
 
-		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/jquery.js"></script>
-		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
-		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
-		<script type="application/javascript">
+		<script src="../../js/mui.min.js "></script>
+		<script type="text/javascript " src="../../js/jquery.js "></script>
+		<script type="text/javascript " src="../../js/mui.zoom.js "></script>
+		<script type="text/javascript " src="../../js/mui.previewimage.js "></script>
+		<script type="application/javascript ">
 			mui.init();
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				var contentStr = self.contentStr;
-				$(".mui-content-padded").append(contentStr);
+				$(".mui-content-padded ").append(contentStr);
 			});
 			mui.previewImage();
 		</script>
