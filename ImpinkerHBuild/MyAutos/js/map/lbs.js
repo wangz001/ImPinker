@@ -37,7 +37,7 @@ var solrQueryData = {
 }
 
 function getweibo(weiboid) {
-	var url = 'http://api.myautos.cn/api/weibo/GetWeiBoById';
+	var url = commonConfig.apiRoot+'/api/weibo/GetWeiBoById';
 	var data = {
 		weiboid: weiboid,
 	};
@@ -58,7 +58,7 @@ function getweibo(weiboid) {
 }
 
 function pullupRefresh() {
-	var weiboApiPath = "http://api.myautos.cn/api/Search/GetWeiboByGeo";
+	var weiboApiPath = commonConfig.apiRoot+'/api/Search/GetWeiboByGeo';
 	var dataPara = solrQueryData;
 	commonUtil.sendRequestGet(weiboApiPath, dataPara, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null && data.Data.WeiboList.length > 0) {

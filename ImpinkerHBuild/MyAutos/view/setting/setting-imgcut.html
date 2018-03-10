@@ -37,6 +37,7 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/app.js" ></script>
+		<script type="text/javascript" src="../../js/commenConfig.js" ></script>
 		<script type="text/javascript" src="../../js/cropper/cropper.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init({});
@@ -87,7 +88,7 @@
 				);
 			}
 			var userstate = app.getState();
-			var url = "http://api.myautos.cn/api/Upload/UserHeadimgUpload";
+			var url = commonConfig.apiRoot + '/api/Upload/UserHeadimgUpload";
 			// 创建上传任务
 			function uploadImage(file) {
 				plus.nativeUI.showWaiting("正在上传...");
@@ -213,5 +214,4 @@
 			}
 		</script>
 	</body>
-
 </html>

@@ -189,7 +189,7 @@
 						return mui.toast('文件超大,请重新选择~');
 					}
 					if(owner.article.articleid > 0 && zip.target.length > 0) {
-						var url = 'http://api.myautos.cn/api/article/UploadArticleImage';
+						var url = commonConfig.apiRoot+'/api/article/UploadArticleImage';
 						var files = [];
 						files.push({
 							name: "articleimages",
@@ -222,7 +222,7 @@
 
 	owner.createYouji = function(titleStr, callback) {
 		callback = callback || $.noop;
-		var url = 'http://api.myautos.cn/api/article/NewArticle';
+		var url = commonConfig.apiRoot+'/api/article/NewArticle';
 		var data = {
 			ArticleName: titleStr
 		};
@@ -242,7 +242,7 @@
 	owner.updateTitle = function(titleStr, callback) {
 		console.log(owner.article.articleid);
 		callback = callback || $.noop;
-		var url = 'http://api.myautos.cn/api/article/UpdateArticleTitle';
+		var url = commonConfig.apiRoot+'/api/article/UpdateArticleTitle';
 		var data = {
 			Id: owner.article.articleid,
 			ArticleName: titleStr
@@ -267,7 +267,7 @@
 		}
 		callback = callback || $.noop;
 		var resultStr = edityoujiUtil.getcontenthtml('yjcontent');
-		var url = 'http://api.myautos.cn/api/article/SaveDraft';
+		var url = commonConfig.apiRoot+'/api/article/SaveDraft';
 		var data = {
 			Id: owner.article.articleid,
 			Content: resultStr
@@ -294,7 +294,7 @@
 					return mui.toast('文件超大,请重新选择~');
 				}
 				if(owner.article.articleid > 0 && zip.target.length > 0) {
-					var url = 'http://api.myautos.cn/api/article/SetCoverImage';
+					var url = commonConfig.apiRoot+'/api/article/SetCoverImage';
 					var files = [];
 					files.push({
 						name: "coverimageimages",
@@ -339,7 +339,7 @@
 			return callback('resultStr不能为kong啊');
 		}
 		callback = callback || $.noop;
-		var url = 'http://api.myautos.cn/api/article/PublishArticle';
+		var url = commonConfig.apiRoot+'/api/article/PublishArticle';
 		var data = {
 			Id: owner.article.articleid,
 			ArticleName: owner.article.articlename,
@@ -359,7 +359,7 @@
 	//获取文章内容
 	owner.getandShowContent = function(articleid, callback) {
 		callback = callback || $.noop;
-		var url = 'http://api.myautos.cn/api/article/GetArticleWithContent';
+		var url = commonConfig.apiRoot+'/api/article/GetArticleWithContent';
 		var data = {
 			articleid: articleid,
 		};

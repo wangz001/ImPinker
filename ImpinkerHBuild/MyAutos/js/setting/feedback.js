@@ -16,7 +16,7 @@
 		imageList: document.getElementById('image-list'),
 		submitBtn: document.getElementById('submit')
 	};
-	var url = 'http://api.myautos.cn/api/setting/AddFeedback';
+	var url = commonConfig.apiRoot+'/api/setting/AddFeedback';
 	feedback.files = [];
 	feedback.uploader = null;
 	feedback.deviceInfo = null;

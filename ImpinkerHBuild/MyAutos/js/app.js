@@ -14,7 +14,7 @@
 			return callback('手机号码不正确');
 		}
 		callback = callback || $.noop;
-		mui.ajax('http://api.myautos.cn/api/account/SendCheckNum', {
+		mui.ajax(commonConfig.apiRoot+'/api/account/SendCheckNum', {
 			data: {
 				phonenum: phonenum,
 				opreatetype: 1
@@ -60,7 +60,7 @@
 			});
 		}
 		//登录验证
-		mui.ajax('http://api.myautos.cn/api/Account/Login', {
+		mui.ajax(commonConfig.apiRoot+'/api/Account/Login', {
 			data: {
 				username: loginInfo.account,
 				password: loginInfo.password
@@ -111,7 +111,7 @@
 			return callback('类型不对');
 		}
 		//登录验证
-		mui.ajax('http://api.myautos.cn/api/Account/LoginOAoth', {
+		mui.ajax(commonConfig.apiRoot+'/api/Account/LoginOAoth', {
 			data: {
 				OpenId: loginInfo.OpenId,
 				OauthType: loginInfo.OauthType,
@@ -169,7 +169,7 @@
 			});
 		}
 	}
-
+	
 	owner.createState = function(loginInfo, data, callback) {
 		var userData=data.Data;
 		var state = owner.getState();
@@ -207,7 +207,7 @@
 		if(regInfo.checknum.length != 6) {
 			return callback('请输入正确的验证码');
 		}
-		mui.ajax('http://api.myautos.cn/api/account/Regist', {
+		mui.ajax(commonConfig.apiRoot+'/api/account/Regist', {
 			data: {
 				Username: regInfo.account,
 				PhoneNum: regInfo.account,

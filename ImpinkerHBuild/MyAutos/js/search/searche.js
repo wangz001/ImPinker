@@ -24,7 +24,7 @@ mui.plusReady(function() {
 	});
 });
 
-var url = 'http://api.myautos.cn/api/Search/SearchByKeyword';
+var url = commonConfig.apiRoot+'/api/Search/SearchByKeyword';
 var param = {
 	userid: 1,
 	pageNum: 1,

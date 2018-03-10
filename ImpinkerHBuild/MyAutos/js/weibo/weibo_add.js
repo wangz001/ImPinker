@@ -26,7 +26,7 @@ mui.init({
 		submitBtn: document.getElementById('submit'),
 		locationBtn: document.getElementById('mySwitch')
 	};
-	var url = 'http://api.myautos.cn/api/weibo/newweibo';
+	var url = commonConfig.apiRoot+'/api/weibo/newweibo';
 	weibo.files = [];
 	weibo.uploader = null;
 	weibo.deviceInfo = null;

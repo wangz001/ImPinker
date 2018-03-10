@@ -130,7 +130,7 @@ var dateLastId = 0;
  */
 function getFirstPage(callback) {
 	callback = callback || $.noop;
-	var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoList';
+	var url = commonConfig.apiRoot+'/api/weibo/GetMyWeiBoList';
 	var datapara = {
 		pageindex: 1,
 		pageSize: pageSize
@@ -157,7 +157,7 @@ function getFirstPage(callback) {
 function pulldownRefresh(callback) {
 	callback = callback || $.noop;
 	//  //根据时间向前或向后取数据
-	var url = 'http://api.myautos.cn/api/weibo/GetListFromIdForPage';
+	var url = commonConfig.apiRoot+'/api/weibo/GetListFromIdForPage';
 	var datapara = {
 		startId: dateFirstId,
 		pageSize: pageSize,
@@ -185,7 +185,7 @@ function pulldownRefresh(callback) {
  */
 function pullupRefresh(callback) {
 	callback = callback || $.noop;
-	var url = 'http://api.myautos.cn/api/weibo/GetListFromIdForPage';
+	var url = commonConfig.apiRoot+'/api/weibo/GetListFromIdForPage';
 	var datapara = {
 		startId: dateLastId,
 		pageSize: pageSize,
@@ -299,7 +299,7 @@ function getListByRange(date1, date2) {
 	dateFirstId=0;
 	dateLastId=0;
 	plus.nativeUI.showWaiting('正在获取数据。。。');
-	var url = 'http://api.myautos.cn/api/weibo/GetMyWeiBoByDateRange';
+	var url = commonConfig.apiRoot+'/api/weibo/GetMyWeiBoByDateRange';
 	var datapara = {
 		dateStart: date1,
 		dateEnd: date2
