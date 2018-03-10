@@ -27,7 +27,7 @@ function getWeibo(weiboid) {
 			if(imgs.length > 1) {
 				//多图
 				for(var j = 0; j < imgs.length; j++) {
-					imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
+					imgHtmlStr += '<a href="#"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + weibo.Id + '"></a>';
 				}
 			} else {
 				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + weibo.Id + '"></a>';

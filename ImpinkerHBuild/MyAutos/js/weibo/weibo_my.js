@@ -11,10 +11,6 @@ mui.init({
 
 });
 
-//添加列表项的点击事件  
-mui('.mui-content').on('tap', 'a', function(e) {
-	var id = this.getAttribute('id');
-});
 mui.previewImage();
 var pageNum = 1;
 var pageSize = 30;
@@ -102,6 +98,22 @@ mui('.mui-scroll').on('tap', '.delete_weibo', function() {
 //评论  
 mui('.mui-scroll').on('tap', '.icon-compose', function() {
 	var weiboid = this.getAttribute("weiboid");
+	mui.openWindow({
+		url: "../weibo/weibo_preview.html",
+		id: "weibo_preview",
+		extras: {
+			weiboid: weiboid
+		},
+		show: {
+			aniShow: 'slide-in-right',
+			duration: 200
+		}
+	});
+});
+
+//跳转到微博
+mui('.mui-table-view').on('tap', '.user_info,.user_detail .text', function() {
+	var weiboid = $(this).attr("weiboid");
 	mui.openWindow({
 		url: "../weibo/weibo_preview.html",
 		id: "weibo_preview",

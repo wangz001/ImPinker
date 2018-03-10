@@ -46,14 +46,17 @@ html,
 
 .gisContent,
 .datetimeContent {
+	padding-left: 10px;
 	color: #b5bebf;
 	font-size: 15px;
-	margin: 10px;
+	margin: 0 10px;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
+.gisContent .mui-icon{
+	margin-left: -12px;
+}
 
 .gisContent .cancel-gis,
 .cancel-datetime {
