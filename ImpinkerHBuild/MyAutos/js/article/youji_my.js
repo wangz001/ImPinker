@@ -37,6 +37,7 @@ mui('.mui-scroll').on('tap', '.article_card_href', function(e) {
 		waiting: {
 			autoShow: false
 		},
+		createNew:true,
 		extras: {
 			articleid: articleid, //扩展参数
 			articlename: ''
