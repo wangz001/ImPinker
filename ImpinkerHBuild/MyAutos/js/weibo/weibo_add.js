@@ -1,3 +1,16 @@
+mui.init({
+	swipeBack: true //启用右滑关闭功能
+});
+//			document.getElementById('youjidraft').addEventListener('tap', function() {
+//				mui.openWindow({
+//					url: "../article/youji_mydraft.html",
+//					id: "youji_mydraft",
+//					show: {
+//						aniShow: 'slide-in-right',
+//						duration: 200
+//					}
+//				});
+//			});
 /*!
  发微博
  */
@@ -236,4 +249,9 @@
 
 	};
 
+	//绑定qq表情
+	$('.emotion').qqFace({
+		assign: 'description',
+		path: '../../js/qqFace/arclist/' //表情存放的路径
+	});
 })();
