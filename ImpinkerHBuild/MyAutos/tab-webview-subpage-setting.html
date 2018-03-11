@@ -15,7 +15,9 @@
 	<body>
 		<div class="mui-content">
 			<div class="header">
-				<div class="bg1"></div>
+				<div class="bg">
+					<div class="bg1"></div>
+				</div>
 				<div class="bg2"></div>
 				<div class="head_pic">
 					<img id="head-img" class="mui-action-preview" src="images/cbd.jpg" />
@@ -62,9 +64,9 @@
 						<a id="notify" href="javascript:;">
 							<span class="mui-icon">
 								<span id="notifycount" class="mui-badge"></span>
-								<svg class="svg-icon" aria-hidden="true">
-									<use xlink:href="#icon-wodexiaoxi"></use>
-								</svg>
+							<svg class="svg-icon" aria-hidden="true">
+								<use xlink:href="#icon-wodexiaoxi"></use>
+							</svg>
 							</span>
 							<span class="btn-text">消息</span>
 						</a>
@@ -118,9 +120,25 @@
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/commonUtil.js"></script>
-	<script type="text/javascript" src="js/commenConfig.js" ></script>
+	<script type="text/javascript" src="js/commenConfig.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
 	<script type="text/javascript" src="js/setting/setting.js"></script>
+	<script>
+		//获得手机屏幕宽度
+//		$(document).ready(function() {　
+//			var bgWidth = $(window).width(); //浏览器当前窗口可视区域宽度
+//			alert(bgWidth);
+//			$(".bg1").attr({
+//				border-style: solid,
+//				border-top-width: 60 px,
+//				border-bottom-width: 65 px,
+//				border-left-width: 375px,
+//				border-color: transparent transparent# fff transparent,
+//				width:0px,
+//				height: 170 px
+//			})　　
+//		})
+	</script>
 
 </html>
