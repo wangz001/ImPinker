@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -209,6 +210,72 @@
   <ItemGroup>
     <Content Include="config\HotTagConfig.xml" />
     <Content Include="Content\about.css" />
+    <Content Include="Content\homeindeximg\1.png" />
+    <Content Include="Content\homeindeximg\2.png" />
+    <Content Include="Content\homeindeximg\3.png" />
+    <Content Include="Content\homeindeximg\4屏.png" />
+    <Content Include="Content\homeindeximg\6.png" />
+    <Content Include="Content\homeindeximg\and.png" />
+    <Content Include="Content\homeindeximg\app.png" />
+    <Content Include="Content\homeindeximg\arrow.png" />
+    <Content Include="Content\homeindeximg\code.png" />
+    <Content Include="Content\homeindeximg\fifth_bg.png" />
+    <Content Include="Content\homeindeximg\first_bg.png" />
+    <Content Include="Content\homeindeximg\four_bg.png" />
+    <Content Include="Content\homeindeximg\know.png" />
+    <Content Include="Content\homeindeximg\logo.png" />
+    <Content Include="Content\homeindeximg\mobile\arrow-up.e4bea9d.png" />
+    <Content Include="Content\homeindeximg\mobile\download-android%402x.82df40e.png" />
+    <Content Include="Content\homeindeximg\mobile\download-android.24f81c5.png" />
+    <Content Include="Content\homeindeximg\mobile\download-apple.286089b.png" />
+    <Content Include="Content\homeindeximg\mobile\download-ios%402x.09fdbd3.png" />
+    <Content Include="Content\homeindeximg\mobile\fifth-bg.97c111d.png" />
+    <Content Include="Content\homeindeximg\mobile\first-bg.b61f989.jpg" />
+    <Content Include="Content\homeindeximg\mobile\footer-logo.16dcc72.png" />
+    <Content Include="Content\homeindeximg\mobile\forth-bg.6bc5efd.png" />
+    <Content Include="Content\homeindeximg\mobile\logo.dae1dea.png" />
+    <Content Include="Content\homeindeximg\mobile\mobile-notification.8a87bfb.png" />
+    <Content Include="Content\homeindeximg\mobile\notification-desc.ae9b019.png" />
+    <Content Include="Content\homeindeximg\mobile\notification.19ac466.png" />
+    <Content Include="Content\homeindeximg\mobile\o_1c05e6gh5d5bvs3p0lfef7617.png" />
+    <Content Include="Content\homeindeximg\mobile\police-badge.9de99b6.png" />
+    <Content Include="Content\homeindeximg\mobile\qr-code.688c7d6.png" />
+    <Content Include="Content\homeindeximg\mobile\second-bg.686af71.png" />
+    <Content Include="Content\homeindeximg\mobile\section-slogan-bg.bc1934d.png" />
+    <Content Include="Content\homeindeximg\mobile\slogan.e4d6ded.png" />
+    <Content Include="Content\homeindeximg\mobile\third-mask.8a73946.png" />
+    <Content Include="Content\homeindeximg\mobile\third-mobile.bc11048.png" />
+    <Content Include="Content\homeindeximg\mobile\tip.224d1f8.png" />
+    <Content Include="Content\homeindeximg\mobile\tip.3e36475.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-A.0606fe7.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-B.79306d8.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-C.ffc5e27.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-D.5f9f6d0.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-desc.ab9d077.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-E.b475795.png" />
+    <Content Include="Content\homeindeximg\mobile\topic-list-item-A.b40d62d.jpeg" />
+    <Content Include="Content\homeindeximg\mobile\topic-list-item-B.0839091.jpeg" />
+    <Content Include="Content\homeindeximg\mobile\topic-list-item-C.927be67.jpeg" />
+    <Content Include="Content\homeindeximg\mobile\topic-list-item-D.cc607a2.jpeg" />
+    <Content Include="Content\homeindeximg\mobile\topic-list-item-E.f38778b.jpeg" />
+    <Content Include="Content\homeindeximg\mobile\topic-post.7fdc85d.png" />
+    <Content Include="Content\homeindeximg\mobile\user-post-bg.9364d99.png" />
+    <Content Include="Content\homeindeximg\mobile\user-post-desc.dfea8db.png" />
+    <Content Include="Content\homeindeximg\mobile\user-post-mobile.d50ac5b.png" />
+    <Content Include="Content\homeindeximg\mobile\video%402x.87690ef.png" />
+    <Content Include="Content\homeindeximg\mobile\video-bg.60012e5.png" />
+    <Content Include="Content\homeindeximg\mobile\video-play.dcc0ede.png" />
+    <Content Include="Content\homeindeximg\three_bg.png" />
+    <Content Include="Content\homeindeximg\topic-a.0606fe7.png" />
+    <Content Include="Content\homeindeximg\topic-b.79306d8.png" />
+    <Content Include="Content\homeindeximg\topic-c.ffc5e27.png" />
+    <Content Include="Content\homeindeximg\two_bg.png" />
+    <Content Include="Content\homeindeximg\weibo.png" />
+    <Content Include="Content\homeindeximg\wexin.png" />
+    <Content Include="Content\homeindeximg\xiaologo.png" />
+    <Content Include="Content\Home\index.css" />
+    <Content Include="Content\Home\indexmobile.css" />
+    <Content Include="Content\image\120x120.png" />
     <Content Include="Content\image\arrow_next.png" />
     <Content Include="Content\image\arrow_pre.png" />
     <Content Include="Content\image\icon-collect-ok.png" />
@@ -225,9 +292,11 @@
     <Content Include="Content\image\logo_3.png" />
     <Content Include="Content\image\search_icon.png" />
     <Content Include="Content\image\search_icon_blue.png" />
+    <Content Include="Content\jquery.fullPage.css" />
     <Content Include="Content\pubthread.css" />
     <Content Include="Scripts\ArticleVote\articleCommentVote.js" />
     <Content Include="Scripts\ArticleVote\articleCollect.js" />
+    <Content Include="Scripts\jquery.fullPage.js" />
     <Content Include="Scripts\voteAnimation.js" />
     <Content Include="Scripts\Swiper\css\myswiper.css" />
     <Content Include="Scripts\Swiper\css\swiper.css" />
@@ -616,6 +685,8 @@
     <Content Include="Views\ArticleCollection\Index.cshtml" />
     <Content Include="Views\Account\FindPassWord.cshtml" />
     <Content Include="Views\Account\FindPassWord_NewPass.cshtml" />
+    <Content Include="Views\Home\ArticleList.cshtml" />
+    <Content Include="Views\Home\IndexMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

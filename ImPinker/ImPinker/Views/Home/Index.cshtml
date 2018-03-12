@@ -1,55 +1,142 @@
-﻿@using ImModel.ViewModel
-@{
-    ViewBag.Title = "车酷-MyAutos";
-    <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet" />
-    <link href="~/Scripts/Swiper/css/myswiper.css" rel="stylesheet" />
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>PC端封面</title>
+    <link href="~/Content/jquery.fullPage.css" rel="stylesheet" />
+    <link href="~/Content/Home/index.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="~/Content/image/120x120.png" />
+    <script src="~/Scripts/jQuery-1.12.3.min.js"></script>
+    <script src="~/Scripts/jquery.fullPage.js"></script>
+</head>
+<body>
+    <div id="fullpage">
+        <div class="section section_one">
+            <nav>
+                <div class="nav_left">
+                    <img src="~/Content/homeindeximg/xiaologo.png" class="logo"><span class="name">途迹</span>
+                </div>
+                <div class="nav_right">
+                    <span class="version">网页版</span>
+                    <span class="join">加入途迹</span>
+                </div>
+            </nav>
+            <div class="main">
+                <div class="left">
+                    <div class="top">
+                        <img src="~/Content/homeindeximg/6.png">
+                    </div>
+                    <div class="bottom">
+                        <img src="~/Content/homeindeximg/3.png">
+                    </div>
 
-}
-@{
-    Html.RenderAction("SlideSwiper");
-}
-@Html.Partial("_TabListPartial")
-<div class="topic-list"><p>今日新增 @ViewBag.DailyAdded 篇文章。</p></div>
-<ul class="topic-list" id="articleConten">
-    @{
-        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
-    }
-</ul>
-<div class="clear"></div>
-<div class="topic-list">
-    <a href="javascript:;" id="load-more-topic">加载更多</a>
-</div>
+                </div>
+                <div class="right">
+                    <img src="~/Content/homeindeximg/topic-a.0606fe7.png">
+                </div>
+            </div>
+            <div class="section_one_footer">
+                <div class="code">
+                    <img src="~/Content/homeindeximg/code.png">
+                </div>
+                <div class="app">
+                    <img src="~/Content/homeindeximg/app.png">
+                </div>
+                <div class="and">
+                    <img src="~/Content/homeindeximg/and.png">
+                </div>
+                <div class="arrow">
+                    <img src="~/Content/homeindeximg/arrow.png">
+                </div>
+            </div>
+        </div>
 
-@section scripts
-{
-    <script src="~/Scripts/Swiper/js/swiper.jquery.js"></script>
-    <script type="text/javascript">
-        var pageCount = @ViewBag.pageCount;
-        var pageIndex = 1;
-        //tab导航选中状态
-        $(document).ready(function() {
-            $("#tabList a").bind("click", function() {
-                $("#tabList a").removeClass("b_twolcur");
-                $(this).addClass("b_twolcur");
-            });
-        });
-        //首页轮播图初始化
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            paginationClickable: true,
-            spaceBetween: 30,
-            centeredSlides: true,
-            mousewheelControl: true,
-            loop: true,
-            preventClicks : false,
-            autoplay: 4000,
-            autoplayDisableOnInteraction: false,
-            slidesPerView : 3,
-            slidesPerGroup : 3,
-        });
-    </script>
-    <script src="~/Scripts/Home/index.js"></script>
-    <script src="~/Scripts/ArticleVote/articleVote.js"></script>
-}
+        <div class="section section_two">
+            <div class="mobile_show">
+                <div class="mobile_show_child mobile_show_A"></div>
+                <div class="mobile_show_child mobile_show_B"></div>
+                <div class="mobile_show_child mobile_show_C"></div>
+            </div>
+            <div class="title_box">
+                <div class="box_title">
+                    我关心的，途迹都知道
+                </div>
+                <div class="box_subtitle">每时每刻，三十万细分的兴趣主题为你追踪你想知道的任何信息。</div>
+                <div class="box_subtitle">一有更新，「途迹」告诉你。</div>
+            </div>
+
+
+
+        </div>
+
+        <div class="section section_three">
+            <div class="section_three_news">
+                <div class="box_title">
+                    告别标题党，拒绝垃圾推送
+                </div>
+                <div class="box_subtitle">途迹以算法与人工智慧精挑细选，让信息一目了然。</div>
+                <div class="box_subtitle">确保你收到的每一条消息，都值得被推送。</div>
+            </div>
+
+
+        </div>
+
+        <div class="section section_four">
+            <div class="section_four_img">
+                <img src="~/Content/homeindeximg/topic-a.0606fe7.png">
+            </div>
+            <div class="section_four_box">
+                <div class="box_title">
+                    与更多同好分享你的见闻与感受
+                </div>
+                <div class="box_subtitle">
+                    每一个独到的声音，都值得被更多人倾听。
+                </div>
+                <div class="box_subtitle">
+                    在途迹，你不仅可以创建主题，更新动态，
+                </div>
+                <div class="box_subtitle">
+                    还可以在主题中发表观点或见闻，更深度地参与内容分享。
+                </div>
+            </div>
+        </div>
+        <footer class="section section_five">
+            <div class="logo">
+                <img src="~/Content/homeindeximg/logo.png">
+            </div>
+            <div class="detail">
+                <div class="info">
+                    <span class="join">加入途迹</span>
+                    <span class="concat">联系我们</span>
+                    <div class="address">
+                        <span class="company">上海若有网络科技有限公司</span>
+                        <span class="number">文字文字150000477号-1</span>
+                        <span class="number2">琥文字文字11111111111111号</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </footer>
+    </div>
+
+</body>
+
+<script>
+		$(function() {
+			$('#fullpage').fullpage({
+				//导航条小圆点
+//				navigation: true,
+//				sectionsColor: ["red", "pink", "lightgrey", "blue", "green"]
+
+			});
+
+		});
+</script>
+</html>
+
+

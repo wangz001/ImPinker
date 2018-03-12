@@ -200,6 +200,7 @@
     <Content Include="Content\article\index-original.css" />
     <Content Include="Content\icons-extra.css" />
     <Content Include="Content\image\logo_100.png" />
+    <Content Include="Content\image\logo_100-old.png" />
     <Content Include="Content\image\qrcode_for_gh_7f5be927b079_258.jpg" />
     <Content Include="Content\article\index.css" />
     <Content Include="Content\mui.min.css" />

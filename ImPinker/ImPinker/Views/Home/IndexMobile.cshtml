@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>封面</title>
+    <meta name="viewport" content="user-scalable=no, width=750">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telephone=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" type="image/x-icon" href="~/Content/image/120x120.png" />
+    <link href="~/Content/jquery.fullPage.css" rel="stylesheet" />
+    <link href="~/Content/Home/indexmobile.css" rel="stylesheet" />
+    <script src="~/Scripts/jQuery-1.12.3.min.js"></script>
+    <script src="~/Scripts/jquery.fullPage.js"></script>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section section_one">
+            <div class="nav">
+                <div class="logo"></div>
+                <div class="load">
+                    <a href="#">下载</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="content">
+                    <img src="~/Content/homeindeximg/mobile/video-bg.60012e5.png" class="video_img">
+                    <a href="#">
+                        <img src="~/Content/homeindeximg/mobile/video-play.dcc0ede.png" class="play">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section_two">
+            <div class="empty"></div>
+            <div class="section_title">
+                我关心的，途迹都知道
+            </div>
+            <div class="section_subtitle">每时每刻，三十万细分的兴趣主题为你追踪你想知道的任何信息。</div>
+            <div class="section_subtitle">一有更新，「途迹」告诉你。</div>
+            <div class="mobile_show">
+                <div class="mobile_show_child mobile_show_A"></div>
+                <div class="mobile_show_child mobile_show_B"></div>
+                <div class="mobile_show_child mobile_show_C"></div>
+            </div>
+        </div>
+
+        <div class="section section_three">
+            <div class="empty"></div>
+            <div class="section_title">
+                告别标题党，拒绝垃圾推送
+            </div>
+            <div class="section_subtitle">途迹以算法与人工智慧精挑细选，让信息一目了然。</div>
+            <div class="section_subtitle">确保你收到的每一条消息，都值得被推送。</div>
+            <div class="section_three_news"></div>
+        </div>
+
+        <div class="section section_four">
+            <div class="empty"></div>
+            <div class="section_title">
+                与更多同好分享你的见闻与感受
+            </div>
+            <div class="section_subtitle">
+                每一个独到的声音，都值得被更多人倾听。
+            </div>
+            <div class="section_subtitle">
+                在途迹，你不仅可以创建主题，更新动态，
+            </div>
+            <div class="section_subtitle">
+                还可以在主题中发表观点或见闻，更深度地参与内容分享。
+            </div>
+            <div class="section_four_box">
+                <div class="section_four_content"></div>
+            </div>
+        </div>
+        <footer class="section section_five">
+            <div class="logo"></div>
+            <div class="detail">
+                <div class="add_left">
+                    加入途迹
+                </div>
+                <div class="add_right">
+                    <img src="">
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript">
+    (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            var html = document.documentElement;
+            var windowWidth = html.clientWidth;
+            html.style.fontSize = windowWidth / 7.5 + 'px';
+        }, false);
+    })();
+</script>
+
+<script>
+    $(function () {
+        $('#fullpage').fullpage({
+            //导航条小圆点
+            //				navigation: true,
+            //				sectionsColor: ["red", "pink", "lightgrey", "blue", "green"]
+
+        });
+
+    });
+</script>

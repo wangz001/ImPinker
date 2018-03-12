@@ -1,0 +1,55 @@
+﻿@using ImModel.ViewModel
+@{
+    ViewBag.Title = "车酷-MyAutos";
+    <link href="~/Scripts/Swiper/css/swiper.css" rel="stylesheet" />
+    <link href="~/Scripts/Swiper/css/myswiper.css" rel="stylesheet" />
+
+}
+@{
+    Html.RenderAction("SlideSwiper");
+}
+@Html.Partial("_TabListPartial")
+<div class="topic-list"><p>今日新增 @ViewBag.DailyAdded 篇文章。</p></div>
+<ul class="topic-list" id="articleConten">
+    @{
+        Html.RenderAction("GetNextPage", new { pageNum = 1, pageCount = 30 });
+    }
+</ul>
+<div class="clear"></div>
+<div class="topic-list">
+    <a href="javascript:;" id="load-more-topic">加载更多</a>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/Swiper/js/swiper.jquery.js"></script>
+    <script type="text/javascript">
+        var pageCount = @ViewBag.pageCount;
+        var pageIndex = 1;
+        //tab导航选中状态
+        $(document).ready(function() {
+            $("#tabList a").bind("click", function() {
+                $("#tabList a").removeClass("b_twolcur");
+                $(this).addClass("b_twolcur");
+            });
+        });
+        //首页轮播图初始化
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            mousewheelControl: true,
+            loop: true,
+            preventClicks : false,
+            autoplay: 4000,
+            autoplayDisableOnInteraction: false,
+            slidesPerView : 3,
+            slidesPerGroup : 3,
+        });
+    </script>
+    <script src="~/Scripts/Home/index.js"></script>
+    <script src="~/Scripts/ArticleVote/articleVote.js"></script>
+}

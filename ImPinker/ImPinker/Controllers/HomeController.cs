@@ -23,8 +23,26 @@ namespace ImPinker.Controllers
         [OutputCache(Duration = 1, VaryByParam = "*")]
         public ActionResult Index()
         {
+            var flag = Request.Browser.IsMobileDevice;
+            if (flag)
+            {
+                return View("IndexMobile");
+            }
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// 首页文章列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ArticleList()
+        {
+
             ViewBag.pageCount = IndexPageCount;
             ViewBag.DailyAdded = ArticleBll.GetRecordCount(string.Format(" CreateTime > '{0}' ", DateTime.Now.AddDays(-1).ToShortDateString()));//今日新增文章
+
             return View();
         }
 
