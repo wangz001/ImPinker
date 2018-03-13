@@ -65,7 +65,7 @@
 					mui.toast("请填写正确的手机号");
 					return;
 				}
-				app.sendCheckNum(phonenum, function(data) {
+				app.sendCheckNum(phonenum,1, function(data) {
 					if(data.IsSuccess == 1) {
 						plus.nativeUI.toast('验证码发送成功');
 						updateSenBtn();

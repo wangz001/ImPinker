@@ -9,7 +9,7 @@
 	 * @param {Object} phonenum
 	 * @param {Object} callback
 	 */
-	owner.sendCheckNum = function(phonenum, callback) {
+	owner.sendCheckNum = function(phonenum,opreatetype, callback) {
 		if(!owner.checkPhone(phonenum)) {
 			return callback('手机号码不正确');
 		}
@@ -17,7 +17,7 @@
 		mui.ajax(commonConfig.apiRoot+'/api/account/SendCheckNum', {
 			data: {
 				phonenum: phonenum,
-				opreatetype: 1
+				opreatetype: opreatetype
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post',

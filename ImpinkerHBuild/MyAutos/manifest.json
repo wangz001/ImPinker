@@ -513,7 +513,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"forget_password.html"
+				],
 				"priority": 0
 			},
 			"tab-webview-subpage-setting.html": {

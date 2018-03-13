@@ -334,7 +334,12 @@
 
 		//退出登录
 		$("#logOut").bind("click", function() {
-			alert("aa");
+			var user=app.getState();
+			user.token='';
+			user.showname='';
+			user.password='';
+			app.setState(user);
+			mui.toast('已退出当前账号');
 		});
 		//检查更新
 		document.getElementById("update").addEventListener('tap', function() {

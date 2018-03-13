@@ -28,3 +28,15 @@
 .mui-btn {
 	padding: 10px;
 }
+
+#checknum{
+	width: 30%;
+	float: left;
+}
+
+#btn_sendchecknum{
+	float: none;
+	width:25%;
+	padding-left: 10px;
+	margin-left: 10px;
+}
