@@ -54,7 +54,25 @@ namespace ImBLL
         /// </summary>
         public bool Update(Users model)
         {
-            return _dal.Update(model);
+            var flag= _dal.Update(model);
+            //修改缓存
+            if (flag)
+            {
+                var key1 = "UserModel-" + model.Id;
+                var key2 = "UserModel-username-" + model.UserName;
+                DeleteCache(key1);
+                DeleteCache(key2);
+            }
+
+            return flag;
+        }
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="key"></param>
+        private void DeleteCache(string key)
+        {
+            DataCache.DeleteCache(key);
         }
 
         /// <summary>
