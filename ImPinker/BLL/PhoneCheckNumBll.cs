@@ -92,7 +92,7 @@ namespace ImBLL
             if (phoneNumDic.ContainsKey(phoneNum))
             {
                 var model = phoneNumDic[phoneNum];
-                if ((DateTime.Now - model.SendTime).TotalSeconds < 80)//间隔时间小于80秒
+                if ((DateTime.Now - model.SendTime).TotalSeconds < 120)//间隔时间小于80秒
                 {
                     return false;
                 }

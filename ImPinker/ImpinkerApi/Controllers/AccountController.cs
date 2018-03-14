@@ -198,7 +198,7 @@ namespace ImpinkerApi.Controllers
             var flag = PhoneCheckNumBll.CheckPhoneNum(vm.PhoneNum, vm.CheckNum, SendCheckNumOperateEnum.FindPassword);
             if (flag)
             {
-                if (!string.IsNullOrEmpty(vm.Password) && vm.Password.Equals(vm.Password2))
+                if (!string.IsNullOrEmpty(vm.Password) && vm.Password.Length>6 && vm.Password.Equals(vm.Password2))
                 {
                     var user = _userBll.GetModelByPhoneNum(vm.PhoneNum);
                     user.PassWord = vm.Password;
@@ -218,7 +218,7 @@ namespace ImpinkerApi.Controllers
                 {
                     IsSuccess = 0,
                     Description = "密码不能为空",
-                    Data = ""
+                    Data = new { step=1,newPass="请输入新密码,长度不少于6位"}
                 });
             }
             return GetJson(new JsonResultViewModel
@@ -228,6 +228,7 @@ namespace ImpinkerApi.Controllers
                 Data = ""
             });
         }
+
 
         /// <summary>
         /// 发送手机验证码
@@ -253,7 +254,7 @@ namespace ImpinkerApi.Controllers
                     break;
                 case SendCheckNumOperateEnum.FindPassword:
                     var userfp = _userBll.GetModelByPhoneNum(vm.PhoneNum);
-                    if (userfp != null)
+                    if (userfp == null)
                     {
                         return GetJson(new JsonResultViewModel
                         {
