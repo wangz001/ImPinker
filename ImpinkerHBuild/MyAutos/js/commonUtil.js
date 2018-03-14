@@ -58,6 +58,31 @@
 			}
 		});
 	}
+	
+	//发post请求，不用身份验证
+	owner.sendRequestPost = function(url, data, callback) {
+		callback = callback || $.noop;
+		mui.ajax(url, {
+			data: data,
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				return callback(data);
+			},
+			error: function(xhr, type, errorThrown) {
+				//console.log(JSON.stringify(type));
+				if(type == 'timeout') {
+					mui.toast("网络不给力，请稍后再试~");
+				}
+				var errorData = {
+					IsSuccess: 0,
+					Description: type
+				}
+				return callback(errorData);
+			}
+		});
+	}
 
 	//发起请求。需要身份验证
 	owner.sendRequestWithToken = function(url, data, isPost, callback) {
