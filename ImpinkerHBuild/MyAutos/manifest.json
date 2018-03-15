@@ -554,7 +554,9 @@
 					"js/jquery.js"
 				],
 				"refer": [
-					"view/setting/setting-account.html"
+					"view/setting/setting-account.html",
+					"view/setting/feedback.html",
+					"view/about.html"
 				],
 				"priority": 0
 			},

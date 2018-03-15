@@ -128,27 +128,9 @@ document.getElementById("my_collect").addEventListener('tap', function() {
 		}
 	});
 });
-//document.getElementById("about").addEventListener('tap', function() {
-//	mui.openWindow({
-//		url: "view/about.html",
-//		id: "about",
-//		show: {
-//			aniShow: 'slide-in-right',
-//			duration: 200
-//		}
-//	});
-//});
 
-document.getElementById("feedback").addEventListener('tap', function() {
-	mui.openWindow({
-		url: "view/setting/feedback.html",
-		id: "feedback",
-		show: {
-			aniShow: 'slide-in-right',
-			duration: 200
-		}
-	});
-});
+
+
 //
 //document.getElementById("testindex").addEventListener('tap', function() {
 //	mui.openWindow({
