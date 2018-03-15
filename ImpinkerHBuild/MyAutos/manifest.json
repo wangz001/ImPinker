@@ -211,7 +211,7 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "","retina47":"C:/Users/wangzheng/Desktop/车酷/appstartTest/750-1334.png","retina55":"C:/Users/wangzheng/Desktop/车酷/appstartTest/1242-2208.png","retina35":"C:/Users/wangzheng/Desktop/车酷/appstartTest/720-1242.png"
+						"default": ""
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
