@@ -87,7 +87,7 @@ function pullupRefresh() {
 			for(var i = 0; i < list.length; i++) {
 				var item = list[i];
 				//添加日期栏
-				var datetime = new Date(item.CreateTime);
+				var datetime = new Date(item.CreateTime.replace(new RegExp(/-/gm) ,"/"));
 				var dateStr = datetime.getFullYear() + '年' + (datetime.getMonth() + 1) + '月'; //+ '-' + datetime.getDate();
 				if(lastTime != dateStr) {
 					lastTime = dateStr;
