@@ -227,7 +227,7 @@ function getArticle(articleid) {
 			var articleinfo = data.Data;
 			articleItem = articleinfo;
 			$("#coverimage").attr("src", articleItem.CoverImage.replace(commonConfig.imgStyle.articlecover_36_24, commonConfig.imgStyle.article_900));
-			$("#article_description").html("简介：" + articleItem.Description);
+			$("#article_description").html("" + articleItem.Description);
 			articleinfo.Content = replace_em(articleinfo.Content);
 			var contentStr = articleinfo.Content;
 			//替换成图片懒加载的地址
@@ -237,7 +237,7 @@ function getArticle(articleid) {
 			$("#articlecontent").html(contentStr);
 			$("#user_headimg").attr('src', articleItem.UserHeadUrl);
 			$("#user_name").html(articleItem.UserName);
-			$("#article-createtime").html(articleItem.CreateTime.substring(0, 11));
+			$(".article-createtime-span").html(articleItem.CreateTime.substring(0, 11));
 			//点赞评论数
 			$(".span_VoteCount").html(articleItem.VoteCount);
 			$(".span_CommentCount").html(articleItem.CommentCount);

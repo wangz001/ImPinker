@@ -1,5 +1,4 @@
 ﻿body {
-
 }
 
 #coverimage {
@@ -110,7 +109,24 @@
     color: #454F5B;
 }
 
+    /*时间及地理位置样式*/
+    #articlecontent p.date-time {
+        margin-left: 5px;
+        font-size: 10px;
+        margin-bottom: 0px;
+        color: #b8b7be;
+    }
 
+    #articlecontent p.gis-location {
+        font-size: 10px;
+        margin-bottom: 0px;
+        color: #b8b7be;
+    }
+
+#articlecontent .gis-location .mui-icon {
+    font-size: 15px;
+}
+/*时间及地理位置样式end*/
 
 /*.header .headimage {
     width: 35px;
