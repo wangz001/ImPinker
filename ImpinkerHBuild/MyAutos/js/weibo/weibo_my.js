@@ -62,6 +62,7 @@ function initWeiBoItem(table, item) {
 		imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 	}
 	item.imglist = imgHtmlStr;
+	item.Description = replace_em(item.Description);
 	//显示地理位置
 	item.cardlocation = "";
 	if(item.LocationText != "" && item.Longitude != "" && item.Lantitude != "") {

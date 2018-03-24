@@ -112,13 +112,14 @@
     /*时间及地理位置样式*/
     #articlecontent p.date-time {
         margin-left: 5px;
-        font-size: 10px;
+        font-size: 11px;
         margin-bottom: 0px;
         color: #b8b7be;
+        float: right;
     }
 
     #articlecontent p.gis-location {
-        font-size: 10px;
+        font-size: 11px;
         margin-bottom: 0px;
         color: #b8b7be;
     }

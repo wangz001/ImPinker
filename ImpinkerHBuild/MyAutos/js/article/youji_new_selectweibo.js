@@ -101,7 +101,7 @@ function bindCheckBoxTab() {
 	$("#pullrefresh [name = checkbox1]:checkbox").bind("click", function() {
 		var weiboid = $(this).val();
 		var isChecked = $(this).is(':checked');
-		console.log(isChecked + "id:" + weiboid);
+		//console.log(isChecked + "id:" + weiboid);
 		if(isChecked) {
 			//往selectedItems 数组添加数据，并改变编号显示
 			for(var i = 0; i < allItems.length; i++) {
@@ -210,10 +210,6 @@ function pullupRefresh(callback) {
  * @param {Object} table
  * @param {Object} item
  */
-var img_1200style = 'style/weibo_1200';
-var img_600style = 'style/weibo_600';
-var img_24style = 'style/weibo_24_16';
-var img_36style = 'style/weibo_36_24';
 var weiboTemplate = $('script[id="weiboitem"]').html();
 
 function initWeiBoItem(item, isPullUp) {
@@ -226,13 +222,14 @@ function initWeiBoItem(item, isPullUp) {
 		//多图
 		imgHtmlStr += "<ul>";
 		for(var j = 0; j < imgs.length; j++) {
-			imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '"></li>';
+			imgHtmlStr += '<li><img src="' + imgs[j] + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_200_200) + '" data-preview-group="' + item.Id + '"></li>';
 		}
 		imgHtmlStr += "</ul>";
 	} else {
-		imgHtmlStr = '<img src="' + imgs[0].replace(img_24style, img_36style) + '" class="bigimage" data-preview-src="' + imgs[0].replace(img_24style, img_1200style) + '" data-preview-group="' + item.Id + '">';
+		imgHtmlStr = '<img src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '">';
 	}
 	item.imglist = imgHtmlStr;
+	item.Description = replace_em(item.Description);
 	var cardStr = weiboTemplate.temp(item);
 	//console.log("first:" + dateFirstId + "--last:" + dateLastId);
 	if(isPullUp) {
@@ -252,6 +249,16 @@ function initWeiBoItem(item, isPullUp) {
 		}
 		$("#weibo-content").prepend(cardStr);
 	}
+}
+
+
+//查看结果
+function replace_em(str) {
+	str = str.replace(/\</g, '&lt;');
+	str = str.replace(/\>/g, '&gt;');
+	str = str.replace(/\n/g, '<br/>');
+	str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
+	return str;
 }
 
 //时间选择框

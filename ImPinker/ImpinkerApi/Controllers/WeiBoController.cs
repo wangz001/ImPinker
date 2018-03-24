@@ -267,7 +267,7 @@ namespace ImpinkerApi.Controllers
                     Lantitude = weiBo.Lantitude,
                     Height = weiBo.Height,
                     LocationText = weiBo.LocationText,
-                    PublishTime = TUtil.DateFormatToString(weiBo.CreateTime),
+                    PublishTime = weiBo.CreateTime.ToString("yyyy-MM-dd HH:mm"),// TUtil.DateFormatToString(weiBo.CreateTime),
                     IsRePost = weiBo.IsRePost,
                     VoteCount = weiBo.VoteCount,
                     CommentCount = weiBo.CommentCount
