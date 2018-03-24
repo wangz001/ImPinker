@@ -117,8 +117,8 @@
 						"appid": "1106138837"
 					},
 					"weixin": {
-						"appid": "wxf3cd120f8ee6582c",
-						"appsecret": "33288d77a54c0855903f15a0e62db120"
+						"appid": "wx4826ff9ccf2b2f08",
+						"appsecret": "9c5b6f50ca4ce0fc6863f67dc4cd438e"
 					},
 					"sina": {
 						"appkey": "1506867046",
@@ -128,8 +128,8 @@
 				},
 				"share": {
 					"weixin": {
-						"appid": "wxf3cd120f8ee6582c",
-						"appsecret": "33288d77a54c0855903f15a0e62db120",
+						"appid": "wx4826ff9ccf2b2f08",
+						"appsecret": "9c5b6f50ca4ce0fc6863f67dc4cd438e",
 						"description": "微信分享"
 					},
 					"qq": {
