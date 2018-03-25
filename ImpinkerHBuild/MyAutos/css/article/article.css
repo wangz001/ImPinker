@@ -32,20 +32,21 @@ nav {
 
 
 /*sliderName*/
-.mui-slider .mui-slider-group .mui-slider-item {
-	font-size: 14px;
-	position: relative;
-	display: inline-block;
-	width: 90%;
-	vertical-align: top;
-	white-space: normal;
-	padding: 0 0px 0 15px;
-	background-color: #fff;
-	height: 250px;
+
+.swiper-container .swiper-slide {
+	width: 85%;
 }
 
-.mui-slider .mui-slider-group .mui-slider-item .slider-item-coverimg {
+.swiper-container .slider-item-coverimg {
+	width: 100%;
 	border-radius: 10px;
+}
+
+.swiper-container .user_info .head_div img {
+	border-radius: 50%;
+	margin: 3px 0;
+	height: 35px;
+	width: 35px;
 }
 
 .slider-title {
@@ -159,6 +160,7 @@ nav {
 	background-color: #eceff4;
 }
 
+
 /*手机屏幕在414px时*/
 
 @media only screen and (min-width:414px) {
@@ -167,14 +169,14 @@ nav {
 	}
 }
 
+
 /*1280分辨率以上（大于1200px）*/
 
-@media screen and (min-width:1200px) {
-	
-}
+@media screen and (min-width:1200px) {}
 
 
 /*1100分辨率（大于960px，小于1199px）*/
+
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
 	.mui-slider .mui-slider-group .mui-slider-item {
 		height: 280px;

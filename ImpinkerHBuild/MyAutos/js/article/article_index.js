@@ -22,12 +22,7 @@ mui.plusReady(function() {
 			initItem(articleData[i], true);
 		}
 	}
-});
 
-//轮播图滚动事件监听；
-document.querySelector('.mui-slider').addEventListener('slide', function(event) {
-	//注意slideNumber是从0开始的；
-	document.getElementById("head-page-num").innerText = (event.detail.slideNumber + 1);
 });
 
 //自定义事件。接受预览页传回的数据
@@ -47,7 +42,7 @@ window.addEventListener('articleVote', function(event) {
 var allArticles = new Array();
 var pageNum = 1;
 var pageSize = 30;
-var apiPath = commonConfig.apiRoot+"/api/Article/GetByPage";
+var apiPath = commonConfig.apiRoot + "/api/Article/GetByPage";
 /**
  * 下拉刷新具体业务实现
  */
@@ -99,6 +94,7 @@ function pullupRefresh() {
 }
 
 var template = $('script[id="article_item"]').html();
+
 function initItem(item, isPullDown) {
 	//如果轮播图已显示，跳过。。。暂时不启用
 	if($.inArray(item.Id, sliderIds) != -1) {
@@ -126,11 +122,12 @@ function initSlide() {
 		initHtml(sliderData);
 	}
 	//获取最新数据
-	var slidePath = commonConfig.apiRoot+'/api/Article/GetSlideArticle';
+	var slidePath = commonConfig.apiRoot + '/api/Article/GetSlideArticle';
 	var para = {};
 	commonUtil.sendRequestGet(slidePath, para, function(data) {
 		if(data.IsSuccess == 1 && data.Data != null) {
 			initHtml(data.Data);
+			//initSwiperSlide();
 			//更新本地缓存数据
 			storageUtil.setSliderData(data.Data);
 		}
@@ -140,24 +137,48 @@ function initSlide() {
 	function initHtml(list) {
 		$("#sliderContent").html("");
 		sliderIds = new Array();
-		var template_a = $('script[id="slide_item_a"]').html();
-		var template_b = $('script[id="slide_item_b"]').html();
-		var aTopStr = template_a.temp(list[list.length - 1]);
-		$("#sliderContent").append(aTopStr);
+		var template_swiper_slide = $('script[id="swiper-slide"]').html();
 		for(var i = 0; i < list.length; i++) {
 			var item = list[i];
 			item.CoverImage = item.CoverImage.replace(commonConfig.imgStyle.article_900, commonConfig.imgStyle.article_1200_605);
-			var tempStr = template_b.temp(item);
+			var tempStr = template_swiper_slide.temp(item);
 			$("#sliderContent").append(tempStr);
 			sliderIds.push(item.Id);
 		}
-		var aBottomStr = template_a.temp(list[0]);
-		$("#sliderContent").append(aBottomStr);
 		//获得slider插件对象
-		var gallery = mui('.mui-slider');
-		gallery.slider({
-			interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
-		});
+		initSwiperSlide();
+	}
+
+	//初始化轮播图
+	var mySwiper;
+
+	function initSwiperSlide() {
+		//初始化轮播图/////防止重复初始化
+		if(mySwiper != null) {
+			mySwiper.destroy();
+			console.log("2343434");
+		}
+		mySwiper = new Swiper('.swiper-container', {
+			speed: 800,
+			direction: 'horizontal',
+			autoplay: true, //可选选项，自动滑动
+			centeredSlides: true,
+			slidesPerView: 'auto',
+			spaceBetween: 15, // 中间的距离
+			loop: true,
+			loopedSlides: 3,
+			slidesOffsetBefore: 0, //设定slide与左边框的预设偏移量（单位px）。
+			on: {
+				slideChangeTransitionEnd: function() {
+					//切换结束时，告诉我现在是第几个slide
+					var index = this.activeIndex;
+					if(index >= 3) {
+						index = index - 3;
+					}
+					document.getElementById("head-page-num").innerText = (index + 1);
+				},
+			},
+		})
 	}
 }
 
@@ -174,8 +195,8 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 	var articlename = this.getAttribute('articlename');
 	//不使用父子模板方案的页面
 	if(type == "common") {
-		var titleNView =commonConfig.titleNView;
-		titleNView.titleText=articlename;
+		var titleNView = commonConfig.titleNView;
+		titleNView.titleText = articlename;
 		var webview_style = {
 			"render": "always",
 			"popGesture": "hide",
@@ -195,11 +216,11 @@ mui('#articlelist,#sliderContent').on('tap', 'a', function() {
 				autoShow: false
 			},
 			extras: {
-				articleUrl: commonConfig.mWebRoot+"/Article/Index?id=" + articleid,
+				articleUrl: commonConfig.mWebRoot + "/Article/Index?id=" + articleid,
 				articleid: articleid, //扩展参数
 				articlename: articlename
 			},
-			createNew:true //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+			createNew: true //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 		});
 	}
 });

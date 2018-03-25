@@ -9,10 +9,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" href="css/iconfont/iconfont.css" />
-		<link rel="stylesheet" href="js/swiper/swiper.css" />
 		<link rel="stylesheet" href="css/article/article.css" />
 		<link rel="stylesheet" href="css/article/article_item.css" />
-		
 	</head>
 
 	<body>
@@ -24,27 +22,15 @@
 						<span id="head-page" class="head-page">
 							<span id="head-page-num">1</span>/3</span>
 					</nav>
-					<div class="swiper-container" style="width: 100%;">
-						<div class="swiper-wrapper" id="sliderContent">
-							<!--<div class="swiper-slide">
+					<div class="mui-slider">
+						<div id="sliderContent" class="mui-slider-group mui-slider-loop">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<!--<div class="mui-slider-item mui-slider-item-duplicate">
 								<a href="#">
-									<img class="slider-item-coverimg" src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
-									<p class="slider-title">吉姆尼行走滇藏线11</p>
+									<img src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 								</a>
-								<div class="user_info">
-									<div class="head_div">
-										<img class="head-img2" src="images/logo.png">
-									</div>
-									<div class="user_news">
-										<span class="name">silva</span>
-										<div class="user_detail">
-											<span class="time">2018.01.03</span>
-											<span class="love2">736</span><span class="comment2">2736</span>
-										</div>
-									</div>
-								</div>
 							</div>
-							<div class="swiper-slide">
+							<div class="mui-slider-item">
 								<a href="#">
 									<img class="slider-item-coverimg" src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
 									<p class="slider-title">吉姆尼行走滇藏线22</p>
@@ -57,15 +43,17 @@
 										<span class="name">silva</span>
 										<div class="user_detail">
 											<span class="time">2018.01.03</span>
-											<span class="love2">736</span><span class="comment2">2736</span>
+											<div class="user_detail_right">
+												<span class="love2">736</span><span class="comment2">2736</span>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="swiper-slide">
+							<div class="mui-slider-item">
 								<a href="#">
 									<img class="slider-item-coverimg" src="http://img.myautos.cn/articlefirstimg/20180205/38_1223_636534538047553781.jpg?x-oss-process=style/article_1200_605">
-									<p class="slider-title">吉姆尼行走滇藏线333</p>
+									<p class="slider-title">吉姆尼行走滇藏线</p>
 								</a>
 								<div class="user_info">
 									<div class="head_div">
@@ -79,11 +67,14 @@
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="images/suzuki.png">
+								</a>
 							</div>-->
 						</div>
-						
 					</div>
-
 					<ul class="mui-table-view" id="articlelist">
 						<!--<li class="article_card mui-table-view-cell">
 							<a href="view/article/preview.html">
@@ -163,10 +154,9 @@
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/commonUtil.js"></script>
-	<script type="text/javascript" src="js/commenConfig.js"></script>
+	<script type="text/javascript" src="js/commenConfig.js" ></script>
 	<script type="text/javascript" src="js/storageUtil.js"></script>
 	<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
-	<script type="text/javascript" src="js/swiper/swiper.js"></script>
 	<script type="text/template" id='article_item'>
 		<li class="article_card mui-table-view-cell">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
@@ -180,13 +170,13 @@
 							<svg class="svg-icon" aria-hidden="true">
   								<use xlink:href="#icon-tuji-dianzan-copy"></use>
   								<span Id="voteCount_$Id$">$VoteCount$</span>
-						</svg>
+							</svg>
 						</span>
 						<span class="comment">
 							<svg class="svg-icon" aria-hidden="true">
   								<use xlink:href="#icon-tuji-pinglun-copy"></use>
   								<span Id="commentCount_$Id$">$CommentCount$</span>
-						</svg>
+							</svg>
 						</span>
 					</div>
 				</div>
@@ -196,8 +186,8 @@
 			</a>
 		</li>
 	</script>
-	<script type="text/template" id="swiper-slide">
-		<div class="swiper-slide">
+	<script type="text/template" id="slide_item_a">
+		<div class="mui-slider-item mui-slider-item-duplicate">
 			<a href="view/article/preview.html" articleid="$Id$" articlename="$ArticleName$">
 				<img class="slider-item-coverimg" src="$CoverImage$">
 				<p class="slider-title">$ArticleName$</p>
@@ -217,9 +207,6 @@
 				</div>
 			</div>
 		</div>
-	</script>
-	<script type="text/template" id="slide_item_a">
-		
 	</script>
 	<script type="text/template" id="slide_item_b">
 		<div class="mui-slider-item">
