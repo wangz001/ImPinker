@@ -15,7 +15,7 @@ var titleNView = {
 	titleColor: '#000000', //文字颜色
 	type: 'transparent', //透明渐变样式
 	autoBackButton: false, //自动绘制返回箭头
-	titleSize: "20px",//标题字体大小
+	titleSize: "20px", //标题字体大小
 	splitLine: { //底部分割线
 		color: '#cccccc'
 	}
@@ -93,6 +93,9 @@ mui.plusReady(function() {
 		$(".zhezhaoDiv").hide();
 	}, 500)
 
+	//设置状态栏颜色
+	plus.navigator.setStatusBarBackground("fff");
+	plus.navigator.setStatusBarStyle("dark");
 });
 
 function preload() {
@@ -104,17 +107,17 @@ function preload() {
 		var sub;
 		//不使用mui的窗口打开方式
 		if(i == 1) {
-			titleNView.titleText="途迹";
+			titleNView.titleText = "途迹";
 			sub = plus.webview.create(subpages[i], subpages[i], {
 				//titleNView: titleNView,
 				top: '0px',
 				bottom: '50px'
 			});
 		} else {
-			if(i==0){
-				titleNView.titleText="游记";
-			}else{
-				titleNView.titleText="个人中心";
+			if(i == 0) {
+				titleNView.titleText = "游记";
+			} else {
+				titleNView.titleText = "个人中心";
 			}
 			sub = plus.webview.create(subpages[i], subpages[i], {
 				titleNView: titleNView,
@@ -397,4 +400,3 @@ function toWeiboPage(imgArr) {
 		}
 	});
 }
-

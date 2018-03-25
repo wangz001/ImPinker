@@ -85,12 +85,16 @@
 
 .user_detail .card-location {
 	color: #b5bebf;
-	font-size: 10px;
+	font-size: 12px;
 	margin-top: 1px;
 }
 
 .user_detail .card-location .mui-icon {
 	font-size: 17px;
+}
+.user_detail .card-location .mui-icon .svg-icon{
+	vertical-align: -0.25em;
+	margin-left: -3px;
 }
 
 .user_news {
@@ -195,7 +199,7 @@
 	.svg-icon {
 		width: 16px;
 		height: 16px;
-		vertical-align: -0.15em;
+		vertical-align: -0.35em;
 		fill: currentColor;
 		overflow: hidden;
 	}

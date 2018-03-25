@@ -140,7 +140,7 @@ function initWeiBoItemTemplate(item) {
 	item.Description = replace_em(item.Description);
 	//判断我是否赞过此微博
 	var isVote = storageUtil.getWeiboVote(item.Id);
-	item.isVote = isVote ? "xin" : "xihuan";
+	item.isVote = isVote ? "tuji-yidianzan" : "tuji-dianzan-copy";
 	//判断我是否收藏过此微博
 	var isCollect = storageUtil.getWeiboCollect(item.Id);
 	item.isCollect = isCollect ? "shoucang" : "favorite_diss";

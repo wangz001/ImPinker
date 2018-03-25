@@ -4,20 +4,25 @@ body {
 }
 
 nav {
-	line-height: 3rem;
+	line-height: 4.0rem;
 	position: relative;
 	width: 90%;
+	padding-top: 10px;
 }
 
 .head-title {
-	font-size: 1.35rem;
+	/*font-size: 1.35rem;*/
+	font-size: 30px;
 	color: #454f5b;
-	padding-left: 15px;
+	padding-left: 15px;	
+	margin-bottom:5px;
+	font-weight: bold;
+	font-family: PingFangSC-Regular;
 }
 
 .head-page {
 	float: right;
-	font-size: 0.9rem;
+	font-size: 15px;
 	color: #a8b5c4;
 }
 
@@ -35,6 +40,7 @@ nav {
 
 .swiper-container .swiper-slide {
 	width: 85%;
+	margin-bottom: 10px;
 }
 
 .swiper-container .slider-item-coverimg {
@@ -52,16 +58,17 @@ nav {
 .slider-title {
 	line-height: 30px;
 	position: relative;
-	bottom: 0;
+	/*bottom: 0;
 	left: 0;
-	width: 100%;
+	width: 100%;*/
 	height: 30px;
 	margin: 5px 0px;
 	text-align: left;
-	opacity: .8;
 	background-color: #fff;
 	font-size: 20px;
 	color: #454F5B;
+	font-weight: bold;
+	font-family: PingFangSC-Regular;
 }
 
 
@@ -115,7 +122,7 @@ nav {
 
 .user_detail .time {
 	top: 0px;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	color: #a1aebf;
 	width: 40%;
 	float: left;
@@ -128,7 +135,7 @@ nav {
 
 .user_detail .love2 {
 	font-size: 12px;
-	color: #bdc6d2;
+	color: #9DABBC;
 	text-align: -webkit-center;
 	background: url(../../img/zan.png) no-repeat left;
 	background-size: 16px;
@@ -138,7 +145,7 @@ nav {
 
 .user_detail .comment2 {
 	font-size: 12px;
-	color: #bdc6d2;
+	color: #9DABBC;
 	background: url(../../img/pinglun.png) no-repeat left;
 	background-size: 16px;
 	padding-left: 22px;
@@ -153,7 +160,7 @@ nav {
 	right: 15px;
 	bottom: 0;
 	left: 15px;
-	height: 2px;
+	height: 1px;
 	content: '';
 	-webkit-transform: scaleY(.5);
 	transform: scaleY(.5);

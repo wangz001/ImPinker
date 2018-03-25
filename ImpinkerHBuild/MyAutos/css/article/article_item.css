@@ -3,7 +3,7 @@
 	/*height: 9rem;*/
 	position: relative;
     overflow: hidden;
-    padding: 12px 15px;
+    padding: 14px 15px;
     list-style: none;
     /*border-bottom: 1px solid #eceff4;*/
 }
@@ -48,10 +48,12 @@
 	/*font-weight: bold;*/
 	margin-bottom: 2px;
 	max-height: 5.8rem;
+	/*font-weight: bold;*/
+	font-family: PingFangSC-Regular;
 }
 .left_div .content{
 	/*font-size: 0.8rem;*/
-	color: #a8b5c4;
+	color: #9dabbc;
 	/*max-height:2.8rem ;*/
 	overflow : hidden;
 	text-overflow: ellipsis;
@@ -65,11 +67,12 @@
     height: 1.8rem;
     line-height: 1.8rem;
     margin-left: 2px;
+    margin-top: 6px;
 }
 .svg-icon{
     width: 16px;
     height: 16px;
-    vertical-align: -0.15em;
+    vertical-align: -0.25em;
     fill: currentColor;
     overflow: hidden;
 }
@@ -82,15 +85,16 @@
     font-size: 12px;
     margin-left:  5px;
     margin-bottom: 3px;
+    color: #9DABBC;
 }
 .detail .comment{
     width: 25%;
-    color: #bdc6d2;
 }
 .detail .comment span{
     font-size: 12px;
     margin-left:  5px;
     margin-bottom: 3px;
+    color: #9DABBC;
 }
 
 
@@ -103,7 +107,7 @@
 	width: 100%;
 	border-radius: 5px;
 	max-height: 9rem;
-	margin-top:3px;
+	/*margin-top:3px;*/
 }
 /*iphone5兼容*/
 @media only screen and (max-width:320px ) {
