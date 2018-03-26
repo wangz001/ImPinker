@@ -140,6 +140,7 @@ function initCard(entityType, item) {
 				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 			}
 			weibo.imglist = imgHtmlStr;
+			item.Description = replace_em(item.Description);
 			//显示地理位置
 			weibo.cardlocation = "";
 			if(weibo.LocationText != "" && weibo.Longitude != "" && weibo.Lantitude != "") {
@@ -151,6 +152,14 @@ function initCard(entityType, item) {
 			currentParamEntity.weiboids.push(weibo.Id);
 		}
 	}
+}
+
+function replace_em(str) {
+	str = str.replace(/\</g, '&lt;');
+	str = str.replace(/\>/g, '&gt;');
+	str = str.replace(/\n/g, '<br/>');
+	str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../js/qqFace/arclist/$1.gif" border="0" />');
+	return str;
 }
 
 //
