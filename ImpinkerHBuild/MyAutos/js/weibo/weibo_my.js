@@ -135,3 +135,9 @@ mui('.mui-table-view').on('tap', '.user_info,.user_detail .text', function() {
 		}
 	});
 });
+
+//长按图片下载
+ mui('.mui-slider-group').on('longtap','.mui-zoom-scroller img',function(){
+    alert(2);
+    var src=$(this).attr("src");
+ });
