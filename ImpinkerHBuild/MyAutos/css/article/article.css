@@ -118,6 +118,7 @@ nav {
 
 .user_detail {
 	position: relative;
+	width:95%;
 }
 
 .user_detail .time {

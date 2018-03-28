@@ -45,22 +45,38 @@ mui.plusReady(function() {
 			}
 		}
 	});
+
+	//监听滚动事件
+	var wh = $(window).height();
+	//console.log(wh);
+	var isTabShow=false;
+	$("#scroll1").scroll(function() {
+		var top = $(window).scrollTop();
+		console.log(top);
+		if(top > 100 && isTabShow) {
+			$("#sliderSegmentedControl").show();
+			isTabShow = true;
+			
+			console.log("small");
+		}
+	});
+
 });
 mui.previewImage();
 var currentParamEntity = {
 	userid: 0,
 	all: {
-		url: commonConfig.apiRoot+'/api/Article/GetUserArticleAndWeiboListByPage',
+		url: commonConfig.apiRoot + '/api/Article/GetUserArticleAndWeiboListByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
 	article: {
-		url: commonConfig.apiRoot+'/api/Article/GetUsersArticleByPage',
+		url: commonConfig.apiRoot + '/api/Article/GetUsersArticleByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
 	weibo: {
-		url: commonConfig.apiRoot+'/api/weibo/GetUsersListByPage',
+		url: commonConfig.apiRoot + '/api/weibo/GetUsersListByPage',
 		pageindex: 1,
 		pagesize: 10
 	},
@@ -134,10 +150,10 @@ function initCard(entityType, item) {
 			if(imgs.length > 1) {
 				//多图
 				for(var j = 0; j < imgs.length; j++) {
-					imgHtmlStr += '<div class="img-box"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></div>';
+					imgHtmlStr += '<div class="img-box"><img src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_200_200) + '" data-preview-src="' + imgs[j].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></div>';
 				}
 			} else {
-				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16,commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
+				imgHtmlStr = '<a href="#"><img class="bigimage" src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_60_34) + '" class="bigimage" data-preview-src="' + imgs[0].replace(commonConfig.imgStyle.weibo_24_16, commonConfig.imgStyle.weibo_1200) + '" data-preview-group="' + item.Id + '"></a>';
 			}
 			weibo.imglist = imgHtmlStr;
 			item.Description = replace_em(item.Description);
@@ -171,26 +187,26 @@ function setUserinfo(username, headimg) {
 //跳转 
 mui('.mui-table-view').on('tap', 'li', function() {
 	var cardType = $(this).attr("class");
-//	if(cardType.indexOf("weibo-card") != -1) {
-//		var weiboid = $(this).attr("weiboid");
-//		return; //暂时不跳转
-//		mui.openWindow({
-//			url: "../weibo/weibo_preview.html",
-//			id: "weibo_preview",
-//			extras: {
-//				weiboid: weiboid
-//			},
-//			show: {
-//				aniShow: 'slide-in-right',
-//				duration: 200
-//			}
-//		});
-//	}
+	//	if(cardType.indexOf("weibo-card") != -1) {
+	//		var weiboid = $(this).attr("weiboid");
+	//		return; //暂时不跳转
+	//		mui.openWindow({
+	//			url: "../weibo/weibo_preview.html",
+	//			id: "weibo_preview",
+	//			extras: {
+	//				weiboid: weiboid
+	//			},
+	//			show: {
+	//				aniShow: 'slide-in-right',
+	//				duration: 200
+	//			}
+	//		});
+	//	}
 	if(cardType.indexOf("article_card") != -1) {
 		var articleid = $(this).attr("articleid");
-		var articleName=$(this).attr("articlename");
-		var titleNView =commonConfig.titleNView;
-		titleNView.titleText=articleName;
+		var articleName = $(this).attr("articlename");
+		var titleNView = commonConfig.titleNView;
+		titleNView.titleText = articleName;
 		var webview_style = {
 			"render": "always",
 			"popGesture": "hide",
