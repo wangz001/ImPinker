@@ -47,19 +47,42 @@ mui.plusReady(function() {
 	});
 
 	//监听滚动事件
-	var wh = $(window).height();
-	//console.log(wh);
-	var isTabShow=false;
-	$("#scroll1").scroll(function() {
-		var top = $(window).scrollTop();
-		console.log(top);
-		if(top > 100 && isTabShow) {
-			$("#sliderSegmentedControl").show();
-			isTabShow = true;
-			
-			console.log("small");
-		}
+	//	var wh = $(window).height();
+	//	//console.log(wh);
+	//	var isTabShow=false;
+	//	$("#scroll1").scroll(function() {
+	//		var top = $(window).scrollTop();
+	//		console.log(top);
+	//		if(top > 100 && isTabShow) {
+	//			$("#sliderSegmentedControl").show();
+	//			isTabShow = true;
+	//			
+	//			console.log("small");
+	//		}
+	//	});
+
+	document.querySelector('#scroll1').addEventListener('scroll', function(e) {
+		console.log(e.detail.y);
+		var topY = 0 - e.detail.y;
+		changeUserinfo(topY);
 	});
+	document.querySelector('#scroll2').addEventListener('scroll', function(e) {
+		console.log(e.detail.y);
+		var topY = 0 - e.detail.y;
+		changeUserinfo(topY);
+	});
+
+	function changeUserinfo(topY) {
+		if(topY > 100) {
+			$("#sliderSegmentedControl").slideDown(500);
+			$(".mui-scroll-wrapper .user-content").slideUp(500);
+		} else {
+			$("#sliderSegmentedControl").slideUp(500);
+			$(".mui-scroll-wrapper .user-content").slideDown(500);
+			//mui('#scroll1').scroll().scrollTo(0,1000,10);
+			//mui('#scroll2').scroll().scroll().scrollTo(0,1000,10);
+		}
+	}
 
 });
 mui.previewImage();

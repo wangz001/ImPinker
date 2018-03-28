@@ -15,15 +15,15 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav" id="header">
+		<!--<header class="mui-bar mui-bar-nav" id="header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">
 			</h1>
-		</header>
+		</header>-->
 		<div class="mui-content">
 
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div style="display: none;" id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div style="display: block;" id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll">
 						<a class="mui-control-item mui-active" href="#item1mobile">
 							途迹
@@ -34,14 +34,23 @@
 					</div>
 				</div>
 				<div class="mui-slider-group">
-					<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">-->
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
-								<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
-									<div class="head-img"><img src="../../images/food.png">
+								<div class="user-content">
+									<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
+										<div class="head-img"><img src="../../images/food.png">
+										</div>
+										<div class="username">
+										</div>
 									</div>
-									<div class="username">
+									<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+										<a class="mui-control-item mui-active" href="#item1mobile">
+											途迹
+										</a>
+										<a class="mui-control-item" href="#item2mobile">
+											游记
+										</a>
 									</div>
 								</div>
 								<ul class="mui-table-view" id="mui-table-view-1">
@@ -93,13 +102,22 @@
 						</div>
 					</div>
 					<div id="item2mobile" class="mui-slider-item mui-control-content">
-						<div class="mui-scroll-wrapper">
+						<div id="scroll2" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
-								<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
-									<div class="head-img"><img src="../../images/food.png">
+								<div class="user-content">
+									<div class="personal-top" style="background-image: url(../../images/cbd.jpg);">
+										<div class="head-img"><img src="../../images/food.png">
+										</div>
+										<div class="username">
+										</div>
 									</div>
-									<div class="username">
-										<!--<h4>Bwlang星</h4>-->
+									<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+										<a class="mui-control-item" href="#item1mobile">
+											途迹
+										</a>
+										<a class="mui-control-item mui-active" href="#item2mobile">
+											游记
+										</a>
 									</div>
 								</div>
 								<ul class="mui-table-view" id="mui-table-view-2">
@@ -240,7 +258,7 @@
 			</li>
 		</script>
 		<script type="text/javascript" src="../../js/user/user_index.js"></script>
-		
+
 	</body>
 
 </html>
