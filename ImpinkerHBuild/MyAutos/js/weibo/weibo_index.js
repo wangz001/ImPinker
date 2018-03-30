@@ -251,6 +251,34 @@ function bindClickEvent() {
 				headimg: headimg
 			}
 		});
+		//-----------------
+		var titleNView = commonConfig.titleNView;
+		titleNView.titleText = articlename;
+		var webview_style = {
+			"render": "always",
+			"popGesture": "hide",
+			"bounce": "vertical",
+			"bounceBackground": "#efeff4",
+			"titleNView": titleNView
+		};
+		//打开详情页面            
+		mui.openWindow({
+			id: id,
+			url: this.href,
+			styles: webview_style,
+			show: {
+				aniShow: aniShow
+			},
+			waiting: {
+				autoShow: false
+			},
+			extras: {
+				articleUrl: commonConfig.mWebRoot + "/Article/Index?id=" + articleid,
+				articleid: articleid, //扩展参数
+				articlename: articlename
+			},
+			createNew: true //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+		});
 	});
 }
 
