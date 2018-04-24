@@ -211,10 +211,10 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": ""
+						"default": "","iphonex":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/1125x2436.png","retina40":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/640x1334.png","iphonexl":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/2436x1125.png","retina47":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/750x1334.png","retina55":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/1242x2208.png","retina35":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/640x960.png","retina55l":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/2208x1242.png"
 					},
 					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						 /*iPad竖屏启动图片，分辨率：768x1004*/
 						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
 						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
@@ -225,7 +225,7 @@
 				},
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "","hdpi":"C:/Users/wangzheng/Desktop/车酷/appstartTest/480-762.png","xhdpi":"C:/Users/wangzheng/Desktop/车酷/appstartTest/720-1242.png","xxhdpi":"C:/Users/wangzheng/Desktop/车酷/appstartTest/1080-1282.png"
+					"ldpi": "","hdpi":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/480x762.png","xhdpi":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/720x1242.png","xxhdpi":"C:/Users/wangzheng/Desktop/车酷/开机图/开机图/1080x1882.png"
 				}
 			}
 		},"ads":{"rp":false,"splash":true,"push":true,"spot":true},"adid":""
