@@ -9,6 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" href="css/main_index.css" />
+		<link rel="stylesheet" href="css/iconmoon/style.css" />
 		<style type="text/css">
 			.zhezhaoDiv {
 				position: fixed;
@@ -24,6 +25,25 @@
 	</head>
 
 	<body>
+		<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<defs>
+				<symbol id="icon-我的" viewBox="0 0 32 32">
+					<title>我的</title>
+					<path fill="#fff" style="fill: var(--color1, #fff)" d="M-410.182-10.182h545.455v74.182h-545.455v-74.182z"></path>
+					<path fill="#ffd300" style="fill: var(--color2, #ffd300)" d="M16.747 19.106c4.686 0 8.485-3.799 8.485-8.485s-3.799-8.485-8.485-8.485c-4.686 0-8.485 3.799-8.485 8.485s3.799 8.485 8.485 8.485zM4.364 26.182h27.636v4.364h-27.636v-4.364z"></path>
+					<path fill="#454f5b" style="fill: var(--color3, #454f5b)" d="M0 31.279v-6.156c0-1.607 1.302-2.909 2.909-2.909h23.12c1.607 0 2.909 1.302 2.909 2.909v6.156h-28.938zM1.455 29.825h26.029v-4.702c0-0.803-0.651-1.455-1.455-1.455h-23.12c-0.803 0-1.455 0.651-1.455 1.455v4.702z"></path>
+					<path fill="#454f5b" style="fill: var(--color3, #454f5b)" d="M13.838 19.833c-5.088 0-9.212-4.124-9.212-9.212s4.124-9.212 9.212-9.212c5.088 0 9.212 4.124 9.212 9.212s-4.124 9.212-9.212 9.212zM13.838 18.379c4.284 0 7.758-3.473 7.758-7.758s-3.473-7.758-7.758-7.758c-4.284 0-7.758 3.473-7.758 7.758s3.473 7.758 7.758 7.758z"></path>
+				</symbol>
+				<symbol id="icon-游记" viewBox="0 0 33 32">
+					<title>游记</title>
+					<path fill="#fff" style="fill: var(--color1, #fff)" d="M-98.783-9.739h521.739v70.957h-521.739v-70.957z"></path>
+					<path fill="#ffd300" style="fill: var(--color2, #ffd300)" d="M7.791 1.67h24.363v28.621h-24.363c-1.537 0-2.783-1.246-2.783-2.783v-23.056c0-1.537 1.246-2.783 2.783-2.783z"></path>
+					<path fill="#454f5b" style="fill: var(--color3, #454f5b)" d="M28.119 2.365h-23.667c-1.153 0-2.087 0.934-2.087 2.087v23.056c0 1.153 0.934 2.087 2.087 2.087h23.667v-27.23zM4.452 0.974h25.058v30.012h-25.058c-1.921 0-3.478-1.557-3.478-3.478v-23.056c0-1.921 1.557-3.478 3.478-3.478z"></path>
+					<path fill="#454f5b" style="fill: var(--color3, #454f5b)" d="M8.37 2.362v9.787c3.357-2.112 3.653-2.291 3.952-2.291 0.297 0 0.607 0.186 4.010 2.3v-9.795h-7.962zM12.519 11.227c0.011-0.006 0.025-0.012 0.041-0.021-0.007 0.004-0.015 0.008-0.023 0.012l-0.018 0.009zM12.086 11.208c0.015 0.008 0.028 0.014 0.038 0.019-0.016-0.008-0.028-0.014-0.038-0.019zM11.716 11.704c-0.605 0.37-1.498 0.925-2.677 1.667-0.629 0.396-1.459 0.206-1.855-0.422-0.135-0.215-0.207-0.463-0.207-0.716v-11.262h10.745l-0 11.27c0 0.743-0.602 1.345-1.345 1.345-0.251 0-0.497-0.070-0.71-0.203-1.199-0.745-2.107-1.303-2.723-1.674-0.261-0.157-0.469-0.281-0.622-0.369-0.15 0.088-0.353 0.21-0.607 0.365z"></path>
+					<path fill="#454f5b" style="fill: var(--color3, #454f5b)" d="M27.84 24.98h-23.451c-1.207 0-2.186 0.979-2.186 2.186s0.979 2.186 2.186 2.186h23.451v-4.373zM4.388 23.589h24.843v7.155h-24.843c-1.976 0-3.578-1.602-3.578-3.578s1.602-3.578 3.578-3.578z"></path>
+				</symbol>
+			</defs>
+		</svg>
 		<div class="zhezhaoDiv">
 		</div>
 		<!--<header class="mui-bar mui-bar-nav" style="display: none;">
@@ -36,14 +56,13 @@
 					<svg class="icon" aria-hidden="true">
   							<use xlink:href="#icon-youji-moren-copy"></use>
 					</svg>
+					
 				</span>
 				<span class="mui-tab-label">游记</span>
 			</a>
 			<a id="weiboTab" class="mui-tab-item" href="tab-webview-subpage-weibo.html">
 				<span class="mui-icon">
-					<svg class="icon" aria-hidden="true">
-  							<use xlink:href="#icon-tujimoren"></use>
-					</svg>
+					<svg class="icon icon-游记"><use xlink:href="#icon-游记"></use></svg>
 				</span>
 				<span class="mui-tab-label">途迹</span>
 			</a>
@@ -56,8 +75,8 @@
 			</a>
 			<a id="mineTab" class="mui-tab-item" href="tab-webview-subpage-setting.html">
 				<span class="mui-icon">
-					<svg class="icon" aria-hidden="true">
-  							<use xlink:href="#icon-wode-moren"></use>
+					<svg class="icon icon-我的">
+						<use xlink:href="#icon-我的"></use>
 					</svg>
 				</span>
 				<span class="mui-tab-label">我的</span>
@@ -67,8 +86,9 @@
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/commonUtil.js"></script>
-		<script type="text/javascript" src="js/commenConfig.js" ></script>
+		<script type="text/javascript" src="js/commenConfig.js"></script>
 		<script type="text/javascript" src="css/iconfont/iconfont.js"></script>
+		<script type="text/javascript" src="css/iconmoon/svgxuse.js"></script>
 		<script type="text/javascript" src="js/main_index.js"></script>
 	</body>
 
